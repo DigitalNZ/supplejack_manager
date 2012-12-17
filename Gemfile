@@ -9,7 +9,7 @@ gem "thin",         ">= 1.5.0"
 gem "mysql2",       ">= 0.3.11"
 
 gem "devise",       ">= 2.1.2"
-gem "simple_form",  ">= 2.0.4"
+gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
 
 # Gems used only for assets and not required
