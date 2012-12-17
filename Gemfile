@@ -49,3 +49,7 @@ gem "compass-rails", ">= 1.0.3", :group => :assets
 gem "zurb-foundation", ">= 3.2.3", :group => :assets
 gem "devise", ">= 2.1.2"
 gem "simple_form", ">= 2.0.4"
+gem "quiet_assets", ">= 1.0.1", :group => :development
+gem "figaro", ">= 0.5.0"
+gem "better_errors", ">= 0.2.0", :group => :development
+gem "binding_of_caller", ">= 0.6.8", :group => :development
