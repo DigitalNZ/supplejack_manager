@@ -33,6 +33,8 @@ group :development do
   gem "quiet_assets",       ">= 1.0.1"
   gem "better_errors",      ">= 0.2.0"
   gem "binding_of_caller",  ">= 0.6.8"
+  gem 'guard-rspec'
+  gem 'rb-fsevent',         '~> 0.9.1'
 end
 
 group :development, :test do
