@@ -10,16 +10,20 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <div id="container" class="container">
-      <header>
-        <%= render 'layouts/navigation' %>
-        <%= render 'layouts/messages' %>
-      </header>
-      <div id="main" role="main">
+    <div class="contain-to-grid">
+      <%= render 'layouts/navigation' %>
+    </div>
+
+    <header>
+      <%= render 'layouts/messages' %>
+    </header>
+
+    <div id="main" role="main" class="row">
+      <div class="twelve columns">
         <%= yield %>
       </div>
-      <footer>
-      </footer>
-    </div> <!--! end of #container -->
+    </div>
+
+    <footer></footer>
   </body>
 </html>

@@ -11,6 +11,7 @@ gem "mysql2",       ">= 0.3.11"
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
+gem "grit"
 
 # Gems used only for assets and not required
 # in production environments by default.

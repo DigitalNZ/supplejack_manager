@@ -14,7 +14,7 @@ describe ParsersController do
 
   describe "GET 'new'" do
     it "initializes a new parser" do
-      Parser.should_receive(:new) { parser }
+      Parser.should_receive(:build) { parser }
       get :new
       assigns(:parser).should eq parser
     end
@@ -30,12 +30,12 @@ describe ParsersController do
 
   describe "GET 'create'" do
     before do 
-      Parser.stub(:new) { parser }
+      Parser.stub(:build) { parser }
       parser.stub(:save) { true }
     end
 
     it "initializes a new parser" do
-      Parser.should_receive(:new).with({"name" => "tepapa.rb"}) { parser }
+      Parser.should_receive(:build).with({"name" => "tepapa.rb"}) { parser }
       post :create, parser: {name: "tepapa.rb"}
     end
 

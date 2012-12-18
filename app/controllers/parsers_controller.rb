@@ -5,7 +5,7 @@ class ParsersController < ApplicationController
   end
 
   def new
-    @parser = Parser.new
+    @parser = Parser.build
   end
 
   def edit
@@ -13,7 +13,7 @@ class ParsersController < ApplicationController
   end
 
   def create
-    @parser = Parser.new(params[:parser])
+    @parser = Parser.build(params[:parser])
 
     if @parser.save
       redirect_to edit_parser_path(@parser)
