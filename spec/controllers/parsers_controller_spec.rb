@@ -41,14 +41,14 @@ describe ParsersController do
 
     it "saves the parser" do
       parser.should_receive(:save)
-      post :create
+      post :create, parser: {name: "tepapa.rb"}
     end
 
     context "valid parser" do
       before { parser.stub(:save) { true }}
 
       it "redirects to edit page" do
-        post :create
+        post :create, parser: {name: "tepapa.rb"}
         response.should redirect_to edit_parser_path("json-europeana.rb")
       end
     end
@@ -57,7 +57,7 @@ describe ParsersController do
       before { parser.stub(:save) { false }}
 
       it "renders the edit action" do
-        post :create
+        post :create, parser: {name: "tepapa.rb"}
         response.should render_template(:edit)
       end
     end

@@ -1,2 +1,13 @@
-<h1>Parsers#new</h1>
-<p>Find me in app/views/parsers/new.html.erb</p>
+<h1>New parser configuration</h1>
+
+<%= simple_form_for @parser do |f| %>
+
+  <%= f.input :name %>
+  <%= f.input :strategy %>
+  
+  <%= f.input :data, as: :text, label: false, required: false %>
+  <%= f.input :message %>
+
+  <%= f.button :submit %>
+
+<% end %>

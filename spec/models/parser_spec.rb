@@ -5,6 +5,19 @@ describe Parser do
   let(:blob) { mock(:blob, name: "europeana.rb", data: "") }
   let(:parser) { Parser.new(blob, "json") }
 
+  describe ".build" do
+    it "initializes a empty parser" do
+      Parser.build.should be_a Parser
+    end
+
+    it "initializes with name, strategy and data" do
+      parser = Parser.build(data: "data", strategy: "strategy", name: "name")
+      parser.data.should eq "data"
+      parser.strategy.should eq "strategy"
+      parser.name.should eq "name"
+    end
+  end
+
   describe ".find" do
     let(:tree) { mock(:tree) }
     let(:blob) { mock(:blob).as_null_object }

@@ -5,8 +5,12 @@ class Parser
   VALID_STRATEGIES = ["json", "oai", "rss", "xml"]
 
   class << self
-    def build
-      
+    def build(attributes={})
+      attributes = attributes.try(:symbolize_keys) || {}
+      parser = self.new(nil, attributes[:strategy])
+      parser.name = attributes[:name]
+      parser.data = attributes[:data]
+      parser
     end
 
     def find(path)
@@ -30,13 +34,17 @@ class Parser
     end
   end
 
-  attr_reader :blob, :strategy, :name
-  attr_accessor :data, :message
+  attr_reader :blob
+  attr_accessor :data, :strategy, :name, :message
 
   def initialize(blob, strategy)
     @blob = blob
-    @name = blob.name
-    @data = blob.data
+
+    if blob
+      @name = blob.name
+      @data = blob.data
+    end
+
     @strategy = strategy
   end
 

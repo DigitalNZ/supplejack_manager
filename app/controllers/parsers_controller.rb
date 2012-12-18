@@ -15,7 +15,7 @@ class ParsersController < ApplicationController
   def create
     @parser = Parser.build(params[:parser])
 
-    if @parser.save
+    if @parser.save(params[:parser][:message])
       redirect_to edit_parser_path(@parser)
     else
       render :edit
