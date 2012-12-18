@@ -2,16 +2,6 @@ require "spec_helper"
 
 describe Repo do
 
-  before(:all) do
-    ENV["PARSER_GIT_REPO_PATH"] = "#{Rails.root.to_s}/spec/fixtures/test_repo"
-    `git init #{ENV["PARSER_GIT_REPO_PATH"]}`
-  end
-
-  after(:all) do
-    `rm -rf #{ENV["PARSER_GIT_REPO_PATH"]}`
-    `mkdir #{ENV["PARSER_GIT_REPO_PATH"]}`
-  end
-
   let(:repo) { Repo.new }
 
   describe "initialize" do

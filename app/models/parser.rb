@@ -31,7 +31,7 @@ class Parser
   end
 
   attr_reader :blob, :strategy, :name
-  attr_accessor :data
+  attr_accessor :data, :message
 
   def initialize(blob, strategy)
     @blob = blob
@@ -52,17 +52,22 @@ class Parser
     blob.present?
   end
 
-  def update_file_contents
-    File.open(fullpath, "w") do |f|
-      f.write(self.data)
-    end
-  end
-
   def path
     "#{strategy}/#{name}"
   end
 
   def fullpath
     ENV["PARSER_GIT_REPO_PATH"] + "/" + path
+  end
+
+  def save(message=nil)
+    THE_REPO.add(self.path, self.data)
+    THE_REPO.commit(message)
+  end
+
+  def update_attributes(attributes={})
+    attributes = attributes.symbolize_keys
+    self.data = attributes[:data]
+    self.save(attributes[:message])
   end
 end
