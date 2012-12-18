@@ -5,32 +5,20 @@ class Parser
   VALID_STRATEGIES = ["json", "oai", "rss", "xml"]
 
   class << self
-    def repository
-      @repo ||= Grit::Repo.new(ENV["PARSER_GIT_REPO_PATH"])
-    end
-
-    def head
-      repository.commits.first
-    end
-
-    def tree
-      head.tree
-    end
-
     def build
       
     end
 
     def find(path)
       path.gsub!(/-/, "/")
-      blob = tree / path
+      blob = THE_REPO.tree / path
       segments = path.split("/")
       new(blob, segments[0])
     end
 
     def all
       parsers = []
-      tree.contents.each do |content|
+      THE_REPO.tree.contents.each do |content|
         if content.respond_to?(:contents) && VALID_STRATEGIES.include?(content.name)
           content.contents.each do |blob|
             parsers << Parser.new(blob, content.name)
@@ -52,11 +40,29 @@ class Parser
     @strategy = strategy
   end
 
-  def to_param
+  def id
     "#{strategy}-#{name}"
   end
 
+  def to_param
+    self.id
+  end
+
   def persisted?
-    false
+    blob.present?
+  end
+
+  def update_file_contents
+    File.open(fullpath, "w") do |f|
+      f.write(self.data)
+    end
+  end
+
+  def path
+    "#{strategy}/#{name}"
+  end
+
+  def fullpath
+    ENV["PARSER_GIT_REPO_PATH"] + "/" + path
   end
 end
