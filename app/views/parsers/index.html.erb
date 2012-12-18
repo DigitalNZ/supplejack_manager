@@ -12,7 +12,7 @@
 
     <% @parsers.each do |parser| %>
     <tr>
-      <td><%= parser.name %></td>
+      <td><%= link_to parser.name, edit_parser_path(parser) %></td>
       <td><%= parser.strategy %></td>
     </tr>
     <% end %>

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ParsersController do
 
-  let(:parser) { mock(:parser, id: "123", to_param: "123") }
+  let(:parser) { mock(:parser, id: "123", to_param: "json-europeana.rb") }
 
   describe "GET 'index'" do
     it "finds all the parser configurations" do
@@ -22,8 +22,8 @@ describe ParsersController do
 
   describe "GET 'edit'" do
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("123") { parser }
-      get :edit, id: "123"
+      Parser.should_receive(:find).with("json-europeana.rb") { parser }
+      get :edit, id: "json-europeana.rb"
       assigns(:parser).should eq parser
     end
   end
@@ -49,7 +49,7 @@ describe ParsersController do
 
       it "redirects to edit page" do
         post :create
-        response.should redirect_to edit_parser_path("123")
+        response.should redirect_to edit_parser_path("json-europeana.rb")
       end
     end
 
@@ -70,22 +70,22 @@ describe ParsersController do
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("123") { parser }
-      put :update, id: "123"
+      Parser.should_receive(:find).with("json-europeana.rb") { parser }
+      put :update, id: "json-europeana.rb"
       assigns(:parser).should eq parser
     end
 
     it "updates the parser attributes" do
       parser.should_receive(:update_attributes).with({"name" => "tepapa.rb"})
-      put :update, id: "123", parser: {name: "tepapa.rb"}
+      put :update, id: "json-europeana.rb", parser: {name: "tepapa.rb"}
     end
 
     context "valid parser" do
       before { parser.stub(:update_attributes) { true }}
 
       it "redirects to edit page" do
-        put :update, id: "123"
-        response.should redirect_to edit_parser_path("123")
+        put :update, id: "json-europeana.rb"
+        response.should redirect_to edit_parser_path("json-europeana.rb")
       end
     end
 
@@ -93,7 +93,7 @@ describe ParsersController do
       before { parser.stub(:update_attributes) { false }}
 
       it "renders the edit action" do
-        put :update, id: "123"
+        put :update, id: "json-europeana.rb"
         response.should render_template(:edit)
       end
     end
@@ -106,14 +106,14 @@ describe ParsersController do
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("123") { parser }
-      delete :destroy, id: "123"
+      Parser.should_receive(:find).with("json-europeana.rb") { parser }
+      delete :destroy, id: "json-europeana.rb"
       assigns(:parser).should eq parser
     end
 
     it "destroys the parser config" do
       parser.should_receive(:destroy)
-      delete :destroy, id: "123"
+      delete :destroy, id: "json-europeana.rb"
     end
   end
 

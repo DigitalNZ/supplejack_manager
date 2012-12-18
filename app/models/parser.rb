@@ -1,4 +1,6 @@
 class Parser
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
 
   VALID_STRATEGIES = ["json", "oai", "rss", "xml"]
 
@@ -20,6 +22,7 @@ class Parser
     end
 
     def find(path)
+      path.gsub!(/-/, "/")
       blob = tree / path
       segments = path.split("/")
       new(blob, segments[0])
@@ -40,10 +43,20 @@ class Parser
   end
 
   attr_reader :blob, :strategy, :name
+  attr_accessor :data
 
   def initialize(blob, strategy)
     @blob = blob
     @name = blob.name
+    @data = blob.data
     @strategy = strategy
+  end
+
+  def to_param
+    "#{strategy}-#{name}"
+  end
+
+  def persisted?
+    false
   end
 end

@@ -10,8 +10,11 @@
  *
  *= require_self
  *= require foundation_and_overrides
- *= require_tree .
 */
+
+@import "codemirror";
+@import "codemirror/themes/monokai";
+
 .brand {
   float: left;
   padding-right: 8px;

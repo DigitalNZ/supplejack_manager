@@ -44,16 +44,16 @@ describe Parser do
 
     it "finds the file by it's path" do
       Parser.tree.should_receive(:/).with("xml/natlib_pages.rb") { blob }
-      Parser.find("xml/natlib_pages.rb")
+      Parser.find("xml-natlib_pages.rb")
     end
 
     it "initializes a new parser" do
-      Parser.find("xml/natlib_pages.rb").should be_a Parser
+      Parser.find("xml-natlib_pages.rb").should be_a Parser
     end
 
     it "initializes a parser with blob and strategy" do
       Parser.should_receive(:new).with(blob, "xml")
-      Parser.find("xml/natlib_pages.rb")
+      Parser.find("xml-natlib_pages.rb")
     end
   end
 
