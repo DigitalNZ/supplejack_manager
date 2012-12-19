@@ -13,6 +13,8 @@ $ ->
   $("#records-preview-button").click ->
     $("#preview-modal").reveal()
 
+    myCodeMirror.save()
+
     $link = $(this)
     $form = $link.closest("form")
     $.post $link.attr("href"), $form.serialize(), (data) ->
