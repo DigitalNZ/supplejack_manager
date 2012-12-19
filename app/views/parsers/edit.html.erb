@@ -1,6 +1,6 @@
-<h1><%= @parser.name %></h1>
-
 <%= simple_form_for @parser do |f| %>
+  <h1 class="left"><%= @parser.name %></h1>
+  <%= link_to "Preview Records", records_path(@parser.id), class: "button new-right", id: "records-preview-button" %>
   
   <%= f.input :data, as: :text, label: false %>
   <%= f.input :message %>
@@ -8,3 +8,14 @@
   <%= f.button :submit %>
 
 <% end %>
+
+
+<div id="preview-modal" class="reveal-modal xxlarge">
+  <div id="preview-area" class="CodeRay">
+    <div class="preview-area-spinner">
+      <%= image_tag("spinner.gif") %>
+    </div>
+  </div>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>

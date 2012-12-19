@@ -18,6 +18,7 @@ gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
 gem "grit"
+gem "coderay",      "~> 1.0.8"
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -9,3 +9,13 @@ $ ->
     lineNumbers: true,
     tabSize: 2
   }
+
+  $("#records-preview-button").click ->
+    $("#preview-modal").reveal()
+
+    $link = $(this)
+    $form = $link.closest("form")
+    $.post $link.attr("href"), $form.serialize(), (data) ->
+      $("#preview-area").html(data)
+
+    return false;

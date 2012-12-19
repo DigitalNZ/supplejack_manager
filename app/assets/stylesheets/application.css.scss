@@ -14,7 +14,9 @@
 
 @import "codemirror";
 @import "codemirror/themes/monokai";
+@import "coderay";
 @import "base";
+@import "parsers";
 
 .brand {
   float: left;
