@@ -16,22 +16,50 @@ class Previewer
     File.open(path, "w") {|f| f.write(data) }
   end
 
+  def klass_name
+    parser.name.gsub(/\.rb/, "").camelize
+  end
+
   def klass
-    parser.name.gsub(/\.rb/, "").classify.constantize
+    klass_name.constantize
   end
 
   def record
-    create_tempfile
-    load(path)
-    klass.records(limit: 1).first
+    return nil if @record_not_found == true
+
+    @record ||= begin
+      create_tempfile
+      load(path)
+      record = klass.records(limit: 1).first
+      @record_not_found = true unless record
+      record
+    end
   end
 
-  def pretty_json
+  def record?
+    record
+    !@record_not_found
+  end
+
+  def attributes_json
     JSON.pretty_generate(record.attributes)
   end
 
-  def pretty_output
-    CodeRay.scan(pretty_json, :json).html(:line_numbers => :table).html_safe
+  def attributes_output
+    CodeRay.scan(attributes_json, :json).html(:line_numbers => :table).html_safe
+  end
+
+  def errors?
+    record.errors.any?
+  end
+
+  def errors_json
+    return nil unless record.errors.any?
+    JSON.pretty_generate(record.errors)
+  end
+
+  def errors_output
+    CodeRay.scan(errors_json, :json).html(:line_numbers => :table).html_safe if errors?
   end
 
 end

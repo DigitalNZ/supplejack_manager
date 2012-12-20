@@ -11,6 +11,8 @@ $ ->
   }
 
   $("#records-preview-button").click ->
+    $("#preview-area-spinner").show();
+    $("#preview-area").html("")
     $("#preview-modal").reveal()
 
     myCodeMirror.save()
@@ -18,6 +20,7 @@ $ ->
     $link = $(this)
     $form = $link.closest("form")
     $.post $link.attr("href"), $form.serialize(), (data) ->
+      $("#preview-area-spinner").hide();
       $("#preview-area").html(data)
 
     return false;

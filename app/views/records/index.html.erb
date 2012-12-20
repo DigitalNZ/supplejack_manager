@@ -1,1 +1,14 @@
-<%= @previewer.pretty_output %>
+<% if @previewer.record? %>
+
+  <% if @previewer.errors? %>
+    <h3>Errors</h3>
+
+    <%= @previewer.errors_output %>
+  <% end %>
+
+  <h3>Record attributes</h3>
+  <%= @previewer.attributes_output %>
+
+<% else %>
+  <h3><%= @parser.name %> <span>didn't return any records.</span></h3>
+<% end %>

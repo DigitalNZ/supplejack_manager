@@ -2,7 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.preview-area-spinner {
+#preview-modal {
+  padding-top: 16px;
+}
+
+#preview-area-spinner {
   text-align: center;
-  margin: 40px 0;
+  margin: 54px 0 40px;
 }
