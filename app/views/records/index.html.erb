@@ -9,6 +9,10 @@
   <h3>Record attributes</h3>
   <%= @previewer.attributes_output %>
 
+<% elsif @previewer.syntax_error %>
+  <h3>There is a syntax error in the parser configuration</h3>
+
+  <%= @previewer.syntax_error %>
 <% else %>
   <h3><%= @parser.name %> <span>didn't return any records.</span></h3>
 <% end %>

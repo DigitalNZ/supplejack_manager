@@ -36,6 +36,24 @@ describe Previewer do
     end
   end
 
+  describe "#load_parser" do
+    it "creates the tempfile" do
+      previewer.should_receive(:create_tempfile)
+      previewer.load_parser
+    end
+
+    it "loads the file" do
+      previewer.should_receive(:load).with(previewer.path)
+      previewer.load_parser.should be_true
+    end
+
+    it "rescues from any error" do
+      previewer.stub(:load).and_raise(SyntaxError.new("Error while loading"))
+      previewer.load_parser.should be_false
+      previewer.syntax_error.should eq "Error while loading"
+    end
+  end
+
   describe "#record" do
     let(:record) { mock(:record) }
 
@@ -43,13 +61,8 @@ describe Previewer do
       Europeana.stub(:records) { [record] }
     end
 
-    it "creates the tempfile" do
-      previewer.should_receive(:create_tempfile)
-      previewer.record
-    end
-
-    it "loads the file" do
-      previewer.should_receive(:load).with(previewer.path)
+    it "loads the parser file" do
+      previewer.should_receive(:load_parser)
       previewer.record
     end
 

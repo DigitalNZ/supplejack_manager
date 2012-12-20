@@ -1,10 +1,11 @@
 class Previewer
 
-  attr_reader :parser, :data
+  attr_reader :parser, :data, :syntax_error
 
   def initialize(parser, data)
     @parser = parser
     @data = data
+    @syntax_error = nil
   end
 
   def path
@@ -24,15 +25,28 @@ class Previewer
     klass_name.constantize
   end
 
+  def load_parser
+    begin
+      create_tempfile
+      load(path)
+      return true
+    rescue SyntaxError => e
+      @syntax_error = e.message
+      return false
+    end
+  end
+
   def record
     return nil if @record_not_found == true
 
     @record ||= begin
-      create_tempfile
-      load(path)
-      record = klass.records(limit: 1).first
-      @record_not_found = true unless record
-      record
+      if load_parser
+        record = klass.records(limit: 1).first
+        @record_not_found = true unless record
+        record
+      else
+        @record_not_found = true
+      end
     end
   end
 
