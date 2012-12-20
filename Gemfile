@@ -43,6 +43,7 @@ group :development do
   gem "binding_of_caller",  ">= 0.6.8"
   gem 'guard-rspec'
   gem 'rb-fsevent',         '~> 0.9.1'
+  gem 'zeus'
 end
 
 group :development, :test do

@@ -4,6 +4,10 @@ describe ParsersController do
 
   let(:parser) { mock(:parser, id: "123", to_param: "json-europeana.rb") }
 
+  before(:each) do
+    controller.stub(:authenticate_user!) { true }
+  end
+
   describe "GET 'index'" do
     it "finds all the parser configurations" do
       Parser.should_receive(:all) { [parser] }
@@ -58,7 +62,7 @@ describe ParsersController do
 
       it "renders the edit action" do
         post :create, parser: {name: "tepapa.rb"}
-        response.should render_template(:edit)
+        response.should render_template(:new)
       end
     end
   end
@@ -76,7 +80,7 @@ describe ParsersController do
     end
 
     it "updates the parser attributes" do
-      parser.should_receive(:update_attributes).with({"name" => "tepapa.rb"})
+      parser.should_receive(:update_attributes).with({"name" => "tepapa.rb"}, nil)
       put :update, id: "json-europeana.rb", parser: {name: "tepapa.rb"}
     end
 

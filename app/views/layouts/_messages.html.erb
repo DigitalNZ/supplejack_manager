@@ -1,5 +1,10 @@
-<% flash.each do |name, msg| %>
-  <% if msg.is_a?(String) %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-  <% end %>
-<% end %>
+<div class="row">
+  <div class="twelve columns">
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <% name = :success if name.to_s == "notice" %>
+        <%= content_tag :div, msg, class: "alert-box #{name} margin-top" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

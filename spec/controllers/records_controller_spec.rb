@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe RecordsController do
+
+  before(:each) do
+    controller.stub(:authenticate_user!) { true }
+  end
   
   let(:parser) { mock(:parser) }
   let(:previewer) { mock(:previewer) }

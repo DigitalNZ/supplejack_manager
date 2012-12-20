@@ -5,6 +5,34 @@ describe Parser do
   let(:blob) { mock(:blob, name: "europeana.rb", data: "") }
   let(:parser) { Parser.new(blob, "json") }
 
+  context "validations" do
+    before(:each) do
+      parser.name = "valid_name.rb"
+      parser.strategy = "json"
+      parser.data = "class Europeana < HarvesterCore::Json::Base; end"
+    end
+
+    it "should not be valid with a invalid name" do
+      parser.name = "weird name"
+      parser.should_not be_valid
+    end
+
+    it "should not be valid when it starts with a number" do
+      parser.name = "1tapuhi.rb"
+      parser.should_not be_valid
+    end
+
+    it "should be valid with a valid name" do
+      parser.name = "nzmuseums_oai.rb"
+      parser.should be_valid
+    end
+
+    it "should not be valid with a invalid strategy" do
+      parser.strategy = "sitemap"
+      parser.should_not be_valid
+    end
+  end
+
   describe ".build" do
     it "initializes a empty parser" do
       Parser.build.should be_a Parser
@@ -76,21 +104,33 @@ describe Parser do
       parser.stub(:data) { "class Tv3" }
       parser.stub(:path) { "json/europeana.rb" }
       THE_REPO.should_receive(:add).with("json/europeana.rb", "class Tv3")
-      THE_REPO.should_receive(:commit).with("New config")
+      THE_REPO.should_receive(:commit).with("New config", nil)
       parser.save("New config")
+    end
+
+    it "returns false when invalid" do
+      parser.name = nil
+      parser.save.should be_false
     end
   end
 
   describe "#update_attributes" do
+    let(:user) { mock(:user) }
+
     it "updates the data" do
       parser.should_receive("data=").with("new data")
       parser.should_receive(:save)
-      parser.update_attributes(data: "new data")
+      parser.update_attributes({data: "new data"}, nil)
     end
 
     it "adds a message to the commit" do
-      parser.should_receive(:save).with("Testing")
-      parser.update_attributes(data: "new data", message: "Testing")
+      parser.should_receive(:save).with("Testing", nil)
+      parser.update_attributes({data: "new data", message: "Testing"}, nil)
+    end
+
+    it "sends the commit author" do
+      parser.should_receive(:save).with("Testing", user)
+      parser.update_attributes({data: "new data", message: "Testing"}, user)
     end
   end
 end

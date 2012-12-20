@@ -3,6 +3,8 @@ require "spec_helper"
 describe Repo do
 
   let(:repo) { Repo.new }
+  let(:index) { mock(:index).as_null_object }
+  let(:head) { mock(:head) }
 
   describe "initialize" do
     let(:grit_repo) { mock(:grit_repo) }
@@ -14,7 +16,6 @@ describe Repo do
   end
 
   describe "#index" do
-    let(:index) { mock(:index).as_null_object }
     let(:grit_repo) { mock(:grit_repo, index: index) }
 
     before do 
@@ -46,6 +47,21 @@ describe Repo do
 
     it "returns the tree from head" do
       repo.tree.should eq tree
+    end
+  end
+
+  describe "#commit" do
+    let(:author) { mock(:author) }
+
+    before(:each) do
+      repo.stub(:index) { index }
+      repo.stub(:author) { author }
+      repo.stub(:head) { head }
+    end
+
+    it "commits to the index" do
+      index.should_receive(:commit).with("Message", [head], author, nil, "master")
+      repo.commit("Message", "Federico")
     end
   end
 end

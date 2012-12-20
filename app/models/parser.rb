@@ -1,8 +1,13 @@
 class Parser
+  include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
   VALID_STRATEGIES = ["json", "oai", "rss", "xml"]
+
+  validates_presence_of   :name, :strategy, :data
+  validates_format_of     :name, with: /^[a-z][a-z0-9_]+\.rb/
+  validates_inclusion_of  :strategy, in: VALID_STRATEGIES
 
   class << self
     def build(attributes={})
@@ -68,14 +73,18 @@ class Parser
     ENV["PARSER_GIT_REPO_PATH"] + "/" + path
   end
 
-  def save(message=nil)
-    THE_REPO.add(self.path, self.data)
-    THE_REPO.commit(message)
+  def save(message=nil, user=nil)
+    if self.valid?
+      THE_REPO.add(self.path, self.data)
+      THE_REPO.commit(message, user)
+    else
+      return false
+    end
   end
 
-  def update_attributes(attributes={})
+  def update_attributes(attributes={}, user=nil)
     attributes = attributes.symbolize_keys
     self.data = attributes[:data]
-    self.save(attributes[:message])
+    self.save(attributes[:message], user)
   end
 end

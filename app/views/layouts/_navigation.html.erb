@@ -1,17 +1,18 @@
 <nav class="top-bar">
   <ul>
-    <li class="name"><h1><%= link_to t('manager'), root_path %></li>
+    <li class="name"><h1><%= t('manager') %></li>
     <li class="toggle-topbar"><a href="#"></a></li>
   </ul>
   <section>
     <% if user_signed_in? %>
       <ul class="left">
-        <li><%= link_to t('home.title'), root_path %></li>
+        <li><%= link_to t('parsers.label'), parsers_path %></li>
       </ul>
     <% end %>
 
     <ul class="right">
       <% if user_signed_in? %>
+        <li class="name"><span>Hi, <%= current_user.name %></span></li>
         <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
       <% else %>
         <li><%= link_to t('login'), new_user_session_path %></li>

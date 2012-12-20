@@ -1,5 +1,7 @@
 class ParsersController < ApplicationController
 
+  before_filter :authenticate_user!
+
   def index
     @parsers = Parser.all
   end
@@ -14,18 +16,17 @@ class ParsersController < ApplicationController
 
   def create
     @parser = Parser.build(params[:parser])
-
-    if @parser.save(params[:parser][:message])
+    if @parser.save(params[:parser][:message], current_user)
       redirect_to edit_parser_path(@parser)
     else
-      render :edit
+      render :new
     end
   end
 
   def update
     @parser = Parser.find(params[:id])
 
-    if @parser.update_attributes(params[:parser])
+    if @parser.update_attributes(params[:parser], current_user)
       redirect_to edit_parser_path(@parser)
     else
       render :edit
@@ -35,5 +36,6 @@ class ParsersController < ApplicationController
   def destroy
     @parser = Parser.find(params[:id])
     @parser.destroy
+    redirect_to parsers_path
   end
 end

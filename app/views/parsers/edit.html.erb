@@ -3,7 +3,7 @@
   <%= link_to "Preview Records", records_path(@parser.id), class: "button new-right", id: "records-preview-button" %>
   
   <%= f.input :data, as: :text, label: false %>
-  <%= f.input :message %>
+  <%= f.input :message, require: false %>
 
   <%= f.button :submit %>
 <% end %>

@@ -26,8 +26,19 @@ class Repo
     index.add(path, contents)
   end
 
-  def commit(message)
-    user = Grit::Actor.new("Federico Gonzalez", "fede@example.com")
-    index.commit(message, [head], user, nil, 'master')
+  def commit(message, commiter)
+    index.commit(message, [head], author(commiter), nil, 'master')
+  end
+
+  def author(name_or_user=nil)
+    if name_or_user
+      if name_or_user.is_a?(User)
+        Grit::Actor.new(name_or_user.name, name_or_user.email)
+      else
+        Grit::Actor.from_string(name)
+      end
+    else
+      Grit::Actor.new("Federico Gonzalez", "fede@example.com")
+    end
   end
 end
