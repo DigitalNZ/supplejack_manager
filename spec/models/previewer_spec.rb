@@ -54,6 +54,25 @@ describe Previewer do
     end
   end
 
+  describe "load_record" do
+    let(:record) { mock(:record) }
+
+    before do
+      Europeana.stub(:records) { [record] }
+    end
+
+    it "loads one record" do
+      Europeana.should_receive(:records).with({limit: 1}) { [record] }
+      previewer.load_record.should eq record
+    end
+
+    it "rescues from any error" do
+      Europeana.stub(:records).and_raise(StandardError.new("Hi"))
+      previewer.load_record.should be_nil
+      previewer.fetch_error.should eq "Hi"
+    end
+  end
+
   describe "#record" do
     let(:record) { mock(:record) }
 

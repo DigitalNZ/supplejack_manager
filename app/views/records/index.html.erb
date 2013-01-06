@@ -2,17 +2,21 @@
 
   <% if @previewer.errors? %>
     <h3>Errors</h3>
-
     <%= @previewer.errors_output %>
   <% end %>
-
   <h3>Record attributes</h3>
   <%= @previewer.attributes_output %>
 
 <% elsif @previewer.syntax_error %>
-  <h3>There is a syntax error in the parser configuration</h3>
 
+  <h3>Syntax error in the parser configuration</h3>
   <%= @previewer.syntax_error %>
+
+<% elsif @previewer.fetch_error %>
+  
+  <h3>Error while fetching the records</h3>
+  <%= @previewer.fetch_error %>
+
 <% else %>
   <h3><%= @parser.name %> <span>didn't return any records.</span></h3>
 <% end %>

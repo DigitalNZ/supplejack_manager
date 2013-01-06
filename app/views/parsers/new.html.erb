@@ -3,10 +3,10 @@
 <%= simple_form_for @parser do |f| %>
 
   <%= f.input :name %>
-  <%= f.input :strategy %>
+  <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
   
   <%= f.input :data, as: :text, label: false, required: false %>
-  <%= f.input :message %>
+  <%= f.input :message, label: t("parsers.commit_message") %>
 
   <%= f.button :submit %>
 

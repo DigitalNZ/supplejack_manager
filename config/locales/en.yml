@@ -8,3 +8,4 @@ en:
 
   parsers:
     label: "Parsers"
+    commit_message: "Commit Message"
