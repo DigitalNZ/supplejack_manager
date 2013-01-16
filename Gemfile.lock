@@ -1,4 +1,17 @@
 GIT
+  remote: git@scm.digitalnz.org:harvester/core
+  revision: 7c96f70a25cdd77be955ac8ae378e9722588e25f
+  specs:
+    harvester_core (0.0.1)
+      actionpack (~> 3.2)
+      activesupport (~> 3.2)
+      chronic (~> 0.8.0)
+      jsonpath (~> 0.5.0)
+      nokogiri
+      rest-client (~> 1.6.7)
+      tzinfo
+
+GIT
   remote: https://github.com/code4lib/ruby-oai.git
   revision: 05e22cadf0064b04ccd9d7e38e8467eff75ba251
   specs:
@@ -14,18 +27,6 @@ GIT
     simple_form (2.1.0.dev)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-
-PATH
-  remote: /Users/fede/code/hippo/harvester/core
-  specs:
-    harvester_core (0.0.1)
-      actionpack (~> 3.2)
-      activesupport (~> 3.2)
-      chronic (~> 0.8.0)
-      jsonpath (~> 0.5.0)
-      nokogiri
-      rest-client (~> 1.6.7)
-      tzinfo
 
 GEM
   remote: https://rubygems.org/
