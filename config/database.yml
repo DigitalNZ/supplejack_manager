@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: harvester_manager_production
+  database: harvester_production
   pool: 5
   username: digitalnz
   password: n4tlibby
