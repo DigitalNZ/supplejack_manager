@@ -23,6 +23,7 @@ PATH
       activesupport (~> 3.2)
       chronic (~> 0.8.0)
       jsonpath (~> 0.5.0)
+      nokogiri
       rest-client (~> 1.6.7)
       tzinfo
 
