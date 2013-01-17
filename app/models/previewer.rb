@@ -1,45 +1,18 @@
 class Previewer
 
-  attr_reader :parser, :data, :syntax_error, :fetch_error
+  attr_reader :parser, :loader, :syntax_error, :fetch_error
 
   def initialize(parser, data)
     @parser = parser
-    @data = data
+    @parser.data = data
+    @loader = ParserLoader.new(parser)
     @syntax_error = nil
     @fetch_error = nil
   end
 
-  def path
-    @path ||= Rails.root.to_s + "/tmp/parsers/#{parser.strategy}/#{parser.name}"
-  end
-
-  def create_tempfile
-    FileUtils.mkdir_p("#{Rails.root.to_s}/tmp/parsers/#{parser.strategy}")
-    File.open(path, "w") {|f| f.write(data) }
-  end
-
-  def klass_name
-    parser.name.gsub(/\.rb/, "").camelize
-  end
-
-  def klass
-    klass_name.constantize
-  end
-
-  def load_parser
-    begin
-      create_tempfile
-      load(path)
-      return true
-    rescue SyntaxError => e
-      @syntax_error = e.message
-      return false
-    end
-  end
-
   def load_record
     begin
-      klass.records(limit: 1).first
+      loader.parser_class.records(limit: 1).first
     rescue StandardError => e
       @fetch_error = e.message
       return nil
@@ -50,11 +23,12 @@ class Previewer
     return nil if @record_not_found == true
 
     @record ||= begin
-      if load_parser
+      if loader.loaded?
         record = load_record
         @record_not_found = true unless record
         record
       else
+        @syntax_error = loader.syntax_error
         @record_not_found = true
       end
     end

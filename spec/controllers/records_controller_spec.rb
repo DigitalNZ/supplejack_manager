@@ -6,7 +6,7 @@ describe RecordsController do
     controller.stub(:authenticate_user!) { true }
   end
   
-  let(:parser) { mock(:parser) }
+  let(:parser) { mock(:parser).as_null_object }
   let(:previewer) { mock(:previewer) }
 
   describe "GET index" do

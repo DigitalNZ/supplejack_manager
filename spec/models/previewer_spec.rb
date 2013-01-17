@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Previewer do
 
-  let(:parser) { mock(:parser, name: "europeana.rb", strategy: "json") }
+  let(:parser) { Parser.build(name: "europeana.rb", strategy: "json", data: nil) }
   let(:previewer) { Previewer.new(parser, "Data") }
 
   class Europeana
@@ -10,54 +10,23 @@ describe Previewer do
       []
     end
   end
-  
-  describe "#path" do
-    it "builds a absolute path to the temp file" do
-      previewer.path.should eq "#{Rails.root.to_s}/tmp/parsers/json/europeana.rb"
+
+  describe "#initialize" do
+    it "updates the parser data" do
+      previewer.parser.data.should eq "Data"
     end
 
-    it "memoizes the path" do
-      parser.should_receive(:name).once
-      previewer.path
-      previewer.path
-    end
-  end
-
-  describe "#create_tempfile" do
-    it "creates a new tempfile with the path" do
-      previewer.create_tempfile
-      File.read(previewer.path).should eq "Data"
-    end
-  end
-
-  describe "#klass" do
-    it "returns the class singleton" do
-      previewer.klass.should eq Europeana
-    end
-  end
-
-  describe "#load_parser" do
-    it "creates the tempfile" do
-      previewer.should_receive(:create_tempfile)
-      previewer.load_parser
-    end
-
-    it "loads the file" do
-      previewer.should_receive(:load).with(previewer.path)
-      previewer.load_parser.should be_true
-    end
-
-    it "rescues from any error" do
-      previewer.stub(:load).and_raise(SyntaxError.new("Error while loading"))
-      previewer.load_parser.should be_false
-      previewer.syntax_error.should eq "Error while loading"
+    it "initializes a ParserLoader" do
+      previewer.loader.should be_a(ParserLoader)
     end
   end
 
   describe "load_record" do
     let(:record) { mock(:record) }
+    let(:loader) { mock(:loader, parser_class: Europeana, loaded?: true) }
 
-    before do
+    before(:each) do
+      previewer.stub(:loader) { loader }
       Europeana.stub(:records) { [record] }
     end
 
@@ -75,13 +44,15 @@ describe Previewer do
 
   describe "#record" do
     let(:record) { mock(:record) }
+    let(:loader) { mock(:loader, parser_class: Europeana, loaded?: true) }
 
     before do
+      previewer.stub(:loader) { loader }
       Europeana.stub(:records) { [record] }
     end
 
     it "loads the parser file" do
-      previewer.should_receive(:load_parser)
+      loader.should_receive(:loaded?)
       previewer.record
     end
 
@@ -105,6 +76,13 @@ describe Previewer do
     it "returns true" do
       Europeana.stub(:records) { [record] }
       previewer.record?.should be_true
+    end
+
+    it "sets the syntax error" do
+      loader = mock(:loader, loaded?: false, syntax_error: "Error")
+      previewer.stub(:loader) { loader }
+      previewer.record?.should be_false
+      previewer.syntax_error.should eq "Error"
     end
   end
 
