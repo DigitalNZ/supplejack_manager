@@ -19,4 +19,6 @@
 //= require foundation/app
 //= require codemirror
 //= require codemirror/modes/ruby
-//= require_tree .
+//= require code_mirror_setup
+//= require parsers
+//= require shared_modules

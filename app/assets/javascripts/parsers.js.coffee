@@ -3,13 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  textArea = document.getElementById("parser_data")
-  myCodeMirror = CodeMirror.fromTextArea textArea, {
-    theme: "monokai",
-    lineNumbers: true,
-    tabSize: 2
-  }
-
   $("#records-preview-button").click ->
     $("#preview-area-spinner").show();
     $("#preview-area").html("")

@@ -1,9 +1,8 @@
-<h1>New parser configuration</h1>
+<h1>New shared module</h1>
 
-<%= simple_form_for @parser do |f| %>
+<%= simple_form_for @shared_module do |f| %>
 
   <%= f.input :name %>
-  <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
   
   <%= f.input :data, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
   <%= f.input :message, label: t("commit_message") %>

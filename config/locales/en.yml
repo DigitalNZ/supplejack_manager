@@ -5,7 +5,10 @@ en:
   manager: "Harvest Manager"
   logout: "Logout"
   login: "Login"
+  commit_message: "Commit Message"
 
   parsers:
     label: "Parsers"
-    commit_message: "Commit Message"
+
+  shared_modules:
+    label: "Shared Modules"

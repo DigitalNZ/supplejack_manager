@@ -2,8 +2,8 @@
   <h1 class="left"><%= @parser.name %></h1>
   <%= link_to "Preview Records", records_path(@parser.id), class: "button new-right", id: "records-preview-button" %>
   
-  <%= f.input :data, as: :text, label: false %>
-  <%= f.input :message, require: false, label: t("parsers.commit_message") %>
+  <%= f.input :data, as: :text, label: false, input_html: {class: "code-editor"} %>
+  <%= f.input :message, require: false, label: t("commit_message") %>
 
   <%= f.button :submit %>
 <% end %>
