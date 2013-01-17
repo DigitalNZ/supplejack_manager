@@ -1,3 +1,4 @@
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -20,5 +21,5 @@
 //= require codemirror
 //= require codemirror/modes/ruby
 //= require code_mirror_setup
+//= require harvester
 //= require parsers
-//= require shared_modules

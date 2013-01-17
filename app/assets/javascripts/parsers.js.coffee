@@ -4,11 +4,11 @@
 
 $ ->
   $("#records-preview-button").click ->
-    $("#preview-area-spinner").show();
+    $("#preview-area-spinner").show()
     $("#preview-area").html("")
     $("#preview-modal").reveal()
 
-    myCodeMirror.save()
+    window.Harvester.myCodeMirror.save()
 
     $link = $(this)
     $form = $link.closest("form")
