@@ -16,8 +16,12 @@ class ParserLoader
     File.open(path, "w") {|f| f.write(parser.data) }
   end
 
+  def parser_class_name
+    parser.name.gsub(/\.rb/, "").camelize
+  end
+
   def parser_class
-    parser.name.gsub(/\.rb/, "").camelize.constantize
+    parser_class_name.constantize
   end
 
   def load_parser
@@ -25,6 +29,7 @@ class ParserLoader
 
     begin
       create_tempfile
+      clear_parser_class_definitions
       load(path)
       @loaded = true
     rescue SyntaxError => e
@@ -36,5 +41,11 @@ class ParserLoader
   def loaded?
     load_parser
     @loaded
+  end
+
+  def clear_parser_class_definitions
+    if Object.const_defined?(parser_class_name)
+      parser_class.clear_definitions
+    end
   end
 end

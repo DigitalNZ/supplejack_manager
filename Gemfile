@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails',        '3.2.11'
 
 gem "harvester_core", git: "git@scm.digitalnz.org:harvester/core"
-#gem "harvester_core", path: "/Users/fede/code/hippo/harvester/core"
+# gem "harvester_core", path: "/Users/fede/code/hippo/harvester/core"
 
 gem "oai", git: "https://github.com/code4lib/ruby-oai.git"
 
@@ -52,7 +52,7 @@ end
 
 group :test do
   gem "database_cleaner",   ">= 0.9.1"
-  gem "email_spec",         ">= 1.4.0"
+  # gem "email_spec",         ">= 1.4.0"
   gem "cucumber-rails",     ">= 1.3.0", :require => false
   gem "launchy",            ">= 2.1.2"
   gem "capybara",           ">= 2.0.1"

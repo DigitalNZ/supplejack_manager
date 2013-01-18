@@ -2,7 +2,9 @@ require "spec_helper"
 
 describe ParserLoader do
 
-  class Europeana; end
+  class Europeana
+    def self.clear_definitions; end
+  end
 
   let(:parser) { Parser.build(strategy: "json", name: "europeana.rb", data: "class Europeana \n end") }
   let(:loader) { ParserLoader.new(parser) }
@@ -38,6 +40,11 @@ describe ParserLoader do
       loader.load_parser
     end
 
+    it "clears the klass definitions" do
+      loader.should_receive(:clear_parser_class_definitions)
+      loader.load_parser
+    end
+
     it "loads the file" do
       loader.should_receive(:load).with(loader.path)
       loader.load_parser.should be_true
@@ -59,6 +66,13 @@ describe ParserLoader do
     it "returns the @loaded value" do
       loader.instance_variable_set("@loaded", true)
       loader.loaded?.should be_true
+    end
+  end
+
+  describe "clear_parser_class_definitions" do
+    it "clears the parser class definitions" do
+      Europeana.should_receive(:clear_definitions)
+      loader.clear_parser_class_definitions
     end
   end
 end

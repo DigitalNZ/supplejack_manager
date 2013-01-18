@@ -35,4 +35,12 @@ class Parser < GitStorage
   def fullpath
     ENV["PARSER_GIT_REPO_PATH"] + "/" + path
   end
+
+  def loader
+    @loader ||= ParserLoader.new(self)
+  end
+
+  def load
+    loader.load_parser
+  end
 end
