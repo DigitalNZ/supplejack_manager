@@ -13,8 +13,10 @@ namespace :harvester do
     klass = parser.loader.parser_class
     records = klass.records(limit: limit > 0 ? limit : nil)
     records.each do |record|
-      RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: record.attributes}.to_json, :content_type => :json, :accept => :json
+      attributes = record.attributes
+      RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
       records_harvested += 1
+      puts "Posted: #{attributes[:identifier].first}"
     end
 
     elapsed_time = Time.now-start_time
