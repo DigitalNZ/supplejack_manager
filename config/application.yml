@@ -14,7 +14,7 @@ development:
 
 production:
   PARSER_GIT_REPO_PATH: "/data/sites/harvester.uat.digitalnz.org/parsers.git"
-  API_HOST: "http://harvester.uat.digitalnz.org"
+  API_HOST: "http://api.uat.digitalnz.org"
 
 test:
   PARSER_GIT_REPO_PATH: "spec/fixtures/test_repo"
