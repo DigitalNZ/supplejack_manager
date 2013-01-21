@@ -21,10 +21,16 @@ describe ParserLoader do
     end
   end
 
+  describe "#data_with_encoding" do
+    it "should add a utf-8 encoding to the top of the file" do
+      loader.data_with_encoding.should eq "# encoding: utf-8\r\nclass Europeana \n end"
+    end
+  end
+
   describe "#create_tempfile" do
     it "creates a new tempfile with the path" do
       loader.create_tempfile
-      File.read(loader.path).should eq "class Europeana \n end"
+      File.read(loader.path).should eq "# encoding: utf-8\r\nclass Europeana \n end"
     end
   end
 

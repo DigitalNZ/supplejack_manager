@@ -18,6 +18,6 @@ namespace :harvester do
     end
 
     elapsed_time = Time.now-start_time
-    puts "[#{Time.now}] #{records_harvested} records harvested. Records/sec: #{records_harvested.to_f/elapsed_time.to_f}. (Elapsed: #{elapsed_time} sec.)"
+    puts "[#{Time.now}] #{records_harvested} records harvested. Records/sec: #{(records_harvested.to_f/elapsed_time.to_f).round(2)}. (Elapsed: #{elapsed_time.round(2)} sec.)"
   end
 end
