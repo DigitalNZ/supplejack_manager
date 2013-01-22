@@ -15,14 +15,18 @@ namespace :harvester do
     klass = parser.loader.parser_class
     records = klass.records(limit: limit > 0 ? limit : nil)
     records.each do |record|
-      attributes = record.attributes
+      begin
+        attributes = record.attributes
 
-      measure = Benchmark.measure do
-        RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
+        measure = Benchmark.measure do
+          RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
+        end
+
+        records_harvested += 1
+        puts "Posted (#{measure.real.round(4)}): #{attributes[:identifier].first}"
+      rescue StandardError => e
+        puts "Failed: #{e.message}"
       end
-
-      records_harvested += 1
-      puts "Posted (#{measure.real.round(4)}): #{attributes[:identifier].first}"
     end
 
     elapsed_time = Time.now-start_time
