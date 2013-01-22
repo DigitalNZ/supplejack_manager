@@ -1,3 +1,5 @@
+require 'benchmark'
+
 namespace :harvester do
   desc "Task to initiate a new harverst"
   task :start, [:strategy, :file_name, :limit] => :environment do |t, args|
@@ -14,9 +16,13 @@ namespace :harvester do
     records = klass.records(limit: limit > 0 ? limit : nil)
     records.each do |record|
       attributes = record.attributes
-      RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
+
+      measure = Benchmark.measure do
+        RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
+      end
+
       records_harvested += 1
-      puts "Posted: #{attributes[:identifier].first}"
+      puts "Posted (#{measure.real.round(4)}): #{attributes[:identifier].first}"
     end
 
     elapsed_time = Time.now-start_time
