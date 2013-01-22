@@ -4,8 +4,18 @@
     <h3>Errors</h3>
     <%= @previewer.errors_output %>
   <% end %>
-  <h3>Record attributes</h3>
-  <%= @previewer.attributes_output %>
+
+  <div id="record-attributes">
+    <h3 class="left">Record attributes</h3>
+    <%= link_to "Raw data", "#", id: "record-raw-data-button", class: "button new-right" %>
+    <%= @previewer.attributes_output %>
+  </div>
+
+  <div id="record-raw-data">
+    <h3 class="left">Raw Data</h3>
+    <%= link_to "Record attributes", "#", id: "record-attributes-button", class: "button new-right" %>
+    <%= @previewer.raw_output %>
+  </div>
 
 <% elsif @previewer.syntax_error %>
 

@@ -47,6 +47,19 @@ class Previewer
     CodeRay.scan(attributes_json, :json).html(:line_numbers => :table).html_safe
   end
 
+  def pretty_xml_output
+    record.raw_data
+  end
+
+  def pretty_json_output
+    JSON.pretty_generate(record.raw_data)
+  end
+
+  def raw_output
+    format = parser.xml? ? :xml : :json
+    CodeRay.scan(self.send("pretty_#{format}_output"), format).html(line_numbers: :table).html_safe
+  end
+
   def errors?
     record.errors.any?
   end

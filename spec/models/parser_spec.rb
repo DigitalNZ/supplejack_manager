@@ -95,4 +95,42 @@ describe Parser do
       parser.load
     end
   end
+
+  describe "xml?" do
+    let(:parser) { Parser.build({strategy: "xml", name: "natlib.rb"}) }
+
+    it "returns true for Xml strategy" do
+      parser.strategy = "xml"
+      parser.xml?.should be_true
+    end
+
+    it "returns true for Oai strategy" do
+      parser.strategy = "oai"
+      parser.xml?.should be_true
+    end
+
+    it "returns true for Rss strategy" do
+      parser.strategy = "rss"
+      parser.xml?.should be_true
+    end
+
+    it "returns false for Json strategy" do
+      parser.strategy = "json"
+      parser.xml?.should be_false
+    end
+  end
+
+  describe "json?" do
+    let(:parser) { Parser.build({strategy: "json", name: "natlib.rb"}) }
+
+    it "returns true for Json strategy" do
+      parser.strategy = "json"
+      parser.json?.should be_true
+    end
+
+    it "returns false for Rss strategy" do
+      parser.strategy = "rss"
+      parser.json?.should be_false
+    end
+  end
 end

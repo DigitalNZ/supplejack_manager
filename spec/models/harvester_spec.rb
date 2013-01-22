@@ -1,10 +1,6 @@
 require "spec_helper"
 
 describe Harvester do
-  
-  # class NatlibPages
-  #   def self.records(options={}); end
-  # end
 
   let(:parser) { Parser.build(strategy: "xml", name: "natlib_pages.rb", data: "class NatlibPages < HarvesterCore::Xml::Base; end") }
   let(:harvester) { Harvester.new(parser, "10") }

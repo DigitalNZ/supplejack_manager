@@ -43,4 +43,12 @@ class Parser < GitStorage
   def load
     loader.load_parser
   end
+
+  def xml?
+    ["xml", "oai", "rss"].include?(strategy)
+  end
+
+  def json?
+    strategy == "json"
+  end
 end
