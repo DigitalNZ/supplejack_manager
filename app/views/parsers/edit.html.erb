@@ -1,11 +1,30 @@
-<%= simple_form_for @parser do |f| %>
-  <h1 class="left"><%= @parser.name %></h1>
-  <%= link_to "Preview Records", records_path(@parser.id), class: "button new-right", id: "records-preview-button" %>
-  
+<h1 class="left"><%= @parser.name %></h1>
+
+<%= link_to "Harvest", "", class: "button new-right", id: "records-harvest-modal-button" %>
+<%= link_to "Preview", records_path(@parser.id), class: "button new-right", id: "records-preview-button" %>
+
+<%= simple_form_for @parser do |f| %>  
   <%= f.input :data, as: :text, label: false, input_html: {class: "code-editor"} %>
-  <%= f.input :message, require: false, label: t("commit_message") %>
+  <%= f.input :message, :require => false, :label => t("commit_message") %>
 
   <%= f.button :submit %>
+
+  <div id="harvest-modal" class="reveal-modal medium">
+    <div id="harvest-form">
+      <h3><%= t("parsers.records_to_harvest") %></h3>
+
+      <%= text_field_tag :limit, "", class: "string optional" %>
+      <%= link_to "Harvest records", harvest_path(@parser.id), class: "button columns twelve", id: "records-harvest-button" %>
+    </div>
+
+    <div id="harvest-result"></div>
+
+    <div id="harvest-spinner" style="display: none" class="spinner">
+      <%= image_tag("spinner.gif") %>
+    </div>
+
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
 <% end %>
 
 
@@ -13,7 +32,7 @@
   <div id="preview-area" class="CodeRay">
   </div>
 
-  <div id="preview-area-spinner">
+  <div id="preview-area-spinner" class="spinner">
     <%= image_tag("spinner.gif") %>
   </div>
 

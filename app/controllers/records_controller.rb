@@ -8,6 +8,12 @@ class RecordsController < ApplicationController
     render layout: false
   end
 
+  def harvest
+    @harvester = Harvester.new(@parser, params[:limit])
+    @harvester.start
+    render layout: false
+  end
+
   def find_parser
     @parser = Parser.find(params[:parser_id])
   end

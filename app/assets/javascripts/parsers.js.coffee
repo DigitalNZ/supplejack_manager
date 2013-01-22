@@ -11,9 +11,28 @@ $ ->
     window.Harvester.myCodeMirror.save()
 
     $link = $(this)
-    $form = $link.closest("form")
+    $form = $("form")
     $.post $link.attr("href"), $form.serialize(), (data) ->
-      $("#preview-area-spinner").hide();
+      $("#preview-area-spinner").hide()
       $("#preview-area").html(data)
+
+    return false;
+
+  $("#records-harvest-modal-button").click ->
+    $("#harvest-form").show()
+    $("#harvest-result").hide()
+    $("#harvest-modal").reveal()
+
+    return false;
+
+  $("#records-harvest-button").click ->
+    $("#harvest-spinner").show()
+    $("#harvest-form").hide()
+
+    $link = $(this)
+    $form = $("form")
+    $.post $link.attr("href"), $form.serialize(), (data) ->
+      $("#harvest-spinner").hide()
+      $("#harvest-result").show().html(data)
 
     return false;

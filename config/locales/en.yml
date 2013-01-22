@@ -9,6 +9,7 @@ en:
 
   parsers:
     label: "Parsers"
+    records_to_harvest: "How many records do you wish to harvest?"
 
   shared_modules:
     label: "Shared Modules"
