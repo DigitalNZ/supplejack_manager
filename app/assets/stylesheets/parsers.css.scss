@@ -15,8 +15,12 @@
   display: none;
 }
 
-.CodeRay .new-right {
-  margin-top: 10px;
+.CodeRay {
+  clear: both;
+  
+  .new-right {
+    margin-top: 10px;
+  }
 }
 
 .preview-navigation {
