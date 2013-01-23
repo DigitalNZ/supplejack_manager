@@ -1,18 +1,22 @@
 class Previewer
 
-  attr_reader :parser, :loader, :syntax_error, :fetch_error
+  attr_reader :parser, :loader, :syntax_error, :fetch_error, :index
 
-  def initialize(parser, data)
+  def initialize(parser, data, index=0)
     @parser = parser
-    @parser.data = data
+    @parser.data = data if data.present?
     @loader = ParserLoader.new(parser)
+    @index = index.to_i
     @syntax_error = nil
     @fetch_error = nil
   end
 
   def load_record
     begin
-      loader.parser_class.records(limit: 1).first
+      loader.parser_class.records(limit: index+1).each_with_index do |record, i|
+        return record if index == i
+      end
+      nil
     rescue StandardError => e
       @fetch_error = e.message
       return nil

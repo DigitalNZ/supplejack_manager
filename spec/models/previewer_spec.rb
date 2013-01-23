@@ -6,9 +6,8 @@ describe Previewer do
   let(:previewer) { Previewer.new(parser, "Data") }
 
   class Europeana
-    def self.records(options={})
-      []
-    end
+    def self.records(options={}); [];end
+    def self.clear_definitions; end
   end
 
   describe "#initialize" do
@@ -39,6 +38,13 @@ describe Previewer do
       Europeana.stub(:records).and_raise(StandardError.new("Hi"))
       previewer.load_record.should be_nil
       previewer.fetch_error.should eq "Hi"
+    end
+
+    it "returns the third record" do
+      previewer = Previewer.new(parser, "Data", 2)
+      record3 = mock(:record, id: 3)
+      Europeana.stub(:records) { [record, record, record3] }
+      previewer.load_record.should eq record3
     end
   end
 

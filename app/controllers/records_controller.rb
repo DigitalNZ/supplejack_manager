@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
   before_filter :find_parser
 
   def index
-    @previewer = Previewer.new(@parser, params[:parser][:data])
+    @previewer = Previewer.new(@parser, params[:parser][:data], params[:index])
     render layout: false
   end
 

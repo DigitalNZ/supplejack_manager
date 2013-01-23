@@ -7,13 +7,27 @@
 
   <div id="record-attributes">
     <h3 class="left">Record attributes</h3>
+
+    <div class="preview-navigation">
+      <%= link_to_previous @parser.id, params[:index], class: "records-preview-button arrow arrow-left" %>
+      <%= link_to_next @parser.id, params[:index], class: "records-preview-button arrow arrow-right" %>
+    </div>
+
     <%= link_to "Raw data", "#", id: "record-raw-data-button", class: "button new-right" %>
+
     <%= @previewer.attributes_output %>
   </div>
 
   <div id="record-raw-data">
     <h3 class="left">Raw Data</h3>
+
+    <div class="preview-navigation">
+      <%= link_to_previous @parser.id, params[:index], class: "records-preview-button arrow arrow-left" %>
+      <%= link_to_next @parser.id, params[:index], class: "records-preview-button arrow arrow-right" %>
+    </div>
+
     <%= link_to "Record attributes", "#", id: "record-attributes-button", class: "button new-right" %>
+
     <%= @previewer.raw_output %>
   </div>
 

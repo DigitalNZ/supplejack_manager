@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $("#records-preview-button").click ->
+  $("#main").on 'click', 'a.records-preview-button', ->
     $("#preview-area-spinner").show()
     $("#preview-area").html("")
     $("#preview-modal").reveal()

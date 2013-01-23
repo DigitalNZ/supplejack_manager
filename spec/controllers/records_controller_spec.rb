@@ -19,8 +19,8 @@ describe RecordsController do
     end
 
     it "initializes a previewer object" do
-      Previewer.should_receive(:new).with(parser, "Data") { previewer }
-      post :index, parser_id: "json-europeana.rb", parser: {data: "Data"}
+      Previewer.should_receive(:new).with(parser, "Data", "10") { previewer }
+      post :index, parser_id: "json-europeana.rb", parser: {data: "Data"}, index: 10
       assigns(:previewer).should eq previewer
     end
   end

@@ -18,3 +18,34 @@
 .CodeRay .new-right {
   margin-top: 10px;
 }
+
+.preview-navigation {
+  float: right;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+$arrowSize: 18px;
+
+.arrow {
+  width: 0; 
+  height: 0;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.arrow-right {
+  border-top: $arrowSize solid transparent;
+  border-bottom: $arrowSize solid transparent;
+  border-left: $arrowSize solid $mainColor;
+}
+
+.arrow-left {
+  border-top: $arrowSize solid transparent;
+  border-bottom: $arrowSize solid transparent; 
+  border-right: $arrowSize solid $mainColor; 
+
+  &.disabled {
+    border-right: $arrowSize solid $secondaryColor; 
+  }
+}

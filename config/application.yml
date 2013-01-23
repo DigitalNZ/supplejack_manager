@@ -11,11 +11,14 @@
 development:
   PARSER_GIT_REPO_PATH: "/Users/fede/Desktop/test_remote"
   API_HOST: "http://localhost:3000"
+  HARVESTER_CACHING_ENABLED: true
 
 production:
   PARSER_GIT_REPO_PATH: "/data/sites/harvester.uat.digitalnz.org/parsers.git"
   API_HOST: "http://api.uat.digitalnz.org"
+  HARVESTER_CACHING_ENABLED: true
 
 test:
   PARSER_GIT_REPO_PATH: "spec/fixtures/test_repo"
   API_HOST: "http://localhost:3000"
+  HARVESTER_CACHING_ENABLED: false

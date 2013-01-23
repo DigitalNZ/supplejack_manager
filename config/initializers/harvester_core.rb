@@ -1,0 +1,1 @@
+HarvesterCore.caching_enabled = ENV["HARVESTER_CACHING_ENABLED"] == "true"

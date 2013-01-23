@@ -1,7 +1,7 @@
 <h1 class="left"><%= @parser.name %></h1>
 
 <%= link_to "Harvest", "", class: "button new-right", id: "records-harvest-modal-button" %>
-<%= link_to "Preview", records_path(@parser.id), class: "button new-right", id: "records-preview-button" %>
+<%= link_to "Preview", records_path(@parser.id), class: "records-preview-button button new-right" %>
 
 <%= simple_form_for @parser do |f| %>  
   <%= f.input :data, as: :text, label: false, input_html: {class: "code-editor"} %>
