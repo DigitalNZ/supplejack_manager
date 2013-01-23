@@ -20,6 +20,9 @@ gem "grit"
 gem "coderay",      "~> 1.0.8"
 
 gem "sidekiq"
+gem 'slim'
+# if you require 'sinatra' you get the DSL extended to Object
+gem 'sinatra', :require => nil
 
 # Gems used only for assets and not required
 # in production environments by default.
