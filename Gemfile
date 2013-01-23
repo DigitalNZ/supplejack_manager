@@ -23,6 +23,7 @@ gem "sidekiq"
 gem 'slim'
 # if you require 'sinatra' you get the DSL extended to Object
 gem 'sinatra', :require => nil
+gem 'pusher'
 
 # Gems used only for assets and not required
 # in production environments by default.

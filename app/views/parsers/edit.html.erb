@@ -1,3 +1,9 @@
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+<script type="text/javascript">
+  var pusher = new Pusher('<%= Pusher.key %>');
+  var channel = pusher.subscribe('<%= @parser.strategy %>-<%= @parser.name %>-<%= current_user.id %>');
+</script>
+
 <h1 class="left"><%= @parser.name %></h1>
 
 <%= link_to "Harvest", "", class: "button new-right", id: "records-harvest-modal-button" %>
