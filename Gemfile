@@ -11,7 +11,7 @@ gem "oai", git: "https://github.com/code4lib/ruby-oai.git"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "thin",         ">= 1.5.0"
-gem "mysql2",       ">= 0.3.11"
+gem "mongoid",      "~> 3.0.19"
 
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
