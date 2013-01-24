@@ -12,17 +12,11 @@ development:
   PARSER_GIT_REPO_PATH: "/Users/fede/Desktop/test_remote"
   API_HOST: "http://localhost:3000"
   HARVESTER_CACHING_ENABLED: true
-  PUSHER_APP_ID: 35891
-  PUSHER_KEY: "14146dbb93214dc2863f"
-  PUSHER_SECRET: "f73b388f23f494e4eef1"
 
 production:
   PARSER_GIT_REPO_PATH: "/data/sites/harvester.uat.digitalnz.org/parsers.git"
   API_HOST: "http://api.uat.digitalnz.org"
   HARVESTER_CACHING_ENABLED: true
-  PUSHER_APP_ID: 35891
-  PUSHER_KEY: "14146dbb93214dc2863f"
-  PUSHER_SECRET: "f73b388f23f494e4eef1"
 
 test:
   PARSER_GIT_REPO_PATH: "spec/fixtures/test_repo"
