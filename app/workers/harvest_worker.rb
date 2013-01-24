@@ -5,11 +5,15 @@ class HarvestWorker
     job = HarvestJob.find(harvest_job_id)
     self.update_as_started(job)
 
-    parser = job.parser
-    parser.load
-    records = parser.loader.parser_class.records
-    records.each do |record|
-      self.process_record(record, job)
+    begin
+      parser = job.parser
+      parser.load
+      records = parser.loader.parser_class.records
+      records.each do |record|
+        self.process_record(record, job)
+      end
+    rescue StandardError => e
+      job.harvest_job_errors.create(exception_class: e.class, message: e.message, backtrace: e.backtrace[0..5])
     end
 
     self.update_as_finished(job)
@@ -21,8 +25,11 @@ class HarvestWorker
   end
 
   def process_record(record, job)
-    self.post_to_api(record)
-    job.records_harvested ||= 0
+    begin
+      self.post_to_api(record)
+    rescue StandardError => e
+      job.harvest_job_errors.build(exception_class: e.class, message: e.message, backtrace: e.backtrace[0..5])
+    end
     job.records_harvested += 1
     job.save
   end

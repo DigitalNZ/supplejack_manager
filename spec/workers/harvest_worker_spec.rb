@@ -44,6 +44,12 @@ describe HarvestWorker do
       worker.perform(1)
       job.end_time.should_not be_nil
     end
+
+    it "rescues exceptions from records method and adds them to job errors" do
+      NatlibPages.stub(:records).and_raise "Everything broke"
+      worker.perform(1)
+      job.harvest_job_errors.first.message.should eq "Everything broke"
+    end
   end
 
   describe "#update_as_started" do
@@ -77,7 +83,13 @@ describe HarvestWorker do
 
     it "saves the job" do
       job.should_receive(:save)
-      worker.process_record(record,job)
+      worker.process_record(record, job)
+    end
+
+    it "rescues exceptions from a record and adds it to the job errors" do
+      worker.stub(:post_to_api).and_raise "Post failed"
+      worker.process_record(record, job)
+      job.harvest_job_errors.first.message.should eq "Post failed"
     end
   end
 

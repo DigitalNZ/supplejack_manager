@@ -9,8 +9,10 @@ class HarvestJob
   field :start_time,          type: DateTime
   field :end_time,            type: DateTime
 
-  field :records_harvested,   type: Integer
+  field :records_harvested,   type: Integer, default: 0
   field :average_record_time, type: Float
+
+  embeds_many :harvest_job_errors
 
   belongs_to :user
 
