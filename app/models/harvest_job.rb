@@ -2,7 +2,8 @@ class HarvestJob
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :parser_path,         type: String
+  field :file_name,           type: String
+  field :strategy,            type: String
   field :version,             type: String
 
   field :start_time,          type: DateTime
@@ -20,6 +21,6 @@ class HarvestJob
   end
 
   def parser
-    Parser.find(self.parser_path)
+    Parser.find("#{strategy}-#{file_name}")
   end
 end
