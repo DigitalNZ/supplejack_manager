@@ -5,7 +5,7 @@ class HarvestJob
   field :file_name,           type: String
   field :strategy,            type: String
   field :version,             type: String
-  field :limit,               type: Integer
+  field :limit,               type: Integer, default: 0
 
   field :start_time,          type: DateTime
   field :end_time,            type: DateTime

@@ -8,7 +8,7 @@ class HarvestWorker
     begin
       parser = job.parser
       parser.load
-      records = parser.loader.parser_class.records
+      records = parser.loader.parser_class.records(limit: job.limit.to_i > 0 ? job.limit : nil)
       records.each do |record|
         self.process_record(record, job)
         return if self.stop_harvest?(job)
@@ -37,7 +37,12 @@ class HarvestWorker
 
   def post_to_api(record)
     attributes = record.attributes
-    RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
+
+    measure = Benchmark.measure do
+      RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
+    end
+
+    puts "POST (#{measure.real.round(4)}): #{attributes[:identifier].try(:first)}" unless Rails.env.test?
   end
 
   def update_as_finished(job)
