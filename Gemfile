@@ -11,13 +11,18 @@ gem "oai", git: "https://github.com/code4lib/ruby-oai.git"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "thin",         ">= 1.5.0"
-gem "mysql2",       ">= 0.3.11"
+gem "mongoid",      "~> 3.0.19"
 
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
 gem "grit"
 gem "coderay",      "~> 1.0.8"
+
+gem "sidekiq"
+gem 'slim'
+# if you require 'sinatra' you get the DSL extended to Object
+gem 'sinatra', :require => nil
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -46,7 +51,7 @@ group :development do
 end
 
 group :development, :test do
-  gem "rspec-rails",        ">= 2.11.4"
+  gem "rspec-rails",        ">= 2.12.2"
   gem "factory_girl_rails", ">= 4.1.0"
 end
 

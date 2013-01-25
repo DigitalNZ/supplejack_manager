@@ -78,3 +78,6 @@ pickle-email-*.html
 
 /harvester-manager.sublime-project
 /harvester-manager.sublime-workspace
+
+/config/initializers/env_variables.rb
+

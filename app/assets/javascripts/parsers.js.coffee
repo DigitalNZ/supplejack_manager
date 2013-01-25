@@ -25,18 +25,6 @@ $ ->
 
     return false;
 
-  $("#records-harvest-button").click ->
-    $("#harvest-spinner").show()
-    $("#harvest-form").hide()
-
-    $link = $(this)
-    $form = $("form")
-    $.post $link.attr("href"), $form.serialize(), (data) ->
-      $("#harvest-spinner").hide()
-      $("#harvest-result").show().html(data)
-
-    return false;
-
   $("#preview-area").on 'click', '#record-raw-data-button', ->
     $("#record-raw-data").show()
     $("#record-attributes").hide()

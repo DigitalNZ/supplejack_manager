@@ -1,0 +1,24 @@
+#harvest-result {
+  h3 {
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+}
+
+.error {
+  background: lighten($alertColor, 52%);
+  border: 1px solid $alertColor;
+  color: $alertColor;
+  margin-bottom: 5px;
+  padding: 6px;
+}
+
+#harvest-stats {
+  margin-top: 20px;
+}
+
+#harvest-job {
+  .button {
+    margin-top: 0;
+  }
+}

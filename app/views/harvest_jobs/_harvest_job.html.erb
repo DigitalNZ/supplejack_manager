@@ -1,0 +1,45 @@
+<%= content_tag :div, id: "harvest-job", data: { url: harvest_job_path(@harvest_job) } do %>
+  
+  <h3 class="left"><%= t("harvest_jobs.progress") %></h3>
+  <%= link_to t("harvest_jobs.stop"), harvest_job_path(@harvest_job, {harvest_job: {stop: true}}), method: :put, remote: true, id: "stop-harvest-button", class: "button new-right", style: ("display: none" if @harvest_job.finished?) %>
+
+  <table class="twelve">
+    <tr>
+      <td><%= t("harvest_jobs.start_time") %></td>
+      <td>
+        <% if @harvest_job.start_time %>
+          <strong><%= l @harvest_job.start_time, format: :long %></strong>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.records_harvested") %></td>
+      <td>
+        <strong><%= number_with_precision @harvest_job.records_harvested, precision: 0 %></strong>
+      </td>
+    </tr>
+
+    <% if @harvest_job.finished? %>
+    <tr id="harvest-end-time">
+      <td><%= t("harvest_jobs.end_time") %></td>
+      <td>
+        <strong><%= l @harvest_job.start_time, format: :long %></strong>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+  <h5><%= t("harvest_jobs.errors") %></h5>
+
+  <% if @harvest_job.harvest_job_errors.any? %>
+    <div id="harvest-job-errors">
+      <% @harvest_job.harvest_job_errors.each do |error| %>
+        <div class="error"><%= error.message %></div>
+      <% end %>
+    </div>
+  <% else %>
+    <p><%= t("harvest_jobs.no_errors") %></p>
+  <% end %>
+
+<% end %>
