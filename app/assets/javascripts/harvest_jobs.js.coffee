@@ -4,7 +4,7 @@ $ ->
 
 @HarvestJobsPoller =
   poll: ->
-    setTimeout @request, 3000
+    setTimeout @request, 2000
 
   request: ->
     $.get($("#harvest-job").data('url'))

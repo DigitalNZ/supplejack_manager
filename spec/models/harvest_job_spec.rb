@@ -28,4 +28,16 @@ describe HarvestJob do
     end
   end
 
+  describe "#finished?" do
+    it "returns true with a end_time" do
+      job.end_time = Time.now
+      job.finished?.should be_true
+    end
+
+    it "returns false without a end_time" do
+      job.end_time = nil
+      job.finished?.should be_false
+    end
+  end
+
 end

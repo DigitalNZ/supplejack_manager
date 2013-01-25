@@ -6,4 +6,6 @@ class HarvestJobError
   field :message,         type: String
   field :backtrace,       type: Array
 
+  embedded_in :harvest_job
+
 end

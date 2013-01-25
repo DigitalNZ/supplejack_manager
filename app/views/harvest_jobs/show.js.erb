@@ -1,2 +1,5 @@
 $("#harvest-result").html('<%= j render @harvest_job %>').show();
-HarvestJobsPoller.poll()
+
+if ($("#harvest-end-time").length == 0) {
+  HarvestJobsPoller.poll()
+}

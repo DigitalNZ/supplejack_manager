@@ -100,11 +100,6 @@ describe HarvestWorker do
       RestClient.should_receive(:post).with("#{ENV["API_HOST"]}/harvester/records.json", {record: {title: "Hi"}}.to_json, :content_type => :json, :accept => :json)
       worker.post_to_api(record)
     end
-
-    it "recovers from a rest client exception" do
-      RestClient.should_receive(:post).and_raise(StandardError.new("Error"))
-      worker.post_to_api(record)
-    end
   end
 
   describe "#update_as_finished" do
@@ -122,4 +117,38 @@ describe HarvestWorker do
     end
   end
 
+  describe "#stop_harvest?" do
+    
+    context "stop is true" do
+      let(:job) { HarvestJob.create(stop: true) }
+
+      it "returns true" do
+        worker.stop_harvest?(job).should be_true
+      end
+
+      it "updates the job with the end time" do
+        worker.should_receive(:update_as_finished).with(job)
+        worker.stop_harvest?(job)
+      end
+
+      it "returns true true when more 5 errors" do
+        6.times { job.harvest_job_errors.create(message: "Hi") }
+        worker.stop_harvest?(job).should be_true
+      end
+    end
+
+    context "stop is false" do
+      let(:job) { HarvestJob.create(stop: false) }
+
+      it "returns true true when more 5 errors" do
+        6.times { job.harvest_job_errors.create(message: "Hi") }
+        worker.stop_harvest?(job).should be_true
+      end
+
+      it "returns false" do
+        worker.stop_harvest?(job).should be_false
+      end
+    end
+
+  end
 end

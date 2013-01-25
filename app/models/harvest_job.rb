@@ -12,6 +12,7 @@ class HarvestJob
 
   field :records_harvested,   type: Integer, default: 0
   field :average_record_time, type: Float
+  field :stop,                type: Boolean, default: false
 
   embeds_many :harvest_job_errors
 
@@ -29,5 +30,9 @@ class HarvestJob
 
   def parser
     Parser.find("#{strategy}-#{file_name}")
+  end
+
+  def finished?
+    !!end_time
   end
 end

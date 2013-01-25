@@ -33,4 +33,21 @@ describe HarvestJobsController do
       assigns(:harvest_job).should eq job
     end
   end
+
+  describe "PUT Update" do
+    before(:each) do
+      HarvestJob.stub(:find).with("1") { job }
+    end
+
+    it "finds the harvest job" do
+      HarvestJob.should_receive(:find).with("1") { job }
+      put :update, id: 1, format: "js"
+      assigns(:harvest_job).should eq job
+    end
+
+    it "should update the attributes" do
+      job.should_receive(:update_attributes).with({"stop" => true})
+      put :update, id: 1, harvest_job: {stop: true}, format: "js"
+    end
+  end
 end
