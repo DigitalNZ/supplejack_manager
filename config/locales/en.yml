@@ -10,6 +10,14 @@ en:
   parsers:
     label: "Parsers"
     records_to_harvest: "How many records do you wish to harvest?"
+    strategy: "Strategy"
+    name: "Name"
+
+  harvest_jobs:
+    strategy: "Strategy"
+    file_name: "File name"
+    start_time: "Start time"
+    records_harvested: "Records harvester"
 
   shared_modules:
     label: "Shared Modules"

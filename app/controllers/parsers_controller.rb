@@ -12,6 +12,7 @@ class ParsersController < ApplicationController
 
   def edit
     @parser = Parser.find(params[:id])
+    @harvest_job = HarvestJob.from_parser(@parser)
   end
 
   def create

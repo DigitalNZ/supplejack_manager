@@ -1,0 +1,18 @@
+<%= content_tag :div, id: "harvest-job", data: { url: harvest_job_path(@harvest_job) } do %>
+
+  <h3><%= t("harvest_jobs.strategy") %>: <%= @harvest_job.strategy %></h3>
+  <h3><%= t("harvest_jobs.file_name") %>: <%= @harvest_job.file_name %></h3>
+
+  <p>
+    <%= t("harvest_jobs.start_time") %>: 
+    <% if @harvest_job.start_time %>
+      <%= l @harvest_job.start_time, format: :short %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= t("harvest_jobs.records_harvested") %>: 
+    <%= number_with_precision @harvest_job.records_harvested, precision: 0 %>
+  </p>
+
+<% end %>

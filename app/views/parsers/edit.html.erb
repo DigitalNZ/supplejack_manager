@@ -8,23 +8,6 @@
   <%= f.input :message, :require => false, :label => t("commit_message") %>
 
   <%= f.button :submit %>
-
-  <div id="harvest-modal" class="reveal-modal medium">
-    <div id="harvest-form">
-      <h3><%= t("parsers.records_to_harvest") %></h3>
-
-      <%= text_field_tag :limit, "", class: "string optional" %>
-      <%= link_to "Harvest records", harvest_path(@parser.id), class: "button columns twelve", id: "records-harvest-button" %>
-    </div>
-
-    <div id="harvest-result"></div>
-
-    <div id="harvest-spinner" style="display: none" class="spinner">
-      <%= image_tag("spinner.gif") %>
-    </div>
-
-    <a class="close-reveal-modal">&#215;</a>
-  </div>
 <% end %>
 
 
@@ -36,5 +19,15 @@
     <%= image_tag("spinner.gif") %>
   </div>
 
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="harvest-modal" class="reveal-modal medium">
+  <div id="harvest-form">
+    <%= render "harvest_jobs/form" %>
+  </div>
+
+  <div id="harvest-result"></div>
+  
   <a class="close-reveal-modal">&#215;</a>
 </div>

@@ -5,6 +5,7 @@ class HarvestJob
   field :file_name,           type: String
   field :strategy,            type: String
   field :version,             type: String
+  field :limit,               type: Integer
 
   field :start_time,          type: DateTime
   field :end_time,            type: DateTime
@@ -17,6 +18,10 @@ class HarvestJob
   belongs_to :user
 
   after_create :enqueue
+
+  def self.from_parser(parser)
+    new(strategy: parser.strategy, file_name: parser.name)
+  end
 
   def enqueue
     HarvestWorker.perform_async(self.id)

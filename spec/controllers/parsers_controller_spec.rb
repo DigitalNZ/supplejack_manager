@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ParsersController do
 
-  let(:parser) { mock(:parser, id: "123", to_param: "json-europeana.rb") }
+  let(:parser) { mock(:parser, id: "123", to_param: "json-europeana.rb").as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
@@ -25,10 +25,22 @@ describe ParsersController do
   end
 
   describe "GET 'edit'" do
+    let(:job) { mock_model(HarvestJob).as_null_object }
+
+    before(:each) do
+      Parser.stub(:find) { parser }
+    end
+
     it "finds an existing parser " do
       Parser.should_receive(:find).with("json-europeana.rb") { parser }
       get :edit, id: "json-europeana.rb"
       assigns(:parser).should eq parser
+    end
+
+    it "initializes a harvest_job" do
+      HarvestJob.should_receive(:from_parser).with(parser) { job }
+      get :edit, id: "json-europeana.rb"
+      assigns(:harvest_job).should eq job
     end
   end
 

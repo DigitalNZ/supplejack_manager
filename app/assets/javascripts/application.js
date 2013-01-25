@@ -23,3 +23,4 @@
 //= require code_mirror_setup
 //= require harvester
 //= require parsers
+//= require harvest_jobs
