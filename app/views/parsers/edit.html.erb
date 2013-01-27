@@ -4,8 +4,7 @@
 <%= link_to "Preview", records_path(@parser.id), class: "records-preview-button button new-right" %>
 
 <%= simple_form_for @parser do |f| %>  
-  <%= f.input :data, as: :text, label: false, input_html: {class: "code-editor"} %>
-  <%= f.input :message, :require => false, :label => t("commit_message") %>
+  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
 
   <%= f.button :submit %>
 <% end %>

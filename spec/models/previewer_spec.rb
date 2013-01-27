@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Previewer do
 
-  let(:parser) { Parser.build(name: "europeana.rb", strategy: "json", data: nil) }
+  let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: nil) }
   let(:previewer) { Previewer.new(parser, "Data") }
 
   class Europeana
@@ -11,8 +11,8 @@ describe Previewer do
   end
 
   describe "#initialize" do
-    it "updates the parser data" do
-      previewer.parser.data.should eq "Data"
+    it "updates the parser content" do
+      previewer.parser.content.should eq "Data"
     end
 
     it "initializes a ParserLoader" do

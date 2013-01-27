@@ -1,19 +1,17 @@
-class SharedModule < GitStorage
+class SharedModule
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Versioning
 
-  def self.build(attributes={})
-    name = attributes.delete(:name)
-    super(attributes.merge(path: "shared_modules/#{name}"))
+  field :name,      type: String
+  field :content,   type: String
+  field :user_id,   type: String
+
+  def file_name
+    @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"
   end
 
-  def self.find(name)
-    super("shared_modules/#{name}")
-  end
-
-  def self.all
-    super("shared_modules")
-  end
-
-  def id
-    name
+  def path
+    "shared_modules/#{file_name}"
   end
 end

@@ -8,20 +8,20 @@ class ParserLoader
   end
 
   def path
-    @path ||= Rails.root.to_s + "/tmp/parsers/#{parser.strategy}/#{parser.name}"
+    @path ||= Rails.root.to_s + "/tmp/parsers/#{parser.strategy}/#{parser.file_name}"
   end
 
-  def data_with_encoding
-    "# encoding: utf-8\r\n" + parser.data
+  def content_with_encoding
+    "# encoding: utf-8\r\n" + parser.content.to_s
   end
 
   def create_tempfile
     FileUtils.mkdir_p("#{Rails.root.to_s}/tmp/parsers/#{parser.strategy}")
-    File.open(path, "w") {|f| f.write(data_with_encoding) }
+    File.open(path, "w") {|f| f.write(content_with_encoding) }
   end
 
   def parser_class_name
-    parser.name.gsub(/\.rb/, "").camelize
+    parser.name.gsub(/\s|\.rb/, "").camelize
   end
 
   def parser_class

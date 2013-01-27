@@ -6,7 +6,7 @@ describe ParserLoader do
     def self.clear_definitions; end
   end
 
-  let(:parser) { Parser.build(strategy: "json", name: "europeana.rb", data: "class Europeana \n end") }
+  let(:parser) { Parser.new(strategy: "json", name: "Europeana", content: "class Europeana \n end") }
   let(:loader) { ParserLoader.new(parser) }
   
   describe "#path" do
@@ -15,15 +15,15 @@ describe ParserLoader do
     end
 
     it "memoizes the path" do
-      parser.should_receive(:name).once
+      parser.should_receive(:name).once { "/path" }
       loader.path
       loader.path
     end
   end
 
-  describe "#data_with_encoding" do
+  describe "#content_with_encoding" do
     it "should add a utf-8 encoding to the top of the file" do
-      loader.data_with_encoding.should eq "# encoding: utf-8\r\nclass Europeana \n end"
+      loader.content_with_encoding.should eq "# encoding: utf-8\r\nclass Europeana \n end"
     end
   end
 
@@ -31,6 +31,13 @@ describe ParserLoader do
     it "creates a new tempfile with the path" do
       loader.create_tempfile
       File.read(loader.path).should eq "# encoding: utf-8\r\nclass Europeana \n end"
+    end
+  end
+
+  describe "#parser_class_name" do
+    it "removes whitespace from the name" do
+      parser.stub(:name) { "NatLib Pages" }
+      loader.parser_class_name.should eq "NatLibPages"
     end
   end
 

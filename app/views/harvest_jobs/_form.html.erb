@@ -1,8 +1,7 @@
 <h3><%= t("parsers.records_to_harvest") %></h3>
 
 <%= simple_form_for @harvest_job, remote: true do |f| %>
-  <%= f.input :strategy, as: :hidden %>
-  <%= f.input :file_name, as: :hidden %>
+  <%= f.input :parser_id, as: :hidden %>
 
   <%= f.input :limit, label: false %>
   <%= f.button :submit, "Start Harvest", class: "button columns twelve"  %>

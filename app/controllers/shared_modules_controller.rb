@@ -7,7 +7,7 @@ class SharedModulesController < ApplicationController
   end
 
   def new
-    @shared_module = SharedModule.build
+    @shared_module = SharedModule.new
   end
 
   def edit
@@ -15,10 +15,11 @@ class SharedModulesController < ApplicationController
   end
 
   def create
-    @shared_module = SharedModule.build(params[:shared_module])
+    @shared_module = SharedModule.new(params[:shared_module])
+    @shared_module.user_id = current_user.id
 
-    if @shared_module.save(params[:shared_module][:message], current_user)
-      redirect_to edit_shared_module_path(@shared_module.id)
+    if @shared_module.save
+      redirect_to edit_shared_module_path(@shared_module)
     else
       render :new
     end
@@ -26,9 +27,10 @@ class SharedModulesController < ApplicationController
 
   def update
     @shared_module = SharedModule.find(params[:id])
+    @shared_module.user_id = current_user.id
 
-    if @shared_module.update_attributes(params[:shared_module], current_user)
-      redirect_to edit_shared_module_path(@shared_module.id)
+    if @shared_module.update_attributes(params[:shared_module])
+      redirect_to edit_shared_module_path(@shared_module)
     else
       render :edit
     end

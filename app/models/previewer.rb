@@ -2,9 +2,9 @@ class Previewer
 
   attr_reader :parser, :loader, :syntax_error, :fetch_error, :index
 
-  def initialize(parser, data, index=0)
+  def initialize(parser, content, index=0)
     @parser = parser
-    @parser.data = data if data.present?
+    @parser.content = content if content.present?
     @loader = ParserLoader.new(parser)
     @index = index.to_i
     @syntax_error = nil

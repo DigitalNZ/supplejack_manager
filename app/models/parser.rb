@@ -1,35 +1,26 @@
-class Parser < GitStorage
+class Parser
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Versioning
+
+  field :name,      type: String
+  field :strategy,  type: String
+  field :content,   type: String
+  field :user_id,   type: String
+
+  has_many :harvest_jobs
+
   VALID_STRATEGIES = ["json", "oai", "rss", "xml"]
 
-  validates_presence_of   :strategy
+  validates_presence_of   :name, :strategy, :content
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
 
-  class << self
-    def build(attributes={})
-      path = [attributes[:strategy], attributes[:name]].join("/")
-      super(path: path, data: attributes[:data])
-    end
-
-    def find(path)
-      path.gsub!(/-/, "/")
-      super(path)
-    end
-
-    def all
-      super(["xml", "rss", "oai", "json"])
-    end
+  def file_name
+    @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"
   end
 
-  attr_accessor :strategy
-
-  def initialize(path, data)
-    super(path, data)
-
-    @strategy = path.split("/").first if path.present?
-  end
-
-  def id
-    "#{strategy}-#{name}"
+  def path
+    "#{strategy}/#{file_name}"
   end
 
   def fullpath

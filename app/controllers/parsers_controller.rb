@@ -7,7 +7,7 @@ class ParsersController < ApplicationController
   end
 
   def new
-    @parser = Parser.build
+    @parser = Parser.new
   end
 
   def edit
@@ -16,8 +16,10 @@ class ParsersController < ApplicationController
   end
 
   def create
-    @parser = Parser.build(params[:parser])
-    if @parser.save(params[:parser][:message], current_user)
+    @parser = Parser.new(params[:parser])
+    @parser.user_id = current_user.id
+
+    if @parser.save(current_user)
       redirect_to edit_parser_path(@parser)
     else
       render :new
@@ -26,8 +28,9 @@ class ParsersController < ApplicationController
 
   def update
     @parser = Parser.find(params[:id])
+    @parser.user_id = current_user.id
 
-    if @parser.update_attributes(params[:parser], current_user)
+    if @parser.update_attributes(params[:parser])
       redirect_to edit_parser_path(@parser)
     else
       render :edit

@@ -5,9 +5,8 @@
   <%= f.input :name %>
   <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
   
-  <%= f.input :data, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
-  <%= f.input :message, label: t("commit_message") %>
+  <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
 
   <%= f.button :submit %>
-
+  
 <% end %>

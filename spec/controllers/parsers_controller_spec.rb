@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe ParsersController do
 
-  let(:parser) { mock(:parser, id: "123", to_param: "json-europeana.rb").as_null_object }
+  let(:parser) { mock(:parser, id: "1234", to_param: "1234").as_null_object }
+  let(:user) { mock_model(User, id: "1234").as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
+    controller.stub(:current_user) { user }
   end
 
   describe "GET 'index'" do
@@ -18,7 +20,7 @@ describe ParsersController do
 
   describe "GET 'new'" do
     it "initializes a new parser" do
-      Parser.should_receive(:build) { parser }
+      Parser.should_receive(:new) { parser }
       get :new
       assigns(:parser).should eq parser
     end
@@ -32,40 +34,40 @@ describe ParsersController do
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("json-europeana.rb") { parser }
-      get :edit, id: "json-europeana.rb"
+      Parser.should_receive(:find).with("1234") { parser }
+      get :edit, id: "1234"
       assigns(:parser).should eq parser
     end
 
     it "initializes a harvest_job" do
       HarvestJob.should_receive(:from_parser).with(parser) { job }
-      get :edit, id: "json-europeana.rb"
+      get :edit, id: "1234"
       assigns(:harvest_job).should eq job
     end
   end
 
   describe "GET 'create'" do
     before do 
-      Parser.stub(:build) { parser }
+      Parser.stub(:new) { parser }
       parser.stub(:save) { true }
     end
 
     it "initializes a new parser" do
-      Parser.should_receive(:build).with({"name" => "tepapa.rb"}) { parser }
-      post :create, parser: {name: "tepapa.rb"}
+      Parser.should_receive(:new).with({"name" => "Tepapa"}) { parser }
+      post :create, parser: {name: "Tepapa"}
     end
 
     it "saves the parser" do
       parser.should_receive(:save)
-      post :create, parser: {name: "tepapa.rb"}
+      post :create, parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
       before { parser.stub(:save) { true }}
 
       it "redirects to edit page" do
-        post :create, parser: {name: "tepapa.rb"}
-        response.should redirect_to edit_parser_path("json-europeana.rb")
+        post :create, parser: {name: "Tepapa"}
+        response.should redirect_to edit_parser_path("1234")
       end
     end
 
@@ -73,7 +75,7 @@ describe ParsersController do
       before { parser.stub(:save) { false }}
 
       it "renders the edit action" do
-        post :create, parser: {name: "tepapa.rb"}
+        post :create, parser: {name: "Tepapa"}
         response.should render_template(:new)
       end
     end
@@ -86,22 +88,22 @@ describe ParsersController do
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("json-europeana.rb") { parser }
-      put :update, id: "json-europeana.rb"
+      Parser.should_receive(:find).with("1234") { parser }
+      put :update, id: "1234"
       assigns(:parser).should eq parser
     end
 
     it "updates the parser attributes" do
-      parser.should_receive(:update_attributes).with({"name" => "tepapa.rb"}, nil)
-      put :update, id: "json-europeana.rb", parser: {name: "tepapa.rb"}
+      parser.should_receive(:update_attributes).with({"name" => "Tepapa"})
+      put :update, id: "1234", parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
       before { parser.stub(:update_attributes) { true }}
 
       it "redirects to edit page" do
-        put :update, id: "json-europeana.rb"
-        response.should redirect_to edit_parser_path("json-europeana.rb")
+        put :update, id: "1234"
+        response.should redirect_to edit_parser_path("1234")
       end
     end
 
@@ -109,7 +111,7 @@ describe ParsersController do
       before { parser.stub(:update_attributes) { false }}
 
       it "renders the edit action" do
-        put :update, id: "json-europeana.rb"
+        put :update, id: "1234"
         response.should render_template(:edit)
       end
     end
@@ -122,14 +124,14 @@ describe ParsersController do
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("json-europeana.rb") { parser }
-      delete :destroy, id: "json-europeana.rb"
+      Parser.should_receive(:find).with("1234") { parser }
+      delete :destroy, id: "1234"
       assigns(:parser).should eq parser
     end
 
     it "destroys the parser config" do
       parser.should_receive(:destroy)
-      delete :destroy, id: "json-europeana.rb"
+      delete :destroy, id: "1234"
     end
   end
 
