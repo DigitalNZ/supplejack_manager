@@ -12,13 +12,16 @@ development:
   PARSER_GIT_REPO_PATH: "/Users/fede/Desktop/test_remote"
   API_HOST: "http://localhost:3000"
   HARVESTER_CACHING_ENABLED: true
+  AIRBRAKE_API_KEY: "67de138430d63c6892c6118665fb11d7"
 
 production:
   PARSER_GIT_REPO_PATH: "/data/sites/harvester.uat.digitalnz.org/parsers.git"
   API_HOST: "http://api.uat.digitalnz.org"
   HARVESTER_CACHING_ENABLED: true
+  AIRBRAKE_API_KEY: "67de138430d63c6892c6118665fb11d7"
 
 test:
   PARSER_GIT_REPO_PATH: "spec/fixtures/test_repo"
   API_HOST: "http://localhost:3000"
   HARVESTER_CACHING_ENABLED: false
+  AIRBRAKE_API_KEY: "67de138430d63c6892c6118665fb11d7"
