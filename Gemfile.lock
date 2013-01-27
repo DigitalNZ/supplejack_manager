@@ -59,9 +59,6 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
-    airbrake (3.1.2)
-      activesupport
-      builder
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     better_errors (0.3.2)
@@ -148,6 +145,9 @@ GEM
       guard (>= 1.1)
       rspec (~> 2.11)
     hike (1.2.1)
+    honeybadger (1.5.0)
+      activesupport
+      json
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.1.4)
@@ -307,7 +307,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  airbrake
   better_errors (>= 0.2.0)
   binding_of_caller (>= 0.6.8)
   capybara (>= 2.0.1)
@@ -322,6 +321,7 @@ DEPENDENCIES
   grit
   guard-rspec
   harvester_core!
+  honeybadger
   jquery-rails
   launchy (>= 2.1.2)
   mongoid (~> 3.0.19)

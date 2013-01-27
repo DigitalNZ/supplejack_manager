@@ -18,7 +18,7 @@ gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
 gem "grit"
 gem "coderay",      "~> 1.0.8"
-gem "airbrake"
+gem 'honeybadger'
 
 gem "sidekiq"
 gem 'slim'
