@@ -7,7 +7,7 @@ class HarvestWorker
 
     begin
       parser = job.parser
-      parser.load
+      parser.load_file
       records = parser.loader.parser_class.records(limit: job.limit.to_i > 0 ? job.limit : nil)
       records.each do |record|
         self.process_record(record, job)

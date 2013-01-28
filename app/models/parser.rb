@@ -31,7 +31,7 @@ class Parser
     @loader ||= ParserLoader.new(self)
   end
 
-  def load
+  def load_file
     loader.load_parser
   end
 

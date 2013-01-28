@@ -7,7 +7,7 @@ describe HarvestWorker do
 
   before(:each) do
     RestClient.stub(:post)
-    parser.load
+    parser.load_file
   end
   
   describe "#perform" do

@@ -4,7 +4,7 @@ namespace :harvester do
   desc "Task to initiate a new harverst"
   task :start, [:strategy, :file_name, :limit] => :environment do |t, args|
     parser = Parser.find("#{args[:strategy]}-#{args[:file_name]}")
-    parser.load
+    parser.load_file
 
     start_time = Time.now
     puts "[#{start_time}] Starting #{args[:file_name]} harvester."

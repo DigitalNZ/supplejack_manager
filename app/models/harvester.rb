@@ -12,7 +12,7 @@ class Harvester
   def start
     @start_time = Time.now
 
-    parser.load
+    parser.load_file
     records = parser.loader.parser_class.records(limit: limit)
     records.each do |record|
       self.post_to_api(record)

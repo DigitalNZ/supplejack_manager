@@ -68,7 +68,7 @@ describe Parser do
 
     it "should load the parser file" do
       loader.should_receive(:load_parser)
-      parser.load
+      parser.load_file
     end
   end
 
