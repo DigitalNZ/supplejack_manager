@@ -1,3 +1,8 @@
+if RUBY_VERSION =~ /1.9/
+  Encoding.default_external = Encoding::UTF_8
+  Encoding.default_internal = Encoding::UTF_8
+end
+
 source 'https://rubygems.org'
 
 gem 'rails',        '3.2.11'
@@ -16,7 +21,6 @@ gem "mongoid",      "~> 3.0.19"
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
-gem "grit"
 gem "coderay",      "~> 1.0.8"
 gem 'honeybadger'
 
