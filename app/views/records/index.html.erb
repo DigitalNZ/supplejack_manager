@@ -39,7 +39,13 @@
 <% elsif @previewer.fetch_error %>
   
   <h3>Error while fetching the records</h3>
-  <%= @previewer.fetch_error %>
+  <h5><%= @previewer.fetch_error %></h5>
+
+  <ul>
+    <% @previewer.fetch_error_backtrace.each do |backtrace| %>
+      <li><%= backtrace %></li>
+    <% end %>
+  </ul>
 
 <% else %>
   <h3><%= @parser.name %> <span>didn't return any records.</span></h3>

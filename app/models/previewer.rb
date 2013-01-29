@@ -1,6 +1,6 @@
 class Previewer
 
-  attr_reader :parser, :loader, :syntax_error, :fetch_error, :index
+  attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace
 
   def initialize(parser, content, index=0)
     @parser = parser
@@ -9,6 +9,7 @@ class Previewer
     @index = index.to_i
     @syntax_error = nil
     @fetch_error = nil
+    @fetch_error_backtrace = nil
   end
 
   def load_record
@@ -19,6 +20,7 @@ class Previewer
       nil
     rescue StandardError => e
       @fetch_error = e.message
+      @fetch_error_backtrace = e.backtrace
       return nil
     end
   end

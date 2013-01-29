@@ -10,7 +10,7 @@ class Parser
 
   has_many :harvest_jobs
 
-  VALID_STRATEGIES = ["json", "oai", "rss", "xml"]
+  VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]
 
   validates_presence_of   :name, :strategy, :content
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
