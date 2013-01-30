@@ -20,7 +20,7 @@ production:
   PARSER_GIT_REPO_PATH: "/data/sites/harvester.uat.digitalnz.org/parsers.git"
   API_HOST: "http://api.uat.digitalnz.org"
   WORKER_HOST: "http://worker.uat.digitalnz.org"
-  WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
+  WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
 
