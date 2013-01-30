@@ -26,11 +26,6 @@ gem 'honeybadger'
 
 gem 'activeresource', require: 'active_resource'
 
-gem "sidekiq"
-gem 'slim'
-# if you require 'sinatra' you get the DSL extended to Object
-gem 'sinatra', :require => nil
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
