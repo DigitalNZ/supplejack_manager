@@ -18,6 +18,14 @@ describe ParsersController do
     end
   end
 
+  describe "GET show" do
+    it "finds an existing parser " do
+      Parser.should_receive(:find).with("1234") { parser }
+      get :show, id: "1234"
+      assigns(:parser).should eq parser
+    end
+  end
+
   describe "GET 'new'" do
     it "initializes a new parser" do
       Parser.should_receive(:new) { parser }

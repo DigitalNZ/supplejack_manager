@@ -1,8 +1,10 @@
 class HarvestJob < ActiveResource::Base
+  
   self.site = ENV["WORKER_HOST"]
+  self.user = ENV["WORKER_API_KEY"]
 
   def self.from_parser(parser)
-    self.new(parser_id: parser.id)
+    self.new(parser_id: parser.id, limit: nil)
   end
 
   def user
@@ -11,5 +13,21 @@ class HarvestJob < ActiveResource::Base
 
   def finished?
     !!end_time
+  end
+
+  def start_time
+    value = super
+    if value.is_a?(String)
+      value = value.present? ? Time.parse(value) : nil
+    end
+    value
+  end
+
+  def end_time
+    value = super
+    if value.is_a?(String)
+      value = value.present? ? Time.parse(value) : nil
+    end
+    value
   end
 end

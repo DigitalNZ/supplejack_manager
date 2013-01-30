@@ -2,10 +2,12 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+
+  before_save :ensure_authentication_token
   
   field :name,                    type: String
 
@@ -26,4 +28,7 @@ class User
   field :last_sign_in_at,         type: Time
   field :current_sign_in_ip,      type: String
   field :last_sign_in_ip,         type: String
+
+  ## Token authenticatable
+  field :authentication_token,    type: String
 end

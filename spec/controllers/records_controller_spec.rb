@@ -24,22 +24,4 @@ describe RecordsController do
       assigns(:previewer).should eq previewer
     end
   end
-
-  describe "POST harvest" do
-    before do 
-      Parser.stub(:find) { parser }
-      Harvester.stub(:new) { harvester }
-    end
-
-    it "initializes a harvester object" do
-      Harvester.should_receive(:new).with(parser, "10") { harvester }
-      post :harvest, parser_id: "1234", parser: {content: "Data"}, limit: 10
-      assigns(:harvester).should eq harvester
-    end
-
-    it "starts the harvest" do
-      harvester.should_receive(:start)
-      post :harvest, parser_id: "1234", parser: {content: "Data"}, limit: 10
-    end
-  end
 end

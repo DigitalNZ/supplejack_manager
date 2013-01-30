@@ -2,8 +2,15 @@ class ParsersController < ApplicationController
 
   before_filter :authenticate_user!
 
+  respond_to :json
+
   def index
     @parsers = Parser.all
+  end
+
+  def show
+    @parser = Parser.find(params[:id])
+    respond_with @parser
   end
 
   def new
