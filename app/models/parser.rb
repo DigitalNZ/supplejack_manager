@@ -8,8 +8,6 @@ class Parser
   field :content,   type: String
   field :user_id,   type: String
 
-  has_many :harvest_jobs
-
   VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]
 
   validates_presence_of   :name, :strategy, :content

@@ -1,30 +1,12 @@
-class HarvestJob
-  include Mongoid::Document
-  include Mongoid::Timestamps
-
-  field :version,             type: Integer
-  field :limit,               type: Integer, default: 0
-
-  field :start_time,          type: DateTime
-  field :end_time,            type: DateTime
-
-  field :records_harvested,   type: Integer, default: 0
-  field :average_record_time, type: Float
-  field :stop,                type: Boolean, default: false
-
-  embeds_many :harvest_job_errors
-
-  belongs_to :parser
-  belongs_to :user
-
-  after_create :enqueue
+class HarvestJob < ActiveResource::Base
+  self.site = ENV["WORKER_HOST"]
 
   def self.from_parser(parser)
-    parser.harvest_jobs.build
+    self.new(parser_id: parser.id)
   end
 
-  def enqueue
-    HarvestWorker.perform_async(self.id)
+  def user
+    User.find(self.user_id)
   end
 
   def finished?

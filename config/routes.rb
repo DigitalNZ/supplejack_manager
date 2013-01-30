@@ -10,11 +10,4 @@ HarvesterManager::Application.routes.draw do
   devise_for :users
 
   root :to => "parsers#index"
-
-  # sidekiq interface, using device for authentication
-  require 'sidekiq/web'
-  constraint = lambda { |request| request.env['warden'].authenticate!({ scope: :user }) }
-  constraints constraint do
-    mount Sidekiq::Web => '/sidekiq'
-  end
 end

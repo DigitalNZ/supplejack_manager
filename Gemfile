@@ -24,6 +24,8 @@ gem "figaro",       ">= 0.5.0"
 gem "coderay",      "~> 1.0.8"
 gem 'honeybadger'
 
+gem 'activeresource', require: 'active_resource'
+
 gem "sidekiq"
 gem 'slim'
 # if you require 'sinatra' you get the DSL extended to Object

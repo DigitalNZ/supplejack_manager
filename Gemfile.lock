@@ -302,6 +302,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeresource
   better_errors (>= 0.2.0)
   binding_of_caller (>= 0.6.8)
   capybara (>= 2.0.1)
