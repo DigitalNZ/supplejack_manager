@@ -1,7 +1,5 @@
 class HarvestJobsController < ApplicationController
 
-  before_filter :authenticate_user!
-
   def show
     @harvest_job = HarvestJob.find(params[:id])
   end

@@ -1,0 +1,90 @@
+$productionColor: $successColor;
+$stagingColor: $mainColor;
+
+.button.production {
+  background-color: $productionColor;
+  border: 1px solid darken($productionColor, 15%);
+
+  &:hover, &:focus {
+    background-color: darken($productionColor, 7%);
+  }
+}
+
+.version {
+  position: relative;
+  background: $secondaryColor;
+  margin-bottom: 3px;
+  padding: 9px 9px 3px;
+
+  &.active {
+    background: darken($secondaryColor, 10%);
+  }
+
+  p {
+    margin: 0;
+    color: #6f6f6f;
+    font-size: 12px;
+  }
+
+  .production {
+    background-color: $productionColor;
+  }
+
+  .staging {
+    background-color: $stagingColor;
+  }
+}
+
+$versionTagSize: 13px;
+
+.version-tag {
+  position: absolute;
+  right: -10px;
+  top: 9px;
+  color: $white;
+  padding: 6px;
+  width: 82px;
+
+  .arrow-left {
+    position: absolute;
+    left: -21px;
+    top: 0px;
+    border-top: $versionTagSize solid transparent;
+    border-bottom: $versionTagSize solid transparent; 
+  }
+
+  &>.version-tag {
+    top: -5px;
+    right: 0;
+  }
+
+  &.production {
+    background-color: $productionColor;
+
+    &>.arrow-left {
+      border-right: 15px solid $productionColor;
+    }
+  }
+
+  &.staging {
+    background-color: $stagingColor;
+
+    &>.arrow-left {
+      border-right: 15px solid $stagingColor;
+    }
+  }
+}
+
+.version-bubble-container {
+  position: absolute;
+  top: 16px;
+  right: 5px;
+  text-align: right;
+}
+
+.version-bubble {
+  color: $white;
+  padding: 2px;
+  margin-left: 4px;
+  @include border-radius(3px);
+}

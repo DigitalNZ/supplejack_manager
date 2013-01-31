@@ -1,6 +1,5 @@
 class RecordsController < ApplicationController
   
-  before_filter :authenticate_user!
   before_filter :find_parser
 
   def index

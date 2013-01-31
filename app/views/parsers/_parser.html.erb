@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="twelve columns">
+    <div class="seven columns">
+      <h1 class="left"><%= link_to @parser.name, edit_parser_path(@parser) %></h1>
+    </div>
+    
+    <div class="five columns">
+      <% if @version %>
+        <% if @version.staging? %>
+          <%= link_to "Staging Harvest", "", class: "button new-right records-harvest-modal-button" %>
+        <% end %>
+
+        <% if @version.production? %>
+          <%= link_to "Production Harvest", "", class: "button production new-right records-harvest-modal-button" %>
+        <% end %>
+      <% end %>
+
+      <%= link_to "Preview", records_path(@parser.id), class: "records-preview-button button new-right" %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="nine columns">
+    <% if @version %>
+      <%= render "parser_versions/form" %>
+    <% else %>
+      <%= render "form" %>
+    <% end %>
+  </div>
+
+  <div class="three columns">
+    <h3 class="no-margin-top"><%= t("parsers.history") %></h3>
+
+    <div id="parser-versions">
+      <% @parser.versions.desc(:created_at).each do |version| %>
+        <div class="version <%= 'active' if @version.try(:id) == version.id %>">
+          <%= link_to version.message || "No message", parser_parser_version_path(@parser, version) %>
+          <p><%= l(version.created_at, format: :short) %> by <%= version.user.try(:first_name) %></p>
+
+          <%= environment_tags(version, @parser) %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @version %>
+      <br/>
+      <%= link_to "Tag as Staging", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["staging"]).uniq}), method: :put, class: "button small" %>
+      <%= link_to "Tag as Production", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["production"]).uniq}), method: :put, class: "button small production" %>
+    <% end %>
+  </div>
+</div>
+
+<div id="preview-modal" class="reveal-modal xxlarge">
+  <div id="preview-area" class="CodeRay">
+  </div>
+
+  <div id="preview-area-spinner" class="spinner">
+    <%= image_tag("spinner.gif") %>
+  </div>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="harvest-modal" class="reveal-modal large">
+  <div id="harvest-form">
+    <%= render "harvest_jobs/form" %>
+  </div>
+
+  <div id="harvest-result"></div>
+  
+  <a class="close-reveal-modal">&#215;</a>
+</div>

@@ -1,7 +1,5 @@
 class ParsersController < ApplicationController
 
-  before_filter :authenticate_user!
-
   respond_to :json
 
   def index
@@ -19,14 +17,14 @@ class ParsersController < ApplicationController
 
   def edit
     @parser = Parser.find(params[:id])
-    @harvest_job = HarvestJob.from_parser(@parser)
+    @harvest_job = HarvestJob.from_parser(@parser, current_user)
   end
 
   def create
     @parser = Parser.new(params[:parser])
     @parser.user_id = current_user.id
 
-    if @parser.save(current_user)
+    if @parser.save_with_version
       redirect_to edit_parser_path(@parser)
     else
       render :new
@@ -35,9 +33,10 @@ class ParsersController < ApplicationController
 
   def update
     @parser = Parser.find(params[:id])
+    @parser.attributes = params[:parser]
     @parser.user_id = current_user.id
 
-    if @parser.update_attributes(params[:parser])
+    if @parser.save_with_version
       redirect_to edit_parser_path(@parser)
     else
       render :edit

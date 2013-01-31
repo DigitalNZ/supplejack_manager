@@ -1,0 +1,7 @@
+<%= simple_form_for @parser do |f| %>  
+  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
+
+  <%= f.input :message %>
+
+  <%= f.button :submit %>
+<% end %>

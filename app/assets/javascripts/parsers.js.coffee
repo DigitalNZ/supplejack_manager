@@ -18,7 +18,7 @@ $ ->
 
     return false;
 
-  $("#records-harvest-modal-button").click ->
+  $(".records-harvest-modal-button").click ->
     $("#harvest-form").show()
     $("#harvest-result").hide()
     $("#harvest-modal").reveal()

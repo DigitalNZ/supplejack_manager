@@ -3,8 +3,8 @@ class HarvestJob < ActiveResource::Base
   self.site = ENV["WORKER_HOST"]
   self.user = ENV["WORKER_API_KEY"]
 
-  def self.from_parser(parser)
-    self.new(parser_id: parser.id, limit: nil)
+  def self.from_parser(parser, user=nil)
+    self.new(parser_id: parser.id, limit: nil, user_id: user.try(:id))
   end
 
   def user

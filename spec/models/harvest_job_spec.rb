@@ -2,13 +2,19 @@ require "spec_helper"
 
 describe HarvestJob do
 
+  let(:user) { mock_model(User, id: "333").as_null_object }
+
   describe ".from_parser" do
-    let(:parser) { Parser.new }
+    let(:parser) { mock(:parser, id: "1234") }
 
     it "initializes a new HarvestJob" do
-      parser = mock(:parser, id: "1234")
       job = HarvestJob.from_parser(parser)
       job.parser_id.should eq "1234"
+    end
+
+    it "sets the user_id" do
+      job = HarvestJob.from_parser(parser, user)
+      job.user_id.should eq "333"
     end
   end
 

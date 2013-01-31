@@ -44,12 +44,6 @@ describe Parser do
         parser.path.should eq "json/europeana.rb"
       end
     end
-
-    describe "fullpath" do
-      it "returns the full file path" do
-        parser.fullpath.should eq "spec/fixtures/test_repo/json/europeana.rb"
-      end
-    end
   end
 
   describe "#loader" do
@@ -107,6 +101,61 @@ describe Parser do
     it "returns false for Rss strategy" do
       parser.strategy = "rss"
       parser.json?.should be_false
+    end
+  end
+
+  describe "current_version" do
+    let(:parser) { FactoryGirl.create(:parser, strategy: "json", name: "Natlib") }
+
+    before(:each) do
+      parser.update_attributes(tags: ["production"])
+      parser.update_attributes(tags: nil)
+    end
+
+    it "returns the most recent version tagged with production" do
+      parser.reload
+      parser.current_version(:production).should eq parser.versions[1]
+    end
+  end
+
+  describe "#save_with_version" do
+    let(:parser) { FactoryGirl.build(:parser, strategy: "json", name: "Natlib") }
+
+    context "valid parser" do
+      before(:each) do
+        parser.save_with_version
+        @version = parser.versions.first
+      end
+
+      it "creates a new parser version" do
+        parser.versions.size.should eq 1 
+      end
+
+      it "copies the contents" do
+        @version.content.should eq parser.content
+      end
+
+      it "generates the version number" do
+        @version.version.should eq 1
+      end
+    end
+
+    context "invalid parser" do
+      it "doesnt generate a new version when saving fails" do
+        parser.name = nil
+        parser.save_with_version.should be_false
+        parser.versions.should be_empty
+      end
+    end
+  end
+
+  describe "#find_version" do
+    let(:parser) { FactoryGirl.create(:parser) }
+
+    it "finds the version" do
+      parser.save_with_version
+      version = parser.versions.first
+      parser.find_version(version.id).should eq version
     end
   end
 end

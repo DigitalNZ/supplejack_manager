@@ -1,9 +1,14 @@
 $ ->
-  window.Harvester.textArea = document.getElementsByClassName("code-editor")[0]
+  Harvester.textArea = document.getElementsByClassName("code-editor")[0]
 
-  if window.Harvester.textArea != undefined
-    window.Harvester.myCodeMirror = CodeMirror.fromTextArea window.Harvester.textArea, {
+  Harvester.readOnly = ->
+    $(Harvester.textArea).hasClass("read-only")
+
+
+  if Harvester.textArea != undefined
+    Harvester.myCodeMirror = CodeMirror.fromTextArea Harvester.textArea, {
       theme: "monokai",
       lineNumbers: true,
-      tabSize: 2
+      tabSize: 2,
+      readOnly: Harvester.readOnly()
     }

@@ -31,4 +31,8 @@ class User
 
   ## Token authenticatable
   field :authentication_token,    type: String
+
+  def first_name
+    name.split("\s").first if name.present?
+  end
 end

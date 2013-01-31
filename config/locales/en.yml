@@ -12,6 +12,10 @@ en:
     records_to_harvest: "How many records do you wish to harvest?"
     strategy: "Strategy"
     name: "Name"
+    history: "History"
+    environments:
+      production: "Production"
+      staging: "Staging"
 
   harvest_jobs:
     strategy: "Strategy"

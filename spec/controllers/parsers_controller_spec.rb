@@ -36,6 +36,7 @@ describe ParsersController do
 
   describe "GET 'edit'" do
     let(:job) { mock_model(HarvestJob).as_null_object }
+    let(:user) { mock_model(User, id: "333").as_null_object }
 
     before(:each) do
       Parser.stub(:find) { parser }
@@ -48,7 +49,7 @@ describe ParsersController do
     end
 
     it "initializes a harvest_job" do
-      HarvestJob.should_receive(:from_parser).with(parser) { job }
+      HarvestJob.should_receive(:from_parser).with(parser, user) { job }
       get :edit, id: "1234"
       assigns(:harvest_job).should eq job
     end
@@ -66,12 +67,12 @@ describe ParsersController do
     end
 
     it "saves the parser" do
-      parser.should_receive(:save)
+      parser.should_receive(:save_with_version)
       post :create, parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
-      before { parser.stub(:save) { true }}
+      before { parser.stub(:save_with_version) { true }}
 
       it "redirects to edit page" do
         post :create, parser: {name: "Tepapa"}
@@ -80,7 +81,7 @@ describe ParsersController do
     end
 
     context "invalid parser" do
-      before { parser.stub(:save) { false }}
+      before { parser.stub(:save_with_version) { false }}
 
       it "renders the edit action" do
         post :create, parser: {name: "Tepapa"}
@@ -102,12 +103,17 @@ describe ParsersController do
     end
 
     it "updates the parser attributes" do
-      parser.should_receive(:update_attributes).with({"name" => "Tepapa"})
+      parser.should_receive("attributes=").with({"name" => "Tepapa"})
+      put :update, id: "1234", parser: {name: "Tepapa"}
+    end
+
+    it "saves the parser" do
+      parser.should_receive(:save_with_version)
       put :update, id: "1234", parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
-      before { parser.stub(:update_attributes) { true }}
+      before { parser.stub(:save_with_version) { true }}
 
       it "redirects to edit page" do
         put :update, id: "1234"
@@ -116,7 +122,7 @@ describe ParsersController do
     end
 
     context "invalid parser" do
-      before { parser.stub(:update_attributes) { false }}
+      before { parser.stub(:save_with_version) { false }}
 
       it "renders the edit action" do
         put :update, id: "1234"

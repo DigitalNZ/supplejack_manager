@@ -1,6 +1,9 @@
 HarvesterManager::Application.routes.draw do
 
-  resources :parsers
+  resources :parsers do
+    resources :parser_versions, path: "versions", only: [:show, :update]
+  end
+
   resources :shared_modules, except: [:show]
   resources :harvest_jobs, only: [:create, :update, :show]
 

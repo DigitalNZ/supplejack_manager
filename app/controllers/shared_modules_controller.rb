@@ -1,7 +1,5 @@
 class SharedModulesController < ApplicationController
 
-  before_filter :authenticate_user!
-
   def index
     @shared_modules = SharedModule.all
   end
