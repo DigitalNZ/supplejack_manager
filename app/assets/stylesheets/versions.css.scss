@@ -14,7 +14,7 @@ $stagingColor: $mainColor;
   position: relative;
   background: $secondaryColor;
   margin-bottom: 3px;
-  padding: 9px 9px 3px;
+  padding: 9px 84px 3px 9px;
 
   &.active {
     background: darken($secondaryColor, 10%);
