@@ -20,4 +20,10 @@ class ParserVersion
     self.tags ||= []
     self.tags.include?("production")
   end
+
+  def update_attributes(attributes={})
+    attributes ||= {}
+    attributes[:tags] ||= []
+    super(attributes)
+  end
 end

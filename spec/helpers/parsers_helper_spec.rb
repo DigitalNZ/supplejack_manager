@@ -13,7 +13,7 @@ describe ParsersHelper do
       end
 
       it "displays the production tag" do
-        helper.environment_tags(version, parser).should eq %{<span class="version-tag production"><span class="arrow arrow-left"></span>Production</span>}
+        helper.environment_tags(version, parser).should eq %{<div class="version-tag-container"><span class="version-tag production current"><span class="arrow arrow-left"></span>P</span></div>}
       end
     end
 
@@ -24,7 +24,7 @@ describe ParsersHelper do
       end
 
       it "displays the production tag" do
-        helper.environment_tags(version, parser).should eq %{<span class="version-tag staging"><span class="arrow arrow-left"></span>Staging</span>}
+        helper.environment_tags(version, parser).should eq %{<div class="version-tag-container"><span class="version-tag staging current"><span class="arrow arrow-left"></span>S</span></div>}
       end
     end
 
@@ -36,7 +36,7 @@ describe ParsersHelper do
       end
 
       it "displays the production tag nested in the staging tag" do
-        helper.environment_tags(version, parser).should eq %{<span class="version-tag staging"><span class="arrow arrow-left"></span>Staging<span class="version-tag production"><span class="arrow arrow-left"></span>Production</span></span>}
+        helper.environment_tags(version, parser).should eq %{<div class="version-tag-container"><span class="version-tag staging current"><span class="arrow arrow-left"></span>S</span><span class="version-tag production current"><span class="arrow arrow-left"></span>P</span></div>}
       end
     end
 
@@ -50,21 +50,21 @@ describe ParsersHelper do
 
       context "older production tag" do
         it "returns a small production bubble" do
-          helper.environment_tags(version, parser).should eq %{<div class="version-bubble-container"><span class="version-bubble production">P</span></div>}
+          helper.environment_tags(version, parser).should eq %{<div class="version-tag-container"><span class="version-tag production">P</span></div>}
         end
       end
 
       context "older staging tag" do
         it "returns a small staging bubble" do
           version.stub(:tags) { ["staging"] }
-          helper.environment_tags(version, parser).should eq %{<div class="version-bubble-container"><span class="version-bubble staging">S</span></div>}
+          helper.environment_tags(version, parser).should eq %{<div class="version-tag-container"><span class="version-tag staging">S</span></div>}
         end
       end
 
       context "older staging and production tags" do
         it "returns a two small bubbles" do
           version.stub(:tags) { ["staging", "production"] }
-          helper.environment_tags(version, parser).should eq %{<div class="version-bubble-container"><span class="version-bubble staging">S</span><span class="version-bubble production">P</span></div>}
+          helper.environment_tags(version, parser).should eq %{<div class="version-tag-container"><span class="version-tag staging">S</span><span class="version-tag production">P</span></div>}
         end
       end
     end

@@ -16,24 +16,21 @@ module ParsersHelper
   end
 
   def environment_tags(version, parser)
-    current_staging = parser.current_version(:staging)
-    current_production = parser.current_version(:production)
-
-    if version == current_staging && version == current_production
-      environment_tag(:staging, environment_tag(:production))
-    elsif version == current_staging
-      environment_tag(:staging)
-    elsif version == current_production
-      environment_tag(:production)
-    else
-      content_tag(:div, "", class: "version-bubble-container") do
-        bubbles = []
-        version.tags ||= []
-        version.tags.each do |environment|
-          bubbles << content_tag(:span, environment.capitalize.first, class: "version-bubble #{environment}")
+    content_tag(:div, class: "version-tag-container") do
+      bubbles = []
+      version.tags ||= []
+      version.tags.each do |environment|
+        label = environment.capitalize.first
+        arrow = nil
+        classes = ["version-tag", environment]
+        if parser.current_version(environment.to_sym) == version
+          arrow = content_tag(:span, "", class: "arrow arrow-left")
+          classes << "current"
         end
-        safe_join(bubbles)
+
+        bubbles << content_tag(:span, safe_join([arrow, label]), class: classes.join(" "))
       end
+      safe_join(bubbles)
     end
   end
 

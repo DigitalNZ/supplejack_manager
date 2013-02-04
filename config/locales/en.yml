@@ -16,6 +16,7 @@ en:
     environments:
       production: "Production"
       staging: "Staging"
+    edit_current: "(Edit current version)"
 
   harvest_jobs:
     strategy: "Strategy"

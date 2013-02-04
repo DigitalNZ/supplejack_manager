@@ -37,25 +37,42 @@ $stagingColor: $mainColor;
 
 $versionTagSize: 13px;
 
-.version-tag {
+#parser-versions {
+  clear: both;
+}
+
+.edit-parser {
+  float: left;
+  margin-top: 7px;
+  margin-left: 7px;
+}
+
+.version-tag-container {
   position: absolute;
-  right: -10px;
-  top: 9px;
+  top: 16px;
+  right: 5px;
+  text-align: right;
+
+  .current {
+    margin-left: 18px;
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+}
+
+.version-tag {
+  position: relative;
   color: $white;
-  padding: 6px;
-  width: 82px;
+  padding: 5px;
+  margin-left: 4px;
+  @include border-radius(3px);
 
   .arrow-left {
     position: absolute;
-    left: -21px;
+    left: -20px;
     top: 0px;
     border-top: $versionTagSize solid transparent;
-    border-bottom: $versionTagSize solid transparent; 
-  }
-
-  &>.version-tag {
-    top: -5px;
-    right: 0;
+    border-bottom: $versionTagSize solid transparent;
   }
 
   &.production {
@@ -73,18 +90,4 @@ $versionTagSize: 13px;
       border-right: 15px solid $stagingColor;
     }
   }
-}
-
-.version-bubble-container {
-  position: absolute;
-  top: 16px;
-  right: 5px;
-  text-align: right;
-}
-
-.version-bubble {
-  color: $white;
-  padding: 2px;
-  margin-left: 4px;
-  @include border-radius(3px);
 }

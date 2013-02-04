@@ -30,7 +30,8 @@
   </div>
 
   <div class="three columns">
-    <h3 class="no-margin-top"><%= t("parsers.history") %></h3>
+    <h3 class="no-margin-top left"><%= t("parsers.history") %></h3>
+    <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "edit-parser" %>
 
     <div id="parser-versions">
       <% @parser.versions.desc(:created_at).each do |version| %>
@@ -45,8 +46,18 @@
 
     <% if @version %>
       <br/>
-      <%= link_to "Tag as Staging", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["staging"]).uniq}), method: :put, class: "button small" %>
-      <%= link_to "Tag as Production", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["production"]).uniq}), method: :put, class: "button small production" %>
+      <% if @version.production? %>
+        <%= link_to "Untag as Production", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) - ["production"]).uniq}), method: :put, class: "button small production" %>
+      <% else %>
+        <%= link_to "Tag as Production", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["production"]).uniq}), method: :put, class: "button small production" %>
+      <% end %>
+
+      <% if @version.staging? %>
+        <%= link_to "Untag as Staging", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) - ["staging"]).uniq}), method: :put, class: "button small" %>
+      <% else %>
+        <%= link_to "Tag as Staging", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["staging"]).uniq}), method: :put, class: "button small" %>
+      <% end %>
+      
     <% end %>
   </div>
 </div>
