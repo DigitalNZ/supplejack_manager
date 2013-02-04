@@ -1,6 +1,6 @@
 GIT
   remote: git@scm.digitalnz.org:harvester/core
-  revision: b3ab592470077babda88d3866e3f9387bcd88cd8
+  revision: 8097f81b7be03f3d65b7580a843a1ba9acb6cef5
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)
@@ -8,6 +8,7 @@ GIT
       chronic (~> 0.8.0)
       jsonpath (~> 0.5.0)
       nokogiri
+      redis (~> 3)
       rest-client (~> 1.6.7)
       tzinfo
 
@@ -145,7 +146,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.6)
-    jsonpath (0.5.0)
+    jsonpath (0.5.1)
       multi_json
     launchy (2.1.2)
       addressable (~> 2.3)
@@ -208,6 +209,7 @@ GEM
     rb-fsevent (0.9.2)
     rdoc (3.12)
       json (~> 1.4)
+    redis (3.0.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.12.0)
