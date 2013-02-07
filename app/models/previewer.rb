@@ -33,7 +33,7 @@ class Previewer
     @record ||= begin
       if loader.loaded?
         record = load_record
-        @record_not_found = true unless record
+        record ? record.attributes : @record_not_found = true
         record
       else
         @syntax_error = loader.syntax_error

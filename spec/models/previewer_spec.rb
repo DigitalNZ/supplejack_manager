@@ -49,7 +49,7 @@ describe Previewer do
   end
 
   describe "#record" do
-    let(:record) { mock(:record) }
+    let(:record) { mock(:record).as_null_object }
     let(:loader) { mock(:loader, parser_class: Europeana, loaded?: true) }
 
     before do
@@ -69,7 +69,7 @@ describe Previewer do
   end
 
   describe "#record?" do
-    let(:record) { mock(:record) }
+    let(:record) { mock(:record).as_null_object }
 
     before do
       Europeana.stub(:records) { [] }
@@ -93,7 +93,7 @@ describe Previewer do
   end
 
   describe "#attributes_json" do
-    let(:record) { mock(:record, attributes: {title: "Json!"}) }
+    let(:record) { mock(:record, attributes: {title: "Json!"}).as_null_object }
 
     it "returns the json in a pretty format" do
       previewer.stub(:record) { record }
