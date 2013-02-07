@@ -7,6 +7,10 @@ class SharedModule
   field :content,   type: String
   field :user_id,   type: String
 
+  def self.find_by_name(name)
+    where(name: name).first
+  end
+
   def file_name
     @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"
   end

@@ -104,4 +104,16 @@ describe SharedModulesController do
       end
     end
   end
+
+  describe "GET search" do
+    before do 
+      SharedModule.stub(:find_by_name) { shared_module }
+    end
+
+    it "should find the module by name" do
+      SharedModule.should_receive(:find_by_name).with("Copyright") { shared_module }
+      get :search, name: "Copyright", format: :js
+      assigns(:shared_module).should eq shared_module
+    end
+  end
 end

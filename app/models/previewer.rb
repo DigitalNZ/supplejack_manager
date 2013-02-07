@@ -1,3 +1,5 @@
+require "shared_module"
+
 class Previewer
 
   attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace

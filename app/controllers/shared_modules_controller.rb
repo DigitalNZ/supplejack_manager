@@ -1,5 +1,7 @@
 class SharedModulesController < ApplicationController
 
+  respond_to :html, :json
+
   def index
     @shared_modules = SharedModule.all
   end
@@ -32,5 +34,10 @@ class SharedModulesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def search
+    @shared_module = SharedModule.find_by_name(params[:name])
+    respond_with @shared_module
   end
 end
