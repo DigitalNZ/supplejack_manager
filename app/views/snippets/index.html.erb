@@ -1,0 +1,19 @@
+<h1 class="left">Snippet</h1>
+<%= link_to "New Snippet", new_snippet_path, class: "button new-right" %>
+
+<table class="twelve">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @snippets.each do |snippet| %>
+    <tr>
+      <td><%= link_to snippet.name, edit_snippet_path(snippet) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -4,7 +4,7 @@ HarvesterManager::Application.routes.draw do
     resources :parser_versions, path: "versions", only: [:show, :update]
   end
 
-  resources :shared_modules, except: [:show] do
+  resources :snippets, except: [:show] do
     get "search", on: :collection
   end
 

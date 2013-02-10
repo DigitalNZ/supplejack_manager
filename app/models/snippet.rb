@@ -1,4 +1,4 @@
-class SharedModule
+class Snippet
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Versioning
@@ -16,6 +16,6 @@ class SharedModule
   end
 
   def path
-    "shared_modules/#{file_name}"
+    "snippets/#{file_name}"
   end
 end

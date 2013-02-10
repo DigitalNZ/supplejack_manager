@@ -28,5 +28,5 @@ en:
     no_errors: "Hurray! There haven't been any errors."
     stop: "Stop Harvest"
 
-  shared_modules:
-    label: "Shared Modules"
+  snippets:
+    label: "Snippets"

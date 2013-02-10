@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :shared_module do
+  factory :snippet do
     name      "Copyright"
     content   "module Copyright; end"
   end

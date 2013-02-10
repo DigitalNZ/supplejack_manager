@@ -1,5 +1,5 @@
-<%= simple_form_for @shared_module do |f| %>
-  <h1 class="left"><%= @shared_module.name %></h1>
+<%= simple_form_for @snippet do |f| %>
+  <h1 class="left"><%= @snippet.name %></h1>
   
   <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
 
