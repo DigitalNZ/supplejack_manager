@@ -27,6 +27,7 @@ en:
     errors: "Errors"
     no_errors: "Hurray! There haven't been any errors."
     stop: "Stop Harvest"
+    operator: "Operator"
 
   snippets:
     label: "Snippets"

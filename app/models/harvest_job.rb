@@ -8,11 +8,15 @@ class HarvestJob < ActiveResource::Base
   end
 
   def user
-    User.find(self.user_id)
+    begin
+      User.find(self.user_id) if self.respond_to?(:user_id)
+    rescue Mongoid::Errors::DocumentNotFound
+      nil
+    end
   end
 
   def finished?
-    !!end_time
+    self.status == "finished"
   end
 
   def start_time

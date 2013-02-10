@@ -23,6 +23,7 @@ gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
 gem "coderay",      "~> 1.0.8"
 gem 'honeybadger'
+gem "chronic_duration"
 
 gem 'activeresource', require: 'active_resource'
 

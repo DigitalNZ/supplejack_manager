@@ -46,8 +46,8 @@ describe HarvestJobsController do
     end
 
     it "should update the attributes" do
-      job.should_receive(:update_attributes).with({"stop" => true})
-      put :update, id: 1, harvest_job: {stop: true}, format: "js"
+      job.should_receive(:update_attributes).with({"status" => "finished"})
+      put :update, id: 1, harvest_job: {status: "finished"}, format: "js"
     end
   end
 end

@@ -25,16 +25,25 @@ describe HarvestJob do
       User.should_receive(:find).with("1234567")
       job.user
     end
+
+    it "returns nil when not found" do
+      job.user.should be_nil
+    end
+
+    it "returns nil when no user_id is present" do
+      job = HarvestJob.new
+      job.user.should be_nil
+    end
   end
 
   describe "#finished?" do
-    it "returns true with a end_time" do
-      job.end_time = Time.now
+    it "returns true" do
+      job.status = "finished"
       job.finished?.should be_true
     end
 
-    it "returns false without a end_time" do
-      job.end_time = nil
+    it "returns false" do
+      job.status = "active"
       job.finished?.should be_false
     end
   end
