@@ -7,11 +7,11 @@
     <div class="five columns">
       <% if @version %>
         <% if @version.staging? %>
-          <%= link_to "Staging Harvest", "", class: "button new-right records-harvest-modal-button" %>
+          <%= link_to "Staging Harvest", "", class: "button new-right records-harvest-modal-button", data: {environment: "staging"} %>
         <% end %>
 
         <% if @version.production? %>
-          <%= link_to "Production Harvest", "", class: "button production new-right records-harvest-modal-button" %>
+          <%= link_to "Production Harvest", "", class: "button production new-right records-harvest-modal-button", data: {environment: "production"} %>
         <% end %>
       <% end %>
 

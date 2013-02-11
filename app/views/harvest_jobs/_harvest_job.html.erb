@@ -7,44 +7,51 @@
   <%= link_to t("harvest_jobs.stop"), harvest_job_path(@harvest_job, {harvest_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-harvest-button", class: "button new-right", style: ("display: none" if @harvest_job.finished?) %>
 
   <table class="twelve">
-  <tr>
-    <td><%= t("harvest_jobs.operator") %></td>
-    <td>
-      <strong><%= @harvest_job.user.try(:name) %></strong>
-    </td>
-  </tr>
+    <tr>
+      <td><%= t("harvest_jobs.operator") %></td>
+      <td>
+        <strong><%= @harvest_job.user.try(:name) %></strong>
+      </td>
+    </tr>
 
-  <tr>
-    <td><%= t("harvest_jobs.start_time") %></td>
-    <td>
-      <% if @harvest_job.start_time %>
-        <strong><%= l @harvest_job.start_time, format: :long %></strong>
-      <% end %>
-    </td>
-  </tr>
+    <tr>
+      <td><%= t("harvest_jobs.environment") %></td>
+      <td>
+        <strong><%= @harvest_job.environment %></strong>
+      </td>
+    </tr>
 
-  <tr>
-    <td><%= t("harvest_jobs.records_harvested") %></td>
-    <td>
-      <strong><%= number_with_precision @harvest_job.records_harvested, precision: 0 %></strong>
-    </td>
-  </tr>
+    <tr>
+      <td><%= t("harvest_jobs.start_time") %></td>
+      <td>
+        <% if @harvest_job.start_time %>
+          <strong><%= l @harvest_job.start_time, format: :long %></strong>
+        <% end %>
+      </td>
+    </tr>
 
-  <% if @harvest_job.finished? %>
-  <tr id="harvest-end-time">
-    <td><%= t("harvest_jobs.end_time") %></td>
-    <td>
-      <strong><%= l @harvest_job.end_time, format: :long %></strong>
-    </td>
-  </tr>
+    <% if @harvest_job.finished? %>
+    <tr id="harvest-end-time">
+      <td><%= t("harvest_jobs.end_time") %></td>
+      <td>
+        <strong><%= l @harvest_job.end_time, format: :long %></strong>
+      </td>
+    </tr>
 
-  <tr>
-    <td><%= t("harvest_jobs.duration") %></td>
-    <td>
-      <strong><%= ChronicDuration.output(@harvest_job.duration.to_i) %></strong>
-    </td>
-  </tr>
-  <% end %>
+    <tr>
+      <td><%= t("harvest_jobs.duration") %></td>
+      <td>
+        <strong><%= ChronicDuration.output(@harvest_job.duration.to_i) %></strong>
+      </td>
+    </tr>
+    <% end %>
+
+    <tr>
+      <td><%= t("harvest_jobs.records_harvested") %></td>
+      <td>
+        <strong><%= number_with_precision @harvest_job.records_harvested, precision: 0 %></strong>
+      </td>
+    </tr>
   </table>
 
   <h5><%= t("harvest_jobs.errors") %></h5>

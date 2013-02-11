@@ -6,7 +6,7 @@ class HarvestJob < ActiveResource::Base
   add_response_method :http
 
   def self.from_parser(parser, user=nil)
-    self.new(parser_id: parser.id, limit: nil, user_id: user.try(:id))
+    self.new(parser_id: parser.id, limit: nil, user_id: user.try(:id), environment: nil)
   end
 
   def self.search(params={})

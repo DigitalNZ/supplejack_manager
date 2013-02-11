@@ -19,6 +19,9 @@ $ ->
     return false;
 
   $(".records-harvest-modal-button").click ->
+    $link = $(this)
+    environment = $link.data("environment")
+    $("#harvest_job_environment").val(environment)
     $("#harvest-form").show()
     $("#harvest-result").hide()
     $("#harvest-modal").reveal()
