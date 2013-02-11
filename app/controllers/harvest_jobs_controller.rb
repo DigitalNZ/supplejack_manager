@@ -1,5 +1,9 @@
 class HarvestJobsController < ApplicationController
 
+  def index
+    @harvest_jobs = HarvestJob.search(params)
+  end
+
   def show
     @harvest_job = HarvestJob.find(params[:id])
   end

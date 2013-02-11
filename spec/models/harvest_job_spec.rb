@@ -3,6 +3,7 @@ require "spec_helper"
 describe HarvestJob do
 
   let(:user) { mock_model(User, id: "333").as_null_object }
+  let(:job) { HarvestJob.new(user_id: "1234567", parser_id: "7654321") }
 
   describe ".from_parser" do
     let(:parser) { mock(:parser, id: "1234") }
@@ -18,7 +19,29 @@ describe HarvestJob do
     end
   end
 
-  let(:job) { HarvestJob.new(user_id: "1234567") }
+  describe ".search" do
+    let(:jobs) { [job] }
+
+    before(:each) do
+      HarvestJob.stub(:find) { jobs }
+      jobs.stub(:http) { {} }
+    end
+
+    it "finds all active harvest jobs" do
+      HarvestJob.should_receive(:find).with(:all, params: {status: "active", page: 1})
+      HarvestJob.search.should eq jobs
+    end
+
+    it "finds all finished harvest jobs" do
+      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: 1})
+      HarvestJob.search("status" => "finished")
+    end
+
+    it "paginates through the records" do
+      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: "2"})
+      HarvestJob.search("status" => "finished", "page" => "2")
+    end
+  end
 
   describe "#user" do
     it "finds the user based on the user_id" do
@@ -33,6 +56,22 @@ describe HarvestJob do
     it "returns nil when no user_id is present" do
       job = HarvestJob.new
       job.user.should be_nil
+    end
+  end
+
+  describe "#parser" do
+    it "finds the parser based on the parser_id" do
+      Parser.should_receive(:find).with("7654321")
+      job.parser
+    end
+
+    it "returns nil when not found" do
+      job.parser.should be_nil
+    end
+
+    it "returns nil when no parser_id is present" do
+      job = HarvestJob.new
+      job.parser.should be_nil
     end
   end
 

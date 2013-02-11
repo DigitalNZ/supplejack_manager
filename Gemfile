@@ -24,6 +24,8 @@ gem "figaro",       ">= 0.5.0"
 gem "coderay",      "~> 1.0.8"
 gem 'honeybadger'
 gem "chronic_duration"
+gem "kaminari"
+gem "activeresource-response"
 
 gem 'activeresource', require: 'active_resource'
 

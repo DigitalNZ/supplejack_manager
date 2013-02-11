@@ -5,6 +5,18 @@
   }
 }
 
+.parser-title { display: none;}
+
+.harvest-job-full {
+  .parser-title { display: inline;}
+
+  #harvest-job {
+    .button {
+      margin-top: 14px;
+    }
+  }
+}
+
 .error {
   background: lighten($alertColor, 52%);
   border: 1px solid $alertColor;

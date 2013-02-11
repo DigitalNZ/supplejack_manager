@@ -7,6 +7,22 @@ describe HarvestJobsController do
   before(:each) do
     controller.stub(:authenticate_user!) { true }
   end
+
+  describe "GET index" do
+    it "returns active harvest jobs" do
+      HarvestJob.should_receive(:search).with(hash_including("status" => "active"))
+      get :index, status: "active"
+    end
+  end
+
+  describe "#GET show" do
+    
+    it "finds the harvest job" do
+      HarvestJob.should_receive(:find).with("1") { job }
+      get :show, id: 1, format: "js"
+      assigns(:harvest_job).should eq job
+    end
+  end
   
   describe "POST create" do
     before(:each) do
@@ -22,15 +38,6 @@ describe HarvestJobsController do
     it "should save the harvest job" do
       job.should_receive(:save)
       post :create, harvest_job: {strategy: "xml", file_name: "youtube.rb"}, format: "js"
-    end
-  end
-
-  describe "#GET show" do
-    
-    it "finds the harvest job" do
-      HarvestJob.should_receive(:find).with("1") { job }
-      get :show, id: 1, format: "js"
-      assigns(:harvest_job).should eq job
     end
   end
 

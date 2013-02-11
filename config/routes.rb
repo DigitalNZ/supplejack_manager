@@ -8,7 +8,7 @@ HarvesterManager::Application.routes.draw do
     get "search", on: :collection
   end
 
-  resources :harvest_jobs, only: [:create, :update, :show]
+  resources :harvest_jobs, only: [:index, :create, :update, :show]
 
   match "/parsers/:parser_id/records" => "records#index", parser_id: /[a-z0-9\-_\.]+/, as: :records
 

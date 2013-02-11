@@ -1,0 +1,47 @@
+<h1 class="left">Harvest Jobs</h1>
+
+<div class="row">
+  <div class="twelve columns">
+    <dl class="tabs pill">
+      <%= content_tag(:dd, link_to(t("harvest_jobs.active"), harvest_jobs_path), class: ("active" if params[:status].nil?)) %>
+      <%= content_tag(:dd, link_to(t("harvest_jobs.finished"), harvest_jobs_path(status: "finished")), class: ("active" if params[:status] == "finished")) %>
+    </dl>
+  </div>
+</div>
+
+<table class="twelve">
+  <thead>
+    <tr>
+      <th><%= t("harvest_jobs.parser") %></th>
+      <th><%= t("harvest_jobs.operator") %></th>
+      <th><%= t("harvest_jobs.start_time") %></th>
+
+      <% if params[:status] == "finished" %>
+        <th><%= t("harvest_jobs.duration") %></th>
+      <% end %>
+
+      <th><%= t("harvest_jobs.records_harvested") %></th>
+
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @harvest_jobs.each do |harvest_job| %>
+    <tr>
+      <td><%= link_to harvest_job.parser.try(:name), edit_parser_path(harvest_job.parser) %></td>
+      <td><%= harvest_job.user.try(:name) %></td>
+      <td><%= l harvest_job.start_time, format: :long %></td>
+
+      <% if params[:status] == "finished" %>
+        <td><%= ChronicDuration.output(harvest_job.duration.to_i) %></td>
+      <% end %>
+
+      <td><%= harvest_job.records_harvested %></td>
+      <td><%= link_to t("harvest_jobs.view_details"), harvest_job %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @harvest_jobs %>

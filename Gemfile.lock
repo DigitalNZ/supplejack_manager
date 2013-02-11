@@ -56,6 +56,8 @@ GEM
     activeresource (3.2.11)
       activemodel (= 3.2.11)
       activesupport (= 3.2.11)
+    activeresource-response (0.5.1)
+      activeresource (>= 3.0)
     activesupport (3.2.11)
       i18n (~> 0.6)
       multi_json (~> 1.0)
@@ -150,6 +152,9 @@ GEM
     json (1.7.6)
     jsonpath (0.5.1)
       multi_json
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
     libv8 (3.3.10.4)
@@ -281,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeresource
+  activeresource-response
   better_errors (>= 0.2.0)
   binding_of_caller (>= 0.6.8)
   capybara (>= 2.0.1)
@@ -297,6 +303,7 @@ DEPENDENCIES
   harvester_core!
   honeybadger
   jquery-rails
+  kaminari
   launchy (>= 2.1.2)
   mongoid (~> 3.0.19)
   oai!

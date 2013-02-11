@@ -19,6 +19,7 @@ en:
     edit_current: "(Edit current version)"
 
   harvest_jobs:
+    label: "Harvest Jobs"
     strategy: "Strategy"
     file_name: "File name"
     start_time: "Start time"
@@ -28,6 +29,11 @@ en:
     no_errors: "Hurray! There haven't been any errors."
     stop: "Stop Harvest"
     operator: "Operator"
+    active: "Active"
+    finished: "Finished"
+    view_details: "View details"
+    parser: "Parser"
+    duration: "Duration"
 
   snippets:
     label: "Snippets"
