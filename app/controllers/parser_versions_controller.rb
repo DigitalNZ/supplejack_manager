@@ -2,8 +2,11 @@ class ParserVersionsController < ApplicationController
 
   before_filter :find_parser_and_version
 
+  respond_to :html, :json
+
   def show
-    @harvest_job = HarvestJob.from_parser(@parser, current_user)
+    @harvest_job = HarvestJob.build(parser_id: @parser.id, version_id: @version.id, user_id: current_user.id)
+    respond_with @version
   end
 
   def update

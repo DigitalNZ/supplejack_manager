@@ -2,12 +2,16 @@ class ParserVersion
   include Mongoid::Document
   include Mongoid::Timestamps::Created
 
+  include ActiveModel::SerializerSupport
+
   field :content,   type: String
   field :tags,      type: Array
   field :message,   type: String
   field :version,   type: Integer
 
   embedded_in :parser
+
+  delegate :name, :strategy, :file_name, to: :parser
 
   belongs_to :user
 

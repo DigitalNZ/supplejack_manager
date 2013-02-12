@@ -29,6 +29,13 @@ GIT
       actionpack (~> 3.0)
       activemodel (~> 3.0)
 
+GIT
+  remote: https://github.com/rails-api/active_model_serializers.git
+  revision: 3e9b366a4531e6795b73b41e732f9db849874903
+  specs:
+    active_model_serializers (0.5.2)
+      activemodel (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -285,6 +292,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers!
   activeresource
   activeresource-response
   better_errors (>= 0.2.0)

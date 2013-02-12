@@ -2,9 +2,10 @@
 
 <%= simple_form_for @harvest_job, remote: true do |f| %>
   <%= f.input :parser_id, as: :hidden %>
+  <%= f.input :version_id, as: :hidden %>
   <%= f.input :user_id, as: :hidden %>
   <%= f.input :environment, as: :hidden %>
 
   <%= f.input :limit, label: false %>
-  <%= f.button :submit, "Start Harvest", class: "button columns twelve"  %>
+  <%= f.button :submit, "Start Harvest", class: "button columns twelve" %>
 <% end %>

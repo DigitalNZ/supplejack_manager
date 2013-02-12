@@ -19,6 +19,20 @@ describe HarvestJob do
     end
   end
 
+  describe ".build" do
+    it "initializes a new HarvestJob with default attributes" do
+      job = HarvestJob.build
+      [:parser_id, :limit, :user_id, :version_id, :environment].each do |attribute|
+        job.send(attribute).should be_nil
+      end
+    end
+
+    it "overrides the attributes passed" do
+      job = HarvestJob.build(parser_id: "12345")
+      job.parser_id.should eq "12345"
+    end
+  end
+
   describe ".search" do
     let(:jobs) { [job] }
 
