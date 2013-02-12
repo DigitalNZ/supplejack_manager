@@ -9,6 +9,9 @@
 
 .harvest-job-full {
   .parser-title { display: inline;}
+  table {
+    clear: both;
+  }
 
   #harvest-job {
     .button {
