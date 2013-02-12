@@ -8,6 +8,7 @@ describe Previewer do
   class Europeana
     def self.records(options={}); [];end
     def self.clear_definitions; end
+    def self.environment=(env); end
   end
 
   describe "#initialize" do

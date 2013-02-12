@@ -16,7 +16,9 @@ class Previewer
 
   def load_record
     begin
-      loader.parser_class.records(limit: index+1).each_with_index do |record, i|
+      klass = loader.parser_class
+      klass.environment = "staging"
+      klass.records(limit: index+1).each_with_index do |record, i|
         return record if index == i
       end
       nil
