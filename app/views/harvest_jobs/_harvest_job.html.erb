@@ -41,7 +41,14 @@
     <tr>
       <td><%= t("harvest_jobs.duration") %></td>
       <td>
-        <strong><%= ChronicDuration.output(@harvest_job.duration.to_i) %></strong>
+        <strong><%= ChronicDuration.output(@harvest_job.duration) %></strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.records_per_second") %></td>
+      <td>
+        <strong><%= number_with_precision @harvest_job.throughput, precision: 2, delimiter: "," %></strong>
       </td>
     </tr>
     <% end %>
@@ -49,7 +56,7 @@
     <tr>
       <td><%= t("harvest_jobs.records_harvested") %></td>
       <td>
-        <strong><%= number_with_precision @harvest_job.records_harvested, precision: 0 %></strong>
+        <strong><%= number_with_delimiter @harvest_job.records_harvested %></strong>
       </td>
     </tr>
   </table>

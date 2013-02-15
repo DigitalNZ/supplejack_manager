@@ -34,6 +34,7 @@ en:
     view_details: "View details"
     parser: "Parser"
     duration: "Duration"
+    records_per_second: "Records/sec"
 
   snippets:
     label: "Snippets"
