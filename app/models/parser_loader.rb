@@ -21,7 +21,7 @@ class ParserLoader
   end
 
   def parser_class_name
-    parser.name.gsub(/\s|\.rb/, "").camelize
+    parser.name.gsub(/\s/, "_").camelize
   end
 
   def parser_class
