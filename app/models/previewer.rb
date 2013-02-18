@@ -2,7 +2,7 @@ require "snippet"
 
 class Previewer
 
-  attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace
+  attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace, :document_error
 
   def initialize(parser, content, index=0)
     @parser = parser
@@ -49,6 +49,15 @@ class Previewer
     !@record_not_found
   end
 
+  def document?
+    begin
+      !!record.document
+    rescue StandardError => e
+      @document_error = e.message
+      false
+    end
+  end
+
   def attributes_json
     JSON.pretty_generate(record.attributes)
   end
@@ -70,17 +79,21 @@ class Previewer
     CodeRay.scan(self.send("pretty_#{format}_output"), format).html(line_numbers: :table).html_safe
   end
 
-  def errors?
-    record.errors.any?
+  def field_errors?
+    record.field_errors.any?
   end
 
-  def errors_json
-    return nil unless record.errors.any?
-    JSON.pretty_generate(record.errors)
+  def field_errors_json
+    return nil unless field_errors?
+    JSON.pretty_generate(record.field_errors)
   end
 
-  def errors_output
-    CodeRay.scan(errors_json, :json).html(:line_numbers => :table).html_safe if errors?
+  def field_errors_output
+    CodeRay.scan(field_errors_json, :json).html(:line_numbers => :table).html_safe if field_errors?
+  end
+
+  def validation_errors?
+    !record.errors.empty?
   end
 
 end

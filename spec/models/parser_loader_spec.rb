@@ -39,6 +39,11 @@ describe ParserLoader do
       parser.stub(:name) { "NatLib Pages" }
       loader.parser_class_name.should eq "NatLibPages"
     end
+
+    it "capitalizes each word" do
+      parser.stub(:name) { "nlnzcat catalog" }
+      loader.parser_class_name.should eq "NlnzcatCatalog"
+    end
   end
 
   describe "#parser_class" do
