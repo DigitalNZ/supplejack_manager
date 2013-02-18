@@ -186,20 +186,20 @@ describe Previewer do
     end
   end
 
-  describe "#validation_errors?" do
-    let(:record) { mock(:record, errors: {}) }
+  # describe "#validation_errors?" do
+  #   let(:record) { mock(:record, errors: {}) }
 
-    before { previewer.stub(:record) { record } }
+  #   before { previewer.stub(:record) { record } }
 
-    it "returns false when there are no validation_errors" do
-      previewer.validation_errors?.should be_false
-    end
+  #   it "returns false when there are no validation_errors" do
+  #     previewer.validation_errors?.should be_false
+  #   end
 
-    it "returns true when there are validation_errors" do
-      record.stub(:errors) { {title: "Invalid"} }
-      previewer.validation_errors?.should be_true
-    end
-  end
+  #   it "returns true when there are validation_errors" do
+  #     record.stub(:errors) { {title: "Invalid"} }
+  #     previewer.validation_errors?.should be_true
+  #   end
+  # end
 
 
 end

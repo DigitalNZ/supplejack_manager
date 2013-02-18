@@ -93,7 +93,8 @@ class Previewer
   end
 
   def validation_errors?
-    !record.errors.empty?
+    # !record.errors.empty?
+    false
   end
 
 end
