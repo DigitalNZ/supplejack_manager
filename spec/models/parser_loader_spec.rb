@@ -2,11 +2,7 @@ require "spec_helper"
 
 describe ParserLoader do
 
-  class Europeana
-    def self.clear_definitions; end
-  end
-
-  let(:parser) { Parser.new(strategy: "json", name: "Europeana", content: "class Europeana \n end") }
+  let(:parser) { Parser.new(strategy: "json", name: "Europeana", content: "class Europeana < HarvesterCore::Json::Base; end") }
   let(:loader) { ParserLoader.new(parser) }
   
   describe "#path" do
@@ -23,14 +19,14 @@ describe ParserLoader do
 
   describe "#content_with_encoding" do
     it "should add a utf-8 encoding to the top of the file" do
-      loader.content_with_encoding.should eq "# encoding: utf-8\r\nclass Europeana \n end"
+      loader.content_with_encoding.should eq "# encoding: utf-8\r\nclass Europeana < HarvesterCore::Json::Base; end"
     end
   end
 
   describe "#create_tempfile" do
     it "creates a new tempfile with the path" do
       loader.create_tempfile
-      File.read(loader.path).should eq "# encoding: utf-8\r\nclass Europeana \n end"
+      File.read(loader.path).should eq "# encoding: utf-8\r\nclass Europeana < HarvesterCore::Json::Base; end"
     end
   end
 
@@ -47,6 +43,10 @@ describe ParserLoader do
   end
 
   describe "#parser_class" do
+    before(:each) do
+      loader.load_parser
+    end
+
     it "returns the class singleton" do
       loader.parser_class.should eq Europeana
     end
@@ -88,6 +88,10 @@ describe ParserLoader do
   end
 
   describe "clear_parser_class_definitions" do
+    before(:each) do
+      loader.load_parser
+    end
+
     it "clears the parser class definitions" do
       Europeana.should_receive(:clear_definitions)
       loader.clear_parser_class_definitions

@@ -3,15 +3,14 @@
   <% if @previewer.document? %>
     <% if @previewer.field_errors? %>
       <h3>Errors</h3>
+
       <%= @previewer.field_errors_output %>
     <% end %>
 
     <% if @previewer.validation_errors? %>
       <h3>Validation Errors</h3>
       
-      <%= @previewer.record.errors.inspect %>
-
-      <ul>
+      <ul class="indented">
         <% @previewer.record.errors.each do |attribute, message| %>
           <li><strong><%= attribute %>: </strong> <%= message %></li>
         <% end %>

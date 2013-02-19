@@ -2,14 +2,8 @@ require "spec_helper"
 
 describe Previewer do
 
-  let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: nil) }
+  let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < HarvesterCore::Json::Base; end") }
   let(:previewer) { Previewer.new(parser, "Data") }
-
-  class Europeana
-    def self.records(options={}); [];end
-    def self.clear_definitions; end
-    def self.environment=(env); end
-  end
 
   describe "#initialize" do
     it "updates the parser content" do
@@ -23,10 +17,9 @@ describe Previewer do
 
   describe "load_record" do
     let(:record) { mock(:record) }
-    let(:loader) { mock(:loader, parser_class: Europeana, loaded?: true) }
 
     before(:each) do
-      previewer.stub(:loader) { loader }
+      parser.load_file
       Europeana.stub(:records) { [record] }
     end
 
@@ -51,10 +44,10 @@ describe Previewer do
 
   describe "#record" do
     let(:record) { mock(:record).as_null_object }
-    let(:loader) { mock(:loader, parser_class: Europeana, loaded?: true) }
+    let(:loader) { previewer.loader }
 
     before do
-      previewer.stub(:loader) { loader }
+      parser.load_file
       Europeana.stub(:records) { [record] }
     end
 
@@ -64,7 +57,7 @@ describe Previewer do
     end
 
     it "returns the first record" do
-      Europeana.should_receive(:records).with({limit: 1}) { [record] }
+      previewer.stub(:load_record) { record }
       previewer.record.should eq record
     end
   end
@@ -73,6 +66,7 @@ describe Previewer do
     let(:record) { mock(:record).as_null_object }
 
     before do
+      parser.load_file
       Europeana.stub(:records) { [] }
     end
 
@@ -81,6 +75,8 @@ describe Previewer do
     end
 
     it "returns true" do
+      loader = mock(:loader, loaded?: true, syntax_error: "Error", parser_class: Europeana)
+      previewer.stub(:loader) { loader }
       Europeana.stub(:records) { [record] }
       previewer.record?.should be_true
     end
@@ -186,20 +182,20 @@ describe Previewer do
     end
   end
 
-  # describe "#validation_errors?" do
-  #   let(:record) { mock(:record, errors: {}) }
+  describe "#validation_errors?" do
+    let(:record) { mock(:record, errors: {}) }
 
-  #   before { previewer.stub(:record) { record } }
+    before { previewer.stub(:record) { record } }
 
-  #   it "returns false when there are no validation_errors" do
-  #     previewer.validation_errors?.should be_false
-  #   end
+    it "returns false when there are no validation_errors" do
+      previewer.validation_errors?.should be_false
+    end
 
-  #   it "returns true when there are validation_errors" do
-  #     record.stub(:errors) { {title: "Invalid"} }
-  #     previewer.validation_errors?.should be_true
-  #   end
-  # end
+    it "returns true when there are validation_errors" do
+      record.stub(:errors) { {title: "Invalid"} }
+      previewer.validation_errors?.should be_true
+    end
+  end
 
 
 end

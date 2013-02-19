@@ -35,7 +35,12 @@ class Previewer
     @record ||= begin
       if loader.loaded?
         record = load_record
-        record ? record.attributes : @record_not_found = true
+        if record
+          record.attributes
+          record.valid?
+        else
+          @record_not_found = true
+        end
         record
       else
         @syntax_error = loader.syntax_error
@@ -93,8 +98,7 @@ class Previewer
   end
 
   def validation_errors?
-    # !record.errors.empty?
-    false
+    !record.errors.empty?
   end
 
 end
