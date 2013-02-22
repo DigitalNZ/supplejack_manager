@@ -42,17 +42,17 @@ describe HarvestJob do
     end
 
     it "finds all active harvest jobs" do
-      HarvestJob.should_receive(:find).with(:all, params: {status: "active", page: 1})
+      HarvestJob.should_receive(:find).with(:all, params: {status: "active", page: 1, environment: ["staging", "production"]})
       HarvestJob.search.should eq jobs
     end
 
     it "finds all finished harvest jobs" do
-      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: 1})
+      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: 1, environment: ["staging", "production"]})
       HarvestJob.search("status" => "finished")
     end
 
     it "paginates through the records" do
-      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: "2"})
+      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: "2", environment: ["staging", "production"]})
       HarvestJob.search("status" => "finished", "page" => "2")
     end
   end

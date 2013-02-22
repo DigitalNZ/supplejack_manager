@@ -17,7 +17,7 @@ class HarvestJob < ActiveResource::Base
 
     def search(params={})
       params = params.try(:dup).try(:symbolize_keys) || {}
-      params.reverse_merge!(status: "active", page: 1)
+      params.reverse_merge!(status: "active", page: 1, environment: ["staging","production"])
       harvest_jobs = self.find(:all, params: params)
       Kaminari::PaginatableArray.new(
         harvest_jobs,{
