@@ -10,7 +10,7 @@ describe RecordsController do
   let(:previewer) { mock(:previewer) }
   let(:harvester) { mock(:harvester).as_null_object }
 
-  describe "GET index" do
+  describe "POST index" do
     before { Parser.stub(:find) { parser } }
 
     it "finds the parser" do
@@ -19,9 +19,14 @@ describe RecordsController do
     end
 
     it "initializes a previewer object" do
-      Previewer.should_receive(:new).with(parser, "Data", "10") { previewer }
+      Previewer.should_receive(:new).with(parser, "Data", "10", nil) { previewer }
       post :index, parser_id: "1234", parser: {content: "Data"}, index: 10
       assigns(:previewer).should eq previewer
+    end
+
+    it "initializes a new previewer in test mode" do
+      Previewer.should_receive(:new).with(parser, "Data", "10", "test") { previewer }
+      post :index, parser_id: "1234", parser: {content: "Data"}, index: 10, environment: "test"
     end
   end
 end

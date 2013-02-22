@@ -17,6 +17,7 @@
 //= require foundation/jquery.placeholder
 //= require foundation/jquery.foundation.topbar
 //= require foundation/jquery.foundation.reveal
+//= require foundation/jquery.foundation.buttons
 //= require foundation/app
 //= require codemirror
 //= require codemirror/modes/ruby

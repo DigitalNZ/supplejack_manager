@@ -18,7 +18,7 @@ class HarvestJob < ActiveResource::Base
     def search(params={})
       params = params.try(:dup).try(:symbolize_keys) || {}
       params.reverse_merge!(status: "active", page: 1)
-      harvest_jobs = self.find(:all, params: {status: params[:status], page: params[:page]})
+      harvest_jobs = self.find(:all, params: params)
       Kaminari::PaginatableArray.new(
         harvest_jobs,{
           limit: harvest_jobs.http['X-limit'].to_i,

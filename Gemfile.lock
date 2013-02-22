@@ -1,6 +1,6 @@
 GIT
   remote: git@scm.digitalnz.org:harvester/core
-  revision: e76f3532dd1a372cd660a0c83a03dd077ada92e8
+  revision: bdc626b92089bb88bded6680a49cd4369d37f63a
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)

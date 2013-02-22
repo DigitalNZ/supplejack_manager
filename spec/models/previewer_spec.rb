@@ -5,6 +5,8 @@ describe Previewer do
   let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < HarvesterCore::Json::Base; end") }
   let(:previewer) { Previewer.new(parser, "Data") }
 
+  let(:record) { mock(:record, field_errors: {}, errors: {}).as_null_object }
+
   describe "#initialize" do
     it "updates the parser content" do
       previewer.parser.content.should eq "Data"
@@ -16,8 +18,6 @@ describe Previewer do
   end
 
   describe "load_record" do
-    let(:record) { mock(:record) }
-
     before(:each) do
       parser.load_file
       Europeana.stub(:records) { [record] }
@@ -43,7 +43,6 @@ describe Previewer do
   end
 
   describe "#record" do
-    let(:record) { mock(:record).as_null_object }
     let(:loader) { previewer.loader }
 
     before do
@@ -63,8 +62,6 @@ describe Previewer do
   end
 
   describe "#record?" do
-    let(:record) { mock(:record).as_null_object }
-
     before do
       parser.load_file
       Europeana.stub(:records) { [] }
@@ -86,6 +83,18 @@ describe Previewer do
       previewer.stub(:loader) { loader }
       previewer.record?.should be_false
       previewer.syntax_error.should eq "Error"
+    end
+  end
+
+  describe "#test?" do
+    it "should return true" do
+      previewer.environment = "test"
+      previewer.test?.should be_true
+    end
+
+    it "should return false" do
+      previewer.environment = "staging"
+      previewer.test?.should be_false
     end
   end
 
@@ -168,8 +177,6 @@ describe Previewer do
   end
 
   describe "#field_errors?" do
-    let(:record) { mock(:record, field_errors: {}) }
-
     before { previewer.stub(:record) { record } }
 
     it "returns false when there are no field_errors" do
@@ -183,7 +190,6 @@ describe Previewer do
   end
 
   describe "#validation_errors?" do
-    let(:record) { mock(:record, errors: {}) }
 
     before { previewer.stub(:record) { record } }
 

@@ -10,7 +10,7 @@ HarvesterManager::Application.routes.draw do
 
   resources :harvest_jobs, only: [:index, :create, :update, :show]
 
-  match "/parsers/:parser_id/records" => "records#index", parser_id: /[a-z0-9\-_\.]+/, as: :records
+  match "/parsers/:parser_id/preview" => "records#index", as: :preview
 
   devise_for :users
 

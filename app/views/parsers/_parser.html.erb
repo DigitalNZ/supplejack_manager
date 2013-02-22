@@ -15,7 +15,15 @@
         <% end %>
       <% end %>
 
-      <%= link_to "Preview", records_path(@parser.id), class: "records-preview-button button new-right" %>
+      <div href="#" class="button new-right dropdown">
+        Test
+        <ul>
+          <li><%= link_to "Run Harvest", "", class: "records-harvest-modal-button", data: {environment: "test"} %></li>
+          <li><%= link_to "Preview", preview_path(@parser.id, environment: "test"), class: "records-preview-button" %></li>
+        </ul>
+      </div>
+
+      <%= link_to "Preview", preview_path(@parser.id), class: "records-preview-button button new-right" %>
     </div>
   </div>
 </div>

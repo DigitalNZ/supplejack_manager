@@ -21,8 +21,8 @@
       <h3 class="left">Record attributes</h3>
 
       <div class="preview-navigation">
-        <%= link_to_previous @parser.id, params[:index], class: "records-preview-button arrow arrow-left" %>
-        <%= link_to_next @parser.id, params[:index], class: "records-preview-button arrow arrow-right" %>
+        <%= link_to_previous @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-left" %>
+        <%= link_to_next @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-right" %>
       </div>
 
       <%= link_to "Raw data", "#", id: "record-raw-data-button", class: "button new-right" %>
@@ -34,8 +34,8 @@
       <h3 class="left">Raw Data</h3>
 
       <div class="preview-navigation">
-        <%= link_to_previous @parser.id, params[:index], class: "records-preview-button arrow arrow-left" %>
-        <%= link_to_next @parser.id, params[:index], class: "records-preview-button arrow arrow-right" %>
+        <%= link_to_previous @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-left" %>
+        <%= link_to_next @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-right" %>
       </div>
 
       <%= link_to "Record attributes", "#", id: "record-attributes-button", class: "button new-right" %>
@@ -46,6 +46,12 @@
     <h3>Error while building the record</h3>
 
     <%= @previewer.document_error  %>
+
+    <ul class="indented">
+      <% @previewer.document_backtrace.each do |backtrace| %>
+        <li><%= backtrace %></li>
+      <% end %>
+    </ul>
   <% end %>
 
 <% elsif @previewer.syntax_error %>
@@ -58,7 +64,7 @@
   <h3>Error while fetching the records</h3>
   <h5><%= @previewer.fetch_error %></h5>
 
-  <ul>
+  <ul class="indented">
     <% @previewer.fetch_error_backtrace.each do |backtrace| %>
       <li><%= backtrace %></li>
     <% end %>

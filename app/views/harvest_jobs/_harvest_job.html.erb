@@ -61,16 +61,28 @@
     </tr>
   </table>
 
-  <h5><%= t("harvest_jobs.errors") %></h5>
+  <h5><%= t("harvest_jobs.invalid_records") %></h5>
 
-  <% if @harvest_job.harvest_job_errors.any? %>
-  <div id="harvest-job-errors">
-    <% @harvest_job.harvest_job_errors.each do |error| %>
-      <div class="error"><%= error.message %></div>
+  <% if @harvest_job.invalid_records.any? %>
+  <div id="harvest-job-invalid-errors">
+    <% @harvest_job.invalid_records.each do |record| %>
+      <div class="error"><%= record.error_messages.join(", ") %></div>
     <% end %>
   </div>
   <% else %>
-  <p><%= t("harvest_jobs.no_errors") %></p>
+  <p><%= t("harvest_jobs.no_validation_errors") %></p>
+  <% end %>
+
+  <h5><%= t("harvest_jobs.failed_records") %></h5>
+
+  <% if @harvest_job.failed_records.any? %>
+  <div id="harvest-job-failed-errors">
+    <% @harvest_job.failed_records.each do |record| %>
+      <div class="error"><%= record.exception_class %>: <%= record.message %></div>
+    <% end %>
+  </div>
+  <% else %>
+  <p><%= t("harvest_jobs.no_failure_errors") %></p>
   <% end %>
 
 <% end %>

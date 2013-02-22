@@ -2,6 +2,8 @@ class Parser
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  include ActiveModel::SerializerSupport
+
   field :name,      type: String
   field :strategy,  type: String
   field :content,   type: String
