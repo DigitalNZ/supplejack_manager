@@ -39,6 +39,7 @@ en:
     parser: "Parser"
     duration: "Duration"
     records_per_second: "Records/sec"
+    validation_failure_errors: "Validation/Failure Errors"
 
   snippets:
     label: "Snippets"

@@ -21,6 +21,7 @@
       <% end %>
 
       <th><%= t("harvest_jobs.records_harvested") %></th>
+      <th><%= t("harvest_jobs.validation_failure_errors") %></th>
 
       <th></th>
     </tr>
@@ -29,7 +30,12 @@
   <tbody>
     <% @harvest_jobs.each do |harvest_job| %>
     <tr>
-      <td><%= link_to harvest_job.parser.try(:name), edit_parser_path(harvest_job.parser) %></td>
+      <% if harvest_job.version_id.present? %>
+        <td><%= link_to harvest_job.parser.try(:name), parser_parser_version_path(harvest_job.parser_id, harvest_job.version_id) %></td>
+      <% else %>
+        <td><%= link_to harvest_job.parser.try(:name), edit_parser_path(harvest_job.parser) %></td>
+      <% end %>
+
       <td><%= harvest_job.user.try(:name) %></td>
       <td><%= l harvest_job.start_time, format: :long %></td>
 
@@ -38,6 +44,7 @@
       <% end %>
 
       <td><%= harvest_job.records_harvested %></td>
+      <td><%= harvest_job.invalid_records.size %>/<%= harvest_job.failed_records.size %></td>
       <td><%= link_to t("harvest_jobs.view_details"), harvest_job %></td>
     </tr>
     <% end %>

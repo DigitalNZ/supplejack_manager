@@ -20,6 +20,12 @@
   }
 }
 
+#harvest-modal {
+  .errors-count {
+    display: none;
+  }
+}
+
 .error {
   background: lighten($alertColor, 52%);
   border: 1px solid $alertColor;

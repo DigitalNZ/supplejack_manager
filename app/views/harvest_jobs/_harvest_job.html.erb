@@ -61,7 +61,7 @@
     </tr>
   </table>
 
-  <h5><%= t("harvest_jobs.invalid_records") %></h5>
+  <h5><%= t("harvest_jobs.invalid_records") %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
 
   <% if @harvest_job.invalid_records.any? %>
   <div id="harvest-job-invalid-errors">
@@ -73,7 +73,7 @@
   <p><%= t("harvest_jobs.no_validation_errors") %></p>
   <% end %>
 
-  <h5><%= t("harvest_jobs.failed_records") %></h5>
+  <h5><%= t("harvest_jobs.failed_records") %> <span class="errors-count">(<%= @harvest_job.failed_records_count.to_i %>)</span></h5>
 
   <% if @harvest_job.failed_records.any? %>
   <div id="harvest-job-failed-errors">
