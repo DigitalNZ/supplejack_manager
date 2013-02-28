@@ -6,6 +6,8 @@ en:
   logout: "Logout"
   login: "Login"
   commit_message: "Commit Message"
+  view_details: "View details"
+  delete: "Delete"
 
   parsers:
     label: "Parsers"
@@ -19,7 +21,7 @@ en:
     edit_current: "(Edit current version)"
 
   harvest_jobs:
-    label: "Harvest Jobs"
+    label: "Jobs"
     strategy: "Strategy"
     file_name: "File name"
     start_time: "Start time"
@@ -40,6 +42,28 @@ en:
     duration: "Duration"
     records_per_second: "Records/sec"
     validation_failure_errors: "Validation/Failure Errors"
+    scheduled: "Scheduled"
+    already_active_html: "There is already an active Job running for the <strong>%{parser}</strong> in the <strong>%{environment}</strong> environment"
+    incremental: "Incremental Harvest?"
+
+  harvest_schedules:
+    label: Schedules
+    parser: "Parser"
+    new_schedule: "New Schedule"
+    edit_schedule: "Edit Schedule"
+    offset_hint: "The offset is a number value which represents the number of days to offset the start of the schedule. Valid values are: Weekly (0-6), Fortnightly (0-13), Monthly (0-27)"
+    next_run_at: "Next Job"
+    confirm_delete: "Are you sure you want to delete the Schedule?"
+    no_one_off_schedules: "There are no one off schedules programmed"
+    incremental_hint: "The incremental option only applies to OAI harvests. It will use the last time a harvest was run for the particular parser as a starting point."
 
   snippets:
     label: "Snippets"
+
+  activemodel:
+    models:
+      harvest_schedule: "Schedule"
+
+    attributes:
+      harvest_schedule:
+        at_hour: "At time"

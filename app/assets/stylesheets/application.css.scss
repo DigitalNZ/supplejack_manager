@@ -11,6 +11,9 @@
  *= require_self
 */
 
+@import "jquery.ui.datepicker";
+@import "jquery.ui.slider";
+@import "jquery.ui.timepicker";
 @import "foundation_and_overrides";
 @import "codemirror";
 @import "codemirror/themes/monokai";

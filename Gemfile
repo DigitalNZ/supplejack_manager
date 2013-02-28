@@ -48,6 +48,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 group :development do
   gem "quiet_assets",       ">= 1.0.1"

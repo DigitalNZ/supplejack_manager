@@ -18,10 +18,16 @@
 //= require foundation/jquery.foundation.topbar
 //= require foundation/jquery.foundation.reveal
 //= require foundation/jquery.foundation.buttons
+//= require foundation/jquery.foundation.tabs
+//= require foundation/jquery.foundation.forms
 //= require foundation/app
+//= require jquery.ui.datepicker
+//= require jquery.ui.slider
+//= require jquery.ui.timepicker
 //= require codemirror
 //= require codemirror/modes/ruby
 //= require code_mirror_setup
 //= require harvester
 //= require parsers
 //= require harvest_jobs
+//= require harvest_schedules

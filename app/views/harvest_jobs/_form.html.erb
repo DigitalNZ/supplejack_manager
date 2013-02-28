@@ -6,6 +6,19 @@
   <%= f.input :user_id, as: :hidden %>
   <%= f.input :environment, as: :hidden %>
 
+  <% if @parser.strategy == "oai" %>
+    <div class="row">
+      <div class="three columns">
+        <%= f.label :incremental, t("harvest_jobs.incremental") %>
+      </div>
+      <div class="nine columns">
+        <%= f.input :incremental, as: :boolean, label: false %>
+      </div>
+    </div>
+
+    <br/>
+  <% end %>
+
   <%= f.input :limit, label: false %>
   <%= f.button :submit, "Start Harvest", class: "button columns twelve" %>
 <% end %>

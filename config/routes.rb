@@ -1,7 +1,9 @@
 HarvesterManager::Application.routes.draw do
 
   resources :parsers do
-    resources :parser_versions, path: "versions", only: [:show, :update]
+    resources :parser_versions, path: "versions", only: [:show, :update] do
+      get :current, on: :collection
+    end
   end
 
   resources :snippets, except: [:show] do
@@ -9,6 +11,7 @@ HarvesterManager::Application.routes.draw do
   end
 
   resources :harvest_jobs, only: [:index, :create, :update, :show]
+  resources :harvest_schedules
 
   match "/parsers/:parser_id/preview" => "records#index", as: :preview
 

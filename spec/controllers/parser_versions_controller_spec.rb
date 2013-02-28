@@ -13,6 +13,14 @@ describe ParserVersionsController do
     Parser.stub(:find).with("1") { parser }
     parser.stub(:find_version) { version }
   end
+
+  describe "GET current" do
+    it "finds the current version for an environment" do
+      parser.should_receive(:current_version).with("staging") { version }
+      get :current, parser_id: 1, environment: "staging", format: "json"
+      assigns(:version).should eq version
+    end
+  end
   
   describe "GET Show" do
     it "finds the parser" do

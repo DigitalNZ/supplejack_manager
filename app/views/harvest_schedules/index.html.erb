@@ -1,0 +1,80 @@
+<h1 class="left">Schedules</h1>
+<%= link_to "New Schedule", new_harvest_schedule_path, class: "button new-right" %>
+
+<br/>
+
+<h2 class="clear">One-off</h1>
+
+<table class="twelve">
+  <thead>
+    <tr>
+      <th><%= t("harvest_schedules.parser") %></th>
+      <th><%= t("harvest_schedules.start_time") %></th>
+      <th><%= t("harvest_schedules.environment") %></th>
+
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @one_off_schedules.any? %>
+
+      <% @one_off_schedules.each do |harvest_schedule| %>
+      <tr>
+        <td><%= harvest_schedule.parser.try(:name) %></td>
+        <td><%= l harvest_schedule.start_time, format: :long %></td>
+        <td><%= harvest_schedule.environment %></td>
+        <td>
+          <%= link_to t("edit"), edit_harvest_schedule_path(harvest_schedule) %> | 
+          <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+        </td>
+      </tr>
+      <% end %>
+
+    <% else %>
+
+      <tr>
+        <td colspan="5"><p><%= t("harvest_schedules.no_one_off_schedules") %></p></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Recurrent</h1>
+
+<table class="twelve">
+  <thead>
+    <tr>
+      <th><%= t("harvest_schedules.parser") %></th>
+      <th><%= t("harvest_schedules.start_time") %></th>
+      <th><%= t("harvest_schedules.frequency") %></th>
+      <th><%= t("harvest_schedules.next_run_at") %></th>
+      <th><%= t("harvest_schedules.environment") %></th>
+
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recurrent_schedules.each do |harvest_schedule| %>
+    <tr>
+      <td><%= harvest_schedule.parser.try(:name) %></td>
+      <td><%= l harvest_schedule.start_time, format: :long %></td>
+
+      <% if harvest_schedule.frequency.present? %>
+        <td><%= harvest_schedule.frequency %> at <%= harvest_schedule.at_hour %>:<%= harvest_schedule.at_minutes %> (<%= harvest_schedule.cron %>)</td>
+      <% else %>
+        <td><%= harvest_schedule.cron %></td>
+      <% end %>
+
+      <td><%= l harvest_schedule.next_run_at, format: :long %></td>
+      <td><%= harvest_schedule.environment %></td>
+      <td>
+        <%= link_to t("edit"), edit_harvest_schedule_path(harvest_schedule) %> | 
+        <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

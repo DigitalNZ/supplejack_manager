@@ -36,7 +36,12 @@
         <td><%= link_to harvest_job.parser.try(:name), edit_parser_path(harvest_job.parser) %></td>
       <% end %>
 
-      <td><%= harvest_job.user.try(:name) %></td>
+      <% if harvest_job.user %>
+        <td><%= harvest_job.user.try(:name) %></td>
+      <% else %>
+        <td><%= t("harvest_jobs.scheduled") %></td>
+      <% end %>
+
       <td><%= l harvest_job.start_time, format: :long %></td>
 
       <% if params[:status] == "finished" %>

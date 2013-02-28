@@ -1,5 +1,5 @@
 class ParserSerializer < ActiveModel::Serializer
   
-  attributes :name, :strategy, :content, :file_name
+  attributes :id, :name, :strategy, :content, :file_name
 
 end

@@ -3,6 +3,26 @@ class HarvestJob < ActiveResource::Base
   self.site = ENV["WORKER_HOST"]
   self.user = ENV["WORKER_API_KEY"]
 
+  schema do
+    attribute :start_time,            :datetime
+    attribute :end_time,              :datetime
+    attribute :records_harvested,     :integer
+    attribute :throughput,            :float
+    attribute :duration,              :float
+    attribute :status,                :string
+    attribute :user_id,               :string
+    attribute :parser_id,             :string
+    attribute :version_id,            :string
+    attribute :harvest_schedule_id,   :string
+    attribute :environment,           :string
+    attribute :failed_records_count,  :integer
+    attribute :invalid_records_count, :integer
+    attribute :created_at,            :datetime
+    attribute :incremental,           :boolean
+  end
+
+  include ActiveResource::SchemaTypes
+
   add_response_method :http
 
   class << self
@@ -30,7 +50,7 @@ class HarvestJob < ActiveResource::Base
 
   def user
     @user ||= begin
-      User.find(self.user_id) if self.respond_to?(:user_id)
+      User.find(self.user_id) if self.respond_to?(:user_id) && user_id.present?
     rescue Mongoid::Errors::DocumentNotFound
       nil
     end
@@ -38,7 +58,15 @@ class HarvestJob < ActiveResource::Base
 
   def parser
     @parser ||= begin
-      Parser.find(self.parser_id) if self.respond_to?(:parser_id)
+      Parser.find(self.parser_id) if self.respond_to?(:parser_id) && parser_id.present?
+    rescue Mongoid::Errors::DocumentNotFound
+      nil
+    end
+  end
+
+  def harvest_schedule
+    @harvest_schedule ||= begin
+      HarvestSchedule.find(self.harvest_schedule_id) if self.respond_to?(:harvest_schedule_id) && harvest_schedule_id.present?
     rescue Mongoid::Errors::DocumentNotFound
       nil
     end
@@ -46,21 +74,5 @@ class HarvestJob < ActiveResource::Base
 
   def finished?
     self.status == "finished"
-  end
-
-  def start_time
-    value = super
-    if value.is_a?(String)
-      value = value.present? ? Time.parse(value) : nil
-    end
-    value
-  end
-
-  def end_time
-    value = super
-    if value.is_a?(String)
-      value = value.present? ? Time.parse(value) : nil
-    end
-    value
   end
 end

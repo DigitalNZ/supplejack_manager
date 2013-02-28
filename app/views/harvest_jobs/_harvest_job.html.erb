@@ -10,7 +10,11 @@
     <tr>
       <td><%= t("harvest_jobs.operator") %></td>
       <td>
-        <strong><%= @harvest_job.user.try(:name) %></strong>
+        <% if @harvest_job.user %>
+          <strong><%= @harvest_job.user.try(:name) %></strong>
+        <% else %>
+          <strong><%= t("harvest_jobs.scheduled") %></strong>
+        <% end %>
       </td>
     </tr>
 
