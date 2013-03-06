@@ -44,6 +44,7 @@ class Parser
   end
 
   def current_version(environment)
+    return self.versions.last if environment.to_sym == :test
     self.versions.where(tags: environment.to_s).desc(:created_at).first
   end
 

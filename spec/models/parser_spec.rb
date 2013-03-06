@@ -108,13 +108,23 @@ describe Parser do
     let(:parser) { FactoryGirl.create(:parser, strategy: "json", name: "Natlib") }
 
     before(:each) do
-      parser.update_attributes(tags: ["production"])
-      parser.update_attributes(tags: nil)
+      parser.attributes = {tags: ["production"], content: "Hi 1"}
+      parser.save_with_version
+      parser.attributes = {tags: nil, content: "Hi 2"}
+      parser.save_with_version
+      parser.reload
     end
 
-    it "returns the most recent version tagged with production" do
-      parser.reload
-      parser.current_version(:production).should eq parser.versions[1]
+    context "production environment" do
+      it "returns the most recent version tagged with production" do
+        parser.current_version(:production).should eq parser.versions[0]
+      end
+    end
+
+    context "test environment" do
+      it "returns the most recent version regardless of tags" do
+        parser.current_version(:test).should eq parser.versions[1]
+      end
     end
   end
 
