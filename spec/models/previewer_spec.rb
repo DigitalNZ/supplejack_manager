@@ -4,7 +4,6 @@ describe Previewer do
 
   let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < HarvesterCore::Json::Base; end") }
   let(:previewer) { Previewer.new(parser, "Data") }
-
   let(:record) { mock(:record, field_errors: {}, errors: {}).as_null_object }
 
   describe "#initialize" do
@@ -14,6 +13,51 @@ describe Previewer do
 
     it "initializes a ParserLoader" do
       previewer.loader.should be_a(ParserLoader)
+    end
+  end
+
+  describe "#fetch_record" do
+    let(:job) { mock(:harvest_job).as_null_object }
+
+    context "fetch record from a existing harvest" do
+      let(:previewer) { Previewer.new(parser, "Data", 2, "staging", true) }
+      let(:invalid_record) { mock(:record, raw_data: "</xml>") }
+
+      before do
+        class Europeana < HarvesterCore::Json::Base; end
+        HarvestJob.stub(:search) { [job] }
+        job.stub(:invalid_records) { [1,2, invalid_record] }
+        Europeana.stub(:new) { record }
+      end
+
+      it "should search for the latest Job" do
+        HarvestJob.should_receive(:search).with(parser_id: parser.id, environment: "staging", status: "finished", limit: 1) { [job] }
+        previewer.fetch_record(Europeana)
+      end
+
+      it "should initialize a new record with the raw_data from the database" do
+        Europeana.should_receive(:new).with("</xml>", true) { record }
+        previewer.fetch_record(Europeana)
+      end
+
+      it "should set the attribute values and return the record" do
+        record.should_receive(:set_attribute_values)
+        previewer.fetch_record(Europeana).should eq record
+      end
+
+      it "returns nil when a HarvestJob is not found" do
+        HarvestJob.stub(:search) { [] }
+        previewer.fetch_record(Europeana).should be_nil
+      end
+    end
+
+    context "fetch live record" do
+      let(:previewer) { Previewer.new(parser, "Data", 2, "staging", nil) }
+
+      it "should fetch the live record" do
+        Europeana.should_receive(:records).with(limit: 3) { [1, 2, record] }
+        previewer.fetch_record(Europeana).should eq record
+      end
     end
   end
 

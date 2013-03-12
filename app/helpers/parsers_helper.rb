@@ -1,14 +1,14 @@
 module ParsersHelper
 
-  def link_to_next(parser_id, index, environment, html_options={})
-    link_to "", preview_path(parser_id, index: index.to_i+1, environment: environment), html_options
+  def link_to_next(parser_id, index, environment, review, html_options={})
+    link_to "", preview_path(parser_id, index: index.to_i+1, environment: environment, review: review), html_options
   end
 
-  def link_to_previous(parser_id, index, environment, html_options={})
+  def link_to_previous(parser_id, index, environment, review, html_options={})
     index = index.to_i - 1
 
     if index >= 0
-      link_to "", preview_path(parser_id, index: index.to_i, environment: environment), html_options
+      link_to "", preview_path(parser_id, index: index.to_i, environment: environment, review: review), html_options
     else
       html_options[:class] << " disabled"
       content_tag(:span, "", html_options)

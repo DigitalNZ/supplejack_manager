@@ -1,6 +1,13 @@
 <% if @previewer.record? %>
 
   <% if @previewer.document? %>
+    <% if @previewer.harvest_job %>
+      <h3>Invalid/failed records from last <%= @previewer.harvest_job.environment %> harvest</h3>
+      <div>Started: <strong><%= l @previewer.harvest_job.start_time, format: :long %></strong></div>
+      <div>Records: <strong><%= @previewer.harvest_job.total_errors_count %></strong></div>
+      <div>Environment: <strong><%= @previewer.harvest_job.environment %></strong> </div>
+    <% end %>
+
     <% if @previewer.field_errors? %>
       <h3>Errors</h3>
 
@@ -21,8 +28,8 @@
       <h3 class="left">Record attributes</h3>
 
       <div class="preview-navigation">
-        <%= link_to_previous @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-left" %>
-        <%= link_to_next @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-right" %>
+        <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-left" %>
+        <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-right" %>
       </div>
 
       <%= link_to "Raw data", "#", id: "record-raw-data-button", class: "button new-right" %>
@@ -34,8 +41,8 @@
       <h3 class="left">Raw Data</h3>
 
       <div class="preview-navigation">
-        <%= link_to_previous @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-left" %>
-        <%= link_to_next @parser.id, params[:index], params[:environment], class: "records-preview-button arrow arrow-right" %>
+        <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-left" %>
+        <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-right" %>
       </div>
 
       <%= link_to "Record attributes", "#", id: "record-attributes-button", class: "button new-right" %>

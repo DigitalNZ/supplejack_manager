@@ -2,10 +2,10 @@ require "snippet"
 
 class Previewer
 
-  attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace, :document_error, :document_backtrace
+  attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace, :document_error, :document_backtrace, :review, :harvest_job
   attr_accessor :environment
 
-  def initialize(parser, content, index=0, environment="staging")
+  def initialize(parser, content, index=0, environment="staging", review=false)
     @parser = parser
     @parser.content = content if content.present?
     @loader = ParserLoader.new(parser)
@@ -13,13 +13,16 @@ class Previewer
     @syntax_error = nil
     @fetch_error = nil
     @fetch_error_backtrace = nil
-    @environment = environment
+    @environment = environment || "staging"
+    @review = review || false
+    @harvest_job = nil
   end
 
   def fetch_record(klass)
-    if self.test?
-      harvest_job = HarvestJob.search(parser_id: @parser.id, environment: "test", status: "finished", limit: 1).try(:first)
-      invalid_record = harvest_job.invalid_records[index]
+    if self.review
+      @harvest_job = HarvestJob.search(parser_id: @parser.id, environment: @environment, status: "finished", limit: 1).try(:first)
+      return nil unless @harvest_job
+      invalid_record = @harvest_job.invalid_records[index]
 
       if invalid_record
         record = klass.new(invalid_record.raw_data, true)

@@ -1,29 +1,32 @@
 <div class="row">
-  <div class="twelve columns">
-    <div class="seven columns">
-      <h1 class="left"><%= link_to @parser.name, edit_parser_path(@parser) %></h1>
+  <div class="seven columns">
+    <h1 class="left"><%= link_to @parser.name, edit_parser_path(@parser) %></h1>
+  </div>
+  
+  <div class="five columns last">
+    <div href="#" class="button split new-right preview dropdown">
+      <%= link_to "Preview", preview_path(@parser.id), class: "records-preview-button" %>
+      <span></span>
+      <ul>
+        <li><%= link_to "Review Staging", preview_path(@parser.id, environment: "staging", review: true), class: "records-preview-button" %></li>
+        <li><%= link_to "Review Production", preview_path(@parser.id, environment: "production", review: true), class: "records-preview-button" %></li>
+        <li><%= link_to "Review Test", preview_path(@parser.id, environment: "test", review: true), class: "records-preview-button" %></li>
+      </ul>
     </div>
-    
-    <div class="five columns">
-      <% if @version %>
-        <% if @version.staging? %>
-          <%= link_to "Staging Harvest", "", class: "button new-right records-harvest-modal-button", data: {environment: "staging"} %>
+
+    <div href="#" class="button new-right run-harvest dropdown">
+      Run Harvest
+      <ul>
+        <% if @version.try(:staging?) %>
+          <li><%= link_to "Staging Harvest", "", class: "records-harvest-modal-button", data: {environment: "production"} %></li>
         <% end %>
 
-        <% if @version.production? %>
-          <%= link_to "Production Harvest", "", class: "button production new-right records-harvest-modal-button", data: {environment: "production"} %>
+        <% if @version.try(:production?) %>
+          <li><%= link_to "Production Harvest", "", class: "records-harvest-modal-button", data: {environment: "production"} %></li>
         <% end %>
-      <% end %>
 
-      <div href="#" class="button new-right dropdown">
-        Test
-        <ul>
-          <li><%= link_to "Test Harvest", "", class: "records-harvest-modal-button", data: {environment: "test"} %></li>
-          <li><%= link_to "Review", preview_path(@parser.id, environment: "test"), class: "records-preview-button" %></li>
-        </ul>
-      </div>
-
-      <%= link_to "Preview", preview_path(@parser.id), class: "records-preview-button button new-right" %>
+        <li><%= link_to "Test Harvest", "", class: "records-harvest-modal-button", data: {environment: "test"} %></li>
+      </ul>
     </div>
   </div>
 </div>

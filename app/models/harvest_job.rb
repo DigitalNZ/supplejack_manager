@@ -75,4 +75,8 @@ class HarvestJob < ActiveResource::Base
   def finished?
     self.status == "finished"
   end
+
+  def total_errors_count
+    failed_records_count.to_i + invalid_records_count.to_i
+  end
 end

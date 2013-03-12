@@ -101,4 +101,12 @@ describe HarvestJob do
     end
   end
 
+  describe "#total_errors_count" do
+    it "should add the failed and invalid record counts" do
+      job.stub(:failed_records_count) { 5 }
+      job.stub(:invalid_records_count) { 3 }
+      job.total_errors_count.should eq 8
+    end
+  end
+
 end
