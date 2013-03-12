@@ -18,7 +18,7 @@
       Run Harvest
       <ul>
         <% if @version.try(:staging?) %>
-          <li><%= link_to "Staging Harvest", "", class: "records-harvest-modal-button", data: {environment: "production"} %></li>
+          <li><%= link_to "Staging Harvest", "", class: "records-harvest-modal-button", data: {environment: "staging"} %></li>
         <% end %>
 
         <% if @version.try(:production?) %>
