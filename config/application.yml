@@ -9,7 +9,6 @@
 #
 
 development:
-  PARSER_GIT_REPO_PATH: "/Users/fede/Desktop/test_remote"
   API_HOST: "http://localhost:3000"
   WORKER_HOST: "http://localhost:3002"
   WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
@@ -17,7 +16,13 @@ development:
   HONEYBADGER_API_KEY: "cd199c3f"
 
 production:
-  PARSER_GIT_REPO_PATH: "/data/sites/harvester.uat.digitalnz.org/parsers.git"
+  API_HOST: "http://api.digitalnz.org"
+  WORKER_HOST: "http://worker.dnz03.digitalnz.org"
+  WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
+  HARVESTER_CACHING_ENABLED: true
+  HONEYBADGER_API_KEY: "cd199c3f"
+
+staging:
   API_HOST: "http://api.uat.digitalnz.org"
   WORKER_HOST: "http://worker.uat.digitalnz.org"
   WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
@@ -25,7 +30,6 @@ production:
   HONEYBADGER_API_KEY: "cd199c3f"
 
 test:
-  PARSER_GIT_REPO_PATH: "spec/fixtures/test_repo"
   API_HOST: "http://localhost:3000"
   WORKER_HOST: "http://localhost:3002"
   WORKER_API_KEY: "12345"

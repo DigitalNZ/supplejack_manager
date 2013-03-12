@@ -9,4 +9,4 @@ $ ->
     setTimeout @request, 2000
 
   request: ->
-    $.get($("#harvest-job").data('url'))
+    $.get($("#harvest-job").data('url') + ".js")

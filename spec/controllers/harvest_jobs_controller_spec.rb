@@ -11,7 +11,7 @@ describe HarvestJobsController do
   describe "GET index" do
     it "returns active harvest jobs" do
       HarvestJob.should_receive(:search).with(hash_including("status" => "active"))
-      get :index, status: "active"
+      get :index, status: "active", environment: "staging"
     end
   end
 
@@ -19,7 +19,7 @@ describe HarvestJobsController do
     
     it "finds the harvest job" do
       HarvestJob.should_receive(:find).with("1") { job }
-      get :show, id: 1, format: "js"
+      get :show, id: 1, format: "js", environment: "staging"
       assigns(:harvest_job).should eq job
     end
   end
@@ -31,13 +31,13 @@ describe HarvestJobsController do
 
     it "initializes a new harvest job" do
       HarvestJob.should_receive(:new).with({"strategy" => "xml", "file_name" => "youtube.rb"}) { job }
-      post :create, harvest_job: {strategy: "xml", file_name: "youtube.rb"}, format: "js"
+      post :create, harvest_job: {strategy: "xml", file_name: "youtube.rb"}, format: "js", environment: "staging"
       assigns(:harvest_job).should eq job
     end
 
     it "should save the harvest job" do
       job.should_receive(:save)
-      post :create, harvest_job: {strategy: "xml", file_name: "youtube.rb"}, format: "js"
+      post :create, harvest_job: {strategy: "xml", file_name: "youtube.rb"}, format: "js", environment: "staging"
     end
   end
 
@@ -48,13 +48,13 @@ describe HarvestJobsController do
 
     it "finds the harvest job" do
       HarvestJob.should_receive(:find).with("1") { job }
-      put :update, id: 1, format: "js"
+      put :update, id: 1, format: "js", environment: "staging"
       assigns(:harvest_job).should eq job
     end
 
     it "should update the attributes" do
       job.should_receive(:update_attributes).with({"status" => "finished"})
-      put :update, id: 1, harvest_job: {status: "finished"}, format: "js"
+      put :update, id: 1, harvest_job: {status: "finished"}, format: "js", environment: "staging"
     end
   end
 end

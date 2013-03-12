@@ -9,6 +9,10 @@ en:
   view_details: "View details"
   delete: "Delete"
 
+  environments:
+    production: "Production"
+    staging: "Staging"
+
   parsers:
     label: "Parsers"
     records_to_harvest: "How many records do you wish to harvest?"
@@ -50,7 +54,9 @@ en:
     label: Schedules
     parser: "Parser"
     new_schedule: "New Schedule"
+    new_env_schedule: "New %{env} Schedule"
     edit_schedule: "Edit Schedule"
+    edit_env_schedule: "Edit %{env} Schedule"
     offset_hint: "The offset is a number value which represents the number of days to offset the start of the schedule. Valid values are: Weekly (0-6), Fortnightly (0-13), Monthly (0-27)"
     next_run_at: "Next Job"
     confirm_delete: "Are you sure you want to delete the Schedule?"

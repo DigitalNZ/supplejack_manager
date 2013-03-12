@@ -1,5 +1,7 @@
 class HarvestSchedulesController < ApplicationController
 
+  before_filter :set_worker_environment
+
   respond_to :html
 
   def index
@@ -15,6 +17,7 @@ class HarvestSchedulesController < ApplicationController
   def new
     @harvest_schedule = HarvestSchedule.new
     @harvest_schedule.start_time = Time.now
+    @harvest_schedule.environment = params[:environment]
   end
 
   def create
@@ -37,5 +40,9 @@ class HarvestSchedulesController < ApplicationController
     @harvest_schedule = HarvestSchedule.find(params[:id])
     @harvest_schedule.destroy
     redirect_to harvest_schedules_path
+  end
+
+  def set_worker_environment
+    set_worker_environment_for(HarvestSchedule)
   end
 end

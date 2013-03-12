@@ -1,5 +1,5 @@
-<h1 class="left">Schedules</h1>
-<%= link_to "New Schedule", new_harvest_schedule_path, class: "button new-right" %>
+<h1 class="left">Schedules (<%= params[:environment] %>)</h1>
+<%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right" %>
 
 <br/>
 
@@ -25,7 +25,7 @@
         <td><%= l harvest_schedule.start_time, format: :long %></td>
         <td><%= harvest_schedule.environment %></td>
         <td>
-          <%= link_to t("edit"), edit_harvest_schedule_path(harvest_schedule) %> | 
+          <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
           <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
         </td>
       </tr>
@@ -71,7 +71,7 @@
       <td><%= l harvest_schedule.next_run_at, format: :long %></td>
       <td><%= harvest_schedule.environment %></td>
       <td>
-        <%= link_to t("edit"), edit_harvest_schedule_path(harvest_schedule) %> | 
+        <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
         <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
       </td>
     </tr>

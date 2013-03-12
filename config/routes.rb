@@ -10,8 +10,10 @@ HarvesterManager::Application.routes.draw do
     get "search", on: :collection
   end
 
-  resources :harvest_jobs, only: [:index, :create, :update, :show]
-  resources :harvest_schedules
+  scope ":environment", as: "environment" do
+    resources :harvest_jobs, only: [:index, :create, :update, :show]
+    resources :harvest_schedules
+  end
 
   match "/parsers/:parser_id/preview" => "records#index", as: :preview
 

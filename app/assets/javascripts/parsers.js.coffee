@@ -26,6 +26,8 @@ $ ->
     $("#harvest-result").hide()
     $("#harvest-modal").reveal()
 
+    $("#harvest-form form").attr("action", "/" + environment + "/harvest_jobs")
+
     return false;
 
   $("#preview-area").on 'click', '#record-raw-data-button', ->

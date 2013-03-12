@@ -44,7 +44,7 @@
     </ul>
   <% end %>
 
-  <%= f.input :environment, collection: ["staging", "production"].map{|o| [o.capitalize, o] }, include_blank: false %>
+  <%= f.input :environment, as: :hidden %>
 
   <div class="row">
     <div class="two columns">

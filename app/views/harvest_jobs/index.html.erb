@@ -1,4 +1,4 @@
-<h1 class="left">Harvest Jobs</h1>
+<h1 class="left">Jobs (<%= params[:environment] %>)</h1>
 
 <div class="row">
   <div class="twelve columns">
@@ -50,7 +50,7 @@
 
       <td><%= harvest_job.records_harvested %></td>
       <td><%= harvest_job.invalid_records.size %>/<%= harvest_job.failed_records.size %></td>
-      <td><%= link_to t("harvest_jobs.view_details"), harvest_job %></td>
+      <td><%= link_to t("harvest_jobs.view_details"), environment_harvest_job_path(harvest_job.environment, harvest_job) %></td>
     </tr>
     <% end %>
   </tbody>
