@@ -9,28 +9,24 @@
 #
 
 development:
-  API_HOST: "http://localhost:3000"
   WORKER_HOST: "http://localhost:3002"
   WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
 
 production:
-  API_HOST: "http://api.digitalnz.org"
   WORKER_HOST: "http://worker.dnz03.digitalnz.org"
   WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
 
 staging:
-  API_HOST: "http://api.uat.digitalnz.org"
   WORKER_HOST: "http://worker.uat.digitalnz.org"
   WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
 
 test:
-  API_HOST: "http://localhost:3000"
   WORKER_HOST: "http://localhost:3002"
   WORKER_API_KEY: "12345"
   HARVESTER_CACHING_ENABLED: false
