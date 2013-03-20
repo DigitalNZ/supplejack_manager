@@ -30,6 +30,18 @@ $ ->
 
     return false;
 
+  $(".records-enrichment-modal-button").click ->
+    $link = $(this)
+    environment = $link.data("environment")
+    $("#enrichment_job_environment").val(environment)
+    $("#enrichment-form").show()
+    $("#enrichment-result").hide()
+    $("#enrichment-modal").reveal()
+
+    $("#enrichment-form form").attr("action", "/" + environment + "/enrichment_jobs")
+
+    return false;
+
   $("#preview-area").on 'click', '#record-raw-data-button', ->
     $("#record-raw-data").show()
     $("#record-attributes").hide()

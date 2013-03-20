@@ -18,6 +18,7 @@ class ParsersController < ApplicationController
   def edit
     @parser = Parser.find(params[:id])
     @harvest_job = HarvestJob.from_parser(@parser, current_user)
+    @enrichment_job = EnrichmentJob.from_parser(@parser, current_user)
   end
 
   def create

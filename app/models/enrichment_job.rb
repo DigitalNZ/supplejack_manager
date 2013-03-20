@@ -1,5 +1,5 @@
-class HarvestJob < AbstractJob
-
+class EnrichmentJob < AbstractJob
+  
   schema do
     attribute :start_time,            :datetime
     attribute :end_time,              :datetime
@@ -15,9 +15,9 @@ class HarvestJob < AbstractJob
     attribute :failed_records_count,  :integer
     attribute :invalid_records_count, :integer
     attribute :created_at,            :datetime
-    attribute :incremental,           :boolean
-    attribute :enrichments,           :string
+    attribute :enrichment,            :string
   end
 
   include ActiveResource::SchemaTypes
+
 end

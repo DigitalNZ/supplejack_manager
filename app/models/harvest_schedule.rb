@@ -16,6 +16,7 @@ class HarvestSchedule < ActiveResource::Base
     attribute :last_run_at, :datetime
     attribute :recurrent,   :boolean
     attribute :incremental, :boolean
+    attribute :enrichments, :string
   end
 
   include ActiveResource::SchemaTypes
@@ -39,6 +40,11 @@ class HarvestSchedule < ActiveResource::Base
     rescue Mongoid::Errors::DocumentNotFound
       nil
     end
+  end
+
+  def oai?
+    return false unless parser
+    parser.oai?
   end
 
 end

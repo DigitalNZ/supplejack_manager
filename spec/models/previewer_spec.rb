@@ -6,13 +6,17 @@ describe Previewer do
   let(:previewer) { Previewer.new(parser, "Data") }
   let(:record) { mock(:record, field_errors: {}, errors: {}).as_null_object }
 
+  before do
+    class Europeana < HarvesterCore::Json::Base; end
+  end
+
   describe "#initialize" do
     it "updates the parser content" do
       previewer.parser.content.should eq "Data"
     end
 
     it "initializes a ParserLoader" do
-      previewer.loader.should be_a(ParserLoader)
+      previewer.loader.should be_a(HarvesterCore::Loader)
     end
   end
 
@@ -24,7 +28,6 @@ describe Previewer do
       let(:invalid_record) { mock(:record, raw_data: "</xml>") }
 
       before do
-        class Europeana < HarvesterCore::Json::Base; end
         HarvestJob.stub(:search) { [job] }
         job.stub(:invalid_records) { [1,2, invalid_record] }
         Europeana.stub(:new) { record }
@@ -116,17 +119,17 @@ describe Previewer do
     end
 
     it "returns true" do
-      loader = mock(:loader, loaded?: true, syntax_error: "Error", parser_class: Europeana)
+      loader = mock(:loader, loaded?: true, load_error: "Error", parser_class: Europeana)
       previewer.stub(:loader) { loader }
       Europeana.stub(:records) { [record] }
       previewer.record?.should be_true
     end
 
     it "sets the syntax error" do
-      loader = mock(:loader, loaded?: false, syntax_error: "Error")
+      loader = mock(:loader, loaded?: false, load_error: "Error")
       previewer.stub(:loader) { loader }
       previewer.record?.should be_false
-      previewer.syntax_error.should eq "Error"
+      previewer.load_error.should eq "Error"
     end
   end
 

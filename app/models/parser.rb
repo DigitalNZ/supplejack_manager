@@ -28,7 +28,7 @@ class Parser
   end
 
   def loader
-    @loader ||= ParserLoader.new(self)
+    @loader ||= HarvesterCore::Loader.new(self)
   end
 
   def load_file
@@ -41,6 +41,10 @@ class Parser
 
   def json?
     strategy == "json"
+  end
+
+  def oai?
+    strategy == "oai"
   end
 
   def current_version(environment)
@@ -61,6 +65,14 @@ class Parser
 
   def find_version(version_id)
     self.versions.find(version_id)
+  end
+
+  def enrichment_definitions
+    begin
+      loader.loaded? ? loader.parser_class.enrichment_definitions : {}
+    rescue StandardError => e
+      {}
+    end
   end
 
 end

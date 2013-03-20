@@ -11,7 +11,9 @@ HarvesterManager::Application.routes.draw do
   end
 
   scope ":environment", as: "environment" do
-    resources :harvest_jobs, only: [:index, :create, :update, :show]
+    resources :abstract_jobs, only: [:index], path: "jobs"
+    resources :harvest_jobs, only: [:create, :update, :show]
+    resources :enrichment_jobs, only: [:create, :update, :show]
     resources :harvest_schedules
   end
 

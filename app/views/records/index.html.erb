@@ -66,10 +66,10 @@
       <% end %>
     </div>
   </div>
-<% elsif @previewer.syntax_error %>
+<% elsif @previewer.load_error %>
 
-  <h4>Syntax error in the parser configuration</h4>
-  <%= @previewer.syntax_error %>
+  <h4>There was a error while loading the Parser.</h4>
+  <%= @previewer.load_error %>
 
 <% elsif @previewer.fetch_error %>
   

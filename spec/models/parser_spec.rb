@@ -48,7 +48,7 @@ describe Parser do
 
   describe "#loader" do
     it "should initialize a loader object" do
-      ParserLoader.should_receive(:new).with(parser)
+      HarvesterCore::Loader.should_receive(:new).with(parser)
       parser.loader
     end
   end
@@ -166,6 +166,29 @@ describe Parser do
       parser.save_with_version
       version = parser.versions.first
       parser.find_version(version.id).should eq version
+    end
+  end
+
+  describe "#enrichment_definitions" do
+    let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
+    let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class) }
+
+    before(:each) do
+      parser.stub(:loader) { loader }
+    end
+
+    it "returns the parser enrichment definitions" do
+      parser.enrichment_definitions.should eq({ndha_rights: "Hi"})
+    end
+
+    it "rescues from a excepction" do
+      loader.stub(:parser_class).and_raise(StandardError.new("hi"))
+      parser.enrichment_definitions.should eq({})
+    end
+
+    it "returns an empty hash when the parser is unable to load" do
+      loader.stub(:loaded?) { false }
+      parser.enrichment_definitions.should eq({})
     end
   end
 end

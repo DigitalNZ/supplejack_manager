@@ -1,0 +1,75 @@
+<%= content_tag :div, id: "enrichment-job", data: { url: environment_enrichment_job_path(params[:environment], @enrichment_job, format: "js"), active: !@enrichment_job.finished? } do %>
+  
+  <h2 class="left">
+    <%= t("enrichment_jobs.progress") %>
+    <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser) %></span>
+  </h2>
+  <%= link_to t("enrichment_jobs.stop"), environment_enrichment_job_path(params[:environment], @enrichment_job, {enrichment_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-enrichment-button", class: "button new-right", style: ("display: none" if @enrichment_job.finished?) %>
+
+  <table class="twelve">
+    <tr>
+      <td><%= t("enrichment_jobs.enrichment") %></td>
+      <td>
+        <strong><%= @enrichment_job.enrichment %></strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.operator") %></td>
+      <td>
+        <% if @enrichment_job.user %>
+          <strong><%= @enrichment_job.user.try(:name) %></strong>
+        <% else %>
+          <strong><%= t("harvest_jobs.scheduled") %></strong>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.environment") %></td>
+      <td>
+        <strong><%= @enrichment_job.environment %></strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.start_time") %></td>
+      <td>
+        <% if @enrichment_job.start_time %>
+          <strong><%= l @enrichment_job.start_time, format: :long %></strong>
+        <% end %>
+      </td>
+    </tr>
+
+    <% if @enrichment_job.finished? %>
+    <tr id="enrichment-end-time">
+      <td><%= t("harvest_jobs.end_time") %></td>
+      <td>
+        <strong><%= l @enrichment_job.end_time, format: :long %></strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.duration") %></td>
+      <td>
+        <strong><%= ChronicDuration.output(@enrichment_job.duration) %></strong>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.records_per_second") %></td>
+      <td>
+        <strong><%= number_with_precision @enrichment_job.throughput, precision: 2, delimiter: "," %></strong>
+      </td>
+    </tr>
+    <% end %>
+
+    <tr>
+      <td><%= t("enrichment_jobs.records_enriched") %></td>
+      <td>
+        <strong><%= number_with_delimiter @enrichment_job.records_count %></strong>
+      </td>
+    </tr>
+  </table>
+
+<% end %>

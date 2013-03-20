@@ -15,7 +15,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def new
-    @harvest_schedule = HarvestSchedule.new
+    @harvest_schedule = HarvestSchedule.new(params[:harvest_schedule] || {})
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
   end

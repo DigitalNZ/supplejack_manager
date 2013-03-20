@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="seven columns">
+  <div class="six columns">
     <h1 class="left"><%= link_to @parser.name, edit_parser_path(@parser) %></h1>
   </div>
   
-  <div class="five columns last">
+  <div class="six columns last">
     <div href="#" class="button split new-right preview dropdown">
       <%= link_to "Preview", preview_path(@parser.id), class: "records-preview-button" %>
       <span></span>
@@ -26,6 +26,19 @@
         <% end %>
 
         <li><%= link_to "Test Harvest", "", class: "records-harvest-modal-button", data: {environment: "test"} %></li>
+      </ul>
+    </div>
+
+    <div href="#" class="button new-right run-enrichment dropdown">
+      Run Enrichment
+      <ul>
+        <% if @version.try(:staging?) %>
+          <li><%= link_to "Staging Enrichment", "", class: "records-enrichment-modal-button", data: {environment: "staging"} %></li>
+        <% end %>
+
+        <% if @version.try(:production?) %>
+          <li><%= link_to "Production Enrichment", "", class: "records-enrichment-modal-button", data: {environment: "production"} %></li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -90,6 +103,16 @@
   </div>
 
   <div id="harvest-result"></div>
+  
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="enrichment-modal" class="reveal-modal large">
+  <div id="enrichment-form">
+    <%= render "enrichment_jobs/form" %>
+  </div>
+
+  <div id="enrichment-result"></div>
   
   <a class="close-reveal-modal">&#215;</a>
 </div>

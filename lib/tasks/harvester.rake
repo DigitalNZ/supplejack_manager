@@ -8,7 +8,7 @@ namespace :harvester do
 
     start_time = Time.now
     puts "[#{start_time}] Starting #{args[:file_name]} harvester."
-    records_harvested = 0
+    records_count = 0
 
     limit = args[:limit].to_i
 
@@ -22,7 +22,7 @@ namespace :harvester do
           RestClient.post "#{ENV["API_HOST"]}/harvester/records.json", {record: attributes}.to_json, :content_type => :json, :accept => :json
         end
 
-        records_harvested += 1
+        records_count += 1
         puts "Posted (#{measure.real.round(4)}): #{attributes[:identifier].first}"
       rescue StandardError => e
         puts "Failed: #{e.message}"
@@ -30,6 +30,6 @@ namespace :harvester do
     end
 
     elapsed_time = Time.now-start_time
-    puts "[#{Time.now}] #{records_harvested} records harvested. Records/sec: #{(records_harvested.to_f/elapsed_time.to_f).round(2)}. (Elapsed: #{elapsed_time.round(2)} sec.)"
+    puts "[#{Time.now}] #{records_count} records harvested. Records/sec: #{(records_count.to_f/elapsed_time.to_f).round(2)}. (Elapsed: #{elapsed_time.round(2)} sec.)"
   end
 end

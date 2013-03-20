@@ -2,15 +2,15 @@ require "snippet"
 
 class Previewer
 
-  attr_reader :parser, :loader, :syntax_error, :index, :fetch_error, :fetch_error_backtrace, :document_error, :document_backtrace, :review, :harvest_job
+  attr_reader :parser, :loader, :load_error, :index, :fetch_error, :fetch_error_backtrace, :document_error, :document_backtrace, :review, :harvest_job
   attr_accessor :environment
 
   def initialize(parser, content, index=0, environment="staging", review=false)
     @parser = parser
     @parser.content = content if content.present?
-    @loader = ParserLoader.new(parser)
+    @loader = HarvesterCore::Loader.new(parser)
     @index = index.to_i
-    @syntax_error = nil
+    @load_error = nil
     @fetch_error = nil
     @fetch_error_backtrace = nil
     @environment = environment || "staging"
@@ -65,7 +65,7 @@ class Previewer
         end
         record
       else
-        @syntax_error = loader.syntax_error
+        @load_error = loader.load_error
         @record_not_found = true
       end
     end

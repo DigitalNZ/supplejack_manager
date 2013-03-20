@@ -15,8 +15,8 @@
               <%= link_to t('harvest_jobs.label'), "#" %>
 
               <ul class="dropdown">
-                <%= link_to_tab t('environments.staging'), environment_harvest_jobs_path("staging") %>
-                <%= link_to_tab t('environments.production'), environment_harvest_jobs_path("production") %>
+                <%= link_to_tab t('environments.staging'), environment_abstract_jobs_path("staging") %>
+                <%= link_to_tab t('environments.production'), environment_abstract_jobs_path("production") %>
               </ul>
             </li>
 

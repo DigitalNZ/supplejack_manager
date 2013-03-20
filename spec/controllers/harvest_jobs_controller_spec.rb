@@ -8,13 +8,6 @@ describe HarvestJobsController do
     controller.stub(:authenticate_user!) { true }
   end
 
-  describe "GET index" do
-    it "returns active harvest jobs" do
-      HarvestJob.should_receive(:search).with(hash_including("status" => "active"))
-      get :index, status: "active", environment: "staging"
-    end
-  end
-
   describe "#GET show" do
     
     it "finds the harvest job" do

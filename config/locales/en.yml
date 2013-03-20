@@ -12,10 +12,12 @@ en:
   environments:
     production: "Production"
     staging: "Staging"
+    test: "Test"
 
   parsers:
     label: "Parsers"
     records_to_harvest: "How many records do you wish to harvest?"
+    enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
     name: "Name"
     history: "History"
@@ -23,6 +25,11 @@ en:
       production: "Production"
       staging: "Staging"
     edit_current: "(Edit current version)"
+
+  abstract_jobs:
+    type: "Job Type"
+    harvestjob: "Harvest"
+    enrichmentjob: "Enrichment"
 
   harvest_jobs:
     label: "Jobs"
@@ -49,6 +56,11 @@ en:
     scheduled: "Scheduled"
     already_active_html: "There is already an active Job running for the <strong>%{parser}</strong> in the <strong>%{environment}</strong> environment"
     incremental: "Incremental Harvest?"
+
+  enrichment_jobs:
+    records_harvested: "Records enriched"
+    stop: "Stop Enrichment"
+    progress: "Enrichment progress"
 
   harvest_schedules:
     label: Schedules

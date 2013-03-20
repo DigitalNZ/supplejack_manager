@@ -30,4 +30,5 @@
 //= require harvester
 //= require parsers
 //= require harvest_jobs
+//= require enrichment_jobs
 //= require harvest_schedules

@@ -1,11 +1,7 @@
 class HarvestJobsController < ApplicationController
 
   before_filter :set_worker_environment
-
-  def index
-    @harvest_jobs = HarvestJob.search(params)
-  end
-
+  
   def show
     @harvest_job = HarvestJob.find(params[:id])
   end
