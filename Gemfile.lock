@@ -1,6 +1,6 @@
 GIT
   remote: git@scm.digitalnz.org:harvester/core
-  revision: 63c77f90fc1b0d11271a787f5c6ddeee623e93b7
+  revision: 912bb7ee29d62ea2235f61ec61a90d7dcacc50a7
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)
@@ -151,7 +151,7 @@ GEM
     guard-rspec (2.4.0)
       guard (>= 1.1)
       rspec (~> 2.11)
-    hike (1.2.1)
+    hike (1.2.2)
     honeybadger (1.5.0)
       activesupport
       json
