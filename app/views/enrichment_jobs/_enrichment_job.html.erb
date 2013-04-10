@@ -70,6 +70,13 @@
         <strong><%= number_with_delimiter @enrichment_job.records_count %></strong>
       </td>
     </tr>
+
+    <tr>
+      <td><%= t("enrichment_jobs.records_posted") %></td>
+      <td>
+        <strong><%= number_with_delimiter @enrichment_job.posted_records_count %></strong>
+      </td>
+    </tr>
   </table>
 
 <% end %>
