@@ -9,7 +9,7 @@ gem 'rails',        '3.2.12'
 # gem "rails", path: "/Users/fede/code/gems/rails"
 
 gem "harvester_core", git: "git@scm.digitalnz.org:harvester/core"
-#gem "harvester_core", path: "~/dev/harvester-core"
+#gem "harvester_core", path: "~/Projects/dnz/squirrel/core"
 
 gem "oai", git: "https://github.com/code4lib/ruby-oai.git"
 
