@@ -71,6 +71,7 @@ class Parser
     begin
       loader.loaded? ? loader.parser_class.enrichment_definitions : {}
     rescue StandardError => e
+      Rails.logger.error "Could not load parser: #{e.message}"
       {}
     end
   end
