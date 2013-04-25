@@ -69,8 +69,12 @@ class Parser
 
   def enrichment_definitions
     begin
-      Rails.logger.debug "loading parser - loader.loaded?: #{loader.loaded?.inspect}"
-      loader.loaded? ? loader.parser_class.enrichment_definitions : {}
+      if loader.loaded?
+        loader.parser_class.enrichment_definitions
+      else
+        Rails.logger.error "parser not loaded: #{loader.load_error}"
+        {}
+      end
     rescue StandardError => e
       Rails.logger.error "Could not load parser: #{e.message}"
       {}
