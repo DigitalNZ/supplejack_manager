@@ -15,6 +15,13 @@
     </tr>
 
     <tr>
+      <td><%= t("enrichment_jobs.record_id") %></td>
+      <td>
+        <strong><%= @enrichment_job.record_id %></strong>
+      </td>
+    </tr>
+
+    <tr>
       <td><%= t("harvest_jobs.operator") %></td>
       <td>
         <% if @enrichment_job.user %>

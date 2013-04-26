@@ -17,6 +17,7 @@ class EnrichmentJob < AbstractJob
     attribute :posted_records_count,  :integer
     attribute :created_at,            :datetime
     attribute :enrichment,            :string
+    attribute :record_id,             :integer
   end
 
   include ActiveResource::SchemaTypes

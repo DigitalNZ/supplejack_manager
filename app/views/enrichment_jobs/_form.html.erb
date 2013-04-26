@@ -6,6 +6,9 @@
   <%= f.input :user_id, as: :hidden %>
   <%= f.input :environment, as: :hidden %>
 
+
+  <%= f.input :record_id, placeholder: "Enter a record_id, or leave blank to run full enrichment" %>
+
   <% if @parser.enrichment_definitions.any? %>
     <%= f.input :enrichment, collection: @parser.enrichment_definitions.keys.map {|k| [k.to_s.titleize, k]}, as: :radio_buttons, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
   <% end %>
