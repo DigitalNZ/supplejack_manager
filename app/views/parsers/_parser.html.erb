@@ -56,20 +56,8 @@
   <div class="three columns">
     <h3 class="no-margin-top left"><%= t("parsers.history") %></h3>
     <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "edit-parser" %>
-
-    <div id="parser-versions">
-      <% @parser.versions.desc(:created_at).each do |version| %>
-        <div class="version <%= 'active' if @version.try(:id) == version.id %>">
-          <%= link_to version.message || "No message", parser_parser_version_path(@parser, version) %>
-          <p><%= l(version.created_at, format: :short) %> by <%= version.user.try(:first_name) %></p>
-
-          <%= environment_tags(version, @parser) %>
-        </div>
-      <% end %>
-    </div>
-
+    <div class="tagging">
     <% if @version %>
-      <br/>
       <% if @version.production? %>
         <%= link_to "Untag as Production", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) - ["production"]).uniq}), method: :put, class: "button small production" %>
       <% else %>
@@ -81,8 +69,18 @@
       <% else %>
         <%= link_to "Tag as Staging", parser_parser_version_path(@parser, @version, version: {tags: (Array(@version.tags) + ["staging"]).uniq}), method: :put, class: "button small" %>
       <% end %>
-      
     <% end %>
+  </div>
+    <div id="parser-versions">
+      <% @parser.versions.desc(:created_at).each do |version| %>
+        <div class="version <%= 'active' if @version.try(:id) == version.id %>">
+          <%= link_to version.message || "No message", parser_parser_version_path(@parser, version) %>
+          <p><%= l(version.created_at, format: :short) %> by <%= version.user.try(:first_name) %></p>
+
+          <%= environment_tags(version, @parser) %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
