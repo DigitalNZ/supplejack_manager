@@ -171,7 +171,7 @@ describe Parser do
 
   describe "#enrichment_definitions" do
     let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
-    let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class) }
+    let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
     before(:each) do
       parser.stub(:loader) { loader }
