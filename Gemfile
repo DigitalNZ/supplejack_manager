@@ -19,7 +19,7 @@ gem "active_model_serializers", git: "https://github.com/rails-api/active_model_
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem "thin",         ">= 1.5.0"
-gem "mongoid",      "~> 3.0.19"
+gem "mongoid",      "~> 3.1.3"
 
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
