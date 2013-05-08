@@ -72,6 +72,13 @@
     <% end %>
 
     <tr>
+      <td><%= t("enrichment_jobs.records_processed") %></td>
+      <td>
+        <strong><%= number_with_delimiter @enrichment_job.processed_count %></strong>
+      </td>
+    </tr>
+
+    <tr>
       <td><%= t("enrichment_jobs.records_enriched") %></td>
       <td>
         <strong><%= number_with_delimiter @enrichment_job.records_count %></strong>

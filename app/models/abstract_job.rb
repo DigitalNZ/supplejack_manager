@@ -8,6 +8,7 @@ class AbstractJob < ActiveResource::Base
     attribute :start_time,            :datetime
     attribute :end_time,              :datetime
     attribute :records_count,         :integer
+    attribute :processed_count,       :integer
     attribute :throughput,            :float
     attribute :duration,              :float
     attribute :status,                :string

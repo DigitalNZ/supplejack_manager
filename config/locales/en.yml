@@ -62,6 +62,7 @@ en:
     stop: "Stop Enrichment"
     progress: "Enrichment progress"
     records_posted: "Records posted to API"
+    records_processed: "Records processed"
 
   harvest_schedules:
     label: Schedules
