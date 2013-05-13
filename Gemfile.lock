@@ -1,6 +1,6 @@
 GIT
   remote: git@scm.digitalnz.org:harvester/core
-  revision: 06e883597071a6dbbe8d7fbbe0d4e060e44f2322
+  revision: 38eb6aeff82752ee4cad02316131f2617ae643d3
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)
@@ -277,7 +277,7 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.17.0)
-    tilt (1.4.0)
+    tilt (1.4.1)
     timecop (0.5.2)
     treetop (1.4.12)
       polyglot
