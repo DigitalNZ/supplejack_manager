@@ -4,15 +4,7 @@
   </div>
   
   <div class="six columns last">
-    <div href="#" class="button split new-right preview dropdown">
-      <%= link_to "Preview", preview_path(@parser.id), class: "records-preview-button" %>
-      <span></span>
-      <ul>
-        <li><%= link_to "Review Staging", preview_path(@parser.id, environment: "staging", review: true), class: "records-preview-button" %></li>
-        <li><%= link_to "Review Production", preview_path(@parser.id, environment: "production", review: true), class: "records-preview-button" %></li>
-        <li><%= link_to "Review Test", preview_path(@parser.id, environment: "test", review: true), class: "records-preview-button" %></li>
-      </ul>
-    </div>
+    <%= link_to "Preview", preview_path(@parser.id), class: "button new-right records-preview-button" %>
 
     <div href="#" class="button new-right run-harvest dropdown">
       Run Harvest

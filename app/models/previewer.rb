@@ -2,122 +2,71 @@ require "snippet"
 
 class Previewer
 
-  attr_reader :parser, :loader, :load_error, :index, :fetch_error, :fetch_error_backtrace, :document_error, :document_backtrace, :review, :harvest_job
+  attr_reader :parser, :index, :review, :user_id
   attr_accessor :environment
 
-  def initialize(parser, content, index=0, environment="staging", review=false)
+  def initialize(parser, code, user_id, index=0, environment="staging", review=false)
     @parser = parser
-    @parser.content = content if content.present?
-    @loader = HarvesterCore::Loader.new(parser)
+    @code = code if code.present?
     @index = index.to_i
-    @load_error = nil
-    @fetch_error = nil
     @fetch_error_backtrace = nil
     @environment = environment || "staging"
     @review = review || false
-    @harvest_job = nil
+    @user_id = user_id
   end
 
-  def fetch_record(klass)
-    if self.review
-      @harvest_job = HarvestJob.search(parser_id: @parser.id, environment: @environment, status: "finished", limit: 1).try(:first)
-      return nil unless @harvest_job
-      invalid_record = @harvest_job.invalid_records[index]
-
-      if invalid_record
-        record = klass.new(invalid_record.raw_data, true)
-        record.set_attribute_values
-        record
-      else
-        nil
-      end
-    else
-      klass.records(limit: index+1).each_with_index do |record, i|
-        return record if index == i
-      end
-      nil
-    end
+  def preview
+    @preview ||= JSON.parse(RestClient.post("#{ENV["WORKER_HOST"]}/previews", {
+      preview: {
+        parser_code: @code, 
+        parser_id: @parser.id,
+        index: @index,
+        user_id: user_id
+        }}))
   end
 
-  def load_record
-    begin
-      klass = loader.parser_class
-      klass.environment = @environment
-      fetch_record(klass)
-    rescue StandardError => e
-      @fetch_error = e.message
-      @fetch_error_backtrace = e.backtrace
-      return nil
-    end
+  def harvest_job
+    @harvest_job ||= HarvestJob.find preview['harvest_job_id']
   end
 
-  def record
-    return nil if @record_not_found == true
+  def harvest_failure
+    preview['errors']['harvest_failure']
+  end
 
-    @record ||= begin
-      if loader.loaded?
-        record = load_record
-        if record
-          record.attributes
-          record.valid?
-        else
-          @record_not_found = true
-        end
-        record
-      else
-        @load_error = loader.load_error
-        @record_not_found = true
-      end
-    end
+  def harvest_failure?
+    !!harvest_failure
   end
 
   def record?
-    record
-    !@record_not_found
+    harvest_job.records_count > 0
   end
 
-  def test?
-    environment == "test"
+  def raw_data?
+    !!preview['raw_data']
   end
 
-  def document?
-    begin
-      !!record.document
-    rescue StandardError => e
-      @document_error = e.message
-      @document_backtrace = e.backtrace
-      false
-    end
+  def harvested_attributes?
+    !!preview['harvested_attributes']
   end
 
-  def attributes_json
-    JSON.pretty_generate(record.attributes)
+  def api_record_output
+    CodeRay.scan(api_record_json, :json).html(:line_numbers => :table).html_safe
   end
 
-  def attributes_output
-    CodeRay.scan(attributes_json, :json).html(:line_numbers => :table).html_safe
+  def api_record_json
+    JSON.pretty_generate(preview['record'])
   end
 
-  def pretty_xml_output
-    record.raw_data
+  def harvested_attributes_output
+    CodeRay.scan(harvested_attributes_json, :json).html(:line_numbers => :table).html_safe
   end
 
-  def pretty_json_output
-    JSON.pretty_generate(record.raw_data)
-  end
-
-  def raw_output
-    format = parser.xml? ? :xml : :json
-    CodeRay.scan(self.send("pretty_#{format}_output"), format).html(line_numbers: :table).html_safe
+  def harvested_attributes_json
+    JSON.pretty_generate(preview['harvested_attributes'])
   end
 
   def field_errors?
-    record.field_errors.any?
-  end
-
-  def field_errors_json
-    return nil unless field_errors?
-    JSON.pretty_generate(record.field_errors)
+    preview['errors']['field_errors'].any?
   end
 
   def field_errors_output
@@ -125,7 +74,28 @@ class Previewer
   end
 
   def validation_errors?
-    !record.errors.empty?
+    preview['errors']['validation_errors'].any?
   end
 
+  def validation_errors
+    preview['errors']['validation_errors']
+  end
+
+  def raw_output
+    format = parser.xml? ? :xml : :json
+    CodeRay.scan(self.send("pretty_#{format}_output"), format).html(line_numbers: :table).html_safe
+  end
+
+  def pretty_xml_output
+    preview['raw_data']
+  end
+
+  def pretty_json_output
+    JSON.pretty_generate(preview['raw_data'])
+  end
+
+  def field_errors_json
+    return nil unless field_errors?
+    JSON.pretty_generate(preview['errors']['field_errors'])
+  end
 end

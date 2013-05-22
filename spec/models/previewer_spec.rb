@@ -3,204 +3,126 @@ require "spec_helper"
 describe Previewer do
 
   let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < HarvesterCore::Json::Base; end") }
-  let(:previewer) { Previewer.new(parser, "Data") }
-  let(:record) { mock(:record, field_errors: {}, errors: {}).as_null_object }
+  let(:previewer) { Previewer.new(parser, "Data", "user123") }
 
-  before do
-    class Europeana < HarvesterCore::Json::Base; end
-  end
+  describe "#preview" do
+    
+    let(:preview) { mock(:preview) }
 
-  describe "#initialize" do
-    it "updates the parser content" do
-      previewer.parser.content.should eq "Data"
+    before { JSON.stub(:parse) {{}} }
+
+    it "requests a preview object from the worker" do
+      RestClient.should_receive(:post).with("#{ENV["WORKER_HOST"]}/previews", {preview: 
+        { parser_code: "Data", 
+          parser_id: parser.id, 
+          index: 0, 
+          user_id: "user123"}})
+      previewer.send(:preview)    
     end
 
-    it "initializes a ParserLoader" do
-      previewer.loader.should be_a(HarvesterCore::Loader)
-    end
-  end
-
-  describe "#fetch_record" do
-    let(:job) { mock(:harvest_job).as_null_object }
-
-    context "fetch record from a existing harvest" do
-      let(:previewer) { Previewer.new(parser, "Data", 2, "staging", true) }
-      let(:invalid_record) { mock(:record, raw_data: "</xml>") }
-
-      before do
-        HarvestJob.stub(:search) { [job] }
-        job.stub(:invalid_records) { [1,2, invalid_record] }
-        Europeana.stub(:new) { record }
-      end
-
-      it "should search for the latest Job" do
-        HarvestJob.should_receive(:search).with(parser_id: parser.id, environment: "staging", status: "finished", limit: 1) { [job] }
-        previewer.fetch_record(Europeana)
-      end
-
-      it "should initialize a new record with the raw_data from the database" do
-        Europeana.should_receive(:new).with("</xml>", true) { record }
-        previewer.fetch_record(Europeana)
-      end
-
-      it "should set the attribute values and return the record" do
-        record.should_receive(:set_attribute_values)
-        previewer.fetch_record(Europeana).should eq record
-      end
-
-      it "returns nil when a HarvestJob is not found" do
-        HarvestJob.stub(:search) { [] }
-        previewer.fetch_record(Europeana).should be_nil
-      end
+    it "store the response as json in @preview" do
+      RestClient.stub(:post) { preview }
+      JSON.should_receive(:parse).with(preview) { {json: "JSON!"} }
+      previewer.send(:preview)
+      previewer.instance_variable_get(:@preview).should eq({json: "JSON!"})
     end
 
-    context "fetch live record" do
-      let(:previewer) { Previewer.new(parser, "Data", 2, "staging", nil) }
-
-      it "should fetch the live record" do
-        Europeana.should_receive(:records).with(limit: 3) { [1, 2, record] }
-        previewer.fetch_record(Europeana).should eq record
-      end
+    it "should memoize the response" do
+      RestClient.should_receive(:post).once { preview }
+      previewer.send(:preview)
+      previewer.send(:preview)
     end
   end
 
-  describe "load_record" do
+
+  describe "#harvest_job" do
+    let(:harvest_job) { mock(:harvest_job) }
+
     before(:each) do
-      parser.load_file
-      Europeana.stub(:records) { [record] }
+      previewer.stub(:preview) { {'harvest_job_id' => '123'} }  
     end
 
-    it "loads one record" do
-      Europeana.should_receive(:records).with({limit: 1}) { [record] }
-      previewer.load_record.should eq record
+    it "finds the harvest job from the preview" do
+      HarvestJob.should_receive(:find).with('123') { harvest_job }
+      previewer.harvest_job.should eq harvest_job
     end
 
-    it "rescues from any error" do
-      Europeana.stub(:records).and_raise(StandardError.new("Hi"))
-      previewer.load_record.should be_nil
-      previewer.fetch_error.should eq "Hi"
-    end
-
-    it "returns the third record" do
-      previewer = Previewer.new(parser, "Data", 2)
-      record3 = mock(:record, id: 3)
-      Europeana.stub(:records) { [record, record, record3] }
-      previewer.load_record.should eq record3
+    it "only finds harvest job once" do
+      HarvestJob.should_receive(:find).once { harvest_job }
+      previewer.harvest_job
+      previewer.harvest_job
     end
   end
 
-  describe "#record" do
-    let(:loader) { previewer.loader }
+  describe "#harvest_failure" do
+    let(:harvest_job) { mock(:harvest_job, harvest_failure: mock(:harvest_failure)) }
 
-    before do
-      parser.load_file
-      Europeana.stub(:records) { [record] }
-    end
+    before { previewer.stub(:preview) { { errors: {harvest_failure: {exception_class: "Exception"}}} } }
 
-    it "loads the parser file" do
-      loader.should_receive(:loaded?)
-      previewer.record
-    end
-
-    it "returns the first record" do
-      previewer.stub(:load_record) { record }
-      previewer.record.should eq record
+    it "returns the harvest_failure of the preview object" do
+      previewer.harvest_failure.should eq({exception_class: "Exception"}) 
     end
   end
 
   describe "#record?" do
-    before do
-      parser.load_file
-      Europeana.stub(:records) { [] }
-    end
-
-    it "returns false" do
+    it "returns false if there were no records processed" do
+      previewer.stub(:harvest_job) {mock(:harvest_job, records_count: 0)}
       previewer.record?.should be_false
     end
 
-    it "returns true" do
-      loader = mock(:loader, loaded?: true, load_error: "Error", parser_class: Europeana)
-      previewer.stub(:loader) { loader }
-      Europeana.stub(:records) { [record] }
+    it "returns true if there was records precessed" do
+      previewer.stub(:harvest_job) {mock(:harvest_job, records_count: 1)}
       previewer.record?.should be_true
     end
-
-    it "sets the syntax error" do
-      loader = mock(:loader, loaded?: false, load_error: "Error")
-      previewer.stub(:loader) { loader }
-      previewer.record?.should be_false
-      previewer.load_error.should eq "Error"
-    end
   end
 
-  describe "#test?" do
-    it "should return true" do
-      previewer.environment = "test"
-      previewer.test?.should be_true
-    end
-
-    it "should return false" do
-      previewer.environment = "staging"
-      previewer.test?.should be_false
-    end
-  end
-
-  describe "document?" do
+  describe "raw_data?" do
     let(:document) { mock(:document).as_null_object }
     let(:record) { mock(:record, document: document) }
 
-    before(:each) do
-      previewer.stub(:record) { record }
+    it "returns true when the raw_data is available" do
+      previewer.stub(:preview) { {raw_data: "Raw data!"} }
+      previewer.raw_data?.should be_true
     end
 
-    it "returns true when document is retrieved correctly" do
-      record.stub(:document) { document }
-      previewer.document?.should be_true
-    end
-
-    it "returns false when document raises an error" do
-      record.stub(:document).and_raise(StandardError.new("Error!"))
-      previewer.document?.should be_false
-      previewer.document_error.should eq "Error!"
+    it "returns false when the raw_data is nil" do
+      previewer.stub(:preview) { {raw_data: nil} }
+      previewer.raw_data?.should be_false 
     end
   end
 
-  describe "#attributes_json" do
-    let(:record) { mock(:record, attributes: {title: "Json!"}).as_null_object }
-
-    it "returns the json in a pretty format" do
-      previewer.stub(:record) { record }
-      previewer.attributes_json.should eq JSON.pretty_generate({title: "Json!"})
-    end
-  end
-
-  describe "#attributes_output" do
+  describe "#api_record_output" do
     let(:attributes_json) { JSON.pretty_generate({title: "Json!"}) }
 
     before do
-      previewer.stub(:attributes_json) { attributes_json }
+      previewer.stub(:api_record_json) { attributes_json }
     end
 
     it "returns highlighted json" do
       output = %q{{\n  <span class=\"key\"><span class=\"delimiter\">&quot;</span><span class=\"content\">title</span><span class=\"delimiter\">&quot;</span></span>: <span class=\"string\"><span class=\"delimiter\">&quot;</span><span class=\"content\">Json!</span><span class=\"delimiter\">&quot;</span></span>\n}}
-      previewer.attributes_output.should match(output)
+      previewer.api_record_output.should match(output)
     end
   end
 
-  describe "#field_errors_json" do
-    let(:record) { mock(:record, field_errors: {title: "Invalid!"}) }
-
-    before do
-      previewer.stub(:record) { record }
-    end
+  describe "#api_record_json" do
+    let(:preview) { {"record" => { title: "Json!" } } }
 
     it "returns the json in a pretty format" do
-      previewer.field_errors_json.should eq JSON.pretty_generate({title: "Invalid!"})
+      previewer.stub(:preview) { preview }
+      previewer.send(:api_record_json).should eq JSON.pretty_generate({title: "Json!"})
+    end
+  end
+
+  describe "#field_errors?" do
+    before { previewer.stub(:preview) { {errors: {field_errors: {} }}} }
+
+    it "returns false when there are no field_errors" do
+      previewer.field_errors?.should be_false
     end
 
-    it "returns nil when there are no field_errors" do
-      record.stub(:field_errors) { {} }
-      previewer.field_errors_json.should be_nil
+    it "returns true when there are field_errors" do
+      previewer.stub(:preview) {{errors: { field_errors: { title: "Invalid" }}} }
+      previewer.field_errors?.should be_true
     end
   end
 
@@ -223,32 +145,66 @@ describe Previewer do
     end
   end
 
-  describe "#field_errors?" do
-    before { previewer.stub(:record) { record } }
-
-    it "returns false when there are no field_errors" do
-      previewer.field_errors?.should be_false
-    end
-
-    it "returns true when there are field_errors" do
-      record.stub(:field_errors) { {title: "Invalid"} }
-      previewer.field_errors?.should be_true
-    end
-  end
-
   describe "#validation_errors?" do
-
-    before { previewer.stub(:record) { record } }
-
     it "returns false when there are no validation_errors" do
+      previewer.stub(:preview) { {errors:{validation_errors:{}}} }
       previewer.validation_errors?.should be_false
     end
 
     it "returns true when there are validation_errors" do
-      record.stub(:errors) { {title: "Invalid"} }
+      previewer.stub(:preview) { {errors:{validation_errors:{title:"Invalid"}}} }
       previewer.validation_errors?.should be_true
     end
   end
 
+  describe "#validation_errors" do
+    it "returns the validation errors" do
+      previewer.stub(:preview) { {errors:{validation_errors:{title:"Invalid"}}} }
+      previewer.validation_errors.should eq({title: "Invalid"})
+    end
+  end
 
+  describe "#raw_output" do
+
+    before { previewer.stub(:preview) { {raw_data: "" }} }
+
+    it "should call pretty_xml_output when format is xml" do
+      parser.stub(:xml?) { true }
+      previewer.should_receive(:pretty_xml_output).and_call_original
+      previewer.raw_output
+    end
+
+    it "should call pretty_json_output when format is not xml" do
+      parser.stub(:xml?) { false }
+      previewer.should_receive(:pretty_json_output) {}
+      previewer.raw_output
+    end
+  end
+
+  describe "#pretty_xml_output" do
+    it "returns the raw data" do
+      previewer.stub(:preview) { {raw_data: "I am raw!" } }
+      previewer.pretty_xml_output.should eq "I am raw!"
+    end
+  end
+
+  describe "#pretty_json_output" do
+    it "pretty generates the json output" do
+      previewer.stub(:preview) { {raw_data: "I am raw!" } }
+      JSON.should_receive(:pretty_generate).with("I am raw!") { "I am raw! JSON" }
+      previewer.pretty_json_output.should eq "I am raw! JSON"
+    end
+  end
+
+  describe "#field_errors_json" do
+    it "returns the json in a pretty format" do
+      previewer.stub(:preview) { {errors: {field_errors: {title: "WRONG!"}}} }
+      previewer.field_errors_json.should eq JSON.pretty_generate({title: "WRONG!"})
+    end
+
+    it "returns nil when there are no field_errors" do
+      previewer.stub(:preview) { {errors: {field_errors: {}}} }
+      previewer.field_errors_json.should be_nil
+    end
+  end
 end

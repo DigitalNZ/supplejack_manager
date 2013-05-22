@@ -41,13 +41,3 @@ $ ->
     $("#enrichment-form form").attr("action", "/" + environment + "/enrichment_jobs")
 
     return false;
-
-  $("#preview-area").on 'click', '#record-raw-data-button', ->
-    $("#record-raw-data").show()
-    $("#record-attributes").hide()
-    return false;
-
-  $("#preview-area").on 'click', '#record-attributes-button', ->
-    $("#record-raw-data").hide()
-    $("#record-attributes").show()
-    return false;

@@ -1,4 +1,4 @@
-if RUBY_VERSION =~ /1.9/
+  if RUBY_VERSION =~ /1.9/
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
 end
@@ -18,8 +18,7 @@ gem "active_model_serializers", git: "https://github.com/rails-api/active_model_
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "thin",         ">= 1.5.0"
-gem "mongoid",      "~> 3.1.3"
+gem "mongoid",      "~> 3.0.19"
 
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
@@ -44,7 +43,7 @@ group :assets do
   gem 'uglifier',         '>= 1.0.3'
 
   gem "compass-rails",    ">= 1.0.3"
-  gem "zurb-foundation",  ">= 3.2.3"
+  gem "zurb-foundation",  "= 3.2.3"
 end
 
 gem 'jquery-rails'
@@ -56,6 +55,8 @@ group :development do
   gem "binding_of_caller",  ">= 0.6.8"
   gem 'guard-rspec'
   gem 'rb-fsevent',         '~> 0.9.1'
+  gem 'pry-rails'
+  gem "unicorn-rails"
 end
 
 group :development, :test do

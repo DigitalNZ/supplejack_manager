@@ -1,15 +1,8 @@
-<% if @previewer.record? %>
+
+  <% if @previewer.raw_data? %>
   <div class="row">
     <div class="ten columns">
       <h2>Previewing records</h2>
-
-      <% if @previewer.harvest_job %>
-        <h4>Invalid/failed records from last <%= @previewer.harvest_job.environment %> harvest</h4>
-        <div>Started: <strong><%= l @previewer.harvest_job.start_time, format: :long %></strong></div>
-        <div>Records: <strong><%= @previewer.harvest_job.total_errors_count %></strong></div>
-        <div>Environment: <strong><%= @previewer.harvest_job.environment %></strong> </div>
-      <% end %>
-
     </div>
 
     <div class="two columns align-right">
@@ -20,7 +13,8 @@
 
   <div class="row">
     <div class="twelve columns">
-      <% if @previewer.document? %>
+      <% if @previewer.raw_data? %>
+
         <% if @previewer.field_errors? %>
           <h4>Field Errors</h4>
           <%= @previewer.field_errors_output %>
@@ -30,29 +24,46 @@
           <h4>Validation Errors</h4>
           
           <ul class="indented">
-            <% @previewer.record.errors.each do |attribute, message| %>
-              <li><strong><%= attribute %>: </strong> <%= message %></li>
+            <% @previewer.validation_errors.each do |error| %>
+              <% error.each do |attribute, message| %>
+                <li><strong><%= attribute %>: </strong> <%= message %></li>
+              <% end %>
             <% end %>
           </ul>
         <% end %>
 
-        <div id="record-attributes">
-          <div class="row">
-            <div class="nine columns"><h4>Record attributes</h4></div>
-            <div class="three columns align-right"><%= link_to "Raw data", "#", id: "record-raw-data-button", class: "button" %></div>
-          </div>
-          
-          <%= @previewer.attributes_output %>
-        </div>
+        <dl class="tabs">
+          <% if @previewer.raw_data? %><dd><a href="#sourceData" >Source Data</a></dd><% end %>
+          <% if @previewer.harvested_attributes? %><dd class="active"><a href="#harvestedAttributes">Harvested Attributes</a></dd><% end %>
+          <% if @previewer.record? %><dd><a href="#apiRecord">API Record</a></dd><% end %>
+        </dl>
+        <ul class="tabs-content">
 
-        <div id="record-raw-data">
-          <div class="row">
-            <div class="nine columns"><h4>Raw Data</h4></div>
-            <div class="three columns align-right"><%= link_to "Record attributes", "#", id: "record-attributes-button", class: "button" %></div>
-          </div>
+          <% if @previewer.raw_data? %>
+          <li id="sourceDataTab">
+            <div id="record-raw-data" >
+              <%= @previewer.raw_output %>
+            </div>
+          </li>
+          <% end %>
 
-          <%= @previewer.raw_output %>
-        </div>
+          <% if @previewer.harvested_attributes? %>
+          <li class="active" id="harvestedAttributesTab"> 
+            <div id="harvest-attributes" >
+              <%= @previewer.harvested_attributes_output %>
+            </div>
+          </li>
+          <% end %>
+
+          <% if @previewer.record? %>
+          <li id="apiRecordTab"> 
+            <div id="record-attributes" >
+              <%= @previewer.api_record_output %>
+            </div>
+          </li>
+          <% end %>
+
+        </ul>
       <% else %>
         <h4>Error while building the record</h4>
 
@@ -66,18 +77,16 @@
       <% end %>
     </div>
   </div>
-<% elsif @previewer.load_error %>
 
-  <h4>There was a error while loading the Parser.</h4>
-  <%= @previewer.load_error %>
+<% elsif @previewer.harvest_failure? %>
 
-<% elsif @previewer.fetch_error %>
+  <h4>There was an error with the harvest.</h4>
   
-  <h4>Error while fetching the records</h4>
-  <h6><%= @previewer.fetch_error %></h6>
+  <h6><%= @previewer.harvest_failure['exception_class'] %></h6>
+  <p><%= @previewer.harvest_failure['message'] %></p>
 
   <ul class="indented">
-    <% @previewer.fetch_error_backtrace.each do |backtrace| %>
+    <% @previewer.harvest_failure['backtrace'].each do |backtrace| %>
       <li><%= backtrace %></li>
     <% end %>
   </ul>
