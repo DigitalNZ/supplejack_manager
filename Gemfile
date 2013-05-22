@@ -18,7 +18,7 @@ gem "active_model_serializers", git: "https://github.com/rails-api/active_model_
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "mongoid",      "~> 3.0.19"
+gem "mongoid"
 
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
