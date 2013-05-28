@@ -57,10 +57,10 @@ describe Previewer do
   describe "#harvest_failure" do
     let(:harvest_job) { mock(:harvest_job, harvest_failure: mock(:harvest_failure)) }
 
-    before { previewer.stub(:preview) { { errors: {harvest_failure: {exception_class: "Exception"}}} } }
+    before { previewer.stub(:preview) { { 'errors' => {'harvest_failure' => {'exception_class'=> "Exception"}}} } }
 
     it "returns the harvest_failure of the preview object" do
-      previewer.harvest_failure.should eq({exception_class: "Exception"}) 
+      previewer.harvest_failure.should eq({'exception_class' => "Exception"}) 
     end
   end
 
@@ -81,12 +81,12 @@ describe Previewer do
     let(:record) { mock(:record, document: document) }
 
     it "returns true when the raw_data is available" do
-      previewer.stub(:preview) { {raw_data: "Raw data!"} }
+      previewer.stub(:preview) { {'raw_data' => "Raw data!"} }
       previewer.raw_data?.should be_true
     end
 
     it "returns false when the raw_data is nil" do
-      previewer.stub(:preview) { {raw_data: nil} }
+      previewer.stub(:preview) { {'raw_data' => nil} }
       previewer.raw_data?.should be_false 
     end
   end
@@ -114,14 +114,14 @@ describe Previewer do
   end
 
   describe "#field_errors?" do
-    before { previewer.stub(:preview) { {errors: {field_errors: {} }}} }
+    before { previewer.stub(:preview) { {'errors' => {'field_errors' => {} }}} }
 
     it "returns false when there are no field_errors" do
       previewer.field_errors?.should be_false
     end
 
     it "returns true when there are field_errors" do
-      previewer.stub(:preview) {{errors: { field_errors: { title: "Invalid" }}} }
+      previewer.stub(:preview) {{'errors' => { 'field_errors' => { 'title' => "Invalid" }}} }
       previewer.field_errors?.should be_true
     end
   end
@@ -147,20 +147,20 @@ describe Previewer do
 
   describe "#validation_errors?" do
     it "returns false when there are no validation_errors" do
-      previewer.stub(:preview) { {errors:{validation_errors:{}}} }
+      previewer.stub(:preview) { {'errors' => {'validation_errors' => {}}} }
       previewer.validation_errors?.should be_false
     end
 
     it "returns true when there are validation_errors" do
-      previewer.stub(:preview) { {errors:{validation_errors:{title:"Invalid"}}} }
+      previewer.stub(:preview) { {'errors' => {'validation_errors' => {'title' => "Invalid"}}} }
       previewer.validation_errors?.should be_true
     end
   end
 
   describe "#validation_errors" do
     it "returns the validation errors" do
-      previewer.stub(:preview) { {errors:{validation_errors:{title:"Invalid"}}} }
-      previewer.validation_errors.should eq({title: "Invalid"})
+      previewer.stub(:preview) { {'errors' => {'validation_errors' => {'title' => "Invalid"}}} }
+      previewer.validation_errors.should eq({'title' => "Invalid"})
     end
   end
 
@@ -183,14 +183,14 @@ describe Previewer do
 
   describe "#pretty_xml_output" do
     it "returns the raw data" do
-      previewer.stub(:preview) { {raw_data: "I am raw!" } }
+      previewer.stub(:preview) { {'raw_data' => "I am raw!" } }
       previewer.pretty_xml_output.should eq "I am raw!"
     end
   end
 
   describe "#pretty_json_output" do
     it "pretty generates the json output" do
-      previewer.stub(:preview) { {raw_data: "I am raw!" } }
+      previewer.stub(:preview) { {'raw_data' => "I am raw!" } }
       JSON.should_receive(:pretty_generate).with("I am raw!") { "I am raw! JSON" }
       previewer.pretty_json_output.should eq "I am raw! JSON"
     end
@@ -198,12 +198,12 @@ describe Previewer do
 
   describe "#field_errors_json" do
     it "returns the json in a pretty format" do
-      previewer.stub(:preview) { {errors: {field_errors: {title: "WRONG!"}}} }
+      previewer.stub(:preview) { {'errors' => {'field_errors' => {'title' => "WRONG!"}}} }
       previewer.field_errors_json.should eq JSON.pretty_generate({title: "WRONG!"})
     end
 
     it "returns nil when there are no field_errors" do
-      previewer.stub(:preview) { {errors: {field_errors: {}}} }
+      previewer.stub(:preview) { {'errors' => {'field_errors' => {}}} }
       previewer.field_errors_json.should be_nil
     end
   end

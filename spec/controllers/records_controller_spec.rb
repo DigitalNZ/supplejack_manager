@@ -4,6 +4,7 @@ describe RecordsController do
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
+    controller.stub(:current_user) { mock(:user, id: 123) }
   end
   
   let(:parser) { mock(:parser).as_null_object }
@@ -19,18 +20,18 @@ describe RecordsController do
     end
 
     it "initializes a previewer object" do
-      Previewer.should_receive(:new).with(parser, "Data", "10", nil, nil) { previewer }
+      Previewer.should_receive(:new).with(parser, "Data", 123, "10", nil, nil) { previewer }
       post :index, parser_id: "1234", parser: {content: "Data"}, index: 10
       assigns(:previewer).should eq previewer
     end
 
     it "initializes a new previewer in test mode" do
-      Previewer.should_receive(:new).with(parser, "Data", "10", "test", nil) { previewer }
+      Previewer.should_receive(:new).with(parser, "Data", 123, "10", "test", nil) { previewer }
       post :index, parser_id: "1234", parser: {content: "Data"}, index: 10, environment: "test"
     end
 
     it "should preview the records from a existing harvest" do
-      Previewer.should_receive(:new).with(parser, "Data", "10", "test", true) { previewer }
+      Previewer.should_receive(:new).with(parser, "Data", 123, "10", "test", true) { previewer }
       post :index, parser_id: "1234", parser: {content: "Data"}, index: 10, environment: "test", review: true
     end
   end
