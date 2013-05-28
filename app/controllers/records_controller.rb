@@ -1,7 +1,6 @@
 class RecordsController < ApplicationController
   
   before_filter :find_parser
-  before_filter :set_worker_environment
 
   def index
     params[:environment] ||= 'staging'
