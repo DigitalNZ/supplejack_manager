@@ -1,6 +1,6 @@
 GIT
   remote: git@scm.digitalnz.org:harvester/core
-  revision: 38eb6aeff82752ee4cad02316131f2617ae643d3
+  revision: d3a1643ed1cdacc0ae74b47f2f3f474727bce5cc
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)
@@ -193,7 +193,7 @@ GEM
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
     moped (1.5.0)
-    multi_json (1.7.3)
+    multi_json (1.7.5)
     multipart-post (1.1.5)
     nokogiri (1.5.9)
     numerizer (0.1.1)
