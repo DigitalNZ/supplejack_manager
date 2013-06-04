@@ -5,6 +5,21 @@
   }
 }
 
+#accordion {
+  h3.error {
+    margin: 0;
+  }
+  span.ui-accordion-header-icon {
+    float: right; 
+  }
+  table.CodeRay {
+    margin: 0;
+  }
+  span.right {
+    float: right;
+  }
+}
+
 .parser-title { display: none;}
 
 .harvest-job-full {

@@ -65,14 +65,26 @@
       </td>
     </tr>
   </table>
+  
+   <% if @harvest_job.harvest_failure.present? %>
+    <h5><%= t('harvest_jobs.harvest_failure')%> </h5>
+    <span><%= @harvest_job.harvest_failure.message %></span>
+  <% end %>
 
   <h5><%= t("harvest_jobs.invalid_records") %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
 
   <% if @harvest_job.invalid_records.any? %>
   <div id="harvest-job-invalid-errors">
-    <% @harvest_job.invalid_records.each do |record| %>
-      <div class="error"><%= record.error_messages.join(", ") %></div>
-    <% end %>
+    <div id="accordion">
+      <% @harvest_job.invalid_records.each do |record| %>
+        <h3 class="error">
+          <span><%= record.error_messages.join(", ") %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
+        </h3>
+        <div>
+          <%= pretty_format(@harvest_job.parser_id, record.raw_data) %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <% else %>
   <p><%= t("harvest_jobs.no_validation_errors") %></p>
@@ -82,9 +94,16 @@
 
   <% if @harvest_job.failed_records.any? %>
   <div id="harvest-job-failed-errors">
-    <% @harvest_job.failed_records.each do |record| %>
-      <div class="error"><%= record.exception_class %>: <%= record.message %></div>
-    <% end %>
+    <div id="accordion">
+      <% @harvest_job.failed_records.each do |record| %>
+        <h3 class="error">
+          <span><%= record.error_messages.join(", ") %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
+        </h3>
+        <div>
+          <%= pretty_format(@harvest_job.parser_id, record.raw_data) %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <% else %>
   <p><%= t("harvest_jobs.no_failure_errors") %></p>

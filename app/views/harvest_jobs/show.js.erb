@@ -1,4 +1,5 @@
 $("#harvest-result").html('<%= j render @harvest_job %>').show();
+$("#accordion").accordion({heightStyle: "content",collapsible: true, active: false})
 
 if ($("#harvest-end-time").length == 0) {
   HarvestJobsPoller.poll()
