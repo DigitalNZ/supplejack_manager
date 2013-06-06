@@ -4,7 +4,7 @@ describe ApplicationHelper do
 
 	describe "#pretty_format" do
 
-		let(:raw_data) { {bill: "bob"}  }
+		let(:raw_data) { {bill: "bob"}.to_json  }
 		let(:parser) { mock(:parser) }
 
 		context "parser found" do
@@ -28,7 +28,7 @@ describe ApplicationHelper do
 				end
 
 				it "should pretty generate the JSON if it is json" do
-					JSON.should_receive(:pretty_generate).with(raw_data)
+					JSON.should_receive(:pretty_generate).with({"bill"=>"bob"})
 				  helper.pretty_format("abc123", raw_data)
 				end
 			end
