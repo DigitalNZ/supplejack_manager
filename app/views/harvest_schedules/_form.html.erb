@@ -24,13 +24,13 @@
     <ul class="tabs-content contained">
 
       <%= content_tag :li, id: "simpleScheduleTab", class: @harvest_schedule.simple? ? "active" : nil do %>
-        <%= f.input :frequency, collection: ["weekly", "fortnightly", "monthly"].map{|o| [o.capitalize, o] } %>
+        <%= f.input :frequency, collection: ["daily", "weekly", "fortnightly", "monthly"].map{|o| [o.capitalize, o] } %>
 
         <div class="input string optional harvest_schedule_at_hour">
           <%= f.label :at_hour %>
           <div class="row">
-            <div class="two columns"><%= f.input_field :at_hour, collection: 0..23, include_blank: false %></div>
-            <div class="two columns"><%= f.input_field :at_minutes, collection: [0,15,30,45], include_blank: false %></div>
+            <div class="two columns"><%= f.input_field :at_hour, collection: (0..23).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
+            <div class="two columns"><%= f.input_field :at_minutes, collection: (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
             <div class="ten columns"></div>
           </div>
         </div>
@@ -63,11 +63,7 @@
     <br/>
   <% end %>
 
-  <% if @harvest_schedule.parser %>
-    <% if @harvest_schedule.parser.enrichment_definitions.any? %>
-      <%= f.input :enrichments, collection: @harvest_schedule.parser.enrichment_definitions.keys.map {|k| [k.to_s.titleize, k.to_s]}, as: :check_boxes, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
-    <% end %>
-  <% end %>
+  <%= render "enrichments", { harvest_schedule: @harvest_schedule }  %>
 
   <br/>
 

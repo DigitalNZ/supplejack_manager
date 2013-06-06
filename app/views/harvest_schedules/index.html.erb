@@ -63,7 +63,7 @@
       <td><%= l harvest_schedule.start_time, format: :long %></td>
 
       <% if harvest_schedule.frequency.present? %>
-        <td><%= harvest_schedule.frequency %> at <%= harvest_schedule.at_hour %>:<%= harvest_schedule.at_minutes %> (<%= harvest_schedule.cron %>)</td>
+        <td><%= harvest_schedule.frequency %> at <%= harvest_schedule.at_hour.to_s.rjust(2, "0") %>:<%= harvest_schedule.at_minutes.to_s.rjust(2, "0") %> (<%= harvest_schedule.cron %>)</td>
       <% else %>
         <td><%= harvest_schedule.cron %></td>
       <% end %>
