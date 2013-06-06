@@ -1,6 +1,7 @@
 class ParserVersion
   include Mongoid::Document
   include Mongoid::Timestamps::Created
+  include Mongoid::Paranoia
 
   include ActiveModel::SerializerSupport
 

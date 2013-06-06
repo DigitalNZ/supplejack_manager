@@ -91,7 +91,7 @@ class Previewer
   end
 
   def pretty_json_output
-    JSON.pretty_generate(JSON.parse(preview['raw_data']))
+    JSON.pretty_generate(JSON.parse(preview["raw_data"]))
   end
 
   def field_errors_json

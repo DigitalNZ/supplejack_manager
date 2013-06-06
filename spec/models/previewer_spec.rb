@@ -190,7 +190,8 @@ describe Previewer do
 
   describe "#pretty_json_output" do
     it "pretty generates the json output" do
-      previewer.stub(:preview) { {'raw_data' => "I am raw!" } }
+      previewer.stub(:preview) { {"raw_data" => "I am raw!"} }
+      JSON.should_receive(:parse) { "I am raw!" }
       JSON.should_receive(:pretty_generate).with("I am raw!") { "I am raw! JSON" }
       previewer.pretty_json_output.should eq "I am raw! JSON"
     end

@@ -137,14 +137,25 @@ describe ParsersController do
       parser.stub(:destroy) { true }
     end
 
-    it "finds an existing parser " do
-      Parser.should_receive(:find).with("1234") { parser }
-      delete :destroy, id: "1234"
-      assigns(:parser).should eq parser
+    context "job not running for parser" do
+
+      before { parser.stub(:running_jobs?) { false } }
+
+      it "finds an existing parser " do
+        Parser.should_receive(:find).with("1234") { parser }
+        delete :destroy, id: "1234"
+        assigns(:parser).should eq parser
+      end
+
+      it "destroys the parser config" do
+        parser.should_receive(:destroy)
+        delete :destroy, id: "1234"
+      end
     end
 
-    it "destroys the parser config" do
-      parser.should_receive(:destroy)
+    it "does not destroy if there are currently running jobs" do
+      parser.stub(:running_jobs) { true }
+      parser.should_not_receive(:destroy)
       delete :destroy, id: "1234"
     end
   end

@@ -1,6 +1,7 @@
 class Parser
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Paranoia
 
   include ActiveModel::SerializerSupport
 
@@ -20,12 +21,36 @@ class Parser
   validates_uniqueness_of :name
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
 
+  before_save :update_contents_parser_class!
+
+  before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
+
   def file_name
     @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"
   end
 
   def path
     "#{strategy}/#{file_name}"
+  end
+
+  def last_edited_by
+    self.versions.last.try(:user).try(:name)
+  end
+
+  def running_jobs?
+    if Rails.env.development?
+      !AbstractJob.search({parser_id: self.id}, 'development').empty?
+    else
+      !AbstractJob.search({parser_id: self.id}, 'staging').empty? and !AbstractJob.search({parser_id: self.id}, 'production').empty?
+    end
+  end
+
+  def scheduled?
+    if Rails.env.development?
+      !HarvestSchedule.find_from_environment({parser_id: self.id}, 'development').empty?
+    else
+      !HarvestSchedule.find_from_environment({parser_id: self.id}, 'staging').empty? and !HarvestSchedule.find_from_environment({parser_id: self.id}, 'production').empty?
+    end
   end
 
   def loader
@@ -66,6 +91,14 @@ class Parser
 
   def find_version(version_id)
     self.versions.find(version_id)
+  end
+
+  def update_contents_parser_class!
+    if self.changed.include?("name")
+      class_name = self.name.gsub(/\s/, "_").camelize
+      self.content = self.content.gsub(/^class .* </, "class #{class_name} <")
+      self.message = "Renamed parser class"
+    end
   end
 
   def enrichment_definitions

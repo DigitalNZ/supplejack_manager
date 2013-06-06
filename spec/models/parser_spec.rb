@@ -30,6 +30,13 @@ describe Parser do
     end
   end
 
+  describe "before:destroy" do
+    it "should destroy all HarvestSchedules for the given parser." do
+      HarvestSchedule.should_receive(:destroy_all_for_parser).with(parser.id)
+      parser.destroy
+    end
+  end
+
   context "file paths" do
     let(:parser) { FactoryGirl.build(:parser, name: "Europeana", strategy: "json") }
 
@@ -48,6 +55,18 @@ describe Parser do
       it "returns the file path relative to the repository root dir" do
         parser.path.should eq "json/europeana.rb"
       end
+    end
+  end
+
+  describe "#last_edited_by" do
+    it "should return the last edited by" do
+      parser.stub(:versions) { [mock(:version, user: mock(:user, name: "bill"))] }
+      parser.last_edited_by.should eq "bill"
+    end
+
+    it "handles parsers with no versions" do
+      parser.stub(:versions) { [] }
+      parser.last_edited_by.should be_nil
     end
   end
 
@@ -171,6 +190,32 @@ describe Parser do
       parser.save_with_version
       version = parser.versions.first
       parser.find_version(version.id).should eq version
+    end
+  end
+
+  describe "update_contents_parser_class!" do
+
+    let(:parser) { FactoryGirl.create(:parser) }
+
+    it "replaces the class name in the content" do
+      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
+      parser.name =  "Nz On Screen"
+      parser.update_contents_parser_class!
+      parser.content.should eq "class NzOnScreen < HarvesterCore::Oai::Base"
+    end
+
+    it "sets the commit message" do
+      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
+      parser.name =  "Nz On Screen"
+      parser.update_contents_parser_class!
+      parser.message.should eq "Renamed parser class"
+    end
+
+    it "replaces specific class names" do
+      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
+      parser.name = "Bfm rss"
+      parser.update_contents_parser_class!
+      parser.content.should eq "class BfmRss < HarvesterCore::Oai::Base"
     end
   end
 

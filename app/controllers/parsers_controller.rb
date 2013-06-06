@@ -46,7 +46,7 @@ class ParsersController < ApplicationController
 
   def destroy
     @parser = Parser.find(params[:id])
-    @parser.destroy
+    @parser.destroy unless @parser.running_jobs?
     redirect_to parsers_path
   end
 end

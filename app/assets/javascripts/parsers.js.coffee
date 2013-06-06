@@ -41,3 +41,18 @@ $ ->
     $("#enrichment-form form").attr("action", "/" + environment + "/enrichment_jobs")
 
     return false;
+
+  $('#rename-parser-action').click ->
+    $('#parser-title').hide()
+    $('#hidden-parser-form').show()
+
+  $('#cancel-parser-delete').click ->
+    $('#delete-parser-alert .close-reveal-modal').trigger('click')
+  $('.show_more').click ->
+    $('.version.hidden').show();
+    $(this).hide();
+
+
+  $('#parsers').dataTable("aaSorting": [ [2,'desc'] ])
+  $(document).foundationCustomForms();
+  

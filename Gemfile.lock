@@ -40,6 +40,13 @@ GIT
     active_model_serializers (0.5.2)
       activemodel (>= 3.0)
 
+GIT
+  remote: https://github.com/rweng/jquery-datatables-rails.git
+  revision: 494f752b8eb8350f33841c822a67d014c869219f
+  specs:
+    jquery-datatables-rails (1.11.2)
+      jquery-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -326,6 +333,7 @@ DEPENDENCIES
   guard-rspec
   harvester_core!
   honeybadger
+  jquery-datatables-rails!
   jquery-rails
   jquery-ui-rails
   kaminari

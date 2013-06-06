@@ -1,4 +1,5 @@
 class AbstractJob < ActiveResource::Base
+  include EnvironmentHelpers
   
   self.site = ENV["WORKER_HOST"]
   self.user = ENV["WORKER_API_KEY"]
@@ -38,7 +39,8 @@ class AbstractJob < ActiveResource::Base
       self.new(parser_id: parser.id, version_id: nil, limit: nil, user_id: user.try(:id), environment: nil)
     end
 
-    def search(params={})
+    def search(params={}, environment = nil)
+      self.change_worker_env!(environment) if environment.present?
       params = params.try(:dup).try(:symbolize_keys) || {}
       params.reverse_merge!(status: "active", page: 1, environment: ["staging","production"])
       jobs = self.find(:all, params: params)

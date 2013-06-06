@@ -41,19 +41,40 @@ describe HarvestJob do
       jobs.stub(:http) { {} }
     end
 
-    it "finds all active harvest jobs" do
-      HarvestJob.should_receive(:find).with(:all, params: {status: "active", page: 1, environment: ["staging", "production"]})
-      HarvestJob.search.should eq jobs
+    context "environment defined" do
+      it "finds all active harvest jobs" do
+        HarvestJob.should_receive(:find).with(:all, params: {status: "active", page: 1, environment: ["staging", "production"]})
+        HarvestJob.search.should eq jobs
+      end
+
+      it "finds all finished harvest jobs" do
+        HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: 1, environment: ["staging", "production"]})
+        HarvestJob.search("status" => "finished")
+      end
+
+      it "paginates through the records" do
+        HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: "2", environment: ["staging", "production"]})
+        HarvestJob.search("status" => "finished", "page" => "2")
+      end
+
+      it "does not change the workers site and key" do
+        HarvestJob.should_not_receive(:change_worker_env!)
+        HarvestJob.search("status" => "finished", "page" => "2")
+      end
     end
 
-    it "finds all finished harvest jobs" do
-      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: 1, environment: ["staging", "production"]})
-      HarvestJob.search("status" => "finished")
+    it "changes the HarvestJob's site and key to the staging site and key" do
+       HarvestJob.should_receive(:change_worker_env!).with('staging')
+       HarvestJob.search({"status" => "finished", "page" => "2"}, 'staging')
     end
+  end
 
-    it "paginates through the records" do
-      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: "2", environment: ["staging", "production"]})
-      HarvestJob.search("status" => "finished", "page" => "2")
+  describe ".change_worker_env!" do
+    it "should change the site and key for a given class" do
+      Figaro.should_receive(:env).with('staging') { {"WORKER_HOST" => "http://host.work", "WORKER_API_KEY" => "abc123"} }
+      HarvestJob.change_worker_env!('staging')
+      HarvestJob.site.should eq URI("http://host.work")
+      HarvestJob.user.should eq "abc123"
     end
   end
 

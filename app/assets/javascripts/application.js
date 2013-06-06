@@ -21,7 +21,10 @@
 //= require foundation/jquery.foundation.buttons
 //= require foundation/jquery.foundation.tabs
 //= require foundation/jquery.foundation.forms
+//= require foundation/jquery.foundation.tooltips
 //= require foundation/app
+//= require dataTables/jquery.dataTables
+//= require datatables.foundation
 //= require jquery.ui.datepicker
 //= require jquery.ui.slider
 //= require jquery.ui.timepicker
@@ -33,3 +36,4 @@
 //= require harvest_jobs
 //= require enrichment_jobs
 //= require harvest_schedules
+//= require snippets

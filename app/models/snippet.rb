@@ -2,6 +2,7 @@ class Snippet
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Versioning
+  include Mongoid::Paranoia
 
   field :name,      type: String
   field :content,   type: String

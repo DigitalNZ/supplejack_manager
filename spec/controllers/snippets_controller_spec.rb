@@ -105,6 +105,15 @@ describe SnippetsController do
     end
   end
 
+  describe "DELETE destroy" do
+    it "destroys the snippet" do
+      Snippet.should_receive(:find).with(snippet.id) { snippet }
+      snippet.should_receive(:destroy)
+      delete :destroy, id: snippet.id
+      response.should redirect_to snippets_path
+    end
+  end
+
   describe "GET search" do
     before do 
       Snippet.stub(:find_by_name) { snippet }

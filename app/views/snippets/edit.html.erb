@@ -1,6 +1,36 @@
+
+<div class="row">
+	<div class="nine columns">
+		<h1 id="snippet-title" class="left"><%= @snippet.name %></h1>
+		<div id="hidden-snippet-form">
+			<%= simple_form_for @snippet do |f| %>
+				<div class="snippet-form">
+				  <%= f.input :name %>
+				  <%= f.button :submit %>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="three columns">
+		<ul class="button-group right">
+			<li><a href="#" id="rename-snippet-action" class="button">Rename Snippet</a></li>
+			<li><a href="#" class="button" data-reveal-id="delete-snippet-alert">Delete Snippet</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="delete-snippet-alert" class="reveal-modal small">
+	<h2>Delete Snippet</h2>
+	<p> Are you sure that you want to delete the snippet: <strong><%= @snippet.name %></strong> </p>
+	<div>
+		<%= button_to "Delete", @snippet, method: :delete, class: "button alert right" %>
+		<button id="cancel-snippet-delete" class="button secondary right">Cancel</button>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
 <%= simple_form_for @snippet do |f| %>
-  <h1 class="left"><%= @snippet.name %></h1>
-  
   <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
 
   <%= f.button :submit %>

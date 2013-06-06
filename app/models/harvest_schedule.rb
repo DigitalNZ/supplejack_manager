@@ -1,4 +1,5 @@
 class HarvestSchedule < ActiveResource::Base
+  include EnvironmentHelpers
 
   self.site = ENV["WORKER_HOST"]
   self.user = ENV["WORKER_API_KEY"]
@@ -23,6 +24,24 @@ class HarvestSchedule < ActiveResource::Base
 
   validates_presence_of :parser_id, :start_time
   validates_presence_of :frequency, :at_hour, :at_minutes, if: ->(schedule) { schedule.recurrent && schedule.cron.blank? }
+
+  class << self
+    def find_from_environment(params, env)
+      self.change_worker_env!(env)
+      self.find(:all, params: params)
+    end
+
+    def destroy_all_for_parser(parser_id)
+      environments = ['staging', 'production']
+      environments = [Rails.env] if ['development','test'].include? Rails.env
+
+      environments.each do |env|
+        HarvestSchedule.find_from_environment({parser_id: parser_id}, env).each do |hs|
+          HarvestSchedule.delete(hs.id)
+        end
+      end
+    end
+  end
 
   def simple?
     return true unless self.persisted?

@@ -41,6 +41,73 @@
   margin-left: 10px;
 }
 
+.paging_foundation {
+  float: right;
+}
+
+#parsers_filter {
+  float: left;
+  text-align: left;
+  width: 100%;
+  input {
+    display: inline-block;
+    width: 100%;
+  }
+  label {
+    line-height: 2em;
+  }
+}
+.no-left-padding {
+  padding-left: 0;
+}
+
+ul.harvest-commands {
+  margin-top: 20px;
+  float: right;
+}
+
+ul.parser-actions {
+  margin-top: 14px;
+  li {
+    width: 50%;
+  }
+}
+div.hidden {
+  display: none;
+}
+ul.tagging {
+  li {
+    width: 50%;
+  }
+}
+
+#hidden-parser-form {
+  display: none;
+}
+
+.parser-form {
+  input[type="text"] {
+    font-size: 1.6em;
+    height: 100%;
+  }
+  input[type="submit"] {
+    float: left;
+    margin-top: 19px;
+    margin-left: 20px;
+  }
+  .parser_name {
+    width: 70%;
+    float: left;
+  }
+}
+
+.sorting { background: url('/assets/sort_both.png') no-repeat center right; }
+.sorting_asc { background: url('/assets/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('/assets/sort_desc.png') no-repeat center right; }
+
+.sorting_asc_disabled { background: url('/assets/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('/assets/sort_desc_disabled.png') no-repeat center right; }
+
 $arrowSize: 18px;
 
 .arrow {

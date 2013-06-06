@@ -1,4 +1,4 @@
-  if RUBY_VERSION =~ /1.9/
+if RUBY_VERSION =~ /1.9/
   Encoding.default_external = Encoding::UTF_8
   Encoding.default_internal = Encoding::UTF_8
 end
@@ -44,6 +44,7 @@ group :assets do
 
   gem "compass-rails",    ">= 1.0.3"
   gem "zurb-foundation",  "= 3.2.3"
+  gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 end
 
 gem 'jquery-rails'
