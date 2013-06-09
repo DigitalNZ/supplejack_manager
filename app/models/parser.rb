@@ -17,6 +17,7 @@ class Parser
   ENVIRONMENTS = [:staging, :production]
 
   validates_presence_of   :name, :strategy, :content
+  validates_uniqueness_of :name
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
 
   def file_name

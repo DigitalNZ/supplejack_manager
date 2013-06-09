@@ -23,6 +23,11 @@ describe Parser do
       parser.content = nil
       parser.should_not be_valid
     end
+
+    it "should not be valid with a duplicated name" do
+      parser2 = FactoryGirl.create(:parser, name: 'NZ Museums')
+      parser.should_not be_valid
+    end
   end
 
   context "file paths" do
