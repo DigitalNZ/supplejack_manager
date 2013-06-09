@@ -75,6 +75,9 @@ class Parser
         Rails.logger.error "parser not loaded: #{loader.load_error}"
         {}
       end
+    rescue ScriptError => e
+      Rails.logger.error "Syntax error ... Could not load parser: #{e.message}"
+      {}
     rescue StandardError => e
       Rails.logger.error "Could not load parser: #{e.message}"
       {}

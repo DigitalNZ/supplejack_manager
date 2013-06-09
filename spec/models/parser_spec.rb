@@ -186,6 +186,11 @@ describe Parser do
       parser.enrichment_definitions.should eq({})
     end
 
+    it "should not fail when the parser fails to be loaded due to a syntax error" do
+      loader.stub(:parser_class).and_raise(SyntaxError.new("broken syntax"))
+      parser.enrichment_definitions.should eq({})
+    end
+
     it "returns an empty hash when the parser is unable to load" do
       loader.stub(:loaded?) { false }
       parser.enrichment_definitions.should eq({})
