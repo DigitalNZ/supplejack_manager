@@ -1,6 +1,6 @@
 <%= simple_form_for @harvest_schedule, html: {class: "harvest_schedule"} do |f| %>
 
-  <%= f.input :parser_id, collection: Parser.all %>
+  <%= f.input :parser_id, collection: Parser.asc(:name) %>
 
   <%= f.input :start_time, input_html: {class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
 
@@ -46,22 +46,7 @@
 
   <%= f.input :environment, as: :hidden %>
 
-  <% if @harvest_schedule.oai? %>
-    <div class="row">
-      <div class="two columns">
-        <%= f.label :incremental %>
-      </div>
-      <div class="ten columns">
-        <%= f.input :incremental, as: :boolean, label: false %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="twelve columns"><span class="hint"><%= t("harvest_schedules.incremental_hint") %></span></div>
-    </div>
-
-    <br/>
-  <% end %>
+  <%= render "oai", { harvest_schedule: @harvest_schedule }  %>  
 
   <%= render "enrichments", { harvest_schedule: @harvest_schedule }  %>
 
