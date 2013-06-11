@@ -36,6 +36,7 @@ class ParsersController < ApplicationController
     @parser = Parser.find(params[:id])
     @parser.attributes = params[:parser]
     @parser.user_id = current_user.id
+    @parser.update_contents_parser_class!
 
     if @parser.save_with_version
       redirect_to edit_parser_path(@parser)

@@ -2,14 +2,15 @@ class Parser
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Paranoia
-
   include ActiveModel::SerializerSupport
+  include TemplateHelpers
+
 
   field :name,      type: String
   field :strategy,  type: String
   field :content,   type: String
 
-  attr_accessor :message, :tags, :user_id
+  attr_accessor :message, :tags, :user_id, :parser_template_name
 
   embeds_many :versions, class_name: "ParserVersion"
 
@@ -17,11 +18,11 @@ class Parser
 
   ENVIRONMENTS = [:staging, :production]
 
-  validates_presence_of   :name, :strategy, :content
+  validates_presence_of   :name, :strategy
   validates_uniqueness_of :name
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
 
-  before_save :update_contents_parser_class!
+  before_create :apply_parser_template!
 
   before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
 
@@ -91,14 +92,6 @@ class Parser
 
   def find_version(version_id)
     self.versions.find(version_id)
-  end
-
-  def update_contents_parser_class!
-    if self.changed.include?("name")
-      class_name = self.name.gsub(/\s/, "_").camelize
-      self.content = self.content.gsub(/^class .* </, "class #{class_name} <")
-      self.message = "Renamed parser class"
-    end
   end
 
   def enrichment_definitions

@@ -1,0 +1,19 @@
+<h1 class="left">Parser Templates</h1>
+<%= link_to "New Parser Template", new_parser_template_path, class: "button new-right" %>
+
+<table class="twelve">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @parser_templates.each do |parser_template| %>
+    <tr>
+      <td><%= link_to parser_template.name, edit_parser_template_path(parser_template) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

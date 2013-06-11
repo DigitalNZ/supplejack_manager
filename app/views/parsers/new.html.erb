@@ -4,8 +4,7 @@
 
   <%= f.input :name %>
   <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
-  
-  <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
+  <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name) %>
 
   <%= f.button :submit %>
   

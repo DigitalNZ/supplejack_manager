@@ -1,0 +1,26 @@
+.parser_templates.edit {
+	.button-group {
+		margin-top: 20px; 
+	}
+	#hidden-parser-template-form {
+		display: none;
+	}
+	form {
+		margin: 0 0 6px;
+	}
+}
+.parser-template-form {
+  input[type="text"] {
+    font-size: 1.6em;
+    height: 100%;
+  }
+  input[type="submit"] {
+    float: left;
+    margin-top: 19px;
+    margin-left: 20px;
+  }
+  .parser_template_name {
+    width: 70%;
+    float: left;
+  }
+}

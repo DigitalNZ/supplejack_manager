@@ -37,3 +37,4 @@
 //= require enrichment_jobs
 //= require harvest_schedules
 //= require snippets
+//= require parser_templates

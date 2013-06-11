@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="eight columns">
+		<h1 id="parser-template-title" class="left"><%= @parser_template.name %></h1>
+		<div id="hidden-parser-template-form">
+			<%= simple_form_for @parser_template do |f| %>
+				<div class="parser-template-form">
+				  <%= f.input :name %>
+				  <%= f.button :submit %>
+			  </div>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="four columns">
+		<ul class="button-group right">
+			<li><a href="#" id="rename-parser-template-action" class="button">Rename Parser Template</a></li>
+			<li><a href="#" class="button" data-reveal-id="delete-parser-template-alert">Delete Parser Template</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="delete-parser-template-alert" class="reveal-modal small">
+	<h2>Delete Parser Template</h2>
+	<p> Are you sure that you want to delete the parser template: <strong><%= @parser_template.name %></strong> </p>
+	<div>
+		<%= button_to "Delete", @parser_template, method: :delete, class: "button alert right" %>
+		<button id="cancel-parser-template-delete" class="button secondary right">Cancel</button>
+	</div>
+	<a class="close-reveal-modal">&#215;</a>
+</div>
+
+<%= simple_form_for @parser_template do |f| %>
+  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
+
+  <%= f.button :submit %>
+<% end %>

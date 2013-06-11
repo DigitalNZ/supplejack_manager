@@ -19,11 +19,6 @@ describe Parser do
       parser.should_not be_valid
     end
 
-    it "should not be valid without a content" do
-      parser.content = nil
-      parser.should_not be_valid
-    end
-
     it "should not be valid with a duplicated name" do
       parser2 = FactoryGirl.create(:parser, name: 'NZ Museums')
       parser.should_not be_valid
@@ -190,32 +185,6 @@ describe Parser do
       parser.save_with_version
       version = parser.versions.first
       parser.find_version(version.id).should eq version
-    end
-  end
-
-  describe "update_contents_parser_class!" do
-
-    let(:parser) { FactoryGirl.create(:parser) }
-
-    it "replaces the class name in the content" do
-      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
-      parser.name =  "Nz On Screen"
-      parser.update_contents_parser_class!
-      parser.content.should eq "class NzOnScreen < HarvesterCore::Oai::Base"
-    end
-
-    it "sets the commit message" do
-      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
-      parser.name =  "Nz On Screen"
-      parser.update_contents_parser_class!
-      parser.message.should eq "Renamed parser class"
-    end
-
-    it "replaces specific class names" do
-      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
-      parser.name = "Bfm rss"
-      parser.update_contents_parser_class!
-      parser.content.should eq "class BfmRss < HarvesterCore::Oai::Base"
     end
   end
 

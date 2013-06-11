@@ -26,6 +26,9 @@ en:
       staging: "Staging"
     edit_current: "(Edit current version)"
 
+  parser_templates:
+    label: "Parser Templates"
+
   abstract_jobs:
     type: "Job Type"
     harvestjob: "Harvest"

@@ -10,6 +10,8 @@ HarvesterManager::Application.routes.draw do
     get "search", on: :collection
   end
 
+  resources :parser_templates
+
   scope ":environment", as: "environment" do
     resources :abstract_jobs, only: [:index], path: "jobs"
     resources :harvest_jobs, only: [:create, :update, :show, :index]

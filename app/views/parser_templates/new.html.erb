@@ -1,0 +1,11 @@
+<h1>New Parser Template</h1>
+
+<%= simple_form_for @parser_template do |f| %>
+
+  <%= f.input :name %>
+  
+  <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
+
+  <%= f.button :submit %>
+
+<% end %>
