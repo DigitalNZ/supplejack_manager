@@ -42,7 +42,7 @@ class Parser
     if Rails.env.development?
       !AbstractJob.search({parser_id: self.id}, 'development').empty?
     else
-      !AbstractJob.search({parser_id: self.id}, 'staging').empty? and !AbstractJob.search({parser_id: self.id}, 'production').empty?
+      !AbstractJob.search({parser_id: self.id}, 'staging').empty? or !AbstractJob.search({parser_id: self.id}, 'production').empty?
     end
   end
 
@@ -50,7 +50,7 @@ class Parser
     if Rails.env.development?
       !HarvestSchedule.find_from_environment({parser_id: self.id}, 'development').empty?
     else
-      !HarvestSchedule.find_from_environment({parser_id: self.id}, 'staging').empty? and !HarvestSchedule.find_from_environment({parser_id: self.id}, 'production').empty?
+      !HarvestSchedule.find_from_environment({parser_id: self.id}, 'staging').empty? or !HarvestSchedule.find_from_environment({parser_id: self.id}, 'production').empty?
     end
   end
 
