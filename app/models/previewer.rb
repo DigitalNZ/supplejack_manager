@@ -38,7 +38,7 @@ class Previewer
   end
 
   def record?
-    harvest_job.records_count > 0
+    harvest_job.records_count > 0 and preview['record'].present?
   end
 
   def raw_data?
