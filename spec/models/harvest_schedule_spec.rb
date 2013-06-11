@@ -9,7 +9,7 @@ describe HarvestSchedule do
     describe ".find_from_environment" do
       it "should perform the normal find_all operation but for the specified environment" do
         HarvestSchedule.should_receive(:change_worker_env!)
-        HarvestSchedule.should_receive(:find).with(:all, params: {})
+        HarvestSchedule.should_receive(:find).with(:all, params: {:harvest_schedule => {}})
         HarvestSchedule.find_from_environment({},'staging')
       end
     end

@@ -72,6 +72,7 @@ describe Previewer do
 
     it "returns true if there was records precessed" do
       previewer.stub(:harvest_job) {mock(:harvest_job, records_count: 1)}
+      previewer.stub(:preview) { {"record" => {"title" => "bill"}} }
       previewer.record?.should be_true
     end
   end
