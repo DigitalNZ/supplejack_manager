@@ -6,7 +6,6 @@
   <%= f.input :user_id, as: :hidden %>
   <%= f.input :environment, as: :hidden %>
 
-
   <%= f.input :mode, collection: @parser.modes, as: :radio_buttons, checked: @parser.modes.first, label_html: {class: "large"} %>
 
   <%= f.input :limit, label: t("parsers.records_to_harvest"), label_html: {class: "large"} %>
