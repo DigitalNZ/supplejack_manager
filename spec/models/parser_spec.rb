@@ -219,12 +219,12 @@ describe Parser do
   describe "#modes" do
     it "returns normal and full_and_flush if the parser is not oai" do
       parser.stub(:oai?) {false}
-      parser.modes.should eq ['normal','full_and_flush']
+      parser.modes.should eq [['Normal','normal'],['Full And Flush', 'full_and_flush']]
     end
 
     it "returns normal, full_and_flush and incremental if the parser is oai" do
       parser.stub(:oai?) {true}
-      parser.modes.should eq ['normal','full_and_flush', 'incremental']
+      parser.modes.should eq [['Normal','normal'],['Full And Flush','full_and_flush'], ['Incremental','incremental']]
     end
   end
 end
