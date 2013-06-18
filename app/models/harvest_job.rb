@@ -15,8 +15,9 @@ class HarvestJob < AbstractJob
     attribute :failed_records_count,  :integer
     attribute :invalid_records_count, :integer
     attribute :created_at,            :datetime
-    attribute :incremental,           :boolean
     attribute :enrichments,           :string
+    attribute :mode,                  :string
+    attribute :posted_records_count,  :integer
   end
 
   include ActiveResource::SchemaTypes

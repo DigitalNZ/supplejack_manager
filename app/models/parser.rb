@@ -111,4 +111,10 @@ class Parser
     end
   end
 
+  def modes
+    modes = ['normal','full_and_flush']
+    modes << 'incremental' if oai?
+    modes.map {|m| [m.titleize, m]}
+  end
+
 end

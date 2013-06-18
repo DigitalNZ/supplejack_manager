@@ -64,6 +64,13 @@
         <strong><%= number_with_delimiter @harvest_job.records_count %></strong>
       </td>
     </tr>
+
+    <tr>
+      <td><%= t("harvest_jobs.records_posted") %></td>
+      <td>
+        <strong><%= number_with_delimiter @harvest_job.posted_records_count %></strong>
+      </td>
+    </tr>
   </table>
   
    <% if @harvest_job.harvest_failure.present? %>

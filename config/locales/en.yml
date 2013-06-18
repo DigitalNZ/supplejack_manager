@@ -60,6 +60,7 @@ en:
     already_active_html: "There is already an active Job running for the <strong>%{parser}</strong> in the <strong>%{environment}</strong> environment"
     incremental: "Incremental Harvest?"
     harvest_failure: "Harvest failure"
+    records_posted: "Records posted to API"
 
   enrichment_jobs:
     records_harvested: "Records enriched"
