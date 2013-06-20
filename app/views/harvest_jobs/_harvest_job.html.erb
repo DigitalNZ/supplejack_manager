@@ -27,6 +27,13 @@
     </tr>
 
     <tr>
+      <td><%= t("harvest_jobs.mode") %></td>
+      <td>
+        <strong><%= @harvest_job.mode.try(:titleize) %></strong>
+      </td>
+    </tr>
+
+    <tr>
       <td><%= t("harvest_jobs.start_time") %></td>
       <td>
         <% if @harvest_job.start_time %>

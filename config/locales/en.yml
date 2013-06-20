@@ -61,6 +61,7 @@ en:
     incremental: "Incremental Harvest?"
     harvest_failure: "Harvest failure"
     records_posted: "Records posted to API"
+    mode: "Mode"
 
   enrichment_jobs:
     records_harvested: "Records enriched"

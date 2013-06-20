@@ -11,7 +11,7 @@
       <th><%= t("harvest_schedules.parser") %></th>
       <th><%= t("harvest_schedules.start_time") %></th>
       <th><%= t("harvest_schedules.environment") %></th>
-
+      <th><%= t("harvest_schedules.mode") %></th>
       <th></th>
     </tr>
   </thead>
@@ -24,6 +24,7 @@
         <td><%= harvest_schedule.parser.try(:name) %></td>
         <td><%= l harvest_schedule.start_time, format: :long %></td>
         <td><%= harvest_schedule.environment %></td>
+        <td><%= harvest_schedule.mode.try(:titleize) %></td>
         <td>
           <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
           <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
@@ -51,7 +52,7 @@
       <th><%= t("harvest_schedules.frequency") %></th>
       <th><%= t("harvest_schedules.next_run_at") %></th>
       <th><%= t("harvest_schedules.environment") %></th>
-
+      <th><%= t("harvest_schedules.mode") %></th>
       <th></th>
     </tr>
   </thead>
@@ -70,6 +71,7 @@
 
       <td><%= l harvest_schedule.next_run_at, format: :long %></td>
       <td><%= harvest_schedule.environment %></td>
+      <td><%= harvest_schedule.mode.try(:titleize) %></td>
       <td>
         <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
         <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
