@@ -1,0 +1,21 @@
+<h1 class="left">Collection Rules</h1>
+<%= link_to "New collection rule", new_collection_rule_path, class: "button new-right" %>
+
+<table id="collection_rules" class="twelve">
+  <thead>
+    <tr>
+      <th>Collection Title</th>
+      <th>Updated At</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @collection_rules.each do |collection_rule| %>
+    <tr>
+      <td><%= link_to collection_rule.collection_title, edit_collection_rule_path(collection_rule) %></td>
+      <td><%= collection_rule.updated_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

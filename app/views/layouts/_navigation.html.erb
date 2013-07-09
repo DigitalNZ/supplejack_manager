@@ -29,6 +29,12 @@
                 <%= link_to_tab t('environments.production'), environment_harvest_schedules_path("production") %>
               </ul>
             </li>
+            <li class="has-dropdown">
+              <%= link_to t('link_checker.label'), "#" %>
+              <ul class="dropdown">
+                <%= link_to_tab t('link_checker.collection_rules'), collection_rules_path %>
+              </ul>
+            </li>
           </ul>
         <% end %>
 

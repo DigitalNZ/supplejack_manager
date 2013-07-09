@@ -84,6 +84,10 @@ en:
     no_one_off_schedules: "There are no one off schedules programmed"
     incremental_hint: "The incremental option only applies to OAI harvests. It will use the last time a harvest was run for the particular parser as a starting point."
 
+  link_checker:
+    label: "Link Checker"
+    collection_rules: "Collection Rules"
+
   snippets:
     label: "Snippets"
 
