@@ -18,6 +18,7 @@ class ParserVersionsController < ApplicationController
 
   def update
     @version.update_attributes(params[:version])
+    @version.post_changes
     redirect_to parser_parser_version_path(@parser, @version)
   end
 

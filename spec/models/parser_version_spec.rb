@@ -39,4 +39,26 @@ describe ParserVersion do
       end
     end
   end
+
+  describe "#post_changes" do
+    before(:each) do
+      version.user = FactoryGirl.build(:user)
+    end
+
+    context "tagged as production" do
+      it "should post to changes app" do
+        version.tags = ["production"]
+        RestClient::Request.should_receive(:execute).with(anything())
+        version.post_changes
+      end
+    end
+
+    context "untagged as production" do
+      it "should not post to changes app" do
+        version.tags = ["staging"]
+        RestClient::Request.should_not_receive(:execute).with(anything())
+        version.post_changes
+      end
+    end
+  end
 end

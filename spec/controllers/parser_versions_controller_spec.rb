@@ -52,5 +52,13 @@ describe ParserVersionsController do
       put :update, id: 1, parser_id: 1, version: {tags: ["staging"]}
       response.should redirect_to parser_parser_version_path(parser, version)
     end
+
+    context "posting to changes app" do
+      it "post to changes app" do
+        version.should_receive(:post_changes)
+        put :update, id: 1, parser_id: 1, version: { tags: ["production"] }
+      end
+    end
   end
+
 end

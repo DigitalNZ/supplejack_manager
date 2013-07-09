@@ -13,21 +13,33 @@ development:
   WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
+  CHANGESAPP_HOST: "http://localhost:3003/changes"
+  CHANGESAPP_USER: "dnz_changes"
+  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
 
 production:
   WORKER_HOST: "http://worker.dnz03.digitalnz.org"
   WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
+  CHANGESAPP_HOST: "http://changes.uat.digitalnz.org/changes"
+  CHANGESAPP_USER: "dnz_changes"
+  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
 
 staging:
   WORKER_HOST: "http://worker.uat.digitalnz.org"
   WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
+  CHANGESAPP_HOST: "http://changes.uat.digitalnz.org/changes"
+  CHANGESAPP_USER: "dnz_changes"
+  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
 
 test:
   WORKER_HOST: "http://localhost:3002"
   WORKER_API_KEY: "12345"
   HARVESTER_CACHING_ENABLED: false
   HONEYBADGER_API_KEY: "cd199c3f"
+  CHANGESAPP_HOST: "http://localhost:3003/changes"
+  CHANGESAPP_USER: "dnz_changes"
+  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"

@@ -31,4 +31,25 @@ class ParserVersion
     attributes[:tags] ||= []
     super(attributes)
   end
+
+  def post_changes
+    if self.production?
+      payload = {
+        component: "DNZ Harvester configs",
+        description: self.message,
+        email: self.user.email,
+        time: Time.now,
+        environment: Rails.env,
+        revision: self.version
+      }
+
+      RestClient::Request.execute(
+        method: :post,
+        url: ENV["CHANGESAPP_HOST"],
+        user: ENV["CHANGESAPP_USER"],
+        password: ENV["CHANGESAPP_PASSWORD"],
+        payload: payload
+      )
+    end
+  end
 end
