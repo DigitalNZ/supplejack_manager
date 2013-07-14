@@ -36,7 +36,7 @@ class ParserVersion
     if self.production?
       payload = {
         component: "DNZ Harvester configs",
-        description: self.message,
+        description: "#{self.name}: #{self.message}",
         email: self.user.email,
         time: Time.now,
         environment: Rails.env,

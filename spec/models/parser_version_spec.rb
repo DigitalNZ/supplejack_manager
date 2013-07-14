@@ -43,6 +43,7 @@ describe ParserVersion do
   describe "#post_changes" do
     before(:each) do
       version.user = FactoryGirl.build(:user)
+      version.parser = FactoryGirl.build(:parser)
     end
 
     context "tagged as production" do
