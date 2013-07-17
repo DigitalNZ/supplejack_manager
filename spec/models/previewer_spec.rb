@@ -167,7 +167,7 @@ describe Previewer do
 
   describe "#deletable?" do
     it "returns true if deletable is true in the preview hash" do
-      previewer.stub(:preview) { {'deletable' => 'true'} }
+      previewer.stub(:preview) { {'deletable' => true} }
       previewer.deletable?.should be_true
     end
 
