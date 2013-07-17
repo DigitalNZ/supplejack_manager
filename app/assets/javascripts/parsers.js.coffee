@@ -15,6 +15,7 @@ $ ->
     $.post $link.attr("href"), $form.serialize(), (data) ->
       $("#preview-area-spinner").hide()
       $("#preview-area").html(data)
+      console.log data
 
     return false;
 

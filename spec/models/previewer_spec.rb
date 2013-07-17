@@ -165,6 +165,18 @@ describe Previewer do
     end
   end
 
+  describe "#deletable?" do
+    it "returns true if deletable is true in the preview hash" do
+      previewer.stub(:preview) { {'deletable' => 'true'} }
+      previewer.deletable?.should be_true
+    end
+
+    it "returns false if deletable is not true" do
+      previewer.stub(:preview) { {'deletable' => 'false'} }
+      previewer.deletable?.should be_false
+    end
+  end
+
   describe "#raw_output" do
 
     before { previewer.stub(:preview) { {raw_data: "" }} }

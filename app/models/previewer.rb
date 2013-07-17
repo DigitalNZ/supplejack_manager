@@ -81,6 +81,10 @@ class Previewer
     preview['errors']['validation_errors']
   end
 
+  def deletable?
+    preview['deletable'] == true
+  end
+
   def raw_output
     format = parser.xml? ? :xml : :json
     CodeRay.scan(self.send("pretty_#{format}_output"), format).html(line_numbers: :table).html_safe
