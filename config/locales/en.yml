@@ -86,7 +86,12 @@ en:
 
   link_checker:
     label: "Link Checker"
-    collection_rules: "Collection Rules"
+    collection_rules: "Link Check Rules"
+
+  statistics:
+    environments:
+      staging: "Statistics Staging"
+      production: "Statistics Production"
 
   snippets:
     label: "Snippets"

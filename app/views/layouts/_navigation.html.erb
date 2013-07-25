@@ -33,13 +33,9 @@
             <li class="has-dropdown">
               <%= link_to t('link_checker.label'), "#" %>
               <ul class="dropdown">
+                <%= link_to_tab t('statistics.environments.production'), environment_collection_statistics_path("production") %>
+                <%= link_to_tab t('statistics.environments.staging'), environment_collection_statistics_path("staging") %>
                 <%= link_to_tab t('link_checker.collection_rules'), collection_rules_path %>
-                <li class="has-dropdown"><%= link_to t('link_checker.collection_statistics'), '#'%>
-                  <ul class="dropdown">
-                <%= link_to_tab t('environments.staging'), environment_collection_statistics_path("staging") %>
-                <%= link_to_tab t('environments.production'), environment_collection_statistics_path("production") %>
-                  </ul>
-                </li>
               </ul>
             </li>
           </ul>
