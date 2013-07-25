@@ -13,7 +13,7 @@
 		    <h5>Activations (<%= collection.activated_records.size %>)</h5>
 		    <ul class="no-list-style">
 			    <% collection.activated_records.each do |record| %>
-			     <li><%= "#{record.record_id}: #{record.landing_url}" %></li>
+			     <li><%= "#{record.record_id}: "%><%= link_to "#{record.landing_url}", record.landing_url %></li>
 			    <% end %>
 		    </ul>
 		  </div>
@@ -23,7 +23,7 @@
 		    <h5>Suppressions (<%= collection.suppressed_records.size %>)</h5>
 		    <ul class="no-list-style">
 			    <% collection.suppressed_records.each do |record| %>
-			     <li><%= "#{record.record_id}: #{record.landing_url}" %></li>
+			     <li><%= "#{record.record_id}: "%><%= link_to "#{record.landing_url}", record.landing_url %></li>
 			    <% end %>
 		    </ul>
 		  </div>
@@ -33,7 +33,7 @@
 		    <h5>Deletions (<%= collection.deleted_records.size %>)</h5>
 		    <ul class="no-list-style">
 			    <% collection.deleted_records.each do |record| %>
-			     <li><%= "#{record.record_id}: #{record.landing_url}" %></li>
+			     <li><%= "#{record.record_id}: "%><%= link_to "#{record.landing_url}", record.landing_url %></li>
 			    <% end %>
 		    </ul>
 		  </div>
