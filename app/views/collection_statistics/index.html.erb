@@ -1,0 +1,25 @@
+<h1 class="left">Collection Statistics (<%= params[:environment]%>)</h1>
+
+<table id="stats" class="twelve">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Suppressed</th>
+      <th>Activated</th>
+      <th>Deleted</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+		<% @collection_statistics.each do |day, counts| %>
+			<tr>
+	      <td><%= day.to_date.to_formatted_s(:long) %></td>
+	      <td><%= counts[:suppressed] %></td>
+	      <td><%= counts[:activated] %></td>
+	      <td><%= counts[:deleted] %></td>
+	      <td><%= link_to "Show details", environment_collection_statistic_path(params[:environment], day.to_s) %></td>
+	    </tr>
+		<% end %>
+  </tbody>
+</table>

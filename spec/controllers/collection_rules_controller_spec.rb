@@ -16,6 +16,12 @@ describe CollectionRulesController do
       get :index
       assigns(:collection_rules).should eq [collection_rule]
     end
+
+    it "should do a where if collection_rules is defined" do
+      params = {collection_rules: {collection_title: "TAPUHI"}}
+      CollectionRules.should_receive(:where).with(params[:collection_rules].stringify_keys)
+      get :index, params
+    end
   end
 
   describe "GET 'show'" do

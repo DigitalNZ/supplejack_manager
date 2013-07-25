@@ -1,0 +1,2 @@
+module CollectionStatisticsHelper
+end
