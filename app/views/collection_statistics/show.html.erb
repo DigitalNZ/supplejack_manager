@@ -1,4 +1,11 @@
-<h2>Collection Statistics for: <%= @day.to_date.to_formatted_s(:long) %></h2>
+<div class="twelve">
+	
+	<h2>
+		<%= link_to "", environment_collection_statistic_path(params[:environment], (@day.to_date - 1.day).to_s), class: "records-preview-button arrow arrow-left" unless (@day.to_date - 1.day) < 1.month.ago.to_date%>
+		<span>Collection Statistics for: <%= @day.to_date.to_formatted_s(:long) %></span>
+		<%= link_to "", environment_collection_statistic_path(params[:environment], (@day.to_date + 1.day).to_s), class: "records-preview-button arrow arrow-right" unless (@day.to_date + 1.day) > Date.today %>
+	</h2>
+</div>
 
 <div class="twelve">
 	<% unless @collection_statistics.any? %>
