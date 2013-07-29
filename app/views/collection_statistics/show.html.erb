@@ -17,36 +17,30 @@
 	<div class="row">
 		<div class="twelve columns">
 		<h4><%= collection.collection_title %></h4>
-	  <% if collection.activated_records.present? %>
   		<div class="status-section left four">
-		    <h5>Activations (<%= collection.activated_records.size %>)</h5>
+		    <h5>Activations (<%= collection.activated_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
-			    <% collection.activated_records.each do |record| %>
+			    <% collection.activated_records.to_a.each do |record| %>
 			     <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
 			    <% end %>
 		    </ul>
 		  </div>
-	  <% end %>
-	  <% if collection.suppressed_records.present? %>
 		  <div class="status-section left four">
-		    <h5>Suppressions (<%= collection.suppressed_records.size %>)</h5>
+		    <h5>Suppressions (<%= collection.suppressed_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
-			    <% collection.suppressed_records.each do |record| %>
+			    <% collection.suppressed_records.to_a.each do |record| %>
 			     <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
 			    <% end %>
 		    </ul>
 		  </div>
-	  <% end %>
-	  <% if collection.deleted_records.present? %>
 		  <div class="status-section left four">
-		    <h5>Deletions (<%= collection.deleted_records.size %>)</h5>
+		    <h5>Deletions (<%= collection.deleted_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
-			    <% collection.deleted_records.each do |record| %>
+			    <% collection.deleted_records.to_a.each do |record| %>
 			     <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
 			    <% end %>
 		    </ul>
 		  </div>
-	  <% end %>
 		</div>
 	</div>
 <% end %>
