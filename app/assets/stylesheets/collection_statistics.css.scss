@@ -1,3 +1,18 @@
 .status-section {
 	padding-right: 15px;
 }
+.arrow-right.disabled {
+	border-left: 18px solid #E9E9E9;
+}
+.cycle-prev-day-button {
+	position: absolute;
+	left: 0;
+}
+.cycle-next-day-button {
+	position: absolute;
+	right: 0;
+}
+h2.collection-stats-heading {
+	position: relative;
+	text-align: center;
+}
