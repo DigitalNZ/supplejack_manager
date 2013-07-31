@@ -30,6 +30,7 @@
 //= require jquery.ui.timepicker
 //= require codemirror
 //= require codemirror/modes/ruby
+//= require collection_rules
 //= require code_mirror_setup
 //= require harvester
 //= require parsers

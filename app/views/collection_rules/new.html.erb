@@ -1,11 +1,6 @@
-<h1>New Collection Rule</h1>
-
-<%= simple_form_for @collection_rule, :url => collection_rules_path do |f| %>
-
-  <%= f.input :collection_title %>
-  <%= f.input :xpath %>
-  <%= f.input :status_codes %>
-
-  <%= f.button :submit %>
-  
-<% end %>
+<div class="row">
+  <div class="eight columns">
+    <h1 id="collection-rule-title" class="left">New Collection Rule</h1>
+    <%= render 'form', url: collection_rules_path %>
+  </div>
+</div>

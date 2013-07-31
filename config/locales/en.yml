@@ -103,3 +103,8 @@ en:
     attributes:
       harvest_schedule:
         at_hour: "At time"
+
+  simple_form:
+      labels:
+        collection_rules:
+          active: 'Collection link checking active?'

@@ -1,0 +1,9 @@
+<%= simple_form_for @collection_rule, url: url do |f| %>
+  <%= f.input :collection_title %>
+  <%= f.input :xpath %>
+  <%= f.input :status_codes %>
+  <%= f.input :throttle %>
+  <%= f.input :active, :as => :boolean, value: true %>
+
+  <%= f.button :submit %>
+<% end %>
