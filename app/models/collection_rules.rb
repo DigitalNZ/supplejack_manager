@@ -8,5 +8,5 @@ class CollectionRules
   field :active, type: Boolean, default: true
   field :throttle, type: Integer
 
-  validates :collection_title, presence: true
+  validates :collection_title, presence: true, uniqueness: true 
 end
