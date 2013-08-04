@@ -1,7 +1,7 @@
 <div id="mode">
   <% if harvest_schedule.parser.present? %>
     <%= simple_fields_for harvest_schedule do |f| %>
-      <%= f.input :mode, collection: harvest_schedule.parser.modes, as: :radio_buttons, checked: harvest_schedule.parser.modes.first, label_html: {class: "large"} %>
+      <%= f.input :mode, collection: harvest_schedule.parser.modes, as: :radio_buttons, checked: harvest_schedule.mode, label_html: {class: "large"} %>
       <% if harvest_schedule.oai? %>
         <div class="row">
           <div class="twelve columns"><span class="hint"><%= t("harvest_schedules.incremental_hint") %></span></div>
