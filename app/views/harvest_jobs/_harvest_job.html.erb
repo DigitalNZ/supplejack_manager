@@ -111,7 +111,7 @@
     <div id="accordion">
       <% @harvest_job.failed_records.each do |record| %>
         <h3 class="error">
-          <span><%= record.error_messages.join(", ") %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
+          <span><%= record.message %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
         </h3>
         <div>
           <%= pretty_format(@harvest_job.parser_id, record.raw_data) %>
