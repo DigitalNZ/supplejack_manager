@@ -1,0 +1,40 @@
+<div class="row twelve columns">
+  <h2>Add Suppressed Collection</h2>
+</div>
+<div class="row six">
+  <%= form_tag suppress_collections_path do %>
+    <div class="eight columns">
+      <%= text_field_tag :id %>
+    </div>
+    <div class="four columns">
+      <%= submit_tag "Add new suppressed collection", class: "button" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row twelve columns">
+  <h2>Suppressed Collections</h2>
+</div>
+
+<div class="row">
+  <div class="six columns">
+    <table id="suppress_collection">
+      <thead>
+        <tr>
+          <th class="three">Collection Title</th>
+          <th class="two">Activate Collection</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @blacklist.each do |collection| %>
+        <tr>
+          <td><%= collection %></td>
+          <td><%= link_to "Activate", suppress_collection_path(collection), :method => :delete, class: "button right" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

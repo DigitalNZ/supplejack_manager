@@ -16,6 +16,7 @@ development:
   CHANGESAPP_HOST: "http://localhost:3003/changes"
   CHANGESAPP_USER: "dnz_changes"
   CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
+  API_HOST: "http://localhost:3000"
 
 production:
   WORKER_HOST: "http://worker.dnz03.digitalnz.org"
@@ -25,6 +26,7 @@ production:
   CHANGESAPP_HOST: "http://changes.uat.digitalnz.org/changes"
   CHANGESAPP_USER: "dnz_changes"
   CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
+  API_HOST: "http://api.dnz03.digitalnz.org"
 
 staging:
   WORKER_HOST: "http://worker.uat.digitalnz.org"
@@ -34,6 +36,7 @@ staging:
   CHANGESAPP_HOST: "http://changes.uat.digitalnz.org/changes"
   CHANGESAPP_USER: "dnz_changes"
   CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
+  API_HOST: "http://api.uat.digitalnz.org"
 
 test:
   WORKER_HOST: "http://localhost:3002"
@@ -43,3 +46,4 @@ test:
   CHANGESAPP_HOST: "http://localhost:3003/changes"
   CHANGESAPP_USER: "dnz_changes"
   CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
+  API_HOST: "http://localhost:3000"
