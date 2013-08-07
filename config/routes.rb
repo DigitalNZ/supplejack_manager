@@ -11,9 +11,9 @@ HarvesterManager::Application.routes.draw do
   end
 
   resources :parser_templates
-
   resources :collection_rules
   resources :suppress_collections
+  resources :previews, only: [:show, :update]
 
   scope ":environment", as: "environment" do
     resources :abstract_jobs, only: [:index], path: "jobs"

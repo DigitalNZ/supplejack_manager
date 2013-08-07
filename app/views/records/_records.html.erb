@@ -1,0 +1,64 @@
+<span id="preview-job" url="/previews/<%=@preview_id%>"></span>
+<div class="row">
+  <div class="ten columns">
+    <h2>Previewing records</h2>
+  </div>
+
+  <div class="two columns align-right">
+    <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-left" %>
+    <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-right" %>
+  </div>
+</div>
+
+<div class="row" id="preview-<%=@preview_id%>">
+  <div class="twelve columns">
+      <p><strong>Status: </strong><span id="status">Creating preview job.</span></p>
+
+      <div id="record-to-delete" class="hidden">
+        <p></strong>This record is marked for deletion.</em></p>
+      </div>
+
+      <div id="field-errors" class="hidden">
+        <h4>Field Errors</h4>
+        <p></p>
+      </div>
+
+      <div id="harvest-errors" class="hidden">
+        <h4>Harvest Errors</h4>
+        <p></p>
+      </div>
+
+      <div id="validation-errors" class="hidden">
+        <h4>Validation Errors</h4>
+        <ul class="indented"></ul>
+      </div>
+
+      <dl class="tabs">
+        <dd><a href="#sourceData">Source Data<span class="small-spinner"></span></a></dd>
+        <dd class="active"><a href="#harvestedAttributes">Harvested Attributes<span class="small-spinner"></span></a></dd>
+        <dd><a href="#apiRecord">API Record<span class="small-spinner"></span></a></dd>
+      </dl>
+      
+      <ul class="tabs-content">
+        <li id="sourceDataTab">
+          <div id="record-raw-data"></div>
+        </li>
+
+        <li class="active" id="harvestedAttributesTab"> 
+          <div id="harvest-attributes"></div>
+        </li>
+
+        <li id="apiRecordTab"> 
+          <div id="record-attributes"></div>
+        </li>
+      </ul>
+
+      <div id="harvest-failure">
+        <h6></h6>
+        <p></p>
+        <ul class="indented"></ul>
+      </div>
+  </div>
+</div>
+
+<h4 class="not-found hidden"><%= @previewer.parser.name %> <span>didn't return any records.</span></h4>

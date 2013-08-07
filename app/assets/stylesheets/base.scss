@@ -52,3 +52,15 @@ form {
 .align-right {
   text-align: right;
 }
+
+.small-spinner {
+  background: url(/assets/small-spinner.gif) no-repeat 0 0;
+  width: 20px;
+  height: 20px;
+  display: block;
+  float: right;
+  margin: 10px 0 0 12px;
+}
+.hidden {
+  display: none;
+}

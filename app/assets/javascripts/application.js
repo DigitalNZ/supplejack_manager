@@ -39,3 +39,4 @@
 //= require harvest_schedules
 //= require snippets
 //= require parser_templates
+//= require previews

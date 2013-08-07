@@ -14,8 +14,7 @@ $ ->
     $form = $("form")
     $.post $link.attr("href"), $form.serialize(), (data) ->
       $("#preview-area-spinner").hide()
-      $("#preview-area").html(data)
-      console.log data
+      #$("#preview-area").html(data)
 
     return false;
 
@@ -57,4 +56,3 @@ $ ->
 
   $('#parsers').dataTable("aaSorting": [ [2,'desc'] ])
   $(document).foundationCustomForms();
-  
