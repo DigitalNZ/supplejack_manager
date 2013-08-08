@@ -17,12 +17,12 @@
 </div>
 
 <div class="row">
-  <div class="six columns">
+  <div class="four columns">
     <table id="suppress_collection">
       <thead>
         <tr>
           <th class="three">Collection Title</th>
-          <th class="two">Activate Collection</th>
+          <th class="one">Activate Collection</th>
         </tr>
       </thead>
 
@@ -30,11 +30,10 @@
         <% @blacklist.each do |collection| %>
         <tr>
           <td><%= collection %></td>
-          <td><%= link_to "Activate", suppress_collection_path(collection), :method => :delete, class: "button right" %></td>
+          <td><%= link_to "Activate", suppress_collection_path(collection), :method => :delete, class: "small button" %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
-
