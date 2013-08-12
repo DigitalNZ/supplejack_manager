@@ -27,17 +27,7 @@ describe SuppressCollectionsController do
 
   describe "POST 'create'" do
     it "should add the collection to the suppressed collection in the API" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections/TAPUHI", { status: 'suppressed'})
-      post :create, id: 'TAPUHI'
-    end
-
-    it "should handle collection names with spaces" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections/Carterton%20Kete", { status: 'suppressed'})
-      post :create, id: 'Carterton Kete'
-    end
-
-    it "should handle RestClient errors" do
-      RestClient.stub(:put).and_raise(RestClient::Exception.new)
+      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections", { collection: 'TAPUHI', status: 'suppressed'})
       post :create, id: 'TAPUHI'
     end
 
@@ -46,17 +36,17 @@ describe SuppressCollectionsController do
       post :create, id: 'TAPUHI'
       expect(response).to redirect_to suppress_collections_url
     end
+
+    it "should handle RestClient errors" do
+      RestClient.stub(:put).and_raise(RestClient::Exception.new)
+      post :create, id: 'TAPUHI'
+    end
   end
 
   describe "DELETE 'destroy'" do
     it "removes the collection from suppressed collections" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections/TAPUHI", { status: 'active'})
+      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections", { collection: 'TAPUHI', status: 'active'})
       delete :destroy, id: "TAPUHI"
-    end
-
-    it "should handle collection names with spaces" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections/Carterton%20Kete", { status: 'active'})
-      delete :destroy, id: 'Carterton Kete'
     end
 
     it "should redirect to suppress collections url" do

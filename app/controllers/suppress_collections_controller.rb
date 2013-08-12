@@ -9,8 +9,8 @@ class SuppressCollectionsController < ApplicationController
 
   def create
     begin
-      name = ERB::Util.url_encode(params[:id])
-      RestClient.put("#{ENV['API_HOST']}/link_checker/collections/#{name}", { status: 'suppressed' })
+      url = "#{ENV['API_HOST']}/link_checker/collections"
+      RestClient.put(url, { collection: params[:id], status: 'suppressed' })
     rescue RestClient::Exception => e
       Rails.logger.error "Exception #{e} when attempting to post to API"
     end
@@ -20,8 +20,8 @@ class SuppressCollectionsController < ApplicationController
 
   def destroy
     begin
-      name = ERB::Util.url_encode(params[:id])
-      RestClient.put("#{ENV['API_HOST']}/link_checker/collections/#{name}", { status: 'active' })
+      url = "#{ENV['API_HOST']}/link_checker/collections"
+      RestClient.put(url, { collection: params[:id], status: 'active' })
     rescue RestClient::Exception => e
       Rails.logger.error "Exception #{e} when attempting to post to API"
     end
