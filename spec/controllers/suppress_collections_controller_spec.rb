@@ -27,7 +27,7 @@ describe SuppressCollectionsController do
 
   describe "POST 'create'" do
     it "should add the collection to the suppressed collection in the API" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections", { collection: 'TAPUHI', status: 'suppressed'})
+      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collection", { collection: 'TAPUHI', status: 'suppressed'})
       post :create, id: 'TAPUHI'
     end
 
@@ -45,7 +45,7 @@ describe SuppressCollectionsController do
 
   describe "DELETE 'destroy'" do
     it "removes the collection from suppressed collections" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collections", { collection: 'TAPUHI', status: 'active'})
+      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/link_checker/collection", { collection: 'TAPUHI', status: 'active'})
       delete :destroy, id: "TAPUHI"
     end
 
