@@ -52,7 +52,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
   <% end %>
 <% end %>
 
-<% unless @preview.harvest_failure? or @preview.validation_errors? or @preview.field_errors? or @preview.harvest_job_errors.present? or @preview.api_record.present? or @preview.finished? %>
+<% unless @preview.errors? or @preview.api_record.present? or @preview.finished? %>
 	PreviewJobsPoller.poll();
 <% else %>
 	$('#preview-<%= @preview.id %> a[href="#sourceData"] .small-spinner, a[href="#harvestedAttributes"] .small-spinner, a[href="#apiRecord"] .small-spinner').hide();

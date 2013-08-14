@@ -95,5 +95,9 @@ class Preview < ActiveResource::Base
   def field_errors_json
     JSON.pretty_generate(JSON.parse(self.field_errors)) if field_errors?
   end
+
+  def errors?
+    harvest_failure? or validation_errors? or field_errors? or harvest_job_errors.present?
+  end
   
 end
