@@ -39,6 +39,14 @@
                 <%= link_to_tab t('link_checker.suppress_collections'), suppress_collections_path %>
               </ul>
             </li>
+
+            <li class="has-dropdown">
+              <%= link_to t('users.label'), "#" %>
+              <ul class="dropdown">
+                <%= link_to_tab t('users.all_users'), users_path %>
+                <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
+              </ul>
+            </li>
           </ul>
         <% end %>
 

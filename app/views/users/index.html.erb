@@ -1,0 +1,21 @@
+<h1 class="left">Users</h1>
+
+<%= link_to "New user", new_user_path, class: "button new-right" %>
+
+<table id="users" class="twelve">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.name, edit_user_path(user.id) %></td>
+      <td><%= user.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

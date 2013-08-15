@@ -108,3 +108,8 @@ en:
       labels:
         collection_rules:
           active: 'Collection link checking active?'
+
+  users:
+    label: 'Users'
+    all_users: 'All Users'
+    edit_profile: 'Edit Profile'

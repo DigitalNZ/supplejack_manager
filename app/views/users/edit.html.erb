@@ -1,0 +1,9 @@
+<h1>
+    <% if @user == current_user %>
+        Edit Profile
+    <% else %>
+        Edit User
+    <% end %>
+</h1>
+
+<%= render "form" %>

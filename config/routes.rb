@@ -26,6 +26,7 @@ HarvesterManager::Application.routes.draw do
   match "/parsers/:parser_id/preview" => "records#index", as: :preview
 
   devise_for :users
+  resources :users, only: [:index, :edit, :update, :new, :create]
 
   root :to => "parsers#index"
 end
