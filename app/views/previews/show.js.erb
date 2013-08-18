@@ -1,4 +1,4 @@
-$('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.status.try(:capitalize)) %>");
+$('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.status) %>");
 
 <% if @preview.raw_data.present? and @preview.harvested_attributes.present? %>
 	$('#preview-<%= @preview.id %> #record-raw-data').html('<%= escape_javascript(@preview.raw_output) %>');
