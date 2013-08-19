@@ -44,8 +44,8 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 
 <% if @preview.harvest_failure? %>
   $('#preview-<%= @preview.id %> #status').html("Harvest Failed");
-	$('#preview-<%= @preview.id %> #harvest-failure h6').html("<%= @preview.harvest_failure_output['exception_class'] %>");
-	$('#preview-<%= @preview.id %> #harvest-failure p').html("<%= @preview.harvest_failure_output['message'] %>");
+	$('#preview-<%= @preview.id %> #harvest-failure h6').html("<%= escape_javascript(@preview.harvest_failure_output['exception_class']) %>");
+	$('#preview-<%= @preview.id %> #harvest-failure p').html("<%= escape_javascript(@preview.harvest_failure_output['message']) %>");
   
   <% @preview.harvest_failure_output['backtrace'].each do |backtrace| %>
     $('#preview-<%= @preview.id %> #harvest-failure ul').append("<li><%= escape_javascript(backtrace) %></li>");
