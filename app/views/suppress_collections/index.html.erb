@@ -2,7 +2,7 @@
   <h2>Add Suppressed Collection</h2>
 </div>
 <div class="row five">
-  <%= form_tag suppress_collections_path do %>
+  <%= form_tag environment_suppress_collections_path(params[:environment]) do %>
     <div class="five columns">
       <%= text_field_tag :id %>
     </div>
@@ -30,7 +30,7 @@
         <% @blacklist.each do |collection| %>
         <tr>
           <td><%= collection %></td>
-          <td><%= link_to "Activate", suppress_collection_path(collection), :method => :delete, class: "small button" %></td>
+          <td><%= link_to "Activate", environment_suppress_collection_path(id: collection, environment: params[:environment]), :method => :delete, class: "small button" %></td>
         </tr>
         <% end %>
       </tbody>

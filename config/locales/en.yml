@@ -86,7 +86,12 @@ en:
 
   link_checker:
     label: "Link Checker"
-    collection_rules: "Link Check Rules"
+    collection_rules:
+      staging: "Link Check Rules Staging"
+      production: "Link Check Rules Production"
+    suppress_collections:
+      staging: "Suppress Collection Staging"
+      production: "Suppress Collection Production"
 
   statistics:
     environments:

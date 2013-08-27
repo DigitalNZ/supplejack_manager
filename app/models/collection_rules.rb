@@ -1,12 +1,19 @@
-class CollectionRules
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  
-  field :collection_title, type: String
-  field :xpath, type: String
-  field :status_codes, type: String
-  field :active, type: Boolean, default: true
-  field :throttle, type: Integer
+class CollectionRules < ActiveResource::Base
+  self.site = ENV["WORKER_HOST"]
+  self.user = ENV["WORKER_API_KEY"]
 
-  validates :collection_title, presence: true, uniqueness: true 
+  schema do
+    attribute :collection_title, :string
+    attribute :xpath,            :string
+    attribute :status_codes,     :string
+    attribute :active,           :boolean
+    attribute :throttle,         :integer
+  end
+
+  include ActiveResource::SchemaTypes
+
+  def id
+    self._id
+  end
+
 end

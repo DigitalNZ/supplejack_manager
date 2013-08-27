@@ -1,5 +1,5 @@
 <h1 class="left">Collection Rules</h1>
-<%= link_to "New collection rule", new_collection_rule_path, class: "button new-right" %>
+<%= link_to "New collection rule", new_environment_collection_rule_path(environment: params[:environment]), class: "button new-right" %>
 
 <table id="collection_rules" class="twelve">
   <thead>
@@ -13,7 +13,7 @@
   <tbody>
     <% @collection_rules.each do |collection_rule| %>
     <tr>
-      <td><%= link_to collection_rule.collection_title, edit_collection_rule_path(collection_rule) %></td>
+      <td><%= link_to collection_rule.collection_title, edit_environment_collection_rule_path(id: collection_rule.id, environment: params[:environment]) %></td>
       <td><%= collection_rule.active %></td>
       <td><%= collection_rule.updated_at %></td>
     </tr>

@@ -11,8 +11,6 @@ HarvesterManager::Application.routes.draw do
   end
 
   resources :parser_templates
-  resources :collection_rules
-  resources :suppress_collections
   resources :previews, only: [:show, :update]
 
   scope ":environment", as: "environment" do
@@ -21,6 +19,8 @@ HarvesterManager::Application.routes.draw do
     resources :enrichment_jobs, only: [:create, :update, :show]
     resources :harvest_schedules
     resources :collection_statistics, only: [:index, :show]
+    resources :collection_rules
+    resources :suppress_collections
   end
 
   match "/parsers/:parser_id/preview" => "records#index", as: :preview

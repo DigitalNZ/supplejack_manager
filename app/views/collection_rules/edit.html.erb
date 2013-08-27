@@ -1,6 +1,6 @@
 <div class="row">
   <div class="eight columns">
     <h1 id="collection-rule-title" class="left"><%= @collection_rule.collection_title %></h1>
-    <%= render 'form', url: collection_rule_path(@collection_rule) %>
+    <%= render 'form', url: environment_collection_rule_path(id: @collection_rule.id, environment: params[:environment]) %>
   </div>
 </div>
