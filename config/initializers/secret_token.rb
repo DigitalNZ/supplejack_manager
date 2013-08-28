@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-HarvesterManager::Application.config.secret_token = '2f00f435132c5527e8d83dae24885a2d610cc60a5fb55658e22a6f9b64adb8e7f6b13519a42cc5a59f9eee38949ee7570958002b083a2ef7c01f1c1c075b39c8'
+HarvesterManager::Application.config.secret_token = ENV['SECRET_TOKEN'] || 'dae5a2dae24885a2d61248da5a61dae242e24885a2d885a4885a2d61d24885a2d61dad6185a2d61'
