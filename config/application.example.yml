@@ -45,7 +45,7 @@ staging:
   HOST: "harvester.org"
   DEVISE_MAILER: "info@harvester.org"
   SECRET_TOKEN: "some really long hashvalue"
-  
+
 production:
 	WORKER_HOST: "http://worker.harvester.org"
   WORKER_API_KEY: "secretapikey"
