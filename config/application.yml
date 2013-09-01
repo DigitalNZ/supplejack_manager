@@ -13,9 +13,6 @@ development:
   WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "cd199c3f"
-  CHANGESAPP_HOST: "http://localhost:3003/changes"
-  CHANGESAPP_USER: "dnz_changes"
-  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
   API_HOST: "http://localhost:3000"
 
 test:
@@ -23,33 +20,4 @@ test:
   WORKER_API_KEY: "12345"
   HARVESTER_CACHING_ENABLED: false
   HONEYBADGER_API_KEY: "cd199c3f"
-  CHANGESAPP_HOST: "http://localhost:3003/changes"
-  CHANGESAPP_USER: "dnz_changes"
-  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
   API_HOST: "http://localhost:3000"
-
-staging:
-  WORKER_HOST: "http://worker.uat.digitalnz.org"
-  WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
-  HARVESTER_CACHING_ENABLED: true
-  HONEYBADGER_API_KEY: "cd199c3f"
-  CHANGESAPP_HOST: "http://changes.uat.digitalnz.org/changes"
-  CHANGESAPP_USER: "dnz_changes"
-  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
-  API_HOST: "http://api.uat.digitalnz.org"
-  HOST: "harvester.uat.digitalnz.org"
-  DEVISE_MAILER: "info@harvester.uat.digitalnz.org"
-  SECRET_TOKEN: "2f00f435132c5527e8d83dae24885a2d610cc60a5fb55658e22a6f9b64adb8e7f6b13519a42cc5a59f9eee38949ee7570958002b083a2ef7c01f1c1c075b39c8"
-
-production:
-  WORKER_HOST: "http://worker.dnz03.digitalnz.org"
-  WORKER_API_KEY: "rq6umzbPzPztcefxC8sX"
-  HARVESTER_CACHING_ENABLED: true
-  HONEYBADGER_API_KEY: "cd199c3f"
-  CHANGESAPP_HOST: "http://changes.uat.digitalnz.org/changes"
-  CHANGESAPP_USER: "dnz_changes"
-  CHANGESAPP_PASSWORD: "wac7iam3gom5hy7"
-  API_HOST: "http://api.dnz03.digitalnz.org"
-  HOST: "harvester.uat.digitalnz.org"
-  DEVISE_MAILER: "info@harvester.uat.digitalnz.org"
-  SECRET_TOKEN: "2f00f435132c5527e8d83dae24885a2d610cc60a5fb55658e22a6f9b64adb8e7f6b13519a42cc5a59f9eee38949ee7570958002b083a2ef7c01f1c1c075b39c8"
