@@ -9,7 +9,7 @@
 #
 development:
 	WORKER_HOST: "http://worker.harvester.org"
-  WORKER_API_KEY: "secretapikey"
+  WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "abc123"
   CHANGESAPP_HOST: "http://changes.harvester.org/changes"
@@ -22,7 +22,7 @@ development:
 
 test:
 	WORKER_HOST: "http://worker.harvester.org"
-  WORKER_API_KEY: "secretapikey"
+  WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
   HARVESTER_CACHING_ENABLED: true
   HONEYBADGER_API_KEY: "abc123"
   CHANGESAPP_HOST: "http://changes.harvester.org/changes"
