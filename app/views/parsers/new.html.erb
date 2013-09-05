@@ -1,10 +1,26 @@
 <h1>New parser configuration</h1>
 
-<%= simple_form_for @parser do |f| %>
+<%= simple_form_for @parser, html: {class: 'six'} do |f| %>
+  <div class="row">
+    <div class="column twelve">
 
-  <%= f.input :name %>
-  <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
-  <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name) %>
+      <%= f.input :name %>
+      <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
+      <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name) %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="column eight">
+    <%= f.association :source, as: :grouped_select, collection: Partner.all, group_method: :sources %>
+    </div>
+    <div class="columns four">
+      <span class="postfix">
+        <%= link_to 'create new source', new_source_path %>
+      </span>
+    </div>
+  </div>
 
   <%= f.button :submit %>
   

@@ -1,0 +1,19 @@
+<h1 class="left">Partners</h1>
+<%= link_to "New Partner", new_partner_path, class: "button new-right" %>
+
+<table id="partners" class="twelve">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @partners.each do |partner| %>
+    <tr>
+      <td><%= link_to partner.name, edit_partner_path(partner) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

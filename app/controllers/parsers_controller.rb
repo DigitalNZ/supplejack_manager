@@ -13,6 +13,8 @@ class ParsersController < ApplicationController
 
   def new
     @parser = Parser.new
+    @source = @parser.source = Source.new
+    @source.partner = Partner.new
   end
 
   def edit
@@ -24,6 +26,7 @@ class ParsersController < ApplicationController
   def create
     @parser = Parser.new(params[:parser])
     @parser.user_id = current_user.id
+    @source = @parser.source
 
     if @parser.save_with_version
       redirect_to edit_parser_path(@parser)

@@ -38,4 +38,6 @@ HarvesterManager::Application.configure do
   config.assets.debug = true
 
   ENV["UNICORN_WORKERS"] = "2"
+
+  BACKEND_ENVIRONMENTS = [:development]
 end

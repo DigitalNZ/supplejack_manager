@@ -1,0 +1,21 @@
+<%= simple_form_for(@source) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row form-inputs">
+    <div class="four columns">
+      <%= f.input :name %>
+      <%= f.input :source_id, label: 'source_id' %>
+      <%= f.association :partner, collection: Partner.all, include_blank: '<create new>' %>
+      <%= f.simple_fields_for :partner do |partner_form| %>
+      <fieldset id="new-partner-fields">
+        <legend>New partner</legend>
+        <%= partner_form.input :name %>
+      </fieldset>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

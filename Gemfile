@@ -72,4 +72,5 @@ group :test do
   gem "launchy",            ">= 2.1.2"
   gem "capybara",           ">= 2.0.1"
   gem 'timecop'
+  gem 'webmock'
 end

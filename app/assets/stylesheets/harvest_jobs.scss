@@ -41,7 +41,7 @@
   }
 }
 
-.error {
+#harvest-result .error {
   background: lighten($alertColor, 52%);
   border: 1px solid $alertColor;
   color: $alertColor;

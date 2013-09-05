@@ -1,5 +1,6 @@
 HarvesterManager::Application.routes.draw do
 
+
   resources :parsers do
     resources :parser_versions, path: "versions", only: [:show, :update] do
       get :current, on: :collection
@@ -11,6 +12,10 @@ HarvesterManager::Application.routes.draw do
   end
 
   resources :parser_templates
+
+  resources :partners, except: [:show, :destroy]
+  resources :sources, except: [:show, :destroy]
+  
   resources :previews, only: [:show, :update]
 
   scope ":environment", as: "environment" do

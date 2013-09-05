@@ -9,8 +9,8 @@ development:
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost:27017
-        #- 192.168.0.70
+        #- localhost:27018
+        - 192.168.0.70
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
@@ -31,8 +31,8 @@ development:
     api:
       database: dnz_api_development
       hosts:
-        - localhost:27017
-        #- 192.168.0.70
+        #- localhost:27018
+        - 192.168.0.70
       options:
         consistency: :strong
   # Configure Mongoid specific options. (optional)

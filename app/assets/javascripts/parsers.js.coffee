@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+
 $ ->
   $("#main").on 'click', 'a.records-preview-button', ->
     $("#preview-area-spinner").show()
@@ -54,5 +55,7 @@ $ ->
     $(this).hide();
 
 
-  $('#parsers').dataTable("aaSorting": [ [2,'desc'] ])
+  $('#parsers').dataTable("aaSorting": [ [4,'desc'] ])
   $(document).foundationCustomForms();
+
+

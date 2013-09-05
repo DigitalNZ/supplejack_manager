@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Parser do
+  before do
+    Partner.any_instance.stub(:update_apis)
+    Source.any_instance.stub(:update_apis)
+  end
 
   let(:parser) { FactoryGirl.build(:parser) }
 
@@ -20,8 +24,9 @@ describe Parser do
     end
 
     it "should not be valid with a duplicated name" do
-      parser2 = FactoryGirl.create(:parser, name: 'NZ Museums')
-      parser.should_not be_valid
+      parser1 = FactoryGirl.create(:parser, name: 'NZ Museums')
+      parser2 = FactoryGirl.build(:parser, name: 'NZ Museums')
+      parser2.should_not be_valid
     end
   end
 

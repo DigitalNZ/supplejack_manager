@@ -12,6 +12,15 @@
             <%= link_to_tab t('snippets.label'), snippets_path %>
             <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
 
+              <li class="has-dropdown">
+              <%= link_to t('partners'), "#" %>
+
+              <ul class="dropdown">
+                <%= link_to_tab t('partners'), partners_path %>
+                <%= link_to_tab t('sources'), sources_path %>
+              </ul>
+            </li>
+
             <li class="has-dropdown">
               <%= link_to t('harvest_jobs.label'), "#" %>
 

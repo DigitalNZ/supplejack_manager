@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe ParserVersion do
+  before do
+    Partner.any_instance.stub(:update_apis)
+    Source.any_instance.stub(:update_apis)
+  end
 
   let(:version) { ParserVersion.new }
   

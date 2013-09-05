@@ -12,6 +12,10 @@ class Parser
 
   attr_accessor :message, :tags, :user_id, :parser_template_name
 
+  belongs_to :source
+  accepts_nested_attributes_for :source
+  validates :source, presence: true, associated: true
+
   embeds_many :versions, class_name: "ParserVersion"
 
   VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]

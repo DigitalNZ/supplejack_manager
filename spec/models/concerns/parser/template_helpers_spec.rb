@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Parser::TemplateHelpers do
+  before do
+    Partner.any_instance.stub(:update_apis)
+    Source.any_instance.stub(:update_apis)
+  end
 
   describe "update_contents_parser_class!" do
 

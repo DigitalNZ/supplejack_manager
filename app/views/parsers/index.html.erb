@@ -4,6 +4,8 @@
 <table id="parsers" class="twelve">
   <thead>
     <tr>
+      <th>Partner</th>
+      <th>Source</th>
       <th>Name</th>
       <th>Strategy</th>
       <th>Last Updated</th>
@@ -15,6 +17,8 @@
 
     <% @parsers.each do |parser| %>
     <tr>
+      <td><%= parser.source.partner.name %></td>
+      <td><%= parser.source.name %></td>
       <td><%= link_to parser.name, edit_parser_path(parser) %></td>
       <td><%= parser.strategy %></td>
       <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
