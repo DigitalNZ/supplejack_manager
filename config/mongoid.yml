@@ -31,8 +31,7 @@ development:
     api:
       database: dnz_api_development
       hosts:
-        #- localhost:27018
-        - 192.168.0.70
+        <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
         consistency: :strong
   # Configure Mongoid specific options. (optional)
@@ -89,7 +88,7 @@ test:
     api:
       database: dnz_api_test
       hosts:
-        - localhost:27017
+        <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
         consistency: :strong
 
@@ -104,7 +103,7 @@ staging:
     api:
       database: dnz_api_staging
       hosts:
-        - localhost:27017
+        <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
         consistency: :strong
 
@@ -119,8 +118,6 @@ production:
     api:
       database: dnz_api_production
       hosts:
-        - dnz01.digitalnz.org:27017
-        - dnz04.digitalnz.org:27017
-        - dnz02.digitalnz.org:27017
+        <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
         consistency: :eventual

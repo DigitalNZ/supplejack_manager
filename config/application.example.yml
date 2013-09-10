@@ -19,6 +19,7 @@ development:
   HOST: "harvester.org"
   DEVISE_MAILER: "info@harvester.org"
   SECRET_TOKEN: "some really long hashvalue"
+  API_MONGOID_HOSTS: "localhost:27017"
 
 test:
 	WORKER_HOST: "http://worker.harvester.org"
@@ -32,6 +33,7 @@ test:
   HOST: "harvester.org"
   DEVISE_MAILER: "info@harvester.org"
   SECRET_TOKEN: "some really long hashvalue"
+  API_MONGOID_HOSTS: "localhost:27017"
 
 staging:
 	WORKER_HOST: "http://worker.harvester.org"
@@ -45,6 +47,7 @@ staging:
   HOST: "harvester.org"
   DEVISE_MAILER: "info@harvester.org"
   SECRET_TOKEN: "some really long hashvalue"
+  API_MONGOID_HOSTS: "localhost:27017"
 
 production:
 	WORKER_HOST: "http://worker.harvester.org"
@@ -58,3 +61,4 @@ production:
   HOST: "harvester.org"
   DEVISE_MAILER: "info@harvester.org"
   SECRET_TOKEN: "some really long hashvalue"
+  API_MONGOID_HOSTS: "localhost:27017"
