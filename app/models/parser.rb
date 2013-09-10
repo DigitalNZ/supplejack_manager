@@ -121,4 +121,8 @@ class Parser
     modes.map {|m| [m.titleize, m]}
   end
 
+  def partner 
+    source.try(:partner)
+  end 
+
 end

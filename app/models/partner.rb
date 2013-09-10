@@ -9,6 +9,8 @@ class Partner
 
   after_save :update_apis
 
+  default_scope order_by(name: :asc)
+
   def update_apis
     BACKEND_ENVIRONMENTS.each do |environment|
       env = Figaro.env(environment)

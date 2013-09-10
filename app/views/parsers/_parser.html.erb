@@ -154,7 +154,8 @@
   <h2>Change source</h2>
   <p> Warning: changing the source of this parser does not affect records that have already been harvested.</p>
   <%= simple_form_for @parser do |f| %>
-    <%= f.association :source, as: :grouped_select, collection: Partner.all, group_method: :sources, include_blank: false %>
+    <%= f.input :partner, collection: Partner.all.sort(name: 1), label_method: :name, value_method: :name %>
+    <%= f.association :source, as: :grouped_select, collection: Partner.all, group_method: :sources, include_blank: false, label_method: :name, group_label_method: :name %>
     <%= f.button :submit, "Change source", class: 'right' %>
   <% end %>
   <a class="close-reveal-modal">&#215;</a>

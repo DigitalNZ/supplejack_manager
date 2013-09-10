@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+stored_sources = null
 
 $ ->
   $("#main").on 'click', 'a.records-preview-button', ->
@@ -54,6 +55,14 @@ $ ->
     $('.version.hidden').show();
     $(this).hide();
 
+  stored_sources = $('#parser_source_id optgroup')
+
+  $('#parser_partner').change ->
+    partner = $('#parser_partner').val()
+    $('#parser_source_id optgroup').remove()
+    $('#parser_source_id').append(stored_sources)
+    if partner != ""
+      $("#parser_source_id optgroup[label!='#{partner}']").remove()
 
   $('#parsers').dataTable("aaSorting": [ [4,'desc'] ])
   $(document).foundationCustomForms();

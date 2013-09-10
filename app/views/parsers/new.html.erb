@@ -13,14 +13,21 @@
 
   <div class="row">
     <div class="column eight">
-    <%= f.association :source, as: :grouped_select, collection: Partner.all, group_method: :sources %>
-    </div>
-    <div class="columns four">
-      <span class="postfix">
-        <%= link_to 'create new source', new_source_path %>
-      </span>
+      <%= f.input :partner, collection: Partner.all.sort(name: 1), label_method: :name, value_method: :name %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="column eight">
+    <%= f.association :source, as: :grouped_select, collection: Partner.all.sort(name: 1), group_method: :sources, label_method: :name, group_label_method: :name %>
+    </div>
+    <span class="postfix column four">
+        <%= link_to 'create new source', new_source_path %>
+    </span>
+  </div>
+
+      
+
 
   <%= f.button :submit %>
   

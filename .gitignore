@@ -75,7 +75,7 @@ pickle-email-*.html
 **.swp
 
 # Ignore application configuration
-# /config/application.yml
+/config/application.yml
 
 /harvester-manager.sublime-project
 /harvester-manager.sublime-workspace
