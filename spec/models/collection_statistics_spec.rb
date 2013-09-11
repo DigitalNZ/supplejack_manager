@@ -18,4 +18,31 @@ describe CollectionStatistics do
 	  index_stats.should eq({})
 	end
 
+	@collection_statistics  = { :collection_rules => { source_id: "tapuhi" } }.to_json
+
+  ActiveResource::HttpMock.respond_to do |mock|
+    mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics 
+  end
+
+	describe "source" do
+
+		let(:collection_statistics) { CollectionStatistics.new }
+		let(:source) { FactoryGirl.create(:source) }
+
+		before do
+			Partner.any_instance.stub(:update_apis)
+    	Source.any_instance.stub(:update_apis)
+			collection_statistics.stub(:source_id) { 'tapuhi' }
+		end
+
+		it "shound find the source with the collection statistics source id" do
+			Source.should_receive(:find_by).with(source_id: 'tapuhi') { source }
+		  collection_statistics.source.should eq source
+		end
+
+		it "returns nil if it can not find the source" do
+		  collection_statistics.source.should be_nil
+		end
+	end
+
 end

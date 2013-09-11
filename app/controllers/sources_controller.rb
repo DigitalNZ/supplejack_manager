@@ -1,7 +1,11 @@
 class SourcesController < ApplicationController
+
+  respond_to :html, :json
+  
   # GET /sources
   def index
     @sources = Source.all
+    respond_with @sources
   end
 
   # GET /sources/new
@@ -13,6 +17,11 @@ class SourcesController < ApplicationController
   # GET /sources/1/edit
   def edit
     @source = Source.find(params[:id])
+  end
+
+  def show
+    @source = Source.find(params[:id])
+    respond_with @source
   end
 
   # POST /sources

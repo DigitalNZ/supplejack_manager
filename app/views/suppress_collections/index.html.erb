@@ -2,9 +2,10 @@
   <h2>Add Suppressed Collection</h2>
 </div>
 <div class="row five">
-  <%= form_tag environment_suppress_collections_path(params[:environment]) do %>
+  <%= form_tag(environment_suppress_collection_path(id: "123", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
     <div class="five columns">
-      <%= text_field_tag :id %>
+      <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
+      <%= hidden_field_tag :status, "suppressed" %>
     </div>
     <div class="seven columns">
       <%= submit_tag "Add new suppressed collection", class: "button" %>
@@ -25,15 +26,19 @@
           <th class="one">Activate Collection</th>
         </tr>
       </thead>
-
       <tbody>
-        <% @blacklist.each do |collection| %>
+        <% @blacklisted_sources.each do |source| %>
         <tr>
-          <td><%= collection %></td>
-          <td><%= link_to "Activate", environment_suppress_collection_path(id: collection, environment: params[:environment]), :method => :delete, class: "small button" %></td>
+          <td><%= source["name"] %></td>
+          <td>
+            <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
+              <%= hidden_field_tag :status, "active" %>
+              <%= submit_tag "Activate", class: "small button" %>
+            <% end %>
         </tr>
         <% end %>
       </tbody>
+
     </table>
   </div>
 </div>

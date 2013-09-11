@@ -3,23 +3,13 @@ class SuppressCollectionsController < ApplicationController
   respond_to :html, :json
 
   def index
-    response = RestClient.get("#{fetch_env_vars['API_HOST']}/link_checker/collections") rescue nil
-    @blacklist = JSON.parse(response.body)['suppressed_collections'] if response
+    @response = RestClient.get("#{fetch_env_vars['API_HOST']}/sources", { params: {:"source[status]" => "suppressed"}}) rescue nil
+    @blacklisted_sources = JSON.parse(@response)["sources"] rescue []
   end
 
-  def create
+  def update
     begin
-      RestClient.put("#{fetch_env_vars['API_HOST']}/link_checker/collection", { collection: params[:id], status: 'suppressed' })
-    rescue RestClient::Exception => e
-      Rails.logger.error "Exception #{e} when attempting to post to API"
-    end
-
-    redirect_to environment_suppress_collections_path(environment: params[:environment])
-  end
-
-  def destroy
-    begin
-      RestClient.put("#{fetch_env_vars['API_HOST']}/link_checker/collection", { collection: params[:id], status: 'active' })
+      RestClient.put("#{fetch_env_vars['API_HOST']}/sources/#{params[:id]}", { source: { status: params[:status] }})
     rescue RestClient::Exception => e
       Rails.logger.error "Exception #{e} when attempting to post to API"
     end

@@ -1,5 +1,5 @@
 <%= simple_form_for @collection_rule, url: url do |f| %>
-  <%= f.input :collection_title %>
+ <%= f.input :source_id, as: :grouped_select, collection: Partner.all.sort(name: 1), group_method: :sources, label_method: :name, value_method: :source_id, group_label_method: :name %>
   <%= f.input :xpath %>
   <%= f.input :status_codes %>
   <%= f.input :throttle %>

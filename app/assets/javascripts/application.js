@@ -43,3 +43,4 @@
 //= require previews
 //= require partners
 //= require sources
+//= require suppressed_collections

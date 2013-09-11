@@ -17,4 +17,8 @@ class CollectionStatistics < ActiveResource::Base
 		index_statistics
   end
 
+  def source
+  	Source.find_by(source_id: self.source_id) rescue nil
+  end
+
 end

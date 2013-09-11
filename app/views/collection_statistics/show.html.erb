@@ -16,7 +16,7 @@
 <% @collection_statistics.each do |collection| %>
 	<div class="row">
 		<div class="twelve columns">
-		<h4><%= collection.collection_title %></h4>
+		<h4><%= collection.source.name %></h4>
   		<div class="status-section left four">
 		    <h5>Activations (<%= collection.activated_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">

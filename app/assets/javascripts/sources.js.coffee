@@ -51,4 +51,4 @@ $ ->
   $('#environment').change -> 
     update_link()
 
-  update_link()
+  update_link() if $( "#date-slider" ).length != 0
