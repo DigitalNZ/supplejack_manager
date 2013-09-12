@@ -28,6 +28,7 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.slider
 //= require jquery.ui.timepicker
+//= require moment.min
 //= require codemirror
 //= require codemirror/modes/ruby
 //= require collection_rules

@@ -14,7 +14,9 @@ HarvesterManager::Application.routes.draw do
   resources :parser_templates
 
   resources :partners, except: [:show, :destroy]
-  resources :sources, except: [:show, :destroy]
+  resources :sources, except: [:show, :destroy] do
+    get :reindex, on: :member
+  end
   
   resources :previews, only: [:show, :update]
 

@@ -4,17 +4,17 @@
 <table id="sources" class="twelve">
   <thead>
     <tr>
-      <th>Partner</th>
-      <th>Name</th>
+      <th>Source Name</th>
       <th>Source ID</th>
+      <th>Partner</th>
     </tr>
   </thead>
   <tbody>
   <% @sources.each do |source| %>
     <tr>
-      <td><%= source.partner.name %></td>
       <td><%= link_to source.name, edit_source_path(source) %></td>
       <td><%= source.source_id %></td>
+      <td><%= link_to source.partner.name, edit_partner_path(source.partner) %></td>
     </tr>
   <% end %>
   </tbody>
