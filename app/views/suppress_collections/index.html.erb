@@ -2,7 +2,7 @@
   <h2>Add Suppressed Collection</h2>
 </div>
 <div class="row five">
-  <%= form_tag(environment_suppress_collection_path(id: "123", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
+  <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
     <div class="five columns">
       <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
       <%= hidden_field_tag :status, "suppressed" %>
