@@ -1,6 +1,6 @@
 GIT
   remote: git@scm.digitalnz.org:harvester/core
-  revision: 023f3d51ab6869a1ab5d044b48d4c4c89d7b369d
+  revision: ea65cb35be8c007fa2532da89f21eb5f7afe589a
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)
@@ -162,7 +162,7 @@ GEM
     honeybadger (1.5.0)
       activesupport
       json
-    i18n (0.6.4)
+    i18n (0.6.5)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -171,7 +171,7 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.7)
-    jsonpath (0.5.3)
+    jsonpath (0.5.4)
       multi_json
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -190,8 +190,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
-    mime-types (1.23)
-    mimemagic (0.2.0)
+    mime-types (1.25)
+    mimemagic (0.2.1)
     mini_portile (0.5.1)
     modular-scale (1.0.2)
       compass (>= 0.11.5)
@@ -201,8 +201,8 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
-    moped (1.5.0)
-    multi_json (1.7.7)
+    moped (1.5.1)
+    multi_json (1.8.0)
     multipart-post (1.1.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
