@@ -1,13 +1,19 @@
 require "spec_helper"
 
-describe ParserVersion do
+class Program
+  include Versioned
+end
+
+describe Version do
+
+  let(:program) { Program.new }
+  let(:version) { Version.new }
+
   before do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
+    version.versionable = program
+    version.user = FactoryGirl.build(:user, email: "test@test.co.nz")
   end
 
-  let(:version) { ParserVersion.new }
-  
   describe "#staging?" do
     context "has staging tag" do
       before { version.tags = ["staging"] }
@@ -45,10 +51,6 @@ describe ParserVersion do
   end
 
   describe "#post_changes" do
-    before(:each) do
-      version.user = FactoryGirl.build(:user)
-      version.parser = FactoryGirl.build(:parser)
-    end
 
     context "tagged as production" do
       it "should post to changes app" do
@@ -64,6 +66,37 @@ describe ParserVersion do
         RestClient::Request.should_not_receive(:execute).with(anything())
         version.post_changes
       end
+    end
+  end
+
+  describe "#changes_payload" do
+
+    it "should include component with a value of DNZ Harvester - Program" do
+      version.changes_payload.should include(component: "DNZ Harvester - Program")
+    end
+
+    it "should include description with a value of Test program: New version" do
+      program.name = "Test program"
+      version.message = "New version"
+
+      version.changes_payload.should include(description: "Test program: New version")
+    end
+
+    it "should include the email of the user that saved the version" do
+      version.changes_payload.should include(email: "test@test.co.nz")
+    end
+
+    it "should include the current time" do
+      version.changes_payload[:time].should_not be_nil
+    end
+
+    it "should include the current Rails environment" do
+      version.changes_payload.should include(environment: "test")
+    end
+
+    it "should include the current version number" do
+      version.version = 2
+      version.changes_payload.should include(revision: 2)
     end
   end
 end

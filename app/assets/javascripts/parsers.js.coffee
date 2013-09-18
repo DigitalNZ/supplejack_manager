@@ -31,18 +31,19 @@ $ ->
 
     $("#harvest-form form").attr("action", "/" + environment + "/harvest_jobs")
 
+    $.get($(this).attr("href"), {'environment': environment})
     return false;
 
   $(".records-enrichment-modal-button").click ->
     $link = $(this)
     environment = $link.data("environment")
-    $("#enrichment_job_environment").val(environment)
     $("#enrichment-form").show()
     $("#enrichment-result").hide()
     $("#enrichment-modal").reveal()
 
     $("#enrichment-form form").attr("action", "/" + environment + "/enrichment_jobs")
 
+    $.get($(this).attr("href"), {'environment': environment})
     return false;
 
   $('#rename-parser-action').click ->

@@ -42,8 +42,9 @@ class SnippetsController < ApplicationController
     redirect_to snippets_path
   end
 
-  def search
-    @snippet = Snippet.find_by_name(params[:name])
+  def current_version
+    @snippet = Snippet.find_by_name(params[:name], params[:environment])
     respond_with @snippet
   end
+
 end

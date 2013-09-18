@@ -18,6 +18,7 @@ class HarvestJob < AbstractJob
     attribute :enrichments,           :string
     attribute :mode,                  :string
     attribute :posted_records_count,  :integer
+    attribute :limit,                 :integer
   end
 
   include ActiveResource::SchemaTypes

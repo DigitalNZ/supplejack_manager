@@ -1,15 +1,15 @@
 class Snippet
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Versioning
   include Mongoid::Paranoia
 
-  field :name,      type: String
-  field :content,   type: String
-  field :user_id,   type: String
+  include Versioned
 
-  def self.find_by_name(name)
-    where(name: name).first
+  field :content,   type: String
+
+  def self.find_by_name(name, environment)
+    snippet = where(name: name).first
+    snippet.current_version(environment) if snippet.present?
   end
 
   def file_name

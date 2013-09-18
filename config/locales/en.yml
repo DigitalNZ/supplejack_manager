@@ -8,6 +8,7 @@ en:
   commit_message: "Commit Message"
   view_details: "View details"
   delete: "Delete"
+  history: "History"
 
   environments:
     production: "Production"
@@ -20,14 +21,22 @@ en:
     enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
     name: "Name"
-    history: "History"
+    rename: "Rename Parser"
+    delete: "Delete Parser"
+    change_source: "Change Source"
+    edit_current: "(Edit current version)"
     environments:
       production: "Production"
       staging: "Staging"
-    edit_current: "(Edit current version)"
 
   parser_templates:
     label: "Parser Templates"
+
+  snippets:
+    label: "Snippets"
+    edit_current: "(Edit current version)"
+    rename: "Rename Snippet"
+    delete: "Delete Snippet"
 
   abstract_jobs:
     type: "Job Type"
@@ -97,9 +106,6 @@ en:
     environments:
       staging: "Statistics Staging"
       production: "Statistics Production"
-
-  snippets:
-    label: "Snippets"
 
   activemodel:
     models:

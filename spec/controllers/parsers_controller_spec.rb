@@ -67,12 +67,12 @@ describe ParsersController do
     end
 
     it "saves the parser" do
-      parser.should_receive(:save_with_version)
+      parser.should_receive(:save)
       post :create, parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
-      before { parser.stub(:save_with_version) { true }}
+      before { parser.stub(:save) { true }}
 
       it "redirects to edit page" do
         post :create, parser: {name: "Tepapa"}
@@ -81,7 +81,7 @@ describe ParsersController do
     end
 
     context "invalid parser" do
-      before { parser.stub(:save_with_version) { false }}
+      before { parser.stub(:save) { false }}
 
       it "renders the edit action" do
         post :create, parser: {name: "Tepapa"}
@@ -108,12 +108,12 @@ describe ParsersController do
     end
 
     it "saves the parser" do
-      parser.should_receive(:save_with_version)
+      parser.should_receive(:save)
       put :update, id: "1234", parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
-      before { parser.stub(:save_with_version) { true }}
+      before { parser.stub(:save) { true }}
 
       it "redirects to edit page" do
         put :update, id: "1234"
@@ -122,7 +122,7 @@ describe ParsersController do
     end
 
     context "invalid parser" do
-      before { parser.stub(:save_with_version) { false }}
+      before { parser.stub(:save) { false }}
 
       it "renders the edit action" do
         put :update, id: "1234"

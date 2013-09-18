@@ -1,6 +1,6 @@
 <h3>Run Enrichment</h3>
 
-<%= simple_form_for @enrichment_job, url: environment_enrichment_jobs_path("staging"), remote: true do |f| %>
+<%= simple_form_for @enrichment_job, url: environment_enrichment_jobs_path(@enrichment_job.environment), remote: true do |f| %>
   <%= f.input :parser_id, as: :hidden %>
   <%= f.input :version_id, as: :hidden %>
   <%= f.input :user_id, as: :hidden %>
@@ -9,8 +9,8 @@
 
   <%= f.input :record_id, placeholder: "Enter a record_id, or leave blank to run full enrichment" %>
 
-  <% if @parser.enrichment_definitions.any? %>
-    <%= f.input :enrichment, collection: @parser.enrichment_definitions.keys.map {|k| [k.to_s.titleize, k]}, as: :radio_buttons, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
+  <% if @parser.enrichment_definitions(@enrichment_job.environment).any? %>
+    <%= f.input :enrichment, collection: @parser.enrichment_definitions(@enrichment_job.environment).keys.map {|k| [k.to_s.titleize, k]}, as: :radio_buttons, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
   <% end %>
 
   <br/>

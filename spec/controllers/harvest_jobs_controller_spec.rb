@@ -9,14 +9,14 @@ describe HarvestJobsController do
   end
 
   describe "#GET show" do
-    
+
     it "finds the harvest job" do
       HarvestJob.should_receive(:find).with("1") { job }
       get :show, id: 1, format: "js", environment: "staging"
       assigns(:harvest_job).should eq job
     end
   end
-  
+
   describe "POST create" do
     before(:each) do
       HarvestJob.stub(:new) { job }

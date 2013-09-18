@@ -3,24 +3,23 @@ class Parser
   include Mongoid::Timestamps
   include Mongoid::Paranoia
   include ActiveModel::SerializerSupport
+
   include TemplateHelpers
 
+  include Versioned
 
-  field :name,      type: String
   field :strategy,  type: String
   field :content,   type: String
 
-  attr_accessor :message, :tags, :user_id, :parser_template_name
+  attr_accessor :parser_template_name
 
   belongs_to :source
   accepts_nested_attributes_for :source
   validates :source, presence: true, associated: true
 
-  embeds_many :versions, class_name: "ParserVersion"
-
   VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]
 
-  ENVIRONMENTS = [:staging, :production]
+  # ENVIRONMENTS = [:staging, :production]
 
   validates_presence_of   :name, :strategy
   validates_uniqueness_of :name
@@ -36,10 +35,6 @@ class Parser
 
   def path
     "#{strategy}/#{file_name}"
-  end
-
-  def last_edited_by
-    self.versions.last.try(:user).try(:name)
   end
 
   def running_jobs?
@@ -58,14 +53,6 @@ class Parser
     end
   end
 
-  def loader
-    @loader ||= HarvesterCore::Loader.new(self)
-  end
-
-  def load_file
-    loader.load_parser
-  end
-
   def xml?
     ["xml", "oai", "rss"].include?(strategy)
   end
@@ -78,28 +65,10 @@ class Parser
     strategy == "oai"
   end
 
-  def current_version(environment)
-    return self.versions.last if environment.to_sym == :test
-    self.versions.where(tags: environment.to_s).desc(:created_at).first
-  end
-
-  def save_with_version
-    result = self.save
-
-    if result
-      version_number = self.versions.count + 1
-      self.versions.create(content: content, tags: tags, message: message, user_id: user_id, version: version_number)
-    end
-
-    result
-  end
-
-  def find_version(version_id)
-    self.versions.find(version_id)
-  end
-
-  def enrichment_definitions
+  def enrichment_definitions(environment)
     begin
+      loader = HarvesterCore::Loader.new(self, environment)
+
       if loader.loaded?
         loader.parser_class.enrichment_definitions
       else
@@ -121,8 +90,8 @@ class Parser
     modes.map {|m| [m.titleize, m]}
   end
 
-  def partner 
+  def partner
     source.try(:partner)
-  end 
+  end
 
 end

@@ -1,8 +1,8 @@
-class ParserVersion
+class Version
+
   include Mongoid::Document
   include Mongoid::Timestamps::Created
   include Mongoid::Paranoia
-
   include ActiveModel::SerializerSupport
 
   field :content,   type: String
@@ -10,11 +10,10 @@ class ParserVersion
   field :message,   type: String
   field :version,   type: Integer
 
-  embedded_in :parser
-
-  delegate :name, :strategy, :file_name, to: :parser
-
   belongs_to :user
+
+  embedded_in :versionable, polymorphic: true
+  delegate :name, :strategy, :file_name, to: :versionable
 
   def staging?
     self.tags ||= []
@@ -34,14 +33,7 @@ class ParserVersion
 
   def post_changes
     if self.production?
-      payload = {
-        component: "DNZ Harvester configs",
-        description: "#{self.name}: #{self.message}",
-        email: self.user.email,
-        time: Time.now,
-        environment: Rails.env,
-        revision: self.version
-      }
+      payload = changes_payload
 
       RestClient::Request.execute(
         method: :post,
@@ -51,5 +43,16 @@ class ParserVersion
         payload: payload
       )
     end
+  end
+
+  def changes_payload
+    {
+      component: "DNZ Harvester - #{self.versionable.class.name}",
+      description: "#{self.name}: #{self.message}",
+      email: self.user.email,
+      time: Time.now,
+      environment: Rails.env,
+      revision: self.version
+    }
   end
 end

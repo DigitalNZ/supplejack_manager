@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="nine columns">
+    <h1 id="snippet-title" class="left"><%= @snippet.name %></h1>
+    <div id="hidden-snippet-form">
+      <%= simple_form_for @snippet do |f| %>
+        <div class="snippet-form">
+          <%= f.input :name %>
+          <%= f.button :submit, "Rename Snippet" %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @version %>
+      <%= render "snippet_versions/form" %>
+    <% else %>
+      <%= render "form" %>
+    <% end %>
+  </div>
+
+
+  <div class="three columns">
+    <div class="row">
+    <h3 class="left"><%= t("history") %></h3>
+
+    <%= link_to t("snippets.edit_current"), edit_snippet_path(@snippet), class: "edit-snippet left" %>
+
+    <%= render partial: "versions/version_list", locals: { versionable: @snippet, versionable_path: "snippet_snippet_version" } %>
+
+    <a href="#" id="rename-snippet-action" class="button expand">Rename Snippet</a>
+    <a href="#" class="button expand" data-reveal-id="delete-snippet-alert">Delete Snippet</a>
+
+
+  </div>
+</div>
+
+
+<div id="delete-snippet-alert" class="reveal-modal small">
+  <h2>Delete Snippet</h2>
+  <p> Are you sure that you want to delete the snippet: <strong><%= @snippet.name %></strong> </p>
+  <div>
+    <%= button_to "Delete", @snippet, method: :delete, class: "button alert right" %>
+    <button id="cancel-snippet-delete" class="button secondary right">Cancel</button>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+

@@ -58,38 +58,6 @@ describe Parser do
     end
   end
 
-  describe "#last_edited_by" do
-    it "should return the last edited by" do
-      parser.stub(:versions) { [mock(:version, user: mock(:user, name: "bill"))] }
-      parser.last_edited_by.should eq "bill"
-    end
-
-    it "handles parsers with no versions" do
-      parser.stub(:versions) { [] }
-      parser.last_edited_by.should be_nil
-    end
-  end
-
-  describe "#loader" do
-    it "should initialize a loader object" do
-      HarvesterCore::Loader.should_receive(:new).with(parser)
-      parser.loader
-    end
-  end
-
-  describe "#load" do
-    let!(:loader) { mock(:loader).as_null_object }
-
-    before(:each) do
-      parser.stub(:loader) { loader }
-    end
-
-    it "should load the parser file" do
-      loader.should_receive(:load_parser)
-      parser.load_file
-    end
-  end
-
   describe "xml?" do
     let(:parser) { FactoryGirl.build(:parser, strategy: "xml", name: "Natlib") }
 
@@ -128,71 +96,6 @@ describe Parser do
     end
   end
 
-  describe "current_version" do
-    let(:parser) { FactoryGirl.create(:parser, strategy: "json", name: "Natlib") }
-
-    before(:each) do
-      parser.attributes = {tags: ["production"], content: "Hi 1"}
-      parser.save_with_version
-      parser.attributes = {tags: nil, content: "Hi 2"}
-      parser.save_with_version
-      parser.reload
-    end
-
-    context "production environment" do
-      it "returns the most recent version tagged with production" do
-        parser.current_version(:production).should eq parser.versions[0]
-      end
-    end
-
-    context "test environment" do
-      it "returns the most recent version regardless of tags" do
-        parser.current_version(:test).should eq parser.versions[1]
-      end
-    end
-  end
-
-  describe "#save_with_version" do
-    let(:parser) { FactoryGirl.build(:parser, strategy: "json", name: "Natlib") }
-
-    context "valid parser" do
-      before(:each) do
-        parser.save_with_version
-        @version = parser.versions.first
-      end
-
-      it "creates a new parser version" do
-        parser.versions.size.should eq 1 
-      end
-
-      it "copies the contents" do
-        @version.content.should eq parser.content
-      end
-
-      it "generates the version number" do
-        @version.version.should eq 1
-      end
-    end
-
-    context "invalid parser" do
-      it "doesnt generate a new version when saving fails" do
-        parser.name = nil
-        parser.save_with_version.should be_false
-        parser.versions.should be_empty
-      end
-    end
-  end
-
-  describe "#find_version" do
-    let(:parser) { FactoryGirl.create(:parser) }
-
-    it "finds the version" do
-      parser.save_with_version
-      version = parser.versions.first
-      parser.find_version(version.id).should eq version
-    end
-  end
-
   describe "#enrichment_definitions" do
     let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class).as_null_object }
@@ -202,22 +105,22 @@ describe Parser do
     end
 
     it "returns the parser enrichment definitions" do
-      parser.enrichment_definitions.should eq({ndha_rights: "Hi"})
+      loader.parser_class.enrichment_definitions("staging").should eq({ndha_rights: "Hi"})
     end
 
     it "rescues from a excepction" do
       loader.stub(:parser_class).and_raise(StandardError.new("hi"))
-      parser.enrichment_definitions.should eq({})
+      parser.enrichment_definitions("staging").should eq({})
     end
 
     it "should not fail when the parser fails to be loaded due to a syntax error" do
       loader.stub(:parser_class).and_raise(SyntaxError.new("broken syntax"))
-      parser.enrichment_definitions.should eq({})
+      parser.enrichment_definitions("staging").should eq({})
     end
 
     it "returns an empty hash when the parser is unable to load" do
       loader.stub(:loaded?) { false }
-      parser.enrichment_definitions.should eq({})
+      parser.enrichment_definitions("staging").should eq({})
     end
   end
 

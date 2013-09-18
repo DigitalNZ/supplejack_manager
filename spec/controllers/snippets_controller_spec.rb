@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe SnippetsController do
-  
+
   let(:snippet) { mock_model(Snippet, name: "Copyright", id: "1234", to_param: "1234").as_null_object }
   let(:user) { mock_model(User, id: "1234").as_null_object }
 
@@ -35,7 +35,7 @@ describe SnippetsController do
   end
 
   describe "GET 'create'" do
-    before do 
+    before do
       Snippet.stub(:new) { snippet }
       snippet.stub(:save) { true }
     end
@@ -70,7 +70,7 @@ describe SnippetsController do
   end
 
   describe "GET 'update'" do
-    before do 
+    before do
       Snippet.stub(:find) { snippet }
       snippet.stub(:update_attributes) { true }
     end
@@ -114,14 +114,14 @@ describe SnippetsController do
     end
   end
 
-  describe "GET search" do
-    before do 
+  describe "GET current_version" do
+    before do
       Snippet.stub(:find_by_name) { snippet }
     end
 
-    it "should find the snippet by name" do
-      Snippet.should_receive(:find_by_name).with("Copyright") { snippet }
-      get :search, name: "Copyright", format: :js
+    it "should find the current version of the snippet" do
+      Snippet.should_receive(:find_by_name).with("Copyright", :staging) { snippet }
+      get :current_version, name: "Copyright", environment: :staging, format: :js
       assigns(:snippet).should eq snippet
     end
   end

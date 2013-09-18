@@ -28,7 +28,7 @@ class ParsersController < ApplicationController
     @parser.user_id = current_user.id
     @source = @parser.source
 
-    if @parser.save_with_version
+    if @parser.save
       redirect_to edit_parser_path(@parser)
     else
       render :new
@@ -41,7 +41,7 @@ class ParsersController < ApplicationController
     @parser.user_id = current_user.id
     @parser.update_contents_parser_class!
 
-    if @parser.save_with_version
+    if @parser.save
       redirect_to edit_parser_path(@parser)
     else
       render :edit
