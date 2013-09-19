@@ -118,3 +118,8 @@ en:
     label: 'Users'
     all_users: 'All Users'
     edit_profile: 'Edit Profile'
+
+  records:
+    label: 'Records'
+    staging: 'Records Staging'
+    production: 'Records Production'

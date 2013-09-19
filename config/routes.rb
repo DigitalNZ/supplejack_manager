@@ -28,6 +28,7 @@ HarvesterManager::Application.routes.draw do
     resources :collection_statistics, only: [:index, :show]
     resources :collection_rules
     resources :suppress_collections
+    resources :collection_records, only: [:index, :update]
   end
 
   match "/parsers/:parser_id/preview" => "records#index", as: :preview
