@@ -1,7 +1,7 @@
-<h1 class="left">Collection Rules (<%= params[:environment]%>) </h1>
-<%= link_to "New collection rule", new_environment_collection_rule_path(environment: params[:environment]), class: "button new-right" %>
+<h1 class="left">Link Check Rules (<%= params[:environment]%>) </h1>
+<%= link_to "New link check rule", new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right" %>
 
-<table id="collection_rules" class="twelve">
+<table id="link_check_rules" class="twelve">
   <thead>
     <tr>
       <th>Partner</th>
@@ -14,14 +14,14 @@
   </thead>
 
   <tbody>
-    <% @collection_rules.each do |collection_rule| %>
+    <% @link_check_rules.each do |link_check_rule| %>
     <tr>
-      <td><%= collection_rule.source.try(:partner_name) %></td>
-      <td><%= link_to collection_rule.source.try(:name), edit_source_path(collection_rule.source) %></td>
-      <td><%= collection_rule.source.try(:source_id) %></td>
-      <td><%= collection_rule.active %></td>
-      <td><%= collection_rule.updated_at %></td>
-      <td><%= link_to "Edit", edit_environment_collection_rule_path(id: collection_rule.id, environment: params[:environment]) %></td>
+      <td><%= link_check_rule.source.try(:partner_name) %></td>
+      <td><%= link_to link_check_rule.source.try(:name), edit_source_path(link_check_rule.source) %></td>
+      <td><%= link_check_rule.source.try(:source_id) %></td>
+      <td><%= link_check_rule.active %></td>
+      <td><%= link_check_rule.updated_at %></td>
+      <td><%= link_to "Edit", edit_environment_link_check_rule_path(id: link_check_rule.id, environment: params[:environment]) %></td>
     </tr>
     <% end %>
   </tbody>

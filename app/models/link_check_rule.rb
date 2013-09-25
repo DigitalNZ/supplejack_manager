@@ -1,4 +1,4 @@
-class CollectionRules < ActiveResource::Base
+class LinkCheckRule < ActiveResource::Base
   self.site = ENV["WORKER_HOST"]
   self.user = ENV["WORKER_API_KEY"]
 
@@ -17,7 +17,7 @@ class CollectionRules < ActiveResource::Base
   end
 
   def source
-    Source.find_by(source_id: self.source_id) rescue nil
+    Source.find self.source_id rescue nil
   end
 
 end

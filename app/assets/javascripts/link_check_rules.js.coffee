@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $('#collection_rules').dataTable()
+  $('#link_check_rules').dataTable()
   
