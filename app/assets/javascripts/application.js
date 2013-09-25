@@ -31,7 +31,7 @@
 //= require moment.min
 //= require codemirror
 //= require codemirror/modes/ruby
-//= require collection_rules
+//= require link_check_rules
 //= require code_mirror_setup
 //= require harvester
 //= require parsers

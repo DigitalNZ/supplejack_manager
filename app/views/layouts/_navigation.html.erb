@@ -44,8 +44,8 @@
               <ul class="dropdown">
                 <%= link_to_tab t('statistics.environments.staging'), environment_collection_statistics_path("staging") %>
                 <%= link_to_tab t('statistics.environments.production'), environment_collection_statistics_path("production") %>
-                <%= link_to_tab t('link_checker.collection_rules.staging'), environment_collection_rules_path("staging") %>
-                <%= link_to_tab t('link_checker.collection_rules.production'), environment_collection_rules_path("production") %>
+                <%= link_to_tab t('link_checker.link_check_rules.staging'), environment_link_check_rules_path("staging") %>
+                <%= link_to_tab t('link_checker.link_check_rules.production'), environment_link_check_rules_path("production") %>
                 <%= link_to_tab t('link_checker.suppress_collections.staging'), environment_suppress_collections_path("staging") %>
                 <%= link_to_tab t('link_checker.suppress_collections.production'), environment_suppress_collections_path("production") %>
               </ul>

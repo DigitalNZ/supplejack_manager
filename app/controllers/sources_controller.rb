@@ -4,7 +4,7 @@ class SourcesController < ApplicationController
   
   # GET /sources
   def index
-    @sources = Source.all
+    @sources = params[:source].present? ? Source.where(params[:source]) : Source.all
     respond_with @sources
   end
 

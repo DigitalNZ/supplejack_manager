@@ -86,7 +86,7 @@ en:
 
   link_checker:
     label: "Link Checker"
-    collection_rules:
+    link_check_rules:
       staging: "Link Check Rules Staging"
       production: "Link Check Rules Production"
     suppress_collections:
@@ -111,8 +111,8 @@ en:
 
   simple_form:
       labels:
-        collection_rules:
-          active: 'Collection link checking active?'
+        link_check_rules:
+          active: 'Link checking active?'
 
   users:
     label: 'Users'
