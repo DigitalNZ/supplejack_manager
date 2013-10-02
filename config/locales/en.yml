@@ -16,7 +16,7 @@ en:
     test: "Test"
 
   parsers:
-    label: "Parsers"
+    label: "Harvest parsers"
     records_to_harvest: "How many records do you wish to harvest?"
     enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
@@ -29,8 +29,11 @@ en:
       production: "Production"
       staging: "Staging"
 
+  parser_management:
+    label: 'Parser management'
+
   parser_templates:
-    label: "Parser Templates"
+    label: "Templates"
 
   snippets:
     label: "Snippets"

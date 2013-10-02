@@ -8,11 +8,17 @@
       <section>
         <% if user_signed_in? %>
           <ul class="left">
-            <%= link_to_tab t('parsers.label'), parsers_path %>
-            <%= link_to_tab t('snippets.label'), snippets_path %>
-            <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
+            <li class="has-dropdown">
+              <%= link_to t('parser_management.label'), "#" %>
 
-              <li class="has-dropdown">
+              <ul class="dropdown">
+                <%= link_to_tab t('parsers.label'), parsers_path %>
+                <%= link_to_tab t('snippets.label'), snippets_path %>
+                <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
+              </ul>
+            </li>
+
+            <li class="has-dropdown">
               <%= link_to t('partners'), "#" %>
 
               <ul class="dropdown">
