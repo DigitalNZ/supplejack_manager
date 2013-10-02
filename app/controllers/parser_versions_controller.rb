@@ -7,7 +7,7 @@ class ParserVersionsController < ApplicationController
 
   def current
     @version = @parser.current_version(params[:environment])
-    respond_with @version
+    respond_with @version, serializer: ParserVersionSerializer
   end
 
   def show
