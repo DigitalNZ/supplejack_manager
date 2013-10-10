@@ -13,6 +13,7 @@ class AbstractJob < ActiveResource::Base
     attribute :throughput,            :float
     attribute :duration,              :float
     attribute :status,                :string
+    attribute :status_message,        :string
     attribute :user_id,               :string
     attribute :parser_id,             :string
     attribute :version_id,            :string

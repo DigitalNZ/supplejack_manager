@@ -3,8 +3,9 @@
 <div class="row">
   <div class="twelve columns">
     <dl class="tabs pill">
-      <%= content_tag(:dd, link_to(t("harvest_jobs.active"), environment_abstract_jobs_path(params[:environment])), class: ("active" if params[:status].nil?)) %>
-      <%= content_tag(:dd, link_to(t("harvest_jobs.finished"), environment_abstract_jobs_path(params[:environment], status: "finished")), class: ("active" if params[:status] == "finished")) %>
+      <% ['active', 'finished', 'failed'].each do |status| %>
+        <%= content_tag(:dd, link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status)), class: ("active" if params[:status] == status)) %>
+      <% end %>
     </dl>
   </div>
 </div>

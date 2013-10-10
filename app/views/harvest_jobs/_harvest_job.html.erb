@@ -5,7 +5,7 @@
     <span class="parser-title">: <%= link_to @harvest_job.parser.try(:name), edit_parser_path(@harvest_job.parser) %></span>
   </h2>
 
-  <%= link_to t("harvest_jobs.stop"), environment_harvest_job_path(@harvest_job, {environment: @harvest_job.environment, harvest_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-harvest-button", class: "button new-right", style: ("display: none" if @harvest_job.finished?) %>
+  <%= link_to t("harvest_jobs.stop"), environment_harvest_job_path(@harvest_job, {environment: @harvest_job.environment, harvest_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-harvest-button", class: "button new-right", style: ("display: none" unless @harvest_job.status == "active") %>
 
   <table class="twelve">
     <tr>
@@ -42,7 +42,7 @@
       </td>
     </tr>
 
-    <% if @harvest_job.finished? %>
+    <% if ['failed', 'finished'].include?(@harvest_job.status) %>
     <tr id="harvest-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
