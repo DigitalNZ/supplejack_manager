@@ -46,14 +46,14 @@
     <tr id="harvest-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
-        <strong><%= l @harvest_job.end_time, format: :long %></strong>
+        <strong><%= l(@harvest_job.end_time, format: :long) if @harvest_job.end_time.present? %></strong>
       </td>
     </tr>
 
     <tr>
       <td><%= t("harvest_jobs.duration") %></td>
       <td>
-        <strong><%= ChronicDuration.output(@harvest_job.duration) %></strong>
+        <strong><%= ChronicDuration.output(@harvest_job.duration) if @harvest_job.duration.present? %></strong>
       </td>
     </tr>
 
@@ -78,6 +78,13 @@
         <strong><%= number_with_delimiter @harvest_job.posted_records_count %></strong>
       </td>
     </tr>
+
+    <% if @harvest_job.status_message.present? %>
+    <tr>
+      <td><%= t("harvest_jobs.status_message") %></td>
+      <td><strong><%= @harvest_job.status_message %></strong></td>
+    </tr>
+    <% end %>
   </table>
   
    <% if @harvest_job.harvest_failure.present? %>

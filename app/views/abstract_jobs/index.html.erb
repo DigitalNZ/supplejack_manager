@@ -45,12 +45,12 @@
       <% else %>
         <td><%= t("harvest_jobs.scheduled") %></td>
       <% end %>
-      <td><%= l abstract_job.start_time, format: :long if abstract_job.start_time.present?  %></td>
+      <td><%= l abstract_job.try(:start_time), format: :long %></td>
 
       <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
 
       <% if params[:status] == "finished" %>
-        <td><%= ChronicDuration.output(abstract_job.duration.to_i) %></td>
+        <td><%= ChronicDuration.output(abstract_job.duration.to_i) if abstract_job.duration.present? %></td>
       <% end %>
 
       <td><%= abstract_job.records_count %></td>
