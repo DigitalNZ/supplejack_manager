@@ -59,7 +59,7 @@
     <tr>
       <td><%= t("harvest_jobs.duration") %></td>
       <td>
-        <strong><%= ChronicDuration.output(@enrichment_job.duration) if abstract_job.duration.present?%></strong>
+        <strong><%= ChronicDuration.output(@enrichment_job.duration) if @enrichment_job.duration.present?%></strong>
       </td>
     </tr>
 
