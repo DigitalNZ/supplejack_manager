@@ -45,7 +45,7 @@
       <% else %>
         <td><%= t("harvest_jobs.scheduled") %></td>
       <% end %>
-      <td><%= l abstract_job.try(:start_time), format: :long %></td>
+      <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
 
       <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
 
