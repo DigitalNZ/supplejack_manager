@@ -29,7 +29,7 @@
             <td><%= @record['title'] %></td>
             <td>
               <%= form_tag(environment_collection_record_path(id: @record['record_id'], environment: params[:environment]), method: :put, class: 'collection_records') do |f| %>
-                <% statuses = ['active', 'delete', 'suppressed'] %>
+                <% statuses = ['active', 'deleted', 'suppressed'] %>
                 <%= select_tag 'status', options_for_select(statuses, @record['status']), onchange: 'this.form.submit();' %>
               <% end %>
             </td>
