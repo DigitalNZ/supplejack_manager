@@ -1,13 +1,13 @@
-<h1 class="left">Parser configurations</h1>
-<%= link_to "New Parser configuration", new_parser_path, class: "button new-right" %>
+<h1 class="left"><%= t('parsers.label') %></h1>
+<%= link_to t('parsers.create'), new_parser_path, class: "button new-right" %>
 
 <table id="parsers" class="twelve">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Strategy</th>
+      <th>Harvest Name</th>
+      <th>Data Format</th>
       <th>Partner</th>
-      <th>Source</th>
+      <th>Source ID</th>
       <th>Last Updated</th>
       <th>Last Edited By</th>
     </tr>

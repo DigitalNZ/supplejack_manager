@@ -17,7 +17,7 @@ en:
 
   parsers:
     label: "Harvest Parsers"
-    new: "New Harvest Parser"
+    create: "Create New Harvest Parser"
     records_to_harvest: "How many records do you wish to harvest?"
     enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
@@ -144,9 +144,18 @@ en:
         at_hour: "At time"
 
   simple_form:
-      labels:
-        link_check_rules:
-          active: 'Link checking active?'
+    labels:
+      link_check_rules:
+        active: 'Link checking active?'
+      parser:
+        name: Harvest Name
+        strategy: Harvest Data Format
+        partner: Harvest Partner
+        source: Source ID
+    placeholders:
+      parser:
+        name: 'Human readable name to help you identify your harvests.'
+
 
   users:
     label: 'Users'
