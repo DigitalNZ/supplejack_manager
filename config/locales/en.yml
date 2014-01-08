@@ -2,7 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  manager: "Harvest Manager"
+  manager: "Supplejack"
   logout: "Logout"
   login: "Login"
   commit_message: "Commit Message"
@@ -16,11 +16,12 @@ en:
     test: "Test"
 
   parsers:
-    label: "Harvest parsers"
+    label: "Harvest Parsers"
+    new: "New Harvest Parser"
     records_to_harvest: "How many records do you wish to harvest?"
     enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
-    name: "Name"
+    name: "Parser Name"
     rename: "Rename Parser"
     delete: "Delete Parser"
     change_source: "Change Source"
@@ -29,14 +30,51 @@ en:
       production: "Production"
       staging: "Staging"
 
-  parser_management:
-    label: 'Parser management'
+  staging:
+    jobs:
+      label: "Staging Jobs"
+    records:
+      label: "Staging Records"
+
+  production:
+    jobs:
+      label: "Production Jobs"
+    records:
+      label: "Production Records"
+
+  harvest_management:
+    label: "Harvest Management"
+
+  partners:
+    label: "Partners"
+
+  sources:
+    label: "Harvest Sources"
+
+  jobs:
+    active: "View Active Jobs"
+    finished: "View Finished Jobs"
+    failed: "View Failed Jobs"
+    scheduled: "Update Schedule"
+
+  records:
+    label: "Update Record Status"
+
+  statistics:
+    label: "View Link Checking Statistics"
+
+  link_checker:
+    label: "Link Checker"
+    link_check_rules:
+      label: "Manage Link Checking"
+    suppress_collections:
+      label: "Suppress Collection"
 
   parser_templates:
-    label: "Templates"
+    label: "Harvest Templates"
 
   snippets:
-    label: "Snippets"
+    label: "Code Snippets"
     edit_current: "(Edit current version)"
     rename: "Rename Snippet"
     delete: "Delete Snippet"
@@ -96,19 +134,6 @@ en:
     no_one_off_schedules: "There are no one off schedules programmed"
     incremental_hint: "The incremental option only applies to OAI harvests. It will use the last time a harvest was run for the particular parser as a starting point."
 
-  link_checker:
-    label: "Link Checker"
-    link_check_rules:
-      staging: "Link Check Rules Staging"
-      production: "Link Check Rules Production"
-    suppress_collections:
-      staging: "Suppress Collection Staging"
-      production: "Suppress Collection Production"
-
-  statistics:
-    environments:
-      staging: "Statistics Staging"
-      production: "Statistics Production"
 
   activemodel:
     models:
@@ -127,8 +152,3 @@ en:
     label: 'Users'
     all_users: 'All Users'
     edit_profile: 'Edit Profile'
-
-  records:
-    label: 'Records'
-    staging: 'Records Staging'
-    production: 'Records Production'
