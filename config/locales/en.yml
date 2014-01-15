@@ -29,6 +29,8 @@ en:
     environments:
       production: "Production"
       staging: "Staging"
+    new:
+      helptext: Parsers are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema. Use this form to create new parser scripts. If this harvest relates to a new Harvest Partner you first will need to
 
   staging:
     jobs:
@@ -150,11 +152,12 @@ en:
       parser:
         name: Harvest Name
         strategy: Harvest Data Format
+        parser_template_name: Parser Template Name
         partner: Harvest Partner
         source: Source ID
     placeholders:
       parser:
-        name: 'Human readable name to help you identify your harvests.'
+        name: 'A label to help you identify your harvests'
 
 
   users:

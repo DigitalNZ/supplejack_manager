@@ -1,31 +1,28 @@
-<div class="eight columns centered">
-  <h1>Create a New Harvest Parser</h1>
+<div class="seven columns centered">
+  <h2>Create a New Harvest Parser</h2>
 
-  <%= simple_form_for @parser, html: {class: 'eight'} do |f| %>
+  <h5 class="subheader">
+    <%= t('parsers.new.helptext') %> 
+    <%= link_to 'create new source', new_source_path %>.
+  </h5>
+
+  <%= simple_form_for @parser, html: {class: ''} do |f| %>
     <div class="row">
       <div class="column twelve">
         <%= f.input :name %>
-        <%= f.input :strategy, collection: Parser::VALID_STRATEGIES, prompt: "What sort of data are you harvesting?" %>
-        <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name), prompt: 'Optional starting parser for common types of harvest' %>
+        <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
+        <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name) %>
+
+        <%= f.input :partner, collection: Partner.all.sort(name: 1), label_method: :name, value_method: :name %>
+        <%= f.association :source, as: :grouped_select, collection: Partner.all.sort(name: 1), group_method: :sources, label_method: :name, group_label_method: :name %>  
       </div>
     </div>
 
     <div class="row">
-      <div class="column eight">
-        <%= f.input :partner, collection: Partner.all.sort(name: 1), prompt: 'Here', label_method: :name, value_method: :name %>
+      <div class="column twelve">
+        <%= f.button :submit, class: 'right' %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="column eight">
-      <%= f.association :source, as: :grouped_select, collection: Partner.all.sort(name: 1), group_method: :sources, label_method: :name, group_label_method: :name %>
-      </div>
-      <span class="postfix column four">
-          <%= link_to 'create new source', new_source_path %>
-      </span>
-    </div>
-
-    <%= f.button :submit %>
     
   <% end %>
 </div>
