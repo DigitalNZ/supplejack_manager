@@ -1,11 +1,22 @@
-<h1>New Parser Template</h1>
+<h2 class="left"><%= t('parser_templates.create_a') %></h2>
 
 <%= simple_form_for @parser_template do |f| %>
+  <div class="row">
+    <div class="twelve columns">
+      <%= f.input :name %>
+    </div>
+  </div>
 
-  <%= f.input :name %>
-  
-  <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
+  <div class="row">
+    <div class="twelve columns">
+      <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
+    </div>
+  </div>
 
-  <%= f.button :submit %>
+  <div class="row">
+    <div class="twelve columns">
+      <%= f.button :submit, class: 'right' %>
+    </div>
+  </div>
 
 <% end %>

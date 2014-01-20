@@ -1,42 +1,32 @@
-<div id="alert">
+<div class="seven columns centered">
+  <h2><%= t('sources.edit') %></h2>
+
+  <h5 class="subheader">
+    <strong><%= t('note') %></strong> <%= t('sources.helptext') %>
+  </h5>
+
+  <%= render 'form' %>
+
+  <h2><%= t('sources.manage') %></h2>
+  <a href="#" data-reveal-id="reindex-modal" class="button right"><%= t('sources.reindex') %></a>
   
 </div>
-
-<h1>Editing source</h1>
-
-<p>
-  <strong>Note:</strong>
-  Modifing the source_id of a source will not change the records that have already been harvested using this source_id, and is not recommended.
-</p>
-<%= render 'form' %>
-
-<h2>Manage source</h2>
-
-
-<ul class="button-group">
-    <li><a href="#" data-reveal-id="reindex-modal" class="button">Reindex source</a></li>  
-</ul>
-
+  
 <div id="reindex-modal" class="reveal-modal medium">
-  <h2>Reindex source</h2>
+  <h2><%= t('sources.reindex') %></h2>
   <div class="row">
     <div class="twelve columns">
-      <label class="">Environment:</label>
+      <label class=""><%= t('simple_form.labels.sources.environment') %></label>
       <%= select_tag "environment", options_for_select(BACKEND_ENVIRONMENTS) %>
     </div>
   </div>
   <div class="row">
     <div class="twelve columns">
-      <label class="">Records modified since:</label>
+      <label class=""><%= t('sources.modified_records') %></label>
       <div id="date-slider"></div>
-      <div id="time">All records</div>
+      <div id="time"><%= t('sources.all_records') %></div>
     </div>
   </div>
-  <%= link_to 'Reindex', '#', remote: true, class: "right button", id: 'reindex-button', :'data-url' => reindex_source_path(@source) %>
+  <%= link_to t('sources.reindex'), '#', remote: true, class: "right button", id: 'reindex-button', :'data-url' => reindex_source_path(@source) %>
   <a class="close-reveal-modal">&#215;</a>
 </div>
-
-
-
-
-

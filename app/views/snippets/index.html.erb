@@ -1,10 +1,10 @@
-<h1 class="left">Snippet</h1>
-<%= link_to "New Snippet", new_snippet_path, class: "button new-right" %>
+<h1 class="left"><%= t('snippets.label') %></h1>
+<%= link_to t('snippets.create'), new_snippet_path, class: "button new-right" %>
 
 <table class="twelve">
   <thead>
     <tr>
-      <th>Name</th>
+      <th><%= t('name') %></th>
     </tr>
   </thead>
 

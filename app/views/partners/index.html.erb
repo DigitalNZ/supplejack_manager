@@ -1,5 +1,5 @@
-<h1 class="left">Partners</h1>
-<%= link_to "New Partner", new_partner_path, class: "button new-right" %>
+<h1 class="left"><%= t('partners.label') %></h1>
+<%= link_to t('partners.create'), new_partner_path, class: "button new-right" %>
 
 <table id="partners" class="twelve">
   <thead>
@@ -9,7 +9,6 @@
   </thead>
 
   <tbody>
-
     <% @partners.each do |partner| %>
     <tr>
       <td><%= link_to partner.name, edit_partner_path(partner) %></td>

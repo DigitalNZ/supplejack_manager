@@ -1,3 +1,9 @@
-<h1>New source</h1>
+<div class="eight columns centered">
+  <h1><%= t('sources.create_a') %></h1>
 
-<%= render 'form' %>
+  <h5 class="subheader">
+    Supplejack uses Source ID to identify which harvest particular records have come from.. Source IDs should be lower-case and never contain spaces. "National Library" is an invalid Source ID; "national-library" is a good Source ID.
+  </h5>
+
+  <%= render 'form' %>
+</div>

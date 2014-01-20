@@ -9,28 +9,13 @@ en:
   view_details: "View details"
   delete: "Delete"
   history: "History"
+  name: "Name"
+  note: "Note:"
 
   environments:
     production: "Production"
     staging: "Staging"
     test: "Test"
-
-  parsers:
-    label: "Harvest Parsers"
-    create: "Create New Harvest Parser"
-    records_to_harvest: "How many records do you wish to harvest?"
-    enrichments_to_run: "Select the enrichment you would like to run"
-    strategy: "Strategy"
-    name: "Parser Name"
-    rename: "Rename Parser"
-    delete: "Delete Parser"
-    change_source: "Change Source"
-    edit_current: "(Edit current version)"
-    environments:
-      production: "Production"
-      staging: "Staging"
-    new:
-      helptext: Parsers are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema. Use this form to create new parser scripts. If this harvest relates to a new Harvest Partner you first will need to
 
   staging:
     jobs:
@@ -44,14 +29,43 @@ en:
     records:
       label: "Production Records"
 
+  parsers:
+    label: "Harvest Parsers"
+    create: "Create New Harvest Parser"
+    create_a: "Create a New Harvest Parser"
+    records_to_harvest: "How many records do you wish to harvest?"
+    enrichments_to_run: "Select the enrichment you would like to run"
+    strategy: "Strategy"
+    name: "Parser Name"
+    rename: "Rename Parser"
+    delete: "Delete Parser"
+    change_source: "Change Source"
+    edit_current: "(Edit current version)"
+    environments:
+      production: "Production"
+      staging: "Staging"
+    new:
+      helptext: "Parsers are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema. Use this form to create new parser scripts. If this harvest relates to a new Harvest Partner you first will need to"
+
+  sources:
+    label: "Harvest Sources"
+    create_a: "Create a New Harvest Source"
+    create: "Create New Harvest Source"
+    edit: "Edit a Source"
+    helptext: "Modifing the source_id of a source will not change the records that have already been harvested using this source_id, and is not recommended."
+    manage: "Manage Source"
+    reindex: "Reindex Source"
+    modified_records: "Records Modified Since:"
+    all_records: "All Records"
+
   harvest_management:
     label: "Harvest Management"
 
   partners:
-    label: "Partners"
-
-  sources:
-    label: "Harvest Sources"
+    label: "Partners"  
+    create: "Create New Partner"
+    create_a: "Create a New Partner"
+    edit: "Edit a Partner"
 
   jobs:
     active: "View Active Jobs"
@@ -61,12 +75,20 @@ en:
 
   records:
     label: "Update Record Status"
+    search: "Search Record"
+    not_found: "Record Not Found"
+    record_id: "Record ID"
+    title: "Title"
+    status: "Status"
+
 
   statistics:
     label: "View Link Checking Statistics"
 
   link_checker:
     label: "Link Checker"
+    create: "Create New Link Check Rule"
+    create_a: "Create a New Link Check Rule"
     link_check_rules:
       label: "Manage Link Checking"
     suppress_collections:
@@ -74,12 +96,18 @@ en:
 
   parser_templates:
     label: "Harvest Templates"
+    create: "Create New Harvest Template"
+    create_a: "Create a New Harvest Template"
+    rename: "Rename Harvest Template"
+    delete: "Delete Harvest Template"
 
   snippets:
     label: "Code Snippets"
     edit_current: "(Edit current version)"
-    rename: "Rename Snippet"
-    delete: "Delete Snippet"
+    rename: "Rename Code Snippet"
+    delete: "Delete Code Snippet"
+    create: "Create New Code Snippet"
+    create_a: "Create a New Code Snippet"
 
   abstract_jobs:
     type: "Job Type"
@@ -135,7 +163,7 @@ en:
     confirm_delete: "Are you sure you want to delete the Schedule?"
     no_one_off_schedules: "There are no one off schedules programmed"
     incremental_hint: "The incremental option only applies to OAI harvests. It will use the last time a harvest was run for the particular parser as a starting point."
-
+    save: "Save Schedule"
 
   activemodel:
     models:
@@ -150,14 +178,23 @@ en:
       link_check_rules:
         active: 'Link checking active?'
       parser:
-        name: Harvest Name
-        strategy: Harvest Data Format
-        parser_template_name: Parser Template Name
-        partner: Harvest Partner
-        source: Source ID
+        name: "Harvest Name"
+        strategy: "Harvest Data Format"
+        parser_template_name: "Parser Template Name"
+        partner: "Harvest Partner"
+        source: "Source ID"
+      parser_template:
+        name: "Harvest Template Name"
+      source:
+        source_id: "Source ID"
+        environment: "Environment:"
+      snippet:
+        name: "Code Snippet Name"
     placeholders:
       parser:
-        name: 'A label to help you identify your harvests'
+        name: "A label to help you identify your harvests"
+      collection_record:
+        id: "Enter a Record ID"
 
 
   users:

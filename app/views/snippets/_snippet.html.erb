@@ -26,10 +26,8 @@
 
     <%= render partial: "versions/version_list", locals: { versionable: @snippet, versionable_path: "snippet_snippet_version" } %>
 
-    <a href="#" id="rename-snippet-action" class="button expand">Rename Snippet</a>
-    <a href="#" class="button expand" data-reveal-id="delete-snippet-alert">Delete Snippet</a>
-
-
+    <a href="#" id="rename-snippet-action" class="button expand"><%= t('snippets.rename') %></a>
+    <a href="#" class="button expand" data-reveal-id="delete-snippet-alert"><%= t('snippets.delete') %></a>
   </div>
 </div>
 

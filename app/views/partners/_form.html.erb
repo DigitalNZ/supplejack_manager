@@ -1,10 +1,14 @@
-<%= simple_form_for @partner do |f| %>
-  <div class="partner-form">
-    <div class="row">
-      <div class="column four">
-        <%= f.input :name %>
-      </div>
+<%= simple_form_for @partner, class: 'partner-form' do |f| %>
+  <div class="row">
+    <div class="column twelve">
+      <%= f.input :name %>
     </div>
-    <%= f.button :submit, "Save Partner" %>
   </div>
+
+  <div class="row">
+    <div class="column twelve">
+      <%= f.button :submit, class: 'right' %>
+    </div>
+  </div>
+  
 <% end %>

@@ -1,41 +1,49 @@
-<div class="row twelve columns">
-  <h2>Collection Record</h2>
-</div>
+<div class="eight columns centered">
 
-<div class="row twelve">
-  <%= form_tag(environment_collection_records_path(environment: params[:environment]), {method: :get, id: "collection_records_form"}) do |f| %>
-    <div class="six columns">
-        <%= text_field_tag 'id', @record_id, placeholder: 'Enter Record ID...'  %>
+  <div class="row">
+    <h2 class="twelve columns"><%= t('records.label') %></h2>
+  </div>
+
+  <div class="row">
+    <%= form_tag(environment_collection_records_path(environment: params[:environment]), {method: :get, id: "collection_records_form"}) do |f| %>
+      <div class="four columns">
+          <%= text_field_tag 'id', @record_id, placeholder: t('simple_form.placeholders.collection_record.id')  %>
+      </div>
+      <div class="four columns">
+        <%= submit_tag t('records.search'), class: "button right" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="twelve columns">
+      <% if @record.present? %>
+        <table id="collection-records" class="twelve">
+          <thead>
+            <tr>
+              <th><%= t('records.record_id') %></th>
+              <th><%= t('records.title') %></th>
+              <th><%= t('records.status') %></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= @record['record_id'] %></td>
+              <td><%= @record['title'] %></td>
+              <td>
+                <%= form_tag(environment_collection_record_path(id: @record['record_id'], environment: params[:environment]), method: :put, class: 'collection_records') do |f| %>
+                  <% statuses = ['active', 'deleted', 'suppressed'] %>
+                  <%= select_tag 'status', options_for_select(statuses, @record['status']), onchange: 'this.form.submit();' %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% elsif @record.nil? && @record_id %>
+        <h3><%= t('records.not_found') %></h3>
+      <% end %>
     </div>
-    <div class="six columns">
-      <%= submit_tag "Search record", class: "button" %>
-    </div>
-  <% end %>
+  </div>
+
 </div>
-
-<% if @record.present? %>
-    <table id="collection-records" class="twelve">
-        <thead>
-          <tr>
-            <th>Record ID</th>
-            <th>Title</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td><%= @record['record_id'] %></td>
-            <td><%= @record['title'] %></td>
-            <td>
-              <%= form_tag(environment_collection_record_path(id: @record['record_id'], environment: params[:environment]), method: :put, class: 'collection_records') do |f| %>
-                <% statuses = ['active', 'deleted', 'suppressed'] %>
-                <%= select_tag 'status', options_for_select(statuses, @record['status']), onchange: 'this.form.submit();' %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-    </table>
-<% elsif @record.nil? && @record_id %>
-  <h3>Record not found.</h3>
-<% end %>

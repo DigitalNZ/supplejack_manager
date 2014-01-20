@@ -1,29 +1,30 @@
-<div class="row twelve columns">
+<div class="row eight columns centered">
+
   <h2>Add Suppressed Collection</h2>
-</div>
-<div class="row five">
-  <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
-    <div class="five columns">
-      <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
-      <%= hidden_field_tag :status, "suppressed" %>
-    </div>
-    <div class="seven columns">
-      <%= submit_tag "Add new suppressed collection", class: "button" %>
-    </div>
-  <% end %>
-</div>
+  
+  <div class="row twelve">
+    <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
+      <div class="seven columns">
+        <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
+        <%= hidden_field_tag :status, "suppressed" %>
+      </div>
+      <div class="five columns">
+        <%= submit_tag "Add new suppressed collection", class: "button" %>
+      </div>
+    <% end %>
+  </div>
 
 <div class="row twelve columns">
   <h2>Suppressed Collections (<%= params[:environment]%>)</h2>
 </div>
 
 <div class="row">
-  <div class="four columns">
+  <div class="twelve columns">
     <table id="suppress_collection">
       <thead>
         <tr>
-          <th class="three">Collection Title</th>
-          <th class="one">Activate Collection</th>
+          <th class="two">Collection Title</th>
+          <th class="two">Activate Collection</th>
         </tr>
       </thead>
       <tbody>
@@ -41,4 +42,6 @@
 
     </table>
   </div>
+</div>
+
 </div>

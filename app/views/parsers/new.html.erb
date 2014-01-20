@@ -1,12 +1,12 @@
 <div class="seven columns centered">
-  <h2>Create a New Harvest Parser</h2>
+  <h2><%= t('parsers.create_a') %></h2>
 
   <h5 class="subheader">
     <%= t('parsers.new.helptext') %> 
-    <%= link_to 'create new source', new_source_path %>.
+    <%= link_to t('sources.create'), new_source_path %>.
   </h5>
 
-  <%= simple_form_for @parser, html: {class: ''} do |f| %>
+  <%= simple_form_for @parser do |f| %>
     <div class="row">
       <div class="column twelve">
         <%= f.input :name %>
