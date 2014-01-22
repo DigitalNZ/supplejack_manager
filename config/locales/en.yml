@@ -17,29 +17,48 @@ en:
     staging: "Staging"
     test: "Test"
 
-  staging:
-    jobs:
-      label: "Staging Jobs"
-    records:
-      label: "Staging Records"
+  navigation:
+    contributors: "Contributors and Scripts"
+    staging: "Staging Activity"
+    production: "Production Activity"
 
-  production:
-    jobs:
-      label: "Production Jobs"
-    records:
-      label: "Production Records"
+  dashboard:
+    title: "Supplejack Dashboard"
+    intro: "Get started by naming a new contributor to harvest data from. You can add one or more data sources to each contributor. Then extract data from each source with parser scripts. Complete the process by scheduling and monitoring harvest jobs."
+    server_stats: "%{environment} Server Statistics"
+    twenty_hour_hours: "Last 24 hours"
+    stats:
+      active: "currently active"
+      completed: "completed"
+      failed: "failed"
+      reactivated: "reactivated"
+      suppressed: "suppressed"
+      deleted: "deleted"
+      switch_to_view: "Switch to %{environment} View"
+    parsers:
+      label: "Recently Edited Parsers"
+      view_all: "View All Parser Scripts"
+      name: "Parser Name"
+      data_format: "Data Format"
+      contributor: "Contributor"
+      last_edited: "Last Edited"
+      last_editor: "Last Editor"
+    scheduled_jobs:
+      label: "Next Scheduled Jobs"
+      view_production_schedule: View Production Job Schedule
+    error: "There was an error generating the dashboard. Please try again"
 
   parsers:
-    label: "Harvest Parsers"
-    create: "Create New Harvest Parser"
-    create_a: "Create a New Harvest Parser"
+    label: "Parser Scripts"
+    create: "New Parser Script"
+    create_a: "Create a New Parser Script"
     records_to_harvest: "How many records do you wish to harvest?"
     enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
-    name: "Parser Name"
-    rename: "Rename Parser"
-    delete: "Delete Parser"
-    change_source: "Change Source"
+    name: "Parser Script Name"
+    rename: "Rename Parser Script"
+    delete: "Delete Parser Script"
+    change_source: "Change Data Source"
     edit_current: "(Edit current version)"
     environments:
       production: "Production"
@@ -48,30 +67,27 @@ en:
       helptext: "Parsers are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema. Use this form to create new parser scripts. If this harvest relates to a new Harvest Partner you first will need to"
 
   sources:
-    label: "Harvest Sources"
-    create_a: "Create a New Harvest Source"
-    create: "Create New Harvest Source"
-    edit: "Edit a Source"
-    helptext: "Modifing the source_id of a source will not change the records that have already been harvested using this source_id, and is not recommended."
-    manage: "Manage Source"
-    reindex: "Reindex Source"
+    label: "Data Sources"
+    create_a: "Create a New Data Source"
+    create: "New Data Source"
+    edit: "Edit Data Source"
+    helptext: "Modifing the source_id of a data source will not change the records that have already been harvested using this source_id, and is not recommended."
+    manage: "Manage Data Source"
+    reindex: "Reindex Data Source"
     modified_records: "Records Modified Since:"
     all_records: "All Records"
 
-  harvest_management:
-    label: "Harvest Management"
-
   partners:
-    label: "Partners"  
-    create: "Create New Partner"
-    create_a: "Create a New Partner"
-    edit: "Edit a Partner"
+    label: "Contributors"  
+    create: "New Contributor"
+    create_a: "Create a New Contributor"
+    edit: "Edit a Contributor"
 
   jobs:
-    active: "View Active Jobs"
-    finished: "View Finished Jobs"
-    failed: "View Failed Jobs"
-    scheduled: "Update Schedule"
+    active: "Active Jobs"
+    finished: "Finished Jobs"
+    failed: "Failed Jobs"
+    scheduled: "Job Schedules"
 
   records:
     label: "Update Record Status"
@@ -81,25 +97,25 @@ en:
     title: "Title"
     status: "Status"
 
-
   statistics:
-    label: "View Link Checking Statistics"
+    label: "Link Checking Report"
 
   link_checker:
     label: "Link Checker"
+    action: "Link Checking"
     create: "Create New Link Check Rule"
     create_a: "Create a New Link Check Rule"
     link_check_rules:
-      label: "Manage Link Checking"
+      label: "Link Checking Rules"
     suppress_collections:
-      label: "Suppress Collection"
+      label: "Update Collection Status"
 
   parser_templates:
-    label: "Harvest Templates"
-    create: "Create New Harvest Template"
-    create_a: "Create a New Harvest Template"
-    rename: "Rename Harvest Template"
-    delete: "Delete Harvest Template"
+    label: "Parser Templates"
+    create: "Create New Parser Template"
+    create_a: "Create a New Parser Template"
+    rename: "Rename Parser Template"
+    delete: "Delete Parser Template"
 
   snippets:
     label: "Code Snippets"
@@ -115,7 +131,7 @@ en:
     enrichmentjob: "Enrichment"
 
   harvest_jobs:
-    label: "Jobs"
+    label: "Harvest Jobs"
     strategy: "Strategy"
     file_name: "File name"
     start_time: "Start time"

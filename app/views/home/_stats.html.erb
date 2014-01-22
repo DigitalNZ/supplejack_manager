@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="twelve columns">
+    <h3 class="eight columns"><%= t('dashboard.server_stats', environment: environment.titleize) %></h3>
+    <h5 class="four columns">
+      <% if environment == 'production' %>
+        <%= link_to t('dashboard.stats.switch_to_view', environment: 'Staging'), root_path(environment: 'staging'), class: 'right' %>
+      <% else %>
+        <%= link_to t('dashboard.stats.switch_to_view', environment: 'Production'), root_path(environment: 'production'), class: 'right' %>
+      <% end %>
+    </h5>
+  </div>
+
+  <table id="server-stats" class="twelve columns">
+    <tr>
+      <td class="three header"><%= link_to t('harvest_jobs.label'), environment_abstract_jobs_path(environment, status: "active") %></td>
+      <td class="three stat">
+        <%= link_to stats[:active_jobs], environment_abstract_jobs_path(environment, status: 'active') %>
+      </td>
+      <td class="three stat">
+        <%= link_to stats[:completed_jobs], environment_abstract_jobs_path(environment, status: 'completed') %>
+      </td>
+      <td class="three stat">
+        <%= link_to stats[:failed_jobs], environment_abstract_jobs_path(environment, status: 'failed') %>
+      </td>
+    </tr>
+    <tr class="titles">
+      <td class="hours"><%= t('dashboard.twenty_hour_hours') %></td>
+      <td><%= t('dashboard.stats.active') %></td>
+      <td><%= t('dashboard.stats.completed') %></td>
+      <td><%= t('dashboard.stats.failed') %></td>
+    </tr>
+    <tr>
+      <td class="three header">
+        <%= link_to t('link_checker.action'), environment_collection_statistics_path(environment) %>
+      </td>
+      <td class="three stat">
+        <%= link_to stats[:activated], environment_collection_statistics_path(environment) %>
+      </td>
+      <td class="three stat">
+        <%= link_to stats[:suppressed], environment_collection_statistics_path(environment) %>
+      </td>
+      <td class="three stat">
+        <%= link_to stats[:deleted], environment_collection_statistics_path(environment) %>
+      </td>
+    </tr>
+    <tr class="titles">
+      <td class="hours"><%= t('dashboard.twenty_hour_hours') %></td>
+      <td><%= t('dashboard.stats.reactivated') %></td>
+      <td><%= t('dashboard.stats.suppressed') %></td>
+      <td><%= t('dashboard.stats.deleted') %></td>
+    </tr>
+  </table>
+</div>

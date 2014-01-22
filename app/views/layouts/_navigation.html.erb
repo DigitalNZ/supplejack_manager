@@ -2,21 +2,21 @@
   <div class="twelve columns">
     <nav class="top-bar">
       <ul>
-        <li class="name"><h1><%= t('manager') %></li>
+        <li class="name"><h1><%= link_to t('manager'), root_path %></li>
         <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
       <section>
         <% if user_signed_in? %>
           <ul class="left">
             <li class="has-dropdown">
-              <%= link_to t('harvest_management.label'), "#" %>
+              <%= link_to t('navigation.contributors'), "#" %>
 
               <ul class="dropdown">
+                <%= link_to_tab t('partners.label'), partners_path %>
+                <%= link_to_tab t('sources.label'), sources_path %>
                 <%= link_to_tab t('parsers.label'), parsers_path %>
                 <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
-                <%= link_to_tab t('sources.label'), sources_path %>
                 <%= link_to_tab t('snippets.label'), snippets_path %>
-                <%= link_to_tab t('partners.label'), partners_path %>
 
                 <% if false %>
                 <li class="has-dropdown">
@@ -31,20 +31,13 @@
 
             <% ['staging', 'production'].each do |environment| %>
               <li class="has-dropdown">
-                <%= link_to t("#{environment}.jobs.label"), "#" %>
+                <%= link_to t("navigation.#{environment}"), "#" %>
 
                 <ul class="dropdown">
+                  <%= link_to_tab t('jobs.scheduled'), environment_harvest_schedules_path(environment) %>
                   <%= link_to_tab t('jobs.active'), environment_abstract_jobs_path(environment, status: "active") %>
                   <%= link_to_tab t('jobs.finished'), environment_abstract_jobs_path(environment, status: "finished") %>
                   <%= link_to_tab t('jobs.failed'), environment_abstract_jobs_path(environment, status: "failed") %>
-                  <%= link_to_tab t('jobs.scheduled'), environment_harvest_schedules_path(environment) %>
-                </ul>
-              </li>
-
-              <li class="has-dropdown">
-                <%= link_to t("#{environment}.records.label"), "#" %>
-
-                <ul class="dropdown">
                   <%= link_to_tab t('link_checker.link_check_rules.label'), environment_link_check_rules_path(environment) %>
                   <%= link_to_tab t('statistics.label'), environment_collection_statistics_path(environment) %>
                   <%= link_to_tab t('link_checker.suppress_collections.label'), environment_suppress_collections_path(environment) %>

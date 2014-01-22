@@ -1,5 +1,7 @@
 HarvesterManager::Application.routes.draw do
 
+  root :to => "home#index"
+
   resources :parsers do
     resources :parser_versions, path: "versions", only: [:show, :update] do
       get :current, on: :collection
@@ -39,6 +41,4 @@ HarvesterManager::Application.routes.draw do
 
   devise_for :users
   resources :users, only: [:index, :edit, :update, :new, :create]
-
-  root :to => "parsers#index"
 end
