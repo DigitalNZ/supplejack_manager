@@ -247,3 +247,11 @@ $rowWidth: 1600px;
 // http://www.modularscale.com by Tim Brown
 // https://github.com/scottkellum/modular-scale by scottkellum
 @import 'foundation';
+
+
+// Customisations
+
+// Make all buttons 'radius' buttons
+.button {
+   @extend .radius;
+}
