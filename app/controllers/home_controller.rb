@@ -3,12 +3,14 @@ class HomeController < ApplicationController
   def index
     @environment = params[:environment] || 'production'
     params[:environment] = @environment
-    @stats = {active_jobs: 0, completed_jobs: 0, failed_jobs: 0, activated: 0, suppressed: 0, deleted: 0}
+    @stats = {active_jobs: 'n/a', finished_jobs: 'n/a', failed_jobs: 'n/a', activated: 'n/a', suppressed: 'n/a', deleted: 'n/a'}
 
     begin
-      @stats[:active_jobs] = AbstractJob.search(environment: params[:environment], status: 'active').count
-      @stats[:completed_jobs] = AbstractJob.search(environment: params[:environment], status: 'completed').count
-      @stats[:failed_jobs] = AbstractJob.search(environment: params[:environment], status: 'failed').count
+      since_when = DateTime.now - 1
+
+      @stats[:active_jobs] = AbstractJob.find(:all, :from => :jobs_since, params: {:datetime => since_when, :environment => params[:environment], :status => "active"} ).count
+      @stats[:finished_jobs] = AbstractJob.find(:all, :from => :jobs_since, params: {:datetime => since_when, :environment => params[:environment], :status => "finished"} ).count
+      @stats[:failed_jobs] = AbstractJob.find(:all, :from => :jobs_since, params: {:datetime => since_when, :environment => params[:environment], :status => "failed"} ).count
 
       set_worker_environment_for(CollectionStatistics)
       klass = CollectionStatistics

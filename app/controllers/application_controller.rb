@@ -12,7 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_env_vars
-    if Rails.env.development?
+
+    if Rails.env.development? && params[:environment]
+      environment = params[:environment]
+    elsif Rails.env.development? 
       environment = "development"
     elsif params[:environment] == "test"
       environment = "staging"

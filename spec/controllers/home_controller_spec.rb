@@ -8,7 +8,7 @@ describe HomeController do
 
   describe "GET index" do
     before(:each) do
-      AbstractJob.stub(:search) { {} }
+      AbstractJob.stub(:find) { {} }
       CollectionStatistics.stub(:first) { double(:stats) }
       CollectionStatistics.stub(:index_statistics) { {"2013-12-26"=>{:suppressed=>1, :activated=>2, :deleted=>3}} }
       Parser.stub_chain(:desc, :limit)
@@ -28,32 +28,40 @@ describe HomeController do
     end
 
     context "jobs" do
-      it "sets the count of active jobs" do
-        AbstractJob.should_receive(:search).with(environment: 'production', status: 'active') { [1,2,3] }
-        get :index
-        assigns(:stats)[:active_jobs].should eq 3
+      context "successful query" do
+        before(:each) do
+          AbstractJob.should_receive(:find).with(:all, hash_including(:from)).exactly(3).times { [1,2,3] }
+        end
+
+        it "sets the count of active jobs" do
+          get :index
+          assigns(:stats)[:active_jobs].should eq 3
+        end
+
+        it "sets the count of finished jobs" do
+          get :index
+          assigns(:stats)[:finished_jobs].should eq 3
+        end
+
+        it "sets the count of failed jobs" do
+          get :index
+          assigns(:stats)[:failed_jobs].should eq 3
+        end
+
+      end
+      context "error thrown" do
+        it "sets the counts to n/a when exceptions occour" do
+          AbstractJob.stub(:find).and_raise(StandardError.new)
+          get :index
+          assigns(:stats)[:failed_jobs].should eq 'n/a'
+        end
+
       end
 
-      it "sets the count of completed jobs" do
-        AbstractJob.should_receive(:search).with(environment: 'production', status: 'completed') { [1,2,3,4] }
-        get :index
-        assigns(:stats)[:completed_jobs].should eq 4
-      end
-
-      it "sets the count of failed jobs" do
-        AbstractJob.should_receive(:search).with(environment: 'production', status: 'failed') { [1,2,3,4,5] }
-        get :index
-        assigns(:stats)[:failed_jobs].should eq 5
-      end
-
-      it "sets the counts to 0 when exceptions occour" do
-        AbstractJob.stub(:search).and_raise(StandardError.new)
-        get :index
-        assigns(:stats)[:failed_jobs].should eq 0
-      end
     end
 
     context "collection statistics" do
+
       it "sets the count of reactivated records" do
         get :index
         assigns(:stats)[:activated].should eq 2
@@ -72,8 +80,9 @@ describe HomeController do
       it "sets the counts to 0 when exceptions occour" do
         CollectionStatistics.stub(:index_statistics).and_raise(StandardError.new)
         get :index
-        assigns(:stats)[:activated].should eq 0
+        assigns(:stats)[:activated].should eq 'n/a'
       end
+
     end
 
     context "recently edited parsers" do

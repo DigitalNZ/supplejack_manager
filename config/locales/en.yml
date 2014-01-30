@@ -29,7 +29,7 @@ en:
     twenty_hour_hours: "Last 24 hours"
     stats:
       active: "currently active"
-      completed: "completed"
+      finished: "finished"
       failed: "failed"
       reactivated: "reactivated"
       suppressed: "suppressed"
