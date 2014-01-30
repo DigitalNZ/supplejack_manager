@@ -1,14 +1,14 @@
 <div class="row">
-  <div class="twelve columns">
-    <h3 class="eight columns"><%= t('dashboard.server_stats', environment: environment.titleize) %></h3>
-    <h5 class="four columns">
+
+    <h3 class="nine columns"><%= t('dashboard.server_stats', environment: environment.titleize) %></h3>
+    <h5 class="three columns">
       <% if environment == 'production' %>
-        <%= link_to t('dashboard.stats.switch_to_view', environment: 'Staging'), root_path(environment: 'staging'), class: 'right' %>
+        <%= link_to t('dashboard.stats.switch_to_view', environment: 'Staging'), root_path(environment: 'staging'), class: 'button right secondary twelve' %>
       <% else %>
-        <%= link_to t('dashboard.stats.switch_to_view', environment: 'Production'), root_path(environment: 'production'), class: 'right' %>
+        <%= link_to t('dashboard.stats.switch_to_view', environment: 'Production'), root_path(environment: 'production'), class: 'button right secondary twelve' %>
       <% end %>
     </h5>
-  </div>
+
 
   <table id="server-stats" class="twelve columns">
     <tr>

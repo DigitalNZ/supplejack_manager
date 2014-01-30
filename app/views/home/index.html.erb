@@ -1,14 +1,14 @@
 <div class="twelve columns centered">
 
-  <div class="row">
+  <div class="row top-fifteen">
     <div class="nine columns">
       <h1><%= t('dashboard.title') %></h1>
       <h4 class="subheader"><%= t('dashboard.intro') %></h4>
     </div>
-    <div class="three columns">
-      <%= link_to t('partners.create'), new_partner_path, class: "button new-right twelve" %>
-      <%= link_to t('sources.create'), new_source_path, class: "button new-right twelve" %>
-      <%= link_to t('parsers.create'), new_parser_path, class: "button new-right twelve" %>
+    <div class="three columns new-actions">
+      <%= link_to t('partners.create'), new_partner_path, class: "button right twelve" %>
+      <%= link_to t('sources.create'), new_source_path, class: "button right twelve" %>
+      <%= link_to t('parsers.create'), new_parser_path, class: "button right twelve" %>
     </div>
   </div>
 
@@ -20,10 +20,8 @@
 
   <% if @parsers.present? %>
     <div class="row">
-      <div class="twelve columns">
-        <h3 class="eight columns"><%= t('dashboard.parsers.label') %></h3>
-        <h5 class="four columns"><%= link_to t('dashboard.parsers.view_all'), parsers_path, class: 'right' %></h5>
-      </div>
+      <h3 class="nine columns"><%= t('dashboard.parsers.label') %></h3>
+      <h5 class="three columns"><%= link_to t('dashboard.parsers.view_all'), parsers_path, class: 'button right twelve secondary right' %></h5>
 
       <div class="twelve columns">
         <table class="twelve">
@@ -54,10 +52,8 @@
 
   <% if @scheduled_jobs.present? %>
     <div class="row">
-      <div class="twelve columns">
-        <h3 class="eight columns"><%= t('dashboard.scheduled_jobs.label') %></h3>
-        <h5 class="four columns"><%= link_to t('dashboard.scheduled_jobs.view_production_schedule'), environment_harvest_schedules_path('production'), class: 'right' %></h5>
-      </div>
+      <h3 class="nine columns"><%= t('dashboard.scheduled_jobs.label') %></h3>
+      <h5 class="three columns"><%= link_to t('dashboard.scheduled_jobs.view_production_schedule'), environment_harvest_schedules_path('production'), class: 'button right secondary twelve right' %></h5>
 
       <div class="twelve columns">
         <table class="twelve">
