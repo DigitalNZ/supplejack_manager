@@ -1,4 +1,4 @@
-<h1 class="left">Schedules (<%= params[:environment] %>)</h1>
+<h1 class="left">Job Schedules - <%= params[:environment].capitalize %></h1>
 <%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right" %>
 
 <br/>
@@ -48,11 +48,11 @@
   <thead>
     <tr>
       <th><%= t("harvest_schedules.parser") %></th>
-      <th><%= t("harvest_schedules.start_time") %></th>
-      <th><%= t("harvest_schedules.frequency") %></th>
       <th><%= t("harvest_schedules.next_run_at") %></th>
+      <th><%= t("harvest_schedules.start_time") %></th>
       <th><%= t("harvest_schedules.environment") %></th>
       <th><%= t("harvest_schedules.mode") %></th>
+      <th><%= t("harvest_schedules.frequency") %></th>
       <th></th>
     </tr>
   </thead>
@@ -61,17 +61,15 @@
     <% @recurrent_schedules.each do |harvest_schedule| %>
     <tr>
       <td><%= harvest_schedule.parser.try(:name) %></td>
-      <td><%= l harvest_schedule.start_time, format: :long %></td>
-
+      <td><%= l harvest_schedule.next_run_at, format: :short %></td>
+      <td><%= l harvest_schedule.start_time, format: :short %></td>
+      <td><%= harvest_schedule.environment %></td>
+      <td><%= harvest_schedule.mode.try(:titleize) %></td>
       <% if harvest_schedule.frequency.present? %>
         <td><%= harvest_schedule.frequency %> at <%= harvest_schedule.at_hour.to_s.rjust(2, "0") %>:<%= harvest_schedule.at_minutes.to_s.rjust(2, "0") %> (<%= harvest_schedule.cron %>)</td>
       <% else %>
         <td><%= harvest_schedule.cron %></td>
       <% end %>
-
-      <td><%= l harvest_schedule.next_run_at, format: :long %></td>
-      <td><%= harvest_schedule.environment %></td>
-      <td><%= harvest_schedule.mode.try(:titleize) %></td>
       <td>
         <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
         <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>

@@ -64,7 +64,8 @@ en:
       production: "Production"
       staging: "Staging"
     new:
-      helptext: "Parsers are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema. Use this form to create new parser scripts. If this harvest relates to a new Harvest Partner you first will need to"
+      helptext: "Parser scripts are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema."
+      submit: "Create Parser Script"
 
   sources:
     label: "Data Sources"
@@ -134,7 +135,7 @@ en:
     label: "Harvest Jobs"
     strategy: "Strategy"
     file_name: "File name"
-    start_time: "Start time"
+    start_time: "First Run at"
     records_harvested: "Records harvested"
     progress: "Harvest progress"
     errors: "Errors"
@@ -171,6 +172,7 @@ en:
     label: Schedules
     parser: "Parser"
     new_schedule: "New Schedule"
+    start_time: "First Run at"
     new_env_schedule: "New %{env} Schedule"
     edit_schedule: "Edit Schedule"
     edit_env_schedule: "Edit %{env} Schedule"
@@ -194,10 +196,10 @@ en:
       link_check_rules:
         active: 'Link checking active?'
       parser:
-        name: "Harvest Name"
-        strategy: "Harvest Data Format"
+        name: "Parser Script Name"
+        strategy: "Data Format"
         parser_template_name: "Parser Template Name"
-        partner: "Harvest Partner"
+        partner: "Contributor"
         source: "Source ID"
       parser_template:
         name: "Harvest Template Name"
@@ -206,9 +208,7 @@ en:
         environment: "Environment:"
       snippet:
         name: "Code Snippet Name"
-    placeholders:
-      parser:
-        name: "A label to help you identify your harvests"
+    placeholders:      
       collection_record:
         id: "Enter a Record ID"
 

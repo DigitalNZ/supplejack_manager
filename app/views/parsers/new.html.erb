@@ -3,7 +3,6 @@
 
   <h5 class="subheader">
     <%= t('parsers.new.helptext') %> 
-    <%= link_to t('sources.create'), new_source_path %>.
   </h5>
 
   <%= simple_form_for @parser do |f| %>
@@ -20,7 +19,7 @@
 
     <div class="row">
       <div class="column twelve">
-        <%= f.button :submit, class: 'right' %>
+        <%= f.submit t('parsers.new.submit'), class: 'button right' %>
       </div>
     </div>
     
