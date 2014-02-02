@@ -5,14 +5,9 @@ class HarvestSchedulesController < ApplicationController
   respond_to :html
 
   def index
-    @harvest_schedules = HarvestSchedule.all
+    @harvest_schedules = HarvestSchedule.all.sort_by {|k| k.next_run_at }
     @recurrent_schedules = @harvest_schedules.find_all {|s| s.recurrent == true }
-    Rails.logger.info "-----------"
-    Rails.logger.info @recurrent_schedules.count
-    Rails.logger.info "------------"
     @one_off_schedules = @harvest_schedules.find_all {|s| s.recurrent == false }
-    # Rails.logger.info "-----------------"
-    # Rails.logger.info @one_off_schedules.count
   end
 
   def show
