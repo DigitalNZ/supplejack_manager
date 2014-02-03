@@ -62,7 +62,13 @@
     <tr>
       <td><%= harvest_schedule.parser.try(:name) %></td>
       <td><%= l harvest_schedule.next_run_at, format: :short %></td>
-      <td><%= l harvest_schedule.start_time, format: :short %></td>
+
+      <% if harvest_schedule.next_run_at > DateTime.now %>
+        <td class="grey-out"><%= l harvest_schedule.start_time, format: :first_run_at %></td>
+      <% elsif %>
+        <td><%= l harvest_schedule.start_time, format: :first_run_at %></td>
+      <% end %>
+      
       <td><%= harvest_schedule.environment %></td>
       <td><%= harvest_schedule.mode.try(:titleize) %></td>
       <% if harvest_schedule.frequency.present? %>

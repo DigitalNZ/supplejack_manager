@@ -5,9 +5,9 @@ class HarvestSchedulesController < ApplicationController
   respond_to :html
 
   def index
-    @harvest_schedules = HarvestSchedule.all.sort_by {|k| k.next_run_at }
-    @recurrent_schedules = @harvest_schedules.find_all {|s| s.recurrent == true }
-    @one_off_schedules = @harvest_schedules.find_all {|s| s.recurrent == false }
+    @harvest_schedules = HarvestSchedule.all
+    @recurrent_schedules = @harvest_schedules.find_all {|s| s.recurrent == true }.sort_by(&:next_run_at)
+    @one_off_schedules = @harvest_schedules.find_all {|s| s.recurrent == false }.sort_by(&:start_time)
   end
 
   def show

@@ -11,6 +11,9 @@ en:
   history: "History"
   name: "Name"
   note: "Note:"
+  time:
+    formats:
+      first_run_at: "%d %b %Y"
 
   environments:
     production: "Production"
