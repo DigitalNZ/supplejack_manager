@@ -7,6 +7,8 @@ class CollectionStatistics < ActiveResource::Base
 
 		index_statistics = Hash.new
 
+		statistics = statistics.sort_by(&:day).reverse
+
 		statistics.each do |stats_item|
 			index_statistics[stats_item.day] ||= Hash.new(0)
 			index_statistics[stats_item.day][:suppressed] += stats_item.suppressed_count
