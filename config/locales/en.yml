@@ -48,7 +48,7 @@ en:
       last_editor: "Last Editor"
     scheduled_jobs:
       label: "Next Scheduled Jobs"
-      view_production_schedule: Production Job Schedule
+      view_environment_schedule: "%{environment} Job Schedule"
     error: "There was an error generating the dashboard. Please try again"
 
   parsers:

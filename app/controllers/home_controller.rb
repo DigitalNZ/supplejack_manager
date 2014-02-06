@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    @environment = params[:environment] || 'production'
+    @environment = params[:environment] || 'staging'
     params[:environment] = @environment
     @stats = {active_jobs: 'n/a', finished_jobs: 'n/a', failed_jobs: 'n/a', activated: 'n/a', suppressed: 'n/a', deleted: 'n/a'}
 
@@ -45,7 +45,7 @@ class HomeController < ApplicationController
     end
 
     def gather_harvest_schedules_stats
-      set_worker_environment_for(HarvestSchedule, 'production')
+      set_worker_environment_for(HarvestSchedule, params[:environment])
       @scheduled_jobs = HarvestSchedule.find(:all, :from => :next)
     end
 

@@ -6,16 +6,19 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
 
   def set_worker_environment_for(klass, environment=nil)
-    env_vars = fetch_env_vars(environment)
+    if environment.present?
+      env_vars = Figaro.env(environment)
+    else 
+      env_vars = fetch_env_vars
+    end
+    
     klass.site = env_vars["WORKER_HOST"]
     klass.user = env_vars["WORKER_API_KEY"]
   end
 
   def fetch_env_vars(environment=nil)
 
-    if environment.present?
-      environment = environment
-    elsif Rails.env.development? && params[:environment]
+    if Rails.env.development? && params[:environment]
       environment = params[:environment]
     elsif Rails.env.development? 
       environment = "development"

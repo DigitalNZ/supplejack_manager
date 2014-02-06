@@ -53,7 +53,7 @@
   <% if @scheduled_jobs.present? %>
     <div class="row">
       <h3 class="nine columns"><%= t('dashboard.scheduled_jobs.label') %></h3>
-      <h5 class="three columns"><%= link_to t('dashboard.scheduled_jobs.view_production_schedule'), environment_harvest_schedules_path('production'), class: 'button right secondary twelve right' %></h5>
+      <h5 class="three columns"><%= link_to t('dashboard.scheduled_jobs.view_environment_schedule', environment: @environment.capitalize), environment_harvest_schedules_path(@environment), class: 'button right secondary twelve right' %></h5>
 
       <div class="twelve columns">
         <table class="twelve">
