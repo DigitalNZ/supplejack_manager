@@ -18,6 +18,7 @@ class HarvestSchedulesController < ApplicationController
     @harvest_schedule = HarvestSchedule.new(params[:harvest_schedule] || {})
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
+    @harvest_schedule.mode = "normal"
   end
 
   def create
