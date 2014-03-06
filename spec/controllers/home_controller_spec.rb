@@ -18,12 +18,12 @@ describe HomeController do
     context "#set environment" do
       it "sets the environment to staging" do
         get :index
-        controller.params[:environment].should eq 'staging'
+        controller.params[:environment].should eq 'production'
       end
 
-      it "sets the environment to production if set" do
-        get :index, environment: 'production'
-        controller.params[:environment].should eq 'production'
+      it "sets the environment to staging if set" do
+        get :index, environment: 'staging'
+        controller.params[:environment].should eq 'staging'
       end
     end
 
