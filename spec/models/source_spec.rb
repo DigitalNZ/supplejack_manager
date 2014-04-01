@@ -76,14 +76,16 @@ describe Source do
   end
 
   describe "#create_link_check_rule" do
-    it "should create an inactive LinkCheckRule" do
-      LinkCheckRule.should_receive(:create).with(source_id: source.source_id, active: false)
+    it "should create the rule in each backend_environment" do
+      BACKEND_ENVIRONMENTS = [:staging, :production]
+      source.should_receive(:set_worker_environment_for).with(LinkCheckRule, :production)
+      source.should_receive(:set_worker_environment_for).with(LinkCheckRule, :staging)
+      LinkCheckRule.should_receive(:create).twice()
       source.send(:create_link_check_rule)
     end
 
-    it "should create the rule in each backend_environment" do
-      BACKEND_ENVIRONMENTS = [:staging, :production]
-       LinkCheckRule.should_receive(:create).twice()
+    it "should create an inactive LinkCheckRule" do
+      LinkCheckRule.should_receive(:create).with(source_id: source.id, active: false)
       source.send(:create_link_check_rule)
     end
   end

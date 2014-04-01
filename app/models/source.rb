@@ -1,5 +1,6 @@
 class Source
   include Mongoid::Document
+  include EnvironmentHelpers
 
   belongs_to :partner
 
@@ -31,8 +32,8 @@ class Source
 
   def create_link_check_rule
     BACKEND_ENVIRONMENTS.each do |environment|
-      env = Figaro.env(environment)
-      LinkCheckRule.create(source_id: self.source_id, active: false)
+      set_worker_environment_for(LinkCheckRule, environment)
+      LinkCheckRule.create(source_id: self.id, active: false)
     end
   end
 end

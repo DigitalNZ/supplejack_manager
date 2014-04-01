@@ -1,4 +1,6 @@
 class LinkCheckRule < ActiveResource::Base
+  include EnvironmentHelpers
+  
   self.site = ENV["WORKER_HOST"]
   self.user = ENV["WORKER_API_KEY"]
 
