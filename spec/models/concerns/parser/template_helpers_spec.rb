@@ -4,6 +4,7 @@ describe Parser::TemplateHelpers do
   before do
     Partner.any_instance.stub(:update_apis)
     Source.any_instance.stub(:update_apis)
+    LinkCheckRule.stub(:create)
   end
 
   describe "update_contents_parser_class!" do

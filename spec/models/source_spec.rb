@@ -1,15 +1,17 @@
 require 'spec_helper'
 
 describe Source do
+  let(:source) {FactoryGirl.build(:source)}
+
   before do 
     Partner.any_instance.stub(:update_apis)
     Source.any_instance.stub(:update_apis)
+    LinkCheckRule.stub(:create)
   end
 
   describe "validations" do
     it "is valid with valid attributes" do
-      s = FactoryGirl.build(:source)
-      s.valid?.should be_true
+      source.valid?.should be_true
     end
 
     it "is not valid without a name" do
@@ -37,15 +39,19 @@ describe Source do
 
   describe "after save" do 
     it "calls update_apis" do
-      s = FactoryGirl.build(:source)
-      s.should_receive(:update_apis)
-      s.save
+      source.should_receive(:update_apis)
+      source.save
+    end
+  end
+
+  describe "after create" do
+    it "calls create_link_check_rule" do
+      source.should_receive(:create_link_check_rule)
+      source.save
     end
   end
 
   describe "#update_apis" do
-    let(:source) {FactoryGirl.build(:source)}
-
     before do
       Source.any_instance.unstub(:update_apis)
       RestClient.stub(:post)
@@ -53,19 +59,32 @@ describe Source do
 
     it "updates the source" do
       RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/partners/#{source.partner.id.to_s}/sources",source: source.attributes)
-      source.update_apis
+      source.send(:update_apis)
     end
 
     it "updates each backend_environment" do
       BACKEND_ENVIRONMENTS = [:staging, :production]
       RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/partners/#{source.partner.id.to_s}/sources",anything)
       RestClient.should_receive(:post).with("http://api.dnz03.digitalnz.org/partners/#{source.partner.id.to_s}/sources",anything)
-      source.update_apis
+      source.send(:update_apis)
     end
 
     it "syncs the partner" do
       source.partner.should_receive(:update_apis)
-      source.update_apis
+      source.send(:update_apis)
+    end
+  end
+
+  describe "#create_link_check_rule" do
+    it "should create an inactive LinkCheckRule" do
+      LinkCheckRule.should_receive(:create).with(source_id: source.source_id, active: false)
+      source.send(:create_link_check_rule)
+    end
+
+    it "should create the rule in each backend_environment" do
+      BACKEND_ENVIRONMENTS = [:staging, :production]
+       LinkCheckRule.should_receive(:create).twice()
+      source.send(:create_link_check_rule)
     end
   end
 end

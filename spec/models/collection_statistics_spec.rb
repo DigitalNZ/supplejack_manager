@@ -30,9 +30,10 @@ describe CollectionStatistics do
 		let(:source) { FactoryGirl.create(:source) }
 
 		before do
-			Partner.any_instance.stub(:update_apis)
-    	Source.any_instance.stub(:update_apis)
-			collection_statistics.stub(:source_id) { 'tapuhi' }
+      Partner.any_instance.stub(:update_apis)
+      Source.any_instance.stub(:update_apis)
+      LinkCheckRule.stub(:create)
+      collection_statistics.stub(:source_id) { 'tapuhi' }
 		end
 
 		it "shound find the source with the collection statistics source id" do

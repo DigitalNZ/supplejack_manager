@@ -4,6 +4,7 @@ describe SourcesController do
   before do
     Partner.any_instance.stub(:update_apis)
     Source.any_instance.stub(:update_apis)
+    LinkCheckRule.stub(:create)
   end
 
   let(:partner) {FactoryGirl.create(:partner)}

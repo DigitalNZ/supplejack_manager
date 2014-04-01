@@ -5,5 +5,9 @@
     Supplejack uses Source ID to identify which harvest particular records have come from.. Source IDs should be lower-case and never contain spaces. "National Library" is an invalid Source ID; "national-library" is a good Source ID.
   </h5>
 
+  <h5 class="subheader">
+    A new <%= link_to t('link_checker.link_check_rules.label').singularize, environment_link_check_rules_path('staging') %> will be created for this Source in all environments. By default it will be <strong>disabled</strong>, but it can be enabled and updated under 'Link Checking Rules'.
+  </h5>
+
   <%= render 'form' %>
 </div>
