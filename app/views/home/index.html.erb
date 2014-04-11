@@ -69,7 +69,11 @@
             <% @scheduled_jobs.each do |harvest_schedule| %>
               <tr>
                 <td><%= link_to harvest_schedule.parser.try(:name), edit_parser_path(harvest_schedule.parser) %></td>
-                <td><%= l harvest_schedule.next_run_at, format: :long %></td>
+                <% if harvest_schedule.recurrent? %>
+                  <td><%= l harvest_schedule.next_run_at, format: :long %></td>
+                <% else %>
+                  <td><%= l harvest_schedule.start_time, format: :long %></td>
+                <% end %>
 
                 <% if harvest_schedule.frequency.present? %>
                   <td><%= link_to harvest_schedule_frequency(harvest_schedule), harvest_schedule_path(harvest_schedule) %></td>
