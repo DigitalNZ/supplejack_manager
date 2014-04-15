@@ -6,20 +6,12 @@ end
 source 'https://rubygems.org'
 
 gem 'rails',        '3.2.12'
-# gem "rails", path: "/Users/fede/code/gems/rails"
 
-gem "harvester_core", git: "git@scm.digitalnz.org:harvester/core"
-#gem "harvester_core", path: "~/Projects/dnz/squirrel/core"
+gem "harvester_core", git: "https://github.com/DigitalNZ/supplejack_core.git"
 
 gem "oai", git: "https://github.com/code4lib/ruby-oai.git"
-
 gem "active_model_serializers", git: "https://github.com/rails-api/active_model_serializers.git"
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem "mongoid"
-
 gem "devise",       ">= 2.1.2"
 gem "simple_form",  git: "https://github.com/plataformatec/simple_form.git"
 gem "figaro",       ">= 0.5.0"
@@ -28,7 +20,6 @@ gem 'honeybadger'
 gem "chronic_duration"
 gem "kaminari"
 gem "activeresource-response"
-
 gem 'activeresource', require: 'active_resource'
 
 # Gems used only for assets and not required

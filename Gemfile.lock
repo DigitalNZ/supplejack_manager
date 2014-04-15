@@ -1,6 +1,6 @@
 GIT
-  remote: git@scm.digitalnz.org:harvester/core
-  revision: 14bba8ca67ca2ea6457a7c6f7f184cc483d1fb06
+  remote: https://github.com/DigitalNZ/supplejack_core.git
+  revision: 4fa13b20f8887cd5bfa1393b58498e861f3b65e3
   specs:
     harvester_core (0.0.1)
       actionpack (~> 3.2)
