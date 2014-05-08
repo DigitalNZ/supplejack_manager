@@ -1,9 +1,13 @@
 <h2 class="left"><%= t('parser_templates.create_a') %></h2>
 
+<h5 class="subheader left">
+  <%= t('parser_templates.helptext') %> 
+</h5>
+
 <%= simple_form_for @parser_template do |f| %>
   <div class="row">
     <div class="twelve columns">
-      <%= f.input :name %>
+      <%= f.input :name, label: t('parser_templates.name')%>
     </div>
   </div>
 

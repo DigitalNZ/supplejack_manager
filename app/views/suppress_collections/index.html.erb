@@ -1,7 +1,11 @@
 <div class="row eight columns centered">
-  <h1 class="left">Update Collection Status - <%= params[:environment].capitalize %></h1>
+  <h1><%= t('link_checker.suppress_collections.label') %> - <%= params[:environment].capitalize %></h1>
 
-  <h3 class="left">Suppress a Collection</h3>
+  <h5 class="subheader">
+    <%= t('link_checker.suppress_collections.helptext') %> 
+  </h5>
+
+  <h4 class="left"><%= t('link_checker.suppress_collections.suppress_a') %></h4>
   
   <div class="row twelve left">
     <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
@@ -10,13 +14,13 @@
         <%= hidden_field_tag :status, "suppressed" %>
       </div>
       <div class="five columns">
-        <%= submit_tag "Suppress", class: "button" %>
+        <%= submit_tag t('link_checker.suppress_collections.suppress'), class: "button" %>
       </div>
     <% end %>
   </div>
 
 <div class="row twelve columns">
-  <h3>Currently Suppressed Collections</h3>
+  <h4><%= t('link_checker.suppress_collections.current_supressions_title') %></h4>
 </div>
 
 <div class="row">
@@ -24,8 +28,8 @@
     <table id="suppress_collection">
       <thead>
         <tr>
-          <th class="two">Collection Title</th>
-          <th class="two">Activate Collection</th>
+          <th class="two"><%= t('link_checker.suppress_collections.collection_title') %></th>
+          <th class="two"><%= t('link_checker.suppress_collections.activate_title') %></th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +39,7 @@
           <td>
             <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
               <%= hidden_field_tag :status, "active" %>
-              <%= submit_tag "Activate", class: "small button" %>
+              <%= submit_tag t('link_checker.suppress_collections.activate'), class: "small button" %>
             <% end %>
         </tr>
         <% end %>

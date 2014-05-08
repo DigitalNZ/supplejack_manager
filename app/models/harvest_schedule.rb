@@ -16,7 +16,7 @@ class HarvestSchedule < ActiveResource::Base
     attribute :next_run_at, :datetime
     attribute :last_run_at, :datetime
     attribute :recurrent,   :boolean
-    attribute :mode, :string
+    attribute :mode,        :string
     attribute :enrichments, :string
   end
 

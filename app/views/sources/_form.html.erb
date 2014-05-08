@@ -1,14 +1,17 @@
 <%= simple_form_for(@source) do |f| %>
-  <%= f.error_notification %>
-
+  
+  <% if @source.errors.any? %>
+    <%= f.error_notification %>
+    <% @source.errors.messages[:name] = @source.errors.messages.delete(:source_id) %>
+  <% end %>
+ 
   <div class="row form-inputs">
     <div class="column twelve">
       <%= f.input :name %>
-      <%= f.input :source_id %>
       <%= f.association :partner, collection: Partner.all, include_blank: '<create new>' %>
       <%= f.simple_fields_for :partner do |partner_form| %>
       <fieldset id="new-partner-fields">
-        <legend>New partner</legend>
+        <legend><%= t('partners.create') %></legend>
         <%= partner_form.input :name %>
       </fieldset>
       <% end %>

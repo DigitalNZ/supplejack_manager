@@ -27,7 +27,7 @@ en:
 
   dashboard:
     title: "Supplejack Dashboard"
-    intro: "Get started by naming a new contributor to harvest data from. You can add one or more data sources to each contributor. Then extract data from each source with parser scripts. Complete the process by scheduling and monitoring harvest jobs."
+    intro: "Get started by identifying data sources to bring in to Supplejack. Then extract data from the sources with a parser scripts. Complete the process by scheduling and monitoring regular harvest jobs."
     server_stats: "%{environment} Server Statistics"
     twenty_hour_hours: "Last 24 hours"
     stats:
@@ -58,35 +58,46 @@ en:
     records_to_harvest: "How many records do you wish to harvest?"
     enrichments_to_run: "Select the enrichment you would like to run"
     strategy: "Strategy"
+    data_source: "Data source"
+    collection: "Collection"
     name: "Parser Script Name"
     rename: "Rename Parser Script"
     delete: "Delete Parser Script"
     change_source: "Change Data Source"
     edit_current: "(Edit current version)"
+    parser_template: "Parser template"
     environments:
       production: "Production"
       staging: "Staging"
     new:
-      helptext: "Parser scripts are instructions that tell Supplejack how to gather metadata from a partner organisation and map it to a common schema."
+      helptext: "Parser scripts are instructions that tell Supplejack how to extract data from a source and then map it to a common schema. Data sources can have multiple parser scripts to handle different extractions and enhancements, so you can create and name them separately. Associate your script with the right contributor and data source, before selecting a data format to tell Supplejack what kind of data to expect. You can optionally select a pre-existing template to copy in standard instructions."
       submit: "Create Parser Script"
 
   sources:
     label: "Data Sources"
-    create_a: "Create a New Data Source"
     create: "New Data Source"
+    create_a: "Create a new Data Source"
     edit: "Edit Data Source"
-    helptext: "Modifing the source_id of a data source will not change the records that have already been harvested using this source_id, and is not recommended."
     manage: "Manage Data Source"
+    name_label: "Data Source Name"
     reindex: "Reindex Data Source"
     modified_records: "Records Modified Since:"
     all_records: "All Records"
+    helptext:
+      intro: "Before creating new harvesting instructions with a parser script, you must name your data source and associate it with a contributor. A data source is a single source of data like an XML file or data feed that your want to harvest into Supplejack."
+      linkchecker_html: "A new <a href='/staging/link_check_rules'>Link Checking rule</a> will be created for this Source in all environments. By default it will be <strong>disabled</strong>, but it can be enabled and updated under 'Link Checking Rules'."
+      source_id_warning: "Modifing the source_id of a data source will not change the records that have already been harvested using this source_id, and is not recommended."
 
   partners:
     label: "Contributors"  
     create: "New Contributor"
     create_a: "Create a New Contributor"
     edit: "Edit a Contributor"
-
+    contributor: "Contributor"
+    name: "Contributor name"
+    new:
+      helptext: "A contributor is the name of an organisation or entity that is providing a data source. A contributor can be attached to many data sources."
+    
   jobs:
     active: "Active Jobs"
     finished: "Finished Jobs"
@@ -113,6 +124,13 @@ en:
       label: "Link Checking Rules"
     suppress_collections:
       label: "Update Collection Status"
+      helptext: "A collection is a set of harvested data that has come from a specific data source. You can suppress a collection of data from the active search index by selecting the matching data source."
+      current_supressions_title: "Currently suppressed collections"
+      collection_title: "Collection Title"
+      suppress_a: "Suppress a Collection"
+      suppress: "Suppress"
+      activate: "Activate"
+      activate_title: "Activate Collection"
 
   parser_templates:
     label: "Parser Templates"
@@ -120,6 +138,8 @@ en:
     create_a: "Create a New Parser Template"
     rename: "Rename Parser Template"
     delete: "Delete Parser Template"
+    name: "Parser Template Name"
+    helptext: "A parser template is a set of harvesting instructions that you can reuse when you set up new parser scripts. For example if you regularly harvest YouTube collections you can use the YouTube template. Copy or create your instructions and, on saving the template, it will become available in the New Parser Script form."
 
   snippets:
     label: "Code Snippets"
@@ -173,7 +193,9 @@ en:
 
   harvest_schedules:
     label: Schedules
-    parser: "Parser"
+    parser: "Parser Script"
+    start: "Begin"
+    recurrent: "Recurring"
     new_schedule: "New Schedule"
     start_time: "First Run at"
     new_env_schedule: "New %{env} Schedule"
@@ -186,14 +208,38 @@ en:
     incremental_hint: "The incremental option only applies to OAI harvests. It will use the last time a harvest was run for the particular parser as a starting point."
     save: "Save Schedule"
 
+  mongoid:
+    
+    errors: 
+      models:
+        source: 
+          attributes:
+            name: 
+              blank: "can't be blank"
+            source_id:
+              taken: "Another source already has this name. <br /><br /><em>Note:</em> Non-alphanumeric characters and whitespace are ignored when comparing names" 
+
   activemodel:
     models:
       harvest_schedule: "Schedule"
+      source: 
 
     attributes:
       harvest_schedule:
         at_hour: "At time"
 
+  helpers:
+    submit:
+      source:
+        create: "Create Data Source"
+        update: "Update Data Source"
+      partner:
+        create: "Create a new Contributor"
+        update: "Update Contributor"
+      parser: 
+        create: "Create Paser Script"
+        update: "Update Parser Script"
+              
   simple_form:
     labels:
       link_check_rules:
@@ -201,20 +247,27 @@ en:
       parser:
         name: "Parser Script Name"
         strategy: "Data Format"
-        parser_template_name: "Parser Template Name"
+        parser_template_name: "Parser Template"
         partner: "Contributor"
-        source: "Source ID"
+        source: "Data Source"
       parser_template:
         name: "Harvest Template Name"
       source:
+        name: "Data Source Name"
         source_id: "Source ID"
         environment: "Environment:"
+        partner: "Contributor"
+      partner: 
+        name: "Contributor name"
       snippet:
         name: "Code Snippet Name"
+      harvest_schedule:
+        parser_id: "Parser Script"
+        start_time: "Begin"
+        recurrent: "Recurring"
     placeholders:      
       collection_record:
         id: "Enter a Record ID"
-
 
   users:
     label: 'Users'

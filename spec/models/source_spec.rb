@@ -21,6 +21,9 @@ describe Source do
 
     it "is not valid without a source_id" do
       s = FactoryGirl.build(:source, source_id: nil)
+      # create_source_id is called before validation so if it is 
+      # not stubbed then the source id will be set.
+      s.stub(:create_source_id)
       s.valid?.should be_false
     end
 
@@ -37,16 +40,23 @@ describe Source do
     end
   end
 
-  describe "after save" do 
-    it "calls update_apis" do
-      source.should_receive(:update_apis)
-      source.save
+  describe "before validation" do
+    it "calls create_source_id" do
+      Source.any_instance.should_receive(:create_source_id)
+      Source.create(name: "Test", partner: FactoryGirl.create(:partner))
     end
   end
 
   describe "after create" do
     it "calls create_link_check_rule" do
       source.should_receive(:create_link_check_rule)
+      source.save
+    end
+  end
+
+  describe "after save" do 
+    it "calls update_apis" do
+      source.should_receive(:update_apis)
       source.save
     end
   end
@@ -87,6 +97,37 @@ describe Source do
     it "should create an inactive LinkCheckRule" do
       LinkCheckRule.should_receive(:create).with(source_id: source.id, active: false)
       source.send(:create_link_check_rule)
+    end
+  end
+
+  describe "#create_source_id" do
+    context "a source with a source_id" do
+      it "doesn't create a source_id if one exists" do
+        current_source_id = source.source_id
+        source.send(:create_source_id)
+        source.source_id.should eq current_source_id
+      end
+    end
+
+    context "creating a new source" do
+      let(:new_source) { Source.new(name: "New source", partner: 123) }
+      
+      it "creates a new source_id using the name" do
+        new_source.send(:create_source_id)
+        new_source.source_id.should eq "new_source"
+      end
+
+      it "removes excess whitespace and replaces them with underscores in the source_id" do
+        new_source.name = "New      Source     4"
+        new_source.send(:create_source_id)
+        new_source.source_id.should eq "new_source_4"
+      end
+
+      it "only includes alphanumeric characters in the source_id" do
+        new_source.name = "@New 84 $ource!!"
+        new_source.send(:create_source_id)
+        new_source.source_id.should eq "new_84_ource"
+      end
     end
   end
 end

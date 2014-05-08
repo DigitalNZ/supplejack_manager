@@ -9,17 +9,16 @@
     <div class="row">
       <div class="column twelve">
         <%= f.input :name %>
+        <%= f.input :partner, collection: Partner.all.sort(name: 1), value_method: :name %>
+        <%= f.association :source, as: :grouped_select, collection: Partner.all.sort(name: 1), group_method: :sources, label_method: :name %>  
         <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
         <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name) %>
-
-        <%= f.input :partner, collection: Partner.all.sort(name: 1), label_method: :name, value_method: :name %>
-        <%= f.association :source, as: :grouped_select, collection: Partner.all.sort(name: 1), group_method: :sources, label_method: :name, group_label_method: :name %>  
       </div>
     </div>
 
     <div class="row">
       <div class="column twelve">
-        <%= f.submit t('parsers.new.submit'), class: 'button right' %>
+        <%= f.button :submit, class: 'button right' %>
       </div>
     </div>
     
