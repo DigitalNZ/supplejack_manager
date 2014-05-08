@@ -32,7 +32,7 @@ class Version
   end
 
   def post_changes
-    if self.production?
+    if self.production? && ENV['CHANGESAPP_HOST'].present?
       payload = changes_payload
 
       RestClient::Request.execute(

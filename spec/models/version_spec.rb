@@ -54,6 +54,7 @@ describe Version do
 
     context "tagged as production" do
       it "should post to changes app" do
+        ENV['CHANGESAPP_HOST'] = 'http://test.host'
         version.tags = ["production"]
         RestClient::Request.should_receive(:execute).with(anything())
         version.post_changes

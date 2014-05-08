@@ -1,9 +1,9 @@
 HarvesterManager::Application.routes.draw do
 
-  root :to => "home#index"
+  root to: 'home#index'
 
   resources :parsers do
-    resources :parser_versions, path: "versions", only: [:show, :update] do
+    resources :parser_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
       get :new_enrichment, on: :member
       get :new_harvest, on: :member
@@ -11,8 +11,8 @@ HarvesterManager::Application.routes.draw do
   end
 
   resources :snippets, except: [:show] do
-    get "current_version", on: :collection
-    resources :snippet_versions, path: "versions", only: [:show, :update] do
+    get 'current_version', on: :collection
+    resources :snippet_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
     end
   end
@@ -26,8 +26,8 @@ HarvesterManager::Application.routes.draw do
 
   resources :previews, only: [:show, :update]
 
-  scope ":environment", as: "environment" do
-    resources :abstract_jobs, only: [:index], path: "jobs"
+  scope ':environment', as: 'environment' do
+    resources :abstract_jobs, only: [:index], path: 'jobs'
     resources :harvest_jobs, only: [:create, :update, :show, :index]
     resources :enrichment_jobs, only: [:create, :update, :show, :new]
     resources :harvest_schedules
@@ -37,7 +37,7 @@ HarvesterManager::Application.routes.draw do
     resources :collection_records, only: [:index, :update]
   end
 
-  match "/parsers/:parser_id/preview" => "records#index", as: :preview
+  match '/parsers/:parser_id/preview' => 'records#index', as: :preview
 
   devise_for :users
   resources :users, only: [:index, :edit, :update, :new, :create]

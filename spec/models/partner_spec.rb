@@ -34,11 +34,12 @@ describe Partner do
       partner.update_apis
     end
 
-    it "updates each backend_environment" do
-      BACKEND_ENVIRONMENTS = [:staging, :production]
-      RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/partners",anything)
-      RestClient.should_receive(:post).with("http://api.dnz03.digitalnz.org/partners",anything)
-      partner.update_apis
+    it "updates each environments" do
+      APPLICATION_ENVS.each do |env|
+        env = Figaro.env(env)
+        RestClient.should_receive(:post).with("#{env['API_HOST']}/partners", anything)
+        partner.update_apis
+      end
     end
   end
 end

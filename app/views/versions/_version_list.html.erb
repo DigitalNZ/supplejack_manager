@@ -1,27 +1,30 @@
 <ul class="button-group tagging">
   <% if @version %>
-    <% if @version.production? %>
-      <li>
-        <%= link_to "Untag as Production", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) - ["production"]).uniq}), method: :put, class: "button expand small production" %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Tag as Production", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) + ["production"]).uniq}), method: :put, class: "button expand small production" %>
-      </li>
+    <% if APPLICATION_ENVS.include?(:production) %>
+      <% if @version.production? %>
+        <li>
+          <%= link_to "Untag as Production", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) - ["production"]).uniq}), method: :put, class: "button expand small production" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Tag as Production", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) + ["production"]).uniq}), method: :put, class: "button expand small production" %>
+        </li>
+      <% end %>
     <% end %>
 
-    <% if @version.staging? %>
-      <li>
-        <%= link_to "Untag as Staging", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) - ["staging"]).uniq}), method: :put, class: "button expand small" %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Tag as Staging", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) + ["staging"]).uniq}), method: :put, class: "button expand small" %>
-      </li>
+    <% if APPLICATION_ENVS.include?(:staging) %>
+      <% if @version.staging? %>
+        <li>
+          <%= link_to "Untag as Staging", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) - ["staging"]).uniq}), method: :put, class: "button expand small" %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Tag as Staging", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) + ["staging"]).uniq}), method: :put, class: "button expand small" %>
+        </li>
+      <% end %>
     <% end %>
   <% end %>
 </ul>
-
 
 <div id="versions">
   <% versionable.versions.desc(:created_at).each_with_index do |version, index| %>

@@ -114,7 +114,7 @@ describe SourcesController do
     describe "GET reindex" do
       it "calls reindex on api" do
         source = Source.create! valid_attributes
-        RestClient.should_receive(:get).with("http://localhost:3000/sources/#{source.id}/reindex?date=2013-09-12T01:49:51.067Z")
+        RestClient.should_receive(:get).with("#{ENV['API_HOST']}/sources/#{source.id}/reindex?date=2013-09-12T01:49:51.067Z")
         get :reindex,  {:id => source.to_param, env: :test, date: "2013-09-12T01:49:51.067Z", format: :js}
       end
     end

@@ -16,9 +16,9 @@ describe HomeController do
     end
 
     context "#set environment" do
-      it "sets the environment to staging" do
+      it "sets the environment to first available environment" do
         get :index
-        controller.params[:environment].should eq 'production'
+        controller.params[:environment].should eq APPLICATION_ENVS.first.to_s
       end
 
       it "sets the environment to staging if set" do

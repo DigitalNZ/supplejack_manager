@@ -5,6 +5,7 @@
       <h1><%= t('dashboard.title') %></h1>
       <h4 class="subheader"><%= t('dashboard.intro') %></h4>
     </div>
+
     <div class="three columns new-actions">
       <%= link_to t('sources.create'), new_source_path, class: "button right twelve" %>
       <%= link_to t('parsers.create'), new_parser_path, class: "button right twelve" %>
@@ -13,7 +14,7 @@
 
   <hr />
 
-  <%= render 'stats', {stats: @stats, environment: @environment } %>
+  <%= render 'stats', { stats: @stats, environment: @environment } %>
 
   <hr />
 

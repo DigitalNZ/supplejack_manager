@@ -27,14 +27,14 @@ class Source
   
   def update_apis
     partner.update_apis
-    BACKEND_ENVIRONMENTS.each do |environment|
+    APPLICATION_ENVS.each do |environment|
       env = Figaro.env(environment)
       RestClient.post("#{env['API_HOST']}/partners/#{self.partner.id.to_s}/sources", source: self.attributes)
     end
   end
 
   def create_link_check_rule
-    BACKEND_ENVIRONMENTS.each do |environment|
+    APPLICATION_ENVS.each do |environment|
       set_worker_environment_for(LinkCheckRule, environment)
       LinkCheckRule.create(source_id: self.id, active: false)
     end

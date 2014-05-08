@@ -68,15 +68,16 @@ describe Source do
     end
 
     it "updates the source" do
-      RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/partners/#{source.partner.id.to_s}/sources",source: source.attributes)
+      RestClient.should_receive(:post).with("#{ENV['API_HOST']}/partners/#{source.partner.id.to_s}/sources",source: source.attributes)
       source.send(:update_apis)
     end
 
     it "updates each backend_environment" do
-      BACKEND_ENVIRONMENTS = [:staging, :production]
-      RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/partners/#{source.partner.id.to_s}/sources",anything)
-      RestClient.should_receive(:post).with("http://api.dnz03.digitalnz.org/partners/#{source.partner.id.to_s}/sources",anything)
-      source.send(:update_apis)
+      APPLICATION_ENVS.each do |env|
+        env = Figaro.env(env)
+        RestClient.should_receive(:post).with("#{env['API_HOST']}/partners/#{source.partner.id.to_s}/sources", anything)
+        source.send(:update_apis)
+      end
     end
 
     it "syncs the partner" do
@@ -87,11 +88,11 @@ describe Source do
 
   describe "#create_link_check_rule" do
     it "should create the rule in each backend_environment" do
-      BACKEND_ENVIRONMENTS = [:staging, :production]
-      source.should_receive(:set_worker_environment_for).with(LinkCheckRule, :production)
-      source.should_receive(:set_worker_environment_for).with(LinkCheckRule, :staging)
-      LinkCheckRule.should_receive(:create).twice()
-      source.send(:create_link_check_rule)
+      APPLICATION_ENVS.each do |env|
+        source.should_receive(:set_worker_environment_for).with(LinkCheckRule, env)
+        LinkCheckRule.should_receive(:create)
+        source.send(:create_link_check_rule)  
+      end
     end
 
     it "should create an inactive LinkCheckRule" do

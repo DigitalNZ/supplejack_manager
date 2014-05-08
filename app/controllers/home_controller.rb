@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    @environment = params[:environment] || 'production'
+    @environment = params[:environment] || APPLICATION_ENVS.first.to_s
     params[:environment] = @environment
     @stats = {active_jobs: 'n/a', finished_jobs: 'n/a', failed_jobs: 'n/a', activated: 'n/a', suppressed: 'n/a', deleted: 'n/a'}
 

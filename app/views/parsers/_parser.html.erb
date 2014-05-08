@@ -18,11 +18,11 @@
           <div href="#" class="button run-enrichment dropdown">
             Run Enrichment
             <ul>
-              <% if @version.try(:staging?) %>
+              <% if APPLICATION_ENVS.include?(:staging) %>
                 <li><%= link_to "Staging Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "staging"} %></li>
               <% end %>
 
-              <% if @version.try(:production?) %>
+              <% if APPLICATION_ENVS.include?(:production) %>
                 <li><%= link_to "Production Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "production"} %></li>
               <% end %>
             </ul>
@@ -32,11 +32,11 @@
           <div href="#" class="button run-harvest dropdown">
             Run Harvest
             <ul>
-              <% if @version.try(:staging?) %>
+              <% if APPLICATION_ENVS.include?(:staging) && @version.try(:staging?) %>
                 <li><%= link_to "Staging Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "staging"} %></li>
               <% end %>
 
-              <% if @version.try(:production?) %>
+              <% if APPLICATION_ENVS.include?(:production) && @version.try(:production?) %>
                 <li><%= link_to "Production Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "production"} %></li>
               <% end %>
 

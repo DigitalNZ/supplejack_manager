@@ -29,7 +29,7 @@
               </ul>
             </li>
 
-            <% ['staging', 'production'].each do |environment| %>
+            <% APPLICATION_ENVS.each do |environment| %>
               <li class="has-dropdown">
                 <%= link_to t("navigation.#{environment}"), "#" %>
 

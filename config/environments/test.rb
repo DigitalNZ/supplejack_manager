@@ -35,5 +35,5 @@ HarvesterManager::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  BACKEND_ENVIRONMENTS = [:staging]
+  I18n.enforce_available_locales = false
 end
