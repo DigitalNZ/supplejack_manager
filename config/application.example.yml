@@ -1,64 +1,27 @@
-# Add account credentials and API keys here.
-# See http://railsapps.github.com/rails-environment-variables.html
-# This file should be listed in .gitignore to keep your settings secret!
-# Each entry sets a local environment variable and overrides ENV variables in the Unix shell.
-# For example, setting:
-# GMAIL_USERNAME: Your_Gmail_Username
-# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
-# Add application configuration variables here, as shown below.
-#
+# Example Supplejack Manager application.yml file
+# This setup assumes that you have an API that runs on localhost:3000
+# and a Worker running on localhost:3002.
+# Running the Manager allows you to harvest in production environment.
+
 development:
-	WORKER_HOST: "http://worker.harvester.org"
-  WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
-  HARVESTER_CACHING_ENABLED: true
-  HONEYBADGER_API_KEY: "abc123"
-  CHANGESAPP_HOST: "http://changes.harvester.org/changes"
-  CHANGESAPP_USER: "library_changes"
-  CHANGESAPP_PASSWORD: "abc123"
-  API_HOST: "api.harvester.org"
-  HOST: "harvester.org"
-  DEVISE_MAILER: "info@harvester.org"
-  SECRET_TOKEN: "some really long hashvalue"
-  API_MONGOID_HOSTS: "localhost:27017"
+  WORKER_HOST: http://localhost:3002
+  WORKER_API_KEY: <production worker key>
+  API_HOST: http://localhost:3000
+  API_MONGOID_HOSTS: localhost:27017
 
 test:
-	WORKER_HOST: "http://worker.harvester.org"
-  WORKER_API_KEY: "CcfouGYmkBnRL71aqAp8"
-  HARVESTER_CACHING_ENABLED: true
-  HONEYBADGER_API_KEY: "abc123"
-  CHANGESAPP_HOST: "http://changes.harvester.org/changes"
-  CHANGESAPP_USER: "library_changes"
-  CHANGESAPP_PASSWORD: "abc123"
-  API_HOST: "api.harvester.org"
-  HOST: "harvester.org"
-  DEVISE_MAILER: "info@harvester.org"
-  SECRET_TOKEN: "some really long hashvalue"
-  API_MONGOID_HOSTS: "localhost:27017"
-
-staging:
-	WORKER_HOST: "http://worker.harvester.org"
-  WORKER_API_KEY: "secretapikey"
-  HARVESTER_CACHING_ENABLED: true
-  HONEYBADGER_API_KEY: "abc123"
-  CHANGESAPP_HOST: "http://changes.harvester.org/changes"
-  CHANGESAPP_USER: "library_changes"
-  CHANGESAPP_PASSWORD: "abc123"
-  API_HOST: "api.harvester.org"
-  HOST: "harvester.org"
-  DEVISE_MAILER: "info@harvester.org"
-  SECRET_TOKEN: "some really long hashvalue"
-  API_MONGOID_HOSTS: "localhost:27017"
+  WORKER_HOST: http://localhost:3002
+  WORKER_API_KEY: <production worker key>
+  API_HOST: http://localhost:3000
+  API_MONGOID_HOSTS: localhost:27017
 
 production:
-	WORKER_HOST: "http://worker.harvester.org"
-  WORKER_API_KEY: "secretapikey"
-  HARVESTER_CACHING_ENABLED: true
-  HONEYBADGER_API_KEY: "abc123"
-  CHANGESAPP_HOST: "http://changes.harvester.org/changes"
-  CHANGESAPP_USER: "library_changes"
-  CHANGESAPP_PASSWORD: "abc123"
-  API_HOST: "api.harvester.org"
-  HOST: "harvester.org"
-  DEVISE_MAILER: "info@harvester.org"
-  SECRET_TOKEN: "some really long hashvalue"
-  API_MONGOID_HOSTS: "localhost:27017"
+  WORKER_HOST: http://localhost:3002
+  WORKER_API_KEY: <production worker key>
+  API_HOST: http://localhost:3000
+
+# staging:
+#   WORKER_HOST: http://localhost:4002
+#   WORKER_API_KEY: <staging worker key>
+#   API_HOST: http://localhost:4000
+#   API_MONGOID_HOSTS: localhost:27017
