@@ -12,9 +12,7 @@ The Supplejack Manager is a rails application that provides a visual interface i
 * Define rules for checking links in the Supplejack API.
 * View the statistics for the link checker
 
-## More information and Documentation
-
-[Full installation and usage documentation instructions](http://digitalnz.github.io/supplejack)
+For more information on how to configure and use this application refer to the [documentation](http://digitalnz.github.io/supplejack)
 
 ## COPYRIGHT AND LICENSING  
 
