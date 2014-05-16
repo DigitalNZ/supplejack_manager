@@ -14,7 +14,7 @@ The Supplejack Manager is a rails application that provides a visual interface i
 
 ## More information and Documentation
 
-Full installation and usage documentation instructions can be found at http://digitalnz.github.io/supplejack
+[Full installation and usage documentation instructions](http://digitalnz.github.io/supplejack)
 
 ## COPYRIGHT AND LICENSING  
 
