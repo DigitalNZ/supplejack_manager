@@ -33,7 +33,7 @@ en:
 
   dashboard:
     title: "Supplejack Dashboard"
-    intro: "Get started by identifying data sources to bring in to Supplejack. Then extract data from the sources with a parser scripts. Complete the process by scheduling and monitoring regular harvest jobs."
+    intro: "Get started by identifying data sources to bring in to Supplejack. Then extract data from the sources by creating and running parser scripts. Complete the process by scheduling and monitoring regular harvest jobs."
     server_stats: "%{environment} Server Statistics"
     twenty_hour_hours: "Last 24 hours"
     stats:
@@ -76,7 +76,7 @@ en:
       production: "Production"
       staging: "Staging"
     new:
-      helptext: "Parser scripts are instructions that tell Supplejack how to extract data from a source and then map it to a common schema. Data sources can have multiple parser scripts to handle different extractions and enhancements, so you can create and name them separately. Associate your script with the right contributor and data source, before selecting a data format to tell Supplejack what kind of data to expect. You can optionally select a pre-existing template to copy in standard instructions."
+      helptext: "Parser scripts are instructions that tell Supplejack how to extract data from a source and then map it to a common schema. Data sources can have multiple parser scripts to handle different extractions and enhancements, so you can create and name them separately. Your parser script must be associated with a contributor and data source. Selecting a data format tells Supplejack what kind of data to expect. You can optionally select a pre-existing template that will copy in standard instructions to help you get started."
       submit: "Create Parser Script"
 
   sources:
@@ -130,7 +130,7 @@ en:
       label: "Link Checking Rules"
     suppress_collections:
       label: "Update Collection Status"
-      helptext: "A collection is a set of harvested data that has come from a specific data source. You can suppress a collection of data from the active search index by selecting the matching data source."
+      helptext: "A collection is a set of harvested data that has come from a specific data source. You can suppress a collection (ie all records associated with a specific data source) from the active search index by selecting the matching data source."
       current_supressions_title: "Currently suppressed collections"
       collection_title: "Collection Title"
       suppress_a: "Suppress a Collection"
