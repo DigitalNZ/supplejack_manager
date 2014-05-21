@@ -6,5 +6,5 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
 # http://digitalnz.org/supplejack
 
-HarvesterCore.caching_enabled = ENV["HARVESTER_CACHING_ENABLED"] == "true"
-HarvesterCore.parser_base_path = Rails.root.to_s + "/tmp/parsers"
+SupplejackCommon.caching_enabled = ENV["HARVESTER_CACHING_ENABLED"] == "true"
+SupplejackCommon.parser_base_path = Rails.root.to_s + "/tmp/parsers"

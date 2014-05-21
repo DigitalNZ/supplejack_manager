@@ -94,7 +94,7 @@ class Parser
 
   def enrichment_definitions(environment)
     begin
-      loader = HarvesterCore::Loader.new(self, environment)
+      loader = SupplejackCommon::Loader.new(self, environment)
 
       if loader.loaded?
         loader.parser_class.enrichment_definitions

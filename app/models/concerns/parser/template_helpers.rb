@@ -22,7 +22,7 @@ class Parser
 	  	if self.content.nil?
 
 	  		parser_template = []
-	  		parser_template << "class #{self.name.gsub(/\s/, "_").camelize} < HarvesterCore::#{self.strategy.capitalize}::Base"
+	  		parser_template << "class #{self.name.gsub(/\s/, "_").camelize} < SupplejackCommon::#{self.strategy.capitalize}::Base"
 	  		
 	  		if parser_template_name.present?
 	  			template = ParserTemplate.find_by_name(parser_template_name)

@@ -20,24 +20,24 @@ describe Parser::TemplateHelpers do
     let(:parser) { FactoryGirl.create(:parser) }
 
     it "replaces the class name in the content" do
-      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
+      parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
       parser.name =  "Nz On Screen"
       parser.update_contents_parser_class!
-      parser.content.should eq "class NzOnScreen < HarvesterCore::Oai::Base"
+      parser.content.should eq "class NzOnScreen < SupplejackCommon::Oai::Base"
     end
 
     it "sets the commit message" do
-      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
+      parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
       parser.name =  "Nz On Screen"
       parser.update_contents_parser_class!
       parser.message.should eq "Renamed parser class"
     end
 
     it "replaces specific class names" do
-      parser.content = "class KeteDnz < HarvesterCore::Oai::Base"
+      parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
       parser.name = "Bfm rss"
       parser.update_contents_parser_class!
-      parser.content.should eq "class BfmRss < HarvesterCore::Oai::Base"
+      parser.content.should eq "class BfmRss < SupplejackCommon::Oai::Base"
     end
   end
 
@@ -48,7 +48,7 @@ describe Parser::TemplateHelpers do
     it "should initialize the parsers content parser class" do
       parser.content = nil
       parser.apply_parser_template!
-      parser.content.should eq "class NzOnScreen < HarvesterCore::Xml::Base\n\nend"
+      parser.content.should eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\nend"
     end
 
     it "should not initialize if parsers content is not nil" do
@@ -67,7 +67,7 @@ describe Parser::TemplateHelpers do
         parser.content = nil
         ParserTemplate.should_receive(:find_by_name).with("template") { parser_template }
         parser.apply_parser_template!
-        parser.content.should eq "class NzOnScreen < HarvesterCore::Xml::Base\n\n\t#{parser_template.content}\n\nend"
+        parser.content.should eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\n\t#{parser_template.content}\n\nend"
       end
     end
   end

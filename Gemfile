@@ -15,7 +15,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 
-gem 'harvester_core', git: 'git@github.com:DigitalNZ/supplejack_core.git'
+gem 'supplejack_common', git: 'git@github.com:DigitalNZ/supplejack_common.git'
 
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'

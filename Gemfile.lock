@@ -1,8 +1,8 @@
 GIT
-  remote: git@github.com:DigitalNZ/supplejack_core.git
-  revision: 4fa13b20f8887cd5bfa1393b58498e861f3b65e3
+  remote: git@github.com:DigitalNZ/supplejack_common.git
+  revision: 43984f0547a806e2f1b3f7f5d1d2a1f4f9b81caa
   specs:
-    harvester_core (0.0.1)
+    supplejack_common (0.0.1)
       actionpack (~> 3.2)
       activesupport (~> 3.2)
       chronic (~> 0.8.0)
@@ -339,7 +339,6 @@ DEPENDENCIES
   factory_girl_rails (>= 4.1.0)
   figaro (>= 0.5.0)
   guard-rspec
-  harvester_core!
   honeybadger
   jquery-datatables-rails!
   jquery-rails
@@ -355,6 +354,7 @@ DEPENDENCIES
   rspec-rails (>= 2.12.2)
   sass-rails (~> 3.2.3)
   simple_form!
+  supplejack_common!
   therubyracer
   timecop
   uglifier (>= 1.0.3)

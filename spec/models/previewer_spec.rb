@@ -10,7 +10,7 @@ require "spec_helper"
 
 describe Previewer do
 
-  let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < HarvesterCore::Json::Base; end") }
+  let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < SupplejackCommon::Json::Base; end") }
   let(:previewer) { Previewer.new(parser, "Data", "user123") }
   let(:preview) { mock_model(Preview) }
 
