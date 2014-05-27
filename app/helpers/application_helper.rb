@@ -37,4 +37,8 @@ module ApplicationHelper
       raw_data
     end
   end
+
+  def safe_users_path(params={})
+    current_user.admin? ? users_path(params) : root_path
+  end
 end

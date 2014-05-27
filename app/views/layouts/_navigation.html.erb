@@ -64,7 +64,9 @@ http://digitalnz.org/supplejack
               <%= link_to "Hi, #{current_user.name}", "#" %>
 
               <ul class="dropdown">
-                <%= link_to_tab t('users.all_users'), users_path %>
+                <% if can? :edit_users, current_user %>
+                  <%= link_to_tab t('users.all_users'), users_path %>
+                <% end %>
                 <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %> 
                 <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
               </ul>

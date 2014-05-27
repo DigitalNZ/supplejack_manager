@@ -14,5 +14,17 @@ http://digitalnz.org/supplejack
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
 
-  <%= f.button :submit %> or <%= link_to "Cancel", users_path %>
+
+  <% if can? :edit_users, @user %>
+    <fieldset>
+      <legend>User Administration</legend>
+      
+      <%= f.label :role, 'Role' %>
+      <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+
+      <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
+    </fieldset>
+  <% end %>
+
+  <%= f.button :submit %> or <%= link_to "Cancel", safe_users_path %>
 <% end %>

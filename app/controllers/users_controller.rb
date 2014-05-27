@@ -7,18 +7,20 @@
 # http://digitalnz.org/supplejack
 
 class UsersController < ApplicationController
+  load_and_authorize_resource
 
   def index
-    @users = User.all
+    if params[:active] == 'false'
+      @users = User.deactivated
+    else
+      @users = User.active
+    end
   end
 
   def new
-    @user = User.new
   end
 
   def create
-    @user = User.new(params[:user])
-
     if @user.save
       redirect_to users_path
     else
@@ -27,17 +29,33 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    if params[:user]
+      authorize! :edit_users, @user if params[:user][:role]
 
-    if @user.update_attributes(params[:user])
-      sign_in(@user, bypass: true) if @user == current_user
-      redirect_to users_path, notice: 'User was successfully updated.'
+      if needs_password?(@user, params)
+        if @user.update_attributes(params[:user])
+          sign_in(@user, bypass: true) if @user == current_user
+          redirect_to safe_users_path, notice: 'User was successfully updated.'
+        else
+          render :edit
+        end
+      else
+        params[:user].delete(:password)
+        @user.update_without_password(params[:user])
+        redirect_to safe_users_path, notice: 'User was successfully updated.'
+      end
     else
-      render :edit
+      redirect_to safe_users_path, notice: 'User could not be updated'
     end
+  end
+
+  private
+
+  def needs_password?(user, params)
+    @user.email != params[:user][:email] ||
+      params[:user][:password].present?
   end
 end

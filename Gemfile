@@ -21,6 +21,7 @@ gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'mongoid'
 gem 'devise', '>= 2.1.2'
+gem 'cancan'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'figaro', '>= 0.5.0'
 gem 'coderay', '~> 1.0.8'
@@ -29,6 +30,8 @@ gem 'chronic_duration'
 gem 'kaminari'
 gem 'activeresource-response'
 gem 'activeresource', require: 'active_resource'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -45,9 +48,6 @@ group :assets do
   gem 'zurb-foundation', '= 3.2.3'
   gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 end
-
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 
 group :development do
   gem 'quiet_assets', '>= 1.0.1'

@@ -58,4 +58,20 @@ describe ApplicationHelper do
 		end
 
 	end
+
+	describe "safe_users_path" do
+		context "admin user" do
+			it "should be able to access users_path" do
+		  	helper.stub(:current_user) { double(:user, admin?: true) }
+		  	helper.safe_users_path.should eq users_path
+			end
+		end
+
+		context "standard user" do
+			it "should not be able to access users_path" do
+		  	helper.stub(:current_user) { double(:user, admin?: false) }
+		  	helper.safe_users_path.should eq root_path
+			end
+		end
+	end
 end

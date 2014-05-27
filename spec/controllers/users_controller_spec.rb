@@ -23,10 +23,18 @@ describe UsersController do
       expect(response).to render_template(:index)
     end
 
-    it 'should finds all users' do
-      User.should_receive(:all) { [user] }
+    it 'should find all active users' do
+      User.should_receive(:active) { [user] }
       get :index
       expect(assigns(:users)).to eq [user]
+    end
+
+    context "active=false" do
+      it 'should find all deactivated users' do
+        User.should_receive(:deactivated) { [user] }
+        get :index, active: 'false'
+        expect(assigns(:users)).to eq [user]
+      end
     end
   end
 

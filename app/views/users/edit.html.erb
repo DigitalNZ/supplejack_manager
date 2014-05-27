@@ -8,12 +8,14 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h1>
+<div class="eight columns centered">
+  <h1>
     <% if @user == current_user %>
         Edit Profile
     <% else %>
         Edit User
     <% end %>
-</h1>
+  </h1>
 
-<%= render "form" %>
+  <%= render "form" %>
+</div>

@@ -10,10 +10,15 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  ROLES = %w[admin user]
+
+  scope :active, -> { where(active: true) }
+  scope :deactivated, -> { where(active: false) }
+
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role, :active
 
   before_save :ensure_authentication_token
   
@@ -40,7 +45,21 @@ class User
   ## Token authenticatable
   field :authentication_token,    type: String
 
+  field :role,                    type: String,   default: 'user'
+  field :active,                  type: Boolean,  default: true
+
+  validates :name, :email, :role, presence: true
+  validates :role, inclusion: ROLES
+
   def first_name
     name.split("\s").first if name.present?
+  end
+
+  def admin?
+    self.role == 'admin'
+  end
+
+  def active_for_authentication?
+    super and self.active
   end
 end

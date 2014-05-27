@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   include EnvironmentHelpers
 
   before_filter :authenticate_user!
+
+  def safe_users_path(params={})
+    current_user.admin? ? users_path(params) : root_path
+  end
 end
