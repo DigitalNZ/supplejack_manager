@@ -9,7 +9,7 @@ http://digitalnz.org/supplejack
 %>
 
 <h1 class="left"><%= t('parsers.label') %></h1>
-<%= link_to t('parsers.create'), new_parser_path, class: "button new-right" %>
+<%= link_to t('parsers.create'), new_parser_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
 <table id="parsers" class="twelve">
   <thead>
@@ -24,16 +24,26 @@ http://digitalnz.org/supplejack
   </thead>
 
   <tbody>
-
-    <% @parsers.each do |parser| %>
-    <tr>
-      <td><%= link_to parser.name, edit_parser_path(parser) %></td>
-      <td><%= parser.strategy %></td>
-      <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
-      <td><%= link_to parser.source.name, edit_source_path(parser.source) %></td>
-      <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
-      <td><%= parser.last_edited_by %></td>
-    </tr>
+    <% @parsers.try(:each) do |parser| %>
+      <% if can? :update, parser %>
+        <tr>
+          <td><%= link_to parser.name, edit_parser_path(parser) %></td>
+          <td><%= parser.strategy %></td>
+          <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
+          <td><%= link_to parser.source.name, edit_source_path(parser.source) %></td>
+          <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
+          <td><%= parser.last_edited_by %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= link_to parser.name, parser_path(parser) %></td>
+          <td><%= parser.strategy %></td>
+          <td><%= parser.source.partner.name %></td>
+          <td><%= parser.source.name %></td>
+          <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
+          <td><%= parser.last_edited_by %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

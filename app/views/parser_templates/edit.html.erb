@@ -9,7 +9,7 @@ http://digitalnz.org/supplejack
 %>
 
 <div class="row">
-	<div class="eight columns">
+	<div class="nine columns">
 		<h1 id="parser-template-title" class="left"><%= @parser_template.name %></h1>
 		<div id="hidden-parser-template-form">
 			<%= simple_form_for @parser_template do |f| %>
@@ -21,12 +21,10 @@ http://digitalnz.org/supplejack
 		</div>
 	</div>
 
-	<div class="four columns">
-		<ul class="button-group right">
-			<li><a href="#" id="rename-parser-template-action" class="button"><%= t('parser_templates.rename') %></a></li>
-			<li><a href="#" class="button" data-reveal-id="delete-parser-template-alert"><%= t('parser_templates.delete') %></a></li>
-		</ul>
-	</div>
+	<div class="three columns new-actions">
+		<a href="#" id="rename-parser-template-action" class="button right twelve"><%= t('parser_templates.rename') %></a>
+		<a href="#" class="button right twelve" data-reveal-id="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
+  </div>
 </div>
 
 <div id="delete-parser-template-alert" class="reveal-modal small">

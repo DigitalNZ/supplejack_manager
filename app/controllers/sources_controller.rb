@@ -7,50 +7,50 @@
 # http://digitalnz.org/supplejack
 
 class SourcesController < ApplicationController
+  load_and_authorize_resource
 
   respond_to :html, :json
   
-  # GET /sources
   def index
     @sources = params[:source].present? ? Source.where(params[:source]) : Source.all
     respond_with @sources
   end
 
-  # GET /sources/new
-  def new
-    @source = Source.new
-    @source.partner = Partner.new
-  end
-
-  # GET /sources/1/edit
-  def edit
-    @source = Source.find(params[:id])
-  end
-
   def show
-    @source = Source.find(params[:id])
     respond_with @source
   end
 
-  # POST /sources
-  def create
-    @source = Source.new(params[:source])
+  def new
+    @source.partner = Partner.new
 
-    if @source.save
-      redirect_to sources_path, notice: 'Source was successfully created.'
+    if can? :manage, Partner
+      @partners = Partner.asc(:name)
     else
-      render action: "new"
+      @partners = Partner.find(current_user.manage_partners)
     end
   end
 
-  # PUT /sources/1
-  def update
-    @source = Source.find(params[:id])
+  def edit
+    if can? :manage, Partner
+      @partners = Partner.asc(:name)
+    else
+      @partners = Partner.find(current_user.manage_partners)
+    end
+  end
 
+  def create
+    if @source.save
+      redirect_to sources_path, notice: 'Source was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  def update
     if @source.update_attributes(params[:source])
       redirect_to sources_path, notice: 'Source was successfully updated.'
     else
-      render action: "edit"
+      render :edit
     end
   end
 

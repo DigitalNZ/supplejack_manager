@@ -7,6 +7,7 @@
 # http://digitalnz.org/supplejack
 
 class LinkCheckRulesController < ApplicationController
+  load_and_authorize_resource
 
   respond_to :json, :html
 
@@ -17,27 +18,24 @@ class LinkCheckRulesController < ApplicationController
     respond_with @link_check_rules
   end
 
-  def show
-    @link_check_rule = LinkCheckRule.find(params[:id])
-    respond_with @link_check_rule
-  end
-
   def new
-    @link_check_rule = LinkCheckRule.new
+    if can? :manage, Partner
+      @partners = Partner.asc(:name)
+    else
+      @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
+    end
   end
 
   def edit
-    @link_check_rule = LinkCheckRule.find(params[:id])
+    @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
   end
 
   def destroy
-    @link_check_rule = LinkCheckRule.find(params[:id])
     @link_check_rule.destroy
     redirect_to environment_link_check_rules_path(environment: params[:environment])
   end
 
   def create
-    @link_check_rule = LinkCheckRule.new(params[:link_check_rule])
     if @link_check_rule.save
       redirect_to environment_link_check_rules_path(environment: params[:environment])
     else
@@ -46,7 +44,6 @@ class LinkCheckRulesController < ApplicationController
   end
 
   def update
-    @link_check_rule = LinkCheckRule.find(params[:id])
     if @link_check_rule.update_attributes(params[:link_check_rule])
       redirect_to environment_link_check_rules_path(environment: params[:environment])
     else

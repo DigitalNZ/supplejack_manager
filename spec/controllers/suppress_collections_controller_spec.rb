@@ -9,6 +9,7 @@
 require "spec_helper"
 
 describe SuppressCollectionsController do
+  let(:user) { mock_model(User, role: 'admin').as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }

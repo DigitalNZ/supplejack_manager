@@ -17,8 +17,8 @@ http://digitalnz.org/supplejack
     </div>
 
     <div class="three columns new-actions">
-      <%= link_to t('sources.create'), new_source_path, class: "button right twelve" %>
-      <%= link_to t('parsers.create'), new_parser_path, class: "button right twelve" %>
+      <%= link_to t('sources.create'), new_source_path, class: "button right twelve #{can_show_button(:create, Source)}" %>
+      <%= link_to t('parsers.create'), new_parser_path, class: "button right twelve #{can_show_button(:create, Parser)}" %>
     </div>
   </div>
 
@@ -47,11 +47,19 @@ http://digitalnz.org/supplejack
           <tbody>
             <% @parsers.each do |parser| %>
               <tr>
-                <td><%= link_to parser.name, edit_parser_path(parser) %></td>
-                <td><%= parser.strategy %></td>
-                <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
-                <td><%= distance_of_time_in_words(Time.now, parser.versions.last.try(:created_at).try(:localtime)) %> ago</td>
-                <td><%= parser.last_edited_by %></td>
+                <% if can? :update, parser %>
+                  <td><%= link_to parser.name, edit_parser_path(parser) %></td>
+                  <td><%= parser.strategy %></td>
+                  <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
+                  <td><%= distance_of_time_in_words(Time.now, parser.versions.last.try(:created_at).try(:localtime)) %> ago</td>
+                  <td><%= parser.last_edited_by %></td>
+                <% else %>
+                  <td><%= link_to parser.name, parser_path(parser) %></td>
+                  <td><%= parser.strategy %></td>
+                  <td><%= parser.source.partner.name %></td>
+                  <td><%= distance_of_time_in_words(Time.now, parser.versions.last.try(:created_at).try(:localtime)) %> ago</td>
+                  <td><%= parser.last_edited_by %></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>

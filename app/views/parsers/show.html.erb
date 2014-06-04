@@ -1,0 +1,72 @@
+<%#  
+The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
+and is licensed under the GNU General Public License, version 3. Some components are 
+third party components that are licensed under the MIT license or otherwise publicly available. 
+See https://github.com/DigitalNZ/supplejack_manager for details. 
+
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+http://digitalnz.org/supplejack
+%>
+
+<div class="row">
+  <div class="nine columns">
+    <h1 id="parser-title" class="left"><%= @parser.name %></h1>
+  </div>
+
+  <div class="three columns last">
+    <ul class="button-group harvest-commands">
+      <% if can? :run_harvest, @parser %>
+        <% if @version %>
+          <li>
+            <div href="#" class="button run-enrichment dropdown">
+              Run Enrichment
+              <ul>
+                <% if APPLICATION_ENVS.include?(:staging) %>
+                  <li><%= link_to "Staging Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "staging"} %></li>
+                <% end %>
+
+                <% if APPLICATION_ENVS.include?(:production) %>
+                  <li><%= link_to "Production Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "production"} %></li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div href="#" class="button run-harvest dropdown">
+              Run Harvest
+              <ul>
+                <% if APPLICATION_ENVS.include?(:staging) && @version.try(:staging?) %>
+                  <li><%= link_to "Staging Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "staging"} %></li>
+                <% end %>
+
+                <% if APPLICATION_ENVS.include?(:production) && @version.try(:production?) %>
+                  <li><%= link_to "Production Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "production"} %></li>
+                <% end %>
+
+                <li><%= link_to "Test Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "test"} %></li>
+              </ul>
+            </div>
+          </li>
+        <% end %>
+        <li><%= link_to "Preview", preview_path(@parser.id), class: "button records-preview-button" %></li>
+      <% else %>
+        <div href="#" class="button run-harvest dropdown disabled">Run Harvest</div>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="nine columns">
+    <% if @version %>
+      <%= render "parser_versions/form" %>
+    <% else %>
+      <%= render "form" %>
+    <% end %>
+  </div>
+
+  <div class="three columns">
+    <h3 class="no-margin-top left"><%= t("history") %></h3>
+    <%= render partial: "versions/version_list", locals: { versionable: @parser, versionable_path: "parser_parser_version" } %>
+  </div>
+</div>

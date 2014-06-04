@@ -10,7 +10,7 @@ http://digitalnz.org/supplejack
 
 <%= simple_form_for @harvest_schedule, html: {class: "harvest_schedule"} do |f| %>
 
-  <%= f.input :parser_id, collection: Parser.asc(:name) %>
+  <%= f.input :parser_id, collection: @parsers %>
 
   <%= f.input :start_time, input_html: {class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
 

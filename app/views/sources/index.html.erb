@@ -9,7 +9,7 @@ http://digitalnz.org/supplejack
 %>
 
 <h1 class="left"><%= t('sources.label') %></h1>
-<%= link_to t('sources.create'), new_source_path, class: "button new-right" %>
+<%= link_to t('sources.create'), new_source_path, class: "button new-right #{can_show_button(:create, Source)}" %>
 
 <table id="sources" class="twelve">
   <thead>
@@ -20,16 +20,24 @@ http://digitalnz.org/supplejack
     </tr>
   </thead>
   <tbody>
-  <% @sources.each do |source| %>
-    <tr>
-      <td><%= link_to source.name, edit_source_path(source) %></td>
-      <td><%= source.source_id %></td>
-      <td><%= link_to source.partner.name, edit_partner_path(source.partner) %></td>
-    </tr>
-  <% end %>
+    <% @sources.each do |source| %>
+      <% if can? :update, source %>
+        <tr>
+          <td><%= link_to source.name, edit_source_path(source) %></td>
+          <td><%= source.source_id %></td>
+          <% if can? :update, source.partner %>
+            <td><%= link_to source.partner.name, edit_partner_path(source.partner) %></td>
+          <% else %>
+            <td><%= source.partner.name %></td>
+          <% end %>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= source.name %></td>
+          <td><%= source.source_id %></td>
+          <td><%= source.partner.name %></td>
+        </tr>
+      <% end %>
+    <% end %>
   </tbody>
 </table>
-
-<br />
-
-

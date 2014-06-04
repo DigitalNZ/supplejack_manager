@@ -7,18 +7,15 @@
 # http://digitalnz.org/supplejack
 
 class PartnersController < ApplicationController
+  load_and_authorize_resource
 
   def index
-    @partners = Partner.all
   end
 
   def new
-    @partner = Partner.new
   end
 
   def create
-    @partner = Partner.new(params[:partner])
-
     if @partner.save
       redirect_to partners_path
     else
@@ -27,12 +24,9 @@ class PartnersController < ApplicationController
   end
 
   def edit
-    @partner = Partner.find params[:id]
   end
 
   def update
-    @partner = Partner.find(params[:id])
-
     if @partner.update_attributes(params[:partner])
       redirect_to partners_path, notice: 'partner was successfully updated.'
     else

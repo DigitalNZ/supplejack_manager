@@ -18,12 +18,16 @@ http://digitalnz.org/supplejack
   <div class="row form-inputs">
     <div class="column twelve">
       <%= f.input :name %>
-      <%= f.association :partner, collection: Partner.all, include_blank: '<create new>' %>
-      <%= f.simple_fields_for :partner do |partner_form| %>
-      <fieldset id="new-partner-fields">
-        <legend><%= t('partners.create') %></legend>
-        <%= partner_form.input :name %>
-      </fieldset>
+      <% if can? :manage, Partner %>
+        <%= f.association :partner, collection: @partners, include_blank: '<create new>' %>
+        <%= f.simple_fields_for :partner do |partner_form| %>
+        <fieldset id="new-partner-fields">
+          <legend><%= t('partners.create') %></legend>
+          <%= partner_form.input :name %>
+        </fieldset>
+        <% end %>
+      <% else %>
+        <%= f.association :partner, collection: @partners %>
       <% end %>
     </div>
   </div>

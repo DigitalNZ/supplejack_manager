@@ -27,8 +27,6 @@ class Parser
 
   VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]
 
-  # ENVIRONMENTS = [:staging, :production]
-
   validates_presence_of   :name, :strategy
   validates_uniqueness_of :name
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
@@ -36,6 +34,11 @@ class Parser
   before_create :apply_parser_template!
 
   before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
+
+  def self.find_by_partners(partner_ids=[])
+    sources = Source.where(:partner.in => partner_ids).pluck(:id)
+    @parsers = Parser.where(:source.in => sources)
+  end
 
   def file_name
     @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"

@@ -13,3 +13,17 @@ end
 Then /^"(.*?)" should be an admin$/ do |name|
   User.find_by(name: name).role.should eq 'admin'
 end
+
+When /^the user has "(.*?)" set to "(.*?)"$/ do |attr, value|
+  if value == "true"
+    value = true
+  elsif value == "false"
+    value = false
+  end
+
+  @user.update_attribute(attr.to_sym, value)
+end
+
+Then /^show me the user$/ do
+  puts @user.inspect
+end

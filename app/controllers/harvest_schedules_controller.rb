@@ -7,6 +7,7 @@
 # http://digitalnz.org/supplejack
 
 class HarvestSchedulesController < ApplicationController
+  authorize_resource
 
   before_filter :set_worker_environment
 
@@ -18,15 +19,17 @@ class HarvestSchedulesController < ApplicationController
     @one_off_schedules = @harvest_schedules.find_all {|s| s.recurrent == false }.sort_by(&:start_time)
   end
 
-  def show
-    @harvest_schedule = HarvestSchedule.find(params[:id])
-  end
-
   def new
     @harvest_schedule = HarvestSchedule.new(params[:harvest_schedule] || {})
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
     @harvest_schedule.mode = "normal"
+
+    if can? :manage, HarvestSchedule
+      @parsers = Parser.asc(:name)
+    else
+      @parsers = Parser.find_by_partners(current_user.manage_partners)
+    end
   end
 
   def create
@@ -37,6 +40,12 @@ class HarvestSchedulesController < ApplicationController
 
   def edit
     @harvest_schedule = HarvestSchedule.find(params[:id])
+    
+    if can? :manage, HarvestSchedule
+      @parsers = Parser.asc(:name)
+    else
+      @parsers = Parser.find_by_partners(current_user.manage_partners)
+    end
   end
 
   def update

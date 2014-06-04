@@ -9,9 +9,12 @@ http://digitalnz.org/supplejack
 %>
 
 <%= simple_form_for @snippet do |f| %>
-  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
+  <% if can? :update, @snippet %>
+    <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
 
-  <%= f.input :message %>
-
-  <%= f.button :submit, class: 'right' %>
+    <%= f.input :message %>
+    <%= f.button :submit, class: 'right' %>
+  <% else %>
+    <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor read-only"} %>
+  <% end %>
 <% end %>

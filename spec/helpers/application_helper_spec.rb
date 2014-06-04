@@ -74,4 +74,20 @@ describe ApplicationHelper do
 			end
 		end
 	end
+
+	describe "can_show_button" do
+		context "authorised" do
+			it "should return empty string" do
+			 helper.stub(:can?) { true }
+			 helper.can_show_button(:create, Source).should eq ''
+			end
+		end
+		
+		context "unauthorised" do
+			it "should return disabled" do
+			 helper.stub(:can?) { false }
+			 helper.can_show_button(:create, Source).should eq 'disabled'
+			end
+		end
+	end
 end

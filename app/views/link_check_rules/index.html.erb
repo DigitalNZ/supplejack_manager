@@ -8,8 +8,9 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h1 class="left">Link Check Rules - <%= params[:environment].capitalize%> </h1>
-<%= link_to "New link check rule", new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right" %>
+<h1 class="left">Link Check Rules - <%= params[:environment].capitalize%></h1>
+<%= link_to "New link check rule", new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right #{can_show_button(:create, LinkCheckRule)}" %>
+
 
 <table id="link_check_rules" class="twelve">
   <thead>
@@ -27,11 +28,21 @@ http://digitalnz.org/supplejack
     <% @link_check_rules.each do |link_check_rule| %>
     <tr>
       <td><%= link_check_rule.source.try(:partner_name) %></td>
-      <td><%= link_to link_check_rule.source.try(:name), edit_source_path(link_check_rule.source) %></td>
+      <td>
+        <% if link_check_rule.source && can?(:update, link_check_rule.source) %>
+          <%= link_to link_check_rule.source.try(:name), edit_source_path(link_check_rule.source) %>
+        <% else %>
+          <%= link_check_rule.source.try(:name) %>
+        <% end %>
+      </td>
       <td><%= link_check_rule.source.try(:source_id) %></td>
       <td><%= link_check_rule.active %></td>
       <td><%= link_check_rule.updated_at %></td>
-      <td><%= link_to "Edit", edit_environment_link_check_rule_path(id: link_check_rule.id, environment: params[:environment]) %></td>
+      <td>
+        <% if can? :update, link_check_rule %>
+          <%= link_to "Edit", edit_environment_link_check_rule_path(id: link_check_rule.id, environment: params[:environment]) %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

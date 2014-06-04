@@ -11,9 +11,11 @@ require 'spec_helper'
 describe PartnersController do
   let(:partners) { FactoryGirl.create_list(:partner, 3) }
   let (:partner) {FactoryGirl.build(:partner)}
+  let(:user) { mock_model(User, role: 'admin').as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
+    controller.stub(:current_user) { user }
     Partner.any_instance.stub(:update_apis)
     Source.any_instance.stub(:update_apis)
   end

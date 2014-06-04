@@ -17,6 +17,7 @@ en:
   history: "History"
   name: "Name"
   note: "Note:"
+  cancel: Cancel
   time:
     formats:
       first_run_at: "%d %b %Y"
@@ -102,7 +103,7 @@ en:
     name: "Contributor name"
     new:
       helptext: "A contributor is the name of an organisation or entity that is providing a data source. A contributor can be attached to many data sources."
-    
+
   jobs:
     active: "Active Jobs"
     finished: "Finished Jobs"
@@ -128,8 +129,8 @@ en:
     link_check_rules:
       label: "Link Checking Rules"
     suppress_collections:
-      label: "Update Collection Status"
-      helptext: "A collection is a set of harvested data that has come from a specific data source. You can suppress a collection (ie all records associated with a specific data source) from the active search index by selecting the matching data source."
+      label: "Collection Status"
+      helptext: "A collection is a set of harvested data that has come from a specific data source. You can suppress a collection (i.e. all records associated with a specific data source) from the active search index by selecting the matching data source."
       current_supressions_title: "Currently suppressed collections"
       collection_title: "Collection Title"
       suppress_a: "Suppress a Collection"
@@ -214,7 +215,6 @@ en:
     save: "Save Schedule"
 
   mongoid:
-    
     errors: 
       models:
         source: 
@@ -244,37 +244,13 @@ en:
       parser: 
         create: "Create Paser Script"
         update: "Update Parser Script"
-              
-  simple_form:
-    labels:
-      link_check_rules:
-        active: 'Link checking active?'
-      parser:
-        name: "Parser Script Name"
-        strategy: "Data Format"
-        parser_template_name: "Parser Template"
-        partner: "Contributor"
-        source: "Data Source"
-      parser_template:
-        name: "Harvest Template Name"
-      source:
-        name: "Data Source Name"
-        source_id: "Source ID"
-        environment: "Environment:"
-        partner: "Contributor"
-      partner: 
-        name: "Contributor name"
-      snippet:
-        name: "Code Snippet Name"
-      harvest_schedule:
-        parser_id: "Parser Script"
-        start_time: "Begin"
-        recurrent: "Recurring"
-    placeholders:      
-      collection_record:
-        id: "Enter a Record ID"
 
   users:
     label: 'Users'
     all_users: 'All Users'
     edit_profile: 'Edit Profile'
+    administration: 'User Administration'
+    name_can: 'The user can:'
+    following_contributors: 'For the following contributors:'
+    management_permissions: 'Management Permissions'
+    harvesting_permissions: 'Harvesting Permissions'

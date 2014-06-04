@@ -51,7 +51,9 @@ http://digitalnz.org/supplejack
                   <%= link_to_tab t('link_checker.link_check_rules.label'), environment_link_check_rules_path(environment) %>
                   <%= link_to_tab t('statistics.label'), environment_collection_statistics_path(environment) %>
                   <%= link_to_tab t('link_checker.suppress_collections.label'), environment_suppress_collections_path(environment) %>
-                  <%= link_to_tab t('records.label'), environment_collection_records_path(environment) %>
+                  <% if can? :read, :collection_record %>
+                    <%= link_to_tab t('records.label'), environment_collection_records_path(environment) %>
+                  <% end %>
                 </ul>
               </li>
             <% end %>

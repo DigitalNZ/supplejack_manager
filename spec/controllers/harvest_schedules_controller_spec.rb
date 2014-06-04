@@ -11,9 +11,11 @@ require "spec_helper"
 describe HarvestSchedulesController do
 
   let(:schedule) { mock_model(HarvestSchedule).as_null_object }
+  let(:user) { mock_model(User, role: 'admin').as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
+    controller.stub(:current_user) { user }
   end
 
   describe "GET index" do
@@ -30,15 +32,6 @@ describe HarvestSchedulesController do
       get :index, environment: "staging"
       assigns(:recurrent_schedules).should eq [s1]
       assigns(:one_off_schedules).should eq [s2]
-    end
-  end
-
-  describe "#GET show" do
-    
-    it "finds the harvest schedule" do
-      HarvestSchedule.should_receive(:find).with("1") { schedule }
-      get :show, id: 1, format: "js", environment: "staging"
-      assigns(:harvest_schedule).should eq schedule
     end
   end
   

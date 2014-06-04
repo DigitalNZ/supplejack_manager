@@ -18,6 +18,23 @@ $stagingColor: $mainColor;
   }
 }
 
+.tagging .button {
+  font-size: 12px;
+  line-height: 1.4;
+
+  &.production {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.staging {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+
+
 .version {
   position: relative;
   background: $secondaryColor;

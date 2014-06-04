@@ -7,32 +7,34 @@
 # http://digitalnz.org/supplejack
 
 class ParsersController < ApplicationController
+  load_and_authorize_resource
 
-  respond_to :json
+  respond_to :json, :html
 
   def index
-    @parsers = Parser.all
   end
 
   def show
-    @parser = Parser.find(params[:id])
     respond_with @parser
   end
 
   def new
-    @parser = Parser.new
     @source = @parser.source = Source.new
     @source.partner = Partner.new
+
+    if can? :manage, Partner
+      @partners = Partner.asc(:name)
+    else
+      @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
+    end
   end
 
   def edit
-    @parser = Parser.find(params[:id])
     @harvest_job = HarvestJob.from_parser(@parser, current_user)
     @enrichment_job = EnrichmentJob.from_parser(@parser, current_user)
   end
 
   def create
-    @parser = Parser.new(params[:parser])
     @parser.user_id = current_user.id
     @source = @parser.source
 
@@ -44,7 +46,6 @@ class ParsersController < ApplicationController
   end
 
   def update
-    @parser = Parser.find(params[:id])
     @parser.attributes = params[:parser]
     @parser.user_id = current_user.id
     @parser.update_contents_parser_class!
@@ -57,7 +58,6 @@ class ParsersController < ApplicationController
   end
 
   def destroy
-    @parser = Parser.find(params[:id])
     @parser.destroy unless @parser.running_jobs?
     redirect_to parsers_path
   end

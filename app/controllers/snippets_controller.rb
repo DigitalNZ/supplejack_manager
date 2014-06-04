@@ -7,23 +7,20 @@
 # http://digitalnz.org/supplejack
 
 class SnippetsController < ApplicationController
+  load_and_authorize_resource
 
   respond_to :html, :json
 
   def index
-    @snippets = Snippet.all
   end
 
   def new
-    @snippet = Snippet.new
   end
 
   def edit
-    @snippet = Snippet.find(params[:id])
   end
 
   def create
-    @snippet = Snippet.new(params[:snippet])
     @snippet.user_id = current_user.id
 
     if @snippet.save
@@ -34,7 +31,6 @@ class SnippetsController < ApplicationController
   end
 
   def update
-    @snippet = Snippet.find(params[:id])
     @snippet.user_id = current_user.id
 
     if @snippet.update_attributes(params[:snippet])
@@ -45,7 +41,6 @@ class SnippetsController < ApplicationController
   end
 
   def destroy
-    @snippet = Snippet.find(params[:id])
     @snippet.destroy
     redirect_to snippets_path
   end

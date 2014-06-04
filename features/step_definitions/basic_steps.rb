@@ -26,7 +26,7 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
 end
 
 Then /^I should see "([^"]*)" on "([^"]*)"$/ do |value, selector|
-  page.should have_selector(selector, :text => value)
+  page.should have_selector(selector, text: value)
 end
 
 Then /^I should not see "(.*?)"$/ do |text|
@@ -51,6 +51,10 @@ end
 
 Then /^I should see selector "(.*?)"$/ do |selector|
   page.should have_selector(selector)
+end
+
+Then /^I should not see selector "(.*?)"$/ do |selector|
+  page.should_not have_selector(selector)
 end
 
 Then /take a screenshot(| and show me the page)/ do |show_me|

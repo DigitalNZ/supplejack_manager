@@ -46,6 +46,16 @@ describe Parser do
     end
   end
 
+  describe ".find_by_partners" do
+    let!(:partner) { FactoryGirl.create(:partner) }
+    let!(:source) { FactoryGirl.create(:source, partner: partner) }
+    let!(:parser) { FactoryGirl.create(:parser, source: source) }
+
+    it "should find the Partner" do
+      Parser.find_by_partners([partner.id]).should eq [parser]
+    end
+  end
+
   context "file paths" do
     let(:parser) { FactoryGirl.build(:parser, name: "Europeana", strategy: "json") }
 

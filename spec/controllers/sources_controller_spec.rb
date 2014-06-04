@@ -48,6 +48,10 @@ describe SourcesController do
   end
 
   describe "POST create" do
+    before(:each) {
+      controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+    }
+
     describe "with valid params" do
       it "creates a new Source" do
         expect {
@@ -83,6 +87,10 @@ describe SourcesController do
   end
 
   describe "PUT update" do
+    before(:each) {
+      controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+    }
+
     describe "with valid params" do
       it "updates the requested source" do
         source = Source.create! valid_attributes
@@ -120,6 +128,10 @@ describe SourcesController do
     end
 
     describe "GET reindex" do
+      before(:each) {
+        controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+      }
+
       it "calls reindex on api" do
         source = Source.create! valid_attributes
         RestClient.should_receive(:get).with("#{ENV['API_HOST']}/sources/#{source.id}/reindex?date=2013-09-12T01:49:51.067Z")

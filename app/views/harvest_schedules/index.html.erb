@@ -9,7 +9,7 @@ http://digitalnz.org/supplejack
 %>
 
 <h1 class="left">Job Schedules - <%= params[:environment].capitalize %></h1>
-<%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right" %>
+<%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right #{can_show_button(:create, HarvestSchedule)}" %>
 
 <br/>
 
@@ -36,8 +36,10 @@ http://digitalnz.org/supplejack
         <td><%= harvest_schedule.environment %></td>
         <td><%= harvest_schedule.mode.try(:titleize) %></td>
         <td>
-          <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
-          <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+          <% if can? :update, harvest_schedule %>
+            <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
+            <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+          <% end %>
         </td>
       </tr>
       <% end %>
@@ -87,8 +89,10 @@ http://digitalnz.org/supplejack
         <td><%= harvest_schedule.cron %></td>
       <% end %>
       <td>
-        <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
-        <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+        <% if can? :update, harvest_schedule %>
+          <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
+          <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+        <% end %>
       </td>
     </tr>
     <% end %>

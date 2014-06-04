@@ -9,6 +9,8 @@
 require 'spec_helper'
 
 describe CollectionRecordsController do
+  let(:user) { mock_model(User, role: "admin").as_null_object }
+
   before(:each) do
     controller.stub(:authenticate_user!) { true }
     controller.stub(:current_user) { user }
@@ -32,8 +34,6 @@ describe CollectionRecordsController do
   end
 
   describe 'PUT #update' do
-    before { RestClient.stub(:put) }
-
     it 'should make a post to the api to change the status to active for the record' do
       RestClient.should_receive(:put).with("#{ENV['API_HOST']}/harvester/records/abc123", {record: { status: 'active' }})
       put :update, environment: 'development', id: 'abc123', status: 'active'

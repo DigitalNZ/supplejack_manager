@@ -69,4 +69,11 @@ describe User do
       end
     end
   end
+
+  describe "run_harvest_partners=" do
+    it "should remove the blank entries" do
+      user.run_harvest_partners=(['a', '', 'c'])
+      user.run_harvest_partners.should eq ['a', 'c'] 
+    end
+  end
 end

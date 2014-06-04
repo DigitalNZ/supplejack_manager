@@ -13,11 +13,12 @@ http://digitalnz.org/supplejack
   
   <%= render 'form' %>
 
-  <h2><%= t('sources.manage') %></h2>
-  <a href="#" data-reveal-id="reindex-modal" class="button right"><%= t('sources.reindex') %></a>
-  
+  <% if can? :manage, @source %>
+    <h2><%= t('sources.manage') %></h2>
+    <a href="#" data-reveal-id="reindex-modal" class="button right"><%= t('sources.reindex') %></a>
+  <% end %>
 </div>
-  
+
 <div id="reindex-modal" class="reveal-modal medium">
   <h2><%= t('sources.reindex') %></h2>
   <div class="row">

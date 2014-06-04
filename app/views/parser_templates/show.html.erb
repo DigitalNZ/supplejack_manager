@@ -8,8 +8,12 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<div class="nine columns">
+		<h1 id="parser-template-title" class="left"><%= @parser_template.name %></h1>
+	</div>
+</div>
 
-
-<%= link_to 'Edit', edit_source_path(@source) %> |
-<%= link_to 'Back', sources_path %>
+<%= simple_form_for @parser_template do |f| %>
+  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor read-only"} %>
+<% end %>

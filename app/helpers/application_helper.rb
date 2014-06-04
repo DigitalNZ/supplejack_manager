@@ -41,4 +41,8 @@ module ApplicationHelper
   def safe_users_path(params={})
     current_user.admin? ? users_path(params) : root_path
   end
+
+  def can_show_button(action, object)
+    can?(action, object) ? '' : 'disabled'
+  end
 end

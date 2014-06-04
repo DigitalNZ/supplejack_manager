@@ -14,17 +14,28 @@ http://digitalnz.org/supplejack
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
 
-
   <% if can? :edit_users, @user %>
     <fieldset>
-      <legend>User Administration</legend>
-      
-      <%= f.label :role, 'Role' %>
-      <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-
+      <legend><%= t('users.administration') %></legend>
       <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :role, collection: User::ROLES, label_method: :humanize, value_method: :to_s, include_blank: false, input_html:{ class: 'two' } %>
+    </fieldset>
+
+    <fieldset id="management_permissions">
+      <legend><%= t('users.management_permissions') %></legend>
+      <p><%= t('users.name_can') %></p>
+      <%= f.input :manage_data_sources, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :manage_parsers, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :manage_harvest_schedules, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :manage_link_check_rules, as: :boolean, checked_value: true, unchecked_value: false %>
+      <%= f.input :manage_partners, collection: Partner.all.sort(name: 1), include_blank: false, input_html: {multiple: true, size: 1} %>
+    </fieldset>
+
+    <fieldset id="harvesting_permissions">
+      <legend><%= t('users.harvesting_permissions') %></legend>
+      <%= f.input :run_harvest_partners, collection: Partner.all.sort(name: 1), include_blank: false, input_html: {multiple: true} %>
     </fieldset>
   <% end %>
 
-  <%= f.button :submit %> or <%= link_to "Cancel", safe_users_path %>
+  <%= f.button :submit %> or <%= link_to t('cancel'), safe_users_path %>
 <% end %>

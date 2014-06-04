@@ -7,6 +7,7 @@
 # http://digitalnz.org/supplejack
 
 class CollectionRecordsController < ApplicationController
+  authorize_resource class: false
 
   def index
     @record_id = params[:id]

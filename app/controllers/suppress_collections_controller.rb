@@ -7,6 +7,7 @@
 # http://digitalnz.org/supplejack
 
 class SuppressCollectionsController < ApplicationController
+  authorize_resource class: false
 
   respond_to :html, :json
 

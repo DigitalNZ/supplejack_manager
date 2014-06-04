@@ -32,14 +32,6 @@ describe LinkCheckRulesController do
     end
   end
 
-  describe "GET 'show'" do
-    it "should get the collection rule" do
-      LinkCheckRule.should_receive(:find) { link_check_rule }
-      get :show, id: link_check_rule.id, environment: "development"
-      assigns(:link_check_rule).should eq link_check_rule
-    end
-  end
-
   describe "GET 'new'" do
     it "creates a new collection rule" do
       LinkCheckRule.should_receive(:new) { link_check_rule }

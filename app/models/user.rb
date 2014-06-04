@@ -12,13 +12,16 @@ class User
 
   ROLES = %w[admin user]
 
+  default_scope -> { order_by(name: 1) }
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role, :active
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, 
+    :role, :active, 
+    :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
+    :manage_partners, :run_harvest_partners
 
   before_save :ensure_authentication_token
   
@@ -48,6 +51,13 @@ class User
   field :role,                    type: String,   default: 'user'
   field :active,                  type: Boolean,  default: true
 
+  field :manage_data_sources,     type: Boolean,  default: false
+  field :manage_parsers,          type: Boolean,  default: false
+  field :manage_harvest_schedules,type: Boolean,  default: false
+  field :manage_link_check_rules, type: Boolean,  default: false
+  field :manage_partners,         type: Array, default: []
+  field :run_harvest_partners,    type: Array, default: []
+
   validates :name, :email, :role, presence: true
   validates :role, inclusion: ROLES
 
@@ -57,6 +67,14 @@ class User
 
   def admin?
     self.role == 'admin'
+  end
+
+  def run_harvest_partners=(values)
+    write_attribute(:run_harvest_partners, values.reject!(&:blank?))
+  end
+
+  def manage_partners=(values)
+    write_attribute(:manage_partners, values.reject!(&:blank?))
   end
 
   def active_for_authentication?
