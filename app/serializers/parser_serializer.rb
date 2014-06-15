@@ -8,6 +8,6 @@
 
 class ParserSerializer < ActiveModel::Serializer
   
-  attributes :id, :name, :strategy, :content, :file_name, :source
+  attributes :id, :name, :strategy, :content, :file_name, :source, :data_type
 
 end

@@ -67,7 +67,11 @@ When /^I visit "([^"]*)"$/ do |path|
 end
 
 When /^(?:|I )click button "([^"]*)"$/ do |button|
-  click_button(button)
+  begin 
+    click_button(button)
+  rescue Capybara::ElementNotFound
+    find(".button").click
+  end
 end
 
 When /^(?:|I )click (?:|the )link "([^"]*)"$/ do |link|

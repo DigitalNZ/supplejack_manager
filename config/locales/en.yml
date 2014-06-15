@@ -244,7 +244,7 @@ en:
       parser: 
         create: "Create Paser Script"
         update: "Update Parser Script"
-
+        
   users:
     label: 'Users'
     all_users: 'All Users'

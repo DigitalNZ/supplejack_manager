@@ -27,6 +27,11 @@ describe Parser do
       parser.should_not be_valid
     end
 
+    it "should not be valid with a invalid data type" do
+      parser.data_type = "random"
+      parser.should_not be_valid
+    end
+
     it "should not be valid without a name" do
       parser.name = nil
       parser.should_not be_valid

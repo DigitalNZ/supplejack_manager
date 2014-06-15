@@ -72,4 +72,5 @@ group :test do
   gem 'capybara', '>= 2.0.1'
   gem 'timecop'
   gem 'webmock'
+  gem 'vcr'
 end

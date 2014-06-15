@@ -306,6 +306,7 @@ GEM
     unicorn-rails (1.0.1)
       rack
       unicorn
+    vcr (2.9.2)
     warden (1.2.1)
       rack (>= 1.0)
     webmock (1.8.11)
@@ -361,5 +362,6 @@ DEPENDENCIES
   timecop
   uglifier (>= 1.0.3)
   unicorn-rails
+  vcr
   webmock
   zurb-foundation (= 3.2.3)
