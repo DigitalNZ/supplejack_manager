@@ -8,9 +8,13 @@
 
 class ParserVersionSerializer < ActiveModel::Serializer
 
-  attributes :id, :parser_id, :name, :strategy, :content, :message, :version, :file_name
+  attributes :id, :parser_id, :name, :strategy, :content, :message, :version, :file_name, :data_type
 
   def parser_id
     self.object.versionable.try(:id)
+  end
+
+  def data_type
+    self.object.versionable.try(:data_type)
   end
 end
