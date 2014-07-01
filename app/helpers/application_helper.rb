@@ -45,4 +45,8 @@ module ApplicationHelper
   def can_show_button(action, object)
     can?(action, object) ? '' : 'disabled'
   end
+
+  def parser_type_enabled
+    ENV["PARSER_TYPE_ENABLED"] == "true"
+  end
 end

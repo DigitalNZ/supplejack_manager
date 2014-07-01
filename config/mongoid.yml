@@ -36,7 +36,8 @@ development:
         # operation on failure. (default: 1)
         # retry_interval: 1
     api:
-      database: dnz_api_development
+      # database: dnz_api_development
+      database: supplejack_api_development
       hosts:
         <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:

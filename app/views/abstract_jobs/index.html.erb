@@ -25,6 +25,7 @@ http://digitalnz.org/supplejack
     <tr>
       <th><%= t("abstract_jons.type") %></th>
       <th><%= t("harvest_jobs.parser") %></th>
+      <th><%= t("harvest_jobs.parser_type") %></th>
       <th><%= t("harvest_jobs.operator") %></th>
       <th><%= t("harvest_jobs.start_time") %></th>
       <th><%= t("harvest_jobs.mode") %></th>
@@ -49,7 +50,7 @@ http://digitalnz.org/supplejack
       <% else %>
         <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) %></td>
       <% end %>
-
+      <td><%= abstract_job.parser.try(:data_type) %></td>
       <% if abstract_job.user %>
         <td><%= abstract_job.user.try(:name) %></td>
       <% else %>

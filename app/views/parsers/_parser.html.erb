@@ -11,7 +11,10 @@ http://digitalnz.org/supplejack
 <div class="row">
   <div class="nine columns">
     <% if can? :update, @parser %>
-      <h1 id="parser-title" class="left"><%= link_to @parser.name, edit_parser_path(@parser) %></h1>
+      <h1 id="parser-title" class="left">
+        <%= link_to @parser.name, edit_parser_path(@parser) %>
+        <span class="parser-tag <%= "alert" if @parser.data_type == "concept" %> round label"><%= @parser.data_type %></span>
+      </h1>
       <div id="hidden-parser-form">
         <%= simple_form_for @parser do |f| %>
           <div class='parser-form'>

@@ -20,6 +20,7 @@ http://digitalnz.org/supplejack
       <th>Source ID</th>
       <th>Last Updated</th>
       <th>Last Edited By</th>
+      <th>Parser Type</th>
     </tr>
   </thead>
 
@@ -33,6 +34,7 @@ http://digitalnz.org/supplejack
           <td><%= link_to parser.source.name, edit_source_path(parser.source) %></td>
           <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
           <td><%= parser.last_edited_by %></td>
+          <td><%= parser.data_type %></td>
         </tr>
       <% else %>
         <tr>
@@ -42,6 +44,7 @@ http://digitalnz.org/supplejack
           <td><%= parser.source.name %></td>
           <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
           <td><%= parser.last_edited_by %></td>
+          <td><%= parser.data_type %></td>
         </tr>
       <% end %>
     <% end %>

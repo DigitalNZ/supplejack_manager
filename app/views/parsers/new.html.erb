@@ -22,7 +22,9 @@ http://digitalnz.org/supplejack
         <%= f.input :partner, collection: @partners, value_method: :name %>
         <%= f.association :source, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :name %>
         <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
-        <%= f.input :data_type, collection: Parser::VALID_DATA_TYPE %>
+        <% if parser_type_enabled %>
+          <%= f.input :data_type, collection: Parser::VALID_DATA_TYPE, include_blank: false %>
+        <% end %>
         <%= f.input :parser_template_name, collection: ParserTemplate.all.map(&:name) %>
       </div>
     </div>

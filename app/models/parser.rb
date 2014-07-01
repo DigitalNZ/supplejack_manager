@@ -18,7 +18,7 @@ class Parser
 
   field :strategy,  type: String
   field :content,   type: String
-  field :data_type, type: String
+  field :data_type, type: String, default: "record"
 
   attr_accessor :parser_template_name
 
@@ -27,7 +27,8 @@ class Parser
   validates :source, presence: true, associated: true
 
   VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]
-  VALID_DATA_TYPE = ['record', 'concept']
+
+  VALID_DATA_TYPE = ["record", "concept"]
 
   # ENVIRONMENTS = [:staging, :production]
   validates_presence_of   :name, :strategy, :data_type

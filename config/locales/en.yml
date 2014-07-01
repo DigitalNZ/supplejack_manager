@@ -53,6 +53,7 @@ en:
       contributor: "Contributor"
       last_edited: "Last Edited"
       last_editor: "Last Editor"
+      data_type: "Parser Type"
     scheduled_jobs:
       label: "Next Scheduled Jobs"
       view_environment_schedule: "%{environment} Job Schedule"
@@ -179,6 +180,7 @@ en:
     finished: "Finished"
     view_details: "View details"
     parser: "Parser"
+    parser_type: "Parser Type"
     duration: "Duration"
     records_per_second: "Records/sec"
     validation_failure_errors: "Validation/Failure Errors"

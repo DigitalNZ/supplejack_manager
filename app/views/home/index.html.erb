@@ -42,6 +42,7 @@ http://digitalnz.org/supplejack
               <th><%= t('dashboard.parsers.contributor') %></th>
               <th><%= t('dashboard.parsers.last_edited') %></th>
               <th><%= t('dashboard.parsers.last_editor') %></th>
+              <th><%= t('dashboard.parsers.data_type') %></th>
             </tr>
           </thead>
           <tbody>
@@ -60,6 +61,7 @@ http://digitalnz.org/supplejack
                   <td><%= distance_of_time_in_words(Time.now, parser.versions.last.try(:created_at).try(:localtime)) %> ago</td>
                   <td><%= parser.last_edited_by %></td>
                 <% end %>
+                <td><%= parser.data_type %></td>
               </tr>
             <% end %>
           </tbody>
