@@ -26,7 +26,7 @@ en:
         name: "Parser Script Name"
         strategy: "Data Format"
         parser_template_name: "Parser Template"
-        data_type: "Date Type"
+        data_type: "Data Type"
         partner: "Contributor"
         source: "Data Source"
       parser_template:

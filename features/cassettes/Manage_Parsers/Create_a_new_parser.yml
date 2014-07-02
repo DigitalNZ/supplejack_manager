@@ -1,0 +1,605 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5d3ee373196c190d887a76212d0d01ee
+      X-Runtime:
+      - '0.008385'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e1f8907c1d2faa414e052334931d2f3e
+      X-Runtime:
+      - '0.005915'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d383e261fa08f1fd1c0c1651380c28f9
+      X-Runtime:
+      - '0.005612'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d6b0e5fb3bdf5dba83001d18d885a5dd
+      X-Runtime:
+      - '0.005478'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 41394f2e900d89a12eb235f79492664d
+      X-Runtime:
+      - '0.005554'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9d4786a6dad953d10f1a5aaef7393fbc
+      X-Runtime:
+      - '0.005447'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/53b49bc8f694195bed000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - bea888d12b6dd3a958e0ebe933a77be3
+      X-Runtime:
+      - '0.005435'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/53b49bc8f694195bed000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - db7e13a835aadeadfedffb8f4b62686d
+      X-Runtime:
+      - '0.005618'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9e06b843bfe6b4d157e54a98f83a684e
+      X-Runtime:
+      - '0.008342'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - cfe56b88f77e5c0eeb0c64a0b045cd90
+      X-Runtime:
+      - '0.009625'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 481c1836bd16ad46b08f00129cf9a269
+      X-Runtime:
+      - '0.007135'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0051c9308c7d00a642494b8036c40e75
+      X-Runtime:
+      - '0.005841'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/53b49bc8f694195bed000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 98d095a0aa45cef3ad405f5e9e439651
+      X-Runtime:
+      - '0.005931'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/53b49bc8f694195bed000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9a322f8c814b519afd0263f2c4908af6
+      X-Runtime:
+      - '0.006665'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
+recorded_with: VCR 2.9.2

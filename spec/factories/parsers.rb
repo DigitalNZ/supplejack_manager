@@ -11,7 +11,7 @@ FactoryGirl.define do
     name      "NZ Museums"
     strategy  "xml"
     content   "class NZMuserums; end"
-    data_type "Record"
+    data_type "record"
     source
   end
 end
