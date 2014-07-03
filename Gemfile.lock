@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:DigitalNZ/supplejack_common.git
-  revision: aefe30c668f948bcceec35ff0e9e15a3a5a0bf21
+  revision: 99541b45dfe68b99840c5c85571310de308bcd22
   specs:
     supplejack_common (0.0.1)
       actionpack (~> 3.2)
@@ -248,7 +248,7 @@ GEM
     rb-fsevent (0.9.2)
     rdoc (3.12.1)
       json (~> 1.4)
-    redis (3.0.7)
+    redis (3.1.0)
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
