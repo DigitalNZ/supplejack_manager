@@ -11,7 +11,7 @@ http://digitalnz.org/supplejack
 <span id="preview-job" url="/previews/<%=@preview_id%>"></span>
 <div class="row">
   <div class="ten columns">
-    <h2>Previewing records</h2>
+    <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
   </div>
 
   <div class="two columns align-right">
@@ -46,7 +46,7 @@ http://digitalnz.org/supplejack
       <dl class="tabs">
         <dd><a href="#sourceData">Source Data<span class="small-spinner"></span></a></dd>
         <dd class="active"><a href="#harvestedAttributes">Harvested Attributes<span class="small-spinner"></span></a></dd>
-        <dd><a href="#apiRecord">API Record<span class="small-spinner"></span></a></dd>
+        <dd><a href="#apiRecord">API <%= @parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a></dd>
       </dl>
       
       <ul class="tabs-content">
