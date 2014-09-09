@@ -18,8 +18,5 @@ Feature: Manage Parsers
     When I fill in "Parser Script Name" with "Test Script"
     Then I select contributor from "Contributor" and data source from "Data Source"
     And I select "json" from "Data Format"
-    And I select "concept" from "Data Type"
     And I click button "Create Parser Script"
     Then I should see "Test Script"
-    
-
