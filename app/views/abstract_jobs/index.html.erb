@@ -48,7 +48,7 @@ http://digitalnz.org/supplejack
       <% if abstract_job.version_id.present? %>
         <td><%= link_to abstract_job.parser.try(:name), parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
       <% else %>
-        <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) %></td>
+        <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) rescue '' %></td>
       <% end %>
       <td><%= abstract_job.parser.try(:data_type) %></td>
       <% if abstract_job.user %>
