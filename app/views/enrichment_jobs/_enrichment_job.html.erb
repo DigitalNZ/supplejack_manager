@@ -62,7 +62,7 @@ http://digitalnz.org/supplejack
     <tr id="enrichment-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
-        <strong><%= l @enrichment_job.end_time, format: :long %></strong>
+        <strong><%= l @enrichment_job.end_time, format: :long rescue '' %></strong>
       </td>
     </tr>
 
