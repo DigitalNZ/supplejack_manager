@@ -13,6 +13,12 @@ http://digitalnz.org/supplejack
     <%= simple_fields_for harvest_schedule do |f| %>
 
       <%= f.input :mode, collection: harvest_schedule.parser.modes, as: :radio_buttons, checked: harvest_schedule.mode, label_html: {class: "large"} %>
+
+      <% unless harvest_schedule.parser.modes.flatten.include?('full_and_flush') %>
+        <% checked = harvest_schedule.mode %>
+        <% checked = false unless harvest_schedule.persisted? %>
+        <input class="optional" id="harvest_schedule_mode_full_and_flush" type="radio" disabled="true" <%= "checked" if checked %> name ="harvest_schedule[mode]" title="Full And Flush is currently disabled.">Full And Flush
+      <% end %>
       
       <% if harvest_schedule.oai? %>
         <div class="row">

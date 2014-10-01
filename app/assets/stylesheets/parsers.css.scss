@@ -144,3 +144,9 @@ $arrowSize: 18px;
 #parser-versions {
   margin-bottom: 20px;   
 }
+.has-tip:hover, .has-tip:focus {
+  color: #333333;
+}
+.tab-content-fit {
+  overflow: scroll;
+}

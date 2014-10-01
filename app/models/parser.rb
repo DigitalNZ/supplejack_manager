@@ -19,6 +19,7 @@ class Parser
   field :strategy,  type: String
   field :content,   type: String
   field :data_type, type: String, default: "record"
+  field :allow_full_and_flush, type: Boolean, default: true
 
   attr_accessor :parser_template_name
 
@@ -120,13 +121,18 @@ class Parser
   end
 
   def modes
-    modes = ['normal','full_and_flush']
+    modes = ['normal']
     modes << 'incremental' if oai?
+    modes << 'full_and_flush' if full_and_flush_allowed?
     modes.map {|m| [m.titleize, m]}
   end
 
   def partner
     source.try(:partner)
+  end
+
+  def full_and_flush_allowed?
+    allow_full_and_flush  
   end
 
 end

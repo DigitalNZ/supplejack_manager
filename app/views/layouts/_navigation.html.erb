@@ -48,6 +48,7 @@ http://digitalnz.org/supplejack
                   <%= link_to_tab t('jobs.active'), environment_abstract_jobs_path(environment, status: "active") %>
                   <%= link_to_tab t('jobs.finished'), environment_abstract_jobs_path(environment, status: "finished") %>
                   <%= link_to_tab t('jobs.failed'), environment_abstract_jobs_path(environment, status: "failed") %>
+                  <%= link_to_tab t('jobs.stopped'), environment_abstract_jobs_path(environment, status: "stopped") %>
                   <%= link_to_tab t('link_checker.link_check_rules.label'), environment_link_check_rules_path(environment) %>
                   <%= link_to_tab t('statistics.label'), environment_collection_statistics_path(environment) %>
                   <%= link_to_tab t('link_checker.suppress_collections.label'), environment_suppress_collections_path(environment) %>

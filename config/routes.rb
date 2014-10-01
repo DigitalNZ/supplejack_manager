@@ -11,6 +11,7 @@ HarvesterManager::Application.routes.draw do
   root to: 'home#index'
 
   resources :parsers do
+    get :allow_flush, on: :member
     resources :parser_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
       get :new_enrichment, on: :member

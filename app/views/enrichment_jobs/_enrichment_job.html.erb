@@ -12,7 +12,11 @@ http://digitalnz.org/supplejack
   
   <h2 class="left">
     <%= t("enrichment_jobs.progress") %>
-    <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser) %></span>
+    <% if can? :update, @enrichment_job.parser %>
+      <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser) %></span>
+    <% else %>
+      <span class="parser-title">: <%= @enrichment_job.parser.try(:name) %></span>
+    <% end %>
   </h2>
   <%= link_to t("enrichment_jobs.stop"), environment_enrichment_job_path(params[:environment], @enrichment_job, {enrichment_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-enrichment-button", class: "button new-right", style: ("display: none" if @enrichment_job.finished?) %>
 

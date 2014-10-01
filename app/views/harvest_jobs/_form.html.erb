@@ -8,7 +8,7 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h3>Run Harvest</h3>
+<h3><%= "Run #{@harvest_job.environment.capitalize} Harvest" %></h3>
 
 <%= simple_form_for @harvest_job, remote: true do |f| %>
   <%= f.input :parser_id, as: :hidden %>
@@ -17,6 +17,9 @@ http://digitalnz.org/supplejack
   <%= f.input :environment, as: :hidden %>
 
   <%= f.input :mode, collection: @parser.modes, as: :radio_buttons, checked: @parser.modes.first, label_html: {class: "large"} %>
+  <% unless @parser.modes.flatten.include?('full_and_flush') %>
+    <input type="radio" disabled="true" title="Full And Flush is currently disabled.">Full And Flush
+  <% end %>
 
   <%= f.input :limit, label: t("parsers.records_to_harvest"), label_html: {class: "large"} %>
 

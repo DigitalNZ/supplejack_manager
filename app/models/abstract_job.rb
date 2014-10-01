@@ -52,6 +52,7 @@ class AbstractJob < ActiveResource::Base
       self.change_worker_env!(environment) if environment.present?
       params = params.try(:dup).try(:symbolize_keys) || {}
       params.reverse_merge!(status: "active", page: 1, environment: ["staging","production"])
+      params[:parser_id] = params.delete(:parser) if params[:parser]
       jobs = self.find(:all, params: params)
       Kaminari::PaginatableArray.new(
         jobs,{

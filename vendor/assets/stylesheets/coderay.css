@@ -31,7 +31,7 @@ table.CodeRay td { padding: 2px 4px; vertical-align: top; }
 .CodeRay span.line-numbers { padding: 0px 4px; }
 .CodeRay .line { display: block; float: left; width: 100%; }
 .CodeRay .code { width: 100%; }
-.CodeRay .code pre { width: 806px; overflow: scroll;}
+.CodeRay .code pre { overflow: scroll;}
 
 .CodeRay .debug { color: white !important; background: blue !important; }
 

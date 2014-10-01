@@ -168,4 +168,17 @@ describe ParsersController do
     end
   end
 
+  describe "GET 'allow_flush'" do
+    before do 
+      Parser.stub(:find) { parser }
+      parser.stub(:allow_full_and_flush) { true }
+      parser.stub(:save) { true }
+    end
+
+    it 'sets the allow_full_and_flush to true' do
+      get :allow_flush, id: parser, allow: true
+      expect(assigns(:parser).allow_full_and_flush).to be_true
+    end
+  end
+
 end

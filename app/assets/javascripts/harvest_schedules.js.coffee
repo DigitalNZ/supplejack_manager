@@ -7,6 +7,14 @@
 # http://digitalnz.org/supplejack
 
 $ ->
+  $('#harvest_schedules').dataTable({
+    "order": [ [6,'desc'] ],
+    "aoColumnDefs": [{ 
+      "bSortable": false,
+      "aTargets": [7] 
+    }]
+  })
+
   $('.datetimepicker').datetimepicker({ dateFormat: "dd/mm/yy", minDate: 0, timeFormat: "HH:mm z"});
 
   $("#harvest_schedule_recurrent").click ->
@@ -24,3 +32,4 @@ $ ->
 
     $.get(new_path, $form.serialize())
   )
+

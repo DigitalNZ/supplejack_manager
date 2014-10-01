@@ -75,6 +75,11 @@ describe HarvestJob do
        HarvestJob.should_receive(:change_worker_env!).with('staging')
        HarvestJob.search({"status" => "finished", "page" => "2"}, 'staging')
     end
+
+    it "finds parser if provided" do
+      HarvestJob.should_receive(:find).with(:all, params: {status: "finished", page: "2", environment: ["staging", "production"], parser_id: "123"})
+      HarvestJob.search({"status" => "finished", "page" => "2", "parser" => "123"}, 'staging')
+    end
   end
 
   describe ".change_worker_env!" do

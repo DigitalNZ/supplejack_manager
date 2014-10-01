@@ -61,4 +61,17 @@ class ParsersController < ApplicationController
     @parser.destroy unless @parser.running_jobs?
     redirect_to parsers_path
   end
+
+  def allow_flush
+    @parser.allow_full_and_flush = (params[:allow] == 'true')
+
+    if @parser.save
+      respond_to do |format|
+        format.html { redirect_to edit_parser_path(@parser) }
+        format.js
+      end
+    else
+      redirect_to edit_parser_path(@parser)  
+    end
+  end
 end

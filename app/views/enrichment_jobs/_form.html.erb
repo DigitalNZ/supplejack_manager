@@ -8,7 +8,7 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h3>Run Enrichment</h3>
+<h3><%= "Run #{@enrichment_job.environment.capitalize} Enrichment" %></h3>
 
 <%= simple_form_for @enrichment_job, url: environment_enrichment_jobs_path(@enrichment_job.environment), remote: true do |f| %>
   <%= f.input :parser_id, as: :hidden %>

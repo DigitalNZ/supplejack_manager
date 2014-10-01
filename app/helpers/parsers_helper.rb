@@ -45,4 +45,16 @@ module ParsersHelper
   def environment_tag(environment, nested_tag=nil)
     content_tag(:span, safe_join([content_tag(:span, "", class: "arrow arrow-left"), t("parsers.environments.#{environment}"), nested_tag]), class: "version-tag #{environment}")
   end
+
+  def enrichments(job)
+    if job._type.downcase.match(/enrichment/)
+      content_tag(:span, job.try(:enrichment))   
+    else
+      content_tag(:span, '')   
+    end
+  end
+
+  def localize_date_time(date_time)
+    ActiveSupport::TimeZone['Wellington'].parse(date_time.to_s)
+  end
 end

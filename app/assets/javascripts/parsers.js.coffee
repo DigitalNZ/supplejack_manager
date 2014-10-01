@@ -13,6 +13,14 @@
 stored_sources = null
 
 $ ->
+  $(".edit_parser input[value='Update Parser Script']").click (e) ->
+    parser_message = $('input#parser_message').val()
+
+    if !parser_message
+      alert 'Message is required'
+      e.preventDefault()
+
+
   $("#main").on 'click', 'a.records-preview-button', ->
     $("#preview-area-spinner").show()
     $("#preview-area").html("")

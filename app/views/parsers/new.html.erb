@@ -21,7 +21,7 @@ http://digitalnz.org/supplejack
         <%= f.input :name %>
         <%= f.input :partner, collection: @partners, value_method: :name %>
         <%= f.association :source, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :name %>
-        <%= f.input :strategy, collection: Parser::VALID_STRATEGIES %>
+        <%= f.input :strategy, collection: Hash[Parser::VALID_STRATEGIES.map { |u| [(u == 'xml' ? "#{u}/html".upcase : u.upcase), u]  }] %>
         <% if parser_type_enabled %>
           <%= f.input :data_type, collection: Parser::VALID_DATA_TYPE, include_blank: false %>
         <% end %>

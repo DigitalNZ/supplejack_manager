@@ -80,6 +80,8 @@ en:
     new:
       helptext: "Parser scripts are instructions that tell Supplejack how to extract data from a source and then map it to a common schema. Data sources can have multiple parser scripts to handle different extractions and enhancements, so you can create and name them separately. Your parser script must be associated with a contributor and data source. Selecting a data format tells Supplejack what kind of data to expect. You can optionally select a pre-existing template that will copy in standard instructions to help you get started."
       submit: "Create Parser Script"
+    enable_disable_full_and_flush: "%{action} Full & Flush harvest mode"
+    enable_disable_full_and_flush_confirmation: "You are about to %{action} full and flush. Do you want to proceed?"
 
   sources:
     label: "Data Sources"
@@ -109,6 +111,7 @@ en:
     active: "Active Jobs"
     finished: "Finished Jobs"
     failed: "Failed Jobs"
+    stopped: "Stopped Jobs"
     scheduled: "Job Schedules"
 
   records:
@@ -190,6 +193,11 @@ en:
     harvest_failure: "Harvest failure"
     records_posted: "Records posted to API"
     mode: "Mode"
+    enrichment: "Enrichment"
+    active: "Active"
+    finished: "Finished"
+    failed: "Failed"
+    stopped: "Stopped"
 
   enrichment_jobs:
     records_harvested: "Records enriched"
@@ -244,7 +252,7 @@ en:
         create: "Create a new Contributor"
         update: "Update Contributor"
       parser: 
-        create: "Create Paser Script"
+        create: "Create Parser Script"
         update: "Update Parser Script"
         
   users:

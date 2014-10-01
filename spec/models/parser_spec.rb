@@ -149,14 +149,34 @@ describe Parser do
   end
 
   describe "#modes" do
-    it "returns normal and full_and_flush if the parser is not oai" do
+    it "returns normal if the parser is not oai" do
       parser.stub(:oai?) {false}
-      parser.modes.should eq [['Normal','normal'],['Full And Flush', 'full_and_flush']]
+      parser.stub(:full_and_flush_allowed?) {false}
+      parser.modes.should eq [['Normal','normal']]
+    end
+
+    it "returns normal and incremental if the parser is oai" do
+      parser.stub(:oai?) {true}
+      parser.stub(:full_and_flush_allowed?) {false}
+      parser.modes.should eq [['Normal','normal'], ['Incremental','incremental']]
     end
 
     it "returns normal, full_and_flush and incremental if the parser is oai" do
       parser.stub(:oai?) {true}
-      parser.modes.should eq [['Normal','normal'],['Full And Flush','full_and_flush'], ['Incremental','incremental']]
+      parser.stub(:full_and_flush_allowed?) {true}
+      parser.modes.should eq [['Normal','normal'], ['Incremental','incremental'], ['Full And Flush','full_and_flush']]
+    end
+  end
+
+  describe "#full_and_flush_allowed?" do
+    it "returns true if allowed" do
+      parser.stub(:allow_full_and_flush) { true }
+      expect(parser.full_and_flush_allowed?).to be_true
+    end
+
+    it "returns false if not allowed" do
+      parser.stub(:allow_full_and_flush) { false }
+      expect(parser.full_and_flush_allowed?).to be_false
     end
   end
 end
