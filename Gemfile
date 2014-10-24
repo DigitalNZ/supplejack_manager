@@ -56,6 +56,7 @@ group :development do
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'pry-rails'
   gem 'unicorn-rails'
+  gem 'debugger'
 end
 
 group :development, :test do

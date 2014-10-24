@@ -56,10 +56,10 @@ http://digitalnz.org/supplejack
 
   <%= f.input :environment, as: :hidden %>
 
-  <%= render "mode", { harvest_schedule: @harvest_schedule }  %>  
+  <%= render "mode", { harvest_schedule: @harvest_schedule }  %> 
 
-  <%= render "enrichments", { harvest_schedule: @harvest_schedule, environment: params[:environment]  }  %>
-
+  <%= render "enrichments", { harvest_schedule: @harvest_schedule, environment: params[:environment]  }  %> 
+  
   <br/>
 
   <%= f.button :submit, t('harvest_schedules.save'), class: "button right" %>

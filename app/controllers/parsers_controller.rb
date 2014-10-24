@@ -66,6 +66,10 @@ class ParsersController < ApplicationController
     @parser.allow_full_and_flush = (params[:allow] == 'true')
 
     if @parser.save
+      if params[:allow] == 'false'
+        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, "staging") 
+        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, "production")
+      end
       respond_to do |format|
         format.html { redirect_to edit_parser_path(@parser) }
         format.js

@@ -62,11 +62,12 @@ Then /take a screenshot(| and show me the page)/ do |show_me|
   Then %{show me the page} if show_me.present?
 end
 
-When /^I visit "([^"]*)"$/ do |path|
+  
+When /^I visit "(.*?)"$/ do |path|
   visit(path)
 end
 
-When /^(?:|I )click button "([^"]*)"$/ do |button|
+When /^(?:|I )click button "(.*?)"$/ do |button|
   begin 
     click_button(button)
   rescue Capybara::ElementNotFound
@@ -74,7 +75,7 @@ When /^(?:|I )click button "([^"]*)"$/ do |button|
   end
 end
 
-When /^(?:|I )click (?:|the )link "([^"]*)"$/ do |link|
+When /^(?:|I )click (?:|the )link "(.*?)"$/ do |link|
   click_link(link)
 end
 
@@ -84,19 +85,19 @@ end
 
 # Form steps
 
-When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+When /^(?:|I )fill in "(.*?)" with "(.*?)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
-When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
-  select(value, :from => field)
+When /^(?:|I )select "(.*?)" from "(.*?)"$/ do |value, field|
+  page.select(value, :from => field)
 end
 
-When /^(?:|I )check "([^"]*)"$/ do |field|
+When /^(?:|I )check "(.*?)"$/ do |field|
   check(field)
 end
 
-When /^(?:|I )uncheck "([^"]*)"$/ do |field|
+When /^(?:|I )uncheck "(.*?)"$/ do |field|
   uncheck(field)
 end
 

@@ -9,17 +9,17 @@
 module ParsersHelper
 
   def link_to_next(parser_id, index, environment, review, html_options={})
-    link_to "", preview_path(parser_id, index: index.to_i+1, environment: environment, review: review), html_options
+    link_to "next >", preview_path(parser_id, index: index.to_i+1, environment: environment, review: review), html_options
   end
 
   def link_to_previous(parser_id, index, environment, review, html_options={})
     index = index.to_i - 1
 
     if index >= 0
-      link_to "", preview_path(parser_id, index: index.to_i, environment: environment, review: review), html_options
+      link_to "< previous", preview_path(parser_id, index: index.to_i, environment: environment, review: review), html_options
     else
       html_options[:class] << " disabled"
-      content_tag(:span, "", html_options)
+      content_tag(:span, "< previous", html_options)
     end
   end
 

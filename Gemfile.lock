@@ -1,29 +1,9 @@
 GIT
-  remote: git@github.com:DigitalNZ/supplejack_common.git
-  revision: 49a48dfd02aa6f297b32f3e82d6484b42e5ef05d
+  remote: https://github.com/rweng/jquery-datatables-rails.git
+  revision: 494f752b8eb8350f33841c822a67d014c869219f
   specs:
-    supplejack_common (0.0.2)
-      actionpack (<= 4.1.4)
-      activesupport (<= 4.1.4)
-      chronic (~> 0.8.0)
-      dimensions
-      json (~> 1.7.7)
-      jsonpath (~> 0.5.0)
-      mimemagic
-      mongoid (<= 4.0.0)
-      nokogiri
-      redis (~> 3)
-      rest-client (~> 1.6.7)
-      tzinfo
-
-GIT
-  remote: https://github.com/code4lib/ruby-oai.git
-  revision: 05e22cadf0064b04ccd9d7e38e8467eff75ba251
-  specs:
-    oai (0.3.0)
-      builder (>= 2.0.0)
-      faraday
-      faraday_middleware
+    jquery-datatables-rails (1.11.2)
+      jquery-rails
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
@@ -41,11 +21,31 @@ GIT
       activemodel (>= 3.0)
 
 GIT
-  remote: https://github.com/rweng/jquery-datatables-rails.git
-  revision: 494f752b8eb8350f33841c822a67d014c869219f
+  remote: https://github.com/code4lib/ruby-oai.git
+  revision: 05e22cadf0064b04ccd9d7e38e8467eff75ba251
   specs:
-    jquery-datatables-rails (1.11.2)
-      jquery-rails
+    oai (0.3.0)
+      builder (>= 2.0.0)
+      faraday
+      faraday_middleware
+
+GIT
+  remote: git@github.com:DigitalNZ/supplejack_common.git
+  revision: 49a48dfd02aa6f297b32f3e82d6484b42e5ef05d
+  specs:
+    supplejack_common (0.0.2)
+      actionpack (<= 4.1.4)
+      activesupport (<= 4.1.4)
+      chronic (~> 0.8.0)
+      dimensions
+      json (~> 1.7.7)
+      jsonpath (~> 0.5.0)
+      mimemagic
+      mongoid (<= 4.0.0)
+      nokogiri
+      redis (~> 3)
+      rest-client (~> 1.6.7)
+      tzinfo
 
 GEM
   remote: https://rubygems.org/
@@ -110,6 +110,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    columnize (0.8.9)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -128,6 +129,12 @@ GEM
       nokogiri (>= 1.5.0)
     database_cleaner (0.9.1)
     debug_inspector (0.0.2)
+    debugger (1.6.8)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.3.5)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.3.5)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -340,6 +347,7 @@ DEPENDENCIES
   compass-rails (>= 1.0.3)
   cucumber-rails (>= 1.3.0)
   database_cleaner (>= 0.9.1)
+  debugger
   devise (>= 2.1.2)
   factory_girl_rails (>= 4.1.0)
   figaro (>= 0.5.0)

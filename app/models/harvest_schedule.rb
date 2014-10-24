@@ -49,6 +49,15 @@ class HarvestSchedule < ActiveResource::Base
         end
       end
     end
+
+    def update_schedulers_from_environment(params, env, mode="normal")
+      schedulers = self.find_from_environment(params, env)
+      if schedulers.any?
+        schedulers.each do |scheduler|
+          scheduler.update_attribute(:mode, mode)
+        end
+      end   
+    end
   end
 
   def simple?

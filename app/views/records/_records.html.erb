@@ -10,13 +10,8 @@ http://digitalnz.org/supplejack
 
 <span id="preview-job" url="/previews/<%=@preview_id%>"></span>
 <div class="row">
-  <div class="ten columns">
+  <div class="twelve columns">
     <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
-  </div>
-
-  <div class="two columns align-right">
-    <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-left" %>
-    <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button arrow arrow-right" %>
   </div>
 </div>
 
@@ -47,6 +42,10 @@ http://digitalnz.org/supplejack
         <dd><a href="#sourceData">Source Data<span class="small-spinner"></span></a></dd>
         <dd class="active"><a href="#harvestedAttributes">Harvested Attributes<span class="small-spinner"></span></a></dd>
         <dd><a href="#apiRecord">API <%= @parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a></dd>
+        <div class="align-right">
+          <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %><span style="font-weight: bold;"> - Preview Record -</span>
+          <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %>
+        </div>
       </dl>
       
       <ul class="tabs-content tab-content-fit">
