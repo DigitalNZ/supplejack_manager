@@ -14,7 +14,7 @@ describe HomeController do
     controller.stub(:authenticate_user!) { true }
   end
 
-  describe "GET index" do
+  describe "GET index", :caching => true do
     before(:each) do
       AbstractJob.stub(:find) { {} }
       CollectionStatistics.stub(:first) { double(:stats) }
@@ -29,9 +29,11 @@ describe HomeController do
         controller.params[:environment].should eq APPLICATION_ENVS.first.to_s
       end
 
-      it "sets the environment to staging if set" do
-        get :index, environment: 'staging'
-        controller.params[:environment].should eq 'staging'
+      it "sets the environment to production and cache the environment" do
+        get :index, environment: 'production'
+        controller.params[:environment].should eq 'production'
+        get :index
+        controller.params[:environment].should eq 'production'
       end
     end
 

@@ -56,12 +56,12 @@ group :development do
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'pry-rails'
   gem 'unicorn-rails'
-  gem 'debugger'
 end
 
 group :development, :test do
   gem 'rspec-rails', '>= 2.12.2'
   gem 'factory_girl_rails', '>= 4.1.0'
+  gem 'debugger'
 end
 
 group :test do

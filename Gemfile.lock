@@ -30,13 +30,13 @@ GIT
       faraday_middleware
 
 GIT
-  remote: git@github.com:DigitalNZ/supplejack_common.git
-  revision: 49a48dfd02aa6f297b32f3e82d6484b42e5ef05d
+  remote: https://github.com/DigitalNZ/supplejack_common.git
+  revision: f4d10f0e740f6892e9e7d78856c876d4be72e34d
   specs:
     supplejack_common (0.0.2)
       actionpack (<= 4.1.4)
       activesupport (<= 4.1.4)
-      chronic (~> 0.8.0)
+      chronic (<= 0.10.2)
       dimensions
       json (~> 1.7.7)
       jsonpath (~> 0.5.0)
@@ -98,7 +98,7 @@ GEM
       xpath (~> 1.0.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    chronic (0.8.0)
+    chronic (0.10.2)
     chronic_duration (0.9.6)
       numerizer (~> 0.1.1)
     chunky_png (1.2.8)

@@ -774,4 +774,801 @@ http_interactions:
       string: ! '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 09 Sep 2014 03:06:49 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:17 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 29e914eeecb43c939235abc2a2dc2a76
+      X-Runtime:
+      - '0.009614'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:17 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:17 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5aa4fdaed67e825352a069122e69920b
+      X-Runtime:
+      - '0.010147'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:17 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:17 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - bf9247644dbb1d2986c33f04b5b6a5af
+      X-Runtime:
+      - '0.010183'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:17 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/546159c4f2996bd17e000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f0659ff2ad54ad3a94fb3a6944507d9d
+      X-Runtime:
+      - '0.346577'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:18 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners/546159c4f2996bd17e000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:18 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a0881e4e20e03329c64ccdd33c8d9c0b
+      X-Runtime:
+      - '0.010540'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:18 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:19 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e31346a319ce2b0274f85cfefe962b13
+      X-Runtime:
+      - '0.009269'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners
+    body:
+      encoding: US-ASCII
+      string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:19 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 93465f942d2c63f1dc8f42718f080ab5
+      X-Runtime:
+      - '0.010008'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/546159c4f2996bd17e000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7f6e55815623afd7115ca519b12971a8
+      X-Runtime:
+      - '0.016249'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners/546159c4f2996bd17e000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:35:19 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7a7780fb6802fd3cf37e6eb364754941
+      X-Runtime:
+      - '0.009636'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/54615f3cf2996b233a000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 958124e844f64289475994ae93df9c05
+      X-Runtime:
+      - '0.031882'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:58:37 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners/54615f3cf2996b233a000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:58:37 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e482f188c6c9406e1f3cfda7b59b27ba
+      X-Runtime:
+      - '0.010043'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:58:37 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/54615f3cf2996b233a000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2f53e70d322ae7b2c53d27bd6ff88a45
+      X-Runtime:
+      - '0.013159'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:58:38 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners/54615f3cf2996b233a000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 00:58:39 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a35b20dfa4e75206b988f4a4b9b62821
+      X-Runtime:
+      - '0.009565'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 00:58:39 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/546166eaf2996b569f000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"9671d54176ded80d13a6775951e41287"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 6a2f3469287cb9a0e2cf429e2bd67595
+      X-Runtime:
+      - '0.028240'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 01:31:22 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners/546166eaf2996b569f000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 01:31:23 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"9671d54176ded80d13a6775951e41287"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 29cdafaf00fa0f6d9305d949f07981dd
+      X-Runtime:
+      - '0.009452'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 01:31:23 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/546166eaf2996b569f000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"9671d54176ded80d13a6775951e41287"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 87aa24894ad52269487f22b8903b8026
+      X-Runtime:
+      - '0.013487'
+      Connection:
+      - close
+      Server:
+      - thin 1.6.2 codename Doc Brown
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 01:31:24 GMT
+- request:
+    method: post
+    uri: http://api.dnz03.digitalnz.org/partners/546166eaf2996b569f000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
+    headers:
+      Accept:
+      - ! '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Nov 2014 01:31:24 GMT
+      Server:
+      - thin 1.6.2 codename Doc Brown
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Etag:
+      - ! '"9671d54176ded80d13a6775951e41287"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 573124b6380903a3b89ccc1e0e238e61
+      X-Runtime:
+      - '0.009234'
+      X-Rack-Cache:
+      - invalidate, pass
+      Via:
+      - 1.1 api.digitalnz.org
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Tue, 11 Nov 2014 01:31:24 GMT
 recorded_with: VCR 2.9.2
