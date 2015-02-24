@@ -16,7 +16,9 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.12'
 
 gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
-gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git'
+# Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
+# We cannot get the HEAD oai this app is using Rails version 4.x
+gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'mongoid'
 gem 'devise', '>= 2.1.2'
@@ -39,7 +41,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+  # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 
@@ -61,7 +63,6 @@ end
 group :development, :test do
   gem 'rspec-rails', '>= 2.12.2'
   gem 'factory_girl_rails', '>= 4.1.0'
-  gem 'debugger'
 end
 
 group :test do
