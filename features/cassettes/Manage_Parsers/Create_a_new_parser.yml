@@ -8,7 +8,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -27,7 +27,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -40,7 +40,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -51,7 +51,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -70,7 +70,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -83,7 +83,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -94,7 +94,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -113,7 +113,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -126,7 +126,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -137,7 +137,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -156,7 +156,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -169,7 +169,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -180,7 +180,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -199,7 +199,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -212,7 +212,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -223,7 +223,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -242,7 +242,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -255,7 +255,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -266,7 +266,7 @@ http_interactions:
       string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -285,7 +285,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      - '"202019bbb196fcac81f19eebefea21cb"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -298,7 +298,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -309,7 +309,7 @@ http_interactions:
       string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -328,7 +328,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      - '"202019bbb196fcac81f19eebefea21cb"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -341,7 +341,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -352,7 +352,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -371,7 +371,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -384,7 +384,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -395,7 +395,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -414,7 +414,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -427,7 +427,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -438,7 +438,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -457,7 +457,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -470,7 +470,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -481,7 +481,7 @@ http_interactions:
       string: partner[_id]=53b49bc8f694195bed000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -500,7 +500,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"f3b4665227f2cf34d432585b61fbef04"'
+      - '"f3b4665227f2cf34d432585b61fbef04"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -513,7 +513,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
+      string: '{"_id":"53b49bc8f694195bed000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -524,7 +524,7 @@ http_interactions:
       string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -543,7 +543,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      - '"202019bbb196fcac81f19eebefea21cb"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -556,7 +556,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -567,7 +567,7 @@ http_interactions:
       string: source[_id]=53b49bc8f694195bed000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=53b49bc8f694195bed000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -586,7 +586,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"202019bbb196fcac81f19eebefea21cb"'
+      - '"202019bbb196fcac81f19eebefea21cb"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -599,7 +599,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"53b49bc8f694195bed000003","name":"source 1","partner_id":"53b49bc8f694195bed000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Wed, 02 Jul 2014 23:54:48 GMT
 - request:
@@ -610,7 +610,7 @@ http_interactions:
       string: source[_id]=540e6ec9f69419503a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=540e6ec9f69419503a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -629,7 +629,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
+      - '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -642,7 +642,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 09 Sep 2014 03:06:49 GMT
 - request:
@@ -653,7 +653,7 @@ http_interactions:
       string: source[_id]=540e6ec9f69419503a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=540e6ec9f69419503a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -672,7 +672,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
+      - '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -685,7 +685,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 09 Sep 2014 03:06:49 GMT
 - request:
@@ -696,7 +696,7 @@ http_interactions:
       string: source[_id]=540e6ec9f69419503a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=540e6ec9f69419503a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -715,7 +715,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
+      - '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -728,7 +728,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 09 Sep 2014 03:06:49 GMT
 - request:
@@ -739,7 +739,7 @@ http_interactions:
       string: source[_id]=540e6ec9f69419503a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=540e6ec9f69419503a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -758,7 +758,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
+      - '"fc6d06d09750d4dbac2dd2cdd1a12fa7"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -771,7 +771,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"540e6ec9f69419503a000003","name":"source 1","partner_id":"540e6ec9f69419503a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 09 Sep 2014 03:06:49 GMT
 - request:
@@ -782,7 +782,7 @@ http_interactions:
       string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -805,7 +805,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      - '"1914b94df9319d4bf06af78321f821c2"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -820,7 +820,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+      string: '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:17 GMT
 - request:
@@ -831,7 +831,7 @@ http_interactions:
       string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -854,7 +854,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      - '"1914b94df9319d4bf06af78321f821c2"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -869,7 +869,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+      string: '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:17 GMT
 - request:
@@ -880,7 +880,7 @@ http_interactions:
       string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -903,7 +903,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      - '"1914b94df9319d4bf06af78321f821c2"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -918,7 +918,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+      string: '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:17 GMT
 - request:
@@ -929,7 +929,7 @@ http_interactions:
       string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -948,7 +948,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      - '"c1b0dc570f733513b2a1e48753fd1238"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -961,7 +961,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:18 GMT
 - request:
@@ -972,7 +972,7 @@ http_interactions:
       string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -995,7 +995,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      - '"c1b0dc570f733513b2a1e48753fd1238"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1010,7 +1010,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:18 GMT
 - request:
@@ -1021,7 +1021,7 @@ http_interactions:
       string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1044,7 +1044,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      - '"1914b94df9319d4bf06af78321f821c2"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1059,7 +1059,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+      string: '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
 - request:
@@ -1070,7 +1070,7 @@ http_interactions:
       string: partner[_id]=546159c4f2996bd17e000002&partner[name]=Partner%201
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1093,7 +1093,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"1914b94df9319d4bf06af78321f821c2"'
+      - '"1914b94df9319d4bf06af78321f821c2"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1108,7 +1108,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
+      string: '{"_id":"546159c4f2996bd17e000002","name":"Partner 1"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
 - request:
@@ -1119,7 +1119,7 @@ http_interactions:
       string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1138,7 +1138,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      - '"c1b0dc570f733513b2a1e48753fd1238"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1151,7 +1151,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
 - request:
@@ -1162,7 +1162,7 @@ http_interactions:
       string: source[_id]=546159c5f2996bd17e000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546159c4f2996bd17e000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1185,7 +1185,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"c1b0dc570f733513b2a1e48753fd1238"'
+      - '"c1b0dc570f733513b2a1e48753fd1238"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1200,7 +1200,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546159c5f2996bd17e000003","name":"source 1","partner_id":"546159c4f2996bd17e000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:35:19 GMT
 - request:
@@ -1211,7 +1211,7 @@ http_interactions:
       string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1230,7 +1230,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      - '"7c3ff7a8985db28dfd374d0252ae7178"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1243,7 +1243,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:58:37 GMT
 - request:
@@ -1254,7 +1254,7 @@ http_interactions:
       string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1277,7 +1277,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      - '"7c3ff7a8985db28dfd374d0252ae7178"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1292,7 +1292,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:58:37 GMT
 - request:
@@ -1303,7 +1303,7 @@ http_interactions:
       string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1322,7 +1322,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      - '"7c3ff7a8985db28dfd374d0252ae7178"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1335,7 +1335,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:58:38 GMT
 - request:
@@ -1346,7 +1346,7 @@ http_interactions:
       string: source[_id]=54615f3df2996b233a000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=54615f3cf2996b233a000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1369,7 +1369,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"7c3ff7a8985db28dfd374d0252ae7178"'
+      - '"7c3ff7a8985db28dfd374d0252ae7178"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1384,7 +1384,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"54615f3df2996b233a000003","name":"source 1","partner_id":"54615f3cf2996b233a000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 00:58:39 GMT
 - request:
@@ -1395,7 +1395,7 @@ http_interactions:
       string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1414,7 +1414,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"9671d54176ded80d13a6775951e41287"'
+      - '"9671d54176ded80d13a6775951e41287"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1427,7 +1427,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 01:31:22 GMT
 - request:
@@ -1438,7 +1438,7 @@ http_interactions:
       string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1461,7 +1461,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"9671d54176ded80d13a6775951e41287"'
+      - '"9671d54176ded80d13a6775951e41287"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1476,7 +1476,7 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 01:31:23 GMT
 - request:
@@ -1487,7 +1487,7 @@ http_interactions:
       string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1506,7 +1506,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge
       Etag:
-      - ! '"9671d54176ded80d13a6775951e41287"'
+      - '"9671d54176ded80d13a6775951e41287"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1519,7 +1519,7 @@ http_interactions:
       - thin 1.6.2 codename Doc Brown
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 01:31:24 GMT
 - request:
@@ -1530,7 +1530,7 @@ http_interactions:
       string: source[_id]=546166eaf2996b569f000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=546166eaf2996b569f000002
     headers:
       Accept:
-      - ! '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -1553,7 +1553,7 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Etag:
-      - ! '"9671d54176ded80d13a6775951e41287"'
+      - '"9671d54176ded80d13a6775951e41287"'
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
@@ -1568,7 +1568,105 @@ http_interactions:
       - chunked
     body:
       encoding: US-ASCII
-      string: ! '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
+      string: '{"_id":"546166eaf2996b569f000003","name":"source 1","partner_id":"546166eaf2996b569f000002","source_id":"source_1","status":"active"}'
     http_version: 
   recorded_at: Tue, 11 Nov 2014 01:31:24 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/550f4de5651818d7af000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=550f4de5651818d7af000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=550f4de5651818d7af000002
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - '"f3e0a962e295f63ec6ace17796bd1992"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Meta-Request-Version:
+      - 0.3.4
+      X-Request-Id:
+      - 66f0e0cb-2d9b-467e-8a63-2d979f4b3397
+      X-Runtime:
+      - '0.198335'
+      Connection:
+      - close
+      Server:
+      - thin
+    body:
+      encoding: UTF-8
+      string: '{"_id":{"$oid":"550f4de5651818d7af000003"},"name":"source 1","partner_id":{"$oid":"550f4de5651818d7af000002"},"source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Sun, 22 Mar 2015 23:19:01 GMT
+- request:
+    method: post
+    uri: http://localhost:3000/partners/550f4de5651818d7af000002/sources
+    body:
+      encoding: US-ASCII
+      string: source[_id]=550f4de5651818d7af000003&source[name]=source%201&source[source_id]=source_1&source[partner_id]=550f4de5651818d7af000002
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '131'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - '"f3e0a962e295f63ec6ace17796bd1992"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Meta-Request-Version:
+      - 0.3.4
+      X-Request-Id:
+      - 531ea27d-4982-44a3-98d6-acf83703334f
+      X-Runtime:
+      - '0.011921'
+      Connection:
+      - close
+      Server:
+      - thin
+    body:
+      encoding: UTF-8
+      string: '{"_id":{"$oid":"550f4de5651818d7af000003"},"name":"source 1","partner_id":{"$oid":"550f4de5651818d7af000002"},"source_id":"source_1","status":"active"}'
+    http_version: 
+  recorded_at: Sun, 22 Mar 2015 23:19:01 GMT
 recorded_with: VCR 2.9.2

@@ -12,6 +12,10 @@ class ParsersController < ApplicationController
   respond_to :json, :html
 
   def index
+    respond_to do |format|
+      format.html
+      format.json { render json: @parsers, serializer: ActiveModel::ArraySerializer }
+    end
   end
 
   def show
