@@ -55,19 +55,17 @@ class Parser
   end
 
   def running_jobs?
-    if Rails.env.development?
-      !AbstractJob.search({parser_id: self.id}, 'development').empty?
-    else
-      begin
+    begin
+      active_jobs = []
 
-        !AbstractJob.search({parser_id: self.id}, 'staging').empty? or !AbstractJob.search({parser_id: self.id}, 'production').empty?
-
-      rescue StandardError => e
-
-        Rails.logger.error "Exception caught while checking running jobs. Exception is #{e.inspect}"
-        Rails.logger.error e.backtrace.join("\n") 
-      
+      APPLICATION_ENVS.each do |environment|
+        active_jobs << AbstractJob.search({parser_id: self.id}, environment)        
       end
+
+      active_jobs.flatten.present?
+    rescue StandardError => e
+      Rails.logger.error "Exception caught while checking running jobs. Exception is #{e.inspect}"
+      Rails.logger.error e.backtrace.join("\n") 
     end
   end
 
