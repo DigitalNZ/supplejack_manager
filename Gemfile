@@ -63,6 +63,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'simplecov', require: false
   gem 'database_cleaner', '>= 0.9.1'
   # gem 'email_spec', '>= 1.4.0'
   gem 'cucumber-rails', '>= 1.3.0', :require => false
