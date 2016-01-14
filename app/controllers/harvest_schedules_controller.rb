@@ -29,7 +29,7 @@ class HarvestSchedulesController < ApplicationController
       @parsers = Parser.asc(:name)
     else
       @parsers = Parser.find_by_partners(current_user.manage_partners)
-    end
+    end 
   end
 
   def create

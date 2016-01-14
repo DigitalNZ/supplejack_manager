@@ -21,6 +21,8 @@ class Parser
   field :data_type, type: String, default: "record"
   field :allow_full_and_flush, type: Boolean, default: true
 
+  index({ name: 1 }) # requires this index as parsers are sorted with name in controller
+
   attr_accessor :parser_template_name
 
   belongs_to :source
