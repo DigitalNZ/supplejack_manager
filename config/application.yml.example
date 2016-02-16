@@ -14,7 +14,7 @@
 
 development:
   WORKER_HOST: http://localhost:3002
-  WORKER_API_KEY: <production worker key>
+  WORKER_API_KEY: workerkey
   API_HOST: http://localhost:3000
   API_MONGOID_HOSTS: localhost:27017
 
@@ -24,10 +24,11 @@ test:
   API_HOST: http://localhost:3000
   API_MONGOID_HOSTS: localhost:27017
 
-production:
+staging:
   WORKER_HOST: http://localhost:3002
-  WORKER_API_KEY: <production worker key>
+  WORKER_API_KEY: workerkey
   API_HOST: http://localhost:3000
+  API_MONGOID_HOSTS: localhost:27017
 
 # staging:
 #   WORKER_HOST: http://localhost:4002
