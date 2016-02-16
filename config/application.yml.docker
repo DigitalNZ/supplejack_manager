@@ -1,0 +1,37 @@
+# Example Supplejack Manager application.yml file
+# Add account credentials and API keys here.
+# See http://railsapps.github.com/rails-environment-variables.html
+# This file should be listed in .gitignore to keep your settings secret!
+# Each entry sets a local environment variable and overrides ENV variables in the Unix shell.
+# For example, setting:
+# GMAIL_USERNAME: Your_Gmail_Username
+# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
+# Add application configuration variables here, as shown below.
+# 
+# This setup assumes that you have an API that runs on localhost:3000
+# and a Worker running on localhost:3002.
+# Running the Manager allows you to harvest in production environment.
+
+development:
+  WORKER_HOST: http://worker.weave.local:3000
+  WORKER_API_KEY: workerkey
+  API_HOST: http://api.weaver.local:3000
+  API_MONGOID_HOSTS: mongodb.weave.local:27017
+
+test:
+  WORKER_HOST: http://localhost:3002
+  WORKER_API_KEY: <production worker key>
+  API_HOST: http://localhost:3000
+  API_MONGOID_HOSTS: localhost:27017
+
+staging:
+  WORKER_HOST: http://worker.weave.local:3000
+  WORKER_API_KEY: workerkey
+  API_HOST: http://api.weaver.local:3000
+  API_MONGOID_HOSTS: mongodb.weave.local:27017
+
+# staging:
+#   WORKER_HOST: http://localhost:4002
+#   WORKER_API_KEY: <staging worker key>
+#   API_HOST: http://localhost:4000
+#   API_MONGOID_HOSTS: localhost:27017

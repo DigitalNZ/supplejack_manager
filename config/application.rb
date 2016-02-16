@@ -24,7 +24,6 @@ if defined?(Bundler)
 end
 
 APPLICATION_ENVS = YAML.load_file('config/application.yml').keys.map { |key| key.to_sym } - [:development, :test] rescue []
-ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
 
 module HarvesterManager
   class Application < Rails::Application

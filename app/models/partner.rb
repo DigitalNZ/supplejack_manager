@@ -29,6 +29,7 @@ class Partner
   def update_apis
     APPLICATION_ENVS.each do |environment|
       env = Figaro.env(environment)
+
       RestClient.post("#{env['API_HOST']}/partners", partner: self.attributes)
     end
   end
