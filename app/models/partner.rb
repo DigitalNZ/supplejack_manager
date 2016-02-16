@@ -30,11 +30,6 @@ class Partner
     APPLICATION_ENVS.each do |environment|
       env = Figaro.env(environment)
 
-      Rails.logger.info '---------------------------------------------'
-      Rails.logger.info "#{env['API_HOST']}/partners"
-      Rails.logger.info "#{self.attributes}"
-      Rails.logger.info '---------------------------------------------'
-
       RestClient.post("#{env['API_HOST']}/partners", partner: self.attributes)
     end
   end
