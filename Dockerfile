@@ -1,16 +1,20 @@
-FROM ruby:2.1.7
+FROM ruby:2.3.0
 RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy mysql-client vim openssh-client 
 RUN npm install -g phantomjs-prebuilt
 
 RUN apt-get install -y g++
+
 # For nokogiri
-RUN apt-get install -y libxml2-dev libxslt1-dev
+RUN apt-get install -y libxml2-dev libxslt1-dev libxslt-dev liblzma-dev curl
 
 # capybara-webkit
 RUN apt-get install -y qt5-default libqt5webkit5-dev
 
 # Utilities
 RUN apt-get install -y nmap htop
+
+# Use libxml2, libxslt a packages from alpine for building nokogiri
+RUN bundle config build.nokogiri --use-system-libraries
 
 RUN mkdir /manager
 
