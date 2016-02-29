@@ -1,4 +1,4 @@
-FROM ruby:2.3.0
+FROM ruby:2.1.4
 RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy mysql-client vim openssh-client 
 RUN npm install -g phantomjs-prebuilt
 
