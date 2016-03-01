@@ -25,7 +25,7 @@ WORKDIR /tmp
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 COPY config/mongoid.yml config/mongoid.yml
-COPY config/application.yml config/application.yml
+COPY config/application.yml.docker config/application.yml
 
 # Cache bundle install
 ENV BUNDLE_PATH /bundle
