@@ -190,6 +190,10 @@ GEM
       addressable
       websocket
     listen (0.7.2)
+    lograge (0.3.6)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     lumberjack (1.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -358,6 +362,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   launchy (>= 2.1.2)
+  lograge
   mongoid
   oai!
   pry-rails
@@ -378,4 +383,4 @@ DEPENDENCIES
   zurb-foundation (= 3.2.5)
 
 BUNDLED WITH
-   1.11.0
+   1.12.3
