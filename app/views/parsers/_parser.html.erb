@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -82,20 +82,21 @@ http://digitalnz.org/supplejack
   </div>
 
   <div class="three columns">
-    <h3 class="no-margin-top left"><%= t("history") %></h3>
+    <div class="alert-box secondary round text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
-      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "edit-parser" %>
+      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button success twelve" %>
     <% end %>
-    
+
+
     <%= render partial: "versions/version_list", locals: { versionable: @parser, versionable_path: "parser_parser_version" } %>
-    
+
     <% if can? :run_harvest, @parser %>
       <a href="#" id="rename-parser-action" class="button expand">Rename Parser</a>
       <a href="#" id="change-source-action" data-reveal-id="change-source-alert" class="button expand"><%= t("parsers.change_source") %></a>
       <% if @parser.running_jobs? %>
         <a href="#" class="button expand tip-top has-tip" disabled data-tooltip title="You currently have a job running for this parser. You will need to stop it before being able to delete it."><%= t("parsers.delete") %></a>
       <% else %>
-        <a href="#" class="button expand" data-reveal-id="delete-parser-alert" ><%= t("parsers.delete") %></a>
+        <a href="#" class="button alert expand" data-reveal-id="delete-parser-alert" ><%= t("parsers.delete") %></a>
       <% end %>
       <div class="allow-flush-button">
         <%= render 'parsers/allow_flush_button', parser: @parser %>

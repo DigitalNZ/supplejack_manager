@@ -34,7 +34,10 @@ gem 'activeresource', require: 'active_resource'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'lograge'
-gem 'airbrake', '~> 5.2'
+
+group :staging, :production do
+  gem 'airbrake', '~> 5.2'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
