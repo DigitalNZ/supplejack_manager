@@ -119,7 +119,7 @@ http://digitalnz.org/supplejack
 
 <div id="delete-parser-alert" class="reveal-modal small">
   <h2>Delete Parser</h2>
-  <p> Are you sure that you want to delete the parser: <strong><%= @parser.name %></strong> </p>
+  <p> Are you sure that you want to delete the parser: <strong><%= @parser.name %></strong> with version name: <strong><%= @version.message %></strong>?</p>
   <% if @parser.scheduled? %>
     <p> <strong>Warning:</strong> You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well. </p>
   <% end %>
