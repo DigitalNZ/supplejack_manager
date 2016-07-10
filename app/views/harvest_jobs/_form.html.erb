@@ -1,15 +1,17 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<h3><%= "Run #{@harvest_job.environment.capitalize} Harvest" %></h3>
-
+<h3>
+  <%= "Run #{@harvest_job.environment.capitalize} Harvest " %>
+  <span class='parser-tag  round label'><%= "Parser version #{@version.message}"%></span>
+</h3>
 <%= simple_form_for @harvest_job, remote: true do |f| %>
   <%= f.input :parser_id, as: :hidden %>
   <%= f.input :version_id, as: :hidden %>
@@ -19,13 +21,13 @@ http://digitalnz.org/supplejack
   <%= f.input :mode, collection: @parser.modes, as: :radio_buttons, checked: @parser.modes.first, label_html: {class: "large"} %>
   <% unless @parser.modes.flatten.include?('full_and_flush') %>
     <input type="radio" disabled="true" title="Full And Flush is currently disabled.">Full And Flush
-  <% end %> 
+  <% end %>
   <span class="parser-harvest-mode"><%= "(#{t("parsers.disable_full_and_flush")})" unless @parser.allow_full_and_flush %></span>
   <br/></br>
   <%= f.input :limit, label: t("parsers.records_to_harvest"), label_html: {class: "large"} %>
 
-  <% if @parser.enrichment_definitions(@harvest_job.environment).any? %>
-    <%= f.input :enrichments, collection: @parser.enrichment_definitions(@harvest_job.environment).keys.map {|k| [k.to_s.titleize, k]}, as: :check_boxes, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
+  <% if @parser.enrichment_definitions(@harvest_job.environment, @version).any? %>
+    <%= f.input :enrichments, collection: @parser.enrichment_definitions(@harvest_job.environment, @version).keys.map {|k| [k.to_s.titleize, k]}, as: :check_boxes, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
   <% end %>
 
   <br/>

@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class Parser
@@ -61,13 +61,13 @@ class Parser
       active_jobs = []
 
       APPLICATION_ENVS.each do |environment|
-        active_jobs << AbstractJob.search({parser_id: self.id}, environment)        
+        active_jobs << AbstractJob.search({parser_id: self.id}, environment)
       end
 
       active_jobs.flatten.present?
     rescue StandardError => e
       Rails.logger.error "Exception caught while checking running jobs. Exception is #{e.inspect}"
-      Rails.logger.error e.backtrace.join("\n") 
+      Rails.logger.error e.backtrace.join("\n")
     end
   end
 
@@ -75,15 +75,15 @@ class Parser
     if Rails.env.development?
       !HarvestSchedule.find_from_environment({parser_id: self.id}, 'development').empty?
     else
-      begin 
+      begin
 
         !HarvestSchedule.find_from_environment({parser_id: self.id}, 'staging').empty? or !HarvestSchedule.find_from_environment({parser_id: self.id}, 'production').empty?
 
       rescue StandardError => e
 
         Rails.logger.error "Exception caught while checking scheduled jobs. Exception is #{e.inspect}"
-        Rails.logger.error e.backtrace.join("\n") 
-      
+        Rails.logger.error e.backtrace.join("\n")
+
       end
 
     end
@@ -101,7 +101,19 @@ class Parser
     strategy == "oai"
   end
 
-  def enrichment_definitions(environment)
+  # Returns an object of SupplejackCommon::Loader.
+  # version parameter is added to update the content(parser script)
+  # to the content of the current version. Else the loader will
+  # Always process the last version of parser.
+  #
+  # @author Federico Gonzalez
+  # @last_modified Eddie
+  # @param environment [String]
+  # @param version [Version]
+  # @return [Object] the SupplejackCommon::Loader object
+  def enrichment_definitions(environment, version = nil)
+    self.content = version.content if version
+
     begin
       loader = SupplejackCommon::Loader.new(self, environment)
 
@@ -132,7 +144,7 @@ class Parser
   end
 
   def full_and_flush_allowed?
-    allow_full_and_flush  
+    allow_full_and_flush
   end
 
 end
