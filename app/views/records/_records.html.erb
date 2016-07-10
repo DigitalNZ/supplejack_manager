@@ -12,7 +12,6 @@ http://digitalnz.org/supplejack
 <div class="row">
   <div class="twelve columns">
     <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
-    <div class="alert-box secondary round text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
   </div>
 </div>
 
