@@ -13,6 +13,8 @@ require 'rspec/rails'
 require 'webmock/rspec'
 # require 'rspec/autorun'
 require 'simplecov'
+require 'faker'
+require 'pry'
 
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc,

@@ -8,7 +8,7 @@
 
 FactoryGirl.define do
   factory :parser do
-    name      "NZ Museums"
+    name      Faker::Company.name
     strategy  "xml"
     content   "class NZMuserums; end"
     data_type "record"

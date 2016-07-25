@@ -23,7 +23,7 @@ class Parser
 
   index({ name: 1 }) # requires this index as parsers are sorted with name in controller
 
-  attr_accessor :parser_template_name
+  attr_accessor :parser_template_name, :error
 
   belongs_to :source
   accepts_nested_attributes_for :source
@@ -99,6 +99,25 @@ class Parser
 
   def oai?
     strategy == "oai"
+  end
+
+  # Checks if the parser is valid or not.
+  #
+  # @author Eddie
+  # @last_modified Eddie
+  # @param environment [String]
+  # @param version [Version]
+  # @return [Boolean]
+  def valid_parser?(environment, version = nil)
+    self.content = version.content if version
+
+    begin
+      eval self.content
+      true
+    rescue => error
+      self.error = { type: error.class, message: error.message }
+      false    
+    end
   end
 
   # Returns an object of SupplejackCommon::Loader.
