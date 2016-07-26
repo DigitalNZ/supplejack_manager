@@ -13,6 +13,16 @@ http://digitalnz.org/supplejack
   <div class="twelve columns">
     <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
   </div>
+
+  <!-- 
+    This commented out because we are not passig parser version to 
+    this view. However this will be done in future and this can be used.
+   -->
+  <% if false %>
+    <% unless @parser.valid_parser?(Rails.env, @version) %>
+      <%= render "parsers/error", error: @parser.error %>
+    <% end %>
+  <% end %>  
 </div>
 
 <div class="row" id="preview-<%=@preview_id%>">

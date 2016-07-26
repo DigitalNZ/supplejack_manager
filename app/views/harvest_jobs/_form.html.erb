@@ -38,9 +38,6 @@ http://digitalnz.org/supplejack
   <% end %>
 
 <% else %>
-
-  <h5><%= @parser.error[:type] %> in parser</h5>
-  <p><%= @parser.error[:message] %></p>
-
+  <%= render "parsers/error", error: @parser.error %>
 <% end %>
 
