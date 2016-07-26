@@ -55,11 +55,12 @@ group :development do
   gem 'binding_of_caller', '>= 0.6.8'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
-  gem 'pry-rails'
   gem 'unicorn-rails'
 end
 
 group :development, :test do
+  gem 'pry-rails'  
+  gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
   gem 'factory_girl_rails', '>= 4.1.0'
 end

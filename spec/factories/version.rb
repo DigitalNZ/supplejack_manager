@@ -6,12 +6,11 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-class PreviewsController < ApplicationController
-
-	respond_to :js
-
-	def show
-		@preview = Preview.find(params[:id])
-		respond_with @preview
-	end
+FactoryGirl.define do
+  factory :version do
+    message   "new test version"
+    tags      nil
+    user_id   "577d8c270403714b67000001"
+    content   "default: \"Research papers for 1\"\r\n\t  attributes :display_collection, :primary_collection,   default: \"Massey Research Online"
+  end
 end

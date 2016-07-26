@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -121,6 +121,7 @@ describe Parser do
   end
 
   describe "#enrichment_definitions" do
+    let(:version) { FactoryGirl.build(:version) }
     let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
@@ -128,23 +129,61 @@ describe Parser do
       parser.stub(:loader) { loader }
     end
 
-    it "returns the parser enrichment definitions" do
-      loader.parser_class.enrichment_definitions("staging").should eq({ndha_rights: "Hi"})
+    context 'when version is not passed' do
+      it "content is the last content which is set in the Parser itself" do
+        parser.enrichment_definitions("staging")
+        expect(parser.content).to eq "class NZMuserums; end"
+      end
+
+      it "returns the parser enrichment definitions" do
+        loader.parser_class.enrichment_definitions("staging").should eq({ndha_rights: "Hi"})
+      end
+
+      it "rescues from a excepction" do
+        loader.stub(:parser_class).and_raise(StandardError.new("hi"))
+        parser.enrichment_definitions("staging").should eq({})
+      end
+
+      it "should not fail when the parser fails to be loaded due to a syntax error" do
+        loader.stub(:parser_class).and_raise(SyntaxError.new("broken syntax"))
+        parser.enrichment_definitions("staging").should eq({})
+      end
+
+      it "returns an empty hash when the parser is unable to load" do
+        loader.stub(:loaded?) { false }
+        parser.enrichment_definitions("staging").should eq({})
+      end
     end
 
-    it "rescues from a excepction" do
-      loader.stub(:parser_class).and_raise(StandardError.new("hi"))
-      parser.enrichment_definitions("staging").should eq({})
-    end
+    context 'when version is passed' do
+      it "content is updated" do
+        parser.should_receive(:content)
+        parser.enrichment_definitions("staging", version)
+      end
 
-    it "should not fail when the parser fails to be loaded due to a syntax error" do
-      loader.stub(:parser_class).and_raise(SyntaxError.new("broken syntax"))
-      parser.enrichment_definitions("staging").should eq({})
-    end
+      it "parser has right content from the version" do
+        parser.enrichment_definitions("staging", version)
+        expect(parser.content).to eq "default: \"Research papers for 1\"\r\n\t  attributes :display_collection, :primary_collection,   default: \"Massey Research Online"
+      end
 
-    it "returns an empty hash when the parser is unable to load" do
-      loader.stub(:loaded?) { false }
-      parser.enrichment_definitions("staging").should eq({})
+      it "returns the parser enrichment definitions" do
+        loader.parser_class.enrichment_definitions("staging", version).should eq({ndha_rights: "Hi"})
+      end
+
+      it "rescues from a excepction" do
+        loader.stub(:parser_class).and_raise(StandardError.new("hi"))
+        parser.enrichment_definitions("staging", version).should eq({})
+      end
+
+      it "should not fail when the parser fails to be loaded due to a syntax error" do
+        loader.stub(:parser_class).and_raise(SyntaxError.new("broken syntax"))
+        parser.enrichment_definitions("staging", version).should eq({})
+      end
+
+      it "returns an empty hash when the parser is unable to load" do
+        loader.stub(:loaded?) { false }
+        parser.enrichment_definitions("staging", version).should eq({})
+      end
     end
   end
 
@@ -179,4 +218,21 @@ describe Parser do
       expect(parser.full_and_flush_allowed?).to be_false
     end
   end
+
+  describe "#valid_parser?" do
+    it "should return nil" do
+      expect(parser.error).to be nil
+    end
+
+    it "should return true" do
+      expect(parser.valid_parser?('staging')).to be true
+    end
+
+    it "returns false if not allowed" do
+      parser.stub(:content) { 'nil + 1'}
+      
+      expect(parser.valid_parser?('staging')).to be false
+      expect(parser.error).to eq({type: NoMethodError, message: "undefined method `+' for nil:NilClass"})     
+    end
+  end  
 end
