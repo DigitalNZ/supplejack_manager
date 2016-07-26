@@ -218,4 +218,21 @@ describe Parser do
       expect(parser.full_and_flush_allowed?).to be_false
     end
   end
+
+  describe "#valid_parser?" do
+    it "should return nil" do
+      expect(parser.error).to be nil
+    end
+
+    it "should return true" do
+      expect(parser.valid_parser?('staging')).to be true
+    end
+
+    it "returns false if not allowed" do
+      parser.stub(:content) { 'nil + 1'}
+      
+      expect(parser.valid_parser?('staging')).to be false
+      expect(parser.error).to eq({type: NoMethodError, message: "undefined method `+' for nil:NilClass"})     
+    end
+  end  
 end
