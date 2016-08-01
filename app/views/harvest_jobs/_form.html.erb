@@ -13,7 +13,7 @@ http://digitalnz.org/supplejack
   <span class='parser-tag  round label'><%= "#{@version.message}"%></span>
 </h3>
 
-<% if @parser.valid_parser?(@harvest_job.environment, @version) %>
+<% unless @parser.valid_parser?(@harvest_job.environment, @version) %>
   <%= render "parsers/error", error: @parser.error %>
 <% end %>
 <%= simple_form_for @harvest_job, remote: true do |f| %>
