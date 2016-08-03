@@ -6,18 +6,14 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-if RUBY_VERSION =~ /1.9/
-  Encoding.default_external = Encoding::UTF_8
-  Encoding.default_internal = Encoding::UTF_8
-end
-
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+# Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', ref: 'f90be0d7302e2b102ffe532f9b56bdbac05c2caf'
+gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
@@ -71,7 +67,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
-  gem 'database_cleaner', '>= 0.9.1'
+  gem 'database_cleaner', '>= 1.0.0'
   # gem 'email_spec', '>= 1.4.0'
   gem 'cucumber-rails', '>= 1.3.0', :require => false
   gem 'launchy', '>= 2.1.2'
