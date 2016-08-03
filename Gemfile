@@ -14,8 +14,10 @@ end
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'json', '1.8.3'
+gem 'kgio', '~> 2.10.0'
 
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
+gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', ref: 'f90be0d7302e2b102ffe532f9b56bdbac05c2caf'
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
@@ -59,7 +61,9 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry-rails'  
+  gem 'minitest'
+  gem 'test-unit'
+  gem 'pry-rails'
   gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
   gem 'factory_girl_rails', '>= 4.1.0'
