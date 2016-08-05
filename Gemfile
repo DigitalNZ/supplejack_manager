@@ -19,7 +19,7 @@ gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.gi
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'mongoid'
-gem 'devise', '>= 2.1.2'
+gem 'devise',       '~> 3.0.4'
 gem 'cancancan'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'figaro', '>= 0.7.0'
