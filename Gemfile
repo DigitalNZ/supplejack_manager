@@ -34,6 +34,7 @@ gem 'jquery-ui-rails'
 gem 'lograge'
 gem 'airbrake', '~> 5.2'
 gem 'test-unit'
+gem 'raindrops'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -55,7 +56,6 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'unicorn-rails'
-  gem 'raindrops'
 end
 
 group :development, :test do
