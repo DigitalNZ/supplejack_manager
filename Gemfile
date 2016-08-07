@@ -34,7 +34,7 @@ gem 'jquery-ui-rails'
 gem 'lograge'
 gem 'airbrake', '~> 5.2'
 gem 'test-unit'
-gem 'raindrops'
+gem 'raindrops', '0.11.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
