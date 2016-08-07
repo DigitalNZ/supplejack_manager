@@ -1,4 +1,4 @@
 class Rack::File
-	def warn(*)
-	end
+  def warn(*)
+  end
 end
