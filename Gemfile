@@ -55,6 +55,7 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'unicorn-rails'
+  gem 'raindrops'
 end
 
 group :development, :test do
