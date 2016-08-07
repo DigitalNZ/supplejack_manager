@@ -124,7 +124,7 @@ describe Preview do
 
     it "should call pretty_xml_output when format is xml" do
       preview.format = "xml"
-      preview.should_receive(:pretty_xml_output).and_call_original
+      preview.should_receive(:pretty_xml_output) {}
       preview.raw_output
     end
 
