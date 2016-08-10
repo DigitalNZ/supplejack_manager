@@ -33,6 +33,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'lograge'
 gem 'airbrake', '~> 5.2'
+gem 'test-unit'
 
 
 # Gems used only for assets and not required
@@ -62,7 +63,6 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
   gem 'factory_girl_rails', '>= 4.1.0'
-  gem 'test-unit'
 end
 
 group :test do
