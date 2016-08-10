@@ -348,7 +348,7 @@ GEM
     unicorn-rails (1.0.1)
       rack
       unicorn
-    vcr (2.9.2)
+    vcr (3.0.3)
     warden (1.2.6)
       rack (>= 1.0)
     webmock (1.8.11)
