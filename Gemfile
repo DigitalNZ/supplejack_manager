@@ -8,7 +8,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '~> 3.2.22.2'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
