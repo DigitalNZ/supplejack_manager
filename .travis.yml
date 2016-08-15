@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.3.0
+services:
+  - mongodb
+before_script:
+  - cp config/application.yml.example config/application.yml
+script:
+  - RAILS_ENV=test bundle exec rake db:setup --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec
+  - bundle exec cucumber features
+cache: bundler
+bundler_args: --without production
+sudo: false

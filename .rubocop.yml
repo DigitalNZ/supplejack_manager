@@ -1,0 +1,20 @@
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'lib/refinery/**/*'
+    - 'lib/liquid/**/*'
+    - 'tmp/**/*'
+    - 'features/**/*'
+  DisplayStyleGuide: true
+  DisplayCopNames: true
+Rails:
+  Enabled: true
+# https://github.com/bbatsov/rubocop/issues/1633
+Style/MultilineOperationIndentation:
+  Enabled: false
+Rails/Output:
+  Exclude:
+    - 'lib/**/*'
