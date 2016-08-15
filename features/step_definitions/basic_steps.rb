@@ -13,7 +13,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Then /^(?:|I )should be on "([^"]*)"$/ do |page_path|
+Then /^(?:|I )should be on '([^']*)'$/ do |page_path|
   page_path, page_query = page_path.split('?')
 
   current_path = URI.parse(current_url).path
@@ -21,15 +21,15 @@ Then /^(?:|I )should be on "([^"]*)"$/ do |page_path|
   URI.parse(current_url).query.should == page_query if page_query
 end
 
-Then /^(?:|I )should see "([^"]*)"$/ do |text|
+Then /^(?:|I )should see '([^']*)'$/ do |text|
   page.should have_content(text)
 end
 
-Then /^I should see "([^"]*)" on "([^"]*)"$/ do |value, selector|
+Then /^I should see '([^']*)' on '([^']*)'$/ do |value, selector|
   page.should have_selector(selector, text: value)
 end
 
-Then /^I should not see "(.*?)"$/ do |text|
+Then /^I should not see '(.*?)'$/ do |text|
   page.should have_no_content(text)
 end
 
@@ -49,11 +49,11 @@ Then /^I should see a link to "(.*?)"$/ do |href|
   page.should have_selector("a", :href => href)
 end
 
-Then /^I should see selector "(.*?)"$/ do |selector|
+Then /^I should see selector '(.*?)'$/ do |selector|
   page.should have_selector(selector)
 end
 
-Then /^I should not see selector "(.*?)"$/ do |selector|
+Then /^I should not see selector '(.*?)'$/ do |selector|
   page.should_not have_selector(selector)
 end
 
@@ -63,19 +63,19 @@ Then /take a screenshot(| and show me the page)/ do |show_me|
 end
 
   
-When /^I visit "(.*?)"$/ do |path|
+When /^I visit '(.*?)'$/ do |path|
   visit(path)
 end
 
-When /^(?:|I )click button "(.*?)"$/ do |button|
+When /^(?:|I )click button '(.*?)'$/ do |button|
   begin 
     click_button(button)
   rescue Capybara::ElementNotFound
-    find(".button").click
+    find('.button').click
   end
 end
 
-When /^(?:|I )click (?:|the )link "(.*?)"$/ do |link|
+When /^(?:|I )click (?:|the )link '(.*?)'$/ do |link|
   click_link(link)
 end
 
@@ -85,19 +85,19 @@ end
 
 # Form steps
 
-When /^(?:|I )fill in "(.*?)" with "(.*?)"$/ do |field, value|
+When /^(?:|I )fill in '(.*?)' with '(.*?)'$/ do |field, value|
   fill_in(field, :with => value)
 end
 
-When /^(?:|I )select "(.*?)" from "(.*?)"$/ do |value, field|
+When /^(?:|I )select '(.*?)' from '(.*?)'$/ do |value, field|
   page.select(value, :from => field)
 end
 
-When /^(?:|I )check "(.*?)"$/ do |field|
+When /^(?:|I )check '(.*?)'$/ do |field|
   check(field)
 end
 
-When /^(?:|I )uncheck "(.*?)"$/ do |field|
+When /^(?:|I )uncheck '(.*?)'$/ do |field|
   uncheck(field)
 end
 

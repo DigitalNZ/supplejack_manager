@@ -3,21 +3,21 @@ Given /^a user exists with:$/ do |table|
   @user = FactoryGirl.create(:user, attributes)
 end
 
-Given /^I am logged in(?: as "(.*?)")?$/ do |email|
+Given /^I am logged in(?: as '(.*?)')?$/ do |email|
   visit new_user_session_path
-  fill_in "Email", with: email
-  fill_in "Password", with: "secret"
-  click_button "Sign in"
+  fill_in 'Email', with: email
+  fill_in 'Password', with: 'secret'
+  click_button 'Sign in'
 end
 
-Then /^"(.*?)" should be an admin$/ do |name|
+Then /^'(.*?)' should be an admin$/ do |name|
   User.find_by(name: name).role.should eq 'admin'
 end
 
-When /^the user has "(.*?)" set to "(.*?)"$/ do |attr, value|
-  if value == "true"
+When /^the user has '(.*?)' set to '(.*?)'$/ do |attr, value|
+  if value == 'true'
     value = true
-  elsif value == "false"
+  elsif value == 'false'
     value = false
   end
 
