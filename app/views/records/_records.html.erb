@@ -1,10 +1,13 @@
 <%#
-The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are
-third party components that are licensed under the MIT license or otherwise publicly available.
+The majority of The Supplejack Manager code is Crown copyright (C) 2014,
+New Zealand Government,
+and is licensed under the GNU General Public License, version 3. 
+Some components are third party components that are licensed under 
+the MIT license or otherwise publicly available.
 See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
+Supplejack was created by DigitalNZ at the National Library of NZ and
+the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -14,15 +17,9 @@ http://digitalnz.org/supplejack
     <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
   </div>
 
-  <!-- 
-    This commented out because we are not passig parser version to 
-    this view. However this will be done in future and this can be used.
-   -->
-  <% if false %>
-    <% unless @parser.valid_parser?(Rails.env, @version) %>
-      <%= render "parsers/error", error: @parser.error %>
-    <% end %>
-  <% end %>  
+  <% unless @parser.valid_parser?(Rails.env, @version) %>
+    <%= render "parsers/error", error: @parser.error %>
+  <% end %>
 </div>
 
 <div class="row" id="preview-<%=@preview_id%>">

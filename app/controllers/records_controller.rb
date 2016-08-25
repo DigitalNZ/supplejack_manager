@@ -1,14 +1,17 @@
-# The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# The majority of The Supplejack Manager code is Crown copyright (C) 2014,
+# New Zealand Government,
+# and is licensed under the GNU General Public License, version 3. 
+# Some components are third party components that are licensed under 
+# the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and
+# the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class RecordsController < ApplicationController
   
-  before_filter :find_parser
+  before_filter :find_parser_and_version
 
   def index
     params[:environment] ||= 'staging'
@@ -22,7 +25,8 @@ class RecordsController < ApplicationController
     render layout: false
   end
 
-  def find_parser
+  def find_parser_and_version
     @parser = Parser.find(params[:parser_id])
+    @version = @parser.find_version(params[:version_id])
   end
 end

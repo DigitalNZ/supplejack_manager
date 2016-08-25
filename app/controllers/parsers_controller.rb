@@ -1,9 +1,12 @@
-# The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are
-# third party components that are licensed under the MIT license or otherwise publicly available.
+# The majority of The Supplejack Manager code is Crown copyright (C) 2014,
+# New Zealand Government,
+# and is licensed under the GNU General Public License, version 3. 
+# Some components are third party components that are licensed under 
+# the MIT license or otherwise publicly available.
 # See https://github.com/DigitalNZ/supplejack_manager for details.
 #
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
+# Supplejack was created by DigitalNZ at the National Library of NZ and
+# the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class ParsersController < ApplicationController
@@ -34,6 +37,8 @@ class ParsersController < ApplicationController
   end
 
   def edit
+    # Setting last version as default version on edit
+    @parser_version = @parser.versions.last    
     @harvest_job = HarvestJob.from_parser(@parser, current_user)
     @enrichment_job = EnrichmentJob.from_parser(@parser, current_user)
   end
