@@ -47,8 +47,6 @@ HarvesterManager::Application.routes.draw do
     resources :collection_records, only: [:index, :update]
   end
 
-  match '/parsers/:parser_id/preview/:version_id' => 'records#index', as: :preview
-
   devise_for :users
   resources :users, only: [:index, :edit, :update, :new, :create]
 end
