@@ -6,7 +6,7 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
 # http://digitalnz.org/supplejack
 
-require "spec_helper"
+require 'spec_helper'
 
 describe RecordsController do
 
@@ -19,31 +19,41 @@ describe RecordsController do
   let(:previewer) { mock(:previewer).as_null_object }
   let(:harvester) { mock(:harvester).as_null_object }
 
-  describe "POST index" do
+  describe 'POST index' do
     before do
       Parser.stub(:find) { parser }
       Previewer.stub(:new) { previewer } 
     end
 
-    it "finds the parser" do
-      Parser.should_receive(:find).with("1234") { parser }
-      post :index, parser_id: "1234", parser: {}, format: :js
+    it 'should call before filters for find_parser_and_version' do
+      controller.should_receive(:find_parser_and_version)
+      post :index, parser_id: '1234', version_id: '5678', parser: {}, format: :js
     end
 
-    it "initializes a previewer object" do
-      Previewer.should_receive(:new).with(parser, "Data", 123, 10, nil) { previewer }
-      post :index, parser_id: "1234", parser: {content: "Data"}, index: 10, format: :js
+    it 'should call before filters for set_previewer' do
+      controller.should_receive(:set_previewer)
+      post :index, parser_id: '1234', version_id: '5678', parser: {}, format: :js
+    end
+    
+    it 'finds the parser' do
+      Parser.should_receive(:find).with('1234') { parser }
+      post :index, parser_id: '1234', version_id: '5678', parser: {}, format: :js
+    end
+
+    it 'initializes a previewer object' do
+      Previewer.should_receive(:new).with(parser, 'Data', 123, 10, nil) { previewer }
+      post :index, parser_id: '1234', version_id: '5678', parser: {content: 'Data'}, index: 10, format: :js
       assigns(:previewer).should eq previewer
     end
 
-    it "initializes a new previewer in test mode" do
-      Previewer.should_receive(:new).with(parser, "Data", 123, 10, nil) { previewer }
-      post :index, parser_id: "1234", parser: {content: "Data"}, index: 10, environment: "test", format: :js
+    it 'initializes a new previewer in test mode' do
+      Previewer.should_receive(:new).with(parser, 'Data', 123, 10, nil) { previewer }
+      post :index, parser_id: '1234', version_id: '5678', parser: {content: 'Data'}, index: 10, environment: 'test', format: :js
     end
 
-    it "should preview the records from a existing harvest" do
-      Previewer.should_receive(:new).with(parser, "Data", 123, 10, true) { previewer }
-      post :index, parser_id: "1234", parser: {content: "Data"}, index: 10, environment: "test", review: true, format: :js
+    it 'should preview the records from a existing harvest' do
+      Previewer.should_receive(:new).with(parser, 'Data', 123, 10, true) { previewer }
+      post :index, parser_id: '1234', version_id: '5678', parser: {content: 'Data'}, index: 10, environment: 'test', review: true, format: :js
     end
   end
 end
