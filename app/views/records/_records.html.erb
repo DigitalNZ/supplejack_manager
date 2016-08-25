@@ -11,7 +11,7 @@ the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<span id="preview-job" url="/previews/<%=@preview_id%>"></span>
+<span id="preview-job" url="/previews/<%=@previewer.preview_id%>"></span>
 <div class="row">
   <div class="twelve columns">
     <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
@@ -22,7 +22,7 @@ http://digitalnz.org/supplejack
   <% end %>
 </div>
 
-<div class="row" id="preview-<%=@preview_id%>">
+<div class="row" id="preview-<%=@previewer.preview_id%>">
   <div class="twelve columns">
       <p><strong>Status: </strong><span id="status">Initialising preview record...</span></p>
 
