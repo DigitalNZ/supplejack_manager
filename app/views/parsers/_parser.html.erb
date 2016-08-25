@@ -70,7 +70,7 @@ http://digitalnz.org/supplejack
         <div href="#" class="button run-harvest dropdown twelve disabled">Run Harvest</div>
       <% end %>
       <% if can? :preview, @parser %>
-        <li class="twelve right"><%= link_to "Preview", parser_previewers_path(@parser, @parser_version || @version), class: "button records-preview-button twelve" %></li>
+        <li class="twelve right"><%= link_to "Preview", parser_previewers_path(@parser), class: "button records-preview-button twelve" %></li>
       <% end %>
     </ul>
   </div>

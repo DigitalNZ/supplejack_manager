@@ -37,8 +37,6 @@ class ParsersController < ApplicationController
   end
 
   def edit
-    # Setting last version as default version on edit
-    @parser_version = @parser.versions.last    
     @harvest_job = HarvestJob.from_parser(@parser, current_user)
     @enrichment_job = EnrichmentJob.from_parser(@parser, current_user)
   end
