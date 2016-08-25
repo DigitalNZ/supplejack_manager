@@ -29,7 +29,7 @@ $ ->
     window.Harvester.myCodeMirror.save()
 
     $link = $(this)
-    $form = $("form")
+    $form = $("#parser_content")
     $.post $link.attr("href"), $form.serialize(), (data) ->
       $("#preview-area-spinner").hide()
       #$("#preview-area").html(data)

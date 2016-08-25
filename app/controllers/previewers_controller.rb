@@ -11,9 +11,9 @@
 
 # PreviewersController
 class PreviewersController < ApplicationController
-  before_filter :find_parser_and_version, :set_previewer
+  before_filter :set_previewer, :validate_parser_content
 
-  def new
+  def create
     params[:environment] ||= 'staging'
     set_worker_environment_for(HarvestJob)
 
@@ -24,19 +24,27 @@ class PreviewersController < ApplicationController
   #
   # @author Eddie Gonzalez
   # @last_modified Eddie
-  def find_parser_and_version
-    @parser = Parser.find(params[:parser_id])
-    @version = @parser.find_version(params[:version_id])
-  end
+  # def find_parser_and_version
+  # end
 
   # Initializes Previewer
   #
   # @author Eddie
   # @last_modified Eddie
   def set_previewer
+    @parser = Parser.find(params[:parser_id])
     @previewer = Previewer.new(@parser, params[:parser][:content],
                                current_user.id, params[:index],
                                params[:review])
     @previewer.create_preview_job
+  end
+
+  def validate_parser_content
+    begin
+      eval params[:parser][:content]
+      @parser_error = false
+    rescue => error
+      @parser_error = { type: error.class, message: error.message }
+    end
   end
 end

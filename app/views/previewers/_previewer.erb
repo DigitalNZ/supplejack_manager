@@ -1,0 +1,80 @@
+<%#
+The majority of The Supplejack Manager code is Crown copyright (C) 2014,
+New Zealand Government,
+and is licensed under the GNU General Public License, version 3. 
+Some components are third party components that are licensed under 
+the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
+
+Supplejack was created by DigitalNZ at the National Library of NZ and
+the Department of Internal Affairs.
+http://digitalnz.org/supplejack
+%>
+
+<span id="preview-job" url="/previews/<%=@previewer.preview_id%>"></span>
+<div class="row">
+  <div class="twelve columns">
+    <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
+  </div>
+
+  <% if @parser_error %>
+    <%= render "parsers/error", error: @parser_error %>
+  <% end %>
+</div>
+
+<div class="row" id="preview-<%=@previewer.preview_id%>">
+  <div class="twelve columns">
+      <p><strong>Status: </strong><span id="status">Initialising preview record...</span></p>
+
+      <div id="record-to-delete" class="hidden">
+        <p></strong>This record is marked for deletion.</em></p>
+      </div>
+
+      <div id="field-errors" class="hidden">
+        <h4>Field Errors</h4>
+        <p></p>
+      </div>
+
+      <div id="harvest-errors" class="hidden">
+        <h4>Harvest Errors</h4>
+        <p></p>
+      </div>
+
+      <div id="validation-errors" class="hidden">
+        <h4>Validation Errors</h4>
+        <ul class="indented"></ul>
+      </div>
+
+      <dl class="tabs">
+        <dd><a href="#sourceData">Source Data<span class="small-spinner"></span></a></dd>
+        <dd class="active"><a href="#harvestedAttributes">Harvested Attributes<span class="small-spinner"></span></a></dd>
+        <dd><a href="#apiRecord">API <%= @parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a></dd>
+        <div class="align-right">
+          <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %><span style="font-weight: bold;"> - Preview Record -</span>
+          <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %>
+        </div>
+      </dl>
+
+      <ul class="tabs-content tab-content-fit">
+        <li id="sourceDataTab">
+          <div id="record-raw-data"></div>
+        </li>
+
+        <li class="active" id="harvestedAttributesTab">
+          <div id="harvest-attributes"></div>
+        </li>
+
+        <li id="apiRecordTab">
+          <div id="record-attributes"></div>
+        </li>
+      </ul>
+
+      <div id="harvest-failure">
+        <h6></h6>
+        <p></p>
+        <ul class="indented"></ul>
+      </div>
+  </div>
+</div>
+
+<h4 class="not-found hidden"><%= @previewer.parser.name %> <span>didn't return any records.</span></h4>

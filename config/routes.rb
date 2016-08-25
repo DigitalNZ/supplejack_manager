@@ -12,8 +12,8 @@ HarvesterManager::Application.routes.draw do
 
   resources :parsers do
     get :allow_flush, on: :member
+    resources :previewers, only: [:create]
     resources :parser_versions, path: 'versions', only: [:show, :update] do
-      resources :previewers, only: [:new]
       get :current, on: :collection
       get :new_enrichment, on: :member
       get :new_harvest, on: :member
