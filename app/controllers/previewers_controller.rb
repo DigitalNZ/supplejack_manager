@@ -13,6 +13,10 @@
 class PreviewersController < ApplicationController
   before_filter :set_previewer, :validate_parser_content
 
+  # The reason why a create(POST) method is required
+  # is because the whole content of the parser form
+  # is posted here and get cant handle that amount
+  # of data. This is called from a JS method.
   def create
     params[:environment] ||= 'staging'
     set_worker_environment_for(HarvestJob)
