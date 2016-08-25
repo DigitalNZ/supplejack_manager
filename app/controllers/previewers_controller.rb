@@ -20,13 +20,6 @@ class PreviewersController < ApplicationController
     render layout: false
   end
 
-  # Initializes Parser and Version
-  #
-  # @author Eddie Gonzalez
-  # @last_modified Eddie
-  # def find_parser_and_version
-  # end
-
   # Initializes Previewer
   #
   # @author Eddie
@@ -40,11 +33,9 @@ class PreviewersController < ApplicationController
   end
 
   def validate_parser_content
-    begin
-      eval params[:parser][:content]
-      @parser_error = false
-    rescue => error
-      @parser_error = { type: error.class, message: error.message }
-    end
+    eval params[:parser][:content]
+    @parser_error = false
+  rescue => error
+    @parser_error = { type: error.class, message: error.message }
   end
 end
