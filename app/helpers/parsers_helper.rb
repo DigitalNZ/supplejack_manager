@@ -42,8 +42,9 @@ module ParsersHelper
   #
   # @return [A Tag] of the previous preview page
   def link_to_previous(parser_id, index, environment, review, html_options = {})
+    index = index.to_i - 1
     path = parser_previewers_path(parser_id,
-                                  index: index.to_i - 1,
+                                  index: index,
                                   environment: environment,
                                   review: review)
 
