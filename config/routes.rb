@@ -34,7 +34,7 @@ HarvesterManager::Application.routes.draw do
     get :reindex, on: :member
   end
 
-  resources :previews, only: [:show, :update]
+  resources :previews, only: [:show]
 
   scope ':environment', as: 'environment' do
     resources :abstract_jobs, only: [:index], path: 'jobs'

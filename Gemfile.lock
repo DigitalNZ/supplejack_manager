@@ -334,6 +334,8 @@ GEM
     thor (0.19.1)
     tilt (1.4.1)
     timecop (0.5.2)
+    traceroute (0.5.0)
+      rails (>= 3.0.0)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -409,6 +411,7 @@ DEPENDENCIES
   test-unit
   therubyracer
   timecop
+  traceroute
   uglifier (>= 1.0.3)
   unicorn-rails
   vcr
