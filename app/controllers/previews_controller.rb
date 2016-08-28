@@ -12,6 +12,8 @@
 class PreviewsController < ApplicationController
   respond_to :js
 
+  # @author Michael Treacher
+  # @last_modified Eddie
   def show
     @preview = Preview.find(params[:id])
     respond_with @preview
