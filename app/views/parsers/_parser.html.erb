@@ -87,7 +87,7 @@ http://digitalnz.org/supplejack
   <div class="three columns">
     <div class="alert-box secondary round text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
-      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), method: :get, class: "button success twelve" %>
+      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button success twelve" %>
     <% end %>
 
 
