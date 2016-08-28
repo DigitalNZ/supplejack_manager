@@ -36,6 +36,10 @@ class PreviewersController < ApplicationController
     @previewer.create_preview_job
   end
 
+  # Parse Ruby code in Parser and set error
+  #
+  # @author Eddie
+  # @last_modified Eddie
   def validate_parser_content
     eval params[:parser][:content]
     @parser_error = false
