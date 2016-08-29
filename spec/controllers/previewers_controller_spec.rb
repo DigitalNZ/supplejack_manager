@@ -21,6 +21,19 @@ describe PreviewersController do
   let(:previewer) { mock(:previewer).as_null_object }
   let(:harvester) { mock(:harvester).as_null_object }
 
+  describe 'set_previewer' do
+    before do
+      Parser.stub(:find) { parser }
+      Previewer.stub(:new) { previewer } 
+      controller.stub(:params) { { parser_id: '1234', parser: {}, format: :js } }
+    end
+
+    it 'finds the parser' do
+      Parser.should_receive(:find).with('1234') { parser }
+      controller.set_previewer
+    end
+  end
+
   describe 'POST create' do
     before do
       Parser.stub(:find) { parser }
@@ -34,11 +47,6 @@ describe PreviewersController do
 
     it 'should call before filters for set_previewer' do
       controller.should_receive(:set_previewer)
-      post :create, parser_id: '1234', parser: {}, format: :js
-    end
-
-    it 'finds the parser' do
-      Parser.should_receive(:find).with('1234') { parser }
       post :create, parser_id: '1234', parser: {}, format: :js
     end
 
