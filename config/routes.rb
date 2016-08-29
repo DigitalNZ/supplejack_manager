@@ -12,6 +12,7 @@ HarvesterManager::Application.routes.draw do
 
   resources :parsers do
     get :allow_flush, on: :member
+    resources :previewers, only: [:create]
     resources :parser_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
       get :new_enrichment, on: :member
@@ -33,7 +34,7 @@ HarvesterManager::Application.routes.draw do
     get :reindex, on: :member
   end
 
-  resources :previews, only: [:show, :update]
+  resources :previews, only: [:show]
 
   scope ':environment', as: 'environment' do
     resources :abstract_jobs, only: [:index], path: 'jobs'
@@ -45,8 +46,6 @@ HarvesterManager::Application.routes.draw do
     resources :suppress_collections
     resources :collection_records, only: [:index, :update]
   end
-
-  match '/parsers/:parser_id/preview' => 'records#index', as: :preview
 
   devise_for :users
   resources :users, only: [:index, :edit, :update, :new, :create]

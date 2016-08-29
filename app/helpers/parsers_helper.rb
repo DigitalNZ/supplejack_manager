@@ -1,49 +1,85 @@
-# The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# The majority of The Supplejack Manager code is Crown copyright (C) 2014,
+# New Zealand Government,
+# and is licensed under the GNU General Public License, version 3.
+# Some components are third party components that are licensed under
+# the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and
+# the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
+# Helpers for Parsers
 module ParsersHelper
-
-  def link_to_next(parser_id, index, environment, review, html_options={})
-    link_to "next >", preview_path(parser_id, index: index.to_i+1, environment: environment, review: review), html_options
+  # Returns the next link for preview view
+  #
+  # @author Federico Gonzalez
+  # @last_modified Eddie
+  # @param parser_id [String] the id fo the parser
+  # @param index [String] the index of the preview page
+  # @param environment [String] the environment set to the parser
+  # @param review [String]
+  # @param html_options [String] optional options
+  #
+  # @return [A Tag] of the next preview page
+  def link_to_next(parser_id, index, environment, review, html_options = {})
+    # index params is nil for the first iteration. to_i will make it 0
+    # Its incremented so that in the second iteration previous link can be made visible.
+    # Previous link is disabled when index is 0
+    path = parser_previewers_path(parser_id,
+                                  index: index.to_i + 1,
+                                  environment: environment,
+                                  review: review)
+    link_to 'next >', path, html_options
   end
 
-  def link_to_previous(parser_id, index, environment, review, html_options={})
+  # Returns the previous link for preview view
+  #
+  # @author Federico Gonzalez
+  # @last_modified Eddie
+  # @param parser_id [String] the id fo the parser
+  # @param index [String] the index of the preview page
+  # @param environment [String] the environment set to the parser
+  # @param review [String]
+  # @param html_options [String] optional options
+  #
+  # @return [A Tag] of the previous preview page
+  def link_to_previous(parser_id, index, environment, review, html_options = {})
     index = index.to_i - 1
+    path = parser_previewers_path(parser_id,
+                                  index: index,
+                                  environment: environment,
+                                  review: review)
 
     if index >= 0
-      link_to "< previous", preview_path(parser_id, index: index.to_i, environment: environment, review: review), html_options
+      link_to '< previous', path, html_options
     else
-      html_options[:class] << " disabled"
-      content_tag(:span, "< previous", html_options)
+      html_options[:class] << ' disabled'
+      content_tag(:span, '< previous', html_options)
     end
   end
 
   def environment_tags(version, parser)
-    content_tag(:div, class: "version-tag-container") do
+    content_tag(:div, class: 'version-tag-container') do
       bubbles = []
       version.tags ||= []
       version.tags.each do |environment|
         label = environment.capitalize.first
         arrow = nil
-        classes = ["version-tag", environment]
+        classes = ['version-tag', environment]
         if parser.current_version(environment.to_sym) == version
-          arrow = content_tag(:span, "", class: "arrow arrow-left")
-          classes << "current"
+          arrow = content_tag(:span, '', class: 'arrow arrow-left')
+          classes << 'current'
         end
 
-        bubbles << content_tag(:span, safe_join([arrow, label]), class: classes.join(" "))
+        bubbles << content_tag(:span, safe_join([arrow, label]), class: classes.join(' '))
       end
       safe_join(bubbles)
     end
   end
 
   def environment_tag(environment, nested_tag=nil)
-    content_tag(:span, safe_join([content_tag(:span, "", class: "arrow arrow-left"), t("parsers.environments.#{environment}"), nested_tag]), class: "version-tag #{environment}")
+    content_tag(:span, safe_join([content_tag(:span, '', class: 'arrow arrow-left'), t("parsers.environments.#{environment}"), nested_tag]), class: "version-tag #{environment}")
   end
 
   def enrichments(job)

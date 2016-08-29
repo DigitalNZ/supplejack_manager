@@ -58,7 +58,8 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'unicorn-rails'
-  gem 'rubocop'
+  gem 'traceroute'
+  gem 'rubocop', require: false
 end
 
 group :development, :test do
