@@ -12,7 +12,7 @@
 require 'spec_helper'
 
 describe PreviewersController do
-  before(:each) do
+  before do
     controller.stub(:authenticate_user!) { true }
     controller.stub(:current_user) { mock(:user, id: 123) }
   end
