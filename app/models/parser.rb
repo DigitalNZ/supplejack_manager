@@ -131,7 +131,12 @@ class Parser
   # @param version [Version]
   # @return [Object] the SupplejackCommon::Loader object
   def enrichment_definitions(environment, version = nil)
-    self.content = version.content if version
+
+    if version.nil?
+      self.content = self.current_version(environment).content
+    else
+      self.content = version.content
+    end
 
     begin
       loader = SupplejackCommon::Loader.new(self, environment)
