@@ -135,9 +135,7 @@ class Parser
       self.content = version.content
     else
       env_versions = self.versions.where(tags: environment)
-      if env_versions.any?
-        self.content = env_versions.last
-      end
+      self.content = env_versions.last.content if env_versions.any?
     end
 
     begin
