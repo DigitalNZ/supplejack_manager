@@ -155,6 +155,17 @@ describe Parser do
       end
     end
 
+    context 'when version is not passed but the parser has a tagged version' do
+      before(:each) do
+        parser.versions << FactoryGirl.build(:version, :staging)
+      end
+
+      it "parser is set as the content of the last tagged version" do
+        parser.enrichment_definitions("staging")
+        expect(parser.content).to eq "version for staging"
+      end
+    end
+
     context 'when version is passed' do
       it "content is updated" do
         parser.should_receive(:content)
