@@ -1,5 +1,5 @@
-FROM ruby:2.1.4
-RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy mysql-client vim openssh-client 
+FROM ruby:2.1.7
+RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy mysql-client vim openssh-client git
 RUN npm install -g phantomjs-prebuilt
 
 RUN apt-get install -y g++
@@ -25,11 +25,10 @@ WORKDIR /tmp
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 COPY config/mongoid.yml config/mongoid.yml
-COPY config/application.yml.docker config/application.yml
 
 # Cache bundle install
 ENV BUNDLE_PATH /bundle
 
-RUN bundle install --deployment
+RUN bundle install
 WORKDIR /manager
 ADD . /manager
