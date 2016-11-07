@@ -2,7 +2,7 @@ FROM ruby:2.1.7
 RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy mysql-client vim openssh-client git
 RUN npm install -g phantomjs-prebuilt
 
-RUN apt-get install -y g++
+RUN apt-get install -y g++ cron
 
 # For nokogiri
 RUN apt-get install -y libxml2-dev libxslt1-dev libxslt-dev liblzma-dev curl
