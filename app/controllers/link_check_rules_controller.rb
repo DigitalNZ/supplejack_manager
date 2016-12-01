@@ -27,7 +27,11 @@ class LinkCheckRulesController < ApplicationController
   end
 
   def edit
-    @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
+    if current_user.admin?
+      @partners = Partner.all.asc(:name)
+    else
+      @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
+    end
   end
 
   def destroy
