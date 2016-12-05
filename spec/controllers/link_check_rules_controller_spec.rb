@@ -12,6 +12,8 @@ describe LinkCheckRulesController do
 
   let(:link_check_rule) { mock_model(LinkCheckRule, collection_title: "TAPUHI").as_null_object }
   let(:user) { mock_model(User).as_null_object }
+  let(:admin_user) { mock_model(User, role: 'admin').as_null_object }
+  let(:partner) {FactoryGirl.build(:partner)}
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
@@ -41,6 +43,14 @@ describe LinkCheckRulesController do
   end
 
   describe "GET 'edit'" do
+    it "loads the partners" do
+      user.should_receive(:admin?).twice.and_return(true)
+      Partner.should_receive(:all) { [partner] }
+      LinkCheckRule.should_receive(:find) { link_check_rule }
+      get :edit, id: link_check_rule.id, environment: "development"
+      assigns(:partners).should eq [partner]
+    end
+
     it "finds the link_check_rule" do
       LinkCheckRule.should_receive(:find) { link_check_rule }
       get :edit, id: link_check_rule.id, environment: "development"

@@ -28,7 +28,8 @@ class LinkCheckRulesController < ApplicationController
 
   def edit
     if current_user.admin?
-      @partners = Partner.all.asc(:name)
+      @partners = Partner.all
+      binding.pry
     else
       @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
     end
