@@ -44,8 +44,8 @@ describe LinkCheckRulesController do
 
   describe "GET 'edit'" do
     it "loads the partners" do
-      user.should_receive(:admin?).twice.and_return(true)
-      Partner.should_receive(:all) { [partner] }
+      user.should_receive(:admin?).and_return(true)
+      Partner.stub_chain(:all, :asc) { [partner] }
       LinkCheckRule.should_receive(:find) { link_check_rule }
       get :edit, id: link_check_rule.id, environment: "development"
       assigns(:partners).should eq [partner]
