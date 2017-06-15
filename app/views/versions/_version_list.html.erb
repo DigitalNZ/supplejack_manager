@@ -44,7 +44,7 @@ http://digitalnz.org/supplejack
   <% versionable.versions.desc(:created_at).each_with_index do |version, index| %>
     <div class="version <%= 'active' if @version.try(:id) == version.id %> <%= 'hidden' if index > 15 %>">
       <%= link_to version.message || "No message",  send(:"#{versionable_path}_path", versionable, version) %>
-      <p><%= l(localize_date_time(version.created_at), format: :short) %> by <%= version.user.try(:first_name) %></p>
+      <p><%= localize_date_time(version.created_at) %> by <%= version.user.try(:first_name) %></p>
 
       <%= environment_tags(version, versionable) %>
     </div>

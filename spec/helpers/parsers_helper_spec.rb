@@ -48,6 +48,12 @@ describe ParsersHelper do
       end
     end
 
+    context '#localize_date_time' do
+      it 'return date in dd M yyyy hh:mm format' do
+        expect(localize_date_time(Time.zone.now)).to match(/^[0-9]{2} [a-zA-Z]{3} [0-9]{4} [0-9]{2}:[0-9]{2}/)
+      end
+    end
+
     context "older tags" do
       let(:current_version) { mock(:version, id: "444", tags: ["production"]) }
 
@@ -77,5 +83,4 @@ describe ParsersHelper do
       end
     end
   end
-  
 end
