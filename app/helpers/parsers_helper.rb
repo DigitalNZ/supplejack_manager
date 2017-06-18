@@ -78,7 +78,7 @@ module ParsersHelper
     end
   end
 
-  def environment_tag(environment, nested_tag=nil)
+  def environment_tag(environment, nested_tag = nil)
     content_tag(:span, safe_join([content_tag(:span, '', class: 'arrow arrow-left'), t("parsers.environments.#{environment}"), nested_tag]), class: "version-tag #{environment}")
   end
 
@@ -91,6 +91,7 @@ module ParsersHelper
   end
 
   def localize_date_time(date_time)
-    ActiveSupport::TimeZone['Wellington'].parse(date_time.to_s)
+    local_date = ActiveSupport::TimeZone['Wellington'].parse(date_time.to_s)
+    local_date.strftime('%d %b %Y %H:%M')
   end
 end

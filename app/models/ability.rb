@@ -49,5 +49,4 @@ class Ability
       cannot :read, :collection_record
     end
   end
-
 end
