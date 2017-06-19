@@ -26,6 +26,7 @@ class HarvestSchedule < ActiveResource::Base
     attribute :recurrent,   :boolean
     attribute :mode,        :string
     attribute :enrichments, :string
+    attribute :status,      :string
   end
 
   include ActiveResource::SchemaTypes
