@@ -8,8 +8,22 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h1 class="left">Job Schedules - <%= params[:environment].capitalize %></h1>
-<%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right #{can_show_button(:create, HarvestSchedule)}" %>
+<!-- environment_harvest_schedule_update_all -->
+<div class="twelve columns">
+  <div class="six columns">
+    <h1 class="left">Job Schedules - <%= params[:environment].capitalize %></h1>
+  </div>
+
+  <div class="six columns">
+    <%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right #{can_show_button(:create, HarvestSchedule)}" %>
+
+    <%= form_tag update_all_environment_harvest_schedules_path, method: 'put' do %>
+      <%= hidden_field_tag 'harvest_schedule[status]', (@active_jobs ? 'paused' : 'active') %>
+      <%= submit_tag (@active_jobs ? 'Pause All' : 'Resume all'), class: 'button alert new-right' %>
+    <% end %>
+  </div>  
+</div>
+
 
 <br/>
 
@@ -29,22 +43,38 @@ http://digitalnz.org/supplejack
   <tbody>
     <% if @one_off_schedules.any? %>
 
-      <% @one_off_schedules.each do |harvest_schedule| %>
+      <% @one_off_schedules.each do |schedule| %>
       <tr>
         <td>
-          <% if can? :update, harvest_schedule.parser %>
-            <%= link_to harvest_schedule.parser.try(:name), edit_parser_path(harvest_schedule.parser) %>
+          <% if can? :update, schedule.parser %>
+            <%= link_to schedule.parser.try(:name), edit_parser_path(schedule.parser) %>
           <% else %>
-            <%= harvest_schedule.parser.try(:name) %>
+            <%= schedule.parser.try(:name) %>
           <% end %>
         </td>
-        <td><%= l harvest_schedule.start_time, format: :long %></td>
-        <td><%= harvest_schedule.environment %></td>
-        <td><%= harvest_schedule.mode.try(:titleize) %></td>
+        <td><%= l schedule.start_time, format: :long %></td>
+        <td><%= schedule.environment %></td>
+        <td><%= schedule.mode.try(:titleize) %></td>
         <td>
-          <% if can? :update, harvest_schedule %>
-            <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
-            <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+          <% if can? :update, schedule %>
+            <div class="row">
+              <div class="nine columns">
+                <div class="four columns">
+                  <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], schedule) %>
+                </div>
+
+                <div class="four columns">
+                  <%= link_to t("delete"), harvest_schedule_path(schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+                </div>
+
+                <div class="four columns">
+                  <%= form_tag harvest_schedule_path(schedule), method: 'put' do %>
+                    <%= hidden_field_tag 'harvest_schedule[status]', pause_resume_value_for(schedule) %>
+                    <%= submit_tag pause_resume_class_for(schedule).titleize, class: pause_resume_class_for(schedule) %>
+                  <% end %>                
+                </div>
+              </div>
+            </div>
           <% end %>
         </td>
       </tr>
@@ -67,6 +97,7 @@ http://digitalnz.org/supplejack
     <tr>
       <th><%= t("harvest_schedules.parser") %></th>
       <th><%= t("harvest_schedules.next_run_at") %></th>
+      <th><%= t("harvest_schedules.last_run_at") %></th>
       <th><%= t("harvest_schedules.start_time") %></th>
       <th><%= t("harvest_schedules.environment") %></th>
       <th><%= t("harvest_schedules.mode") %></th>
@@ -77,36 +108,57 @@ http://digitalnz.org/supplejack
   </thead>
 
   <tbody>
-    <% @recurrent_schedules.each do |harvest_schedule| %>
+    <% @recurrent_schedules.each do |schedule| %>
     <tr>
       <td>
-        <% if can? :update, harvest_schedule.parser %>
-          <%= link_to harvest_schedule.parser.try(:name), edit_parser_path(harvest_schedule.parser) %>
+        <% if can? :update, schedule.parser %>
+          <%= link_to schedule.parser.try(:name), edit_parser_path(schedule.parser) %>
         <% else %>
-          <%= harvest_schedule.parser.try(:name) %>
+          <%= schedule.parser.try(:name) %>
         <% end %>
       </td>
-      <td><%= l harvest_schedule.next_run_at, format: :short %></td>
 
-      <% if harvest_schedule.next_run_at > DateTime.now %>
-        <td class="grey-out"><%= l harvest_schedule.start_time, format: :first_run_at %></td>
-      <% elsif %>
-        <td><%= l harvest_schedule.start_time, format: :first_run_at %></td>
+      <td><%= l schedule.next_run_at, format: :short %></td>
+
+      <td><%= schedule.last_run_at ? (l schedule.last_run_at, format: :short) : 'Havent run' %></td>
+
+      <% if schedule.next_run_at > DateTime.now %>
+        <td class="grey-out"><%= l schedule.start_time, format: :first_run_at %></td>
+      <% else %>
+        <td><%= l schedule.start_time, format: :first_run_at %></td>
       <% end %>
       
-      <td><%= harvest_schedule.environment %></td>
-      <td><%= harvest_schedule.mode.try(:titleize) %></td>
-      <% if harvest_schedule.frequency.present? %>
-        <td><%= harvest_schedule.frequency %> at <%= harvest_schedule.at_hour.to_s.rjust(2, "0") %>:<%= harvest_schedule.at_minutes.to_s.rjust(2, "0") %> (<%= harvest_schedule.cron %>)</td>
-        <td><%= harvest_schedule.at_hour.to_s.rjust(2, "0") %>:<%= harvest_schedule.at_minutes.to_s.rjust(2, "0") %></td>
+      <td><%= schedule.environment %></td>
+
+      <td><%= schedule.mode.try(:titleize) %></td>
+      
+      <% if schedule.frequency.present? %>
+        <td><%= schedule.frequency %> at <%= schedule.at_hour.to_s.rjust(2, "0") %>:<%= schedule.at_minutes.to_s.rjust(2, "0") %> (<%= schedule.cron %>)</td>
+        <td><%= schedule.at_hour.to_s.rjust(2, "0") %>:<%= schedule.at_minutes.to_s.rjust(2, "0") %></td>
       <% else %>
-        <td><%= harvest_schedule.cron %></td>
+        <td><%= schedule.cron %></td>
       <% end %>
       <td>
-        <% if can? :update, harvest_schedule %>
-          <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], harvest_schedule) %> | 
-          <%= link_to t("delete"), harvest_schedule_path(harvest_schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
-        <% end %>
+        <div class="row">
+          <div class="nine columns">
+            <% if can? :update, schedule %>
+              <div class="four columns">
+                <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], schedule) %> 
+              </div>
+
+              <div class="four columns">
+              <%= link_to t("delete"), harvest_schedule_path(schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+              </div>
+
+              <div class="four columns">
+                <%= form_tag harvest_schedule_path(schedule), method: 'put' do %>
+                  <%= hidden_field_tag 'harvest_schedule[status]', pause_resume_value_for(schedule) %>
+                  <%= submit_tag pause_resume_class_for(schedule).titleize, class: pause_resume_class_for(schedule) %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </td>
     </tr>
     <% end %>

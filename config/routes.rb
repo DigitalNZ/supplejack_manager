@@ -40,7 +40,11 @@ HarvesterManager::Application.routes.draw do
     resources :abstract_jobs, only: [:index], path: 'jobs'
     resources :harvest_jobs, only: [:create, :update, :show, :index]
     resources :enrichment_jobs, only: [:create, :update, :show, :new]
-    resources :harvest_schedules, except: [:show]
+    
+    resources :harvest_schedules, except: [:show] do
+      put :update_all, on: :collection
+    end
+
     resources :collection_statistics, only: [:index, :show]
     resources :link_check_rules, except: [:show]
     resources :suppress_collections

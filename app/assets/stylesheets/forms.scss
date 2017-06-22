@@ -61,3 +61,16 @@ fieldset#management_permissions , fieldset#harvesting_permissions {
   color: #272727;
   padding-bottom: 10px;
 }
+
+.pause, .resume {
+  background:none!important;
+  color: #2ba6cb;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+}
+
+.resume {
+  color: #FA5858;
+}

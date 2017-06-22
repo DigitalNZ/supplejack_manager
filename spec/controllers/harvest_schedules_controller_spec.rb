@@ -18,7 +18,20 @@ describe HarvestSchedulesController do
     controller.stub(:current_user) { user }
   end
 
+  describe "PUT update_all" do
+    it 'update the scheduled harvets' do
+      HarvestSchedule.should_receive(:all) { [schedule] }
+      schedule.should_receive(:update_attributes).with({ 'status' => 'paused' })
+
+      put :update_all, environment: "staging", harvest_schedule: { status: 'paused' }
+    end
+  end
+
   describe "GET index" do
+    before(:each) do
+      schedule.stub(:status) { 'active' }
+    end
+
     it "returns all harvest schedules" do
       HarvestSchedule.should_receive(:all) { [schedule] }
       get :index, environment: "staging"
@@ -26,8 +39,8 @@ describe HarvestSchedulesController do
     end
 
     it "assigns recurrent and one_off schedules" do
-      s1 = mock(:schedule, recurrent: true, next_run_at: DateTime.now )
-      s2 = mock(:schedyle, recurrent: false, start_time: DateTime.now )
+      s1 = mock(:schedule, recurrent: true, next_run_at: DateTime.now, status: 'active' )
+      s2 = mock(:schedyle, recurrent: false, start_time: DateTime.now, status: 'active' )
       HarvestSchedule.stub(:all) { [s1, s2] }
       get :index, environment: "staging"
       assigns(:recurrent_schedules).should eq [s1]

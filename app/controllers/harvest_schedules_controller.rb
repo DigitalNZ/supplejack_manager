@@ -15,6 +15,8 @@ class HarvestSchedulesController < ApplicationController
 
   def index
     @harvest_schedules = HarvestSchedule.all
+
+    @active_jobs = @harvest_schedules.map(&:status).include? 'active'
     @recurrent_schedules = @harvest_schedules.find_all {|s| s.recurrent == true }.sort_by(&:next_run_at)
     @one_off_schedules = @harvest_schedules.find_all {|s| s.recurrent == false }.sort_by(&:start_time)
   end
@@ -40,7 +42,7 @@ class HarvestSchedulesController < ApplicationController
 
   def edit
     @harvest_schedule = HarvestSchedule.find(params[:id])
-    
+
     if can? :manage, HarvestSchedule
       @parsers = Parser.asc(:name)
     else
@@ -50,7 +52,18 @@ class HarvestSchedulesController < ApplicationController
 
   def update
     @harvest_schedule = HarvestSchedule.find(params[:id])
+
     @harvest_schedule.update_attributes(params[:harvest_schedule])
+    redirect_to harvest_schedules_path
+  end
+
+  def update_all
+    HarvestSchedule.all.each do |schedule|
+      schedule.update_attributes(params[:harvest_schedule])
+    end
+    
+    flash[:notice] = "All scheduled harvests are now #{params[:harvest_schedule][:status]}"
+
     redirect_to harvest_schedules_path
   end
 

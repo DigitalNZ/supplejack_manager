@@ -220,6 +220,7 @@ en:
     edit_schedule: "Edit Schedule"
     edit_env_schedule: "Edit %{env} Schedule"
     offset_hint: "The offset is a number value which represents the number of days to offset the start of the schedule. Valid values are: Weekly (0-6), Fortnightly (0-13), Monthly (0-27)"
+    last_run_at: "Last Job"
     next_run_at: "Next Job"
     confirm_delete: "Are you sure you want to delete the Schedule?"
     no_one_off_schedules: "There are no one off schedules programmed"
