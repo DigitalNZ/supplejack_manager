@@ -103,14 +103,27 @@ http://digitalnz.org/supplejack
   
    <% if @harvest_job.harvest_failure.present? %>
     <h5><%= t('harvest_jobs.harvest_failure')%> </h5>
-    <span><%= @harvest_job.harvest_failure.message %></span>
+
+     <div id="harvest-job-errors-backtrace">
+      <div id="accordion-backtrace" class="accordion">
+        <h3 class="error">
+          <span><%= @harvest_job.harvest_failure.message %></span>
+        </h3>
+        <div>
+          <small>
+            <%= format_backtrace(@harvest_job.harvest_failure.backtrace) %>
+          </small>
+        </div>
+      </div>
+    </div>
   <% end %>
 
   <h5><%= t("harvest_jobs.invalid_records") %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
 
+
   <% if @harvest_job.invalid_records.any? %>
   <div id="harvest-job-invalid-errors">
-    <div id="accordion">
+    <div id="accordion-invalid" class="accordion">
       <% @harvest_job.invalid_records.each do |record| %>
         <h3 class="error">
           <span><%= record.error_messages.join(", ") %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
@@ -129,7 +142,7 @@ http://digitalnz.org/supplejack
 
   <% if @harvest_job.failed_records.any? %>
   <div id="harvest-job-failed-errors">
-    <div id="accordion">
+    <div id="accordion-failed" class="accordion">
       <% @harvest_job.failed_records.each do |record| %>
         <h3 class="error">
           <span><%= record.message %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>

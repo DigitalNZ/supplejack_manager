@@ -38,6 +38,14 @@ module ApplicationHelper
     end
   end
 
+  def format_backtrace(backtrace)
+    content_tag 'div' do
+      backtrace.each_with_index do |span_content, index|
+        concat content_tag("small", span_content)
+      end
+    end
+  end
+
   def safe_users_path(params={})
     current_user.admin? ? users_path(params) : root_path
   end
