@@ -1,3 +1,5 @@
+![Supplejack Logo](https://raw.githubusercontent.com/DigitalNZ/supplejack_manager/master/app/assets/images/logo.png)
+
 # Supplejack Manager
 
 The Supplejack Manager is a rails application that provides a visual interface into the harvesting and link checking processes within the harvester worker. The manager uses active resource to interface into the workers models using a restful interface. It allows the harvest operator to do the following:
