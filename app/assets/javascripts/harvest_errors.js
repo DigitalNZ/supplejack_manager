@@ -12,6 +12,6 @@ $(function() {
     })
   });
 
-  $("#accordion-failed, #accordion-invalid, #accordion-backtrace").accordion({heightStyle: "content",collapsible: true, active: false})
+  $("#accordion-failed, #accordion-invalid, #accordion-backtrace").accordion({heightStyle: "content",collapsible: true, active: false});
 
 });
