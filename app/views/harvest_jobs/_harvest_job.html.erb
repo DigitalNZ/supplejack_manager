@@ -118,7 +118,7 @@ http://digitalnz.org/supplejack
         </h3>
         <div>
           <small>
-            <%= format_backtrace(@harvest_job.harvest_failure.backtrace) %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(@harvest_job.harvest_failure.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
           </small>
         </div>
       </div>
@@ -126,7 +126,6 @@ http://digitalnz.org/supplejack
   <% end %>
 
   <h5><%= t("harvest_jobs.invalid_records") %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
-
 
   <% if @harvest_job.invalid_records.any? %>
   <div id="harvest-job-invalid-errors">
@@ -136,7 +135,17 @@ http://digitalnz.org/supplejack
           <span><%= record.error_messages.join(", ") %></span><span class="right"><%= localize_date_time(record.created_at) %></span>
         </h3>
         <div>
-          <%= pretty_format(@harvest_job.parser_id, record.raw_data) %>
+          <h5>Raw Data</h5>
+
+          <% unless record.raw_data.nil? %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+          <% end %>
+
+          <h5>Backtrace</h5>
+
+          <% unless record.backtrace.nil? %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -156,13 +165,16 @@ http://digitalnz.org/supplejack
         </h3>
         <div>
           <h5>Raw Data</h5>
-          <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+
+          <% unless record.raw_data.nil? %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+          <% end %>
 
           <h5>Backtrace</h5>
 
-          <%=
-            text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly'
-          %>
+          <% unless record.backtrace.nil? %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
+          <% end %>
 
         </div>
       <% end %>
