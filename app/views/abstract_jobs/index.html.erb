@@ -67,7 +67,7 @@ http://digitalnz.org/supplejack
 
       <td><%= abstract_job.records_count %></td>
 
-      <% if abstract_job.invalid_records_count > 0 || abstract_job.failed_records_count > 0 %>
+      <% if ((abstract_job.invalid_records_count.present? && abstract_job.invalid_records_count > 0) || (abstract_job.failed_records_count.present? && abstract_job.failed_records_count > 0)) %>
         <td><span class='errors-count'><strong><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></strong></span></td>
       <% else %>
         <td><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></td>
