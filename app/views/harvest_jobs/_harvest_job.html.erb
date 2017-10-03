@@ -141,11 +141,6 @@ http://digitalnz.org/supplejack
             <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
           <% end %>
 
-          <h5>Backtrace</h5>
-
-          <% unless record.backtrace.nil? %>
-            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
-          <% end %>
         </div>
       <% end %>
     </div>
