@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -66,7 +66,12 @@ http://digitalnz.org/supplejack
       <% end %>
 
       <td><%= abstract_job.records_count %></td>
-      <td><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></td>
+
+      <% if ((abstract_job.invalid_records_count.present? && abstract_job.invalid_records_count > 0) || (abstract_job.failed_records_count.present? && abstract_job.failed_records_count > 0)) %>
+        <td><span class='errors-count'><strong><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></strong></span></td>
+      <% else %>
+        <td><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></td>
+      <% end %>
 
       <td>
         <% if abstract_job._type == "HarvestJob" %>
@@ -75,7 +80,7 @@ http://digitalnz.org/supplejack
           <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, abstract_job) %>
         <% end %>
       </td>
-      
+
     </tr>
     <% end %>
   </tbody>
