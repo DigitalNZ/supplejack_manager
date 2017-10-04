@@ -57,6 +57,6 @@ class SourcesController < ApplicationController
   def reindex
     @source = Source.find(params[:id])
     url = Figaro.env(params[:env])['API_HOST']
-    RestClient.get("#{url}/sources/#{@source.id}/reindex?date=#{params[:date]}")
+    RestClient.get("#{url}/manager/sources/#{@source.id}/reindex?date=#{params[:date]}")
   end
 end
