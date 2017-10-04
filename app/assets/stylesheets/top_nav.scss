@@ -6,14 +6,20 @@
 // Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
 // http://digitalnz.org/supplejack
 
-.top-bar > ul .name h1 {
+/*.top-bar > ul .name h1 {
   font-size: 18px;
   padding-left: 15px;
   color: #FFF;
   margin-right: 15px !important;
+}*/
+
+.top-bar > ul .name {
+  margin-right: 10px !important;
 }
 
 .top-bar {
+  /*height: 60px;*/
+
   li {
     span {
       color: #FFF;
