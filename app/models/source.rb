@@ -37,7 +37,7 @@ class Source
     partner.update_apis
     APPLICATION_ENVS.each do |environment|
       env = Figaro.env(environment)
-      RestClient.post("#{env['API_HOST']}/manager/partners/#{self.partner.id.to_s}/sources", { source: self.attributes, api_key: env['HARVESTER_API_KEY'] })
+      RestClient.post("#{env['API_HOST']}/harvester/partners/#{self.partner.id.to_s}/sources", { source: self.attributes, api_key: env['HARVESTER_API_KEY'] })
     end
   end
 

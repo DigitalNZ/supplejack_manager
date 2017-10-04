@@ -30,7 +30,7 @@ class Partner
     APPLICATION_ENVS.each do |environment|
       env = Figaro.env(environment)
 
-      RestClient.post("#{env['API_HOST']}/manager/partners", { partner: self.attributes, api_key: env['HARVESTER_API_KEY'] })
+      RestClient.post("#{env['API_HOST']}/harvester/partners", { partner: self.attributes, api_key: env['HARVESTER_API_KEY'] })
     end
   end
 end
