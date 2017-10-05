@@ -38,14 +38,14 @@ describe Partner do
     let(:partner) {FactoryGirl.create(:partner)}
 
     it "updates the partner" do
-      RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/partners",partner: partner.attributes)
+      RestClient.should_receive(:post).with("http://api.uat.digitalnz.org/harvester/partners",partner: partner.attributes)
       partner.update_apis
     end
 
     it "updates each environments" do
       APPLICATION_ENVS.each do |env|
         env = Figaro.env(env)
-        RestClient.should_receive(:post).with("#{env['API_HOST']}/partners", anything)
+        RestClient.should_receive(:post).with("#{env['API_HOST']}/harvester/partners", anything)
         partner.update_apis
       end
     end
