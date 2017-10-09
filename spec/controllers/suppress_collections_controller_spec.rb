@@ -18,12 +18,13 @@ describe SuppressCollectionsController do
 
   describe "GET 'index'" do
     it "should be successful" do
+      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       get :index, environment: "development"
       response.should be_success
     end
 
     it "should request the blacklist collection and assign it to response" do
-      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] })
+      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       get :index, environment: "development"
     end
   end

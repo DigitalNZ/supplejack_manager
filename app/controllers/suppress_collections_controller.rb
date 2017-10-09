@@ -12,8 +12,8 @@ class SuppressCollectionsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @response = RestClient.get("#{fetch_env_vars['API_HOST']}/harvester/sources", { params: {:"source[status]" => "suppressed", api_key: fetch_env_vars['HARVESTER_API_KEY'] } }) rescue nil
-    @blacklisted_sources = JSON.parse(@response)["sources"] rescue []
+    @response = RestClient.get("#{fetch_env_vars['API_HOST']}/harvester/sources", { params: {:"source[status]" => "suppressed", api_key: fetch_env_vars['HARVESTER_API_KEY'] } })
+    @blacklisted_sources = JSON.parse(@response)
   end
 
   def update
