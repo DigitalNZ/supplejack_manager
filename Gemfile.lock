@@ -405,6 +405,7 @@ DEPENDENCIES
   launchy (>= 2.1.2)
   lograge
   mongoid (~> 3.1.7)
+  nokogiri
   oai!
   pry-rails
   quiet_assets (>= 1.0.1)

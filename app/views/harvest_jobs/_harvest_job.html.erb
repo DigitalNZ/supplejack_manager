@@ -137,7 +137,9 @@ http://digitalnz.org/supplejack
         <div>
           <h5>Raw Data</h5>
 
-          <% unless record.raw_data.nil? %>
+          <% if Nokogiri::XML(record.raw_data).errors.empty? %>
+            <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only' %>
+          <% else %>
             <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
           <% end %>
 
@@ -162,7 +164,11 @@ http://digitalnz.org/supplejack
           <h5>Raw Data</h5>
 
           <% unless record.raw_data.nil? %>
-            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+            <% if Nokogiri::XML(record.raw_data).errors.empty? %>
+              <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only' %>
+            <% else %>
+              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+            <% end %>
           <% end %>
 
           <h5>Backtrace</h5>
