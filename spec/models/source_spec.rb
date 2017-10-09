@@ -78,7 +78,7 @@ describe Source do
     it "updates each backend_environment" do
       APPLICATION_ENVS.each do |env|
         env = Figaro.env(env)
-        RestClient.should_receive(:post).with("#{env['API_HOST']}/partners/#{source.partner.id.to_s}/sources", anything)
+        RestClient.should_receive(:post).with("#{env['API_HOST']}/harvester/partners/#{source.partner.id.to_s}/sources", anything)
       end
       source.send(:update_apis)
     end
