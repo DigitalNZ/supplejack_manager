@@ -23,7 +23,7 @@ describe CollectionRecordsController do
     end
 
     it 'should search for a record' do
-      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/records/abc123.json")
+      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/records/abc123.json", params: { api_key: ENV['HARVESTER_API_KEY'] })
       get :index, environment: 'development', id: 'abc123'
     end
 
@@ -35,13 +35,13 @@ describe CollectionRecordsController do
 
   describe 'PUT #update' do
     it 'should make a post to the api to change the status to active for the record' do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/harvester/records/abc123", {record: { status: 'active' }})
+      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/harvester/records/abc123", {record: { status: 'active' }, api_key: ENV['HARVESTER_API_KEY']})
       put :update, environment: 'development', id: 'abc123', status: 'active'
     end
 
     it 'should redirect to #index' do
       RestClient.stub(:put)
-      put :update, environment: 'development', id: 'abc123', status: 'active'
+      put :update, environment: 'development', id: 'abc123', status: 'active', api_key: ENV['HARVESTER_API_KEY']
       expect(response).to redirect_to environment_collection_records_path(environment: 'development', id: 'abc123')
     end
   end
