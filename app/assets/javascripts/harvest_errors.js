@@ -8,10 +8,10 @@ $(function() {
       theme: 'monokai',
       tabSize: 2,
       readOnly: true,
+      mode: $(value).data('mode'),
       lineSeperator: ',',
     })
   });
 
   $("#accordion-failed, #accordion-invalid, #accordion-backtrace").accordion({heightStyle: "content",collapsible: true, active: false});
-
 });
