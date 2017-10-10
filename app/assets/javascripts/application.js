@@ -39,6 +39,7 @@
 //= require moment.min
 //= require codemirror
 //= require codemirror/modes/ruby
+//= require codemirror/modes/xml
 //= require link_check_rules
 //= require code_mirror_setup
 //= require harvester

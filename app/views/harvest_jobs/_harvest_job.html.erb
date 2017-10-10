@@ -138,7 +138,11 @@ http://digitalnz.org/supplejack
           <h5>Raw Data</h5>
 
           <% unless record.raw_data.nil? %>
-            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+            <% if Nokogiri::XML(record.raw_data).errors.empty? %>
+              <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
+            <% else %>
+              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+            <% end %>
           <% end %>
 
         </div>
@@ -162,13 +166,17 @@ http://digitalnz.org/supplejack
           <h5>Raw Data</h5>
 
           <% unless record.raw_data.nil? %>
-            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only' %>
+            <% if Nokogiri::XML(record.raw_data).errors.empty? %>
+              <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
+            <% else %>
+              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+            <% end %>
           <% end %>
 
           <h5>Backtrace</h5>
 
           <% unless record.backtrace.nil? %>
-            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly', data: { mode: 'text/x-ruby' } %>
           <% end %>
 
         </div>
