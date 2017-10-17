@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -13,9 +13,9 @@ http://digitalnz.org/supplejack
     <nav class="top-bar">
       <ul>
         <li class="name">
-          <%= link_to image_tag("sj-logo-nav.png"), root_path %>  
+          <%= link_to image_tag("Supplejack360pxgreenwhite.png"), root_path %>  
         </li>
-        
+
         <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
       <section>
@@ -73,7 +73,7 @@ http://digitalnz.org/supplejack
                 <% if can? :edit_users, current_user %>
                   <%= link_to_tab t('users.all_users'), users_path %>
                 <% end %>
-                <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %> 
+                <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
                 <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
