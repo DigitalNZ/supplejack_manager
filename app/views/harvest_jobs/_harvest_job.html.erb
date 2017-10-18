@@ -1,15 +1,15 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
 <%= content_tag :div, id: "harvest-job", data: { url: harvest_job_path(@harvest_job, format: "js"), active: !@harvest_job.finished? } do %>
-  
+
   <h2 class="left">
     <%= t("harvest_jobs.progress") %>
     <% if can? :update, @harvest_job.parser %>
@@ -93,6 +93,13 @@ http://digitalnz.org/supplejack
       </td>
     </tr>
 
+    <tr>
+      <td><%= t("harvest_jobs.records_retried") %></td>
+      <td>
+        <strong><%= number_with_delimiter @harvest_job.retried_records_count %></strong>
+      </td>
+    </tr>
+
     <% if @harvest_job.status_message.present? %>
     <tr>
       <td><%= t("harvest_jobs.status_message") %></td>
@@ -100,7 +107,7 @@ http://digitalnz.org/supplejack
     </tr>
     <% end %>
   </table>
-  
+
    <% if @harvest_job.harvest_failure.present? %>
     <h5><%= t('harvest_jobs.harvest_failure')%> </h5>
 
@@ -111,7 +118,7 @@ http://digitalnz.org/supplejack
         </h3>
         <div>
           <small>
-            <%= format_backtrace(@harvest_job.harvest_failure.backtrace) %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(@harvest_job.harvest_failure.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
           </small>
         </div>
       </div>
@@ -120,16 +127,24 @@ http://digitalnz.org/supplejack
 
   <h5><%= t("harvest_jobs.invalid_records") %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
 
-
   <% if @harvest_job.invalid_records.any? %>
   <div id="harvest-job-invalid-errors">
     <div id="accordion-invalid" class="accordion">
       <% @harvest_job.invalid_records.each do |record| %>
         <h3 class="error">
-          <span><%= record.error_messages.join(", ") %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
+          <span><%= record.error_messages.join(", ") %></span><span class="right"><%= localize_date_time(record.created_at) %></span>
         </h3>
         <div>
-          <%= pretty_format(@harvest_job.parser_id, record.raw_data) %>
+          <h5>Raw Data</h5>
+
+          <% unless record.raw_data.nil? %>
+            <% if Nokogiri::XML(record.raw_data).errors.empty? %>
+              <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
+            <% else %>
+              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+            <% end %>
+          <% end %>
+
         </div>
       <% end %>
     </div>
@@ -145,10 +160,25 @@ http://digitalnz.org/supplejack
     <div id="accordion-failed" class="accordion">
       <% @harvest_job.failed_records.each do |record| %>
         <h3 class="error">
-          <span><%= record.message %></span><span class="right"><%= record.created_at.try(:to_datetime) %></span>
+          <span><%= record.message %></span><span class="right"><%= localize_date_time(record.created_at) %></span>
         </h3>
         <div>
-          <%= pretty_format(@harvest_job.parser_id, record.raw_data) %>
+          <h5>Raw Data</h5>
+
+          <% unless record.raw_data.nil? %>
+            <% if Nokogiri::XML(record.raw_data).errors.empty? %>
+              <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
+            <% else %>
+              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.raw_data)), class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+            <% end %>
+          <% end %>
+
+          <h5>Backtrace</h5>
+
+          <% unless record.backtrace.nil? %>
+            <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly', data: { mode: 'text/x-ruby' } %>
+          <% end %>
+
         </div>
       <% end %>
     </div>
