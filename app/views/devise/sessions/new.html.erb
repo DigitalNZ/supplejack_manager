@@ -9,17 +9,19 @@ http://digitalnz.org/supplejack
 %>
 
 <div class="twelve columns centered">
-  <div class="four columns centered devise-block">
+  <div class="devise-block">
     <div class="four columns centered">
-      <%= image_tag('Supplejack-icon-190.png') %>
+      <div class="four columns centered">
+        <%= image_tag('Supplejack-icon-190.png') %>
+      </div>
+      <h3 class="text-center">Sign In</h3>
+      <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+        <%= f.input :email, :autofocus => true %>
+        <%= f.input :password %>
+        <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+        <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
+      <% end %>
+      <%= render "devise/shared/links" %>
     </div>
-    <h3 class="text-center">Sign In</h3>
-    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
-      <%= f.input :email, :autofocus => true %>
-      <%= f.input :password %>
-      <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-      <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
-    <% end %>
-    <%= render "devise/shared/links" %>
   </div>
 </div>
