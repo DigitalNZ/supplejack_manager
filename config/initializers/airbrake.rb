@@ -1,12 +1,12 @@
-# # Airbrake is an online tool that provides robust exception tracking in your Rails
-# # applications. In doing so, it allows you to easily review errors, tie an error
-# # to an individual piece of code, and trace the cause back to recent
-# # changes. Airbrake enables for easy categorization, searching, and prioritization
-# # of exceptions so that when errors occur, your team can quickly determine the
-# # root cause.
-# #
-# # Configuration details:
-# # https://github.com/airbrake/airbrake-ruby#configuration
+# Airbrake is an online tool that provides robust exception tracking in your Rails
+# applications. In doing so, it allows you to easily review errors, tie an error
+# to an individual piece of code, and trace the cause back to recent
+# changes. Airbrake enables for easy categorization, searching, and prioritization
+# of exceptions so that when errors occur, your team can quickly determine the
+# root cause.
+#
+# Configuration details:
+# https://github.com/airbrake/airbrake-ruby#configuration
 Airbrake.configure do |c|
   # You must set both project_id & project_key. To find your project_id and
   # project_key navigate to your project's General Settings and copy the values

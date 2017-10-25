@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -18,6 +18,14 @@ http://digitalnz.org/supplejack
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
+
+    <%= favicon_link_tag asset_path('favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
+    <%= favicon_link_tag asset_path('favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
+    <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
+    <%= favicon_link_tag asset_path('manifest.json'), rel: 'manifest' %>
+    <%= favicon_link_tag asset_path('safari-pinned-tab.svg'), rel: 'mask-icon', color: "#118a0f" %>
+
+    <meta name="theme-color" content="#118a0f">
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <div class="contain-to-grid">

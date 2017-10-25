@@ -1,9 +1,9 @@
 // The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-// and is licensed under the GNU General Public License, version 3. Some components are 
-// third party components that are licensed under the MIT license or otherwise publicly available. 
-// See https://github.com/DigitalNZ/supplejack_manager for details. 
-// 
-// Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+// and is licensed under the GNU General Public License, version 3. Some components are
+// third party components that are licensed under the MIT license or otherwise publicly available.
+// See https://github.com/DigitalNZ/supplejack_manager for details.
+//
+// Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 // http://digitalnz.org/supplejack
 
 select {
@@ -54,7 +54,7 @@ fieldset#management_permissions , fieldset#harvesting_permissions {
   color: #272727;
 }
 
-.user_manage_partners label, 
+.user_manage_partners label,
 #harvesting_permissions label {
   margin-bottom: 6px;
   font-weight: 500;
@@ -64,8 +64,8 @@ fieldset#management_permissions , fieldset#harvesting_permissions {
 
 .pause, .resume {
   background:none!important;
-  color: #2ba6cb;
-  border:none; 
+  color: $mainColor;
+  border:none;
   padding:0!important;
   font: inherit;
   cursor: pointer;
