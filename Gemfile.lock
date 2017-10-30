@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 810ab1871eaa5063f6137ad530f96ef20de42ec6
-  branch: rm/sj-harvesting-from-http-header-auth
+  revision: fd47a47a818ed671e157faa24e10e9a7101bc78c
   specs:
     supplejack_common (0.0.2)
       actionpack (<= 4.1.4)
@@ -431,4 +430,4 @@ DEPENDENCIES
   zurb-foundation (= 3.2.5)
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
