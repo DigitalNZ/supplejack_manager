@@ -17,8 +17,11 @@ gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
 gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
+# gem 'supplejack_common', path: '/webspace/supplejack/common'
+
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
+
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'mongoid', '~> 3.1.7'
