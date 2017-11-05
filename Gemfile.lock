@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: fd47a47a818ed671e157faa24e10e9a7101bc78c
+  revision: c796d9db8c963572b3644e5be97eadfd27351e1f
+  branch: rm/retry-harvest-urls
   specs:
     supplejack_common (0.0.2)
       actionpack (<= 4.1.4)
@@ -15,6 +16,7 @@ GIT
       nokogiri
       redis (~> 3)
       rest-client (~> 1.6.7)
+      retriable
       sanitize
       tzinfo
 
@@ -285,6 +287,7 @@ GEM
     ref (1.0.5)
     rest-client (1.6.9)
       mime-types (~> 1.16)
+    retriable (3.1.1)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
