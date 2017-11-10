@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: fd47a47a818ed671e157faa24e10e9a7101bc78c
+  revision: e217f14c5d250a0121f2c9ad15044c49e3af528b
   specs:
     supplejack_common (0.0.2)
       actionpack (<= 4.1.4)
@@ -15,6 +15,7 @@ GIT
       nokogiri
       redis (~> 3)
       rest-client (~> 1.6.7)
+      retriable
       sanitize
       tzinfo
 
@@ -185,7 +186,7 @@ GEM
       rspec (~> 2.11)
     hike (1.2.3)
     htmlentities (4.3.4)
-    i18n (0.9.0)
+    i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     journey (1.0.4)
     jquery-rails (2.1.4)
@@ -285,6 +286,7 @@ GEM
     ref (1.0.5)
     rest-client (1.6.9)
       mime-types (~> 1.16)
+    retriable (3.1.1)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
