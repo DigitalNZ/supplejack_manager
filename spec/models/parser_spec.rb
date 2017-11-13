@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
 # and is licensed under the GNU General Public License, version 3. Some components are
 # third party components that are licensed under the MIT license or otherwise publicly available.
@@ -122,8 +124,9 @@ describe Parser do
 
   describe "#enrichment_definitions" do
     let(:version) { FactoryGirl.build(:version) }
-    let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
-    let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class).as_null_object }
+    let(:parser_class) { instance_double('ParserClass', enrichment_definitions: { ndha_rights: 'Hi' }) }
+    # let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
+    # let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
     before(:each) do
       parser.stub(:loader) { loader }
@@ -241,9 +244,9 @@ describe Parser do
 
     it "returns false if not allowed" do
       parser.stub(:content) { 'nil + 1'}
-      
+
       expect(parser.valid_parser?('staging')).to be false
-      expect(parser.error).to eq({type: NoMethodError, message: "undefined method `+' for nil:NilClass"})     
+      expect(parser.error).to eq({type: NoMethodError, message: "undefined method `+' for nil:NilClass"})
     end
-  end  
+  end
 end
