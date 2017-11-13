@@ -27,6 +27,7 @@ gem 'supplejack_common', path: '/webspace/supplejack/common'
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 gem 'mongoid', '~> 5'
+gem 'mongoid_paranoia'
 gem 'devise', '~> 3.0.4'
 gem 'cancancan'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
@@ -64,7 +65,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry-rails'
+  # gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
   gem 'factory_girl_rails', '>= 4.1.0'

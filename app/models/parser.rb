@@ -10,7 +10,7 @@ class Parser
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Paranoia
-  include ActiveModel::SerializerSupport
+  # include ActiveModel::SerializerSupport
 
   include TemplateHelpers
 
@@ -116,7 +116,7 @@ class Parser
       true
     rescue => error
       self.error = { type: error.class, message: error.message }
-      false    
+      false
     end
   end
 

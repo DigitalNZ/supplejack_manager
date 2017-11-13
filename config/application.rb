@@ -18,6 +18,9 @@ require "sprockets/railtie"
 
 APPLICATION_ENVS = YAML.load_file('config/application.yml').keys.map { |key| key.to_sym } - [:development, :test] rescue []
 
+# Require the gems listed in the Gemfile
+Bundler.require(*Rails.groups)
+
 module HarvesterManager
   class Application < Rails::Application
 
