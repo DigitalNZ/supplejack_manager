@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,
 # and is licensed under the GNU General Public License, version 3.
@@ -11,20 +12,21 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.22.2'
+# gem 'rails', '~> 3.2.22.2'
+gem 'rails', '~> 4.0'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
-# gem 'supplejack_common', path: '/webspace/supplejack/common'
+# gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
+gem 'supplejack_common', path: '/webspace/supplejack/common'
 
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
 
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
-gem 'mongoid', '~> 3.1.7'
+gem 'mongoid', '~> 5'
 gem 'devise', '~> 3.0.4'
 gem 'cancancan'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
@@ -41,18 +43,14 @@ gem 'airbrake', '~> 5.2'
 gem 'test-unit'
 gem 'nokogiri'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
-  gem 'uglifier', '>= 1.0.3'
-  gem 'compass-rails', '>= 1.0.3'
-  gem 'zurb-foundation', '= 3.2.5'
-  gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
+gem 'uglifier', '>= 1.0.3'
+gem 'compass-rails', '>= 1.0.3'
+gem 'zurb-foundation', '= 3.2.5'
+gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do
   gem 'quiet_assets', '>= 1.0.1'
