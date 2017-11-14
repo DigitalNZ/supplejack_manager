@@ -29,9 +29,9 @@ class Parser
   accepts_nested_attributes_for :source
   validates :source, presence: true, associated: true
 
-  VALID_STRATEGIES = ["json", "oai", "rss", "xml", "tapuhi"]
+  VALID_STRATEGIES = ['json', 'oai', 'rss', 'xml']
 
-  VALID_DATA_TYPE = ["record", "concept"]
+  VALID_DATA_TYPE = ['record', 'concept']
 
   # ENVIRONMENTS = [:staging, :production]
   validates_presence_of   :name, :strategy, :data_type
@@ -116,7 +116,7 @@ class Parser
       true
     rescue => error
       self.error = { type: error.class, message: error.message }
-      false    
+      false
     end
   end
 
