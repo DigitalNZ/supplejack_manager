@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: ab06671360e3bc007478ce96b56a6c1fca1d6d3b
-  branch: rm/remove-tapuhi
+  revision: e8fd0217eb42d8056c1c3bdd89ddc9caa6174804
   specs:
     supplejack_common (0.0.2)
       actionpack (<= 4.1.4)
