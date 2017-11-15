@@ -1,17 +1,17 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
 
 describe ParsersController do
 
-  let(:parser) { mock(:parser, id: "1234", to_param: "1234").as_null_object }
-  let(:user) { mock_model(User, id: "1234").as_null_object }
+  let(:parser) { double('parser', id: '1234', to_param: '1234').as_null_object }
+  let(:user) { instance_double(User, id: '1234').as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
@@ -43,8 +43,8 @@ describe ParsersController do
   end
 
   describe "GET 'edit'" do
-    let(:job) { mock_model(HarvestJob).as_null_object }
-    let(:user) { mock_model(User, id: "333").as_null_object }
+    let(:job) { instance_double(HarvestJob).as_null_object }
+    let(:user) { instance_double(User, id: '333').as_null_object }
 
     before(:each) do
       Parser.stub(:find) { parser }
@@ -64,7 +64,7 @@ describe ParsersController do
   end
 
   describe "GET 'create'" do
-    before do 
+    before do
       Parser.stub(:new) { parser }
       parser.stub(:save) { true }
     end
@@ -99,7 +99,7 @@ describe ParsersController do
   end
 
   describe "GET 'update'" do
-    before do 
+    before do
       Parser.stub(:find) { parser }
       parser.stub(:update_attributes) { true }
     end
@@ -140,7 +140,7 @@ describe ParsersController do
   end
 
   describe "GET 'destroy'" do
-    before do 
+    before do
       Parser.stub(:find) { parser }
       parser.stub(:destroy) { true }
     end
@@ -162,14 +162,14 @@ describe ParsersController do
     end
 
     it "does not destroy if there are currently running jobs" do
-      parser.stub(:running_jobs) { true }
+      parser.stub(:running_jobs?) { true }
       parser.should_not_receive(:destroy)
       delete :destroy, id: "1234"
     end
   end
 
   describe "GET 'allow_flush'" do
-    before do 
+    before do
       Parser.stub(:find) { parser }
       parser.stub(:allow_full_and_flush) { true }
       parser.stub(:save) { true }
@@ -177,7 +177,7 @@ describe ParsersController do
 
     it 'sets the allow_full_and_flush to true' do
       get :allow_flush, id: parser, allow: true
-      expect(assigns(:parser).allow_full_and_flush).to be_true
+      expect(assigns(:parser).allow_full_and_flush).to be true
     end
   end
 
