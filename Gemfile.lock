@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: e217f14c5d250a0121f2c9ad15044c49e3af528b
+  revision: ab06671360e3bc007478ce96b56a6c1fca1d6d3b
+  branch: rm/remove-tapuhi
   specs:
     supplejack_common (0.0.2)
       actionpack (<= 4.1.4)
@@ -128,7 +129,7 @@ GEM
       compass (>= 0.12.2, < 0.14)
     concurrent-ruby (1.0.5)
     crack (0.3.2)
-    crass (1.0.2)
+    crass (1.0.3)
     cucumber (2.4.0)
       builder (>= 2.1.2)
       cucumber-core (~> 1.5.0)
@@ -432,4 +433,4 @@ DEPENDENCIES
   zurb-foundation (= 3.2.5)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
