@@ -18,7 +18,7 @@ class User
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
-  attr_accessor :name, :email, :password, :password_confirmation, :remember_me, 
+  attr_accessor :name, :email, :password, :password_confirmation, :remember_me,
     :role, :active,
     :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
     :manage_partners, :run_harvest_partners

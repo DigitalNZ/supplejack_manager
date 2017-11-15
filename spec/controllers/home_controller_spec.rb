@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require "spec_helper"
@@ -96,7 +96,7 @@ describe HomeController do
     end
 
     context "recently edited parsers" do
-      let(:parsers) { [mock(:parser)] }
+      let(:parsers) { [double(:parser)] }
 
       it "sets the list of recently edited parsers" do
         Parser.stub_chain(:desc, :limit) { parsers }
@@ -112,7 +112,7 @@ describe HomeController do
     end
 
     context "next scheduled jobs" do
-      let(:schedules) { [mock(:schedule)] }
+      let(:schedules) { [double(:schedule)] }
 
       it "sets the list of next scheduled jobs" do
         HarvestSchedule.should_receive(:find).with(:all, :from => :next) { schedules }
