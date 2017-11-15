@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require "spec_helper"
@@ -11,7 +11,7 @@ require "spec_helper"
 describe HarvestSchedule do
 
   let(:schedule) { HarvestSchedule.new(recurrent: true) }
-  let(:parser) { mock(:parser, id: 1).as_null_object }
+  let(:parser) { double(:parser, id: 1).as_null_object }
 
   context "class methods" do
     describe ".find_from_environment" do
@@ -24,9 +24,9 @@ describe HarvestSchedule do
   end
 
   describe ".destroy_all_for_parser" do
-    let(:mock_schedule_1) { mock(:schedule, id: 1) }
-    let(:mock_schedule_2) { mock(:schedule, id: 2) }
-    let(:mock_schedule_3) { mock(:schedule, id: 3) }
+    let(:mock_schedule_1) { double(:schedule, id: 1) }
+    let(:mock_schedule_2) { double(:schedule, id: 2) }
+    let(:mock_schedule_3) { double(:schedule, id: 3) }
 
     context "staging" do
       before { Rails.stub(:env) { "staging" } }
@@ -55,7 +55,7 @@ describe HarvestSchedule do
       before { schedule.stub(:parser) {nil} }
 
       it "should return false" do
-        schedule.oai?.should be_false
+        schedule.oai?.should be false
       end
     end
 
@@ -64,12 +64,12 @@ describe HarvestSchedule do
 
       it "should return true when is a oai parser" do
         parser.stub(:oai?) { true }
-        schedule.oai?.should be_true
+        schedule.oai?.should be true
       end
 
       it "should return false when is not a oai parser" do
         parser.stub(:oai?) { false }
-        schedule.oai?.should be_false
+        schedule.oai?.should be false
       end
     end
   end

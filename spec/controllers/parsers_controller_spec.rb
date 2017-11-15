@@ -19,7 +19,7 @@ describe ParsersController do
   end
 
   describe "GET 'index'" do
-    it "finds all the parser configurations" do
+    it 'finds all the parser configurations' do
       Parser.should_receive(:all) { [parser] }
       get :index
       assigns(:parsers).should eq [parser]
