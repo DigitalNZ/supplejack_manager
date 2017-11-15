@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -26,10 +26,10 @@ describe CollectionStatistics do
 	  index_stats.should eq({})
 	end
 
-	@collection_statistics  = { :collection_rules => { source_id: "tapuhi" } }.to_json
+	@collection_statistics  = { :collection_rules => { source_id: "source_id" } }.to_json
 
   ActiveResource::HttpMock.respond_to do |mock|
-    mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics 
+    mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics
   end
 
 	describe "source" do
@@ -41,11 +41,11 @@ describe CollectionStatistics do
       Partner.any_instance.stub(:update_apis)
       Source.any_instance.stub(:update_apis)
       LinkCheckRule.stub(:create)
-      collection_statistics.stub(:source_id) { 'tapuhi' }
+      collection_statistics.stub(:source_id) { 'source_id' }
 		end
 
 		it "shound find the source with the collection statistics source id" do
-			Source.should_receive(:find_by).with(source_id: 'tapuhi') { source }
+			Source.should_receive(:find_by).with(source_id: 'source_id') { source }
 		  collection_statistics.source.should eq source
 		end
 
