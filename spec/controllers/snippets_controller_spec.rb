@@ -13,7 +13,7 @@ describe SnippetsController do
    # let(:user)    { instance_double(User, id: '1234').as_null_object }
 
   let(:snippet) { FactoryGirl.create(:snippet, name: 'Copyright') }
-  let(:user)    { FactoryGirl.create(:user) }
+  let(:user)    { FactoryGirl.create(:user, role: 'admin') }
 
   before(:each) do
     allow(controller).to receive(:authenticate_user!) { true }
@@ -24,7 +24,6 @@ describe SnippetsController do
     it 'should assign all @snippets' do
       expect(Snippet).to receive(:all) { [snippet] }
       get :index
-      binding.pry
       expect(assigns(:snippets)).to eq [snippet]
     end
   end
