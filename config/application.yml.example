@@ -7,33 +7,33 @@
 # GMAIL_USERNAME: Your_Gmail_Username
 # makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
 # Add application configuration variables here, as shown below.
-# 
+#
 # This setup assumes that you have an API that runs on localhost:3000
 # and a Worker running on localhost:3002.
 # Running the Manager allows you to harvest in production environment.
 
 development:
-  WORKER_HOST: http://localhost:3002
+  WORKER_HOST: http://127.0.0.1:3002
   WORKER_API_KEY: workerkey
-  API_HOST: http://localhost:3000
+  API_HOST: http://127.0.0.1:3000
   HARVESTER_API_KEY: "provide Supplejack API TOKEN with HARVESTER previleges"
   API_MONGOID_HOSTS: localhost:27017
   AIRBRAKE_PROJECT_ID: <mock value>
-  AIRBRAKE_PROJECT_API_KEY: <mock value> 
+  AIRBRAKE_PROJECT_API_KEY: <mock value>
 
 test:
-  WORKER_HOST: http://localhost:3002
+  WORKER_HOST: http://127.0.0.1:3002
   WORKER_API_KEY: <production worker key>
-  API_HOST: http://localhost:3000
+  API_HOST: http://127.0.0.1:3000
   HARVESTER_API_KEY: "provide Supplejack API TOKEN with HARVESTER previleges"
   API_MONGOID_HOSTS: localhost:27017
   AIRBRAKE_PROJECT_ID: <mock value>
-  AIRBRAKE_PROJECT_API_KEY: <mock value> 
+  AIRBRAKE_PROJECT_API_KEY: <mock value>
 
 staging:
-  WORKER_HOST: http://localhost:3002
+  WORKER_HOST: http://127.0.0.1:3002
   WORKER_API_KEY: workerkey
-  API_HOST: http://localhost:3000
+  API_HOST: http://127.0.0.1:3000
   HARVESTER_API_KEY: "provide Supplejack API TOKEN with HARVESTER previleges"
   API_MONGOID_HOSTS: localhost:27017
 
