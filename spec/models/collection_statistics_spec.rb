@@ -1,18 +1,18 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
 
 describe CollectionStatistics do
 
-	let!(:stats_obj_1) { mock(:stats, day: Date.today, suppressed_count: 2, activated_count: 3, deleted_count: 3) }
-	let!(:stats_obj_2) { mock(:stats, day: Date.today, suppressed_count: 1, activated_count: 1, deleted_count: 2) }
-	let!(:stats_obj_3) { mock(:stats, day: Date.today, suppressed_count: 5, activated_count: 2, deleted_count: 4) }
+	let!(:stats_obj_1) { double(:stats, day: Date.today, suppressed_count: 2, activated_count: 3, deleted_count: 3) }
+	let!(:stats_obj_2) { double(:stats, day: Date.today, suppressed_count: 1, activated_count: 1, deleted_count: 2) }
+	let!(:stats_obj_3) { double(:stats, day: Date.today, suppressed_count: 5, activated_count: 2, deleted_count: 4) }
 
 	it "should convert the active resource object into a hash of dates with counts" do
 	  index_stats = CollectionStatistics.index_statistics([stats_obj_1, stats_obj_2, stats_obj_3])
@@ -29,7 +29,7 @@ describe CollectionStatistics do
 	@collection_statistics  = { :collection_rules => { source_id: "tapuhi" } }.to_json
 
   ActiveResource::HttpMock.respond_to do |mock|
-    mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics 
+    mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics
   end
 
 	describe "source" do
