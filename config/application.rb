@@ -16,10 +16,12 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
-APPLICATION_ENVS = YAML.load_file('config/application.yml').keys.map { |key| key.to_sym } - [:development, :test] rescue []
+Bundler.require(*Rails.groups)
+
+APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development', 'test'] rescue []
+APPLICATION_ENVIRONMENT_VARIABLES = YAML.load_file('config/application.yml')
 
 # Require the gems listed in the Gemfile
-Bundler.require(*Rails.groups)
 
 module HarvesterManager
   class Application < Rails::Application
