@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require "spec_helper"
@@ -13,7 +13,7 @@ describe ApplicationHelper do
   describe "#pretty_format" do
 
     let(:raw_data) { {bill: "bob"}.to_json  }
-    let(:parser) { mock(:parser) }
+    let(:parser) { double(:parser) }
 
     context "parser found" do
 
@@ -23,7 +23,7 @@ describe ApplicationHelper do
         helper.pretty_format("abc123", raw_data)
       end
 
-      before do 
+      before do
         Parser.stub(:find) { parser }
       end
 
@@ -31,7 +31,7 @@ describe ApplicationHelper do
         before { parser.stub(:xml?) { false } }
 
         it "should use coderay to format the raw_data" do
-          CodeRay.should_receive(:scan).with("{\n  \"bill\": \"bob\"\n}", :json) { mock(:output).as_null_object }
+          CodeRay.should_receive(:scan).with("{\n  \"bill\": \"bob\"\n}", :json) { double(:output).as_null_object }
           helper.pretty_format("abc123", raw_data)
         end
 
@@ -88,7 +88,7 @@ describe ApplicationHelper do
        helper.can_show_button(:create, Source).should eq ''
       end
     end
-    
+
     context "unauthorised" do
       it "should return disabled" do
        helper.stub(:can?) { false }
