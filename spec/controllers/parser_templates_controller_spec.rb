@@ -1,17 +1,16 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
 
 describe ParserTemplatesController do
-
-	let(:parser_template) { mock_model(ParserTemplate, name: "Copyright").as_null_object }
-	let(:user) { mock_model(User).as_null_object }
+	let(:parser_template) { instance_double(ParserTemplate, name: "Copyright").as_null_object }
+	let(:user)            { instance_double(User).as_null_object }
 
 	before(:each) do
     controller.stub(:authenticate_user!) { true }
@@ -19,7 +18,7 @@ describe ParserTemplatesController do
   end
 
 	describe "GET 'index'" do
-		it "should get all of the parser templates" do
+		it 'should get all of the parser templates' do
 		  ParserTemplate.should_receive(:all) { [parser_template] }
 		  get :index
 		  assigns(:parser_templates).should eq [parser_template]
@@ -27,7 +26,7 @@ describe ParserTemplatesController do
 	end
 
 	describe "GET 'new'" do
-		it "creates a new parser template" do
+		it 'creates a new parser template' do
 			ParserTemplate.should_receive(:new) { parser_template }
 			get :new
 			assigns(:parser_template).should eq parser_template
@@ -35,7 +34,7 @@ describe ParserTemplatesController do
 	end
 
 	describe "GET 'edit'" do
-		it "finds the parser_template" do
+		it 'finds the parser_template' do
 		  ParserTemplate.should_receive(:find) { parser_template }
 		  get :edit, id: parser_template.id
 		  assigns(:parser_template).should eq parser_template
@@ -43,13 +42,13 @@ describe ParserTemplatesController do
 	end
 
 	describe "POST 'create'" do
-		it "should make a new parser template and assign it with a user id " do
+		it 'should make a new parser template and assign it with a user id' do
 		  ParserTemplate.should_receive(:new) { parser_template }
 		  post :create, parser_template: { name: "template", content: "content" }
 		  assigns(:parser_template) { parser_template }
 		end
 
-		it "should redirect_to the edit page." do
+		it 'should redirect_to the edit page.' do
 			ParserTemplate.stub(:new) { parser_template }
 		  post :create, parser_template: { name: "template", content: "content" }
 		  response.should redirect_to edit_parser_template_path(parser_template.id)

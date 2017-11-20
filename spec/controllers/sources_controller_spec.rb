@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -60,13 +60,13 @@ describe SourcesController do
       end
 
       it "assigns a newly created source as @source" do
-        post :create, {:source => valid_attributes}
+        post :create, params: { source: valid_attributes }
         assigns(:source).should be_a(Source)
         assigns(:source).should be_persisted
       end
 
       it "redirects to the sources page" do
-        post :create, {:source => valid_attributes}
+        post :create, params: { source: valid_attributes }
         response.should redirect_to sources_path
       end
     end
@@ -74,28 +74,28 @@ describe SourcesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
         Source.any_instance.stub(:save).and_return(false)
-        post :create, {:source => {  }}
+        post :create, params: { source: { } }
         assigns(:source).should be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
         Source.any_instance.stub(:save).and_return(false)
-        post :create, {:source => {  }}
-        response.should render_template("new")
+        post :create, params: { source: {} }
+        response.should render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
+  describe 'PUT update' do
     before(:each) {
       controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
     }
 
-    describe "with valid params" do
-      it "updates the requested source" do
+    describe 'with valid params' do
+      it 'updates the requested source' do
         source = Source.create! valid_attributes
-        Source.any_instance.should_receive(:update_attributes).with({ "these" => "params" })
-        put :update, {:id => source.to_param, :source => { "these" => "params" }}
+        Source.any_instance.should_receive(:update_attributes).with('these' => 'params')
+        put :update, {id: source.to_param, source: { 'these' => 'params' }}
       end
 
       it "assigns the requested source as @source" do
@@ -135,7 +135,7 @@ describe SourcesController do
       it "calls reindex on api" do
         source = Source.create! valid_attributes
         RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
-        get :reindex,  {:id => source.to_param, env: :test, date: "2013-09-12T01:49:51.067Z", format: :js}
+        get :reindex,  {:id => source.to_param, env: 'test', date: "2013-09-12T01:49:51.067Z", format: :js}
       end
     end
   end

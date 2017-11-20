@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -19,7 +19,7 @@ describe Versioned do
 
   describe "#last_edited_by" do
     it "should return the last edited by" do
-      parser.stub(:versions) { [mock(:version, user: mock(:user, name: "bill"))] }
+      parser.stub(:versions) { [double(:version, user: double(:user, name: "bill"))] }
       parser.last_edited_by.should eq "bill"
     end
 
@@ -96,7 +96,7 @@ describe Versioned do
     context "invalid parser" do
       it "doesnt generate a new version when saving fails" do
         parser.name = nil
-        parser.save.should be_false
+        parser.save.should be false
         parser.versions.should be_empty
       end
     end
