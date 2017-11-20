@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -59,7 +59,7 @@ describe Parser::TemplateHelpers do
 
     context "parser_template present" do
 
-      let(:parser_template) { mock_model(ParserTemplate, name: "template", content: "template content").as_null_object }
+      let(:parser_template) { instance_double(ParserTemplate, name: "template", content: "template content").as_null_object }
 
       before { parser.parser_template_name = "template" }
 
