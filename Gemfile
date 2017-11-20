@@ -25,7 +25,7 @@ gem 'supplejack_common', path: '/webspace/supplejack/common'
 # We cannot get the HEAD oai this app is using Rails version 4.x
 
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
-gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'mongoid', '~> 5'
 gem 'mongoid_paranoia'
 gem 'devise', '~> 3.0.4'
