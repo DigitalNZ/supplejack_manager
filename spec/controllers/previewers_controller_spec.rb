@@ -14,17 +14,17 @@ require 'spec_helper'
 describe PreviewersController do
   before do
     controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { mock(:user, id: 123) }
+    controller.stub(:current_user) { double(:user, id: 123) }
   end
 
-  let(:parser) { mock(:parser).as_null_object }
-  let(:previewer) { mock(:previewer).as_null_object }
-  let(:harvester) { mock(:harvester).as_null_object }
+  let(:parser)    { double(:parser).as_null_object }
+  let(:previewer) { double(:previewer).as_null_object }
+  let(:harvester) { double(:harvester).as_null_object }
 
   describe 'set_previewer' do
     before do
       Parser.stub(:find) { parser }
-      Previewer.stub(:new) { previewer } 
+      Previewer.stub(:new) { previewer }
       controller.stub(:params) { { parser_id: '1234', parser: {}, format: :js } }
     end
 
@@ -69,8 +69,8 @@ describe PreviewersController do
       post :create, parser_id: '1234',
            parser: { content: 'variable += 1' },
            index: 10, format: :js
-      assigns(:parser_error).should eq({ 'type' => NoMethodError,
-                                         'message'=>"undefined method `+' for nil:NilClass" })
+      assigns(:parser_error).should eq({ :type => NoMethodError,
+                                         :message => "undefined method `+' for nil:NilClass" })
     end
 
     it 'initializes a new previewer in test mode' do
