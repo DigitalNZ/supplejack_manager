@@ -89,22 +89,22 @@ describe Parser do
 
     it "returns true for Xml strategy" do
       parser.strategy = "xml"
-      parser.xml?.should be_true
+      parser.xml?.should be true
     end
 
     it "returns true for Oai strategy" do
       parser.strategy = "oai"
-      parser.xml?.should be_true
+      parser.xml?.should be true
     end
 
     it "returns true for Rss strategy" do
       parser.strategy = "rss"
-      parser.xml?.should be_true
+      parser.xml?.should be true
     end
 
     it "returns false for Json strategy" do
       parser.strategy = "json"
-      parser.xml?.should be_false
+      parser.xml?.should be false
     end
   end
 
@@ -113,20 +113,20 @@ describe Parser do
 
     it "returns true for Json strategy" do
       parser.strategy = "json"
-      parser.json?.should be_true
+      parser.json?.should be true
     end
 
     it "returns false for Rss strategy" do
       parser.strategy = "rss"
-      parser.json?.should be_false
+      parser.json?.should be false
     end
   end
 
   describe "#enrichment_definitions" do
     let(:version) { FactoryGirl.build(:version) }
     let(:parser_class) { instance_double('ParserClass', enrichment_definitions: { ndha_rights: 'Hi' }) }
-    # let(:parser_class) { mock(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
-    # let(:loader) { mock(:loader, loaded?: true, parser_class: parser_class).as_null_object }
+    let(:parser_class) { double(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
+    let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
     before(:each) do
       parser.stub(:loader) { loader }
@@ -224,12 +224,12 @@ describe Parser do
   describe "#full_and_flush_allowed?" do
     it "returns true if allowed" do
       parser.stub(:allow_full_and_flush) { true }
-      expect(parser.full_and_flush_allowed?).to be_true
+      expect(parser.full_and_flush_allowed?).to be true
     end
 
     it "returns false if not allowed" do
       parser.stub(:allow_full_and_flush) { false }
-      expect(parser.full_and_flush_allowed?).to be_false
+      expect(parser.full_and_flush_allowed?).to be false
     end
   end
 
