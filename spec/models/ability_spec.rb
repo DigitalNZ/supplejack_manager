@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -24,7 +24,7 @@ describe Ability do
     @source = FactoryGirl.create(:source, partner: @partner)
     @parser = FactoryGirl.create(:parser, source: @source)
     @harvest_schedule = HarvestSchedule.create(parser_id: @parser.id, recurrent: false)
-    @link_check_rule = mock_model(LinkCheckRule, source_id: @source.id).as_null_object
+    @link_check_rule = instance_double(LinkCheckRule, source_id: @source.id).as_null_object
   end
 
   describe "user" do

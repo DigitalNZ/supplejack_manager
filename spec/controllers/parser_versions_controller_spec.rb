@@ -1,20 +1,20 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require "spec_helper"
 
 describe ParserVersionsController do
 
-  let(:parser) { mock_model(Parser, id: "1").as_null_object }
-  let(:version) { mock_model(Version, id: "2").as_null_object }
-  let(:user) { mock_model(User, id: "3").as_null_object }
-  let(:harvest_job) { mock_model(HarvestJob).as_null_object }
-  let(:enrichment_job) { mock_model(EnrichmentJob).as_null_object}
+  let(:parser) { instance_double(Parser, id: "1").as_null_object }
+  let(:version) { instance_double(Version, id: "2").as_null_object }
+  let(:user) { instance_double(User, id: "3").as_null_object }
+  let(:harvest_job) { instance_double(HarvestJob).as_null_object }
+  let(:enrichment_job) { instance_double(EnrichmentJob).as_null_object}
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
