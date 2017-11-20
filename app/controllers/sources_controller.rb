@@ -8,6 +8,7 @@
 
 class SourcesController < ApplicationController
   load_and_authorize_resource
+  skip_before_action :verify_authenticity_token
 
   respond_to :html, :json
 
@@ -55,11 +56,11 @@ class SourcesController < ApplicationController
   end
 
   def reindex
-    url = APPLICATION_ENVIRONMENT_VARIABLES[params[:env]]['API_HOST']
+    url = APPLICATION_ENVIRONMENT_VARIABLES[params[:environment]]['API_HOST']
     RestClient.get("#{url}/harvester/sources/#{@source.id}/reindex", { params: { date: params[:date], api_key: fetch_env_vars['HARVESTER_API_KEY'] } })
   end
 
   def source_params
-    params.require(:source)
+    params.require(:source).permit(:name, :source_id)
   end
 end

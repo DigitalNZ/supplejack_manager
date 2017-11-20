@@ -55,12 +55,12 @@ describe SourcesController do
     describe "with valid params" do
       it "creates a new Source" do
         expect {
-          post :create, {:source => valid_attributes}
+          post :create, { source: valid_attributes }
         }.to change(Source, :count).by(1)
       end
 
       it "assigns a newly created source as @source" do
-        post :create, params: { source: valid_attributes }
+        post :create, source: valid_attributes
         assigns(:source).should be_a(Source)
         assigns(:source).should be_persisted
       end
@@ -74,13 +74,13 @@ describe SourcesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
         Source.any_instance.stub(:save).and_return(false)
-        post :create, params: { source: { } }
+        post :create, source: {}
         assigns(:source).should be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
         Source.any_instance.stub(:save).and_return(false)
-        post :create, params: { source: {} }
+        post :create, source: {}
         response.should render_template('new')
       end
     end
@@ -106,7 +106,7 @@ describe SourcesController do
 
       it "redirects to the sources index" do
         source = Source.create! valid_attributes
-        put :update, {:id => source.to_param, :source => valid_attributes}
+        put :update, id: source.to_param, source: valid_attributes
         response.should redirect_to sources_path
       end
     end
@@ -135,7 +135,7 @@ describe SourcesController do
       it "calls reindex on api" do
         source = Source.create! valid_attributes
         RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
-        get :reindex,  {:id => source.to_param, env: 'test', date: "2013-09-12T01:49:51.067Z", format: :js}
+        get :reindex,  {:id => source.to_param, environment: 'test', date: "2013-09-12T01:49:51.067Z", format: :js}
       end
     end
   end
