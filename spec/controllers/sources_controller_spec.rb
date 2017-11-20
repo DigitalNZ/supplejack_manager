@@ -15,7 +15,8 @@ describe SourcesController do
     LinkCheckRule.stub(:create)
   end
 
-  let(:partner) {FactoryGirl.create(:partner)}
+  let(:partner) { FactoryGirl.create(:partner) }
+
   def valid_attributes
     FactoryGirl.attributes_for(:source, partner_id: partner.id)
   end
@@ -52,21 +53,21 @@ describe SourcesController do
       controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
     }
 
-    describe "with valid params" do
-      it "creates a new Source" do
+    describe 'with valid params' do
+      it 'creates a new Source' do
         expect {
-          post :create, { source: valid_attributes }
+          post :create, source: valid_attributes
         }.to change(Source, :count).by(1)
       end
 
-      it "assigns a newly created source as @source" do
+      it 'assigns a newly created source as @source' do
         post :create, source: valid_attributes
         assigns(:source).should be_a(Source)
         assigns(:source).should be_persisted
       end
 
-      it "redirects to the sources page" do
-        post :create, params: { source: valid_attributes }
+      it 'redirects to the sources page' do
+        post :create, source: valid_attributes
         response.should redirect_to sources_path
       end
     end
@@ -74,13 +75,13 @@ describe SourcesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
         Source.any_instance.stub(:save).and_return(false)
-        post :create, source: {}
+        post :create, source: { name: '' }
         assigns(:source).should be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
         Source.any_instance.stub(:save).and_return(false)
-        post :create, source: {}
+        post :create, source: { name: '' }
         response.should render_template('new')
       end
     end
@@ -94,8 +95,8 @@ describe SourcesController do
     describe 'with valid params' do
       it 'updates the requested source' do
         source = Source.create! valid_attributes
-        Source.any_instance.should_receive(:update_attributes).with('these' => 'params')
-        put :update, {id: source.to_param, source: { 'these' => 'params' }}
+        Source.any_instance.should_receive(:update_attributes).with(name: 'updated')
+        put :update, { id: source.to_param, source: { name: 'updated' }}
       end
 
       it "assigns the requested source as @source" do
@@ -115,15 +116,15 @@ describe SourcesController do
       it "assigns the source as @source" do
         source = Source.create! valid_attributes
         Source.any_instance.stub(:save).and_return(false)
-        put :update, {:id => source.to_param, :source => {  }}
+        put :update, id: source.to_param, source: { name: '' }
         assigns(:source).should eq(source)
       end
 
       it "re-renders the 'edit' template" do
         source = Source.create! valid_attributes
         Source.any_instance.stub(:save).and_return(false)
-        put :update, {:id => source.to_param, :source => {  }}
-        response.should render_template("edit")
+        put :update, id: source.to_param, source: { name: '' }
+        response.should render_template('edit')
       end
     end
 

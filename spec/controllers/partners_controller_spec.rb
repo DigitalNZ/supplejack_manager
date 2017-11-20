@@ -65,13 +65,13 @@ describe PartnersController do
 
     context 'invalid input' do
       it 'renders new template' do
-        post :create, partner: { }
+        post :create, partner: { name: '' }
         expect(response).to render_template(:new)
       end
 
       it 'should not save the partner' do
         expect {
-          post :create, partner: { }
+          post :create, partner: { name: '' }
         }.to change(Partner, :count).by(0)
       end
     end
