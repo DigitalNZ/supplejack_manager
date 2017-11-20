@@ -9,10 +9,10 @@
 require 'spec_helper'
 
 describe LinkCheckRulesController do
-  let(:link_check_rule) { mock_model(LinkCheckRule, collection_title: 'collection_title').as_null_object }
-  let(:user) { mock_model(User).as_null_object }
-  let(:admin_user) { mock_model(User, role: 'admin').as_null_object }
-  let(:partner) { FactoryGirl.build(:partner) }
+  let(:link_check_rule) { instance_double(LinkCheckRule).as_null_object }
+  let(:user)            { instance_double(User).as_null_object }
+  let(:admin_user)      { instance_double(User, role: 'admin').as_null_object }
+  let(:partner)         { FactoryGirl.build(:partner) }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
