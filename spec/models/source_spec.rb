@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
@@ -11,7 +11,7 @@ require 'spec_helper'
 describe Source do
   let(:source) {FactoryGirl.build(:source)}
 
-  before do 
+  before do
     Partner.any_instance.stub(:update_apis)
     Source.any_instance.stub(:update_apis)
     LinkCheckRule.stub(:create)
@@ -19,32 +19,32 @@ describe Source do
 
   describe "validations" do
     it "is valid with valid attributes" do
-      source.valid?.should be_true
+      source.valid?.should be true
     end
 
     it "is not valid without a name" do
       s = FactoryGirl.build(:source, name: nil)
-      s.valid?.should be_false
+      s.valid?.should be false
     end
 
     it "is not valid without a source_id" do
       s = FactoryGirl.build(:source, source_id: nil)
-      # create_source_id is called before validation so if it is 
+      # create_source_id is called before validation so if it is
       # not stubbed then the source id will be set.
       s.stub(:create_source_id)
-      s.valid?.should be_false
+      s.valid?.should be false
     end
 
     it "must have a partner" do
       s = FactoryGirl.build(:source, partner_id: nil)
-      s.valid?.should be_false
+      s.valid?.should be false
     end
 
     it "must have a unique source_id" do
       s1 = FactoryGirl.create(:source, source_id: 'test')
       s2 = FactoryGirl.build(:source, source_id: 'test')
 
-      s2.valid?.should be_false
+      s2.valid?.should be false
     end
   end
 
@@ -62,7 +62,7 @@ describe Source do
     end
   end
 
-  describe "after save" do 
+  describe "after save" do
     it "calls update_apis" do
       source.should_receive(:update_apis)
       source.save
@@ -77,7 +77,7 @@ describe Source do
 
     it "updates each backend_environment" do
       APPLICATION_ENVS.each do |env|
-        env = Figaro.env(env)
+        env = APPLICATION_ENVIRONMENT_VARIABLES[env]
         RestClient.should_receive(:post).with("#{env['API_HOST']}/harvester/partners/#{source.partner.id.to_s}/sources", anything)
       end
       source.send(:update_apis)
@@ -115,7 +115,7 @@ describe Source do
 
     context "creating a new source" do
       let(:new_source) { Source.new(name: "New source", partner: 123) }
-      
+
       it "creates a new source_id using the name" do
         new_source.send(:create_source_id)
         new_source.source_id.should eq "new_source"
