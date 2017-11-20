@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class HarvestSchedulesController < ApplicationController
@@ -31,7 +31,7 @@ class HarvestSchedulesController < ApplicationController
       @parsers = Parser.asc(:name)
     else
       @parsers = Parser.find_by_partners(current_user.manage_partners)
-    end 
+    end
   end
 
   def create
@@ -61,7 +61,7 @@ class HarvestSchedulesController < ApplicationController
     HarvestSchedule.all.each do |schedule|
       schedule.update_attributes(params[:harvest_schedule])
     end
-    
+
     flash[:notice] = "All scheduled harvests are now #{params[:harvest_schedule][:status]}"
 
     redirect_to harvest_schedules_path
