@@ -26,7 +26,7 @@ describe CollectionStatistics do
 	  index_stats.should eq({})
 	end
 
-	@collection_statistics  = { :collection_rules => { source_id: "tapuhi" } }.to_json
+	@collection_statistics  = { :collection_rules => { source_id: "source_id" } }.to_json
 
   ActiveResource::HttpMock.respond_to do |mock|
     mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics
@@ -41,11 +41,11 @@ describe CollectionStatistics do
       Partner.any_instance.stub(:update_apis)
       Source.any_instance.stub(:update_apis)
       LinkCheckRule.stub(:create)
-      collection_statistics.stub(:source_id) { 'tapuhi' }
+      collection_statistics.stub(:source_id) { 'source_id' }
 		end
 
 		it "shound find the source with the collection statistics source id" do
-			Source.should_receive(:find_by).with(source_id: 'tapuhi') { source }
+			Source.should_receive(:find_by).with(source_id: 'source_id') { source }
 		  collection_statistics.source.should eq source
 		end
 
