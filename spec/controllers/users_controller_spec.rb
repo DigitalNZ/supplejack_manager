@@ -1,16 +1,16 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
 
 describe UsersController do
-  let(:user) { mock_model(User, id: '1234', email: 'email@example.com').as_null_object }
-  let(:other_user) { mock_model(User, id: '4321', email: 'other@example.com').as_null_object }
+  let(:user)       { instance_double(User, id: '1234', email: 'email@example.com').as_null_object }
+  let(:other_user) { instance_double(User, id: '4321', email: 'other@example.com').as_null_object }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }
@@ -29,7 +29,7 @@ describe UsersController do
       expect(assigns(:users)).to eq [user]
     end
 
-    context "active=false" do
+    context 'active=false' do
       it 'should find all deactivated users' do
         User.should_receive(:deactivated) { [user] }
         get :index, active: 'false'

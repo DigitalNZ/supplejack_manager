@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
 # and is licensed under the GNU General Public License, version 3. Some components are
 # third party components that are licensed under the MIT license or otherwise publicly available.
@@ -7,11 +9,11 @@
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
-require "cancan/matchers"
+require 'cancan/matchers'
 
 describe Ability do
-  let(:user) { FactoryGirl.build(:user) }
-  let(:user_ability) { Ability.new(user) }
+  let(:user)          { FactoryGirl.build(:user) }
+  let(:user_ability)  { Ability.new(user) }
   let(:admin_ability) { Ability.new(FactoryGirl.build(:user, role: 'admin')) }
 
   before(:each) do
@@ -27,8 +29,8 @@ describe Ability do
     @link_check_rule = instance_double(LinkCheckRule, source_id: @source.id).as_null_object
   end
 
-  describe "user" do
-    it "should be able to read everything" do
+  describe 'user' do
+    it 'should be able to read everything' do
       user_ability.should be_able_to(:read, Parser)
     end
 

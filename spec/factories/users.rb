@@ -10,18 +10,8 @@ FactoryGirl.define do
   factory :user do
     name      'John Doe'
     email     'john@example.com'
-    role      'admin'
     password  'secret'
     password_confirmation 'secret'
-
-    after(:create) do |user, evaluator|
-      user.update_attributes(
-        name: evaluator.name,
-        email: evaluator.email,
-        role: evaluator.role,
-        password: evaluator.password,
-        password_confirmation: evaluator.password_confirmation
-      )
-    end
+    manage_partners []
   end
 end
