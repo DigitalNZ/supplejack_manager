@@ -12,6 +12,7 @@ FactoryGirl.define do
     email     'john@example.com'
     password  'secret'
     password_confirmation 'secret'
-    manage_partners []
+    role 'user'
+    manage_link_check_rules true
   end
 end

@@ -12,9 +12,9 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 describe Ability do
-  let(:user)          { FactoryGirl.build(:user) }
+  let(:user)          { FactoryGirl.create(:user) }
   let(:user_ability)  { Ability.new(user) }
-  let(:admin_ability) { Ability.new(FactoryGirl.build(:user, role: 'admin')) }
+  let(:admin_ability) { Ability.new(FactoryGirl.create(:user, role: 'admin')) }
 
   before(:each) do
     Partner.any_instance.stub(:update_apis)
@@ -77,11 +77,11 @@ describe Ability do
           user.update_attribute(:manage_partners, [@partner.id.to_s])
         }
 
-        it "should be able to update the parser" do
+        it 'should be able to update the parser' do
           user_ability.should be_able_to(:update, @parser)
         end
 
-        it "should be able to preview the parser" do
+        it 'should be able to preview the parser' do
           user_ability.should be_able_to(:preview, @parser)
         end
       end

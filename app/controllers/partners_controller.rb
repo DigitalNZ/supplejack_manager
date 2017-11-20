@@ -6,14 +6,14 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
+# app/controllers/partners_controller.rb
 class PartnersController < ApplicationController
   load_and_authorize_resource
 
   def index
   end
 
-  def new
-  end
+  def new; end
 
   def create
     if @partner.save
@@ -23,8 +23,7 @@ class PartnersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @partner.update_attributes(partner_params)

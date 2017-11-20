@@ -81,15 +81,6 @@ describe HarvestJob do
     end
   end
 
-  describe ".change_worker_env!" do
-    it "should change the site and key for a given class" do
-      # Figaro.should_receive(:env).with('staging') { {"WORKER_HOST" => "http://host.work", "WORKER_API_KEY" => "abc123"} }
-      HarvestJob.change_worker_env!('staging')
-      HarvestJob.site.should eq URI("http://host.work")
-      HarvestJob.user.should eq "abc123"
-    end
-  end
-
   describe "#user" do
     it "finds the user based on the user_id" do
       User.should_receive(:find).with("1234567")

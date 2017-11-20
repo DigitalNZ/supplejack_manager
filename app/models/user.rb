@@ -67,18 +67,20 @@ class User
   end
 
   def admin?
-    self.role == 'admin'
+    role == 'admin'
   end
 
   def run_harvest_partners=(values)
-    write_attribute(:run_harvest_partners, values.reject!(&:blank?))
+    values = values.reject(&:blank?)
+    self[:run_harvest_partners] = values
   end
 
   def manage_partners=(values)
-    write_attribute(:manage_partners, values.reject!(&:blank?))
+    values = values.reject(&:blank?)
+    self[:manage_partners] = values
   end
 
   def active_for_authentication?
-    super and self.active
+    super && active
   end
 end
