@@ -69,12 +69,12 @@ describe Preview do
   describe '#field_errors?' do
     it 'returns false when there are no field_errors' do
       preview.stub(:field_errors)
-      preview.field_errors?.should be_false
+      preview.field_errors?.should be nil
     end
 
     it 'returns true when there are field_errors' do
       preview.stub(:field_errors) { '{ "title":"Invalid" }' }
-      preview.field_errors?.should be_true
+      preview.field_errors?.should be true
     end
   end
 
@@ -93,31 +93,31 @@ describe Preview do
 
     it 'returns nil when there are no field_errors' do
       preview.stub(:field_errors?) { false }
-      preview.field_errors_output.should be_nil
+      preview.field_errors_output.should be nil
     end
   end
 
   describe '#validation_errors?' do
     it 'returns false when there are no validation_errors' do
       preview.stub(:validation_errors)
-      preview.validation_errors?.should be_false
+      preview.validation_errors?.should be nil
     end
 
     it 'returns true when there are validation_errors' do
       preview.stub(:validation_errors) { '{"title":"Invalid"}' }
-      preview.validation_errors?.should be_true
+      preview.validation_errors?.should be true
     end
   end
 
   describe '#deletable?' do
     it 'returns true if deletable is true in the preview hash' do
       preview.stub(:deletable) { true }
-      preview.deletable?.should be_true
+      preview.deletable?.should be true
     end
 
     it 'returns false if deletable is not true' do
       preview.stub(:deletable) { false }
-      preview.deletable?.should be_false
+      preview.deletable?.should be false
     end
   end
 
@@ -164,7 +164,7 @@ describe Preview do
 
     it 'returns nil when there are no field_errors' do
       preview.stub(:field_errors)
-      preview.field_errors_json.should be_nil
+      preview.field_errors_json.should be nil
     end
   end
 end
