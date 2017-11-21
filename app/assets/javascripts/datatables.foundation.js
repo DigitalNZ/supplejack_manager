@@ -1,6 +1,6 @@
 /* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
-    "sDom": "<'twelve columns'<'row'<'three columns no-left-padding'f>r>><'row'<'twelve columns't>><'row'<'six columns'i><'six columns'p>>",
+    "sDom": "<'medium-12 columns'<'row'<'medium-3 columns no-left-padding'f>r>><'row'<'twelve columns't>><'row'<'medium-6 columns'i><'medium-6 columns'p>>",
     "sPaginationType": "foundation",
     "oLanguage": {
         "sLengthMenu": 'Show <form class="custom dataTables"><select><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></form> entries'

@@ -1,21 +1,18 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
-
 
 <h2 class="collection-stats-heading">
 	<%= link_to_previous_day @day, params[:environment], class: "cycle-prev-day-button arrow arrow-left" %>
 	<span><%= params[:environment].try(:capitalize)%> Collection Statistics for: <%= @day.to_date.to_formatted_s(:long) %></span>
 	<%= link_to_next_day @day, params[:environment], class: "cycle-next-day-button arrow arrow-right"  %>
 </h2>
-
-
 
 <% unless @collection_statistics.any? %>
 	<div class="twelve">
@@ -25,9 +22,9 @@ http://digitalnz.org/supplejack
 
 <% @collection_statistics.each do |collection| %>
 	<div class="row">
-		<div class="twelve columns">
+		<div class="medium-12 columns">
 		<h4><%= collection.source.name %></h4>
-  		<div class="status-section left four">
+  		<div class="status-section left medium-4 columns">
 		    <h5>Activations (<%= collection.activated_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
 			    <% collection.activated_records.to_a.each do |record| %>
@@ -35,7 +32,7 @@ http://digitalnz.org/supplejack
 			    <% end %>
 		    </ul>
 		  </div>
-		  <div class="status-section left four">
+		  <div class="status-section left medium-4 columns">
 		    <h5>Suppressions (<%= collection.suppressed_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
 			    <% collection.suppressed_records.to_a.each do |record| %>
@@ -43,7 +40,7 @@ http://digitalnz.org/supplejack
 			    <% end %>
 		    </ul>
 		  </div>
-		  <div class="status-section left four">
+		  <div class="status-section left medium-4 columns">
 		    <h5>Deletions (<%= collection.deleted_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
 			    <% collection.deleted_records.to_a.each do |record| %>

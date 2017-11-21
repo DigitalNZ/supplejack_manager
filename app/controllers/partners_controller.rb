@@ -11,6 +11,7 @@ class PartnersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @partners = Partner.all
   end
 
   def new; end

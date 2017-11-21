@@ -12,6 +12,7 @@ class SnippetsController < ApplicationController
   respond_to :html, :json
 
   def index
+    @snippets = Snippet.all
   end
 
   def new
