@@ -61,6 +61,6 @@ class SourcesController < ApplicationController
   end
 
   def source_params
-    params.require(:source).permit(:name, :source_id, :partner_id)
+    params.require(:source).permit(:name, :source_id, :partner_id, partner_attributes: :name)
   end
 end

@@ -70,6 +70,12 @@ describe SourcesController do
         post :create, source: valid_attributes
         response.should redirect_to sources_path
       end
+
+      it 'creates a source with a nested contributor' do
+        expect {
+          post :create, source: { name: 'Data Source', partner_id: partner.id, partner_attributes: { name: 'Contributor' }}
+        }.to change(Partner, :count).by(1)
+      end
     end
 
     describe "with invalid params" do
