@@ -24,6 +24,8 @@ Devise.setup do |config|
   # require 'devise/orm/active_record'
   require 'devise/orm/mongoid'
 
+  config.secret_key = '9c3973a3344d174711d9f434f55d82e99322c23b8faf56b97b30bec9d3fc3bd34bfd01119c981d96daba24e63e69ad2f28785baad403caf613d671891523e745'
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -181,7 +183,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
-  config.token_authentication_key = :auth_token
+  # config.token_authentication_key = :auth_token
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for

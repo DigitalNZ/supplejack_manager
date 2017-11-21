@@ -30,8 +30,8 @@ PATH
   remote: /webspace/supplejack/common
   specs:
     supplejack_common (0.0.2)
-      actionpack (<= 4.1.4)
-      activesupport (<= 4.1.4)
+      actionpack (<= 4.1.8)
+      activesupport (<= 4.1.8)
       chronic (<= 0.10.2)
       dimensions
       htmlentities
@@ -49,17 +49,17 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.1.4)
-      actionpack (= 4.1.4)
-      actionview (= 4.1.4)
-      mail (~> 2.5.4)
-    actionpack (4.1.4)
-      actionview (= 4.1.4)
-      activesupport (= 4.1.4)
+    actionmailer (4.1.8)
+      actionpack (= 4.1.8)
+      actionview (= 4.1.8)
+      mail (~> 2.5, >= 2.5.4)
+    actionpack (4.1.8)
+      actionview (= 4.1.8)
+      activesupport (= 4.1.8)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.4)
-      activesupport (= 4.1.4)
+    actionview (4.1.8)
+      activesupport (= 4.1.8)
       builder (~> 3.1)
       erubis (~> 2.7.0)
     active_model_serializers (0.10.7)
@@ -67,12 +67,12 @@ GEM
       activemodel (>= 4.1, < 6)
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
-    activemodel (4.1.4)
-      activesupport (= 4.1.4)
+    activemodel (4.1.8)
+      activesupport (= 4.1.8)
       builder (~> 3.1)
-    activerecord (4.1.4)
-      activemodel (= 4.1.4)
-      activesupport (= 4.1.4)
+    activerecord (4.1.8)
+      activemodel (= 4.1.8)
+      activesupport (= 4.1.8)
       arel (~> 5.0.0)
     activeresource (4.1.0)
       activemodel (~> 4.0)
@@ -80,7 +80,7 @@ GEM
       rails-observers (~> 0.1.2)
     activeresource-response (1.1.1)
       activeresource (>= 3, < 5)
-    activesupport (4.1.4)
+    activesupport (4.1.8)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -88,19 +88,13 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (5.8.1)
-      airbrake-ruby (~> 1.8)
-    airbrake-ruby (1.8.0)
+    airbrake (7.1.0)
+      airbrake-ruby (~> 2.5)
+    airbrake-ruby (2.6.0)
     arel (5.0.1.20140414130214)
     ast (2.3.0)
     backports (3.10.3)
     bcrypt (3.1.11)
-    bcrypt-ruby (3.1.5)
-      bcrypt (>= 3.1.3)
-    better_errors (2.4.0)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
     bson (4.2.2)
@@ -176,15 +170,15 @@ GEM
     database_cleaner (1.6.2)
     debug_inspector (0.0.3)
     debugger-linecache (1.2.0)
-    devise (3.0.4)
-      bcrypt-ruby (~> 3.0)
+    devise (4.3.0)
+      bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.2)
+      responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
     dimensions (1.3.0)
     docile (1.1.5)
-    erubi (1.7.0)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.9.0)
@@ -256,19 +250,14 @@ GEM
       railties (>= 4, < 5.2)
       request_store (~> 1.0)
     lumberjack (1.0.12)
-    mail (2.5.5)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
+    mail (2.7.0)
+      mini_mime (>= 0.1.1)
     method_source (0.9.0)
     mime-types (1.25.1)
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    modular-scale (1.0.6)
-      compass (>= 0.12.1)
-      sass (>= 3.2.0)
-      sassy-math (>= 1.5)
     mongo (2.4.3)
       bson (>= 4.2.1, < 5.0.0)
     mongoid (5.2.1)
@@ -282,6 +271,7 @@ GEM
     mongoid_paranoia (0.2.1)
       mongoid (>= 4)
       mongoid-compatibility
+    moped (1.5.3)
     multi_json (1.12.2)
     multi_test (0.1.2)
     multipart-post (2.0.0)
@@ -299,7 +289,6 @@ GEM
     parallel (1.12.0)
     parser (2.4.0.2)
       ast (~> 2.3)
-    polyglot (0.3.5)
     power_assert (1.1.1)
     powerpack (0.1.1)
     pry (0.9.12.6)
@@ -315,33 +304,35 @@ GEM
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.1.4)
-      actionmailer (= 4.1.4)
-      actionpack (= 4.1.4)
-      actionview (= 4.1.4)
-      activemodel (= 4.1.4)
-      activerecord (= 4.1.4)
-      activesupport (= 4.1.4)
+    rails (4.1.8)
+      actionmailer (= 4.1.8)
+      actionpack (= 4.1.8)
+      actionview (= 4.1.8)
+      activemodel (= 4.1.8)
+      activerecord (= 4.1.8)
+      activesupport (= 4.1.8)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.4)
+      railties (= 4.1.8)
       sprockets-rails (~> 2.0)
     rails-observers (0.1.5)
       activemodel (>= 4.0)
-    railties (4.1.4)
-      actionpack (= 4.1.4)
-      activesupport (= 4.1.4)
+    railties (4.1.8)
+      actionpack (= 4.1.8)
+      activesupport (= 4.1.8)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.2.2)
       rake
     raindrops (0.19.0)
-    rake (12.2.1)
+    rake (12.3.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redis (3.3.5)
     ref (2.0.0)
     request_store (1.3.2)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rest-client (1.6.9)
       mime-types (~> 1.16)
     retriable (3.1.1)
@@ -387,8 +378,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sassy-math (1.5.1)
-      compass (>= 0.11)
     shellany (0.0.1)
     simplecov (0.15.1)
       docile (~> 1.1.0)
@@ -414,9 +403,6 @@ GEM
     timecop (0.9.1)
     traceroute (0.5.0)
       rails (>= 3.0.0)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -437,10 +423,7 @@ GEM
       hashdiff
     xpath (2.1.0)
       nokogiri (~> 1.3)
-    zurb-foundation (3.2.5)
-      compass (>= 0.12.2)
-      modular-scale (= 1.0.6)
-      rake
+    zurb-foundation (4.3.2)
       sass (>= 3.2.0)
 
 PLATFORMS
@@ -450,9 +433,9 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activeresource
   activeresource-response
-  airbrake (~> 5.2)
-  better_errors (>= 0.2.0)
+  airbrake
   binding_of_caller (>= 0.6.8)
+  bson
   cancancan
   capybara (>= 2.0.1)
   chronic_duration
@@ -461,7 +444,7 @@ DEPENDENCIES
   compass-rails (>= 1.0.3)
   cucumber-rails (>= 1.4.0)
   database_cleaner (>= 1.3.0)
-  devise (~> 3.0.4)
+  devise (~> 4.0)
   factory_girl_rails (>= 4.1.0)
   faker
   figaro (>= 0.7.0)
@@ -476,6 +459,7 @@ DEPENDENCIES
   lograge
   mongoid (~> 5)
   mongoid_paranoia
+  moped
   nokogiri
   oai!
   pry-byebug
@@ -496,7 +480,7 @@ DEPENDENCIES
   unicorn-rails
   vcr
   webmock
-  zurb-foundation (= 3.2.5)
+  zurb-foundation
 
 BUNDLED WITH
    1.16.0

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,
 # and is licensed under the GNU General Public License, version 3.
@@ -28,7 +26,7 @@ gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'mongoid', '~> 5'
 gem 'mongoid_paranoia'
-gem 'devise', '~> 3.0.4'
+gem 'devise', '~> 4.0'
 gem 'cancancan'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'figaro', '>= 0.7.0'
@@ -40,9 +38,11 @@ gem 'activeresource', require: 'active_resource'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'lograge'
-gem 'airbrake', '~> 5.2'
+gem 'airbrake'
 gem 'test-unit'
 gem 'nokogiri'
+gem 'moped'
+gem 'bson'
 
 gem 'sass-rails'
 gem 'coffee-rails'
@@ -50,12 +50,12 @@ gem 'coffee-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'compass-rails', '>= 1.0.3'
-gem 'zurb-foundation', '= 3.2.5'
+gem 'zurb-foundation'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do
   gem 'quiet_assets', '>= 1.0.1'
-  gem 'better_errors', '>= 0.2.0'
+  # gem 'better_errors', '>= 0.2.0'
   gem 'binding_of_caller', '>= 0.6.8'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'

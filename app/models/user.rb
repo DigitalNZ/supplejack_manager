@@ -16,7 +16,7 @@ class User
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   # TODO check if needed. I have commented out because it seems very odd to override the mongo fields with attr_accessor
   # attr_accessor :name, :email, :password, :password_confirmation, :remember_me,
@@ -24,7 +24,7 @@ class User
   #   :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
   #   :manage_partners, :run_harvest_partners
 
-  before_save :ensure_authentication_token
+  # before_save :ensure_authentication_token
 
   field :name,                    type: String
 
