@@ -106,7 +106,7 @@ describe ParsersController do
 
     it "finds an existing parser " do
       Parser.should_receive(:find).with("1234") { parser }
-      put :update, id: "1234"
+      put :update, id: "1234", parser: { name: '' }
       assigns(:parser).should eq parser
     end
 
@@ -124,7 +124,7 @@ describe ParsersController do
       before { parser.stub(:save) { true }}
 
       it "redirects to edit page" do
-        put :update, id: "1234"
+        put :update, id: "1234", parser: { name: '' }
         response.should redirect_to edit_parser_path("1234")
       end
     end
@@ -133,7 +133,7 @@ describe ParsersController do
       before { parser.stub(:save) { false }}
 
       it "renders the edit action" do
-        put :update, id: "1234"
+        put :update, id: "1234", parser: { name: '' }
         response.should render_template(:edit)
       end
     end
