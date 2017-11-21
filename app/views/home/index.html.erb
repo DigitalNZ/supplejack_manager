@@ -1,22 +1,22 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<div class="twelve columns centered">
+<div class="medium-12 columns small-centered">
 
   <div class="row top-fifteen">
-    <div class="nine columns">
+    <div class="medium-9 columns">
       <h1><%= t('dashboard.title') %></h1>
       <h4 class="subheader"><%= t('dashboard.intro') %></h4>
     </div>
 
-    <div class="three columns new-actions">
+    <div class="medium-3 columns new-actions">
       <%= link_to t('sources.create'), new_source_path, class: "button right twelve #{can_show_button(:create, Source)}" %>
       <%= link_to t('parsers.create'), new_parser_path, class: "button right twelve #{can_show_button(:create, Parser)}" %>
     </div>
@@ -30,10 +30,10 @@ http://digitalnz.org/supplejack
 
   <% if @parsers.present? %>
     <div class="row">
-      <h3 class="nine columns"><%= t('dashboard.parsers.label') %></h3>
-      <h5 class="three columns"><%= link_to t('dashboard.parsers.view_all'), parsers_path, class: 'button right twelve secondary right' %></h5>
+      <h3 class="medium-9 columns"><%= t('dashboard.parsers.label') %></h3>
+      <h5 class="medium-3 columns"><%= link_to t('dashboard.parsers.view_all'), parsers_path, class: 'button right twelve secondary right' %></h5>
 
-      <div class="twelve columns">
+      <div class="medium-12 columns">
         <table class="twelve">
           <thead>
             <tr>
@@ -72,10 +72,10 @@ http://digitalnz.org/supplejack
 
   <% if @scheduled_jobs.present? %>
     <div class="row">
-      <h3 class="nine columns"><%= t('dashboard.scheduled_jobs.label') %></h3>
-      <h5 class="three columns"><%= link_to t('dashboard.scheduled_jobs.view_environment_schedule', environment: @environment.capitalize), environment_harvest_schedules_path(@environment), class: 'button right secondary twelve right' %></h5>
+      <h3 class="medium-9 columns"><%= t('dashboard.scheduled_jobs.label') %></h3>
+      <h5 class="medium-3 columns"><%= link_to t('dashboard.scheduled_jobs.view_environment_schedule', environment: @environment.capitalize), environment_harvest_schedules_path(@environment), class: 'button right secondary twelve right' %></h5>
 
-      <div class="twelve columns">
+      <div class="medium-12 columns">
         <table class="twelve">
           <thead>
             <tr>

@@ -23,6 +23,7 @@
 // = require jquery-ui
 // = require jquery_ujs
 // = require dataTables/jquery.dataTables
+// = require foundation
 // = require datatables.foundation
 // = require moment.min
 // = require codemirror
@@ -42,3 +43,5 @@
 // = require sources
 // = require suppressed_collections
 // = require harvest_errors
+
+$(document).foundation();

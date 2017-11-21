@@ -50,7 +50,8 @@ gem 'coffee-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'compass-rails', '>= 1.0.3'
-gem 'zurb-foundation'
+# gem 'zurb-foundation'
+gem 'foundation-rails', '= 5.5.3.2'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do

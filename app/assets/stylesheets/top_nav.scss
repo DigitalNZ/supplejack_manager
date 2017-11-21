@@ -7,10 +7,10 @@
 // http://digitalnz.org/supplejack
 
 /*.top-bar > ul .name h1 {
-  font-size: 18px;
-  padding-left: 15px;
-  color: #FFF;
-  margin-right: 15px !important;
+font-size: 18px;
+padding-left: 15px;
+color: #FFF;
+margin-right: 15px !important;
 }*/
 
 .top-bar > ul .name {
@@ -23,6 +23,11 @@
 
   .supplejack-logo {
     padding: 0;
+
+    img {
+      width: 7.4rem;
+      margin-top: 0.55rem;
+    }
   }
 }
 

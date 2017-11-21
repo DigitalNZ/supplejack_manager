@@ -9,16 +9,15 @@ http://digitalnz.org/supplejack
 %>
 
 <div class="row">
-  <div class="twelve columns">
-    <nav class="top-bar">
+  <div class="medium-12 columns">
+    <nav class="top-bar" data-topbar role='navigation'>
       <ul>
-        <li class="name">
-          <%= link_to image_tag("Supplejack360pxgreenwhite.png"), root_path, class: 'supplejack-logo' %>  
+        <li class="name left">
+          <%= link_to image_tag("Supplejack360pxgreenwhite.png"), root_path, class: 'supplejack-logo' %>
         </li>
-
         <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
-      <section>
+      <section class='top-bar-section'>
         <% if user_signed_in? %>
           <ul class="left">
             <li class="has-dropdown">
@@ -30,15 +29,6 @@ http://digitalnz.org/supplejack
                 <%= link_to_tab t('parsers.label'), parsers_path %>
                 <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
                 <%= link_to_tab t('snippets.label'), snippets_path %>
-
-                <% if false %>
-                <li class="has-dropdown">
-                  <%= link_to_tab t('partners.label'), partners_path %>
-                  <ul class="dropdown">
-                    <li><a href="#">Level 2</a></li>
-                  </ul>
-                </li>
-                <% end %>
               </ul>
             </li>
 
