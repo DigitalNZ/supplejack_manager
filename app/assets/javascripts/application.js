@@ -44,4 +44,6 @@
 // = require suppressed_collections
 // = require harvest_errors
 
-$(document).foundation();
+$(function() {
+  $(document).foundation();
+});
