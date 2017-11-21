@@ -10,6 +10,7 @@ class Parser
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Paranoia
+  include Mongoid::Attributes::Dynamic
 
   include TemplateHelpers
 

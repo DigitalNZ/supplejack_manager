@@ -16,7 +16,7 @@ class ParsersController < ApplicationController
 
   def index
     @parsers = Parser.all
-    
+
     respond_to do |format|
       format.html
       format.json { render json: @parsers, serializer: ActiveModel::ArraySerializer }
@@ -55,7 +55,7 @@ class ParsersController < ApplicationController
   end
 
   def update
-    @parser.attributes = params[:parser]
+    @parser.attributes = parser_params
     @parser.user_id = current_user.id
     @parser.update_contents_parser_class!
 
@@ -86,5 +86,11 @@ class ParsersController < ApplicationController
     else
       redirect_to edit_parser_path(@parser)
     end
+  end
+
+  def parser_params
+    params
+      .require(:parser)
+      .permit(:name, :partner, :source_id, :strategy, :parser_template, :message, :content)
   end
 end
