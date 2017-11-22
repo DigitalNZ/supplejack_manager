@@ -10,7 +10,8 @@ class AbstractJob < ActiveResource::Base
   include EnvironmentHelpers
   
   self.site = ENV["WORKER_HOST"]
-  self.user = ENV["WORKER_API_KEY"]
+  headers['Authorization'] = "Token token=#{ENV['WORKER_API_KEY']}"
+
 
   schema do
     attribute :_type,                 :string
