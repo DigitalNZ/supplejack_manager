@@ -43,6 +43,7 @@ gem 'test-unit'
 gem 'nokogiri'
 gem 'moped'
 gem 'bson'
+gem 'modernizr-rails'
 
 gem 'sass-rails'
 gem 'coffee-rails'

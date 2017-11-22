@@ -15,6 +15,8 @@ class ParserVersionsController < ApplicationController
   before_filter :find_parser
   before_filter :find_version, only: [:show, :update, :new_enrichment, :new_harvest]
 
+  skip_before_filter :authenticate_user!
+
   respond_to :html, :json, :js
 
   def current

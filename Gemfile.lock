@@ -30,8 +30,8 @@ PATH
   remote: /webspace/supplejack/common
   specs:
     supplejack_common (0.0.2)
-      actionpack (<= 4.1.8)
-      activesupport (<= 4.1.8)
+      actionpack
+      activesupport
       chronic (<= 0.10.2)
       dimensions
       htmlentities
@@ -40,7 +40,8 @@ PATH
       mimemagic
       mongoid
       nokogiri
-      redis (~> 3)
+      rails-html-sanitizer
+      redis
       rest-client (~> 1.6.7)
       retriable
       sanitize
@@ -252,6 +253,9 @@ GEM
       activesupport (>= 4, < 5.2)
       railties (>= 4, < 5.2)
       request_store (~> 1.0)
+    loofah (2.1.1)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
@@ -261,6 +265,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
+    modernizr-rails (2.7.1)
     mongo (2.4.3)
       bson (>= 4.2.1, < 5.0.0)
     mongoid (5.2.1)
@@ -317,6 +322,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.8)
       sprockets-rails (~> 2.0)
+    rails-html-sanitizer (1.0.3)
+      loofah (~> 2.0)
     rails-observers (0.1.5)
       activemodel (>= 4.0)
     railties (4.1.8)
@@ -331,7 +338,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redis (3.3.5)
+    redis (4.0.1)
     ref (2.0.0)
     request_store (1.3.2)
     responders (1.1.2)
@@ -459,6 +466,7 @@ DEPENDENCIES
   kgio (~> 2.10.0)
   launchy (>= 2.1.2)
   lograge
+  modernizr-rails
   mongoid (~> 5)
   mongoid_paranoia
   moped
