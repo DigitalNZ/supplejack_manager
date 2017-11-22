@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         end
       else
         params[:user].delete(:password)
-        @user.update_without_password(params[:user])
+        @user.update_without_password(user_params)
         redirect_to safe_users_path, notice: 'User was successfully updated.'
       end
     else
@@ -60,6 +60,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :manage_partners)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :active, :role, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules, :manage_partners, :run_harvest_partners)
   end
 end

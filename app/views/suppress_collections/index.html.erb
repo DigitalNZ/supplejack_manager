@@ -1,42 +1,42 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<div class="row eight columns centered">
+<div class="row medium-8 columns small-centered">
   <h1><%= t('link_checker.suppress_collections.label') %> - <%= params[:environment].capitalize %></h1>
 
   <h5 class="subheader">
-    <%= t('link_checker.suppress_collections.helptext') %> 
+    <%= t('link_checker.suppress_collections.helptext') %>
   </h5>
-  
+
   <% if can? :update, :suppress_collection %>
     <h4 class="left"><%= t('link_checker.suppress_collections.suppress_a') %></h4>
-    
-    <div class="row twelve left">
+
+    <div class="row medium-12 left">
       <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
-        <div class="seven columns">
+        <div class="medium-7 columns">
           <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
           <%= hidden_field_tag :status, "suppressed" %>
         </div>
-        <div class="five columns">
+        <div class="medium-5 columns">
           <%= submit_tag t('link_checker.suppress_collections.suppress'), class: "button" %>
         </div>
       <% end %>
     </div>
   <% end %>
 
-<div class="row twelve columns">
+<div class="row medium-12 columns">
   <h4><%= t('link_checker.suppress_collections.current_supressions_title') %></h4>
 </div>
 
 <div class="row">
-  <div class="twelve columns">
+  <div class="medium-12 columns">
     <table id="suppress_collection">
       <thead>
         <tr>

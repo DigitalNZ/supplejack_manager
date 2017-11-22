@@ -15,11 +15,9 @@ class SnippetsController < ApplicationController
     @snippets = Snippet.all
   end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @snippet.user_id = current_user.id
@@ -34,7 +32,7 @@ class SnippetsController < ApplicationController
   def update
     @snippet.user_id = current_user.id
 
-    if @snippet.update_attributes(params[:snippet])
+    if @snippet.update_attributes(snippet_params)
       redirect_to edit_snippet_path(@snippet)
     else
       render :edit
@@ -51,4 +49,7 @@ class SnippetsController < ApplicationController
     respond_with @snippet
   end
 
+  def snippet_params
+    params.require(:snippet).permit(:name, :content)
+  end
 end
