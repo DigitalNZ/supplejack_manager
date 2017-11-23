@@ -31,7 +31,7 @@ class ParserVersionsController < ApplicationController
   end
 
   def update
-    @version.update_attributes(params[:version])
+    @version.update_attributes(parser_version_params)
     @version.post_changes
     redirect_to parser_parser_version_path(@parser, @version)
   end
@@ -60,4 +60,7 @@ class ParserVersionsController < ApplicationController
     @version = @parser.find_version(params[:id])
   end
 
+  def parser_version_params
+    params.require(:version).permit!
+  end
 end
