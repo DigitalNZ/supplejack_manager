@@ -11,7 +11,7 @@
 source 'https://rubygems.org'
 
 # gem 'rails', '~> 3.2.22.2'
-gem 'rails', '~> 4.0'
+gem 'rails', '= 4.1.16'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
