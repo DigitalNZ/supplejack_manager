@@ -1,8 +1,8 @@
 <%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 New Zealand Government,
-and is licensed under the GNU General Public License, version 3.
-Some components are third party components that are licensed under
+and is licensed under the GNU General Public License, version 3. 
+Some components are third party components that are licensed under 
 the MIT license or otherwise publicly available.
 See https://github.com/DigitalNZ/supplejack_manager for details.
 
@@ -12,11 +12,11 @@ http://digitalnz.org/supplejack
 %>
 
 <div class="row">
-  <div class="medium-9 columns">
+  <div class="nine columns">
     <h1 id="parser-title" class="left"><%= @parser.name %></h1>
   </div>
 
-  <div class="medium-3 columns end">
+  <div class="three columns last">
     <ul class="button-group harvest-commands">
       <% if can? :run_harvest, @parser %>
         <% if @version %>
@@ -60,7 +60,7 @@ http://digitalnz.org/supplejack
 </div>
 
 <div class="row">
-  <div class="margin-9 columns">
+  <div class="nine columns">
     <% if @version %>
       <%= render "parser_versions/form" %>
     <% else %>
@@ -68,7 +68,7 @@ http://digitalnz.org/supplejack
     <% end %>
   </div>
 
-  <div class="margin-3 columns">
+  <div class="three columns">
     <h3 class="no-margin-top left"><%= t("history") %></h3>
     <%= render partial: "versions/version_list", locals: { versionable: @parser, versionable_path: "parser_parser_version" } %>
   </div>

@@ -11,7 +11,7 @@ http://digitalnz.org/supplejack
 <h1 class="left"><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
 
 <div class="row">
-  <div class="medium-12 columns">
+  <div class="twelve columns">
     <dl class="tabs pill">
       <% ['active', 'finished', 'failed', 'stopped'].each do |status| %>
         <%= content_tag(:dd, link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser])), class: ("active" if params[:status] == status)) %>

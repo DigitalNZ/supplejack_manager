@@ -1,8 +1,8 @@
 <%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 New Zealand Government,
-and is licensed under the GNU General Public License, version 3.
-Some components are third party components that are licensed under
+and is licensed under the GNU General Public License, version 3. 
+Some components are third party components that are licensed under 
 the MIT license or otherwise publicly available.
 See https://github.com/DigitalNZ/supplejack_manager for details.
 
@@ -12,7 +12,7 @@ http://digitalnz.org/supplejack
 %>
 
 <div class="row">
-  <div class="medium-9 columns">
+  <div class="nine columns">
     <% if can? :update, @parser %>
       <h1 id="parser-title" class="left">
         <%= link_to @parser.name, edit_parser_path(@parser) %>
@@ -31,12 +31,12 @@ http://digitalnz.org/supplejack
     <% end %>
   </div>
 
-  <div class="medium-3 columns last">
-    <ul class="button-group medium-12 harvest-commands">
+  <div class="three columns last">
+    <ul class="button-group twelve harvest-commands">
       <% if can? :run_harvest, @parser %>
         <% if @version %>
           <li class="twelve right">
-            <div href="#" class="button run-enrichment dropdown medium-12">
+            <div href="#" class="button run-enrichment dropdown twelve">
               Run Enrichment
               <ul>
                 <% if APPLICATION_ENVS.include?(:staging) %>
@@ -49,8 +49,8 @@ http://digitalnz.org/supplejack
               </ul>
             </div>
           </li>
-          <li class="medium-12 right">
-            <div href="#" class="button run-harvest dropdown medium-12">
+          <li class="twelve right">
+            <div href="#" class="button run-harvest dropdown twelve">
               Run Harvest
               <ul>
                 <% if APPLICATION_ENVS.include?(:staging) && @version.try(:staging?) %>
@@ -67,7 +67,7 @@ http://digitalnz.org/supplejack
           </li>
         <% end %>
       <% else %>
-        <div href="#" class="button run-harvest dropdown medium-12 disabled">Run Harvest</div>
+        <div href="#" class="button run-harvest dropdown twelve disabled">Run Harvest</div>
       <% end %>
       <% if can? :preview, @parser %>
         <li class="twelve right"><%= link_to "Preview", parser_previewers_path(@parser), class: "button records-preview-button twelve" %></li>
@@ -76,7 +76,7 @@ http://digitalnz.org/supplejack
   </div>
 </div>
 <div class="row">
-  <div class="medium-9 columns">
+  <div class="nine columns">
     <% if @version %>
       <%= render "parser_versions/form" %>
     <% else %>
@@ -84,7 +84,7 @@ http://digitalnz.org/supplejack
     <% end %>
   </div>
 
-  <div class="medium-3 columns">
+  <div class="three columns">
     <div class="alert-box secondary round text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
       <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button success twelve" %>
@@ -109,11 +109,11 @@ http://digitalnz.org/supplejack
   </div>
 </div>
 
-<div id="preview-modal" data-reveal class="reveal-modal">
+<div id="preview-modal" class="reveal-modal xxlarge">
   <div id="preview-area" class="CodeRay">
   </div>
 
-  <div id="preview-area-spinner" data-reveal class="spinner">
+  <div id="preview-area-spinner" class="spinner">
     <%= image_tag("sj-spinner.gif") %>
   </div>
 

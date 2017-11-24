@@ -14,8 +14,7 @@ http://digitalnz.org/supplejack
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Harvester Manager" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Harvester Manager" %>">
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= javascript_include_tag :modernizr %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
@@ -29,7 +28,7 @@ http://digitalnz.org/supplejack
     <meta name="theme-color" content="#118a0f">
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <div class="top-bar">
+    <div class="contain-to-grid">
       <%= render 'layouts/navigation' %>
     </div>
 
@@ -38,7 +37,7 @@ http://digitalnz.org/supplejack
     </header>
 
     <div id="main" role="main" class="row">
-      <div class="medium-12 columns">
+      <div class="twelve columns">
         <%= yield %>
       </div>
     </div>

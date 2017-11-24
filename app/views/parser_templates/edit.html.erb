@@ -1,15 +1,15 @@
-<%#
+<%#  
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are
-third party components that are licensed under the MIT license or otherwise publicly available.
-See https://github.com/DigitalNZ/supplejack_manager for details.
+and is licensed under the GNU General Public License, version 3. Some components are 
+third party components that are licensed under the MIT license or otherwise publicly available. 
+See https://github.com/DigitalNZ/supplejack_manager for details. 
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
 http://digitalnz.org/supplejack
 %>
 
 <div class="row">
-	<div class="medium-9 columns">
+	<div class="nine columns">
 		<h1 id="parser-template-title" class="left"><%= @parser_template.name %></h1>
 		<div id="hidden-parser-template-form">
 			<%= simple_form_for @parser_template do |f| %>
@@ -21,7 +21,7 @@ http://digitalnz.org/supplejack
 		</div>
 	</div>
 
-	<div class="medium-3 columns new-actions">
+	<div class="three columns new-actions">
 		<a href="#" id="rename-parser-template-action" class="button right twelve"><%= t('parser_templates.rename') %></a>
 		<a href="#" class="button right twelve" data-reveal-id="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
   </div>

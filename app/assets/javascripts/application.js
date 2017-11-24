@@ -19,31 +19,38 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-// = require jquery
-// = require jquery-ui
-// = require jquery_ujs
-// = require dataTables/jquery.dataTables
-// = require foundation
-// = require datatables.foundation
-// = require moment.min
-// = require codemirror
-// = require codemirror/modes/ruby
-// = require codemirror/modes/xml
-// = require link_check_rules
-// = require code_mirror_setup
-// = require harvester
-// = require parsers
-// = require harvest_jobs
-// = require enrichment_jobs
-// = require harvest_schedules
-// = require snippets
-// = require parser_templates
-// = require previews
-// = require partners
-// = require sources
-// = require suppressed_collections
-// = require harvest_errors
-
-$(function() {
-  $(document).foundation();
-});
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require foundation/modernizr.foundation
+//= require foundation/jquery.placeholder
+//= require foundation/jquery.foundation.topbar
+//= require foundation/jquery.foundation.reveal
+//= require foundation/jquery.foundation.buttons
+//= require foundation/jquery.foundation.tabs
+//= require foundation/jquery.foundation.forms
+//= require foundation/jquery.foundation.tooltips
+//= require foundation/app
+//= require dataTables/jquery.dataTables
+//= require datatables.foundation
+//= require jquery.ui.datepicker
+//= require jquery.ui.slider
+//= require jquery.ui.timepicker
+//= require moment.min
+//= require codemirror
+//= require codemirror/modes/ruby
+//= require codemirror/modes/xml
+//= require link_check_rules
+//= require code_mirror_setup
+//= require harvester
+//= require parsers
+//= require harvest_jobs
+//= require enrichment_jobs
+//= require harvest_schedules
+//= require snippets
+//= require parser_templates
+//= require previews
+//= require partners
+//= require sources
+//= require suppressed_collections
+//= require harvest_errors

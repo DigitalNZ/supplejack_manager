@@ -23,7 +23,7 @@ http://digitalnz.org/supplejack
         <% end %>
       <% end %>
 
-      <% if APPLICATION_ENVS.include?('staging') %>
+      <% if APPLICATION_ENVS.include?(:staging) %>
         <% if @version.staging? %>
           <li>
             <%= link_to "Untag as Staging", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) - ["staging"]).uniq}), method: :put, class: "button expand small staging" %>

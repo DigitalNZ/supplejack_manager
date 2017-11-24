@@ -1,14 +1,14 @@
-<%#
+<%#  
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are
-third party components that are licensed under the MIT license or otherwise publicly available.
-See https://github.com/DigitalNZ/supplejack_manager for details.
+and is licensed under the GNU General Public License, version 3. Some components are 
+third party components that are licensed under the MIT license or otherwise publicly available. 
+See https://github.com/DigitalNZ/supplejack_manager for details. 
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
 http://digitalnz.org/supplejack
 %>
 
-<div class="medium-12 columns centered">
+<div class="eight columns centered">
 
   <div class="row">
     <h1 class="left"><%= t('records.label') %> - <%= params[:environment].capitalize %></h1>
@@ -16,17 +16,17 @@ http://digitalnz.org/supplejack
 
   <div class="row">
     <%= form_tag(environment_collection_records_path(environment: params[:environment]), {method: :get, id: "collection_records_form"}) do |f| %>
-      <div class="medium-4 columns">
+      <div class="four columns">
           <%= text_field_tag 'id', @record_id, placeholder: t('simple_form.placeholders.collection_record.id')  %>
       </div>
-      <div class="medium-4 columns">
+      <div class="four columns">
         <%= submit_tag t('records.search'), class: "button right" %>
       </div>
     <% end %>
   </div>
 
   <div class="row">
-    <div class="medium-12 columns">
+    <div class="twelve columns">
       <% if @record.present? %>
         <table id="collection-records" class="twelve">
           <thead>
