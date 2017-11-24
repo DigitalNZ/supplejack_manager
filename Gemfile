@@ -71,7 +71,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
-  gem 'factory_girl_rails', '>= 4.1.0'
+  # gem 'factory_girl_rails', '>= 4.1.0'
+  gem 'factory_bot_rails'
 end
 
 group :test do

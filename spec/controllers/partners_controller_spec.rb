@@ -9,9 +9,9 @@
 require 'spec_helper'
 
 describe PartnersController do
-  let(:partners) { FactoryGirl.create_list(:partner, 3) }
-  let(:partner)  { FactoryGirl.build(:partner) }
-  let(:user)     { FactoryGirl.create(:user, role: 'admin') }
+  let(:partners) { FactoryBot.create_list(:partner, 3) }
+  let(:partner)  { FactoryBot.build(:partner) }
+  let(:user)     { FactoryBot.create(:user, role: 'admin') }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }

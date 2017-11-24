@@ -10,9 +10,9 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 describe Ability do
-  let(:user)          { FactoryGirl.create(:user) }
+  let(:user)          { FactoryBot.create(:user) }
   let(:user_ability)  { Ability.new(user) }
-  let(:admin_ability) { Ability.new(FactoryGirl.create(:user, role: 'admin')) }
+  let(:admin_ability) { Ability.new(FactoryBot.create(:user, role: 'admin')) }
 
   before(:each) do
     Partner.any_instance.stub(:update_apis)
@@ -20,9 +20,9 @@ describe Ability do
     Source.any_instance.stub(:create_link_check_rule)
 
     # Can't use let() as they are invoked before above stubs
-    @partner = FactoryGirl.create(:partner)
-    @source = FactoryGirl.create(:source, partner: @partner)
-    @parser = FactoryGirl.create(:parser, source: @source)
+    @partner = FactoryBot.create(:partner)
+    @source = FactoryBot.create(:source, partner: @partner)
+    @parser = FactoryBot.create(:parser, source: @source)
     @harvest_schedule = HarvestSchedule.create(parser_id: @parser.id, recurrent: false)
     @link_check_rule = instance_double(LinkCheckRule, source_id: @source.id).as_null_object
   end
@@ -42,7 +42,7 @@ describe Ability do
       end
 
       it "should not be able to update other users" do
-        user_ability.should_not be_able_to(:update, FactoryGirl.build(:user))
+        user_ability.should_not be_able_to(:update, FactoryBot.build(:user))
       end
     end
 

@@ -12,7 +12,7 @@ describe LinkCheckRulesController do
   let(:link_check_rule) { instance_double(LinkCheckRule).as_null_object }
   let(:user)            { instance_double(User).as_null_object }
   let(:admin_user)      { instance_double(User, role: 'admin').as_null_object }
-  let(:partner)         { FactoryGirl.build(:partner) }
+  let(:partner)         { FactoryBot.build(:partner) }
 
   before(:each) do
     controller.stub(:authenticate_user!) { true }

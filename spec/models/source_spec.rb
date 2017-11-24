@@ -9,7 +9,7 @@
 require 'spec_helper'
 
 describe Source do
-  let(:source) {FactoryGirl.build(:source)}
+  let(:source) {FactoryBot.build(:source)}
 
   before do
     Partner.any_instance.stub(:update_apis)
@@ -23,12 +23,12 @@ describe Source do
     end
 
     it "is not valid without a name" do
-      s = FactoryGirl.build(:source, name: nil)
+      s = FactoryBot.build(:source, name: nil)
       s.valid?.should be false
     end
 
     it "is not valid without a source_id" do
-      s = FactoryGirl.build(:source, source_id: nil)
+      s = FactoryBot.build(:source, source_id: nil)
       # create_source_id is called before validation so if it is
       # not stubbed then the source id will be set.
       s.stub(:create_source_id)
@@ -36,13 +36,13 @@ describe Source do
     end
 
     it "must have a partner" do
-      s = FactoryGirl.build(:source, partner_id: nil)
+      s = FactoryBot.build(:source, partner_id: nil)
       s.valid?.should be false
     end
 
     it "must have a unique source_id" do
-      s1 = FactoryGirl.create(:source, source_id: 'test')
-      s2 = FactoryGirl.build(:source, source_id: 'test')
+      s1 = FactoryBot.create(:source, source_id: 'test')
+      s2 = FactoryBot.build(:source, source_id: 'test')
 
       s2.valid?.should be false
     end
@@ -51,7 +51,7 @@ describe Source do
   describe "before validation" do
     it "calls create_source_id" do
       Source.any_instance.should_receive(:create_source_id)
-      Source.create(name: "Test", partner: FactoryGirl.create(:partner))
+      Source.create(name: "Test", partner: FactoryBot.create(:partner))
     end
   end
 

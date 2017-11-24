@@ -15,10 +15,10 @@ describe SourcesController do
     LinkCheckRule.stub(:create)
   end
 
-  let(:partner) { FactoryGirl.create(:partner) }
+  let(:partner) { FactoryBot.create(:partner) }
 
   def valid_attributes
-    FactoryGirl.attributes_for(:source, partner_id: partner.id)
+    FactoryBot.attributes_for(:source, partner_id: partner.id)
   end
 
   before(:each) do
@@ -50,7 +50,7 @@ describe SourcesController do
 
   describe "POST create" do
     before(:each) {
-      controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+      controller.stub(:current_user) { FactoryBot.build(:user, role: 'admin') }
     }
 
     describe 'with valid params' do
@@ -95,7 +95,7 @@ describe SourcesController do
 
   describe 'PUT update' do
     before(:each) {
-      controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+      controller.stub(:current_user) { FactoryBot.build(:user, role: 'admin') }
     }
 
     describe 'with valid params' do
@@ -136,7 +136,7 @@ describe SourcesController do
 
     describe "GET reindex" do
       before(:each) {
-        controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+        controller.stub(:current_user) { FactoryBot.build(:user, role: 'admin') }
       }
 
       it "calls reindex on api" do

@@ -12,7 +12,7 @@ describe Snippet do
 
   describe ".find_by_name" do
 
-    let!(:snippet) { FactoryGirl.create(:snippet, name: "Copyright") }
+    let!(:snippet) { FactoryBot.create(:snippet, name: "Copyright") }
 
     it "finds the snippet by name" do
       Snippet.should_receive(:where).with( { name: "Copyright" }) { [snippet] }
@@ -33,7 +33,7 @@ describe Snippet do
 
   context "file paths" do
 
-    let(:snippet) { FactoryGirl.build(:snippet, name: "Copyright Rules") }
+    let(:snippet) { FactoryBot.build(:snippet, name: "Copyright Rules") }
 
     describe "#file_name" do
       it "returns a correct file_name" do

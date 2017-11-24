@@ -1,6 +1,6 @@
 Given /^partner and data source exist$/ do 
   LinkCheckRule.stub(:create)
-  @source = FactoryGirl.create(:source) 
+  @source = FactoryBot.create(:source) 
   @partner = @source.partner
 end
 

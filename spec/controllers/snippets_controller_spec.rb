@@ -12,8 +12,8 @@ describe SnippetsController do
   # let(:snippet) { instance_double(Snippet, name: 'Copyright', id: '1234', to_param: '1234').as_null_object }
    # let(:user)    { instance_double(User, id: '1234').as_null_object }
 
-  let(:snippet) { FactoryGirl.create(:snippet, name: 'Copyright') }
-  let(:user)    { FactoryGirl.create(:user, role: 'admin') }
+  let(:snippet) { FactoryBot.create(:snippet, name: 'Copyright') }
+  let(:user)    { FactoryBot.create(:user, role: 'admin') }
 
   before(:each) do
     allow(controller).to receive(:authenticate_user!) { true }

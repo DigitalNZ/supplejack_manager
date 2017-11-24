@@ -15,7 +15,7 @@ describe Parser do
     LinkCheckRule.stub(:create)
   end
 
-  let(:parser) { FactoryGirl.build(:parser) }
+  let(:parser) { FactoryBot.build(:parser) }
 
   context "validations" do
     it "is valid with valid attributes" do
@@ -38,8 +38,8 @@ describe Parser do
     end
 
     it "should not be valid with a duplicated name" do
-      parser1 = FactoryGirl.create(:parser, name: 'NZ Museums')
-      parser2 = FactoryGirl.build(:parser, name: 'NZ Museums')
+      parser1 = FactoryBot.create(:parser, name: 'NZ Museums')
+      parser2 = FactoryBot.build(:parser, name: 'NZ Museums')
       parser2.should_not be_valid
     end
   end
@@ -52,9 +52,9 @@ describe Parser do
   end
 
   describe ".find_by_partners" do
-    let!(:partner) { FactoryGirl.create(:partner) }
-    let!(:source) { FactoryGirl.create(:source, partner: partner) }
-    let!(:parser) { FactoryGirl.create(:parser, source: source) }
+    let!(:partner) { FactoryBot.create(:partner) }
+    let!(:source) { FactoryBot.create(:source, partner: partner) }
+    let!(:parser) { FactoryBot.create(:parser, source: source) }
 
     it "should find the Partner" do
       Parser.find_by_partners([partner.id]).should eq [parser]
@@ -62,7 +62,7 @@ describe Parser do
   end
 
   context "file paths" do
-    let(:parser) { FactoryGirl.build(:parser, name: "Europeana", strategy: "json") }
+    let(:parser) { FactoryBot.build(:parser, name: "Europeana", strategy: "json") }
 
     describe "#file_name" do
       it "returns a correct file_name" do
@@ -83,7 +83,7 @@ describe Parser do
   end
 
   describe "xml?" do
-    let(:parser) { FactoryGirl.build(:parser, strategy: "xml", name: "Natlib") }
+    let(:parser) { FactoryBot.build(:parser, strategy: "xml", name: "Natlib") }
 
     it "returns true for Xml strategy" do
       parser.strategy = "xml"
@@ -107,7 +107,7 @@ describe Parser do
   end
 
   describe "json?" do
-    let(:parser) { FactoryGirl.build(:parser, strategy: "json", name: "Natlib") }
+    let(:parser) { FactoryBot.build(:parser, strategy: "json", name: "Natlib") }
 
     it "returns true for Json strategy" do
       parser.strategy = "json"
@@ -121,7 +121,7 @@ describe Parser do
   end
 
   describe "#enrichment_definitions" do
-    let(:version) { FactoryGirl.build(:version) }
+    let(:version) { FactoryBot.build(:version) }
     let(:parser_class) { instance_double('ParserClass', enrichment_definitions: { ndha_rights: 'Hi' }) }
     let(:parser_class) { double(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
@@ -158,7 +158,7 @@ describe Parser do
 
     context 'when version is not passed but the parser has a tagged version' do
       before(:each) do
-        parser.versions << FactoryGirl.build(:version, :staging)
+        parser.versions << FactoryBot.build(:version, :staging)
       end
 
       it "parser is set as the content of the last tagged version" do

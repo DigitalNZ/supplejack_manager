@@ -35,7 +35,7 @@ describe CollectionStatistics do
 	describe "source" do
 
 		let(:collection_statistics) { CollectionStatistics.new }
-		let(:source) { FactoryGirl.create(:source) }
+		let(:source) { FactoryBot.create(:source) }
 
 		before do
       Partner.any_instance.stub(:update_apis)

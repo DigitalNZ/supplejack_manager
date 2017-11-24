@@ -30,7 +30,7 @@ module HarvesterManager
     config.generators do |g|
 
       g.test_framework :rspec
-      g.fixture_replacement :factory_girl
+      g.fixture_replacement :factory_bot
 
       g.view_specs false
       g.helper_specs false

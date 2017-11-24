@@ -19,22 +19,22 @@ RSpec.describe Partner do
     end
 
     it 'is not valid unless name is unique' do
-      FactoryGirl.create(:partner, name: 'partner')
-      p2 = FactoryGirl.build(:partner, name: 'partner')
+      FactoryBot.create(:partner, name: 'partner')
+      p2 = FactoryBot.build(:partner, name: 'partner')
       expect(p2.valid?).to be false
     end
   end
 
   describe 'after save' do
     it 'syncs with the apis' do
-      p = FactoryGirl.build(:partner)
+      p = FactoryBot.build(:partner)
       expect(p).to receive(:update_apis)
       p.save
     end
   end
 
   describe '#update_apis' do
-    let(:partner) { FactoryGirl.create(:partner) }
+    let(:partner) { FactoryBot.create(:partner) }
 
     it 'updates each environments' do
       APPLICATION_ENVS.each do |env|

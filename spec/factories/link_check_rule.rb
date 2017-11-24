@@ -6,7 +6,7 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :link_check_rule do
     active false
   end

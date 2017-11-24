@@ -1,6 +1,6 @@
 Given /^a user exists with:$/ do |table|
   attributes = Hash[table.hashes.map(&:values).map(&:flatten)]
-  @user = FactoryGirl.create(:user, attributes)
+  @user = FactoryBot.create(:user, attributes)
 end
 
 Given /^I am logged in(?: as '(.*?)')?$/ do |email|

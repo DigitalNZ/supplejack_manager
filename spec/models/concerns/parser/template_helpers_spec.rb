@@ -17,7 +17,7 @@ describe Parser::TemplateHelpers do
 
   describe "update_contents_parser_class!" do
 
-    let(:parser) { FactoryGirl.create(:parser) }
+    let(:parser) { FactoryBot.create(:parser) }
 
     it "replaces the class name in the content" do
       parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
@@ -43,7 +43,7 @@ describe Parser::TemplateHelpers do
 
   describe "#apply_parser_template!" do
 
-    let(:parser) { FactoryGirl.build(:parser, name: "Nz On Screen", strategy: "xml")  }
+    let(:parser) { FactoryBot.build(:parser, name: "Nz On Screen", strategy: "xml")  }
 
     it "should initialize the parsers content parser class" do
       parser.content = nil

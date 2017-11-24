@@ -15,7 +15,7 @@ describe Versioned do
     LinkCheckRule.stub(:create)
   end
 
-  let(:parser) { FactoryGirl.create(:parser) }
+  let(:parser) { FactoryBot.create(:parser) }
 
   describe "#last_edited_by" do
     it "should return the last edited by" do
@@ -52,7 +52,7 @@ describe Versioned do
   end
 
   describe "#save_with_version" do
-    let(:parser) { FactoryGirl.build(:parser, strategy: "json", name: "Natlib") }
+    let(:parser) { FactoryBot.build(:parser, strategy: "json", name: "Natlib") }
 
     context "valid parser" do
       before(:each) do

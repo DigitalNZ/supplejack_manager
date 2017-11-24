@@ -11,7 +11,7 @@ require 'spec_helper'
 describe ParserTemplatesController do
 	let(:parser_template) { instance_double(ParserTemplate, name: "Copyright").as_null_object }
 	let(:user)          { instance_double(User).as_null_object }
-  # let(:user)            { FactoryGirl.create(:user) }
+  # let(:user)            { FactoryBot.create(:user) }
 
 	before(:each) do
     controller.stub(:authenticate_user!) { true }
