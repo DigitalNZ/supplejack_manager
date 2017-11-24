@@ -45,7 +45,7 @@ describe ParserVersionsController do
     end
 
     it "initializes a harvest job with parser_id, version_id, and user" do
-      HarvestJob.should_receive(:build).with(parser_id: "1", version_id: "2", user_id: "3") { harvest_job }
+      HarvestJob.should_receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
       get :show, id: 1, parser_id: 1
       assigns(:harvest_job).should eq harvest_job
     end
@@ -53,7 +53,7 @@ describe ParserVersionsController do
 
   describe "PUT update" do
     it "updates the version" do
-      version.should_receive(:update_attributes).with({"tags" => ["staging"]})
+      version.should_receive(:update_attributes).with('version' => { 'tags' => ['staging'] }, 'id' => '1', "parser_id"=>"1", "controller"=>"parser_versions", "action"=>"update")
       put :update, id: 1, parser_id: 1, version: {tags: ["staging"]}
     end
 
