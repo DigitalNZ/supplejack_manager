@@ -25,8 +25,8 @@ class ParserVersionsController < ApplicationController
   end
 
   def show
-    @harvest_job = HarvestJob.build(parser_id: @parser.id, version_id: @version.id, user_id: current_user.id)
-    @enrichment_job = EnrichmentJob.build(parser_id: @parser.id, version_id: @version.id, user_id: current_user.id)
+    @harvest_job = HarvestJob.build(parser_id: @parser.id, version_id: @version.id)
+    @enrichment_job = EnrichmentJob.build(parser_id: @parser.id, version_id: @version.id) 
     respond_with @version, serializer: ParserVersionSerializer
   end
 
