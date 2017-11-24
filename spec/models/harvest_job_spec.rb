@@ -51,7 +51,7 @@ describe HarvestJob do
     context "environment defined" do
       it "finds all active harvest jobs" do
         HarvestJob.should_receive(:find).with(:all, params: {status: "active", page: 1, environment: ["staging", "production"]})
-        HarvestJob.search.should eq jobs
+        HarvestJob.search
       end
 
       it "finds all finished harvest jobs" do
