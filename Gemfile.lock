@@ -1,4 +1,27 @@
 GIT
+  remote: https://github.com/DigitalNZ/supplejack_common.git
+  revision: 62054ac0939d22af6117d7d2a212b058321ed620
+  branch: gm/rails-5.1
+  specs:
+    supplejack_common (0.0.2)
+      actionpack
+      activesupport
+      chronic (<= 0.10.2)
+      dimensions
+      htmlentities
+      json (~> 1.8.3)
+      jsonpath (~> 0.5.0)
+      mimemagic
+      mongoid
+      nokogiri
+      rails-html-sanitizer
+      redis
+      rest-client (~> 1.6.7)
+      retriable
+      sanitize
+      tzinfo
+
+GIT
   remote: https://github.com/code4lib/ruby-oai.git
   revision: ebe92638c483813cd401c9588334d64ff46aae70
   ref: ebe92
@@ -25,27 +48,6 @@ GIT
       jquery-rails
       railties (>= 3.1)
       sass-rails
-
-PATH
-  remote: /webspace/supplejack/common
-  specs:
-    supplejack_common (0.0.2)
-      actionpack
-      activesupport
-      chronic (<= 0.10.2)
-      dimensions
-      htmlentities
-      json (~> 1.8.3)
-      jsonpath (~> 0.5.0)
-      mimemagic
-      mongoid
-      nokogiri
-      rails-html-sanitizer
-      redis
-      rest-client (~> 1.6.7)
-      retriable
-      sanitize
-      tzinfo
 
 GEM
   remote: https://rubygems.org/

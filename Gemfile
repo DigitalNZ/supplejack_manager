@@ -16,8 +16,8 @@ gem 'rails', '= 4.1.16'
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
-# gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git'
-gem 'supplejack_common', path: '/webspace/supplejack/common'
+gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', branch: 'gm/rails-5.1'
+# gem 'supplejack_common', path: '/webspace/supplejack/common'
 
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
