@@ -25,12 +25,14 @@ $(function() {
     }
   });
 
-  $("#main").on('click', 'a.records-preview-button', function() {
+  $("#main").on('click', 'a.records-preview-button', function(e) {
+    e.preventDefault();
+
     var $form, $link;
 
     $("#preview-area-spinner").show();
     $("#preview-area").html("");
-    $("#preview-modal").foundation('reveal', 'open');
+    $("#preview-modal").reveal();
     window.Harvester.myCodeMirror.save();
 
     $link = $(this);

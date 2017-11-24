@@ -61,6 +61,6 @@ class ParserVersionsController < ApplicationController
   end
 
   def parser_version_params
-    params.require(:version).permit!
+    params.permit!
   end
 end

@@ -10,6 +10,7 @@ class Version
   include Mongoid::Document
   include Mongoid::Timestamps::Created
   include Mongoid::Paranoia
+  include Mongoid::Attributes::Dynamic
   # include ActiveModel::SerializerSupport
 
   field :content,   type: String
