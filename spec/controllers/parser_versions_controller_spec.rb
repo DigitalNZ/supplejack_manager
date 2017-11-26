@@ -53,7 +53,7 @@ describe ParserVersionsController do
 
   describe "PUT update" do
     it "updates the version" do
-      version.should_receive(:update_attributes).with('version' => { 'tags' => ['staging'] }, 'id' => '1', "parser_id"=>"1", "controller"=>"parser_versions", "action"=>"update")
+      version.should_receive(:update_attributes).with({ 'tags' => ['staging']})
       put :update, id: 1, parser_id: 1, version: {tags: ["staging"]}
     end
 
