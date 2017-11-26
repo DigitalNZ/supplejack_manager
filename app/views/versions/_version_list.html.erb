@@ -11,7 +11,7 @@ http://digitalnz.org/supplejack
 <ul class="button-group tagging">
   <% if can? :run_harvest, @parser %>
     <% if @version %>
-      <% if APPLICATION_ENVS.include?(:production) %>
+      <% if APPLICATION_ENVS.include?('production') %>
         <% if @version.production? %>
           <li>
             <%= link_to "Untag as Production", send(:"#{versionable_path}_path", versionable, @version, version: {tags: (Array(@version.tags) - ["production"]).uniq}), method: :put, class: "button expand small production" %>
