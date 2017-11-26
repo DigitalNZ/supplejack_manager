@@ -26,12 +26,12 @@ class ParserVersionsController < ApplicationController
 
   def show
     @harvest_job = HarvestJob.build(parser_id: @parser.id, version_id: @version.id)
-    @enrichment_job = EnrichmentJob.build(parser_id: @parser.id, version_id: @version.id) 
+    @enrichment_job = EnrichmentJob.build(parser_id: @parser.id, version_id: @version.id)
     respond_with @version, serializer: ParserVersionSerializer
   end
 
   def update
-    @version.update_attributes(parser_version_params)
+    @version.update_attributes(parser_version_params[:version])
     @version.post_changes
     redirect_to parser_parser_version_path(@parser, @version)
   end
