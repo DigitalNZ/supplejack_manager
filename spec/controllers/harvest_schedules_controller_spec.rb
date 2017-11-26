@@ -53,6 +53,11 @@ describe HarvestSchedulesController do
         .with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
         headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=workerkey', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'})
         .to_return(status: 200, body: '', headers: {})
+
+        stub_request(:post, "http://127.0.0.1:3002/harvest_schedules.json")
+          .with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
+              headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=<production worker key>', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'})
+          .to_return(status: 200, body: "", headers: {})
       end
 
       it 'initializes a new harvest schedule' do
