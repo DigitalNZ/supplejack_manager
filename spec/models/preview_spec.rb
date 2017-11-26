@@ -15,13 +15,6 @@ describe Preview do
 
   @preview = { preview: { id: 1 } }.to_json
 
-  ActiveResource::HttpMock.respond_to do |mock|
-    mock.post '/previews.json', {
-      'Authorization' => 'Basic MTIzNDU6',
-      'Content-Type' => 'application/json'
-    }, @preview
-  end
-
   describe '#api_record_json' do
     before { preview.stub(:api_record) { '{"title":"Json!"}' } }
     it 'returns the json in a pretty format' do

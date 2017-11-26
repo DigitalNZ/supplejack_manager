@@ -11,7 +11,8 @@
 source 'https://rubygems.org'
 
 # gem 'rails', '~> 3.2.22.2'
-gem 'rails', '= 4.1.16'
+# gem 'rails', '= 4.1.16'
+gem 'rails', '= 4.2.10'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
@@ -22,6 +23,7 @@ gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.gi
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
 
+gem 'responders', '~> 2.0'
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'mongoid', '~> 5'
@@ -64,6 +66,7 @@ group :development do
   gem 'unicorn-rails'
   gem 'traceroute'
   gem 'rubocop', require: false
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do

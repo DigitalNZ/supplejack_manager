@@ -48,36 +48,42 @@ describe HarvestSchedulesController do
   end
 
   describe 'POST create' do
-    it 'initializes a new harvest schedule'
-      # HarvestSchedule.should_receive(:new).with('cron' => '* * * * *') { schedule }
-      # post :create, harvest_schedule: { cron: '* * * * *' }, environment: 'staging'
-    # end
+    before do
+      stub_request(:post, 'http://127.0.0.1:3002/harvest_schedules.json')
+        .with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
+        headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=workerkey', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'})
+        .to_return(status: 200, body: '', headers: {})
+      end
 
-    it 'should redirect to the index'
-      # post :create, harvest_schedule: {cron: "* * * * *"}, environment: "staging"
-      # response.should redirect_to(environment_harvest_schedules_path("staging"))
-    # end
+      it 'initializes a new harvest schedule' do
+        post :create, harvest_schedule: { cron: '* * * * *', parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: 'staging'
+      end
+
+      it 'should redirect to the index' do
+        post :create, harvest_schedule: {cron: "* * * * *", parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: "staging"
+        response.should redirect_to(environment_harvest_schedules_path("staging"))
+      end
+    end
+
+    describe "PUT Update" do
+      before(:each) do
+        HarvestSchedule.stub(:find).with("1") { schedule }
+      end
+
+      it "finds the harvest schedule" do
+        HarvestSchedule.should_receive(:find).with("1") { schedule }
+        put :update, id: 1, environment: "staging"
+        assigns(:harvest_schedule).should eq schedule
+      end
+
+      it "should update the attributes" do
+        schedule.should_receive(:update_attributes).with({"cron" => "1 1 1 1 1"})
+        put :update, id: 1, harvest_schedule: {cron: "1 1 1 1 1"}, environment: "staging"
+      end
+
+      it "should redirect to the index" do
+        put :update, id: 1, harvest_schedule: {cron: "* * * * *"}, environment: "staging"
+        response.should redirect_to(environment_harvest_schedules_path("staging"))
+      end
+    end
   end
-
-  describe "PUT Update" do
-    before(:each) do
-      HarvestSchedule.stub(:find).with("1") { schedule }
-    end
-
-    it "finds the harvest schedule" do
-      HarvestSchedule.should_receive(:find).with("1") { schedule }
-      put :update, id: 1, environment: "staging"
-      assigns(:harvest_schedule).should eq schedule
-    end
-
-    it "should update the attributes" do
-      schedule.should_receive(:update_attributes).with({"cron" => "1 1 1 1 1"})
-      put :update, id: 1, harvest_schedule: {cron: "1 1 1 1 1"}, environment: "staging"
-    end
-
-    it "should redirect to the index" do
-      put :update, id: 1, harvest_schedule: {cron: "* * * * *"}, environment: "staging"
-      response.should redirect_to(environment_harvest_schedules_path("staging"))
-    end
-  end
-end

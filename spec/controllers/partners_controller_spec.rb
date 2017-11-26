@@ -21,11 +21,11 @@ describe PartnersController do
   end
 
   describe "GET 'index'" do
-    it 'assigns all partners to @partners'
-    #   expect(Partner).to receive(:all) { partners }
-    #   get :index
-    #   expect(assigns(:partners)).to eq partners
-    # end
+    it 'assigns all partners to @partners' do
+      expect(Partner).to receive(:all) { partners }
+      get :index
+      expect(assigns(:partners)).to eq partners
+    end
 
     it 'renders the index view' do
       get :index

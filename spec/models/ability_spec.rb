@@ -24,7 +24,7 @@ describe Ability do
     @source = FactoryBot.create(:source, partner: @partner)
     @parser = FactoryBot.create(:parser, source: @source)
     @harvest_schedule = HarvestSchedule.create(parser_id: @parser.id, recurrent: false)
-    @link_check_rule = instance_double(LinkCheckRule, source_id: @source.id).as_null_object
+    @link_check_rule = FactoryBot.build(:link_check_rule, source_id: @source.id)
   end
 
   describe 'user' do
@@ -122,10 +122,10 @@ describe Ability do
         user_ability.should be_able_to(:create, LinkCheckRule)
       end
 
-      it "should be able to update the link check rule"
-        # user.update_attribute(:manage_partners, [@partner.id.to_s])
-        # user_ability.should be_able_to(:update, @link_check_rule)
-      # end
+      it 'should be able to update the link check rule' do
+        user.update_attribute(:manage_partners, [@partner.id.to_s])
+        user_ability.should be_able_to(:update, @link_check_rule)
+      end
     end
 
     it "should not be read collection_record" do

@@ -28,10 +28,6 @@ describe CollectionStatistics do
 
 	@collection_statistics  = { :collection_rules => { source_id: "source_id" } }.to_json
 
-  ActiveResource::HttpMock.respond_to do |mock|
-    mock.post "/collection_rules.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @collection_statistics
-  end
-
 	describe "source" do
 
 		let(:collection_statistics) { CollectionStatistics.new }

@@ -14,10 +14,6 @@ describe LinkCheckRule do
 
 	@link_check_rule  = { :link_check_rule => { source_id: "source_id", active: true } }.to_json
 
-  ActiveResource::HttpMock.respond_to do |mock|
-    mock.post "/link_check_rule.json", {"Authorization" => "Basic MTIzNDU6", "Content-Type" => "application/json"}, @link_check_rule
-  end
-
   before do
     Partner.any_instance.stub(:update_apis)
     Source.any_instance.stub(:update_apis)
