@@ -10,7 +10,7 @@ require 'spec_helper'
 
 RSpec.describe Partner do
   before do
-    RestClient.stub(:post)
+    allow(RestClient).to receive(:post)
   end
 
   describe 'validations' do

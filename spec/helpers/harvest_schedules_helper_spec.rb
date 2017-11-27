@@ -19,29 +19,29 @@ describe HarvestSchedulesHelper do
 
   context '#harvest_schedule_frequency' do
     it "should generate the text" do
-      helper.harvest_schedule_frequency(harvest_schedule).should eq 'monthly at 13:46 (46 13 1 * *)'
+      expect(helper.harvest_schedule_frequency(harvest_schedule)).to eq 'monthly at 13:46 (46 13 1 * *)'
     end
   end
 
   context '#pause_resume_class_for' do
     it 'returns pause when status is active' do
-      helper.pause_resume_class_for(harvest_schedule).should eq 'pause'
+      expect(helper.pause_resume_class_for(harvest_schedule)).to eq 'pause'
     end
 
     it 'returns resume when status is paused' do
-      harvest_schedule.stub(:status) { 'paused' }
-      helper.pause_resume_class_for(harvest_schedule).should eq 'resume'
+      allow(harvest_schedule).to receive(:status) { 'paused' }
+      expect(helper.pause_resume_class_for(harvest_schedule)).to eq 'resume'
     end
   end
 
   context '#pause_resume_value_for' do
     it 'returns paused when status is active' do
-      helper.pause_resume_value_for(harvest_schedule).should eq 'paused'
+      expect(helper.pause_resume_value_for(harvest_schedule)).to eq 'paused'
     end
 
     it 'returns active when status is paused' do
-      harvest_schedule.stub(:status) { 'paused' }
-      helper.pause_resume_value_for(harvest_schedule).should eq 'active'
+      allow(harvest_schedule).to receive(:status) { 'paused' }
+      expect(helper.pause_resume_value_for(harvest_schedule)).to eq 'active'
     end
   end
 end

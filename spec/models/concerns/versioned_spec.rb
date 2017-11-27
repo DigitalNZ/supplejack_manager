@@ -10,22 +10,22 @@ require 'spec_helper'
 
 describe Versioned do
   before do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
-    LinkCheckRule.stub(:create)
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
   end
 
   let(:parser) { FactoryBot.create(:parser) }
 
   describe "#last_edited_by" do
     it "should return the last edited by" do
-      parser.stub(:versions) { [double(:version, user: double(:user, name: "bill"))] }
-      parser.last_edited_by.should eq "bill"
+      allow(parser).to receive(:versions) { [double(:version, user: double(:user, name: "bill"))] }
+      expect(parser.last_edited_by).to eq "bill"
     end
 
     it "handles parsers with no versions" do
-      parser.stub(:versions) { [] }
-      parser.last_edited_by.should be_nil
+      allow(parser).to receive(:versions) { [] }
+      expect(parser.last_edited_by).to be_nil
     end
   end
 
@@ -40,13 +40,13 @@ describe Versioned do
 
     context "production environment" do
       it "returns the most recent version tagged with production" do
-        parser.current_version(:production).should eq parser.versions[1]
+        expect(parser.current_version(:production)).to eq parser.versions[1]
       end
     end
 
     context "test environment" do
       it "returns the most recent version regardless of tags" do
-        parser.current_version(:test).should eq parser.versions[2]
+        expect(parser.current_version(:test)).to eq parser.versions[2]
       end
     end
   end
@@ -63,7 +63,7 @@ describe Versioned do
       context "content has not changed" do
 
         it "it should not trigger #save_with_version after save" do
-          parser.should_not_receive(:save_with_version)
+          expect(parser).not_to receive(:save_with_version)
           parser.save
         end
 
@@ -75,29 +75,29 @@ describe Versioned do
         end
 
         it "it should #save_with_version after save" do
-          parser.should_receive(:save_with_version)
+          expect(parser).to receive(:save_with_version)
           parser.save
         end
       end
 
       it "creates a new parser version" do
-        parser.versions.size.should eq 1
+        expect(parser.versions.size).to eq 1
       end
 
       it "copies the contents" do
-        @version.content.should eq parser.content
+        expect(@version.content).to eq parser.content
       end
 
       it "generates the version number" do
-        @version.version.should eq 1
+        expect(@version.version).to eq 1
       end
     end
 
     context "invalid parser" do
       it "doesnt generate a new version when saving fails" do
         parser.name = nil
-        parser.save.should be false
-        parser.versions.should be_empty
+        expect(parser.save).to be false
+        expect(parser.versions).to be_empty
       end
     end
   end
@@ -106,7 +106,7 @@ describe Versioned do
     it "finds the version" do
       parser.save
       version = parser.versions.first
-      parser.find_version(version.id).should eq version
+      expect(parser.find_version(version.id)).to eq version
     end
   end
 

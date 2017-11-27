@@ -16,14 +16,14 @@ describe CollectionStatistics do
 
 	it "should convert the active resource object into a hash of dates with counts" do
 	  index_stats = CollectionStatistics.index_statistics([stats_obj_1, stats_obj_2, stats_obj_3])
-	  index_stats[Date.today][:suppressed].should eq(8)
-	  index_stats[Date.today][:activated].should eq(6)
-	  index_stats[Date.today][:deleted].should eq(9)
+	  expect(index_stats[Date.today][:suppressed]).to eq(8)
+	  expect(index_stats[Date.today][:activated]).to eq(6)
+	  expect(index_stats[Date.today][:deleted]).to eq(9)
 	end
 
 	it "should handle an empty array" do
 	  index_stats = CollectionStatistics.index_statistics([])
-	  index_stats.should eq({})
+	  expect(index_stats).to eq({})
 	end
 
 	@collection_statistics  = { :collection_rules => { source_id: "source_id" } }.to_json
@@ -34,19 +34,19 @@ describe CollectionStatistics do
 		let(:source) { FactoryBot.create(:source) }
 
 		before do
-      Partner.any_instance.stub(:update_apis)
-      Source.any_instance.stub(:update_apis)
-      LinkCheckRule.stub(:create)
-      collection_statistics.stub(:source_id) { 'source_id' }
+      allow_any_instance_of(Partner).to receive(:update_apis)
+      allow_any_instance_of(Source).to receive(:update_apis)
+      allow(LinkCheckRule).to receive(:create)
+      allow(collection_statistics).to receive(:source_id) { 'source_id' }
 		end
 
 		it "shound find the source with the collection statistics source id" do
-			Source.should_receive(:find_by).with(source_id: 'source_id') { source }
-		  collection_statistics.source.should eq source
+			expect(Source).to receive(:find_by).with(source_id: 'source_id') { source }
+		  expect(collection_statistics.source).to eq source
 		end
 
 		it "returns nil if it can not find the source" do
-		  collection_statistics.source.should be_nil
+		  expect(collection_statistics.source).to be_nil
 		end
 	end
 

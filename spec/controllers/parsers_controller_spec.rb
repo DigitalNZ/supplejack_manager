@@ -14,31 +14,31 @@ describe ParsersController do
   let(:user) { instance_double(User, id: '1234').as_null_object }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
   describe "GET 'index'" do
     it 'finds all the parser configurations' do
-      Parser.should_receive(:all) { [parser] }
+      expect(Parser).to receive(:all) { [parser] }
       get :index
-      assigns(:parsers).should eq [parser]
+      expect(assigns(:parsers)).to eq [parser]
     end
   end
 
   describe "GET show" do
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("1234") { parser }
+      expect(Parser).to receive(:find).with("1234") { parser }
       get :show, id: "1234"
-      assigns(:parser).should eq parser
+      expect(assigns(:parser)).to eq parser
     end
   end
 
   describe "GET 'new'" do
     it "initializes a new parser" do
-      Parser.should_receive(:new) { parser }
+      expect(Parser).to receive(:new) { parser }
       get :new
-      assigns(:parser).should eq parser
+      expect(assigns(:parser)).to eq parser
     end
   end
 
@@ -47,132 +47,132 @@ describe ParsersController do
     let(:user) { instance_double(User, id: '333').as_null_object }
 
     before(:each) do
-      Parser.stub(:find) { parser }
+      allow(Parser).to receive(:find) { parser }
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("1234") { parser }
+      expect(Parser).to receive(:find).with("1234") { parser }
       get :edit, id: "1234"
-      assigns(:parser).should eq parser
+      expect(assigns(:parser)).to eq parser
     end
 
     it "initializes a harvest_job" do
-      HarvestJob.should_receive(:from_parser).with(parser, user) { job }
+      expect(HarvestJob).to receive(:from_parser).with(parser, user) { job }
       get :edit, id: "1234"
-      assigns(:harvest_job).should eq job
+      expect(assigns(:harvest_job)).to eq job
     end
   end
 
   describe "GET 'create'" do
     before do
-      Parser.stub(:new) { parser }
-      parser.stub(:save) { true }
+      allow(Parser).to receive(:new) { parser }
+      allow(parser).to receive(:save) { true }
     end
 
     it "initializes a new parser" do
-      Parser.should_receive(:new).with({"name" => "Tepapa"}) { parser }
+      expect(Parser).to receive(:new).with({"name" => "Tepapa"}) { parser }
       post :create, parser: {name: "Tepapa"}
     end
 
     it "saves the parser" do
-      parser.should_receive(:save)
+      expect(parser).to receive(:save)
       post :create, parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
-      before { parser.stub(:save) { true }}
+      before { allow(parser).to receive(:save) { true }}
 
       it "redirects to edit page" do
         post :create, parser: {name: "Tepapa"}
-        response.should redirect_to edit_parser_path("1234")
+        expect(response).to redirect_to edit_parser_path("1234")
       end
     end
 
     context "invalid parser" do
-      before { parser.stub(:save) { false }}
+      before { allow(parser).to receive(:save) { false }}
 
       it "renders the edit action" do
         post :create, parser: {name: "Tepapa"}
-        response.should render_template(:new)
+        expect(response).to render_template(:new)
       end
     end
   end
 
   describe "GET 'update'" do
     before do
-      Parser.stub(:find) { parser }
-      parser.stub(:update_attributes) { true }
+      allow(Parser).to receive(:find) { parser }
+      allow(parser).to receive(:update_attributes) { true }
     end
 
     it "finds an existing parser " do
-      Parser.should_receive(:find).with("1234") { parser }
+      expect(Parser).to receive(:find).with("1234") { parser }
       put :update, id: "1234", parser: { name: '' }
-      assigns(:parser).should eq parser
+      expect(assigns(:parser)).to eq parser
     end
 
     it "updates the parser attributes" do
-      parser.should_receive("attributes=").with({"name" => "Tepapa"})
+      expect(parser).to receive("attributes=").with({"name" => "Tepapa"})
       put :update, id: "1234", parser: {name: "Tepapa"}
     end
 
     it "saves the parser" do
-      parser.should_receive(:save)
+      expect(parser).to receive(:save)
       put :update, id: "1234", parser: {name: "Tepapa"}
     end
 
     context "valid parser" do
-      before { parser.stub(:save) { true }}
+      before { allow(parser).to receive(:save) { true }}
 
       it "redirects to edit page" do
         put :update, id: "1234", parser: { name: '' }
-        response.should redirect_to edit_parser_path("1234")
+        expect(response).to redirect_to edit_parser_path("1234")
       end
     end
 
     context "invalid parser" do
-      before { parser.stub(:save) { false }}
+      before { allow(parser).to receive(:save) { false }}
 
       it "renders the edit action" do
         put :update, id: "1234", parser: { name: '' }
-        response.should render_template(:edit)
+        expect(response).to render_template(:edit)
       end
     end
   end
 
   describe "GET 'destroy'" do
     before do
-      Parser.stub(:find) { parser }
-      parser.stub(:destroy) { true }
+      allow(Parser).to receive(:find) { parser }
+      allow(parser).to receive(:destroy) { true }
     end
 
     context "job not running for parser" do
 
-      before { parser.stub(:running_jobs?) { false } }
+      before { allow(parser).to receive(:running_jobs?) { false } }
 
       it "finds an existing parser " do
-        Parser.should_receive(:find).with("1234") { parser }
+        expect(Parser).to receive(:find).with("1234") { parser }
         delete :destroy, id: "1234"
-        assigns(:parser).should eq parser
+        expect(assigns(:parser)).to eq parser
       end
 
       it "destroys the parser config" do
-        parser.should_receive(:destroy)
+        expect(parser).to receive(:destroy)
         delete :destroy, id: "1234"
       end
     end
 
     it "does not destroy if there are currently running jobs" do
-      parser.stub(:running_jobs?) { true }
-      parser.should_not_receive(:destroy)
+      allow(parser).to receive(:running_jobs?) { true }
+      expect(parser).not_to receive(:destroy)
       delete :destroy, id: "1234"
     end
   end
 
   describe "GET 'allow_flush'" do
     before do
-      Parser.stub(:find) { parser }
-      parser.stub(:allow_full_and_flush) { true }
-      parser.stub(:save) { true }
+      allow(Parser).to receive(:find) { parser }
+      allow(parser).to receive(:allow_full_and_flush) { true }
+      allow(parser).to receive(:save) { true }
     end
 
     it 'sets the allow_full_and_flush to true' do

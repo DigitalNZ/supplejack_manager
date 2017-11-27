@@ -15,9 +15,9 @@ describe Ability do
   let(:admin_ability) { Ability.new(FactoryBot.create(:user, role: 'admin')) }
 
   before(:each) do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:create_link_check_rule)
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:create_link_check_rule)
 
     # Can't use let() as they are invoked before above stubs
     @partner = FactoryBot.create(:partner)
@@ -29,20 +29,20 @@ describe Ability do
 
   describe 'user' do
     it 'should be able to read everything' do
-      user_ability.should be_able_to(:read, Parser)
+      expect(user_ability).to be_able_to(:read, Parser)
     end
 
     it "should not be able to read collection_record" do
-      user_ability.should_not be_able_to(:read, :collection_record)
+      expect(user_ability).not_to be_able_to(:read, :collection_record)
     end
 
     describe "users" do
       it "should be able to update own user" do
-        user_ability.should be_able_to(:update, user)
+        expect(user_ability).to be_able_to(:update, user)
       end
 
       it "should not be able to update other users" do
-        user_ability.should_not be_able_to(:update, FactoryBot.build(:user))
+        expect(user_ability).not_to be_able_to(:update, FactoryBot.build(:user))
       end
     end
 
@@ -52,12 +52,12 @@ describe Ability do
       }
 
       it "should be able to create data sources" do
-        user_ability.should be_able_to(:create, Source)
+        expect(user_ability).to be_able_to(:create, Source)
       end
 
       it "should be able to update the data source" do
         user.update_attribute(:manage_partners, [@partner.id.to_s])
-        user_ability.should be_able_to(:update, @source)
+        expect(user_ability).to be_able_to(:update, @source)
       end
     end
 
@@ -67,7 +67,7 @@ describe Ability do
       }
 
       it "should be able to create Parsers" do
-        user_ability.should be_able_to(:create, Parser)
+        expect(user_ability).to be_able_to(:create, Parser)
       end
 
       context "manage_partners" do
@@ -76,25 +76,25 @@ describe Ability do
         }
 
         it 'should be able to update the parser' do
-          user_ability.should be_able_to(:update, @parser)
+          expect(user_ability).to be_able_to(:update, @parser)
         end
 
         it 'should be able to preview the parser' do
-          user_ability.should be_able_to(:preview, @parser)
+          expect(user_ability).to be_able_to(:preview, @parser)
         end
       end
 
       it "should be able to create Parser Templates" do
-        user_ability.should be_able_to(:create, ParserTemplate)
+        expect(user_ability).to be_able_to(:create, ParserTemplate)
       end
 
       it "should be able to create Snippets" do
-        user_ability.should be_able_to(:create, Snippet)
+        expect(user_ability).to be_able_to(:create, Snippet)
       end
 
       it "should be able to run harvests for specific partners" do
         user.update_attribute(:run_harvest_partners, [@parser.partner.id.to_s])
-        user_ability.should be_able_to(:run_harvest, @parser)
+        expect(user_ability).to be_able_to(:run_harvest, @parser)
       end
     end
 
@@ -104,12 +104,12 @@ describe Ability do
       }
 
       it "should be able to create Harvest Schedules" do
-        user_ability.should be_able_to(:create, HarvestSchedule)
+        expect(user_ability).to be_able_to(:create, HarvestSchedule)
       end
 
       it "should be able to create the harvest schedule" do
         user.update_attribute(:manage_partners, [@partner.id.to_s])
-        user_ability.should be_able_to(:update, @harvest_schedule)
+        expect(user_ability).to be_able_to(:update, @harvest_schedule)
       end
     end
 
@@ -119,17 +119,17 @@ describe Ability do
       }
 
       it "should be able to create Link Check Rules" do
-        user_ability.should be_able_to(:create, LinkCheckRule)
+        expect(user_ability).to be_able_to(:create, LinkCheckRule)
       end
 
       it 'should be able to update the link check rule' do
         user.update_attribute(:manage_partners, [@partner.id.to_s])
-        user_ability.should be_able_to(:update, @link_check_rule)
+        expect(user_ability).to be_able_to(:update, @link_check_rule)
       end
     end
 
     it "should not be read collection_record" do
-      user_ability.should_not be_able_to(:read, :collection_record)
+      expect(user_ability).not_to be_able_to(:read, :collection_record)
     end
   end
 end

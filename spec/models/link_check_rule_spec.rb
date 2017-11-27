@@ -15,22 +15,22 @@ describe LinkCheckRule do
 	@link_check_rule  = { :link_check_rule => { source_id: "source_id", active: true } }.to_json
 
   before do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
-    LinkCheckRule.stub(:create)
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
   end
 
 	describe "source" do
 
-		before { link_check_rule.stub(:source_id) { 'abc123' } }
+		before { allow(link_check_rule).to receive(:source_id) { 'abc123' } }
 
 		it "returns the source the collection rules are related to" do
-			Source.should_receive(:find).with( 'abc123') { source }
-		  link_check_rule.source.should eq source
+			expect(Source).to receive(:find).with( 'abc123') { source }
+		  expect(link_check_rule.source).to eq source
 		end
 
 		it "returns nil if it can not find the source" do
-		  link_check_rule.source.should be_nil
+		  expect(link_check_rule.source).to be_nil
 		end
 	end
 end

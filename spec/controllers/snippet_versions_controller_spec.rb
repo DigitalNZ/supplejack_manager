@@ -14,48 +14,48 @@ describe SnippetVersionsController do
   let(:version) { instance_double(Version, id: '2').as_null_object }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
-    Snippet.stub(:find).with(anything) { snippet }
-    snippet.stub(:find_version) { version }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
+    allow(Snippet).to receive(:find).with(anything) { snippet }
+    allow(snippet).to receive(:find_version) { version }
   end
 
   describe 'GET current' do
     it 'gets the current version of the snippet' do
-      snippet.should_receive(:current_version).with('staging') { version }
+      expect(snippet).to receive(:current_version).with('staging') { version }
       get :current, snippet_id: 1, environment: 'staging', format: 'json'
-      assigns(:version).should eq version
+      expect(assigns(:version)).to eq version
     end
   end
 
   describe "GET show" do
     it "finds the snippet" do
-      Snippet.should_receive(:find).with("1") { snippet }
+      expect(Snippet).to receive(:find).with("1") { snippet }
       get :show, snippet_id: 1, id: 1
-      assigns(:snippet).should eq snippet
+      expect(assigns(:snippet)).to eq snippet
     end
 
     it "finds the version of the snippet" do
-      snippet.should_receive(:find_version).with("1") { version }
+      expect(snippet).to receive(:find_version).with("1") { version }
       get :show, snippet_id: 1, id: 1
-      assigns(:version).should eq version
+      expect(assigns(:version)).to eq version
     end
   end
 
   describe "PUT update" do
     it "updates the version" do
-      version.should_receive(:update_attributes).with("tags" => ["staging"])
+      expect(version).to receive(:update_attributes).with("tags" => ["staging"])
       put :update, id: 1, snippet_id: 1, version: { tags: ["staging"] }
     end
 
     it "posts a message to the changes app" do
-      version.should_receive(:post_changes)
+      expect(version).to receive(:post_changes)
       put :update, id: 1, snippet_id: 1, version: { tags: ["staging"] }
     end
 
     it "redirects to the version path" do
       put :update, id: 1, snippet_id: 1, version: { tags: ["staging"] }
-      response.should redirect_to snippet_snippet_version_path(snippet, version)
+      expect(response).to redirect_to snippet_snippet_version_path(snippet, version)
     end
   end
 

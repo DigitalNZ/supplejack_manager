@@ -16,8 +16,8 @@ describe HarvestSchedule do
   context "class methods" do
     describe ".find_from_environment" do
       it "should perform the normal find_all operation but for the specified environment" do
-        HarvestSchedule.should_receive(:change_worker_env!)
-        HarvestSchedule.should_receive(:find).with(:all, params: {:harvest_schedule => {}})
+        expect(HarvestSchedule).to receive(:change_worker_env!)
+        expect(HarvestSchedule).to receive(:find).with(:all, params: {:harvest_schedule => {}})
         HarvestSchedule.find_from_environment({},'staging')
       end
     end
@@ -29,22 +29,22 @@ describe HarvestSchedule do
     let(:mock_schedule_3) { double(:schedule, id: 3) }
 
     context "staging" do
-      before { Rails.stub(:env) { "staging" } }
+      before { allow(Rails).to receive(:env) { "staging" } }
       it "should send a delete request for all of the schedules associated with the given parser" do
-        HarvestSchedule.should_receive(:find_from_environment).with({parser_id: parser.id}, 'staging') { [mock_schedule_1, mock_schedule_2] }
-        HarvestSchedule.should_receive(:delete).with(mock_schedule_1.id)
-        HarvestSchedule.should_receive(:delete).with(mock_schedule_2.id)
-        HarvestSchedule.should_receive(:find_from_environment).with({parser_id: parser.id}, 'production') { [mock_schedule_3] }
-        HarvestSchedule.should_receive(:delete).with(mock_schedule_3.id)
+        expect(HarvestSchedule).to receive(:find_from_environment).with({parser_id: parser.id}, 'staging') { [mock_schedule_1, mock_schedule_2] }
+        expect(HarvestSchedule).to receive(:delete).with(mock_schedule_1.id)
+        expect(HarvestSchedule).to receive(:delete).with(mock_schedule_2.id)
+        expect(HarvestSchedule).to receive(:find_from_environment).with({parser_id: parser.id}, 'production') { [mock_schedule_3] }
+        expect(HarvestSchedule).to receive(:delete).with(mock_schedule_3.id)
         HarvestSchedule.destroy_all_for_parser(parser.id)
       end
     end
 
     context "development" do
-      before { Rails.stub(:env) { "development" } }
+      before { allow(Rails).to receive(:env) { "development" } }
       it "should send a delete request for all of the schedules associated with the given parser" do
-        HarvestSchedule.should_receive(:find_from_environment).with({parser_id: parser.id}, 'development') { [mock_schedule_3] }
-        HarvestSchedule.should_receive(:delete).with(mock_schedule_3.id)
+        expect(HarvestSchedule).to receive(:find_from_environment).with({parser_id: parser.id}, 'development') { [mock_schedule_3] }
+        expect(HarvestSchedule).to receive(:delete).with(mock_schedule_3.id)
         HarvestSchedule.destroy_all_for_parser(parser.id)
       end
     end
@@ -52,24 +52,24 @@ describe HarvestSchedule do
 
   describe "oai?" do
     context "without parser" do
-      before { schedule.stub(:parser) {nil} }
+      before { allow(schedule).to receive(:parser) {nil} }
 
       it "should return false" do
-        schedule.oai?.should be false
+        expect(schedule.oai?).to be false
       end
     end
 
     context "with parser" do
-      before { schedule.stub(:parser) { parser } }
+      before { allow(schedule).to receive(:parser) { parser } }
 
       it "should return true when is a oai parser" do
-        parser.stub(:oai?) { true }
-        schedule.oai?.should be true
+        allow(parser).to receive(:oai?) { true }
+        expect(schedule.oai?).to be true
       end
 
       it "should return false when is not a oai parser" do
-        parser.stub(:oai?) { false }
-        schedule.oai?.should be false
+        allow(parser).to receive(:oai?) { false }
+        expect(schedule.oai?).to be false
       end
     end
   end

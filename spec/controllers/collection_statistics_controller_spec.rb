@@ -15,24 +15,24 @@ describe CollectionStatisticsController do
 	let(:stats_index){ double(:stats_index) }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
 	describe "GET index" do
 		it "should get all of the collection statistics" do
-			CollectionStatistics.should_receive(:all) { [collection_statistics] }
-			CollectionStatistics.should_receive(:index_statistics).with([collection_statistics]) { stats_index }
+			expect(CollectionStatistics).to receive(:all) { [collection_statistics] }
+			expect(CollectionStatistics).to receive(:index_statistics).with([collection_statistics]) { stats_index }
 		  get :index, environment: "staging"
-		  assigns(:collection_statistics).should eq stats_index
+		  expect(assigns(:collection_statistics)).to eq stats_index
 		end
 	end
 
 	describe "GET show" do
 		it "should do a find :all with the day" do
-		  CollectionStatistics.should_receive(:find).with(:all, params: { collection_statistics: {day: Date.today.to_s} }) { collection_statistics }
+		  expect(CollectionStatistics).to receive(:find).with(:all, params: { collection_statistics: {day: Date.today.to_s} }) { collection_statistics }
 		  get :show, id: Date.today.to_s, environment: "staging"
-		  assigns(:collection_statistics).should eq collection_statistics
+		  expect(assigns(:collection_statistics)).to eq collection_statistics
 		end
 	end
 

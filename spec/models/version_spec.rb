@@ -27,7 +27,7 @@ describe Version do
       before { version.tags = ["staging"] }
 
       it "should return true" do
-        version.staging?.should be true
+        expect(version.staging?).to be true
       end
     end
 
@@ -35,7 +35,7 @@ describe Version do
       before { version.tags = ["production"] }
 
       it "should return false" do
-        version.staging?.should be false
+        expect(version.staging?).to be false
       end
     end
   end
@@ -45,7 +45,7 @@ describe Version do
       before { version.tags = ["production"] }
 
       it "should return true" do
-        version.production?.should be true
+        expect(version.production?).to be true
       end
     end
 
@@ -53,7 +53,7 @@ describe Version do
       before { version.tags = ["staging"] }
 
       it "should return false" do
-        version.production?.should be false
+        expect(version.production?).to be false
       end
     end
   end
@@ -64,7 +64,7 @@ describe Version do
       it "should post to changes app" do
         ENV['CHANGESAPP_HOST'] = 'http://test.host'
         version.tags = ["production"]
-        RestClient::Request.should_receive(:execute).with(anything())
+        expect(RestClient::Request).to receive(:execute).with(anything())
         version.post_changes
       end
     end
@@ -72,7 +72,7 @@ describe Version do
     context "untagged as production" do
       it "should not post to changes app" do
         version.tags = ["staging"]
-        RestClient::Request.should_not_receive(:execute).with(anything())
+        expect(RestClient::Request).not_to receive(:execute).with(anything())
         version.post_changes
       end
     end
@@ -81,31 +81,31 @@ describe Version do
   describe "#changes_payload" do
 
     it "should include component with a value of DNZ Harvester - Program" do
-      version.changes_payload.should include(component: "DNZ Harvester - Program")
+      expect(version.changes_payload).to include(component: "DNZ Harvester - Program")
     end
 
     it "should include description with a value of Test program: New version" do
       program.name = "Test program"
       version.message = "New version"
 
-      version.changes_payload.should include(description: "Test program: New version")
+      expect(version.changes_payload).to include(description: "Test program: New version")
     end
 
     it "should include the email of the user that saved the version" do
-      version.changes_payload.should include(email: "test@test.co.nz")
+      expect(version.changes_payload).to include(email: "test@test.co.nz")
     end
 
     it "should include the current time" do
-      version.changes_payload[:time].should_not be_nil
+      expect(version.changes_payload[:time]).not_to be_nil
     end
 
     it "should include the current Rails environment" do
-      version.changes_payload.should include(environment: "test")
+      expect(version.changes_payload).to include(environment: "test")
     end
 
     it "should include the current version number" do
       version.version = 2
-      version.changes_payload.should include(revision: 2)
+      expect(version.changes_payload).to include(revision: 2)
     end
   end
 end

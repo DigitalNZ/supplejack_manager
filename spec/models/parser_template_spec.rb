@@ -16,7 +16,7 @@ describe ParserTemplate do
   	[:name, :content].each do |field|
 	  	it "validates the presence of #{field}" do
 	  	  parser_template.send("#{field}=", nil)
-	  	  parser_template.should_not be_valid
+	  	  expect(parser_template).not_to be_valid
 	  	end
 	  end
 
@@ -24,7 +24,7 @@ describe ParserTemplate do
 	  	FactoryBot.create(:parser_template, name: "xml", content: "Bob")
 	  	parser_template.name = "xml"
 	  	parser_template.content = "jim"
-	  	parser_template.should_not be_valid
+	  	expect(parser_template).not_to be_valid
 	  end
   end
 end

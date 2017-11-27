@@ -10,9 +10,9 @@ require 'spec_helper'
 
 describe SourcesController do
   before do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
-    LinkCheckRule.stub(:create)
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
   end
 
   let(:partner) { FactoryBot.create(:partner) }
@@ -22,21 +22,21 @@ describe SourcesController do
   end
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
+    allow(controller).to receive(:authenticate_user!) { true }
   end
 
   describe "GET index" do
     it "assigns all sources as @sources" do
       source = Source.create! valid_attributes
       get :index, {}
-      assigns(:sources).should eq([source])
+      expect(assigns(:sources)).to eq([source])
     end
   end
 
   describe "GET new" do
     it "assigns a new source as @source" do
       get :new, {}
-      assigns(:source).should be_a_new(Source)
+      expect(assigns(:source)).to be_a_new(Source)
     end
   end
 
@@ -44,13 +44,13 @@ describe SourcesController do
     it "assigns the requested source as @source" do
       source = Source.create! valid_attributes
       get :edit, {:id => source.to_param}
-      assigns(:source).should eq(source)
+      expect(assigns(:source)).to eq(source)
     end
   end
 
   describe "POST create" do
     before(:each) {
-      controller.stub(:current_user) { FactoryBot.build(:user, role: 'admin') }
+      allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
     }
 
     describe 'with valid params' do
@@ -62,13 +62,13 @@ describe SourcesController do
 
       it 'assigns a newly created source as @source' do
         post :create, source: valid_attributes
-        assigns(:source).should be_a(Source)
-        assigns(:source).should be_persisted
+        expect(assigns(:source)).to be_a(Source)
+        expect(assigns(:source)).to be_persisted
       end
 
       it 'redirects to the sources page' do
         post :create, source: valid_attributes
-        response.should redirect_to sources_path
+        expect(response).to redirect_to sources_path
       end
 
       it 'creates a source with a nested contributor' do
@@ -80,68 +80,68 @@ describe SourcesController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
-        Source.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
         post :create, source: { name: '' }
-        assigns(:source).should be_a_new(Source)
+        expect(assigns(:source)).to be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
-        Source.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
         post :create, source: { name: '' }
-        response.should render_template('new')
+        expect(response).to render_template('new')
       end
     end
   end
 
   describe 'PUT update' do
     before(:each) {
-      controller.stub(:current_user) { FactoryBot.build(:user, role: 'admin') }
+      allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
     }
 
     describe 'with valid params' do
       it 'updates the requested source' do
         source = Source.create! valid_attributes
-        Source.any_instance.should_receive(:update_attributes).with(name: 'updated')
+        expect_any_instance_of(Source).to receive(:update_attributes).with(name: 'updated')
         put :update, { id: source.to_param, source: { name: 'updated' }}
       end
 
       it "assigns the requested source as @source" do
         source = Source.create! valid_attributes
         put :update, {:id => source.to_param, :source => valid_attributes}
-        assigns(:source).should eq(source)
+        expect(assigns(:source)).to eq(source)
       end
 
       it "redirects to the sources index" do
         source = Source.create! valid_attributes
         put :update, id: source.to_param, source: valid_attributes
-        response.should redirect_to sources_path
+        expect(response).to redirect_to sources_path
       end
     end
 
     describe "with invalid params" do
       it "assigns the source as @source" do
         source = Source.create! valid_attributes
-        Source.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
         put :update, id: source.to_param, source: { name: '' }
-        assigns(:source).should eq(source)
+        expect(assigns(:source)).to eq(source)
       end
 
       it "re-renders the 'edit' template" do
         source = Source.create! valid_attributes
-        Source.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
         put :update, id: source.to_param, source: { name: '' }
-        response.should render_template('edit')
+        expect(response).to render_template('edit')
       end
     end
 
     describe "GET reindex" do
       before(:each) {
-        controller.stub(:current_user) { FactoryBot.build(:user, role: 'admin') }
+        allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
       }
 
       it "calls reindex on api" do
         source = Source.create! valid_attributes
-        RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
+        expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
         get :reindex,  {:id => source.to_param, environment: 'test', date: "2013-09-12T01:49:51.067Z", format: :js}
       end
     end

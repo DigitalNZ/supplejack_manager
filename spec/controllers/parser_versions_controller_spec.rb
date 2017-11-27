@@ -17,54 +17,54 @@ describe ParserVersionsController do
   let(:enrichment_job) { instance_double(EnrichmentJob).as_null_object}
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
-    Parser.stub(:find).with("1") { parser }
-    parser.stub(:find_version) { version }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
+    allow(Parser).to receive(:find).with("1") { parser }
+    allow(parser).to receive(:find_version) { version }
   end
 
   describe "GET current" do
     it "finds the current version for an environment" do
-      parser.should_receive(:current_version).with("staging") { version }
+      expect(parser).to receive(:current_version).with("staging") { version }
       get :current, parser_id: 1, environment: "staging", format: "json"
-      assigns(:version).should eq version
+      expect(assigns(:version)).to eq version
     end
   end
 
   describe "GET Show" do
     it "finds the parser" do
-      Parser.should_receive(:find).with("1") { parser }
+      expect(Parser).to receive(:find).with("1") { parser }
       get :show, id: 1, parser_id: 1
-      assigns(:parser).should eq parser
+      expect(assigns(:parser)).to eq parser
     end
 
     it "finds the version" do
-      parser.should_receive(:find_version).with("1") { version }
+      expect(parser).to receive(:find_version).with("1") { version }
       get :show, id: 1, parser_id: 1
-      assigns(:version).should eq version
+      expect(assigns(:version)).to eq version
     end
 
     it "initializes a harvest job with parser_id, version_id, and user" do
-      HarvestJob.should_receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
+      expect(HarvestJob).to receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
       get :show, id: 1, parser_id: 1
-      assigns(:harvest_job).should eq harvest_job
+      expect(assigns(:harvest_job)).to eq harvest_job
     end
   end
 
   describe "PUT update" do
     it "updates the version" do
-      version.should_receive(:update_attributes).with({ 'tags' => ['staging']})
+      expect(version).to receive(:update_attributes).with({ 'tags' => ['staging']})
       put :update, id: 1, parser_id: 1, version: {tags: ["staging"]}
     end
 
     it "redirects to the version path" do
       put :update, id: 1, parser_id: 1, version: {tags: ["staging"]}
-      response.should redirect_to parser_parser_version_path(parser, version)
+      expect(response).to redirect_to parser_parser_version_path(parser, version)
     end
 
     context "posting to changes app" do
       it "post to changes app" do
-        version.should_receive(:post_changes)
+        expect(version).to receive(:post_changes)
         put :update, id: 1, parser_id: 1, version: { tags: ["production"] }
       end
     end
@@ -73,36 +73,36 @@ describe ParserVersionsController do
   # new_enrichment
   describe "new_enrichment" do
     it "creates a new enrichment job with parser_id, version_id, user and the environment" do
-      EnrichmentJob.should_receive(:new).with(parser_id: parser.id, version_id: version.id, user_id: user.id, environment: "staging") { enrichment_job }
+      expect(EnrichmentJob).to receive(:new).with(parser_id: parser.id, version_id: version.id, user_id: user.id, environment: "staging") { enrichment_job }
       get :new_enrichment, parser_id: parser.id, id: version.id, user_id: user.id, environment: "staging", format: :js
-      assigns(:enrichment_job).should eq enrichment_job
+      expect(assigns(:enrichment_job)).to eq enrichment_job
     end
   end
 
   describe "new_harvest" do
     it "creates a new Harvest job with with parser_id, version_id, user and the environment" do
-      HarvestJob.should_receive(:new).with(parser_id: parser.id, version_id: version.id, user_id: user.id, environment: "staging") { harvest_job }
+      expect(HarvestJob).to receive(:new).with(parser_id: parser.id, version_id: version.id, user_id: user.id, environment: "staging") { harvest_job }
       get :new_harvest, parser_id: parser.id, id: version.id, user_id: user.id, environment: "staging", format: :js
-      assigns(:harvest_job).should eq harvest_job
+      expect(assigns(:harvest_job)).to eq harvest_job
     end
   end
 
   describe "find_parser" do
     it "finds a parser with params[id]" do
-      controller.stub(:params) { {parser_id: "1"} }
-      Parser.should_receive(:find).with("1") { parser }
+      allow(controller).to receive(:params) { {parser_id: "1"} }
+      expect(Parser).to receive(:find).with("1") { parser }
       controller.send(:find_parser)
-      assigns(:parser).should eq parser
+      expect(assigns(:parser)).to eq parser
     end
   end
 
   describe "find_version" do
     it "finds a parser version with params[id]" do
-      controller.stub(:params) { {id: "1"} }
+      allow(controller).to receive(:params) { {id: "1"} }
       controller.instance_variable_set(:@parser, parser)
-      parser.should_receive(:find_version).with("1") { version }
+      expect(parser).to receive(:find_version).with("1") { version }
       controller.send(:find_version)
-      assigns(:version).should eq version
+      expect(assigns(:version)).to eq version
     end
   end
 

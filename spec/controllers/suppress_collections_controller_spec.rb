@@ -12,37 +12,37 @@ describe SuppressCollectionsController do
   let(:user) { instance_double(User, role: 'admin').as_null_object }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
   describe "GET 'index'" do
     it "should be successful" do
-      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
+      expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       get :index, environment: "development"
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "should request the blacklist collection and assign it to response" do
-      RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
+      expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       get :index, environment: "development"
     end
   end
 
   describe "PUT 'update'" do
     it "should update the source in the API to active" do
-      RestClient.should_receive(:put).with("#{ENV['API_HOST']}/harvester/sources/abc123", source: {status: 'active'}, api_key: ENV['HARVESTER_API_KEY'])
+      expect(RestClient).to receive(:put).with("#{ENV['API_HOST']}/harvester/sources/abc123", source: {status: 'active'}, api_key: ENV['HARVESTER_API_KEY'])
       put :update, id: 'abc123', environment: "development", status: 'active'
     end
 
     it "should redirect to suppress collections url" do
-      RestClient.stub(:put)
+      allow(RestClient).to receive(:put)
       put :update, id: 'abc123', environment: "development", source: {status: 'suppressed'}, api_key: ENV['HARVESTER_API_KEY']
       expect(response).to redirect_to environment_suppress_collections_path(environment: "development")
     end
 
     it "should handle RestClient errors" do
-      RestClient.stub(:put).and_raise(RestClient::Exception.new)
+      allow(RestClient).to receive(:put).and_raise(RestClient::Exception.new)
       put :update, id: 'abc123', environment: "development", status: 'suppressed', api_key: ENV['HARVESTER_API_KEY']
     end
   end

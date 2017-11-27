@@ -13,8 +13,8 @@ describe PreviewsController do
   let(:user) { instance_double(User, id: '1234').as_null_object }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
   describe 'GET show' do

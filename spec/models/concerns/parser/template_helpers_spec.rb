@@ -10,9 +10,9 @@ require 'spec_helper'
 
 describe Parser::TemplateHelpers do
   before do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
-    LinkCheckRule.stub(:create)
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
   end
 
   describe "update_contents_parser_class!" do
@@ -23,21 +23,21 @@ describe Parser::TemplateHelpers do
       parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
       parser.name =  "Nz On Screen"
       parser.update_contents_parser_class!
-      parser.content.should eq "class NzOnScreen < SupplejackCommon::Oai::Base"
+      expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Oai::Base"
     end
 
     it "sets the commit message" do
       parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
       parser.name =  "Nz On Screen"
       parser.update_contents_parser_class!
-      parser.message.should eq "Renamed parser class"
+      expect(parser.message).to eq "Renamed parser class"
     end
 
     it "replaces specific class names" do
       parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
       parser.name = "Bfm rss"
       parser.update_contents_parser_class!
-      parser.content.should eq "class BfmRss < SupplejackCommon::Oai::Base"
+      expect(parser.content).to eq "class BfmRss < SupplejackCommon::Oai::Base"
     end
   end
 
@@ -48,13 +48,13 @@ describe Parser::TemplateHelpers do
     it "should initialize the parsers content parser class" do
       parser.content = nil
       parser.apply_parser_template!
-      parser.content.should eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\nend"
+      expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\nend"
     end
 
     it "should not initialize if parsers content is not nil" do
       parser.content = "Hello World"
       parser.apply_parser_template!
-      parser.content.should eq "Hello World"
+      expect(parser.content).to eq "Hello World"
     end
 
     context "parser_template present" do
@@ -65,9 +65,9 @@ describe Parser::TemplateHelpers do
 
       it "should add the parser_templates content into the parsers content" do
         parser.content = nil
-        ParserTemplate.should_receive(:find_by_name).with("template") { parser_template }
+        expect(ParserTemplate).to receive(:find_by_name).with("template") { parser_template }
         parser.apply_parser_template!
-        parser.content.should eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\n\t#{parser_template.content}\n\nend"
+        expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\n\t#{parser_template.content}\n\nend"
       end
     end
   end

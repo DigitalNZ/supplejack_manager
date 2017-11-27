@@ -16,41 +16,41 @@ describe User do
 
     it 'should return only active users' do
       user.save!
-      User.active.count.should eq 1
+      expect(User.active.count).to eq 1
     end
   end
 
   describe 'validations' do
     it 'should be valid' do
-      user.should be_valid
+      expect(user).to be_valid
     end
 
     it 'should not be valid with an invalid role' do
       user.role = 'not valid'
-      user.should_not be_valid
+      expect(user).not_to be_valid
     end
   end
 
   describe 'admin?' do
     it 'should return true for an admin' do
       user.role = 'admin'
-      user.admin?.should be true
+      expect(user.admin?).to be true
     end
 
     it 'should return false for a user' do
       user.role = 'developer'
-      user.admin?.should be false
+      expect(user.admin?).to be false
     end
   end
 
   describe '#first_name' do
     it 'returns the first name' do
-      user.first_name.should eq 'Federico'
+      expect(user.first_name).to eq 'Federico'
     end
 
     it 'returns nil when name is not present' do
       user.name = nil
-      user.first_name.should be nil
+      expect(user.first_name).to be nil
     end
   end
 
@@ -58,14 +58,14 @@ describe User do
     context 'active user' do
       it 'should return true' do
         user.active = true
-        user.active_for_authentication?.should be true
+        expect(user.active_for_authentication?).to be true
       end
     end
 
     context 'in-active user' do
       it 'should return false' do
         user.active = false
-        user.active_for_authentication?.should be false
+        expect(user.active_for_authentication?).to be false
       end
     end
   end
@@ -73,7 +73,7 @@ describe User do
   describe 'run_harvest_partners=' do
     it 'should remove the blank entries' do
       user.run_harvest_partners=(['a', '', 'c'])
-      user.run_harvest_partners.should eq ['a', 'c']
+      expect(user.run_harvest_partners).to eq ['a', 'c']
     end
   end
 end

@@ -14,10 +14,10 @@ describe PartnersController do
   let(:user)     { FactoryBot.create(:user, role: 'admin') }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
   end
 
   describe "GET 'index'" do
@@ -79,13 +79,13 @@ describe PartnersController do
 
   describe "GET 'edit'" do
     it 'it should render the edit template' do
-      Partner.stub(:find).with("1") {partner}
+      allow(Partner).to receive(:find).with("1") {partner}
       get :edit, id: 1
       expect(response).to render_template(:edit)
     end
 
     it 'should should assign the partner to @partner' do
-      Partner.should_receive(:find).with("1") {partner}
+      expect(Partner).to receive(:find).with("1") {partner}
       get :edit, id: 1
       expect(assigns(:partner)).to eq partner
     end
@@ -93,7 +93,7 @@ describe PartnersController do
 
   describe "PUT 'update'" do
     before(:each) do
-      Partner.stub(:find) { partner }
+      allow(Partner).to receive(:find) { partner }
     end
 
     context 'valid input' do
