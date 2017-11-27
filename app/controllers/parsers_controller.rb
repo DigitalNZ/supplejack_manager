@@ -93,6 +93,6 @@ class ParsersController < ApplicationController
   def parser_params
     params
       .require(:parser)
-      .permit(:name, :partner, :source_id, :strategy, :parser_template, :message, :content)
+      .permit(:name, :partner, :source_id, :strategy, :parser_template_name, :message, :content)
   end
 end
