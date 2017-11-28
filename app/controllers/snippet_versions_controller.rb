@@ -41,6 +41,6 @@ class SnippetVersionsController < ApplicationController
   end
 
   def snippet_version_params
-    params.require(:version).permit!
+    params.permit!
   end
 end
