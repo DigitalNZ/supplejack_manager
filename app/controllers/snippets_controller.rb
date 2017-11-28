@@ -7,9 +7,9 @@
 # http://digitalnz.org/supplejack
 
 class SnippetsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: :current_version
 
-  skip_before_filter :authenticate_user!
+  skip_before_action :authenticate_user!
 
   respond_to :html, :json
 
@@ -52,6 +52,6 @@ class SnippetsController < ApplicationController
   end
 
   def snippet_params
-    params.require(:snippet).permit(:name, :content)
+    params.require(:snippet).permit(:name, :content, :environment)
   end
 end
