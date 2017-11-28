@@ -44,7 +44,7 @@ describe SnippetVersionsController do
 
   describe "PUT update" do
     it "updates the version" do
-      expect(version).to receive(:update_attributes).with("tags" => ["staging"])
+      expect(version).to receive(:update_attributes).with({"version"=>{"tags"=>["staging"]}, "id"=>"1", "snippet_id"=>"1", "controller"=>"snippet_versions", "action"=>"update"})
       put :update, id: 1, snippet_id: 1, version: { tags: ["staging"] }
     end
 
