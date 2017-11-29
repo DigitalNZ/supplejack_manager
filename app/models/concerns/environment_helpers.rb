@@ -43,7 +43,7 @@ module EnvironmentHelpers
     elsif params[:environment] == 'test'
       environment = 'staging'
     else
-      environment = params[:environment]
+      environment = params[:environment] || params[:env]
     end
 
     APPLICATION_ENVIRONMENT_VARIABLES[environment]
