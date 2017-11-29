@@ -58,7 +58,7 @@ class SourcesController < ApplicationController
   end
 
   def reindex
-    url = APPLICATION_ENVIRONMENT_VARIABLES[params[:environment]]['API_HOST']
+    url = APPLICATION_ENVIRONMENT_VARIABLES[params['env']]['API_HOST']
     RestClient.get("#{url}/harvester/sources/#{@source.id}/reindex", { params: { date: params[:date], api_key: fetch_env_vars['HARVESTER_API_KEY'] } })
   end
 

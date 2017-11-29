@@ -25,7 +25,7 @@ class SnippetVersionsController < ApplicationController
   end
 
   def update
-    @version.update_attributes(snippet_version_params)
+    @version.update_attributes(snippet_version_params[:version])
     @version.post_changes
     redirect_to snippet_snippet_version_path(@snippet, @version)
   end
