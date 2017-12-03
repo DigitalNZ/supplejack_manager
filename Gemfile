@@ -10,8 +10,6 @@
 
 source 'https://rubygems.org'
 
-# gem 'rails', '~> 3.2.22.2'
-# gem 'rails', '= 4.1.16'
 gem 'rails', '= 4.2.10'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
@@ -55,12 +53,10 @@ gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'compass-rails', '>= 1.0.3'
 gem 'zurb-foundation', '= 3.2.5'
-# gem 'foundation-rails', '= 5.5.3.2'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do
   gem 'quiet_assets', '>= 1.0.1'
-  # gem 'better_errors', '>= 0.2.0'
   gem 'binding_of_caller', '>= 0.6.8'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
@@ -71,7 +67,6 @@ group :development do
 end
 
 group :development, :test do
-  # gem 'pry-rails'
   gem 'pry-byebug'
   gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
@@ -81,7 +76,6 @@ end
 group :test do
   gem 'simplecov', require: false
   gem 'database_cleaner', '>= 1.3.0'
-  # gem 'email_spec', '>= 1.4.0'
   gem 'cucumber-rails', '>= 1.4.0', require: false
   gem 'launchy', '>= 2.1.2'
   gem 'capybara', '>= 2.0.1'
