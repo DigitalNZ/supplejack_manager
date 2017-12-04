@@ -11,7 +11,6 @@ class Version
   include Mongoid::Timestamps::Created
   include Mongoid::Paranoia
   include Mongoid::Attributes::Dynamic
-  # include ActiveModel::SerializerSupport
 
   field :content,   type: String
   field :tags,      type: Array
