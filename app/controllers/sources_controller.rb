@@ -10,7 +10,7 @@ class SourcesController < ApplicationController
   load_and_authorize_resource
   skip_before_action :verify_authenticity_token
 
-  skip_before_filter :authenticate_user!
+  skip_before_action :authenticate_user!
 
   respond_to :html, :json
 

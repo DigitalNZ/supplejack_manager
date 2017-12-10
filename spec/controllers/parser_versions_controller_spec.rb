@@ -9,45 +9,78 @@
 require 'spec_helper'
 
 describe ParserVersionsController do
-
-  let(:parser) { instance_double(Parser, id: "1").as_null_object }
-  let(:version) { instance_double(Version, id: "2").as_null_object }
-  let(:user) { instance_double(User, id: "3").as_null_object }
+  let(:parser) { instance_double(Parser, id: '1').as_null_object }
+  let(:version) { instance_double(Version, id: '2').as_null_object }
+  let(:user) { instance_double(User, id: '3').as_null_object }
   let(:harvest_job) { instance_double(HarvestJob).as_null_object }
   let(:enrichment_job) { instance_double(EnrichmentJob).as_null_object}
 
   before(:each) do
     allow(controller).to receive(:authenticate_user!) { true }
     allow(controller).to receive(:current_user) { user }
-    allow(Parser).to receive(:find).with("1") { parser }
+    allow(Parser).to receive(:find).with('1') { parser }
     allow(parser).to receive(:find_version) { version }
   end
 
-  describe "GET current" do
-    it "finds the current version for an environment" do
-      expect(parser).to receive(:current_version).with("staging") { version }
-      get :current, parser_id: 1, environment: "staging", format: "json"
-      expect(assigns(:version)).to eq version
+  describe 'GET current' do
+    context 'with a valid WORKER_KEY' do
+      before do
+        request.headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
+      end
+
+      it 'finds the current version for an environment' do
+        expect(parser).to receive(:current_version).with('staging') { version }
+        get :current, parser_id: 1, environment: 'staging', format: 'json'
+        expect(assigns(:version)).to eq version
+      end
+    end
+
+    context 'with an invalid WORKER_KEY' do
+      before do
+        request.headers['Authorization'] = 'Token token=somerandomekey'
+      end
+
+      it 'does not find the current_version for an environment' do
+        get :current, parser_id: 1, environment: 'staging', format: 'json'
+        expect(response.body).to eq "HTTP Token: Access denied.\n"
+      end
     end
   end
 
   describe "GET Show" do
-    it "finds the parser" do
-      expect(Parser).to receive(:find).with("1") { parser }
-      get :show, id: 1, parser_id: 1
-      expect(assigns(:parser)).to eq parser
+    context 'with a valid WORKER_KEY' do
+      before do
+        request.headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
+      end
+
+      it "finds the parser" do
+        expect(Parser).to receive(:find).with("1") { parser }
+        get :show, id: 1, parser_id: 1
+        expect(assigns(:parser)).to eq parser
+      end
+
+      it "finds the version" do
+        expect(parser).to receive(:find_version).with("1") { version }
+        get :show, id: 1, parser_id: 1
+        expect(assigns(:version)).to eq version
+      end
+
+      it "initializes a harvest job with parser_id, version_id, and user" do
+        expect(HarvestJob).to receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
+        get :show, id: 1, parser_id: 1
+        expect(assigns(:harvest_job)).to eq harvest_job
+      end
     end
 
-    it "finds the version" do
-      expect(parser).to receive(:find_version).with("1") { version }
-      get :show, id: 1, parser_id: 1
-      expect(assigns(:version)).to eq version
-    end
+    context 'with an invalid WORKER_KEY' do
+      before do
+        request.headers['Authorization'] = 'Token token=somerandomekey'
+      end
 
-    it "initializes a harvest job with parser_id, version_id, and user" do
-      expect(HarvestJob).to receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
-      get :show, id: 1, parser_id: 1
-      expect(assigns(:harvest_job)).to eq harvest_job
+      it 'does not find the parser' do
+        get :show, id: 1, parser_id: 1
+        expect(response.body).to eq "HTTP Token: Access denied.\n"
+      end
     end
   end
 

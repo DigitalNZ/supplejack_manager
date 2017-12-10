@@ -12,10 +12,11 @@
 class ParserVersionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  before_filter :find_parser
-  before_filter :find_version, only: [:show, :update, :new_enrichment, :new_harvest]
+  before_action :find_parser
+  before_action :find_version, only: [:show, :update, :new_enrichment, :new_harvest]
 
-  skip_before_filter :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:update]
+  before_action :authenticate_worker!, only: [:current, :show]
 
   respond_to :html, :json, :js
 
