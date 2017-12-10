@@ -24,7 +24,9 @@ class ApplicationController < ActionController::Base
     current_user.admin? ? users_path(params) : root_path
   end
 
-  def authenticate_worker!
+  def authenticate_user!
+    return super if request.headers['Authorization'].nil?
+
     authenticate_or_request_with_http_token do |token, _options|
       # Compare the tokens in a time-constant manner, to mitigate
       # timing attacks.
