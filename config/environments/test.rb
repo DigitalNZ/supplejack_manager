@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,and is licensed under the GNU General Public License,
 # version 3. Some components are third party components that are licensed under
@@ -16,10 +15,11 @@ HarvesterManager::Application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
-  config.cache_classes = true
+  # config.cache_classes = false
+  config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance
-  config.serve_static_assets = true
+  config.serve_static_files = true
   # config.static_cache_control = "public, max-age=3600"
 
   # Log error messages when you accidentally call methods on nil

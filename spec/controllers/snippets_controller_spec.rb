@@ -1,28 +1,27 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require "spec_helper"
+require 'spec_helper'
 
 describe SnippetsController do
-
-  let(:snippet) { mock_model(Snippet, name: "Copyright", id: "1234", to_param: "1234").as_null_object }
-  let(:user) { mock_model(User, id: "1234").as_null_object }
+  let(:snippet) { instance_double(Snippet, name: 'Copyright', id: '1234', to_param: '1234').as_null_object }
+  let(:user)    { instance_double(User, id: '1234').as_null_object }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
-  describe "GET index" do
-    it "should assign all @snippets" do
-      Snippet.should_receive(:all) { [snippet] }
+  describe 'GET index' do
+    it 'should assign all @snippets' do
+      expect(Snippet).to receive(:all) { [snippet] }
       get :index
-      assigns(:snippets).should eq [snippet]
+      expect(assigns(:snippets)).to eq [snippet]
     end
   end
 
@@ -83,12 +82,6 @@ describe SnippetsController do
       snippet.stub(:update_attributes) { true }
     end
 
-    it "finds an existing snippet " do
-      Snippet.should_receive(:find).with("1234") { snippet }
-      put :update, id: "1234"
-      assigns(:snippet).should eq snippet
-    end
-
     it "updates the snippet attributes" do
       snippet.should_receive(:update_attributes).with({"name" => "Copyright"})
       put :update, id: "1234", snippet: {name: "Copyright"}
@@ -98,8 +91,8 @@ describe SnippetsController do
       before { snippet.stub(:update_attributes) { true }}
 
       it "redirects to edit page" do
-        put :update, id: "1234"
-        response.should redirect_to edit_snippet_path("1234")
+        put :update, id: '1234', snippet: { name: '' }
+        response.should redirect_to edit_snippet_path('1234')
       end
     end
 
@@ -107,7 +100,7 @@ describe SnippetsController do
       before { snippet.stub(:update_attributes) { false }}
 
       it "renders the edit action" do
-        put :update, id: "1234"
+        put :update, id: "1234", snippet: { name: '' }
         response.should render_template(:edit)
       end
     end
@@ -129,7 +122,7 @@ describe SnippetsController do
 
     it "should find the current version of the snippet" do
       Snippet.should_receive(:find_by_name).with("Copyright", :staging) { snippet }
-      get :current_version, name: "Copyright", environment: :staging, format: :js
+      get :current_version, name: "Copyright", environment: :staging, format: :json
       assigns(:snippet).should eq snippet
     end
   end

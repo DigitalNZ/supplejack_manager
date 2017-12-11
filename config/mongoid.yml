@@ -1,7 +1,7 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. 
-# Some components are third party components that are licensed under 
+# and is licensed under the GNU General Public License, version 3.
+# Some components are third party components that are licensed under
 # the MIT license or otherwise publicly available.
 # See https://github.com/DigitalNZ/supplejack_manager for details.
 #
@@ -11,7 +11,7 @@
 
 development:
   # Configure available database sessions. (required)
-  sessions:
+  clients:
     # Defines the default session. (required)
     default:
       # Defines the name of the default database that Mongoid can connect to.
@@ -44,9 +44,6 @@ development:
     # not have a field definition on the model. (default: true)
     # allow_dynamic_fields: true
 
-    # Enable the identity map, needed for eager loading. (default: false)
-    identity_map_enabled: true
-
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false
 
@@ -78,7 +75,7 @@ development:
     # Ensure all times are UTC in the app side. (default: false)
     # use_utc: false
 test:
-  sessions:
+  clients:
     default:
       database: harvester_test
       hosts:
@@ -91,7 +88,7 @@ test:
         retry_interval: 0
 
 staging:
-  sessions:
+  clients:
     default:
       database: harvester_staging
       hosts:
@@ -100,7 +97,7 @@ staging:
         consistency: :strong
 
 production:
-  sessions:
+  clients:
     default:
       database: harvester_production
       hosts:

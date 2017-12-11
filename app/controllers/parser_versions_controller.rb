@@ -1,7 +1,7 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. 
-# Some components are third party components that are licensed under 
+# and is licensed under the GNU General Public License, version 3.
+# Some components are third party components that are licensed under
 # the MIT license or otherwise publicly available.
 # See https://github.com/DigitalNZ/supplejack_manager for details.
 #
@@ -10,9 +10,12 @@
 # http://digitalnz.org/supplejack
 
 class ParserVersionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   before_filter :find_parser
   before_filter :find_version, only: [:show, :update, :new_enrichment, :new_harvest]
+
+  skip_before_filter :authenticate_user!
 
   respond_to :html, :json, :js
 
@@ -22,13 +25,13 @@ class ParserVersionsController < ApplicationController
   end
 
   def show
-    @harvest_job = HarvestJob.build(parser_id: @parser.id, version_id: @version.id, user_id: current_user.id)
-    @enrichment_job = EnrichmentJob.build(parser_id: @parser.id, version_id: @version.id, user_id: current_user.id)
+    @harvest_job = HarvestJob.build(parser_id: @parser.id, version_id: @version.id)
+    @enrichment_job = EnrichmentJob.build(parser_id: @parser.id, version_id: @version.id)
     respond_with @version, serializer: ParserVersionSerializer
   end
 
   def update
-    @version.update_attributes(params[:version])
+    @version.update_attributes(parser_version_params[:version])
     @version.post_changes
     redirect_to parser_parser_version_path(@parser, @version)
   end
@@ -57,4 +60,7 @@ class ParserVersionsController < ApplicationController
     @version = @parser.find_version(params[:id])
   end
 
+  def parser_version_params
+    params.permit!
+  end
 end

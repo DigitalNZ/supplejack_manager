@@ -9,111 +9,111 @@
 require 'spec_helper'
 
 describe LinkCheckRulesController do
-  let(:link_check_rule) { mock_model(LinkCheckRule, collection_title: 'collection_title').as_null_object }
-  let(:user) { mock_model(User).as_null_object }
-  let(:admin_user) { mock_model(User, role: 'admin').as_null_object }
-  let(:partner) { FactoryGirl.build(:partner) }
+  let(:link_check_rule) { instance_double(LinkCheckRule).as_null_object }
+  let(:user)            { instance_double(User).as_null_object }
+  let(:admin_user)      { instance_double(User, role: 'admin').as_null_object }
+  let(:partner)         { FactoryBot.build(:partner) }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
   describe "GET 'index'" do
     it 'should get all of the collection rules' do
-      LinkCheckRule.should_receive(:all) { [link_check_rule] }
+      expect(LinkCheckRule).to receive(:all) { [link_check_rule] }
       get :index, environment: 'development'
-      assigns(:link_check_rules).should eq [link_check_rule]
+      expect(assigns(:link_check_rules)).to eq [link_check_rule]
     end
 
     it 'should do a where if link_check_rules is defined' do
       params = {link_check_rule: {collection_title: 'collection_title' }, environment: 'development' }
-      LinkCheckRule.should_receive(:where).with(params[:link_check_rule].stringify_keys)
+      expect(LinkCheckRule).to receive(:where).with(params[:link_check_rule].stringify_keys)
       get :index, params
     end
   end
 
   describe "GET 'new'" do
     it "creates a new collection rule" do
-      LinkCheckRule.should_receive(:new) { link_check_rule }
+      expect(LinkCheckRule).to receive(:new) { link_check_rule }
       get :new, environment: 'development'
-      assigns(:link_check_rule).should eq link_check_rule
+      expect(assigns(:link_check_rule)).to eq link_check_rule
     end
   end
 
   describe "GET 'edit'" do
     it 'loads the partners' do
-      user.should_receive(:admin?).and_return(true)
-      Partner.stub_chain(:all, :asc) { [partner] }
-      LinkCheckRule.should_receive(:find) { link_check_rule }
+      expect(user).to receive(:admin?).and_return(true)
+      allow(Partner).to receive_message_chain(:all, :asc) { [partner] }
+      expect(LinkCheckRule).to receive(:find) { link_check_rule }
       get :edit, id: link_check_rule.id, environment: 'development'
-      assigns(:partners).should eq [partner]
+      expect(assigns(:partners)).to eq [partner]
     end
 
     it 'finds the link_check_rule' do
-      LinkCheckRule.should_receive(:find) { link_check_rule }
+      expect(LinkCheckRule).to receive(:find) { link_check_rule }
       get :edit, id: link_check_rule.id, environment: 'development'
-      assigns(:link_check_rule).should eq link_check_rule
+      expect(assigns(:link_check_rule)).to eq link_check_rule
     end
   end
 
   describe "POST 'create'" do
     it 'should make a new collection rule and assign it' do
-      LinkCheckRule.should_receive(:new) { link_check_rule }
+      expect(LinkCheckRule).to receive(:new) { link_check_rule }
       post :create, link_check_rule: { collection_title: 'collection_title', status_codes: '203,205' }, environment: "development"
       assigns(:link_check_rule) { link_check_rule }
     end
 
     it "should redirect_to the index page" do
-      LinkCheckRule.stub(:new) { link_check_rule }
+      allow(LinkCheckRule).to receive(:new) { link_check_rule }
       post :create, link_check_rule: { collection_title: 'collection_title', status_codes: '203,205' }, environment: "development"
-      response.should redirect_to environment_link_check_rules_path(environment: "development")
+      expect(response).to redirect_to environment_link_check_rules_path(environment: "development")
     end
 
     context "link_check_rule not valid" do
       it "should render the new template" do
-        LinkCheckRule.stub(:new) { link_check_rule }
-        link_check_rule.stub(:save) { false }
+        allow(LinkCheckRule).to receive(:new) { link_check_rule }
+        allow(link_check_rule).to receive(:save) { false }
         post :create, link_check_rule: { collection_title: 'collection_title', status_codes: "203,205" }, environment: "development"
-        response.should render_template(:new)
+        expect(response).to render_template(:new)
       end
     end
   end
 
   describe "PUT 'update'" do
     it "should find the link_check_rule" do
-      LinkCheckRule.should_receive(:find) { link_check_rule }
+      expect(LinkCheckRule).to receive(:find) { link_check_rule }
       put :update, id: link_check_rule.id, link_check_rule: { collection_title: 'collection_title', status_codes: "203,205" }, environment: "development"
       assigns(:link_check_rule) { link_check_rule }
     end
 
     it "should redirect_to the index path" do
-      LinkCheckRule.stub(:find) { link_check_rule }
+      allow(LinkCheckRule).to receive(:find) { link_check_rule }
       put :update, id: link_check_rule.id, link_check_rule: { collection_title: 'collection_title', status_codes: "203,205" }, environment: "development"
-      response.should redirect_to environment_link_check_rules_path(environment: "development")
+      expect(response).to redirect_to environment_link_check_rules_path(environment: "development")
     end
 
     it "updates all the attributes" do
-      LinkCheckRule.stub(:find) { link_check_rule }
-      link_check_rule.should_receive(:update_attributes).with({"collection_title" => "collection_title", "status_codes" => "203,205" })
+      allow(LinkCheckRule).to receive(:find) { link_check_rule }
+      expect(link_check_rule).to receive(:update_attributes).with({"collection_title" => "collection_title", "status_codes" => "203,205" })
       put :update, id: link_check_rule.id, link_check_rule: { collection_title: "collection_title", status_codes: "203,205" }, environment: "development"
     end
 
     context "link_check_rule not valid" do
       it "should render the edit template" do
-        LinkCheckRule.stub(:find) { link_check_rule }
-        link_check_rule.stub(:update_attributes) { false }
+        allow(LinkCheckRule).to receive(:find) { link_check_rule }
+        allow(link_check_rule).to receive(:update_attributes) { false }
         post :update, id: link_check_rule.id, link_check_rule: { collection_title: "collection_title", status_codes: "203,205" }, environment: "development"
-        response.should render_template(:edit)
+        expect(response).to render_template(:edit)
       end
     end
   end
 
   describe "DELETE 'destroy'" do
     it "finds the collection rule and destroys it" do
-      LinkCheckRule.should_receive(:find) { link_check_rule }
+      expect(LinkCheckRule).to receive(:find) { link_check_rule }
       delete :destroy, id: link_check_rule.id, environment: "development"
-      response.should redirect_to environment_link_check_rules_path(environment: "development")
+      expect(response).to redirect_to environment_link_check_rules_path(environment: "development")
     end
   end
 

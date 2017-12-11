@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class User
@@ -16,15 +16,16 @@ class User
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, 
-    :role, :active, 
-    :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
-    :manage_partners, :run_harvest_partners
+  # TODO check if needed. I have commented out because it seems very odd to override the mongo fields with attr_accessor
+  # attr_accessor :name, :email, :password, :password_confirmation, :remember_me,
+  #   :role, :active,
+  #   :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
+  #   :manage_partners, :run_harvest_partners
 
-  before_save :ensure_authentication_token
-  
+  # before_save :ensure_authentication_token
+
   field :name,                    type: String
 
   ## Database authenticatable
@@ -66,18 +67,20 @@ class User
   end
 
   def admin?
-    self.role == 'admin'
+    role == 'admin'
   end
 
   def run_harvest_partners=(values)
-    write_attribute(:run_harvest_partners, values.reject!(&:blank?))
+    values = values.reject(&:blank?)
+    self[:run_harvest_partners] = values
   end
 
   def manage_partners=(values)
-    write_attribute(:manage_partners, values.reject!(&:blank?))
+    values = values.reject(&:blank?)
+    self[:manage_partners] = values
   end
 
   def active_for_authentication?
-    super and self.active
+    super && active
   end
 end

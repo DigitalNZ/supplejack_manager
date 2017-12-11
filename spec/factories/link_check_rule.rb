@@ -7,8 +7,7 @@
 # http://digitalnz.org/supplejack
 
 FactoryBot.define do
-  factory :snippet do
-    # name      "Copyright"
-    # content   "module Copyright; end"
+  factory :link_check_rule do
+    active false
   end
 end

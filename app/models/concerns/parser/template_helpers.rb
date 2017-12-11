@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class Parser
@@ -23,7 +23,7 @@ class Parser
 
 	  		parser_template = []
 	  		parser_template << "class #{self.name.gsub(/\s/, "_").camelize} < SupplejackCommon::#{self.strategy.capitalize}::Base"
-	  		
+
 	  		if parser_template_name.present?
 	  			template = ParserTemplate.find_by_name(parser_template_name)
 	  			parser_template << "\t" + template.content.gsub(/\n/, "\n\t")
@@ -33,7 +33,7 @@ class Parser
 
 	  		self.content = parser_template.join("\n\n")
 	  		self.message = "Applied parser template."
-	  	end 
+	  	end
 	  end
 	end
 end

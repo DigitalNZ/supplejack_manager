@@ -1,7 +1,7 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. 
-# Some components are third party components that are licensed under 
+# and is licensed under the GNU General Public License, version 3.
+# Some components are third party components that are licensed under
 # the MIT license or otherwise publicly available.
 # See https://github.com/DigitalNZ/supplejack_manager for details.
 #
@@ -12,9 +12,13 @@
 class ParsersController < ApplicationController
   load_and_authorize_resource
 
+  skip_before_filter :authenticate_user!
+
   respond_to :json, :html
 
   def index
+    @parsers = Parser.all
+
     respond_to do |format|
       format.html
       format.json { render json: @parsers, serializer: ActiveModel::ArraySerializer }
@@ -53,7 +57,7 @@ class ParsersController < ApplicationController
   end
 
   def update
-    @parser.attributes = params[:parser]
+    @parser.attributes = parser_params
     @parser.user_id = current_user.id
     @parser.update_contents_parser_class!
 
@@ -84,5 +88,11 @@ class ParsersController < ApplicationController
     else
       redirect_to edit_parser_path(@parser)
     end
+  end
+
+  def parser_params
+    params
+      .require(:parser)
+      .permit(:name, :partner, :source_id, :strategy, :parser_template_name, :message, :content)
   end
 end

@@ -10,7 +10,7 @@ class Ability
       can :read, :all
 
       can :update, User, id: user.id
-      
+
       if user.manage_data_sources?
         can :create, Source
         can :update, Source do |source|

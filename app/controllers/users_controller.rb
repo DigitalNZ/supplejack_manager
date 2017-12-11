@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 class UsersController < ApplicationController
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       authorize! :edit_users, @user if params[:user][:role]
 
       if needs_password?(@user, params)
-        if @user.update_attributes(params[:user])
+        if @user.update_attributes(user_params)
           sign_in(@user, bypass: true) if @user == current_user
           redirect_to safe_users_path, notice: 'User was successfully updated.'
         else
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         end
       else
         params[:user].delete(:password)
-        @user.update_without_password(params[:user])
+        @user.update_without_password(user_params)
         redirect_to safe_users_path, notice: 'User was successfully updated.'
       end
     else
@@ -57,5 +57,9 @@ class UsersController < ApplicationController
   def needs_password?(user, params)
     @user.email != params[:user][:email] ||
       params[:user][:password].present?
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :active, :role, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules, :manage_partners, :run_harvest_partners)
   end
 end

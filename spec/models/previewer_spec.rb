@@ -14,14 +14,14 @@ describe Previewer do
   let(:previewer) { Previewer.new(parser, "Data", "user123") }
   let(:preview) { mock_model(Preview) }
 
-  before { previewer.stub(:preview) { preview } }
+  before { allow(previewer).to receive(:preview) { preview } }
 
   describe "#create_preview_job" do
 
-    before { RestClient.stub(:post) { '{"_id": "abc123"}' } }
+    before { allow(RestClient).to receive(:post) { '{"_id": "abc123"}' } }
 
     it "creates a preview job" do
-      RestClient.should_receive(:post).with("#{ENV["WORKER_HOST"]}/previews", {
+      expect(RestClient).to receive(:post).with("#{ENV["WORKER_HOST"]}/previews", {
         preview: {
           format: "json",
           harvest_job: {
@@ -39,7 +39,7 @@ describe Previewer do
 
     it "sets the harvest_job_id of the previewer object" do
       previewer.send(:create_preview_job)
-      previewer.preview_id.should eq "abc123"
+      expect(previewer.preview_id).to eq "abc123"
     end
   end
 end

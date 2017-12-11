@@ -1,41 +1,42 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
 
 describe SourcesController do
   before do
-    Partner.any_instance.stub(:update_apis)
-    Source.any_instance.stub(:update_apis)
-    LinkCheckRule.stub(:create)
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
   end
 
-  let(:partner) {FactoryGirl.create(:partner)}
+  let(:partner) { FactoryBot.create(:partner) }
+
   def valid_attributes
-    FactoryGirl.attributes_for(:source, partner_id: partner.id)
+    FactoryBot.attributes_for(:source, partner_id: partner.id)
   end
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
+    allow(controller).to receive(:authenticate_user!) { true }
   end
 
   describe "GET index" do
     it "assigns all sources as @sources" do
       source = Source.create! valid_attributes
       get :index, {}
-      assigns(:sources).should eq([source])
+      expect(assigns(:sources)).to eq([source])
     end
   end
 
   describe "GET new" do
     it "assigns a new source as @source" do
       get :new, {}
-      assigns(:source).should be_a_new(Source)
+      expect(assigns(:source)).to be_a_new(Source)
     end
   end
 
@@ -43,99 +44,105 @@ describe SourcesController do
     it "assigns the requested source as @source" do
       source = Source.create! valid_attributes
       get :edit, {:id => source.to_param}
-      assigns(:source).should eq(source)
+      expect(assigns(:source)).to eq(source)
     end
   end
 
   describe "POST create" do
     before(:each) {
-      controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+      allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
     }
 
-    describe "with valid params" do
-      it "creates a new Source" do
+    describe 'with valid params' do
+      it 'creates a new Source' do
         expect {
-          post :create, {:source => valid_attributes}
+          post :create, source: valid_attributes
         }.to change(Source, :count).by(1)
       end
 
-      it "assigns a newly created source as @source" do
-        post :create, {:source => valid_attributes}
-        assigns(:source).should be_a(Source)
-        assigns(:source).should be_persisted
+      it 'assigns a newly created source as @source' do
+        post :create, source: valid_attributes
+        expect(assigns(:source)).to be_a(Source)
+        expect(assigns(:source)).to be_persisted
       end
 
-      it "redirects to the sources page" do
-        post :create, {:source => valid_attributes}
-        response.should redirect_to sources_path
+      it 'redirects to the sources page' do
+        post :create, source: valid_attributes
+        expect(response).to redirect_to sources_path
+      end
+
+      it 'creates a source with a nested contributor' do
+        expect {
+          post :create, source: { name: 'Data Source', partner_id: partner.id, partner_attributes: { name: 'Contributor' }}
+        }.to change(Partner, :count).by(1)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
-        Source.any_instance.stub(:save).and_return(false)
-        post :create, {:source => {  }}
-        assigns(:source).should be_a_new(Source)
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
+        post :create, source: { name: '' }
+        expect(assigns(:source)).to be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
-        Source.any_instance.stub(:save).and_return(false)
-        post :create, {:source => {  }}
-        response.should render_template("new")
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
+        post :create, source: { name: '' }
+        expect(response).to render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
+  describe 'PUT update' do
     before(:each) {
-      controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+      allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
     }
 
-    describe "with valid params" do
-      it "updates the requested source" do
+    describe 'with valid params' do
+      it 'updates the requested source' do
         source = Source.create! valid_attributes
-        Source.any_instance.should_receive(:update_attributes).with({ "these" => "params" })
-        put :update, {:id => source.to_param, :source => { "these" => "params" }}
+        expect_any_instance_of(Source).to receive(:update_attributes).with(name: 'updated')
+        put :update, { id: source.to_param, source: { name: 'updated' }}
       end
 
       it "assigns the requested source as @source" do
         source = Source.create! valid_attributes
         put :update, {:id => source.to_param, :source => valid_attributes}
-        assigns(:source).should eq(source)
+        expect(assigns(:source)).to eq(source)
       end
 
       it "redirects to the sources index" do
         source = Source.create! valid_attributes
-        put :update, {:id => source.to_param, :source => valid_attributes}
-        response.should redirect_to sources_path
+        put :update, id: source.to_param, source: valid_attributes
+        expect(response).to redirect_to sources_path
       end
     end
 
     describe "with invalid params" do
       it "assigns the source as @source" do
         source = Source.create! valid_attributes
-        Source.any_instance.stub(:save).and_return(false)
-        put :update, {:id => source.to_param, :source => {  }}
-        assigns(:source).should eq(source)
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
+        put :update, id: source.to_param, source: { name: '' }
+        expect(assigns(:source)).to eq(source)
       end
 
       it "re-renders the 'edit' template" do
         source = Source.create! valid_attributes
-        Source.any_instance.stub(:save).and_return(false)
-        put :update, {:id => source.to_param, :source => {  }}
-        response.should render_template("edit")
+        allow_any_instance_of(Source).to receive(:save).and_return(false)
+        put :update, id: source.to_param, source: { name: '' }
+        expect(response).to render_template('edit')
       end
     end
 
     describe "GET reindex" do
       before(:each) {
-        controller.stub(:current_user) { FactoryGirl.build(:user, role: 'admin') }
+        allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
       }
 
       it "calls reindex on api" do
         source = Source.create! valid_attributes
-        RestClient.should_receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
-        get :reindex,  {:id => source.to_param, env: :test, date: "2013-09-12T01:49:51.067Z", format: :js}
+        expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
+        get :reindex,  {id: source.to_param, env: 'test', date: "2013-09-12T01:49:51.067Z", format: :js}
       end
     end
   end

@@ -11,7 +11,7 @@
 
 # PreviewersController
 class PreviewersController < ApplicationController
-  before_filter :set_previewer, :validate_parser_content
+  before_action :set_previewer, :validate_parser_content
 
   # The reason why a create(POST) method is required
   # is because the whole content of the parser form

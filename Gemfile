@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 # New Zealand Government,
 # and is licensed under the GNU General Public License, version 3.
@@ -11,71 +10,72 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.22.2'
+gem 'rails', '= 4.2.10'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v1.0.0'
+gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.0.0'
 # gem 'supplejack_common', path: '/webspace/supplejack/common'
 
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
 
+gem 'responders', '~> 2.0'
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
-gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
-gem 'mongoid', '~> 3.1.7'
-gem 'devise', '~> 3.0.4'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'mongoid', '~> 5'
+gem 'mongoid_paranoia'
+gem 'devise', '~> 4.0'
 gem 'cancancan'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'figaro', '>= 0.7.0'
 gem 'coderay', '~> 1.0.8'
 gem 'chronic_duration'
 gem 'kaminari'
+gem 'kaminari-mongoid'
 gem 'activeresource-response'
 gem 'activeresource', require: 'active_resource'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-rails', '~> 2.0'
+gem 'jquery-ui-rails', '~> 3.0'
 gem 'lograge'
-gem 'airbrake', '~> 5.2'
+gem 'airbrake'
 gem 'test-unit'
 gem 'nokogiri'
+gem 'moped'
+gem 'bson'
+gem 'modernizr-rails'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
-  gem 'uglifier', '>= 1.0.3'
-  gem 'compass-rails', '>= 1.0.3'
-  gem 'zurb-foundation', '= 3.2.5'
-  gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
+gem 'uglifier', '>= 1.0.3'
+gem 'compass-rails', '>= 1.0.3'
+gem 'zurb-foundation', '= 3.2.5'
+gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do
   gem 'quiet_assets', '>= 1.0.1'
-  gem 'better_errors', '>= 0.2.0'
   gem 'binding_of_caller', '>= 0.6.8'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'unicorn-rails'
   gem 'traceroute'
   gem 'rubocop', require: false
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
-  gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'faker'
   gem 'rspec-rails', '>= 2.12.2'
-  gem 'factory_girl_rails', '>= 4.1.0'
+  gem 'factory_bot_rails'
 end
 
 group :test do
   gem 'simplecov', require: false
   gem 'database_cleaner', '>= 1.3.0'
-  # gem 'email_spec', '>= 1.4.0'
   gem 'cucumber-rails', '>= 1.4.0', require: false
   gem 'launchy', '>= 2.1.2'
   gem 'capybara', '>= 2.0.1'

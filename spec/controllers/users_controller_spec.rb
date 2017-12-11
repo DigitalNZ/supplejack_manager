@@ -1,20 +1,20 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require 'spec_helper'
 
 describe UsersController do
-  let(:user) { mock_model(User, id: '1234', email: 'email@example.com').as_null_object }
-  let(:other_user) { mock_model(User, id: '4321', email: 'other@example.com').as_null_object }
+  let(:user)       { instance_double(User, id: '1234', email: 'email@example.com').as_null_object }
+  let(:other_user) { instance_double(User, id: '4321', email: 'other@example.com').as_null_object }
 
   before(:each) do
-    controller.stub(:authenticate_user!) { true }
-    controller.stub(:current_user) { user }
+    allow(controller).to receive(:authenticate_user!) { true }
+    allow(controller).to receive(:current_user) { user }
   end
 
   describe 'GET #index' do
@@ -24,14 +24,14 @@ describe UsersController do
     end
 
     it 'should find all active users' do
-      User.should_receive(:active) { [user] }
+      expect(User).to receive(:active) { [user] }
       get :index
       expect(assigns(:users)).to eq [user]
     end
 
-    context "active=false" do
+    context 'active=false' do
       it 'should find all deactivated users' do
-        User.should_receive(:deactivated) { [user] }
+        expect(User).to receive(:deactivated) { [user] }
         get :index, active: 'false'
         expect(assigns(:users)).to eq [user]
       end
@@ -84,7 +84,7 @@ describe UsersController do
 
   describe 'GET #edit' do
     before(:each) do
-      User.stub(:find) { user }
+      allow(User).to receive(:find) { user }
     end
 
     it 'renders edit template' do
@@ -100,11 +100,11 @@ describe UsersController do
 
   describe 'PUT #update' do
     before(:each) do
-      User.stub(:find) { other_user }
+      allow(User).to receive(:find) { other_user }
     end
 
     it 'should find the user' do
-      User.should_receive(:find)
+      expect(User).to receive(:find)
       put :update, id: other_user.id
     end
 
@@ -132,14 +132,14 @@ describe UsersController do
       end
 
       it 'should sign in if the user is the current user' do
-        User.stub(:find) { user }
-        controller.should_receive(:sign_in)
+        allow(User).to receive(:find) { user }
+        expect(controller).to receive(:sign_in)
         put :update, id: user.id, user: { name: 'User' }
       end
 
       it 'should not sign in the user if not the current user' do
-        User.stub(:find) { other_user }
-        controller.should_not_receive(:sign_in)
+        allow(User).to receive(:find) { other_user }
+        expect(controller).not_to receive(:sign_in)
         put :update, id: other_user.id, user: { name: 'User' }
       end
     end

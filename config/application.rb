@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 require File.expand_path('../boot', __FILE__)
@@ -16,24 +16,22 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+Bundler.require(*Rails.groups)
 
-APPLICATION_ENVS = YAML.load_file('config/application.yml').keys.map { |key| key.to_sym } - [:development, :test] rescue []
+APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development', 'test'] rescue []
+APPLICATION_ENVIRONMENT_VARIABLES = YAML.load_file('config/application.yml')
+
+# Require the gems listed in the Gemfile
 
 module HarvesterManager
   class Application < Rails::Application
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
-      
+
       g.test_framework :rspec
-      g.fixture_replacement :factory_girl
-      
+      g.fixture_replacement :factory_bot
+
       g.view_specs false
       g.helper_specs false
     end
