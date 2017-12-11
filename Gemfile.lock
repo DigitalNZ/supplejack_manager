@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 62054ac0939d22af6117d7d2a212b058321ed620
-  branch: gm/rails-5.1
+  revision: 038163b2419b017c2c7f4a615346097949cc7ab1
+  tag: v2.0.0
   specs:
     supplejack_common (0.0.2)
       actionpack
@@ -11,10 +11,10 @@ GIT
       htmlentities
       json (~> 1.8.3)
       jsonpath (~> 0.5.0)
+      loofah
       mimemagic
       mongoid
       nokogiri
-      rails-html-sanitizer
       redis
       rest-client (~> 1.6.7)
       retriable
