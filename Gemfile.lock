@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 608bfa88460da4a6fd36b66ff63fa6cef2ad13d8
-  branch: gm/rails-5.1
+  revision: 038163b2419b017c2c7f4a615346097949cc7ab1
+  tag: v2.0.0
   specs:
     supplejack_common (0.0.2)
       actionpack
