@@ -12,8 +12,6 @@
 class ParsersController < ApplicationController
   load_and_authorize_resource
 
-  skip_before_action :authenticate_user!
-
   respond_to :json, :html
 
   def index

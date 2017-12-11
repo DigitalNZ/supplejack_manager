@@ -11,8 +11,6 @@ class SnippetVersionsController < ApplicationController
   before_action :find_snippet
   before_action :find_version, only: [:show, :update]
 
-  skip_before_action :authenticate_user!
-
   respond_to :html, :json
 
   def current
