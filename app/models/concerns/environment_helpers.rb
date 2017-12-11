@@ -31,7 +31,7 @@ module EnvironmentHelpers
     end
 
     klass.site = env_vars['WORKER_HOST']
-    klass.user = env_vars['WORKER_API_KEY']
+    klass.user = env_vars['WORKER_KEY']
   end
 
 
@@ -54,7 +54,7 @@ module EnvironmentHelpers
     def change_worker_env!(env)
       env_hash = APPLICATION_ENVIRONMENT_VARIABLES[env]
       self.site = env_hash['WORKER_HOST']
-      self.user = env_hash['WORKER_API_KEY']
+      self.user = env_hash['WORKER_KEY']
     end
   end
 end

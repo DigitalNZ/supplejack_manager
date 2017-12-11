@@ -19,7 +19,7 @@ RSpec.describe ApplicationController do
       end
 
       it 'returns a 401' do
-        request.headers['Authorization'] = 'Token token=somerandomekey'
+        request.headers['Authorization'] = 'Token token=somerandomkey'
         get :index
         expect(response.status).to eq 401
         expect(response.body).to eq "HTTP Token: Access denied.\n"

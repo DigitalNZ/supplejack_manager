@@ -10,7 +10,7 @@ class CollectionStatistics < ActiveResource::Base
   include EnvironmentHelpers
 
   self.site = ENV["WORKER_HOST"]
-  headers['Authorization'] = "Token token=#{ENV['WORKER_API_KEY']}"
+  headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
 
 
   def self.index_statistics(statistics)
