@@ -16,78 +16,41 @@ describe ParserVersionsController do
   let(:enrichment_job) { instance_double(EnrichmentJob).as_null_object}
 
   before(:each) do
+    allow(controller).to receive(:authenticate_user!) { true }
     allow(controller).to receive(:current_user) { user }
     allow(Parser).to receive(:find).with('1') { parser }
     allow(parser).to receive(:find_version) { version }
   end
 
   describe 'GET current' do
-    context 'with a valid WORKER_KEY' do
-      before do
-        request.headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
-      end
-
-      it 'finds the current version for an environment' do
-        expect(parser).to receive(:current_version).with('staging') { version }
-        get :current, parser_id: 1, environment: 'staging', format: 'json'
-        expect(assigns(:version)).to eq version
-      end
-    end
-
-    context 'with an invalid WORKER_KEY' do
-      before do
-        request.headers['Authorization'] = 'Token token=somerandomekey'
-      end
-
-      it 'does not find the current_version for an environment' do
-        get :current, parser_id: 1, environment: 'staging', format: 'json'
-        expect(response.body).to eq "HTTP Token: Access denied.\n"
-      end
+    it 'finds the current version for an environment' do
+      expect(parser).to receive(:current_version).with('staging') { version }
+      get :current, parser_id: 1, environment: 'staging', format: 'json'
+      expect(assigns(:version)).to eq version
     end
   end
 
   describe "GET Show" do
-    context 'with a valid WORKER_KEY' do
-      before do
-        request.headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
-      end
-
-      it "finds the parser" do
-        expect(Parser).to receive(:find).with("1") { parser }
-        get :show, id: 1, parser_id: 1
-        expect(assigns(:parser)).to eq parser
-      end
-
-      it "finds the version" do
-        expect(parser).to receive(:find_version).with("1") { version }
-        get :show, id: 1, parser_id: 1
-        expect(assigns(:version)).to eq version
-      end
-
-      it "initializes a harvest job with parser_id, version_id, and user" do
-        expect(HarvestJob).to receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
-        get :show, id: 1, parser_id: 1
-        expect(assigns(:harvest_job)).to eq harvest_job
-      end
+    it "finds the parser" do
+      expect(Parser).to receive(:find).with("1") { parser }
+      get :show, id: 1, parser_id: 1
+      expect(assigns(:parser)).to eq parser
     end
 
-    context 'with an invalid WORKER_KEY' do
-      before do
-        request.headers['Authorization'] = 'Token token=somerandomekey'
-      end
+    it "finds the version" do
+      expect(parser).to receive(:find_version).with("1") { version }
+      get :show, id: 1, parser_id: 1
+      expect(assigns(:version)).to eq version
+    end
 
-      it 'does not find the parser' do
-        get :show, id: 1, parser_id: 1
-        expect(response.body).to eq "HTTP Token: Access denied.\n"
-      end
+    it "initializes a harvest job with parser_id, version_id, and user" do
+      expect(HarvestJob).to receive(:build).with(parser_id: "1", version_id: "2") { harvest_job }
+      get :show, id: 1, parser_id: 1
+      expect(assigns(:harvest_job)).to eq harvest_job
     end
   end
 
   describe "PUT update" do
-    before(:each) do
-      allow(controller).to receive(:authenticate_user!) { true }
-    end
-
     it "updates the version" do
       expect(version).to receive(:update_attributes).with({ 'tags' => ['staging']})
       put :update, id: 1, parser_id: 1, version: {tags: ["staging"]}
@@ -108,10 +71,6 @@ describe ParserVersionsController do
 
   # new_enrichment
   describe "new_enrichment" do
-    before do
-      allow(controller).to receive(:authenticate_user!) { true }
-    end
-
     it "creates a new enrichment job with parser_id, version_id, user and the environment" do
       expect(EnrichmentJob).to receive(:new).with(parser_id: parser.id, version_id: version.id, user_id: user.id, environment: "staging") { enrichment_job }
       get :new_enrichment, parser_id: parser.id, id: version.id, user_id: user.id, environment: "staging", format: :js
@@ -120,10 +79,6 @@ describe ParserVersionsController do
   end
 
   describe "new_harvest" do
-    before do
-      allow(controller).to receive(:authenticate_user!) { true }
-    end
-
     it "creates a new Harvest job with with parser_id, version_id, user and the environment" do
       expect(HarvestJob).to receive(:new).with(parser_id: parser.id, version_id: version.id, user_id: user.id, environment: "staging") { harvest_job }
       get :new_harvest, parser_id: parser.id, id: version.id, user_id: user.id, environment: "staging", format: :js
@@ -132,10 +87,6 @@ describe ParserVersionsController do
   end
 
   describe "find_parser" do
-    before do
-      allow(controller).to receive(:authenticate_user!) { true }
-    end
-
     it "finds a parser with params[id]" do
       allow(controller).to receive(:params) { {parser_id: "1"} }
       expect(Parser).to receive(:find).with("1") { parser }
@@ -145,10 +96,6 @@ describe ParserVersionsController do
   end
 
   describe "find_version" do
-    before do
-      allow(controller).to receive(:authenticate_user!) { true }
-    end
-
     it "finds a parser version with params[id]" do
       allow(controller).to receive(:params) { {id: "1"} }
       controller.instance_variable_set(:@parser, parser)
