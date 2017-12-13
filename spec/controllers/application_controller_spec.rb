@@ -26,6 +26,15 @@ RSpec.describe ApplicationController do
       end
     end
 
+    context 'with a HTTP basic token' do
+      it 'renders a status 302' do
+        request.headers['Authorization'] = "Basic basic=#{ENV['WORKER_KEY']}"
+        get :index
+        expect(response.status).to eq 302
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
     context 'without an authorization token, it falls back to devise' do
       it 'renders a status 200' do
         sign_in FactoryBot.create(:user)

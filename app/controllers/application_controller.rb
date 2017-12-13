@@ -25,9 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    Rails.logger.info(request.headers['Authorization'])
-
-    return super if request.headers['Authorization'].nil?
+    return super unless valid_token?
 
     authenticate_or_request_with_http_token do |token, _options|
       # Compare the tokens in a time-constant manner, to mitigate
@@ -37,5 +35,9 @@ class ApplicationController < ActionController::Base
         ::Digest::SHA256.hexdigest(ENV['WORKER_KEY'])
       )
     end
+  end
+
+  def valid_token?
+    request.headers['Authorization'].present? && request.headers['Authorization'].include?('Token token')
   end
 end
