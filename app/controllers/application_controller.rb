@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
+    Rails.logger.info(request.headers['Authorization'])
+
     return super if request.headers['Authorization'].nil?
 
     authenticate_or_request_with_http_token do |token, _options|
