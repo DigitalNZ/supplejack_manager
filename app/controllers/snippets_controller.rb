@@ -9,8 +9,6 @@
 class SnippetsController < ApplicationController
   load_and_authorize_resource except: :current_version
 
-  skip_before_action :authenticate_user!
-
   respond_to :html, :json
 
   def index
