@@ -14,5 +14,9 @@ FactoryBot.define do
     password_confirmation 'secret'
     role 'user'
     manage_link_check_rules true
+
+    trait :admin do
+      role 'admin'
+    end
   end
 end
