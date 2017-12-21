@@ -9,12 +9,10 @@
 require 'spec_helper'
 
 describe HarvestSchedulesController do
-  let(:schedule) { instance_double(HarvestSchedule).as_null_object }
-  let(:user) { instance_double(User, role: 'admin').as_null_object }
+  let(:schedule) { FactoryBot.build(:harvest_schedule) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in FactoryBot.create(:user, :admin)
   end
 
   describe 'PUT update_all' do
@@ -49,10 +47,10 @@ describe HarvestSchedulesController do
 
   describe 'POST create' do
     before do
-        stub_request(:post, "http://127.0.0.1:3002/harvest_schedules.json").
-         with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
-              headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=WORKER_KEY', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
-         to_return(status: 200, body: "", headers: {})
+      stub_request(:post, "http://localhost:3002/harvest_schedules.json")
+      .with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
+        headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=WORKER_KEY', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
+        to_return(status: 200, body: "", headers: {})
       end
 
       it 'initializes a new harvest schedule' do
@@ -67,18 +65,18 @@ describe HarvestSchedulesController do
 
     describe "PUT Update" do
       before(:each) do
-        allow(HarvestSchedule).to receive(:find).with("1") { schedule }
+        allow(HarvestSchedule).to receive(:find).with('1') { schedule }
       end
 
-      it "finds the harvest schedule" do
-        expect(HarvestSchedule).to receive(:find).with("1") { schedule }
-        put :update, id: 1, environment: "staging"
+      it 'finds the harvest schedule' do
+        expect(HarvestSchedule).to receive(:find).with('1') { schedule }
+        put :update, id: 1, environment: 'staging', harvest_schedule: {}
         expect(assigns(:harvest_schedule)).to eq schedule
       end
 
       it "should update the attributes" do
-        expect(schedule).to receive(:update_attributes).with({"cron" => "1 1 1 1 1"})
-        put :update, id: 1, harvest_schedule: {cron: "1 1 1 1 1"}, environment: "staging"
+        expect(schedule).to receive(:update_attributes).with({'cron' => '1 1 1 1 1'})
+        put :update, id: 1, harvest_schedule: {cron: '1 1 1 1 1'}, environment: 'staging'
       end
 
       it "should redirect to the index" do
