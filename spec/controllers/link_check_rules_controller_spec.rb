@@ -10,13 +10,11 @@ require 'spec_helper'
 
 describe LinkCheckRulesController do
   let(:link_check_rule) { instance_double(LinkCheckRule).as_null_object }
-  let(:user)            { instance_double(User).as_null_object }
-  let(:admin_user)      { instance_double(User, role: 'admin').as_null_object }
-  let(:partner)         { FactoryBot.build(:partner) }
+  let(:user)            { create(:user, :admin) }
+  let(:partner)         { build(:partner) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
   end
 
   describe "GET 'index'" do
@@ -43,7 +41,6 @@ describe LinkCheckRulesController do
 
   describe "GET 'edit'" do
     it 'loads the partners' do
-      expect(user).to receive(:admin?).and_return(true)
       allow(Partner).to receive_message_chain(:all, :asc) { [partner] }
       expect(LinkCheckRule).to receive(:find) { link_check_rule }
       get :edit, id: link_check_rule.id, environment: 'development'

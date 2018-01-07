@@ -6,19 +6,18 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require "spec_helper"
+require 'spec_helper'
 
 describe HomeController do
-
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
+    sign_in FactoryBot.create(:user)
   end
 
-  describe "GET index", :caching => true do
+  describe 'GET index' do
     before(:each) do
       allow(AbstractJob).to receive(:find) { {} }
       allow(CollectionStatistics).to receive(:first) { double(:stats) }
-      allow(CollectionStatistics).to receive(:index_statistics) { {"2013-12-26"=>{:suppressed=>1, :activated=>2, :deleted=>3}} }
+      allow(CollectionStatistics).to receive(:index_statistics) { {'2013-12-26' => { suppressed: 1, activated: 2, deleted: 3}} }
       allow(Parser).to receive_message_chain(:desc, :limit)
       allow(HarvestSchedule).to receive(:find)
     end
