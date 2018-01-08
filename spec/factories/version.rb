@@ -13,6 +13,10 @@ FactoryBot.define do
     user_id   "577d8c270403714b67000001"
     content   "default: \"Research papers for 1\"\r\n\t  attributes :display_collection, :primary_collection,   default: \"Massey Research Online"
 
+    after(:build) do
+      
+    end
+
     trait :santos do
       tags ['santos clause']
     end
