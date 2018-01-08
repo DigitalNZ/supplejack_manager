@@ -9,11 +9,10 @@
 require "spec_helper"
 
 describe ApplicationHelper do
-
   describe "#pretty_format" do
 
-    let(:raw_data) { {bill: "bob"}.to_json  }
-    let(:parser) { double(:parser) }
+    let(:raw_data) { { bill: 'bob' }.to_json }
+    let(:parser) { build(:parser) }
 
     context "parser found" do
 
@@ -68,14 +67,14 @@ describe ApplicationHelper do
   describe "safe_users_path" do
     context "admin user" do
       it "should be able to access users_path" do
-        allow(helper).to receive(:current_user) { double(:user, admin?: true) }
+        allow(helper).to receive(:current_user) { create(:user, :admin) }
         expect(helper.safe_users_path).to eq users_path
       end
     end
 
     context "standard user" do
       it "should not be able to access users_path" do
-        allow(helper).to receive(:current_user) { double(:user, admin?: false) }
+        allow(helper).to receive(:current_user) { create(:user) }
         expect(helper.safe_users_path).to eq root_path
       end
     end

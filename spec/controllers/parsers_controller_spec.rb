@@ -65,7 +65,6 @@ describe ParsersController do
   describe "GET 'create'" do
     before do
       allow(Parser).to receive(:new) { parser }
-      allow(parser).to receive(:save) { true }
     end
 
     it 'initializes a new parser' do
@@ -79,16 +78,14 @@ describe ParsersController do
     end
 
     context 'valid parser' do
-      before { allow(parser).to receive(:save) { true }}
-
-      it 'redirects to edit page' do
+      it 'redirects to the edit page' do
         post :create, parser: { name: 'Tepapa' }
         expect(response.status).to eq 302
       end
     end
 
     context "invalid parser" do
-      before { allow(parser).to receive(:save) { false }}
+      before { allow(parser).to receive(:save) { false } }
 
       it "renders the edit action" do
         post :create, parser: {name: "Tepapa"}

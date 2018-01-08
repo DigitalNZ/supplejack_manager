@@ -9,8 +9,6 @@
 require 'spec_helper'
 
 describe ParserTemplatesController do
-	# let(:parser_template) { instance_double(ParserTemplate, name: "Copyright").as_null_object }
-
   let(:parser_template) { create(:parser_template) }
   let(:user)            { create(:user, :admin) }
 

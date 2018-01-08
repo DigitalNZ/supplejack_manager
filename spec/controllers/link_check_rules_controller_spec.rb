@@ -9,7 +9,6 @@
 require 'spec_helper'
 
 describe LinkCheckRulesController do
-  # let(:link_check_rule) { instance_double(LinkCheckRule).as_null_object }
   let(:link_check_rule) { build(:link_check_rule) }
   let(:user)            { create(:user, :admin) }
   let(:partner)         { build(:partner) }

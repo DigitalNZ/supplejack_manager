@@ -10,11 +10,10 @@ require 'spec_helper'
 
 describe SnippetsController do
   let(:snippet) { instance_double(Snippet, name: 'Copyright', id: '1234', to_param: '1234').as_null_object }
-  let(:user)    { instance_double(User, id: '1234').as_null_object }
+  let(:user)    { create(:user, :admin) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
   end
 
   describe 'GET index' do

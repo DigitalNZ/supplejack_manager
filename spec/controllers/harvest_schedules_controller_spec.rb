@@ -35,9 +35,10 @@ describe HarvestSchedulesController do
       expect(assigns(:harvest_schedules)).to eq [schedule]
     end
 
-    it "assigns recurrent and one_off schedules" do
-      s1 = double(:schedule, recurrent: true, next_run_at: DateTime.now, status: 'active' )
-      s2 = double(:schedyle, recurrent: false, start_time: DateTime.now, status: 'active' )
+    it 'assigns recurrent and one_off schedules' do
+      s1 = build(:harvest_schedule, recurrent: true, next_run_at: DateTime.now, status: 'active')
+      s2 = build(:harvest_schedule, recurrent: false, start_time: DateTime.now, status: 'active')
+
       allow(HarvestSchedule).to receive(:all) { [s1, s2] }
       get :index, environment: "staging"
       expect(assigns(:recurrent_schedules)).to eq [s1]

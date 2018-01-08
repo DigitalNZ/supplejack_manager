@@ -9,13 +9,14 @@
 require 'spec_helper'
 
 describe SnippetVersionsController do
-  let(:user)    { instance_double(User, id: '3').as_null_object }
-  let(:snippet) { instance_double(Snippet, id: '1').as_null_object }
-  let(:version) { instance_double(Version, id: '2').as_null_object }
+  let(:user)    { create(:user) }
+  # let(:snippet) { instance_double(Snippet, id: '1').as_null_object }
+  # let(:version) { instance_double(Version, id: '2').as_null_object }
+  let(:snippet) { build(:snippet) }
+  let(:version) { build(:version) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
     allow(Snippet).to receive(:find).with(anything) { snippet }
     allow(snippet).to receive(:find_version) { version }
   end
@@ -43,9 +44,10 @@ describe SnippetVersionsController do
   end
 
   describe "PUT update" do
-    it "updates the version" do
-      expect(version).to receive(:update_attributes).with({"tags"=>["staging"]})
-      put :update, id: 1, snippet_id: 1, version: { tags: ["staging"] }
+    it 'updates the version' do
+      allow(version).to receive(:update_attributes) { true }
+      expect(version).to receive(:update_attributes).with({'tags'=>['staging']})
+      put :update, id: 1, snippet_id: 1, version: { tags: ['staging'] }
     end
 
     it "posts a message to the changes app" do
@@ -58,5 +60,4 @@ describe SnippetVersionsController do
       expect(response).to redirect_to snippet_snippet_version_path(snippet, version)
     end
   end
-
 end

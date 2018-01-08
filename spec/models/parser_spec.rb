@@ -9,13 +9,14 @@
 require 'spec_helper'
 
 describe Parser do
+  let(:source) { create(:source) }
+  let(:parser) { build(:parser, source_id: source.id) }
+
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
   end
-
-  let(:parser) { FactoryBot.build(:parser) }
 
   context "validations" do
     it "is valid with valid attributes" do
@@ -38,8 +39,7 @@ describe Parser do
     end
 
     it "should not be valid with a duplicated name" do
-      parser1 = FactoryBot.create(:parser, name: 'NZ Museums')
-      parser2 = FactoryBot.build(:parser, name: 'NZ Museums')
+      parser2 = build(:parser, name: 'NZ Museums')
       expect(parser2).not_to be_valid
     end
   end
@@ -132,8 +132,8 @@ describe Parser do
 
     context 'when version is not passed' do
       it "content is the last content which is set in the Parser itself" do
-        parser.enrichment_definitions("staging")
-        expect(parser.content).to eq "class NZMuserums; end"
+        parser.enrichment_definitions('staging')
+        expect(parser.content).to eq 'class NZMuseums; end'
       end
 
       it "returns the parser enrichment definitions" do
@@ -175,7 +175,7 @@ describe Parser do
 
       it "parser has right content from the version" do
         parser.enrichment_definitions("staging", version)
-        expect(parser.content).to eq "default: \"Research papers for 1\"\r\n\t  attributes :display_collection, :primary_collection,   default: \"Massey Research Online"
+        expect(parser.content).to eq "default: \\\"Research papers for 1\\\"\\r\\n\\t  attributes :display_collection, :primary_collection,   default: \\\"Massey Research Online"
       end
 
       it "returns the parser enrichment definitions" do
