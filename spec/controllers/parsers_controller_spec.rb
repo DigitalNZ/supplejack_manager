@@ -9,7 +9,14 @@
 require 'spec_helper'
 
 describe ParsersController do
-  let(:parser)  { build(:parser) }
+  before do
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
+  end
+
+  let(:source) { create(:source) }
+  let(:parser) { create(:parser, source_id: source) }
   let(:version) { build(:version, versionable: parser) }
   let(:user)    { create(:user, :admin) }
 
