@@ -10,10 +10,8 @@ require 'spec_helper'
 
 describe SnippetVersionsController do
   let(:user)    { create(:user) }
-  # let(:snippet) { instance_double(Snippet, id: '1').as_null_object }
-  # let(:version) { instance_double(Version, id: '2').as_null_object }
-  let(:snippet) { build(:snippet) }
-  let(:version) { build(:version) }
+  let(:snippet) { create(:snippet) }
+  let(:version) { create(:version, versionable: snippet) }
 
   before(:each) do
     sign_in user
@@ -45,7 +43,6 @@ describe SnippetVersionsController do
 
   describe "PUT update" do
     it 'updates the version' do
-      allow(version).to receive(:update_attributes) { true }
       expect(version).to receive(:update_attributes).with({'tags'=>['staging']})
       put :update, id: 1, snippet_id: 1, version: { tags: ['staging'] }
     end
