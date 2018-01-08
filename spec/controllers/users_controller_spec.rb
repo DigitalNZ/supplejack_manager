@@ -9,12 +9,11 @@
 require 'spec_helper'
 
 describe UsersController do
-  let(:user)       { instance_double(User, id: '1234', email: 'email@example.com').as_null_object }
-  let(:other_user) { instance_double(User, id: '4321', email: 'other@example.com').as_null_object }
+  let(:user)       { create(:user, :admin, email: 'email@example.com') }
+  let(:other_user) { create(:user, :admin, email: 'other@example.com') }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
   end
 
   describe 'GET #index' do
@@ -83,10 +82,6 @@ describe UsersController do
   end
 
   describe 'GET #edit' do
-    before(:each) do
-      allow(User).to receive(:find) { user }
-    end
-
     it 'renders edit template' do
       get :edit, id: user.id
       expect(response).to render_template(:edit)
@@ -99,10 +94,6 @@ describe UsersController do
   end
 
   describe 'PUT #update' do
-    before(:each) do
-      allow(User).to receive(:find) { other_user }
-    end
-
     it 'should find the user' do
       expect(User).to receive(:find)
       put :update, id: other_user.id
@@ -132,13 +123,11 @@ describe UsersController do
       end
 
       it 'should sign in if the user is the current user' do
-        allow(User).to receive(:find) { user }
         expect(controller).to receive(:sign_in)
         put :update, id: user.id, user: { name: 'User' }
       end
 
       it 'should not sign in the user if not the current user' do
-        allow(User).to receive(:find) { other_user }
         expect(controller).not_to receive(:sign_in)
         put :update, id: other_user.id, user: { name: 'User' }
       end
