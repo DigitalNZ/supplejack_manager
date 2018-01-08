@@ -25,7 +25,7 @@ describe SnippetsController do
   end
 
   describe "GET 'new'" do
-    it "initializes a new snippet" do
+    it 'initializes a new snippet' do
       Snippet.should_receive(:new) { snippet }
       get :new
       assigns(:snippet).should eq snippet
