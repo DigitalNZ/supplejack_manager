@@ -9,13 +9,12 @@
 require 'spec_helper'
 
 describe PartnersController do
-  let(:partners) { FactoryBot.create_list(:partner, 3) }
-  let(:partner)  { FactoryBot.build(:partner) }
-  let(:user)     { FactoryBot.create(:user, role: 'admin') }
+  let(:partners) { create_list(:partner, 3) }
+  let(:partner)  { build(:partner) }
+  let(:user)     { create(:user, role: 'admin') }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
   end
