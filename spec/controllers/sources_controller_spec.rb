@@ -9,24 +9,25 @@
 require 'spec_helper'
 
 describe SourcesController do
+  let(:partner) { create(:partner) }
+  let(:user)    { create(:user, :admin) }
+
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
   end
 
-  let(:partner) { FactoryBot.create(:partner) }
-
   def valid_attributes
-    FactoryBot.attributes_for(:source, partner_id: partner.id)
+    attributes_for(:source, partner_id: partner.id)
   end
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
+    sign_in user
   end
 
-  describe "GET index" do
-    it "assigns all sources as @sources" do
+  describe 'GET index' do
+    it 'assigns all sources as @sources' do
       source = Source.create! valid_attributes
       get :index, {}
       expect(assigns(:sources)).to eq([source])
