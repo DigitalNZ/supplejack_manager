@@ -9,20 +9,20 @@
 require 'spec_helper'
 
 describe HarvestJob do
-  let(:user) { instance_double(User, id: '333').as_null_object }
+  let(:user) { create(:user, id: 333) }
   let(:job)  { HarvestJob.new(user_id: '1234567', parser_id: '7654321') }
 
-  describe ".from_parser" do
-    let(:parser) { double(:parser, id: "1234") }
+  describe '.from_parser' do
+    let(:parser) { build(:parser, id: 1234) }
 
-    it "initializes a new HarvestJob" do
+    it 'initializes a new HarvestJob' do
       job = HarvestJob.from_parser(parser)
-      expect(job.parser_id).to eq "1234"
+      expect(job.parser_id).to eq 1234
     end
 
-    it "sets the user_id" do
+    it 'sets the user_id' do
       job = HarvestJob.from_parser(parser, user)
-      expect(job.user_id).to eq "333"
+      expect(job.user_id).to eq 333
     end
   end
 
