@@ -15,7 +15,8 @@ describe Versioned do
     allow(LinkCheckRule).to receive(:create)
   end
 
-  let(:parser) { build(:parser) }
+  let(:source) { create(:source) }
+  let(:parser) { create(:parser, source_id: source) }
 
   describe '#last_edited_by' do
     it 'should return the last edited by' do
@@ -44,7 +45,8 @@ describe Versioned do
   end
 
   describe "#save_with_version" do
-    let(:parser) { build(:parser, strategy: 'json', name: 'Natlib') }
+    let(:source) { create(:source) }
+    let(:parser) { create(:parser, strategy: 'json', name: 'Natlib', source_id: source) }
 
     context 'valid parser' do
       before(:each) do
@@ -85,9 +87,9 @@ describe Versioned do
 
     context 'invalid parser' do
       it 'doesnt generate a new version when saving fails' do
-        parser.name = nil
-        expect(parser.save).to be false
-        expect(parser.versions).to be_empty
+        parser2 = build(:parser)
+        expect(parser2.save).to be false
+        expect(parser2.versions).to be_empty
       end
     end
   end
