@@ -16,8 +16,8 @@ describe HomeController do
   describe 'GET index' do
     before(:each) do
       allow(AbstractJob).to receive(:find) { {} }
-      allow(CollectionStatistics).to receive(:first) { double(:stats) }
-      allow(CollectionStatistics).to receive(:index_statistics) { {'2013-12-26' => { suppressed: 1, activated: 2, deleted: 3}} }
+      allow(CollectionStatistics).to receive(:first) { build(:collection_statistics) }
+      allow(CollectionStatistics).to receive(:index_statistics) { { '2013-12-26' => { suppressed: 1, activated: 2, deleted: 3 }} }
       allow(Parser).to receive_message_chain(:desc, :limit)
       allow(HarvestSchedule).to receive(:find)
     end
@@ -95,9 +95,9 @@ describe HomeController do
     end
 
     context "recently edited parsers" do
-      let(:parsers) { [double(:parser)] }
+      let(:parsers) { [build(:parser)] }
 
-      it "sets the list of recently edited parsers" do
+      it 'sets the list of recently edited parsers' do
         allow(Parser).to receive_message_chain(:desc, :limit) { parsers }
         get :index
         expect(assigns(:parsers)).to eq parsers
@@ -111,7 +111,7 @@ describe HomeController do
     end
 
     context "next scheduled jobs" do
-      let(:schedules) { [double(:schedule)] }
+      let(:schedules) { [build(:harvest_schedule)] }
 
       it "sets the list of next scheduled jobs" do
         expect(HarvestSchedule).to receive(:find).with(:all, :from => :next) { schedules }
