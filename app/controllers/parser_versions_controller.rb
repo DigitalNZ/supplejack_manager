@@ -31,7 +31,7 @@ class ParserVersionsController < ApplicationController
   def update
     @version.update_attributes(parser_version_params[:version])
     @version.post_changes
-    redirect_to parser_parser_version_path(parser_id: @parser.id, id: @version.id)
+    redirect_to parser_parser_version_path(@parser, @version)
   end
 
   def new_enrichment

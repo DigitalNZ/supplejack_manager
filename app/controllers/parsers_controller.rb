@@ -48,7 +48,7 @@ class ParsersController < ApplicationController
     @source = @parser.source
 
     if @parser.save
-      redirect_to edit_parser_path(id: @parser.id)
+      redirect_to edit_parser_path(@parser)
     else
       render :new
     end
@@ -60,7 +60,7 @@ class ParsersController < ApplicationController
     @parser.update_contents_parser_class!
 
     if @parser.save
-      redirect_to edit_parser_path(id: @parser.id)
+      redirect_to edit_parser_path(@parser)
     else
       render :edit
     end
@@ -80,7 +80,7 @@ class ParsersController < ApplicationController
         HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, "production")
       end
       respond_to do |format|
-        format.html { redirect_to edit_parser_path(id: @parser.id) }
+        format.html { redirect_to edit_parser_path(@parser) }
         format.js
       end
     else
