@@ -22,7 +22,7 @@ describe HarvestSchedulesController do
 
     before do
       expect(schedule).to receive(:status) { 'active' }
-      expect(schedule).to receive(:update_attributes).with({ 'status' => 'stopped' })
+      expect(schedule).to receive(:update_attributes).with({ status:'stopped' })
     end
 
     it 'update the scheduled harvets' do
@@ -33,7 +33,7 @@ describe HarvestSchedulesController do
     it 'does not update individually paused scheduled harvests' do
       expect(HarvestSchedule).to receive(:all) { [schedule, paused_schedule] }
       expect(paused_schedule).to receive(:status) { 'paused' }
-      expect(paused_schedule).to_not receive(:update_attributes).with({ 'status' => 'stopped' })
+      expect(paused_schedule).to_not receive(:update_attributes).with({ status: 'stopped' })
 
       put :update_all, environment: 'staging', harvest_schedule: { status: 'stopped' }
     end
