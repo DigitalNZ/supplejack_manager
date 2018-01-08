@@ -10,6 +10,7 @@ require 'spec_helper'
 
 describe HarvestSchedulesController do
   let(:schedule) { instance_double(HarvestSchedule).as_null_object }
+  let(:paused_schedule) { instance_double(HarvestSchedule).as_null_object }
   let(:user) { instance_double(User, role: 'admin').as_null_object }
 
   before(:each) do
@@ -18,10 +19,21 @@ describe HarvestSchedulesController do
   end
 
   describe 'PUT update_all' do
-    it 'update the scheduled harvets' do
-      expect(HarvestSchedule).to receive(:all) { [schedule] }
+
+    before do
       expect(schedule).to receive(:status) { 'active' }
       expect(schedule).to receive(:update_attributes).with({ 'status' => 'stopped' })
+    end
+
+    it 'update the scheduled harvets' do
+      expect(HarvestSchedule).to receive(:all) { [schedule] }
+      put :update_all, environment: 'staging', harvest_schedule: { status: 'stopped' }
+    end
+
+    it 'does not update individually paused scheduled harvests' do
+      expect(HarvestSchedule).to receive(:all) { [schedule, paused_schedule] }
+      expect(paused_schedule).to receive(:status) { 'paused' }
+      expect(paused_schedule).to_not receive(:update_attributes).with({ 'status' => 'stopped' })
 
       put :update_all, environment: 'staging', harvest_schedule: { status: 'stopped' }
     end
@@ -52,7 +64,7 @@ describe HarvestSchedulesController do
     before do
         stub_request(:post, "http://localhost:3002/harvest_schedules.json").
          with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
-              headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=abcdedfg', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
+              headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=WORKER_KEY', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
          to_return(status: 200, body: "", headers: {})
       end
 
