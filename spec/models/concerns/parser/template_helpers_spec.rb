@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
 # and is licensed under the GNU General Public License, version 3. Some components are
 # third party components that are licensed under the MIT license or otherwise publicly available.
@@ -15,57 +17,54 @@ describe Parser::TemplateHelpers do
     allow(LinkCheckRule).to receive(:create)
   end
 
-  describe "update_contents_parser_class!" do
+  describe 'update_contents_parser_class!' do
+    let(:parser) { build(:parser) }
 
-    let(:parser) { FactoryBot.create(:parser) }
-
-    it "replaces the class name in the content" do
-      parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
-      parser.name =  "Nz On Screen"
+    it 'replaces the class name in the content' do
+      parser.content = 'class KeteDnz < SupplejackCommon::Oai::Base'
+      parser.name =  'Nz On Screen'
       parser.update_contents_parser_class!
-      expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Oai::Base"
+      expect(parser.content).to eq 'class NzOnScreen < SupplejackCommon::Oai::Base'
     end
 
-    it "sets the commit message" do
-      parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
-      parser.name =  "Nz On Screen"
+    it 'sets the commit message' do
+      parser.content = 'class KeteDnz < SupplejackCommon::Oai::Base'
+      parser.name =  'Nz On Screen'
       parser.update_contents_parser_class!
-      expect(parser.message).to eq "Renamed parser class"
+      expect(parser.message).to eq 'Renamed parser class'
     end
 
-    it "replaces specific class names" do
-      parser.content = "class KeteDnz < SupplejackCommon::Oai::Base"
-      parser.name = "Bfm rss"
+    it 'replaces specific class names' do
+      parser.content = 'class KeteDnz < SupplejackCommon::Oai::Base'
+      parser.name = 'Bfm rss'
       parser.update_contents_parser_class!
-      expect(parser.content).to eq "class BfmRss < SupplejackCommon::Oai::Base"
+      expect(parser.content).to eq 'class BfmRss < SupplejackCommon::Oai::Base'
     end
   end
 
-  describe "#apply_parser_template!" do
+  describe '#apply_parser_template!' do
+    let(:parser) { build(:parser, name: 'Nz On Screen', strategy: 'xml') }
 
-    let(:parser) { FactoryBot.build(:parser, name: "Nz On Screen", strategy: "xml")  }
-
-    it "should initialize the parsers content parser class" do
+    it 'should initialize the parsers content parser class' do
       parser.content = nil
       parser.apply_parser_template!
       expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\nend"
     end
 
-    it "should not initialize if parsers content is not nil" do
-      parser.content = "Hello World"
+    it 'should not initialize if parsers content is not nil' do
+      parser.content = 'Hello World'
       parser.apply_parser_template!
-      expect(parser.content).to eq "Hello World"
+      expect(parser.content).to eq 'Hello World'
     end
 
-    context "parser_template present" do
+    context 'parser_template present' do
+      let(:parser_template) { build(:parser_template, name: 'template', content: 'template content') }
 
-      let(:parser_template) { instance_double(ParserTemplate, name: "template", content: "template content").as_null_object }
+      before { parser.parser_template_name = 'template' }
 
-      before { parser.parser_template_name = "template" }
-
-      it "should add the parser_templates content into the parsers content" do
+      it 'should add the parser_templates content into the parsers content' do
         parser.content = nil
-        expect(ParserTemplate).to receive(:find_by_name).with("template") { parser_template }
+        expect(ParserTemplate).to receive(:find_by_name).with('template') { parser_template }
         parser.apply_parser_template!
         expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\n\t#{parser_template.content}\n\nend"
       end
