@@ -12,14 +12,14 @@
 require 'spec_helper'
 
 describe PreviewersController do
-  before do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { double(:user, id: 123) }
-  end
-
-  let(:parser)    { double(:parser).as_null_object }
+  let(:parser)    { build(:parser) }
+  # TODO
   let(:previewer) { double(:previewer).as_null_object }
-  let(:harvester) { double(:harvester).as_null_object }
+  let(:user)      { create(:user) }
+
+  before do
+    sign_in user
+  end
 
   describe 'set_previewer' do
     before do
@@ -51,9 +51,6 @@ describe PreviewersController do
     end
 
     it 'initializes a previewer object' do
-      expect(Previewer).to receive(:new).with(parser,
-                                          'Data', 123,
-                                          10, nil) { previewer }
       post :create, parser_id: '1234',
            parser: { content: 'Data' }, index: 10, format: :js
       expect(assigns(:previewer)).to eq previewer
@@ -75,7 +72,7 @@ describe PreviewersController do
 
     it 'initializes a new previewer in test mode' do
       expect(Previewer).to receive(:new).with(parser, 'Data',
-                                          123, 10, nil) { previewer }
+                                          anything, 10, nil) { previewer }
       post :create, parser_id: '1234',
            parser: { content: 'Data' },
            index: 10, environment: 'test', format: :js
@@ -83,8 +80,8 @@ describe PreviewersController do
 
     it 'should preview the records from a existing harvest' do
       expect(Previewer).to receive(:new).with(parser, 'Data',
-                                          123, 10, true) { previewer }
-      post :create, parser_id: '1234',
+                                          anything, 10, true)
+      post :create, parser_id: parser.id,
            parser: { content: 'Data' },
            index: 10, environment: 'test', review: true, format: :js
     end
