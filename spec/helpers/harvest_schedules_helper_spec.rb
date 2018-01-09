@@ -9,7 +9,7 @@
 require "spec_helper"
 
 describe HarvestSchedulesHelper do
-  let(:harvest_schedule) { double(:harvest_schedule, 
+  let(:harvest_schedule) { build(:harvest_schedule,
                                  frequency: 'monthly',
                                  at_hour: '13',
                                  at_minutes: '46',

@@ -11,7 +11,7 @@ require "spec_helper"
 describe HarvestSchedule do
 
   let(:schedule) { HarvestSchedule.new(recurrent: true) }
-  let(:parser) { double(:parser, id: 1).as_null_object }
+  let(:parser) { build(:parser) }
 
   context "class methods" do
     describe ".find_from_environment" do
@@ -24,9 +24,9 @@ describe HarvestSchedule do
   end
 
   describe ".destroy_all_for_parser" do
-    let(:mock_schedule_1) { double(:schedule, id: 1) }
-    let(:mock_schedule_2) { double(:schedule, id: 2) }
-    let(:mock_schedule_3) { double(:schedule, id: 3) }
+    let(:mock_schedule_1) { build(:harvest_schedule) }
+    let(:mock_schedule_2) { build(:harvest_schedule) }
+    let(:mock_schedule_3) { build(:harvest_schedule) }
 
     context "staging" do
       before { allow(Rails).to receive(:env) { "staging" } }

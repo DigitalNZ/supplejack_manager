@@ -122,7 +122,6 @@ describe Parser do
 
   describe "#enrichment_definitions" do
     let(:version) { FactoryBot.build(:version) }
-    let(:parser_class) { instance_double('ParserClass', enrichment_definitions: { ndha_rights: 'Hi' }) }
     let(:parser_class) { double(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
