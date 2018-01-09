@@ -18,7 +18,7 @@ http://digitalnz.org/supplejack
     <%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button new-right #{can_show_button(:create, HarvestSchedule)}" %>
 
     <%= form_tag update_all_environment_harvest_schedules_path, method: 'put' do %>
-      <%= hidden_field_tag 'harvest_schedule[status]', (@active_jobs ? 'paused' : 'active') %>
+      <%= hidden_field_tag 'harvest_schedule[status]', (@active_jobs ? 'stopped' : 'active') %>
       <%= submit_tag (@active_jobs ? 'Pause All' : 'Resume all'), class: 'button alert new-right' %>
     <% end %>
   </div>  
