@@ -12,58 +12,40 @@
 require 'spec_helper'
 
 describe PreviewersController do
-  let(:parser)    { build(:parser) }
-  # TODO
-  let(:previewer) { double(:previewer).as_null_object }
-  let(:user)      { create(:user) }
+  before do
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
+  end
+
+  let(:source) { create(:source) }
+  let(:parser) { create(:parser, source_id: source) }
+  let(:user)   { create(:user, :admin) }
 
   before do
     sign_in user
-  end
-
-  describe 'set_previewer' do
-    before do
-      allow(Parser).to receive(:find) { parser }
-      allow(Previewer).to receive(:new) { previewer }
-      allow(controller).to receive(:params) { { parser_id: '1234', parser: {}, format: :js } }
-    end
-
-    it 'finds the parser' do
-      expect(Parser).to receive(:find).with('1234') { parser }
-      controller.set_previewer
-    end
+    allow_any_instance_of(Previewer).to receive(:create_preview_job) { true }
   end
 
   describe 'POST create' do
-    before do
-      allow(Parser).to receive(:find) { parser }
-      allow(Previewer).to receive(:new) { previewer }
-    end
-
     it 'should call before filters for find_parser_and_version' do
       expect(controller).to receive(:validate_parser_content)
-      post :create, parser_id: '1234', parser: {}, format: :js
+      post :create, parser_id: parser.id, parser: {}, format: :js
     end
 
     it 'should call before filters for set_previewer' do
       expect(controller).to receive(:set_previewer)
-      post :create, parser_id: '1234', parser: {}, format: :js
-    end
-
-    it 'initializes a previewer object' do
-      post :create, parser_id: '1234',
-           parser: { content: 'Data' }, index: 10, format: :js
-      expect(assigns(:previewer)).to eq previewer
+      post :create, parser_id: parser.id, parser: {}, format: :js
     end
 
     it 'sets parser_error as false' do
-      post :create, parser_id: '1234',
+      post :create, parser_id: parser.id,
            parser: { content: 'variable = 1' }, index: 10, format: :js
       expect(assigns(:parser_error)).to eq false
     end
 
     it 'sets parser_error with error details' do
-      post :create, parser_id: '1234',
+      post :create, parser_id: parser.id,
            parser: { content: 'variable += 1' },
            index: 10, format: :js
       expect(assigns(:parser_error)).to eq({ :type => NoMethodError,
@@ -71,16 +53,13 @@ describe PreviewersController do
     end
 
     it 'initializes a new previewer in test mode' do
-      expect(Previewer).to receive(:new).with(parser, 'Data',
-                                          anything, 10, nil) { previewer }
-      post :create, parser_id: '1234',
+      post :create, parser_id: parser.id,
            parser: { content: 'Data' },
            index: 10, environment: 'test', format: :js
     end
 
     it 'should preview the records from a existing harvest' do
-      expect(Previewer).to receive(:new).with(parser, 'Data',
-                                          anything, 10, true)
+      expect_any_instance_of(Previewer).to receive(:create_preview_job)
       post :create, parser_id: parser.id,
            parser: { content: 'Data' },
            index: 10, environment: 'test', review: true, format: :js
