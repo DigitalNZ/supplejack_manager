@@ -37,7 +37,7 @@ RSpec.describe ApplicationController do
 
     context 'without an authorization token, it falls back to devise' do
       it 'renders a status 200' do
-        sign_in FactoryBot.create(:user)
+        sign_in create(:user)
         get :index
         expect(response.status).to eq 200
         expect(response.body).to eq 'success'

@@ -9,8 +9,8 @@
 require 'spec_helper'
 
 describe ParsersHelper do
-  let(:version) { instance_double('Version', id: '123', tags: ['production']).as_null_object }
-  let(:parser)  { instance_double('Parser', id: '333', current_version: nil) }
+  let(:parser) { build(:parser) }
+  let(:version) { build(:version, versionable: parser, tags: ['production'])}
 
   describe "#version_tags" do
     context "current production tag" do
@@ -53,7 +53,7 @@ describe ParsersHelper do
     end
 
     context "older tags" do
-      let(:current_version) { instance_double('Version', id: '444', tags: ['production']) }
+      let(:current_version) { build(:version, tags: ['production']) }
 
       before(:each) do
         allow(parser).to receive(:current_version).with(:production) { current_version }

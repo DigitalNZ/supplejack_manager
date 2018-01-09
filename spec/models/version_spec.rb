@@ -19,7 +19,7 @@ describe Version do
 
   before do
     version.versionable = program
-    version.user = FactoryBot.build(:user, email: "test@test.co.nz")
+    version.user = build(:user, email: "test@test.co.nz")
   end
 
   describe "#staging?" do

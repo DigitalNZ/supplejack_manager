@@ -9,13 +9,14 @@
 require 'spec_helper'
 
 describe Parser do
+  let(:source) { create(:source) }
+  let(:parser) { build(:parser, source_id: source.id) }
+
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
   end
-
-  let(:parser) { FactoryBot.build(:parser) }
 
   context "validations" do
     it "is valid with valid attributes" do
@@ -38,8 +39,7 @@ describe Parser do
     end
 
     it "should not be valid with a duplicated name" do
-      parser1 = FactoryBot.create(:parser, name: 'NZ Museums')
-      parser2 = FactoryBot.build(:parser, name: 'NZ Museums')
+      parser2 = build(:parser, name: 'NZ Museums')
       expect(parser2).not_to be_valid
     end
   end
@@ -52,9 +52,9 @@ describe Parser do
   end
 
   describe ".find_by_partners" do
-    let!(:partner) { FactoryBot.create(:partner) }
-    let!(:source) { FactoryBot.create(:source, partner: partner) }
-    let!(:parser) { FactoryBot.create(:parser, source: source) }
+    let!(:partner) { create(:partner) }
+    let!(:source) { create(:source, partner: partner) }
+    let!(:parser) { create(:parser, source: source) }
 
     it "should find the Partner" do
       expect(Parser.find_by_partners([partner.id])).to eq [parser]
@@ -62,7 +62,7 @@ describe Parser do
   end
 
   context "file paths" do
-    let(:parser) { FactoryBot.build(:parser, name: "Europeana", strategy: "json") }
+    let(:parser) { build(:parser, name: "Europeana", strategy: "json") }
 
     describe "#file_name" do
       it "returns a correct file_name" do
@@ -83,7 +83,7 @@ describe Parser do
   end
 
   describe "xml?" do
-    let(:parser) { FactoryBot.build(:parser, strategy: "xml", name: "Natlib") }
+    let(:parser) { build(:parser, strategy: "xml", name: "Natlib") }
 
     it "returns true for Xml strategy" do
       parser.strategy = "xml"
@@ -107,7 +107,7 @@ describe Parser do
   end
 
   describe "json?" do
-    let(:parser) { FactoryBot.build(:parser, strategy: "json", name: "Natlib") }
+    let(:parser) { build(:parser, strategy: "json", name: "Natlib") }
 
     it "returns true for Json strategy" do
       parser.strategy = "json"
@@ -121,8 +121,7 @@ describe Parser do
   end
 
   describe "#enrichment_definitions" do
-    let(:version) { FactoryBot.build(:version) }
-    let(:parser_class) { instance_double('ParserClass', enrichment_definitions: { ndha_rights: 'Hi' }) }
+    let(:version) { build(:version) }
     let(:parser_class) { double(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
@@ -132,8 +131,8 @@ describe Parser do
 
     context 'when version is not passed' do
       it "content is the last content which is set in the Parser itself" do
-        parser.enrichment_definitions("staging")
-        expect(parser.content).to eq "class NZMuserums; end"
+        parser.enrichment_definitions('staging')
+        expect(parser.content).to eq 'class NZMuseums; end'
       end
 
       it "returns the parser enrichment definitions" do
@@ -158,7 +157,7 @@ describe Parser do
 
     context 'when version is not passed but the parser has a tagged version' do
       before(:each) do
-        parser.versions << FactoryBot.build(:version, :staging)
+        parser.versions << build(:version, :staging)
       end
 
       it "parser is set as the content of the last tagged version" do
@@ -175,7 +174,7 @@ describe Parser do
 
       it "parser has right content from the version" do
         parser.enrichment_definitions("staging", version)
-        expect(parser.content).to eq "default: \"Research papers for 1\"\r\n\t  attributes :display_collection, :primary_collection,   default: \"Massey Research Online"
+        expect(parser.content).to eq "default: \\\"Research papers for 1\\\"\\r\\n\\t  attributes :display_collection, :primary_collection,   default: \\\"Massey Research Online"
       end
 
       it "returns the parser enrichment definitions" do

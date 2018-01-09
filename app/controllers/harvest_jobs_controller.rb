@@ -6,10 +6,11 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
+# app/controllers/harvest_jobs_controller.rb
 class HarvestJobsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  before_filter :set_worker_environment
+  before_action :set_worker_environment
 
   def show
     @harvest_job = HarvestJob.find(params[:id])

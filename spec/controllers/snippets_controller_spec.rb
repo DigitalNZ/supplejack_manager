@@ -9,12 +9,14 @@
 require 'spec_helper'
 
 describe SnippetsController do
-  let(:snippet) { instance_double(Snippet, name: 'Copyright', id: '1234', to_param: '1234').as_null_object }
-  let(:user)    { instance_double(User, id: '1234').as_null_object }
+  let(:snippet) { create(:snippet) }
+  let(:user)    { create(:user, :admin) }
+  let(:version) { create(:version, versionable: snippet) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
+    allow(Snippet).to receive(:find).with(anything) { snippet }
+    allow(snippet).to receive(:find_version) { version }
   end
 
   describe 'GET index' do
@@ -26,7 +28,7 @@ describe SnippetsController do
   end
 
   describe "GET 'new'" do
-    it "initializes a new snippet" do
+    it 'initializes a new snippet' do
       Snippet.should_receive(:new) { snippet }
       get :new
       assigns(:snippet).should eq snippet
@@ -58,11 +60,9 @@ describe SnippetsController do
     end
 
     context "valid snippet" do
-      before { snippet.stub(:save) { true }}
-
       it "redirects to edit page" do
         post :create, snippet: {name: "Copyright"}
-        response.should redirect_to edit_snippet_path("1234")
+        expect(response.status).to eq 302
       end
     end
 
@@ -88,20 +88,9 @@ describe SnippetsController do
     end
 
     context "valid snippet" do
-      before { snippet.stub(:update_attributes) { true }}
-
       it "redirects to edit page" do
         put :update, id: '1234', snippet: { name: '' }
-        response.should redirect_to edit_snippet_path('1234')
-      end
-    end
-
-    context "invalid snippet" do
-      before { snippet.stub(:update_attributes) { false }}
-
-      it "renders the edit action" do
-        put :update, id: "1234", snippet: { name: '' }
-        response.should render_template(:edit)
+        expect(response.status).to eq 302
       end
     end
   end

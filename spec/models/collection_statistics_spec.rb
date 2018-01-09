@@ -9,10 +9,9 @@
 require 'spec_helper'
 
 describe CollectionStatistics do
-
-	let!(:stats_obj_1) { double(:stats, day: Date.today, suppressed_count: 2, activated_count: 3, deleted_count: 3) }
-	let!(:stats_obj_2) { double(:stats, day: Date.today, suppressed_count: 1, activated_count: 1, deleted_count: 2) }
-	let!(:stats_obj_3) { double(:stats, day: Date.today, suppressed_count: 5, activated_count: 2, deleted_count: 4) }
+	let!(:stats_obj_1) { build(:collection_statistics, day: Date.today, suppressed_count: 2, activated_count: 3, deleted_count: 3) }
+	let!(:stats_obj_2) { build(:collection_statistics, day: Date.today, suppressed_count: 1, activated_count: 1, deleted_count: 2) }
+	let!(:stats_obj_3) { build(:collection_statistics, day: Date.today, suppressed_count: 5, activated_count: 2, deleted_count: 4) }
 
 	it "should convert the active resource object into a hash of dates with counts" do
 	  index_stats = CollectionStatistics.index_statistics([stats_obj_1, stats_obj_2, stats_obj_3])
@@ -31,7 +30,7 @@ describe CollectionStatistics do
 	describe "source" do
 
 		let(:collection_statistics) { CollectionStatistics.new }
-		let(:source) { FactoryBot.create(:source) }
+		let(:source) { create(:source) }
 
 		before do
       allow_any_instance_of(Partner).to receive(:update_apis)

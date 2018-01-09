@@ -9,13 +9,11 @@
 require 'spec_helper'
 
 describe ParserTemplatesController do
-	let(:parser_template) { instance_double(ParserTemplate, name: "Copyright").as_null_object }
-	let(:user)          { instance_double(User).as_null_object }
-  # let(:user)            { FactoryBot.create(:user) }
+  let(:parser_template) { create(:parser_template) }
+  let(:user)            { create(:user, :admin) }
 
 	before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
   end
 
 	describe "GET 'index'" do
@@ -28,9 +26,8 @@ describe ParserTemplatesController do
 
 	describe "GET 'new'" do
 		it 'creates a new parser template' do
-			expect(ParserTemplate).to receive(:new) { parser_template }
 			get :new
-			expect(assigns(:parser_template)).to eq parser_template
+			expect(assigns(:parser_template)).to be_a_new(ParserTemplate)
 		end
 	end
 
@@ -44,22 +41,19 @@ describe ParserTemplatesController do
 
 	describe "POST 'create'" do
 		it 'should make a new parser template and assign it with a user id' do
-		  expect(ParserTemplate).to receive(:new) { parser_template }
 		  post :create, parser_template: { name: "template", content: "content" }
 		  assigns(:parser_template) { parser_template }
 		end
 
 		it 'should redirect_to the edit page.' do
-			allow(ParserTemplate).to receive(:new) { parser_template }
 		  post :create, parser_template: { name: "template", content: "content" }
-		  expect(response).to redirect_to edit_parser_template_path(parser_template.id)
+		  expect(response).to redirect_to edit_parser_template_path(ParserTemplate.last.id)
 		end
 
 		context "parser_template not valid" do
 			it "should render the new template" do
-			  allow(ParserTemplate).to receive(:new) { parser_template }
-			  allow(parser_template).to receive(:save) { false }
-			  post :create, parser_template: { name: "template", content: "content" }
+			  expect_any_instance_of(ParserTemplate).to receive(:save) { false }
+			  post :create, parser_template: { name: 'template', content: 'content' }
 			  expect(response).to render_template(:new)
 			end
 		end

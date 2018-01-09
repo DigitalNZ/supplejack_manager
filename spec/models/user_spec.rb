@@ -9,10 +9,10 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { FactoryBot.build(:user, name: 'Federico Gonzalez') }
+  let(:user) { build(:user, name: 'Federico Gonzalez') }
 
   describe '.active' do
-    let!(:deactive) { FactoryBot.create(:user, name: 'Deactivated User', email: 'deactivated@example.com', active: false) }
+    let!(:deactive) { create(:user, name: 'Deactivated User', email: 'deactivated@example.com', active: false) }
 
     it 'should return only active users' do
       user.save!

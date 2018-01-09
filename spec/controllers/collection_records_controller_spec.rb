@@ -9,11 +9,8 @@
 require 'spec_helper'
 
 describe CollectionRecordsController do
-  let(:user) { instance_double(User, role: 'admin').as_null_object }
-
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in create(:user, :admin)
   end
 
   describe 'GET #index' do
@@ -36,7 +33,7 @@ describe CollectionRecordsController do
 
   describe 'PUT #update' do
     it 'should make a post to the api to change the status to active for the record' do
-      expect(RestClient).to receive(:put).with("#{ENV['API_HOST']}/harvester/records/abc123", {record: { status: 'active' }, api_key: ENV['HARVESTER_API_KEY']})
+      expect(RestClient).to receive(:put).with("#{ENV['API_HOST']}/harvester/records/abc123", { record: { status: 'active' }, api_key: ENV['HARVESTER_API_KEY'] })
       put :update, environment: 'development', id: 'abc123', status: 'active'
     end
 

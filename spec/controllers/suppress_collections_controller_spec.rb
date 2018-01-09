@@ -6,14 +6,13 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require "spec_helper"
+require 'spec_helper'
 
 describe SuppressCollectionsController do
-  let(:user) { instance_double(User, role: 'admin').as_null_object }
+  let(:user) { create(:user, :admin) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
   end
 
   describe "GET 'index'" do

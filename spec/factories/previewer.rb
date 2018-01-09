@@ -6,14 +6,9 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-class AbstractJobsController < ApplicationController
-  before_filter :set_worker_environment
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-  def index
-    @abstract_jobs = AbstractJob.search(params)
-  end
-
-  def set_worker_environment
-    set_worker_environment_for(AbstractJob)
+FactoryBot.define do
+  factory :previewer do
   end
 end

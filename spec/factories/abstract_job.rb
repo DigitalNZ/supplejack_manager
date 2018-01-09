@@ -6,14 +6,20 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-class AbstractJobsController < ApplicationController
-  before_filter :set_worker_environment
+# Status can be
+# finished, failed, stopped, ready
 
-  def index
-    @abstract_jobs = AbstractJob.search(params)
-  end
-
-  def set_worker_environment
-    set_worker_environment_for(AbstractJob)
+FactoryBot.define do
+  factory :abstract_job do
+    id SecureRandom.hex
+    start_time Time.zone.now - 2.days.ago
+    end_time Time.zone.now
+    records_count 0
+    throughput 0
+    duration 0
+    status 'ready'
+    status_message nil
+    user_id nil
+    environment 'staging'
   end
 end

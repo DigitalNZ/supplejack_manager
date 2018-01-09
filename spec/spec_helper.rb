@@ -15,6 +15,7 @@ require 'webmock/rspec'
 require 'simplecov'
 require 'faker'
 require 'pry'
+require 'support/factory_bot'
 
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc,

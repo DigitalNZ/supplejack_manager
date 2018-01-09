@@ -9,12 +9,11 @@
 require 'spec_helper'
 
 describe PreviewsController do
-  let(:preview) { instance_double(Preview, id: '123').as_null_object }
-  let(:user) { instance_double(User, id: '1234').as_null_object }
+  let(:preview) { build(:preview) }
+  let(:user) { create(:user) }
 
   before(:each) do
-    allow(controller).to receive(:authenticate_user!) { true }
-    allow(controller).to receive(:current_user) { user }
+    sign_in user
   end
 
   describe 'GET show' do

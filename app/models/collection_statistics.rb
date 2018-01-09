@@ -9,14 +9,11 @@
 class CollectionStatistics < ActiveResource::Base
   include EnvironmentHelpers
 
-  self.site = ENV["WORKER_HOST"]
+  self.site = ENV['WORKER_HOST']
   headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
 
-
   def self.index_statistics(statistics)
-
 		index_statistics = Hash.new
-
 		statistics = statistics.sort_by(&:day).reverse
 
 		statistics.each do |stats_item|
@@ -32,5 +29,4 @@ class CollectionStatistics < ActiveResource::Base
   def source
   	Source.find_by(source_id: self.source_id) rescue nil
   end
-
 end
