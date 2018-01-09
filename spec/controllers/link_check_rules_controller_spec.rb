@@ -55,8 +55,7 @@ describe LinkCheckRulesController do
 
   describe "POST 'create'" do
     before do
-      stub_request(:post, 'http://localhost:3002/link_check_rules.json').with(body: "{\"collection_title\":\"collection_title\",\"status_codes\":\"203,205\"}",
-         headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=WORKER_KEY', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).to_return(status: 200, body: "", headers: {})
+      allow_any_instance_of(LinkCheckRule).to receive(:save) { true}
     end
 
     it 'should make a new collection rule and assign it' do

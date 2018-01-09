@@ -48,11 +48,8 @@ describe HarvestSchedulesController do
 
   describe 'POST create' do
     before do
-      stub_request(:post, "http://localhost:3002/harvest_schedules.json")
-      .with(body: "{\"cron\":\"* * * * *\",\"parser_id\":\"1\",\"start_time\":\"2017-11-27 10:29:33 +1300\"}",
-        headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token token=WORKER_KEY', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
-        to_return(status: 200, body: "", headers: {})
-      end
+      allow_any_instance_of(HarvestSchedule).to receive(:save) { true }
+    end
 
       it 'initializes a new harvest schedule' do
         post :create, harvest_schedule: { cron: '* * * * *', parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: 'staging'
