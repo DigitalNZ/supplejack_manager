@@ -10,7 +10,7 @@ require "spec_helper"
 
 describe LinkCheckRule do
 	let(:link_check_rule) { LinkCheckRule.new }
-	let(:source) { FactoryBot.create(:source, source_id: "source_id") }
+	let(:source) { create(:source, source_id: "source_id") }
 
 	@link_check_rule  = { :link_check_rule => { source_id: "source_id", active: true } }.to_json
 

@@ -9,10 +9,10 @@
 require 'spec_helper'
 
 describe HarvestSchedulesController do
-  let(:schedule) { FactoryBot.build(:harvest_schedule) }
+  let(:schedule) { build(:harvest_schedule) }
 
   before(:each) do
-    sign_in FactoryBot.create(:user, :admin)
+    sign_in create(:user, :admin)
   end
 
   describe 'PUT update_all' do

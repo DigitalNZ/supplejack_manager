@@ -9,10 +9,10 @@
 require 'spec_helper'
 
 describe HarvestJobsController do
-  let(:job) { FactoryBot.build(:harvest_job) }
+  let(:job) { build(:harvest_job) }
 
   before(:each) do
-    sign_in FactoryBot.create(:user)
+    sign_in create(:user)
   end
 
   describe '#GET show' do

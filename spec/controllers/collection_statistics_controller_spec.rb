@@ -9,10 +9,10 @@
 require 'spec_helper'
 
 describe CollectionStatisticsController do
-  let(:collection_statistics) { FactoryBot.build(:collection_statistics) }
+  let(:collection_statistics) { build(:collection_statistics) }
 
   before(:each) do
-    sign_in FactoryBot.create(:user)
+    sign_in create(:user)
   end
 
   describe 'GET index' do

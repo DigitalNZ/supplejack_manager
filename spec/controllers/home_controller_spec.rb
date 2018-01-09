@@ -10,7 +10,7 @@ require 'spec_helper'
 
 describe HomeController do
   before(:each) do
-    sign_in FactoryBot.create(:user)
+    sign_in create(:user)
   end
 
   describe 'GET index' do

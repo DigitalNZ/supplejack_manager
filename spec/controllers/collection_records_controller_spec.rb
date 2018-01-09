@@ -10,7 +10,7 @@ require 'spec_helper'
 
 describe CollectionRecordsController do
   before(:each) do
-    sign_in FactoryBot.create(:user, :admin)
+    sign_in create(:user, :admin)
   end
 
   describe 'GET #index' do

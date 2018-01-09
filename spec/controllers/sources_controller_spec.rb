@@ -51,7 +51,7 @@ describe SourcesController do
 
   describe "POST create" do
     before(:each) {
-      allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
+      allow(controller).to receive(:current_user) { build(:user, role: 'admin') }
     }
 
     describe 'with valid params' do
@@ -96,7 +96,7 @@ describe SourcesController do
 
   describe 'PUT update' do
     before(:each) {
-      allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
+      allow(controller).to receive(:current_user) { build(:user, role: 'admin') }
     }
 
     describe 'with valid params' do
@@ -137,7 +137,7 @@ describe SourcesController do
 
     describe "GET reindex" do
       before(:each) {
-        allow(controller).to receive(:current_user) { FactoryBot.build(:user, role: 'admin') }
+        allow(controller).to receive(:current_user) { build(:user, role: 'admin') }
       }
 
       it "calls reindex on api" do

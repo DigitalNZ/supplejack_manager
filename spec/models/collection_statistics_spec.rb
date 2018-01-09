@@ -30,7 +30,7 @@ describe CollectionStatistics do
 	describe "source" do
 
 		let(:collection_statistics) { CollectionStatistics.new }
-		let(:source) { FactoryBot.create(:source) }
+		let(:source) { create(:source) }
 
 		before do
       allow_any_instance_of(Partner).to receive(:update_apis)
