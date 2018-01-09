@@ -58,7 +58,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def update_all
-    HarvestSchedule.all.each do |schedule|
+    HarvestSchedule.all.select { |hs| %w(active stopped).include? hs.status }.each do |schedule|
       schedule.update_attributes(params[:harvest_schedule])
     end
 
