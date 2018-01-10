@@ -3,8 +3,9 @@
 require 'spec_helper'
 
 RSpec.describe SnippetVersionSerializer do
-  let(:snippet) { create(:snippet) }
-  let(:version) { create(:version, versionable: snippet) }
+  let(:user)       { create(:user, :admin) }
+  let(:snippet)    { create(:snippet) }
+  let(:version)    { create(:version, versionable: snippet, user: user) }
   let(:serializer) { described_class.new(version).as_json }
 
   before(:each) do
