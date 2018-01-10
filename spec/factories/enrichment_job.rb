@@ -8,5 +8,16 @@ FactoryBot.define do
     throughput 1.0
     duration 2.0
     status 'started'
+    user_id 'user_id'
+    parser_id 'parser_id'
+    version_id 'version_id'
+    harvest_schedule_id 'harvest_schedule_id'
+    environment 'test'
+    failed_records_count 0
+    invalid_records_count 0
+    posted_records_count 0
+    created_at Time.zone.now
+    enrichment 'enrichment_code'
+    record_id 1
   end
 end
