@@ -33,9 +33,9 @@
 //= require foundation/app
 //= require dataTables/jquery.dataTables
 //= require datatables.foundation
-//= require jquery.ui.datepicker
-//= require jquery.ui.slider
-//= require jquery.ui.timepicker
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/widgets/slider
+//= require jquery.timepicker.js
 //= require moment.min
 //= require codemirror
 //= require codemirror/modes/ruby
