@@ -31,7 +31,7 @@ describe UsersController do
     context 'active=false' do
       it 'should find all deactivated users' do
         expect(User).to receive(:deactivated) { [user] }
-        get :index, active: 'false'
+        get :index, params: { active: 'false' }
         expect(assigns(:users)).to eq [user]
       end
     end
@@ -56,26 +56,26 @@ describe UsersController do
       end
 
       it 'redirects to index template' do
-        post :create, user: @valid_user
+        post :create, params: { user: @valid_user }
         expect(response).to redirect_to(users_path)
       end
 
       it 'should save the user' do
         expect {
-          post :create, user: @valid_user
+          post :create, params: { user: @valid_user }
         }.to change(User, :count).by(1)
       end
     end
 
     context 'invalid input' do
       it 'renders new template' do
-        post :create, user: { name: 'Invalid user' }
+        post :create, params: { user: { name: 'Invalid user' } }
         expect(response).to render_template(:new)
       end
 
       it 'should not save the user' do
         expect {
-          post :create, user: { name: 'Invalid user' }
+          post :create, params: { user: { name: 'Invalid user' } }
         }.to change(User, :count).by(0)
       end
     end
@@ -83,12 +83,12 @@ describe UsersController do
 
   describe 'GET #edit' do
     it 'renders edit template' do
-      get :edit, id: user.id
+      get :edit, params: { id: user.id }
       expect(response).to render_template(:edit)
     end
 
     it 'should assign the current_user to @user' do
-      get :edit, id: user.id
+      get :edit, params: { id: user.id }
       expect(assigns(:user)).to eq user
     end
   end
@@ -96,46 +96,46 @@ describe UsersController do
   describe 'PUT #update' do
     it 'should find the user' do
       expect(User).to receive(:find)
-      put :update, id: other_user.id
+      put :update, params: { id: other_user.id }
     end
 
     it 'redirects to index template' do
-      put :update, id: other_user.id
+      put :update, params: { id: other_user.id }
       expect(response).to redirect_to(users_path)
     end
 
     it 'assigns user to instance variable' do
-      put :update, id: other_user.id
+      put :update, params: { id: other_user.id }
       expect(assigns(:user)).to eq other_user
     end
 
     context 'valid input' do
       it 'should update the user' do
-        put :update, id: other_user.id, user: { name: 'User' }
+        put :update, params: { id: other_user.id, user: { name: 'User' } }
         other_user.reload
         expect(other_user.email).to eq 'other@example.com'
       end
 
       it 'renders users path' do
-        put :update, id: other_user.id, user: { email: 'other@example.com' }
+        put :update, params: { id: other_user.id, user: { email: 'other@example.com' } }
         other_user.reload
         expect(response).to redirect_to(users_path)
       end
 
       it 'should sign in if the user is the current user' do
         expect(controller).to receive(:sign_in)
-        put :update, id: user.id, user: { name: 'User' }
+        put :update, params: { id: user.id, user: { name: 'User' } }
       end
 
       it 'should not sign in the user if not the current user' do
         expect(controller).not_to receive(:sign_in)
-        put :update, id: other_user.id, user: { name: 'User' }
+        put :update, params: { id: other_user.id, user: { name: 'User' } }
       end
     end
 
     context 'invalid input' do
       it 'should not update the user' do
-        put :update, id: other_user.id, user: { email: 'invalid_email' }
+        put :update, params: { id: other_user.id, user: { email: 'invalid_email' } }
         other_user.reload
         expect(other_user.email).to eq 'other@example.com'
       end

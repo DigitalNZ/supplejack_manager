@@ -7,7 +7,7 @@
 # http://digitalnz.org/supplejack
 
 class AbstractJobsController < ApplicationController
-  before_filter :set_worker_environment
+  before_action :set_worker_environment
 
   def index
     @abstract_jobs = AbstractJob.search(params)

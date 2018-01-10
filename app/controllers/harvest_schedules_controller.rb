@@ -9,7 +9,7 @@
 class HarvestSchedulesController < ApplicationController
   authorize_resource
 
-  before_filter :set_worker_environment
+  before_action :set_worker_environment
 
   respond_to :html
 

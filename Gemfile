@@ -46,7 +46,7 @@ gem 'nokogiri'
 gem 'moped'
 gem 'bson'
 gem 'modernizr-rails'
-
+gem 'rails-controller-testing'
 gem 'sass-rails'
 gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
