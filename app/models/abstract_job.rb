@@ -88,7 +88,7 @@ class AbstractJob < ActiveResource::Base
   end
 
   def finished?
-    self.status == "finished"
+    status == 'finished'
   end
 
   def total_errors_count

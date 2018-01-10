@@ -7,7 +7,6 @@
 # http://digitalnz.org/supplejack
 
 class EnrichmentJob < AbstractJob
-
   self.site = ENV["WORKER_HOST"]
   headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
 
@@ -32,5 +31,4 @@ class EnrichmentJob < AbstractJob
   end
 
   include ActiveResource::SchemaTypes
-
 end
