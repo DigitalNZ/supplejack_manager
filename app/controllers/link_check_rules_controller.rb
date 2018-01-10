@@ -58,4 +58,10 @@ class LinkCheckRulesController < ApplicationController
   def set_worker_environment
     set_worker_environment_for(LinkCheckRule)
   end
+
+  private
+
+  def link_check_rule_params
+    params.permit!
+  end
 end
