@@ -6,7 +6,7 @@ RSpec.describe EnvironmentHelpers do
   let(:env_vars) { APPLICATION_ENVIRONMENT_VARIABLES }
   let(:params) { { environment: 'test' } }
 
-  class Dummy
+  class ModelWithMultipleEnvironments
     include EnvironmentHelpers
 
     class << self
@@ -15,7 +15,7 @@ RSpec.describe EnvironmentHelpers do
   end
 
   describe 'dynamic_methods' do
-    let(:dummy) { Dummy.new }
+    let(:dummy) { ModelWithMultipleEnvironments.new }
 
     it 'responds to harvest_jobs_path' do
       expect(dummy).to respond_to(:harvest_jobs_path)
@@ -56,9 +56,9 @@ RSpec.describe EnvironmentHelpers do
 
   describe '#change_worker_env' do
     it 'sets the worker environment to be what is in the environment hash' do
-      Dummy.change_worker_env!('test')
-      expect(Dummy.site).to eq env_vars['test']['WORKER_HOST']
-      expect(Dummy.user).to eq env_vars['test']['WORKER_KEY']
+      ModelWithMultipleEnvironments.change_worker_env!('test')
+      expect(ModelWithMultipleEnvironments.site).to eq env_vars['test']['WORKER_HOST']
+      expect(ModelWithMultipleEnvironments.user).to eq env_vars['test']['WORKER_KEY']
     end
   end
 end

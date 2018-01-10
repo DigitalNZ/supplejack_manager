@@ -62,7 +62,7 @@ RSpec.describe AbstractJob do
       expect(abstract_job.invalid_records_count).to eq 0
     end
 
-    it 'has a incremntal' do
+    it 'has a incremental' do
       expect(abstract_job.incremental).to eq false
     end
 
