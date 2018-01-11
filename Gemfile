@@ -10,7 +10,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.1'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
@@ -61,7 +61,6 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent'
   gem 'unicorn-rails'
-  gem 'traceroute'
   gem 'rubocop', require: false
   gem 'web-console'
 end
