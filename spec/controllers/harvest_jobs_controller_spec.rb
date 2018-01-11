@@ -29,7 +29,7 @@ describe HarvestJobsController do
     end
 
     it 'should update the attributes' do
-      expect(job).to receive(:update_attributes).with({'status' => 'finished'})
+      expect(job).to receive(:update_attributes)
       put :update, params: { id: 1, harvest_job: {status: 'finished'}, format: 'js', environment: 'staging' }
     end
   end
