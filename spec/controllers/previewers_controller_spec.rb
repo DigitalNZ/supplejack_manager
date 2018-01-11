@@ -30,39 +30,39 @@ describe PreviewersController do
   describe 'POST create' do
     it 'should call before filters for find_parser_and_version' do
       expect(controller).to receive(:validate_parser_content)
-      post :create, parser_id: parser.id, parser: {}, format: :js
+      post :create, params: { parser_id: parser.id, parser: { content: 'content' }, format: :js }
     end
 
     it 'should call before filters for set_previewer' do
       expect(controller).to receive(:set_previewer)
-      post :create, parser_id: parser.id, parser: {}, format: :js
+      post :create, params: { parser_id: parser.id, parser: { content: 'content' }, format: :js }
     end
 
     it 'sets parser_error as false' do
-      post :create, parser_id: parser.id,
-           parser: { content: 'variable = 1' }, index: 10, format: :js
+      post :create, params: { parser_id: parser.id,
+           parser: { content: 'variable = 1' }, index: 10, format: :js }
       expect(assigns(:parser_error)).to eq false
     end
 
     it 'sets parser_error with error details' do
-      post :create, parser_id: parser.id,
+      post :create, params: { parser_id: parser.id,
            parser: { content: 'variable += 1' },
-           index: 10, format: :js
+           index: 10, format: :js }
       expect(assigns(:parser_error)).to eq({ :type => NoMethodError,
                                          :message => "undefined method `+' for nil:NilClass" })
     end
 
     it 'initializes a new previewer in test mode' do
-      post :create, parser_id: parser.id,
+      post :create, params: { parser_id: parser.id,
            parser: { content: 'Data' },
-           index: 10, environment: 'test', format: :js
+           index: 10, environment: 'test', format: :js }
     end
 
     it 'should preview the records from a existing harvest' do
       expect_any_instance_of(Previewer).to receive(:create_preview_job)
-      post :create, parser_id: parser.id,
+      post :create, params: { parser_id: parser.id,
            parser: { content: 'Data' },
-           index: 10, environment: 'test', review: true, format: :js
+           index: 10, environment: 'test', review: true, format: :js }
     end
   end
 end
