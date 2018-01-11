@@ -16,7 +16,7 @@ RSpec.describe EnrichmentJobsController do
     end
 
     it 'assigns the correct @enrichment_job' do
-      get :show, id: 1, environment: 'staging'
+      get :show, params: { id: 1, environment: 'staging' }
       expect(assigns(:enrichment_job)).to eq enrichment_job
     end
   end
