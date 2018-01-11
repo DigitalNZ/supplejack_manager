@@ -22,7 +22,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def new
-    @harvest_schedule = HarvestSchedule.new(params[:harvest_schedule] || {})
+    @harvest_schedule = HarvestSchedule.new(harvest_schedule_params || {})
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
     @harvest_schedule.mode = "normal"
@@ -35,7 +35,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def create
-    @harvest_schedule = HarvestSchedule.new(params[:harvest_schedule])
+    @harvest_schedule = HarvestSchedule.new(harvest_schedule_params)
     @harvest_schedule.save
     respond_with @harvest_schedule, location: harvest_schedules_path
   end
@@ -53,13 +53,13 @@ class HarvestSchedulesController < ApplicationController
   def update
     @harvest_schedule = HarvestSchedule.find(params[:id])
 
-    @harvest_schedule.update_attributes(params[:harvest_schedule])
+    @harvest_schedule.update_attributes(harvest_schedule_params)
     redirect_to harvest_schedules_path
   end
 
   def update_all
     HarvestSchedule.all.select { |hs| %w(active stopped).include? hs.status }.each do |schedule|
-      schedule.update_attributes(params[:harvest_schedule])
+      schedule.update_attributes(harvest_schedule_params)
     end
 
     flash[:notice] = "All scheduled harvests are now #{params[:harvest_schedule][:status]}"
@@ -75,5 +75,11 @@ class HarvestSchedulesController < ApplicationController
 
   def set_worker_environment
     set_worker_environment_for(HarvestSchedule)
+  end
+
+  private
+
+  def harvest_schedule_params
+    params.permit!
   end
 end
