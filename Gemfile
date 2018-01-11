@@ -63,7 +63,7 @@ group :development do
   gem 'unicorn-rails'
   gem 'traceroute'
   gem 'rubocop', require: false
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 end
 
 group :development, :test do
