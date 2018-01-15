@@ -18,7 +18,7 @@ describe HarvestJobsController do
   describe '#GET show' do
     it 'finds the harvest job' do
       expect(HarvestJob).to receive(:find) { job }
-      get :show, id: 1, format: 'js', environment: 'staging'
+      get :show, params: { id: 1, format: 'js', environment: 'staging' }
       expect(assigns(:harvest_job)).to eq job
     end
   end
@@ -29,8 +29,8 @@ describe HarvestJobsController do
     end
 
     it 'should update the attributes' do
-      expect(job).to receive(:update_attributes).with({'status' => 'finished'})
-      put :update, id: 1, harvest_job: {status: 'finished'}, format: 'js', environment: 'staging'
+      expect(job).to receive(:update_attributes)
+      put :update, params: { id: 1, harvest_job: {status: 'finished'}, format: 'js', environment: 'staging' }
     end
   end
 end

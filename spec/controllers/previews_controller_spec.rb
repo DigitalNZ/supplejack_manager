@@ -19,7 +19,7 @@ describe PreviewsController do
   describe 'GET show' do
     it 'should find the preview object' do
       expect(Preview).to receive(:find).with(preview.id.to_s) { preview }
-      get :show, id: preview.id, format: 'js'
+      get :show, params: { id: preview.id, format: 'js' }
       expect(assigns(:preview)).to eq preview
     end
   end

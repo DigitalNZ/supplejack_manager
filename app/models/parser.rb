@@ -170,5 +170,4 @@ class Parser
   def full_and_flush_allowed?
     allow_full_and_flush
   end
-
 end

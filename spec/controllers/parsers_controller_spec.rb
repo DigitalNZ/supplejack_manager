@@ -15,10 +15,10 @@ describe ParsersController do
     allow(LinkCheckRule).to receive(:create)
   end
 
-  let(:source) { create(:source) }
-  let(:parser) { create(:parser, source_id: source) }
-  let(:version) { build(:version, versionable: parser) }
+  let(:source)  { create(:source) }
+  let(:parser)  { create(:parser, source_id: source) }
   let(:user)    { create(:user, :admin) }
+  let(:version) { create(:version, versionable: parser, user: user) }
 
   before(:each) do
     sign_in user
@@ -35,8 +35,8 @@ describe ParsersController do
 
   describe 'GET show' do
     it 'finds an existing parser' do
-      expect(Parser).to receive(:find).with("1234") { parser }
-      get :show, id: "1234"
+      expect(Parser).to receive(:find).with('1234') { parser }
+      get :show, params: { id: '1234' }
       expect(assigns(:parser)).to eq parser
     end
   end
@@ -58,44 +58,39 @@ describe ParsersController do
 
     it 'finds an existing parser' do
       expect(Parser).to receive(:find).with('1234') { parser }
-      get :edit, id: '1234'
+      get :edit, params: { id: '1234' }
       expect(assigns(:parser)).to eq parser
     end
 
     it 'initializes a harvest_job' do
       expect(HarvestJob).to receive(:from_parser).with(parser, user) { job }
-      get :edit, id: '1234'
+      get :edit, params: { id: '1234' }
       expect(assigns(:harvest_job)).to eq job
     end
   end
 
   describe "GET 'create'" do
-    before do
-      allow(Parser).to receive(:new) { parser }
-    end
-
     it 'initializes a new parser' do
-      expect(Parser).to receive(:new).with({'name' => 'Tepapa'}) { parser }
-      post :create, parser: { name: 'Tepapa' }
+      expect(Parser).to receive(:new).with('name' => 'Tepapa') { parser }
+      post :create, params: { parser: { name: 'Tepapa' } }
     end
 
-    it "saves the parser" do
-      expect(parser).to receive(:save)
-      post :create, parser: { name: 'Tepapa' }
+    it 'saves the parser' do
+      expect{ post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } }}.to change(Parser, :count).by(1)
     end
 
     context 'valid parser' do
       it 'redirects to the edit page' do
-        post :create, parser: { name: 'Tepapa' }
+        post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } }
         expect(response.status).to eq 302
       end
     end
 
-    context "invalid parser" do
+    context 'invalid parser' do
       before { allow(parser).to receive(:save) { false } }
 
-      it "renders the edit action" do
-        post :create, parser: {name: "Tepapa"}
+      it 'renders the edit action' do
+        post :create, params: { parser: { name: 'Tepapa' } }
         expect(response).to render_template(:new)
       end
     end
@@ -109,25 +104,25 @@ describe ParsersController do
 
     it "finds an existing parser " do
       expect(Parser).to receive(:find).with('1234') { parser }
-      put :update, id: '1234', parser: { name: '' }
+      put :update, params: { id: '1234', parser: { name: '' } }
       expect(assigns(:parser)).to eq parser
     end
 
     it "updates the parser attributes" do
       expect(parser).to receive('attributes=').with({'name' => 'Tepapa'})
-      put :update, id: '1234', parser: { name: 'Tepapa' }
+      put :update, params: { id: '1234', parser: { name: 'Tepapa' } }
     end
 
     it 'saves the parser' do
       expect(parser).to receive(:save)
-      put :update, id: '1234', parser: { name: 'Tepapa' }
+      put :update, params: { id: '1234', parser: { name: 'Tepapa' } }
     end
 
     context 'valid parser' do
       before { allow(parser).to receive(:save) { true }}
 
       it 'redirects to edit page' do
-        put :update, id: parser.id, parser: { name: '' }
+        put :update, params: { id: parser.id, parser: { name: '' } }
         expect(response).to redirect_to edit_parser_path(parser.id)
       end
     end
@@ -136,7 +131,7 @@ describe ParsersController do
       before { allow(parser).to receive(:save) { false }}
 
       it 'renders the edit action' do
-        put :update, id: '1234', parser: { name: '' }
+        put :update, params: { id: '1234', parser: { name: '' } }
         expect(response).to render_template(:edit)
       end
     end
@@ -154,20 +149,20 @@ describe ParsersController do
 
       it "finds an existing parser " do
         expect(Parser).to receive(:find).with("1234") { parser }
-        delete :destroy, id: "1234"
+        delete :destroy, params: { id: "1234" }
         expect(assigns(:parser)).to eq parser
       end
 
       it "destroys the parser config" do
         expect(parser).to receive(:destroy)
-        delete :destroy, id: "1234"
+        delete :destroy, params: { id: "1234" }
       end
     end
 
     it "does not destroy if there are currently running jobs" do
       allow(parser).to receive(:running_jobs?) { true }
       expect(parser).not_to receive(:destroy)
-      delete :destroy, id: "1234"
+      delete :destroy, params: { id: "1234" }
     end
   end
 
@@ -179,9 +174,8 @@ describe ParsersController do
     end
 
     it 'sets the allow_full_and_flush to true' do
-      get :allow_flush, id: parser.id, params: { allow: true }
+      get :allow_flush, params: { id: parser.id, allow: true }
       expect(assigns(:parser).allow_full_and_flush).to be true
     end
   end
-
 end

@@ -16,18 +16,24 @@ class EnrichmentJobsController < ApplicationController
   end
 
   def create
-    @enrichment_job = EnrichmentJob.new(params[:enrichment_job])
+    @enrichment_job = EnrichmentJob.new(enrichment_job_params)
     @enrichment_job.save
   end
 
   def update
     @enrichment_job = EnrichmentJob.find(params[:id])
-    @enrichment_job.update_attributes(params[:enrichment_job])
+    @enrichment_job.update_attributes(enrichment_job_params)
   end
 
   private
 
   def set_worker_environment
     set_worker_environment_for(EnrichmentJob)
+  end
+
+  def enrichment_job_params
+    params.require(:enrichment_job).permit(:parser_id, :version_id,
+                                           :user_id, :environment,
+                                           :record_id, :enrichment)
   end
 end

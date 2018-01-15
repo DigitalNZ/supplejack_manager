@@ -29,7 +29,7 @@ describe HomeController do
       end
 
       it "sets the environment to production and cache the environment" do
-        get :index, environment: 'production'
+        get :index, params: { environment: 'production' }
         expect(controller.params[:environment]).to eq 'production'
         get :index
         expect(controller.params[:environment]).to eq 'production'

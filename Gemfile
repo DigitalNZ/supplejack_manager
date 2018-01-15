@@ -10,7 +10,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '= 4.2.10'
+gem 'rails', '~> 5.1'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
@@ -24,7 +24,7 @@ gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.gi
 gem 'responders', '~> 2.0'
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'mongoid', '~> 5'
+gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'devise', '~> 4.0'
 gem 'cancancan'
@@ -36,8 +36,9 @@ gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'activeresource-response'
 gem 'activeresource', require: 'active_resource'
-gem 'jquery-rails', '~> 2.0'
-gem 'jquery-ui-rails', '~> 3.0'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-timepicker-rails'
 gem 'lograge'
 gem 'airbrake'
 gem 'test-unit'
@@ -45,7 +46,7 @@ gem 'nokogiri'
 gem 'moped'
 gem 'bson'
 gem 'modernizr-rails'
-
+gem 'rails-controller-testing'
 gem 'sass-rails'
 gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -56,14 +57,12 @@ gem 'zurb-foundation', '= 3.2.5'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do
-  gem 'quiet_assets', '>= 1.0.1'
   gem 'binding_of_caller', '>= 0.6.8'
   gem 'guard-rspec'
-  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rb-fsevent'
   gem 'unicorn-rails'
-  gem 'traceroute'
   gem 'rubocop', require: false
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 end
 
 group :development, :test do

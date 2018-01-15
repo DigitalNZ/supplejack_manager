@@ -20,20 +20,20 @@ describe HarvestSchedulesController do
 
     before do
       expect(schedule).to receive(:status) { 'active' }
-      expect(schedule).to receive(:update_attributes).with({ status:'stopped' })
+      expect(schedule).to receive(:update_attributes)
     end
 
     it 'update the scheduled harvets' do
       expect(HarvestSchedule).to receive(:all) { [schedule] }
-      put :update_all, environment: 'staging', harvest_schedule: { status: 'stopped' }
+      put :update_all, params: { environment: 'staging', harvest_schedule: { status: 'stopped' } }
     end
 
     it 'does not update individually paused scheduled harvests' do
       expect(HarvestSchedule).to receive(:all) { [schedule, paused_schedule] }
       expect(paused_schedule).to receive(:status) { 'paused' }
-      expect(paused_schedule).to_not receive(:update_attributes).with({ status: 'stopped' })
+      expect(paused_schedule).to_not receive(:update_attributes)
 
-      put :update_all, environment: 'staging', harvest_schedule: { status: 'stopped' }
+      put :update_all, params: { environment: 'staging', harvest_schedule: { status: 'stopped' }}
     end
   end
 
@@ -44,7 +44,7 @@ describe HarvestSchedulesController do
 
     it "returns all harvest schedules" do
       expect(HarvestSchedule).to receive(:all) { [schedule] }
-      get :index, environment: "staging"
+      get :index, params: { environment: "staging" }
       expect(assigns(:harvest_schedules)).to eq [schedule]
     end
 
@@ -53,7 +53,7 @@ describe HarvestSchedulesController do
       s2 = build(:harvest_schedule, recurrent: false, start_time: DateTime.now, status: 'active')
 
       allow(HarvestSchedule).to receive(:all) { [s1, s2] }
-      get :index, environment: "staging"
+      get :index, params: { environment: "staging" }
       expect(assigns(:recurrent_schedules)).to eq [s1]
       expect(assigns(:one_off_schedules)).to eq [s2]
     end
@@ -65,11 +65,11 @@ describe HarvestSchedulesController do
     end
 
       it 'initializes a new harvest schedule' do
-        post :create, harvest_schedule: { cron: '* * * * *', parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: 'staging'
+        post :create, params: { harvest_schedule: { cron: '* * * * *', parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: 'staging' }
       end
 
       it 'should redirect to the index' do
-        post :create, harvest_schedule: {cron: "* * * * *", parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: "staging"
+        post :create, params: { harvest_schedule: { cron: "* * * * *", parser_id: '1', start_time: '2017-11-27 10:29:33 +1300' }, environment: "staging" }
         expect(response).to redirect_to(environment_harvest_schedules_path("staging"))
       end
     end
@@ -81,17 +81,17 @@ describe HarvestSchedulesController do
 
       it 'finds the harvest schedule' do
         expect(HarvestSchedule).to receive(:find).with('1') { schedule }
-        put :update, id: 1, environment: 'staging', harvest_schedule: {}
+        put :update, params: { id: 1, environment: 'staging', harvest_schedule: {} }
         expect(assigns(:harvest_schedule)).to eq schedule
       end
 
       it "should update the attributes" do
-        expect(schedule).to receive(:update_attributes).with({'cron' => '1 1 1 1 1'})
-        put :update, id: 1, harvest_schedule: {cron: '1 1 1 1 1'}, environment: 'staging'
+        expect(schedule).to receive(:update_attributes)
+        put :update, params: { id: 1, harvest_schedule: {cron: '1 1 1 1 1'}, environment: 'staging' }
       end
 
       it "should redirect to the index" do
-        put :update, id: 1, harvest_schedule: {cron: "* * * * *"}, environment: "staging"
+        put :update, params: { id: 1, harvest_schedule: {cron: "* * * * *"}, environment: "staging" }
         expect(response).to redirect_to(environment_harvest_schedules_path("staging"))
       end
     end

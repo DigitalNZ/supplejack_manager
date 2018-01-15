@@ -44,7 +44,7 @@ describe SourcesController do
   describe "GET edit" do
     it "assigns the requested source as @source" do
       source = Source.create! valid_attributes
-      get :edit, {:id => source.to_param}
+      get :edit, params: { id:  source.to_param }
       expect(assigns(:source)).to eq(source)
     end
   end
@@ -57,24 +57,24 @@ describe SourcesController do
     describe 'with valid params' do
       it 'creates a new Source' do
         expect {
-          post :create, source: valid_attributes
+          post :create, params: { source: valid_attributes }
         }.to change(Source, :count).by(1)
       end
 
       it 'assigns a newly created source as @source' do
-        post :create, source: valid_attributes
+        post :create, params: { source: valid_attributes }
         expect(assigns(:source)).to be_a(Source)
         expect(assigns(:source)).to be_persisted
       end
 
       it 'redirects to the sources page' do
-        post :create, source: valid_attributes
+        post :create, params: { source: valid_attributes }
         expect(response).to redirect_to sources_path
       end
 
       it 'creates a source with a nested contributor' do
         expect {
-          post :create, source: { name: 'Data Source', partner_id: partner.id, partner_attributes: { name: 'Contributor' }}
+          post :create, params: { source: { name: 'Data Source', partner_id: partner.id, partner_attributes: { name: 'Contributor' }} }
         }.to change(Partner, :count).by(1)
       end
     end
@@ -82,13 +82,13 @@ describe SourcesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
         allow_any_instance_of(Source).to receive(:save).and_return(false)
-        post :create, source: { name: '' }
+        post :create, params: { source: { name: '' }}
         expect(assigns(:source)).to be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
         allow_any_instance_of(Source).to receive(:save).and_return(false)
-        post :create, source: { name: '' }
+        post :create, params: { source: { name: '' } }
         expect(response).to render_template('new')
       end
     end
@@ -102,19 +102,19 @@ describe SourcesController do
     describe 'with valid params' do
       it 'updates the requested source' do
         source = Source.create! valid_attributes
-        expect_any_instance_of(Source).to receive(:update_attributes).with(name: 'updated')
-        put :update, { id: source.to_param, source: { name: 'updated' }}
+        expect_any_instance_of(Source).to receive(:update_attributes)
+        put :update, params: { id: source.to_param, source: { name: 'updated' }}
       end
 
       it "assigns the requested source as @source" do
         source = Source.create! valid_attributes
-        put :update, {:id => source.to_param, :source => valid_attributes}
+        put :update, params: { id: source.to_param, source: valid_attributes }
         expect(assigns(:source)).to eq(source)
       end
 
       it "redirects to the sources index" do
         source = Source.create! valid_attributes
-        put :update, id: source.to_param, source: valid_attributes
+        put :update, params: { id: source.to_param, source: valid_attributes }
         expect(response).to redirect_to sources_path
       end
     end
@@ -123,14 +123,14 @@ describe SourcesController do
       it "assigns the source as @source" do
         source = Source.create! valid_attributes
         allow_any_instance_of(Source).to receive(:save).and_return(false)
-        put :update, id: source.to_param, source: { name: '' }
+        put :update, params: { id: source.to_param, source: { name: '' } }
         expect(assigns(:source)).to eq(source)
       end
 
       it "re-renders the 'edit' template" do
         source = Source.create! valid_attributes
         allow_any_instance_of(Source).to receive(:save).and_return(false)
-        put :update, id: source.to_param, source: { name: '' }
+        put :update, params: { id: source.to_param, source: { name: '' }}
         expect(response).to render_template('edit')
       end
     end
@@ -143,7 +143,7 @@ describe SourcesController do
       it "calls reindex on api" do
         source = Source.create! valid_attributes
         expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources/#{source.id}/reindex", params: { date: '2013-09-12T01:49:51.067Z', api_key: ENV['HARVESTER_API_KEY'] })
-        get :reindex,  {id: source.to_param, env: 'test', date: "2013-09-12T01:49:51.067Z", format: :js}
+        get :reindex,  params: { id: source.to_param, env: 'test', date: "2013-09-12T01:49:51.067Z", format: :js }
       end
     end
   end

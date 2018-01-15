@@ -46,7 +46,8 @@ describe Versioned do
 
   describe "#save_with_version" do
     let(:source) { create(:source) }
-    let(:parser) { create(:parser, strategy: 'json', name: 'Natlib', source_id: source) }
+    let(:user)   { create(:user, :admin) }
+    let(:parser) { create(:parser, strategy: 'json', name: 'Natlib', source_id: source, user_id: user) }
 
     context 'valid parser' do
       before(:each) do
