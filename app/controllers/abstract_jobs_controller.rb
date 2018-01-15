@@ -13,7 +13,9 @@ class AbstractJobsController < ApplicationController
   def index
     @abstract_jobs = AbstractJob.search(
       status: abstract_job_params[:status],
-      environment: abstract_job_params[:environment]
+      environment: abstract_job_params[:environment],
+      page: abstract_job_params[:page],
+      parser_id: abstract_job_params[:parser_id]
     )
   end
 
@@ -24,6 +26,6 @@ class AbstractJobsController < ApplicationController
   private
 
   def abstract_job_params
-    params.permit(:status, :environment)
+    params.permit(:status, :environment, :page, :parser_id)
   end
 end
