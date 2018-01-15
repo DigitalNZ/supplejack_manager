@@ -11,12 +11,7 @@ class AbstractJobsController < ApplicationController
   before_action :set_worker_environment
 
   def index
-    @abstract_jobs = AbstractJob.search(
-      status: abstract_job_params[:status],
-      environment: abstract_job_params[:environment],
-      page: abstract_job_params[:page],
-      parser_id: abstract_job_params[:parser_id]
-    )
+    @abstract_jobs = AbstractJob.search(search_params)
   end
 
   def set_worker_environment
@@ -24,6 +19,16 @@ class AbstractJobsController < ApplicationController
   end
 
   private
+
+  def search_params
+    {
+      status: nil,
+      environment: nil,
+      page: nil,
+      parser_id: nil
+    }.reverse_merge!(abstract_job_params)
+      .compact
+  end
 
   def abstract_job_params
     params.permit(:status, :environment, :page, :parser_id)
