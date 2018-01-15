@@ -6,14 +6,24 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
+# app/controllers/abstract_jobs_controller.rb
 class AbstractJobsController < ApplicationController
   before_action :set_worker_environment
 
   def index
-    @abstract_jobs = AbstractJob.search(params)
+    @abstract_jobs = AbstractJob.search(
+      status: abstract_job_params[:status],
+      environment: abstract_job_params[:environment]
+    )
   end
 
   def set_worker_environment
     set_worker_environment_for(AbstractJob)
+  end
+
+  private
+
+  def abstract_job_params
+    params.permit(:status, :environment)
   end
 end
