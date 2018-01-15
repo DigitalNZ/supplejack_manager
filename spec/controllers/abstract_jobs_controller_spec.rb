@@ -15,7 +15,7 @@ describe AbstractJobsController do
 
   describe 'GET index' do
     it 'returns active abstract jobs' do
-      expect(AbstractJob).to receive(:search).with(status: 'active', environment: 'staging')
+      expect(AbstractJob).to receive(:search).with({"status"=>"active", "environment"=>"staging"})
       get :index, params: { status: 'active', environment: 'staging' }
     end
   end
