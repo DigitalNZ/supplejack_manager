@@ -10,6 +10,7 @@ class HarvestSchedulesController < ApplicationController
   authorize_resource
 
   before_action :set_worker_environment
+  skip_before_action :verify_authenticity_token
 
   respond_to :html
 
@@ -22,7 +23,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def new
-    # This is because this route is shared with the new.js template.
+     # This is because this route is shared with the new.js template.
     if params[:harvest_schedule].present?
       @harvest_schedule = HarvestSchedule.new(harvest_schedule_params)
     else

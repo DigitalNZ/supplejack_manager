@@ -37,6 +37,34 @@ describe HarvestSchedulesController do
     end
   end
 
+  describe '#new' do
+    context 'html' do
+      it 'returns the :new template' do
+        get :new, params: { environment: 'staging' }
+        expect(response).to render_template :new
+      end
+
+      it 'assigns a new @harvest_schedule' do
+        get :new, params: { environment: 'staging' }
+        expect(assigns(:harvest_schedule)).to be_a_new(HarvestSchedule)
+      end
+    end
+
+    context 'js' do
+      let(:harvest_schedule) { build(:harvest_schedule) }
+
+      it 'returns the :new js template' do
+        get :new, params: { environment: 'staging' }, format: :js
+        expect(response).to render_template :new
+      end
+
+      it 'assigns the correct @harvest_schedule' do
+        get :new, params: { environment: 'staging', harvest_schedule: harvest_schedule }
+        expect(assigns(:harvest_schedule)).to eq harvest_schedule
+      end
+    end
+  end
+
   describe 'GET index' do
     before(:each) do
       allow(schedule).to receive(:status) { 'active' }
@@ -81,7 +109,7 @@ describe HarvestSchedulesController do
 
       it 'finds the harvest schedule' do
         expect(HarvestSchedule).to receive(:find).with('1') { schedule }
-        put :update, params: { id: 1, environment: 'staging', harvest_schedule: {} }
+        put :update, params: { id: 1, environment: 'staging', harvest_schedule: { test: 'hey' } }
         expect(assigns(:harvest_schedule)).to eq schedule
       end
 
