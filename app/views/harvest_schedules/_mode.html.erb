@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -19,7 +19,7 @@ http://digitalnz.org/supplejack
         <% checked = false unless harvest_schedule.persisted? %>
         <input class="optional" id="harvest_schedule_mode_full_and_flush" type="radio" disabled="true" <%= "checked" if harvest_schedule.mode == 'full_and_flush' %> data="<%= harvest_schedule.mode %>" name ="harvest_schedule[mode]" title="Full And Flush is currently disabled.">Full And Flush <span class="parser-harvest-mode"><%= "(#{t('parsers.disable_full_and_flush')})" unless harvest_schedule.parser.allow_full_and_flush %></span>
       <% end %>
-      
+
       <% if harvest_schedule.oai? %>
         <div class="row">
           <div class="twelve columns"><span class="hint"><%= t("harvest_schedules.incremental_hint") %></span></div>

@@ -33,6 +33,6 @@ class HarvestJobsController < ApplicationController
   private
 
   def harvest_job_params
-    params.require(:harvest_job).permit(:parser_id, :version_id, :user_id, :environment, :mode, :limit, :enrichments)
+    params.require(:harvest_job).permit(:parser_id, :version_id, :user_id, :environment, :mode, :limit, enrichments: [])
   end
 end
