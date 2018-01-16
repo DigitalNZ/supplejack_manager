@@ -22,7 +22,13 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def new
-    @harvest_schedule = HarvestSchedule.new(harvest_schedule_params || {})
+    # This is because this route is shared with the new.js template.
+    if params[:harvest_schedule].present?
+      @harvest_schedule = HarvestSchedule.new(harvest_schedule_params)
+    else
+      @harvest_schedule = HarvestSchedule.new
+    end
+
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
     @harvest_schedule.mode = "normal"
@@ -80,6 +86,6 @@ class HarvestSchedulesController < ApplicationController
   private
 
   def harvest_schedule_params
-    params.permit!
+    params.require(:harvest_schedule).permit!
   end
 end
