@@ -26,7 +26,7 @@ $ ->
     else
       $recurrentOptions.hide()
 
-  $("#harvest-schedule-form").on("change", "#harvest_schedule_parser_id", (event) ->
+  $("#new_harvest_schedule").on("change", "#harvest_schedule_parser_id", (event) ->
     $form = $("form.harvest_schedule")
     new_path = $form.attr("action") + "/new.js"
 
