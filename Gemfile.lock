@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 038163b2419b017c2c7f4a615346097949cc7ab1
-  tag: v2.0.0
+  revision: ca427e64d104545746805e5182a4c0464cc7eb03
+  branch: tokenised-pagination
   specs:
     supplejack_common (0.0.2)
       actionpack
