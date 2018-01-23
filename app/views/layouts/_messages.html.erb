@@ -1,20 +1,18 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<div class="row">
-  <div class="twelve columns">
-    <% flash.each do |name, msg| %>
-      <% if msg.is_a?(String) %>
-        <% name = :success if name.to_s == "notice" %>
-        <%= content_tag :div, msg, class: "alert-box #{name} margin-top" %>
-      <% end %>
+<div class="grid-container">
+  <% flash.each do |name, msg| %>
+    <% if msg.is_a?(String) %>
+      <% name = :success if name.to_s == "notice" %>
+      <%= content_tag :div, msg, class: "callout #{name}" %>
     <% end %>
-  </div>
+  <% end %>
 </div>

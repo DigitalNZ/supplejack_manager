@@ -8,77 +8,66 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<div class="row">
-  <div class="twelve columns">
+<div class='nav-wrapper'>
+  <div class='grid-container'>
     <nav class="top-bar">
-      <ul>
+      <ul class='menu'>
         <li class="name">
-          <%= link_to image_tag("Supplejack360pxgreenwhite.png"), root_path, class: 'supplejack-logo' %>  
+          <%= link_to image_tag("Supplejack360pxgreenwhite.png"), root_path, class: 'supplejack-logo' %>
         </li>
-
-        <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
       <section>
         <% if user_signed_in? %>
-          <ul class="left">
-            <li class="has-dropdown">
-              <%= link_to t('navigation.contributors'), "#" %>
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="has-submenu">
+            <%= link_to t('navigation.contributors'), "#" %>
 
-              <ul class="dropdown">
-                <%= link_to_tab t('partners.label'), partners_path %>
-                <%= link_to_tab t('sources.label'), sources_path %>
-                <%= link_to_tab t('parsers.label'), parsers_path %>
-                <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
-                <%= link_to_tab t('snippets.label'), snippets_path %>
+            <ul class="submenu menu vertical">
+              <%= link_to_tab t('partners.label'), partners_path %>
+              <%= link_to_tab t('sources.label'), sources_path %>
+              <%= link_to_tab t('parsers.label'), parsers_path %>
+              <%= link_to_tab t('parser_templates.label'), parser_templates_path %>
+              <%= link_to_tab t('snippets.label'), snippets_path %>
+            </ul>
+          </li>
 
-                <% if false %>
-                <li class="has-dropdown">
-                  <%= link_to_tab t('partners.label'), partners_path %>
-                  <ul class="dropdown">
-                    <li><a href="#">Level 2</a></li>
-                  </ul>
-                </li>
-                <% end %>
-              </ul>
-            </li>
+          <% APPLICATION_ENVS.each do |environment| %>
+          <li class="has-submenu">
+            <%= link_to t("navigation.#{environment}"), "#" %>
 
-            <% APPLICATION_ENVS.each do |environment| %>
-              <li class="has-dropdown">
-                <%= link_to t("navigation.#{environment}"), "#" %>
-
-                <ul class="dropdown">
-                  <%= link_to_tab t('jobs.scheduled'), environment_harvest_schedules_path(environment) %>
-                  <%= link_to_tab t('jobs.active'), environment_abstract_jobs_path(environment, status: "active") %>
-                  <%= link_to_tab t('jobs.finished'), environment_abstract_jobs_path(environment, status: "finished") %>
-                  <%= link_to_tab t('jobs.failed'), environment_abstract_jobs_path(environment, status: "failed") %>
-                  <%= link_to_tab t('jobs.stopped'), environment_abstract_jobs_path(environment, status: "stopped") %>
-                  <%= link_to_tab t('link_checker.link_check_rules.label'), environment_link_check_rules_path(environment) %>
-                  <%= link_to_tab t('statistics.label'), environment_collection_statistics_path(environment) %>
-                  <%= link_to_tab t('link_checker.suppress_collections.label'), environment_suppress_collections_path(environment) %>
-                  <% if can? :read, :collection_record %>
-                    <%= link_to_tab t('records.label'), environment_collection_records_path(environment) %>
-                  <% end %>
-                </ul>
-              </li>
-            <% end %>
-          </ul>
+            <ul class="dropdown menu" data-dropdown-menu>
+              <%= link_to_tab t('jobs.scheduled'), environment_harvest_schedules_path(environment) %>
+              <%= link_to_tab t('jobs.active'), environment_abstract_jobs_path(environment, status: "active") %>
+              <%= link_to_tab t('jobs.finished'), environment_abstract_jobs_path(environment, status: "finished") %>
+              <%= link_to_tab t('jobs.failed'), environment_abstract_jobs_path(environment, status: "failed") %>
+              <%= link_to_tab t('jobs.stopped'), environment_abstract_jobs_path(environment, status: "stopped") %>
+              <%= link_to_tab t('link_checker.link_check_rules.label'), environment_link_check_rules_path(environment) %>
+              <%= link_to_tab t('statistics.label'), environment_collection_statistics_path(environment) %>
+              <%= link_to_tab t('link_checker.suppress_collections.label'), environment_suppress_collections_path(environment) %>
+              <% if can? :read, :collection_record %>
+              <%= link_to_tab t('records.label'), environment_collection_records_path(environment) %>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+        </ul>
         <% end %>
 
-        <ul class="right">
+        <ul class="right dropdown menu" data-dropdown-menu>
           <% if user_signed_in? %>
-            <li class="name has-dropdown">
-              <%= link_to "Hi, #{current_user.name}", "#" %>
+          <li class="name has-submenu">
+            <%= link_to "Hi, #{current_user.name}", "#" %>
 
-              <ul class="dropdown">
-                <% if can? :edit_users, current_user %>
-                  <%= link_to_tab t('users.all_users'), users_path %>
-                <% end %>
-                <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
-                <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
-              </ul>
-            </li>
+            <ul class="dropdown menu" data-dropdown-menu>
+              <% if can? :edit_users, current_user %>
+              <%= link_to_tab t('users.all_users'), users_path %>
+              <% end %>
+              <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
+              <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
           <% else %>
-            <li><%= link_to t('login'), new_user_session_path %></li>
+          <li><%= link_to t('login'), new_user_session_path %></li>
           <% end %>
         </ul>
       </section>

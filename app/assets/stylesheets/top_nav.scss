@@ -13,6 +13,23 @@
   margin-right: 15px !important;
 }*/
 
+.nav-wrapper {
+  background-color: $black;
+}
+
+.top-bar {
+  background-color: $black;
+  ul {
+    background-color: $black;
+
+    li {
+      a {
+        color: $white;
+      }
+    }
+  }
+}
+
 .top-bar > ul .name {
   margin-right: 10px !important;
 
