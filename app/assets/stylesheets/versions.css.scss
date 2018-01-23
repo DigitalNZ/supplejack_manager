@@ -1,13 +1,15 @@
 // The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-// and is licensed under the GNU General Public License, version 3. Some components are 
-// third party components that are licensed under the MIT license or otherwise publicly available. 
-// See https://github.com/DigitalNZ/supplejack_manager for details. 
-// 
-// Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+// and is licensed under the GNU General Public License, version 3. Some components are
+// third party components that are licensed under the MIT license or otherwise publicly available.
+// See https://github.com/DigitalNZ/supplejack_manager for details.
+//
+// Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 // http://digitalnz.org/supplejack
 
-$productionColor: $successColor;
-$stagingColor: $mainColor;
+// $productionColor: $successColor;
+$productionColor: $success-color;
+// $stagingColor: $mainColor;
+$stagingColor: $primary-color;
 
 .button.production {
   background-color: $productionColor;
@@ -37,12 +39,14 @@ $stagingColor: $mainColor;
 
 .version {
   position: relative;
-  background: $secondaryColor;
+  // background: $secondaryColor;
+  background: $secondary-color;
   margin-bottom: 3px;
   padding: 9px 84px 3px 9px;
 
   &.active {
-    background: darken($secondaryColor, 10%);
+    // background: darken($secondaryColor, 10%);
+    background: darken($secondary-color, 10%);
   }
 
   p {

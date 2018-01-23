@@ -1,9 +1,9 @@
 // The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-// and is licensed under the GNU General Public License, version 3. Some components are 
-// third party components that are licensed under the MIT license or otherwise publicly available. 
-// See https://github.com/DigitalNZ/supplejack_manager for details. 
-// 
-// Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+// and is licensed under the GNU General Public License, version 3. Some components are
+// third party components that are licensed under the MIT license or otherwise publicly available.
+// See https://github.com/DigitalNZ/supplejack_manager for details.
+//
+// Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 // http://digitalnz.org/supplejack
 
 // Place all the styles related to the parsers controller here.
@@ -25,7 +25,7 @@
 
 .CodeRay {
   clear: both;
-  
+
   .new-right {
     margin-top: 10px;
   }
@@ -115,7 +115,7 @@ ul.tagging {
 $arrowSize: 18px;
 
 .arrow {
-  width: 0; 
+  width: 0;
   height: 0;
   display: inline-block;
   margin-left: 6px;
@@ -124,16 +124,19 @@ $arrowSize: 18px;
 .arrow-right {
   border-top: $arrowSize solid transparent;
   border-bottom: $arrowSize solid transparent;
-  border-left: $arrowSize solid $mainColor;
+  // border-left: $arrowSize solid $mainColor;
+  border-left: $arrowSize solid $primary-color;
 }
 
 .arrow-left {
   border-top: $arrowSize solid transparent;
-  border-bottom: $arrowSize solid transparent; 
-  border-right: $arrowSize solid $mainColor; 
+  border-bottom: $arrowSize solid transparent;
+  // border-right: $arrowSize solid $mainColor;
+  border-right: $arrowSize solid $primary-color;
 
   &.disabled {
-    border-right: $arrowSize solid $secondaryColor; 
+    // border-right: $arrowSize solid $secondaryColor;
+    border-right: $arrowSize solid $secondary-color;
   }
 }
 .parser_versions.show .tagging {
@@ -142,7 +145,7 @@ $arrowSize: 18px;
   width: 100%;
 }
 #parser-versions {
-  margin-bottom: 20px;   
+  margin-bottom: 20px;
 }
 .has-tip:hover, .has-tip:focus {
   color: #333333;

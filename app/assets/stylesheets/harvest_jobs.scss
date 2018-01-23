@@ -50,13 +50,17 @@
 }
 
 .errors-count {
-  color: $alertColor;
+  // color: $alertColor;
+  color: $alert-color;
 }
 
 #harvest-result .error {
-  background: lighten($alertColor, 52%);
-  border: 1px solid $alertColor;
-  color: $alertColor;
+  // background: lighten($alertColor, 52%);
+  // border: 1px solid $alertColor;
+  // color: $alertColor;
+  background: lighten($alert-color, 52%);
+  border: 1px solid $alert-color;
+  color: $alert-color;
   margin-bottom: 5px;
   padding: 6px;
   font-size: 1.8rem;
