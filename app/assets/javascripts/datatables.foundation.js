@@ -1,6 +1,6 @@
 /* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
-    "sDom": "<'twelve columns'<'row'<'three columns no-left-padding'f>r>><'row'<'twelve columns't>><'row'<'six columns'i><'six columns'p>>",
+    "sDom": "<'medium-12 cell'<'grid-x'<'medium-3 cell no-left-padding'f>r>><'grid-x'<'medium-12 cell't>><'grid-x'<'medium-6 cell'i><'medium-6 cell'p>>",
     "sPaginationType": "foundation",
     "oLanguage": {
         "sLengthMenu": 'Show <form class="custom dataTables"><select><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></form> entries'
@@ -36,9 +36,9 @@ $.extend( $.fn.dataTableExt.oPagination, {
             };
 
             $(nPaging).addClass('pagination').append(
-                '<ul class="pagination">'+
-                    '<li class="arrow unavailable"><a href="#">&laquo; '+oLang.sPrevious+'</a></li>'+
-                    '<li class="arrow unavailable"><a href="#">'+oLang.sNext+' &raquo; </a></li>'+
+                '<ul class="pagination" role="navigation" aria-label="Pagination">'+
+                    '<li class="pagination-previous disabled"><a href="#">'+oLang.sPrevious+'</a></li>'+
+                    '<li class="pagination-next"><a href="#">'+oLang.sNext+' </a></li>'+
                 '</ul>'
             );
             var els = $('a', nPaging);

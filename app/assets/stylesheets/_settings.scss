@@ -70,8 +70,8 @@ $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #2ba6cb,
-  secondary: #767676,
-  success: #3adb76,
+  secondary: #e9e9e9,
+  success: #5da423,
   warning: #ffae00,
   alert: #cc4b37,
 );
@@ -284,7 +284,7 @@ $button-fill: solid;
 $button-background: $primary-color;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
-$button-color-alt: $black;
+$button-color-alt: $white;
 $button-radius: $global-radius;
 $button-hollow-border-width: 1px;
 $button-sizes: (
@@ -373,7 +373,7 @@ $dropdown-padding: 1rem;
 $dropdown-background: $body-background;
 $dropdown-border: 1px solid $medium-gray;
 $dropdown-font-size: 1rem;
-$dropdown-width: 300px;
+$dropdown-width: 277px;
 $dropdown-radius: $global-radius;
 $dropdown-sizes: (
   tiny: 100px,

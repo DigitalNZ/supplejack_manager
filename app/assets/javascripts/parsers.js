@@ -32,7 +32,7 @@ $(function() {
 
     $("#preview-area-spinner").show();
     $("#preview-area").html("");
-    $("#preview-modal").reveal();
+    $("#preview-modal").foundation('open');
     window.Harvester.myCodeMirror.save();
 
     $link = $(this);
