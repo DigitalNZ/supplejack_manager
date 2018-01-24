@@ -11,17 +11,13 @@ http://digitalnz.org/supplejack
 <div class='nav-wrapper'>
   <div class='grid-container'>
     <nav class="top-bar">
-      <ul class='menu'>
+      <ul class='dropdown menu' data-dropdown-menu>
         <li class="name">
-          <%= link_to image_tag("Supplejack360pxgreenwhite.png"), root_path, class: 'supplejack-logo' %>
+          <%= link_to image_tag('Supplejack360pxgreenwhite.png'), root_path, class: 'supplejack-logo', alt: 'Supplejack' %>
         </li>
-      </ul>
-      <section>
         <% if user_signed_in? %>
-        <ul class="dropdown menu" data-dropdown-menu>
           <li class="has-submenu">
             <%= link_to t('navigation.contributors'), "#" %>
-
             <ul class="submenu menu vertical">
               <%= link_to_tab t('partners.label'), partners_path %>
               <%= link_to_tab t('sources.label'), sources_path %>
@@ -50,27 +46,26 @@ http://digitalnz.org/supplejack
             </ul>
           </li>
           <% end %>
-        </ul>
         <% end %>
+      </ul>
 
-        <ul class="right dropdown menu" data-dropdown-menu>
-          <% if user_signed_in? %>
-          <li class="name has-submenu">
-            <%= link_to "Hi, #{current_user.name}", "#" %>
+      <ul class="float-right dropdown menu" data-dropdown-menu>
+        <% if user_signed_in? %>
+        <li class="name has-submenu">
+          <%= link_to "Hi, #{current_user.name}", "#" %>
 
-            <ul class="dropdown menu" data-dropdown-menu>
-              <% if can? :edit_users, current_user %>
-              <%= link_to_tab t('users.all_users'), users_path %>
-              <% end %>
-              <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
-              <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
-            </ul>
-          </li>
-          <% else %>
-          <li><%= link_to t('login'), new_user_session_path %></li>
-          <% end %>
-        </ul>
-      </section>
+          <ul class="dropdown menu" data-dropdown-menu>
+            <% if can? :edit_users, current_user %>
+            <%= link_to_tab t('users.all_users'), users_path %>
+            <% end %>
+            <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
+            <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+        <% else %>
+        <li><%= link_to t('login'), new_user_session_path %></li>
+        <% end %>
+      </ul>
     </nav>
   </div>
 </div>
