@@ -1,8 +1,8 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 New Zealand Government,
-and is licensed under the GNU General Public License, version 3. 
-Some components are third party components that are licensed under 
+and is licensed under the GNU General Public License, version 3.
+Some components are third party components that are licensed under
 the MIT license or otherwise publicly available.
 See https://github.com/DigitalNZ/supplejack_manager for details.
 
@@ -16,12 +16,12 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 <% if @preview.raw_data.present? and @preview.harvested_attributes.present? %>
 	$('#preview-<%= @preview.id %> #record-raw-data').html('<%= escape_javascript(@preview.raw_output) %>');
 	$('#preview-<%= @preview.id %> #harvest-attributes').html('<%= escape_javascript(@preview.harvested_attributes_output) %>');
-	$('#preview-<%= @preview.id %> a[href="#sourceData"] .small-spinner, a[href="#harvestedAttributes"] .small-spinner').hide();
+	$('#preview-<%= @preview.id %> a[href="#source-data"] .small-spinner, a[href="#harvestedAttributes"] .small-spinner').hide();
 <% end %>
 
 <% if @preview.api_record.present? %>
-	$('#preview-<%= @preview.id %> #apiRecordTab').html('<%= escape_javascript(@preview.api_record_output) %>');
-	$('#preview-<%= @preview.id %> a[href="#apiRecord"] .small-spinner').hide();
+	$('#preview-<%= @preview.id %> #api-record').html('<%= escape_javascript(@preview.api_record_output) %>');
+	$('#preview-<%= @preview.id %> a[href="#api-record"] .small-spinner').hide();
 <% end %>
 
 <% if @preview.field_errors? %>
@@ -42,7 +42,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 			$('#preview-<%= @preview.id %> #validation-errors ul').append("<li><strong><%= attribute %>: </strong><%= message %></li>");
 		<% end%>
 	<% end %>
-	
+
 	$('#preview-<%= @preview.id %> #validation-errors').show();
 <% end %>
 
@@ -59,7 +59,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
   $('#preview-<%= @preview.id %> #status').html("Harvest Failed");
 	$('#preview-<%= @preview.id %> #harvest-failure h6').html("<%= escape_javascript(@preview.harvest_failure_output['exception_class']) %>");
 	$('#preview-<%= @preview.id %> #harvest-failure p').html("<%= escape_javascript(@preview.harvest_failure_output['message']) %>");
-  
+
   <% @preview.harvest_failure_output['backtrace'].each do |backtrace| %>
     $('#preview-<%= @preview.id %> #harvest-failure ul').append("<li><%= escape_javascript(backtrace) %></li>");
   <% end %>
@@ -68,7 +68,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 <% unless @preview.errors? or @preview.api_record.present? or @preview.finished? %>
 	PreviewJobsPoller.poll();
 <% else %>
-	$('#preview-<%= @preview.id %> a[href="#sourceData"] .small-spinner, a[href="#harvestedAttributes"] .small-spinner, a[href="#apiRecord"] .small-spinner').hide();
+	$('#preview-<%= @preview.id %> a[href="#source-data"] .small-spinner, a[href="#harvested-attributes"] .small-spinner, a[href="#api-record"] .small-spinner').hide();
 <% end %>
 
 <% if @preview.finished? and not @preview.raw_data.present? %>

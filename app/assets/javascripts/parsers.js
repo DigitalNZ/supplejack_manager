@@ -25,7 +25,7 @@ $(function() {
     }
   });
 
-  $("#main").on('click', 'a.records-preview-button', function(e) {
+  $('body').on('click', 'a.records-preview-button', function(e) {
     e.preventDefault();
 
     var $form, $link;
