@@ -55,3 +55,11 @@
     }
   }
 }
+
+.is-dropdown-submenu {
+  z-index: 3;
+}
+
+.menu .active > a {
+  background-color: lighten($black, 10);
+}
