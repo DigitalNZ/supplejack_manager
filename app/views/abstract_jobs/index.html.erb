@@ -8,19 +8,17 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h1 class="left"><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
+<h1><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
 
-<div class="row">
-  <div class="twelve columns">
-    <dl class="tabs pill">
-      <% ['active', 'finished', 'failed', 'stopped'].each do |status| %>
-        <%= content_tag(:dd, link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser])), class: ("active" if params[:status] == status)) %>
-      <% end %>
-    </dl>
-  </div>
-</div>
+<% ['active', 'finished', 'failed', 'stopped'].each do |status| %>
+  <% if params[:status] == status %>
+    <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser]), class: 'button primary') %>
+  <% else %>
+    <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser]), class: 'button hollow') %>
+  <% end %>
+<% end %>
 
-<table class="twelve">
+<table>
   <thead>
     <tr>
       <th><%= t("abstract_jons.type") %></th>
@@ -80,7 +78,6 @@ http://digitalnz.org/supplejack
           <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, abstract_job) %>
         <% end %>
       </td>
-
     </tr>
     <% end %>
   </tbody>
