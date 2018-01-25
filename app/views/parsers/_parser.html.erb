@@ -41,7 +41,7 @@ http://digitalnz.org/supplejack
             </div>
 
             <div class='dropdown-pane' id='enrichment-dropdown' data-dropdown data-auto-focus='true'>
-              <ul>
+              <ul class='no-bullet'>
                 <% if APPLICATION_ENVS.include?('staging') %>
                   <li><%= link_to "Staging Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: { environment: "staging" } %></li>
                 <% end %>
@@ -55,19 +55,19 @@ http://digitalnz.org/supplejack
           <li class="medium-12 cell float-right">
             <div class="button run-harvest dropdown medium-12 expanded" data-toggle='harvest-dropdown'>
               Run Harvest
-              <div class='dropdown-pane' id='harvest-dropdown' data-dropdown data-auto-focus='true'>
-                <ul>
-                  <% if APPLICATION_ENVS.include?('staging') && @version.try(:staging?) %>
-                    <li><%= link_to "Staging Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: { environment: 'staging' } %></li>
-                  <% end %>
+            </div>
+            <div class='dropdown-pane' id='harvest-dropdown' data-dropdown data-auto-focus='true'>
+              <ul class='no-bullet'>
+                <% if APPLICATION_ENVS.include?('staging') && @version.try(:staging?) %>
+                  <li><%= link_to "Staging Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: { environment: 'staging' } %></li>
+                <% end %>
 
-                  <% if APPLICATION_ENVS.include?('production') && @version.try(:production?) %>
-                    <li><%= link_to 'Production Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: {environment: 'production' } %></li>
-                  <% end %>
+                <% if APPLICATION_ENVS.include?('production') && @version.try(:production?) %>
+                  <li><%= link_to 'Production Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: {environment: 'production' } %></li>
+                <% end %>
 
-                  <li><%= link_to "Test Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "test"} %></li>
-                </ul>
-              </div>
+                <li><%= link_to "Test Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "test"} %></li>
+              </ul>
             </div>
           </li>
         <% end %>
@@ -92,7 +92,7 @@ http://digitalnz.org/supplejack
   <div class="medium-3 cell">
     <div class="callout secondary text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
-      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button success medium-12 cell" %>
+      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button production medium-12 cell" %>
     <% end %>
 
     <%= render partial: "versions/version_list", locals: { versionable: @parser, versionable_path: "parser_parser_version" } %>

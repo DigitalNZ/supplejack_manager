@@ -39,3 +39,20 @@
 @import "previews";
 @import "home";
 @import "devise";
+
+.pagination-previous a::before, .pagination-previous.disabled::before,
+.pagination-next a::after, .pagination-next.disabled::after {
+  display: none;
+}
+
+.pagination-previous.disabled, .pagination-next.disabled {
+  a {
+    padding: 0.1875rem 0.625rem;
+    color: #cacaca;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
