@@ -54,7 +54,6 @@ gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'compass-rails', '>= 1.0.3'
 gem 'foundation-rails'
-# gem 'zurb-foundation', '= 3.2.5'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 
 group :development do
