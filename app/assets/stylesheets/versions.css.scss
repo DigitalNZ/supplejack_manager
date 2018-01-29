@@ -6,9 +6,7 @@
 // Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 // http://digitalnz.org/supplejack
 
-// $productionColor: $successColor;
 $productionColor: $success-color;
-// $stagingColor: $mainColor;
 $stagingColor: $primary-color;
 
 .button.production {
@@ -39,13 +37,11 @@ $stagingColor: $primary-color;
 
 .version {
   position: relative;
-  // background: $secondaryColor;
   background: $secondary-color;
   margin-bottom: 3px;
   padding: 9px 84px 3px 9px;
 
   &.active {
-    // background: darken($secondaryColor, 10%);
     background: darken($secondary-color, 10%);
   }
 

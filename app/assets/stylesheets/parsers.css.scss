@@ -125,18 +125,15 @@ $arrowSize: 18px;
 .arrow-right {
   border-top: $arrowSize solid transparent;
   border-bottom: $arrowSize solid transparent;
-  // border-left: $arrowSize solid $mainColor;
   border-left: $arrowSize solid $primary-color;
 }
 
 .arrow-left {
   border-top: $arrowSize solid transparent;
   border-bottom: $arrowSize solid transparent;
-  // border-right: $arrowSize solid $mainColor;
   border-right: $arrowSize solid $primary-color;
 
   &.disabled {
-    // border-right: $arrowSize solid $secondaryColor;
     border-right: $arrowSize solid $secondary-color;
   }
 }
