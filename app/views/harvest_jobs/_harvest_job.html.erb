@@ -77,6 +77,15 @@ http://digitalnz.org/supplejack
         <strong><%= number_with_precision @harvest_job.throughput, precision: 2, delimiter: "," %></strong>
       </td>
     </tr>
+
+      <% if @harvest_job.mode === 'full_and_flush' && @harvest_job.records_count.zero? %>
+        <tr>
+          <td>Notice</td>
+          <td>
+            <strong>Full and Flush was not run as 0 records were harvested.</strong>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
 
     <tr>
