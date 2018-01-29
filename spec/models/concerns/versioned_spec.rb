@@ -39,7 +39,7 @@ describe Versioned do
 
     context "test environment" do
       it "returns the most recent version regardless of tags" do
-        expect(parser.current_version(:test)).to eq parser.versions[2]
+        expect(parser.current_version(:test)).to eq parser.versions.last
       end
     end
   end
