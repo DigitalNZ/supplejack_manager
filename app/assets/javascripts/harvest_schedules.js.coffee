@@ -10,7 +10,7 @@ $ ->
   $('#harvest_schedules').dataTable({
     "order": [ [6,'desc'] ],
     "aoColumnDefs": [{
-      "bSortable": false,
+      "bSortable": true,
       "aTargets": [7]
     }]
   })
