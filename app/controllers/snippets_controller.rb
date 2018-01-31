@@ -50,6 +50,6 @@ class SnippetsController < ApplicationController
   end
 
   def snippet_params
-    params.require(:snippet).permit(:name, :content, :environment)
+    params.require(:snippet).permit(:name, :content, :environment, :message).to_h
   end
 end
