@@ -12,7 +12,7 @@ http://digitalnz.org/supplejack
 %>
 
 <div class="grid-x grid-margin-x">
-  <div class="medium-9 cell">
+  <div class="medium-10 cell">
     <% if can? :update, @parser %>
       <h1 id="parser-title" class="float-left">
         <%= link_to @parser.name, edit_parser_path(@parser) %>
@@ -31,11 +31,25 @@ http://digitalnz.org/supplejack
     <% end %>
   </div>
 
-  <div class="medium-3 cell">
-    <ul class="medium-12 cell harvest-commands">
+  <div class="medium-2 cell">
+
+  </div>
+</div>
+<div class="grid-x grid-margin-x">
+  <div class="medium-10 cell">
+    <% if @version %>
+      <%= render "parser_versions/form" %>
+    <% else %>
+      <%= render "form" %>
+    <% end %>
+  </div>
+
+  <div class="medium-2 cell">
+
+    <ul class="harvest-commands">
       <% if can? :run_harvest, @parser %>
         <% if @version %>
-          <li class="medium-12 cell float-right">
+          <li class="medium-12 cell">
             <div class="button run-enrichment dropdown medium-12 expanded" data-toggle='enrichment-dropdown'>
               Run Enrichment
             </div>
@@ -52,7 +66,7 @@ http://digitalnz.org/supplejack
               </ul>
             </div>
           </li>
-          <li class="medium-12 cell float-right">
+          <li class="medium-12 cell">
             <div class="button run-harvest dropdown medium-12 expanded" data-toggle='harvest-dropdown'>
               Run Harvest
             </div>
@@ -75,21 +89,11 @@ http://digitalnz.org/supplejack
         <div href="#" class="button run-harvest dropdown medium-12 cell expanded disabled">Run Harvest</div>
       <% end %>
       <% if can? :preview, @parser %>
-        <li class="medium-12 float-right cell"><%= link_to "Preview", parser_previewers_path(@parser), class: "button records-preview-button expanded", data: { open: 'preview-modal' } %></li>
+        <li class="medium-12 cell"><%= link_to "Preview", parser_previewers_path(@parser), class: "button records-preview-button expanded", data: { open: 'preview-modal' } %></li>
       <% end %>
     </ul>
-  </div>
-</div>
-<div class="grid-x grid-margin-x">
-  <div class="medium-9 cell">
-    <% if @version %>
-      <%= render "parser_versions/form" %>
-    <% else %>
-      <%= render "form" %>
-    <% end %>
-  </div>
 
-  <div class="medium-3 cell">
+
     <div class="callout secondary text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
       <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button production medium-12 cell" %>
