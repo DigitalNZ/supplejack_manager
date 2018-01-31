@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -17,6 +17,10 @@ http://digitalnz.org/supplejack
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="<%= 'current' if page.current? %>">
-  <%= link_to_unless false, page, url, {:remote => remote, :rel => page.next? ? 'next' : page.prev? ? 'prev' : nil} %>
-</li>
+<% if page.current? %>
+  <li class="current"><span class="show-for-sr">You're on page</span> <%= page %></li>
+<% else %>
+  <li>
+    <%= link_to page, url, { remote: remote } %>
+  </li>
+<% end %>

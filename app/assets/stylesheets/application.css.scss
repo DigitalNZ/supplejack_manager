@@ -40,9 +40,11 @@
 @import "home";
 @import "devise";
 
-.pagination-previous a::before, .pagination-previous.disabled::before,
-.pagination-next a::after, .pagination-next.disabled::after {
-  display: none;
+.data-tables {
+  .pagination-previous a::before, .pagination-previous.disabled::before,
+  .pagination-next a::after, .pagination-next.disabled::after {
+    display: none;
+  }
 }
 
 .pagination-previous.disabled, .pagination-next.disabled {

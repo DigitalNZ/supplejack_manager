@@ -36,7 +36,7 @@ $.extend( $.fn.dataTableExt.oPagination, {
             };
 
             $(nPaging).append(
-                '<ul class="pagination" role="navigation" aria-label="Pagination">'+
+                '<ul class="data-tables pagination" role="navigation" aria-label="Pagination">'+
                     '<li class="pagination-previous"><a href="#">&laquo; ' + oLang.sPrevious + '</a></li>' +
                     '<li class="pagination-next"><a href="#">' + oLang.sNext + ' &raquo; </a></li>' +
                 '</ul>'

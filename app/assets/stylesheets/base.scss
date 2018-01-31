@@ -31,14 +31,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
 
-ul.pagination {
-  .arrow {
-    width: auto;
-    height: auto;
-    display: block;
-  }
-}
-
 ul.no-list-style {
   list-style: none;
 }
@@ -81,3 +73,20 @@ form {
     margin-bottom: 15px
   }
 }
+
+.button.primary {
+  color: $white;
+}
+
+// ul.pagination {
+//   .current {
+//     a {
+//       padding: 0;
+//       color: $white;
+//
+//       &:hover {
+//         background-color: transparent;
+//       }
+//     }
+//   }
+// }
