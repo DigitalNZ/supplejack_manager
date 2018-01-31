@@ -24,9 +24,11 @@ http://digitalnz.org/supplejack
 
   <%= f.input :mode, collection: @parser.modes, as: :radio_buttons, checked: @parser.modes.first, label_html: {class: "large"} %>
   <% unless @parser.modes.flatten.include?('full_and_flush') %>
-    <input type="radio" disabled="true" title="Full And Flush is currently disabled.">Full And Flush
+    <input type="radio" disabled="true" title="Full And Flush is currently disabled." class="<%="#{'disabled-f-and-f' unless @parser.allow_full_and_flush }" %>">
   <% end %>
-  <span class="parser-harvest-mode"><%= "(#{t("parsers.disable_full_and_flush")})" unless @parser.allow_full_and_flush %></span>
+  <span class="<%= "parser-harvest-mode #{'disabled-f-and-f' unless @parser.allow_full_and_flush }" %>">
+    <%= "(#{t("parsers.disable_full_and_flush")})" unless @parser.allow_full_and_flush %>
+  </span>
   <br/></br>
   <%= f.input :limit, label: t("parsers.records_to_harvest"), label_html: {class: "large"} %>
 
