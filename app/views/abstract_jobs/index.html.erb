@@ -8,82 +8,81 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h1 class="left"><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
+<h1><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
 
-<div class="row">
-  <div class="twelve columns">
-    <dl class="tabs pill">
-      <% ['active', 'finished', 'failed', 'stopped'].each do |status| %>
-        <%= content_tag(:dd, link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser])), class: ("active" if params[:status] == status)) %>
-      <% end %>
-    </dl>
-  </div>
-</div>
+<% ['active', 'finished', 'failed', 'stopped'].each do |status| %>
+  <% if params[:status] == status %>
+    <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser]), class: 'button primary') %>
+  <% else %>
+    <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser]), class: 'button hollow') %>
+  <% end %>
+<% end %>
 
-<table class="twelve">
-  <thead>
-    <tr>
-      <th><%= t("abstract_jons.type") %></th>
-      <th><%= t("harvest_jobs.parser") %></th>
-      <th><%= t("harvest_jobs.parser_type") %></th>
-      <th><%= t("harvest_jobs.enrichment") %></th>
-      <th><%= t("harvest_jobs.operator") %></th>
-      <th><%= t("harvest_jobs.start_time") %></th>
-      <th><%= t("harvest_jobs.mode") %></th>
-      <% if params[:status] == "finished" %>
-        <th><%= t("harvest_jobs.duration") %></th>
-      <% end %>
-
-      <th><%= t("harvest_jobs.records_harvested") %></th>
-      <th><%= t("harvest_jobs.validation_failure_errors") %></th>
-
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @abstract_jobs.each do |abstract_job| %>
-    <tr>
-      <td><%= t("abstract_jobs.#{abstract_job._type.downcase}") %></td>
-      <% if abstract_job.version_id.present? %>
-        <td><%= link_to abstract_job.parser.try(:name), parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
-      <% else %>
-        <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) rescue '' %></td>
-      <% end %>
-      <td><%= abstract_job.parser.try(:data_type) %></td>
-      <td><%= enrichments(abstract_job) %></td>
-      <% if abstract_job.user %>
-        <td><%= abstract_job.user.try(:name) %></td>
-      <% else %>
-        <td><%= t("harvest_jobs.scheduled") %></td>
-      <% end %>
-      <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
-
-      <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
-
-      <% if params[:status] == "finished" %>
-        <td><%= ChronicDuration.output(abstract_job.duration.to_i) if abstract_job.duration.present? %></td>
-      <% end %>
-
-      <td><%= abstract_job.records_count %></td>
-
-      <% if ((abstract_job.invalid_records_count.present? && abstract_job.invalid_records_count > 0) || (abstract_job.failed_records_count.present? && abstract_job.failed_records_count > 0)) %>
-        <td><span class='errors-count'><strong><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></strong></span></td>
-      <% else %>
-        <td><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></td>
-      <% end %>
-
-      <td>
-        <% if abstract_job._type == "HarvestJob" %>
-          <%= link_to t("harvest_jobs.view_details"), environment_harvest_job_path(abstract_job.environment, abstract_job) %>
-        <% elsif abstract_job._type == "EnrichmentJob" %>
-          <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, abstract_job) %>
+<div class='table-scroll'>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t("abstract_jons.type") %></th>
+        <th><%= t("harvest_jobs.parser") %></th>
+        <th><%= t("harvest_jobs.parser_type") %></th>
+        <th><%= t("harvest_jobs.enrichment") %></th>
+        <th><%= t("harvest_jobs.operator") %></th>
+        <th><%= t("harvest_jobs.start_time") %></th>
+        <th><%= t("harvest_jobs.mode") %></th>
+        <% if params[:status] == "finished" %>
+          <th><%= t("harvest_jobs.duration") %></th>
         <% end %>
-      </td>
 
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+        <th><%= t("harvest_jobs.records_harvested") %></th>
+        <th><%= t("harvest_jobs.validation_failure_errors") %></th>
+
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @abstract_jobs.each do |abstract_job| %>
+      <tr>
+        <td><%= t("abstract_jobs.#{abstract_job._type.downcase}") %></td>
+        <% if abstract_job.version_id.present? %>
+          <td><%= link_to abstract_job.parser.try(:name), parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
+        <% else %>
+          <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) rescue '' %></td>
+        <% end %>
+        <td><%= abstract_job.parser.try(:data_type) %></td>
+        <td><%= enrichments(abstract_job) %></td>
+        <% if abstract_job.user %>
+          <td><%= abstract_job.user.try(:name) %></td>
+        <% else %>
+          <td><%= t("harvest_jobs.scheduled") %></td>
+        <% end %>
+        <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
+
+        <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
+
+        <% if params[:status] == "finished" %>
+          <td><%= ChronicDuration.output(abstract_job.duration.to_i) if abstract_job.duration.present? %></td>
+        <% end %>
+
+        <td><%= abstract_job.records_count %></td>
+
+        <% if ((abstract_job.invalid_records_count.present? && abstract_job.invalid_records_count > 0) || (abstract_job.failed_records_count.present? && abstract_job.failed_records_count > 0)) %>
+          <td><span class='errors-count'><strong><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></strong></span></td>
+        <% else %>
+          <td><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></td>
+        <% end %>
+
+        <td>
+          <% if abstract_job._type == "HarvestJob" %>
+            <%= link_to t("harvest_jobs.view_details"), environment_harvest_job_path(abstract_job.environment, abstract_job) %>
+          <% elsif abstract_job._type == "EnrichmentJob" %>
+            <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, abstract_job) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate @abstract_jobs %>

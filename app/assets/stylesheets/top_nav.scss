@@ -13,6 +13,27 @@
   margin-right: 15px !important;
 }*/
 
+.menu a {
+  line-height: 1.37;
+}
+
+.nav-wrapper {
+  background-color: $black;
+}
+
+.top-bar {
+  background-color: $black;
+  ul {
+    background-color: $black;
+
+    li {
+      a {
+        color: $white;
+      }
+    }
+  }
+}
+
 .top-bar > ul .name {
   margin-right: 10px !important;
 
@@ -33,4 +54,12 @@
       margin-right: 9px;
     }
   }
+}
+
+.is-dropdown-submenu {
+  z-index: 100;
+}
+
+.menu .active > a {
+  background-color: lighten($black, 10);
 }

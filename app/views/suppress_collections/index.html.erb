@@ -1,69 +1,54 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<div class="row eight columns centered">
-  <h1><%= t('link_checker.suppress_collections.label') %> - <%= params[:environment].capitalize %></h1>
+<h1><%= t('link_checker.suppress_collections.label') %> - <%= params[:environment].capitalize %></h1>
 
-  <h5 class="subheader">
-    <%= t('link_checker.suppress_collections.helptext') %> 
-  </h5>
-  
-  <% if can? :update, :suppress_collection %>
-    <h4 class="left"><%= t('link_checker.suppress_collections.suppress_a') %></h4>
-    
-    <div class="row twelve left">
-      <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
-        <div class="seven columns">
-          <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
-          <%= hidden_field_tag :status, "suppressed" %>
-        </div>
-        <div class="five columns">
-          <%= submit_tag t('link_checker.suppress_collections.suppress'), class: "button" %>
-        </div>
-      <% end %>
-    </div>
+<h5 class="subheader">
+  <%= t('link_checker.suppress_collections.helptext') %>
+</h5>
+
+<% if can? :update, :suppress_collection %>
+  <h4><%= t('link_checker.suppress_collections.suppress_a') %></h4>
+
+  <%= form_tag(environment_suppress_collection_path(id: "source_id", environment: params[:environment]), {method: :put, id: "suppress_collection_form"}) do |f| %>
+    <%= select_tag :id, grouped_options_for_select(Partner.for_select), include_blank: true %>
+    <%= hidden_field_tag :status, "suppressed" %>
+    <%= submit_tag t('link_checker.suppress_collections.suppress'), class: "button" %>
   <% end %>
 
-<div class="row twelve columns">
-  <h4><%= t('link_checker.suppress_collections.current_supressions_title') %></h4>
-</div>
+<% end %>
 
-<div class="row">
-  <div class="twelve columns">
-    <table id="suppress_collection">
-      <thead>
-        <tr>
-          <th class="two"><%= t('link_checker.suppress_collections.collection_title') %></th>
-          <% if can? :update, :suppress_collection %>
-            <th class="two"><%= t('link_checker.suppress_collections.activate_title') %></th>
+<h4><%= t('link_checker.suppress_collections.current_supressions_title') %></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('link_checker.suppress_collections.collection_title') %></th>
+      <% if can? :update, :suppress_collection %>
+        <th><%= t('link_checker.suppress_collections.activate_title') %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blacklisted_sources.each do |source| %>
+    <tr>
+      <td><%= source["name"] %></td>
+      <% if can? :update, :suppress_collection %>
+        <td>
+          <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
+            <%= hidden_field_tag :status, "active" %>
+            <%= submit_tag t('link_checker.suppress_collections.activate'), class: "small button" %>
           <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @blacklisted_sources.each do |source| %>
-        <tr>
-          <td><%= source["name"] %></td>
-          <% if can? :update, :suppress_collection %>
-            <td>
-              <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
-                <%= hidden_field_tag :status, "active" %>
-                <%= submit_tag t('link_checker.suppress_collections.activate'), class: "small button" %>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
-        <% end %>
-      </tbody>
-
-    </table>
-  </div>
-</div>
-
-</div>
+        </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -9,7 +9,7 @@ http://digitalnz.org/supplejack
 %>
 
 <!DOCTYPE html>
-<html>
+<html class='no-js'>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Harvester Manager" %></title>
@@ -28,20 +28,14 @@ http://digitalnz.org/supplejack
     <meta name="theme-color" content="#118a0f">
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <div class="contain-to-grid">
-      <%= render 'layouts/navigation' %>
-    </div>
+    <%= render 'layouts/navigation' %>
 
     <header>
       <%= render 'layouts/messages' %>
     </header>
 
-    <div id="main" role="main" class="row">
-      <div class="twelve columns">
-        <%= yield %>
-      </div>
+    <div id="main" role="main" class="grid-container">
+      <%= yield %>
     </div>
-
-    <footer></footer>
   </body>
 </html>

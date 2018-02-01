@@ -1,23 +1,23 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<div class="seven columns centered">
+<div class="medium-12 cell">
   <h2><%= t('parsers.create_a') %></h2>
 
   <h5 class="subheader">
-    <%= t('parsers.new.helptext') %> 
+    <%= t('parsers.new.helptext') %>
   </h5>
 
   <%= simple_form_for @parser do |f| %>
-    <div class="row">
-      <div class="column twelve">
+    <div class="grid-x">
+      <div class="medium-12 cell">
         <%= f.input :name %>
         <%= f.input :partner, collection: @partners, value_method: :name %>
         <%= f.association :source, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :name %>
@@ -29,11 +29,11 @@ http://digitalnz.org/supplejack
       </div>
     </div>
 
-    <div class="row">
-      <div class="column twelve">
-        <%= f.button :submit, class: 'button right' %>
+    <div class="grid-x">
+      <div class="medium-12 cell">
+        <%= f.button :submit, class: 'button float-right' %>
       </div>
     </div>
-    
+
   <% end %>
 </div>

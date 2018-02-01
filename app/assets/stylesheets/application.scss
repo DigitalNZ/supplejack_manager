@@ -16,9 +16,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
 */
 
+@import 'jquery-ui/core';
+@import 'jquery-ui/theme';
 @import "jquery-ui/datepicker";
 @import "jquery-ui/slider";
 @import "jquery.ui.timepicker";
@@ -40,3 +41,22 @@
 @import "previews";
 @import "home";
 @import "devise";
+
+.data-tables {
+  .pagination-previous a::before, .pagination-previous.disabled::before,
+  .pagination-next a::after, .pagination-next.disabled::after {
+    display: none;
+  }
+}
+
+.pagination-previous.disabled, .pagination-next.disabled {
+  a {
+    padding: 0.1875rem 0.625rem;
+    color: $medium-gray;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

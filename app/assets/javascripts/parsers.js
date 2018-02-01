@@ -25,14 +25,14 @@ $(function() {
     }
   });
 
-  $("#main").on('click', 'a.records-preview-button', function(e) {
+  $('body').on('click', 'a.records-preview-button', function(e) {
     e.preventDefault();
 
     var $form, $link;
 
     $("#preview-area-spinner").show();
     $("#preview-area").html("");
-    $("#preview-modal").reveal();
+    $("#preview-modal").foundation('open');
     window.Harvester.myCodeMirror.save();
 
     $link = $(this);
@@ -45,7 +45,9 @@ $(function() {
     return false;
   });
 
-  $(".records-harvest-modal-button").click(function() {
+  $(".records-harvest-modal-button").click(function(e) {
+    e.preventDefault();
+
     var $link, environment;
     $link = $(this);
     environment = $link.data("environment");
@@ -53,7 +55,7 @@ $(function() {
     $('#harvest_job_mode_normal').prop('checked', 'checked');
     $("#harvest-form").show();
     $("#harvest-result").hide();
-    $("#harvest-modal").reveal();
+    $("#harvest-modal").foundation('open');
     $("#harvest-form form").attr("action", "/" + environment + "/harvest_jobs");
     $.get($(this).attr("href"), {
       'environment': environment
@@ -67,7 +69,7 @@ $(function() {
     environment = $link.data("environment");
     $("#enrichment-form").show();
     $("#enrichment-result").hide();
-    $("#enrichment-modal").reveal();
+    $("#enrichment-modal").foundation('open');
     $("#enrichment-form form").attr("action", "/" + environment + "/enrichment_jobs");
     $.get($(this).attr("href"), {
       'environment': environment

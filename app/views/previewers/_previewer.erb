@@ -1,8 +1,8 @@
 <%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014,
 New Zealand Government,
-and is licensed under the GNU General Public License, version 3. 
-Some components are third party components that are licensed under 
+and is licensed under the GNU General Public License, version 3.
+Some components are third party components that are licensed under
 the MIT license or otherwise publicly available.
 See https://github.com/DigitalNZ/supplejack_manager for details.
 
@@ -12,8 +12,9 @@ http://digitalnz.org/supplejack
 %>
 
 <span id="preview-job" url="/previews/<%=@previewer.preview_id%>"></span>
-<div class="row">
-  <div class="twelve columns">
+
+<div class="grid-x">
+  <div class="medium-12 cell">
     <h2>Previewing <%= @parser.data_type.pluralize rescue 'records' %></h2>
   </div>
 
@@ -22,8 +23,8 @@ http://digitalnz.org/supplejack
   <% end %>
 </div>
 
-<div class="row" id="preview-<%=@previewer.preview_id%>">
-  <div class="twelve columns">
+<div class="grid-x" id="preview-<%=@previewer.preview_id%>">
+  <div class="medium-12 cell">
       <p><strong>Status: </strong><span id="status">Initialising preview record...</span></p>
 
       <div id="record-to-delete" class="hidden">
@@ -45,29 +46,35 @@ http://digitalnz.org/supplejack
         <ul class="indented"></ul>
       </div>
 
-      <dl class="tabs">
-        <dd><a href="#sourceData">Source Data<span class="small-spinner"></span></a></dd>
-        <dd class="active"><a href="#harvestedAttributes">Harvested Attributes<span class="small-spinner"></span></a></dd>
-        <dd><a href="#apiRecord">API <%= @parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a></dd>
+      <ul class='tabs' data-tabs id='example-tabs'>
+        <li class='tabs-title'>
+          <a data-tabs-target='source-data'>Source Data<span class="small-spinner"></span></a>
+        </li>
+        <li class='tabs-title is-active' aria-selected='true'>
+          <a data-tabs-target='harvested-attributes'>Harvested Attributes<span class="small-spinner"></span></a>
+        </li>
+        <li class='tabs-title'>
+          <a data-tabs-target="api-record">API <%= @parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a>
+        </li>
         <div class="align-right">
-          <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %><span style="font-weight: bold;"> - Preview Record -</span>
+          <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %> - Preview Record -
           <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %>
         </div>
-      </dl>
-
-      <ul class="tabs-content tab-content-fit">
-        <li id="sourceDataTab">
-          <div id="record-raw-data"></div>
-        </li>
-
-        <li class="active" id="harvestedAttributesTab">
-          <div id="harvest-attributes"></div>
-        </li>
-
-        <li id="apiRecordTab">
-          <div id="record-attributes"></div>
-        </li>
       </ul>
+
+      <div class="tabs-content" data-tabs-content='example-tabs'>
+        <div class='tabs-panel' id="source-data">
+          <div id="record-raw-data"></div>
+        </div>
+
+        <div class="tabs-panel is-active" id="harvested-attributes">
+          <div id="harvest-attributes"></div>
+        </div>
+
+        <div class='tabs-panel' id="api-record">
+          <div id="record-attributes"></div>
+        </div>
+      </div>
 
       <div id="harvest-failure">
         <h6></h6>

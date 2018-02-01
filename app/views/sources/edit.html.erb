@@ -1,42 +1,45 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
 <br/>
 <div id="alert"></div>
 
-<div class="seven columns centered">
+<div class="medium-7 cell">
   <h2><%= t('sources.edit') %></h2>
-  
+
   <%= render 'form' %>
 
   <% if can? :manage, @source %>
     <h2><%= t('sources.manage') %></h2>
-    <a href="#" data-reveal-id="reindex-modal" class="button right"><%= t('sources.reindex') %></a>
+    <a href="#" data-open="reindex-modal" class="button float-right"><%= t('sources.reindex') %></a>
   <% end %>
 </div>
 
-<div id="reindex-modal" class="reveal-modal medium">
+<div id="reindex-modal" class="reveal medium" data-reveal>
   <h2><%= t('sources.reindex') %></h2>
-  <div class="row">
-    <div class="twelve columns">
+  <div class="grid-x">
+    <div class="medium-12 cell">
       <label class=""><%= t('simple_form.labels.sources.environment') %></label>
       <%= select_tag "environment", options_for_select(APPLICATION_ENVS) %>
     </div>
   </div>
-  <div class="row">
-    <div class="twelve columns">
+  <div class="grid-x">
+    <div class="medium-12 cell">
       <label class=""><%= t('sources.modified_records') %></label>
       <div id="date-slider"></div>
       <div id="time"><%= t('sources.all_records') %></div>
     </div>
   </div>
-  <%= link_to t('sources.reindex'), '#', remote: true, class: "right button", id: 'reindex-button', :'data-url' => reindex_source_path(@source) %>
-  <a class="close-reveal-modal">&#215;</a>
+  <%= link_to t('sources.reindex'), '#', remote: true, class: "float-right button", id: 'reindex-button', :'data-url' => reindex_source_path(@source) %>
+
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>

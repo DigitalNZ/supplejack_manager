@@ -35,7 +35,6 @@ fieldset#management_permissions , fieldset#harvesting_permissions {
 
   select[multiple] {
     margin-bottom: 0;
-    // overflow-y: scroll;
   }
 }
 
@@ -64,7 +63,7 @@ fieldset#management_permissions , fieldset#harvesting_permissions {
 
 .pause, .resume {
   background:none!important;
-  color: $mainColor;
+  color: $primary-color;
   border:none;
   padding:0!important;
   font: inherit;

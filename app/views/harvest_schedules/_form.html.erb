@@ -14,44 +14,51 @@ http://digitalnz.org/supplejack
 
   <%= f.input :start_time, input_html: {class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
 
-  <div class="row">
-    <div class="two columns">
+  <div class="grid-x">
+    <div class="medium-2 cell">
       <%= f.label :recurrent %>
     </div>
-    <div class="ten columns">
+    <div class="medium-10 cell">
       <%= f.input :recurrent, as: :boolean, label: false %>
     </div>
   </div>
 
   <br/>
 
+  <ul class="tabs" data-tabs id="example-tabs">
+    <%= content_tag :li, class: "tabs-title #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
+      <a data-tabs-target="simple-schedule-tab" href="#simple-schedule-tab">Simple Schedule</a>
+    <% end %>
+
+    <%= content_tag :li, class: "tabs-title #{!@harvest_schedule.simple? ? "is-active" : nil }" do %>
+      <a data-tabs-target='cron-syntax-tab' href="#cron-syntax-tab" aria-selected="true">Cron Syntax</a>
+    <% end %>
+  </ul>
+
   <%= content_tag(:div, id: "recurrent-options", style: @harvest_schedule.recurrent ? "" : "display: none") do %>
-    <dl class="tabs contained">
-      <%= content_tag(:dd, link_to("Simple Schedule", "#simpleSchedule"), class: @harvest_schedule.simple? ? "active" : nil) %>
-      <%= content_tag(:dd, link_to("Cron Syntax", "#cronSyntax"), class: !@harvest_schedule.simple? ? "active" : nil) %>
-    </dl>
 
-    <ul class="tabs-content contained">
+    <div class="tabs-content" data-tabs-content='example-tabs'>
 
-      <%= content_tag :li, id: "simpleScheduleTab", class: @harvest_schedule.simple? ? "active" : nil do %>
+      <%= content_tag :div, id: "simple-schedule-tab", class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
         <%= f.input :frequency, collection: ["daily", "weekly", "fortnightly", "monthly"].map{|o| [o.capitalize, o] } %>
 
         <div class="input string optional harvest_schedule_at_hour">
           <%= f.label :at_hour %>
-          <div class="row">
-            <div class="two columns"><%= f.input_field :at_hour, collection: (0..23).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
-            <div class="two columns"><%= f.input_field :at_minutes, collection: (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
-            <div class="ten columns"></div>
+          <div class="grid-x">
+            <div class="medium-2 cell"><%= f.input_field :at_hour, collection: (0..23).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
+            <div class="medium-2 cell"><%= f.input_field :at_minutes, collection: (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
+            <div class="medium-10 cell"></div>
           </div>
         </div>
 
         <%= f.input :offset, hint: t("harvest_schedules.offset_hint") %>
       <% end %>
 
-      <%= content_tag :li, id: "cronSyntaxTab", class: !@harvest_schedule.simple? ? "active" : nil do %>
+      <%= content_tag :div, id: "cron-syntax-tab", class: "tabs-panel #{!@harvest_schedule.simple? ? "is-active" : nil}" do %>
         <%= f.input :cron %>
       <% end %>
-    </ul>
+
+    </div>
   <% end %>
 
   <%= f.input :environment, as: :hidden %>
@@ -62,5 +69,5 @@ http://digitalnz.org/supplejack
 
   <br/>
 
-  <%= f.button :submit, t('harvest_schedules.save'), class: "button right" %>
+  <%= f.button :submit, t('harvest_schedules.save'), class: "button float-right" %>
 <% end %>
