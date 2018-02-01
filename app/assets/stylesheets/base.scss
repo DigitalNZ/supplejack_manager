@@ -78,15 +78,10 @@ form {
   color: $white;
 }
 
-// ul.pagination {
-//   .current {
-//     a {
-//       padding: 0;
-//       color: $white;
-//
-//       &:hover {
-//         background-color: transparent;
-//       }
-//     }
-//   }
-// }
+.ui-datepicker-div {
+  background-color: $white;
+}
+
+select {
+  -webkit-appearance: none;
+}

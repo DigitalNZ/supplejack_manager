@@ -8,13 +8,8 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<div class="grid-x">
-  <div class="medium-7 cell">
-    <h2><%= t("harvest_schedules.edit_env_schedule", env: params[:environment].capitalize) %></h2>
+<h2><%= t("harvest_schedules.edit_env_schedule", env: params[:environment].capitalize) %></h2>
 
-    <div id="harvest-schedule-form">
-      <%= render "form" %>
-    </div>
-
-  </div>
+<div id="harvest-schedule-form">
+  <%= render "form" %>
 </div>
