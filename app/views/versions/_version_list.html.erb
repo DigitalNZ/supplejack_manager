@@ -30,8 +30,6 @@ http://digitalnz.org/supplejack
   <% end %>
 </div>
 
-<h3><%= t("history") %></h3>
-
 <div id="versions">
   <% versionable.versions.desc(:created_at).each_with_index do |version, index| %>
     <div class="version <%= 'active' if @version.try(:id) == version.id %> <%= 'hidden' if index > 15 %>">
@@ -41,6 +39,6 @@ http://digitalnz.org/supplejack
     </div>
   <% end %>
   <% if versionable.versions.count > 15 %>
-    <button class="button show_more secondary expanded small"> Click to show all versions...</button>
+    <button class="button show_more secondary expanded"> Click to show all versions...</button>
   <% end %>
 </div>

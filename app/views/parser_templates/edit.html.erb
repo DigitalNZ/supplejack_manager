@@ -1,16 +1,16 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
-<div class="row">
-	<div class="nine columns">
-		<h1 id="parser-template-title" class="left"><%= @parser_template.name %></h1>
+<div class="grid-x">
+	<div class="medium-9 cell">
+		<h1 id="parser-template-title" class="float-left"><%= @parser_template.name %></h1>
 		<div id="hidden-parser-template-form">
 			<%= simple_form_for @parser_template do |f| %>
 				<div class="parser-template-form">
@@ -21,20 +21,23 @@ http://digitalnz.org/supplejack
 		</div>
 	</div>
 
-	<div class="three columns new-actions">
-		<a href="#" id="rename-parser-template-action" class="button right twelve"><%= t('parser_templates.rename') %></a>
-		<a href="#" class="button right twelve" data-reveal-id="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
+	<div class="medium-3 cell new-actions">
+		<a href="#" id="rename-parser-template-action" class="button float-right medium-12"><%= t('parser_templates.rename') %></a>
+		<a href="#" class="button float-right medium-12" data-open="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
   </div>
 </div>
 
-<div id="delete-parser-template-alert" class="reveal-modal small">
+<div id="delete-parser-template-alert" class="reveal small" data-reveal>
 	<h2>Delete Parser Template</h2>
 	<p> Are you sure that you want to delete the parser template: <strong><%= @parser_template.name %></strong> </p>
 	<div>
-		<%= button_to "Delete", @parser_template, method: :delete, class: "button alert right" %>
-		<button id="cancel-parser-template-delete" class="button secondary right">Cancel</button>
+		<%= button_to "Delete", @parser_template, method: :delete, class: "button alert float-right" %>
+		<button id="cancel-parser-template-delete" data-close class="button secondary float-right">Cancel</button>
 	</div>
-	<a class="close-reveal-modal">&#215;</a>
+
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 
 <%= simple_form_for @parser_template do |f| %>

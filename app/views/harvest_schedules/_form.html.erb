@@ -44,10 +44,10 @@ http://digitalnz.org/supplejack
 
         <div class="input string optional harvest_schedule_at_hour">
           <%= f.label :at_hour %>
-          <div class="row">
-            <div class="two columns"><%= f.input_field :at_hour, collection: (0..23).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
-            <div class="two columns"><%= f.input_field :at_minutes, collection: (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
-            <div class="ten columns"></div>
+          <div class="grid-x">
+            <div class="medium-2 cell"><%= f.input_field :at_hour, collection: (0..23).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
+            <div class="medium-2 cell"><%= f.input_field :at_minutes, collection: (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
+            <div class="medium-10 cell"></div>
           </div>
         </div>
 
