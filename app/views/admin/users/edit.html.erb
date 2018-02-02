@@ -1,0 +1,6 @@
+<h2><%= @admin_user.id %></h2>
+
+<%= simple_form_for @admin_user, url: admin_user_path(@admin_user.id) do |f| %>
+  <%= f.input :max_requests  %>
+  <%= f.button :submit %>
+<% end %>
