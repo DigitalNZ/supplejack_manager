@@ -20,8 +20,8 @@ module Admin
       @user = JSON.parse(RestClient.get("#{host}/harvester/users/#{id}.json", params: { api_key: api_key, page: page }))
     end
 
-    def update(id, max_requests)
-      RestClient.patch("#{host}/harvester/users/#{id}.json?api_key=#{api_key}", { user: { max_requests: max_requests }})
+    def update(params)
+      RestClient.patch("#{host}/harvester/users/#{params['id']}.json?api_key=#{api_key}", { user: { max_requests: params['max_requests'] }})
     end
 
     private

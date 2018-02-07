@@ -14,7 +14,7 @@ module Admin
     end
 
     def update
-      if Admin::User.new(params[:environment]).update(params[:id], params[:max_requests])
+      if Admin::User.new(params[:environment]).update(user_params.to_hash)
         redirect_to environment_admin_users_path
       else
         render :edit
@@ -22,6 +22,10 @@ module Admin
     end
 
     private
+
+    def user_params
+      params.permit(:max_requests, :id)
+    end
 
     def api_key
       APPLICATION_ENVIRONMENT_VARIABLES[
