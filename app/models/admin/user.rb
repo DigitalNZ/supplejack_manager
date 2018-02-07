@@ -8,13 +8,12 @@ module Admin
   class User
     attr_accessor :environment, :page
 
-    def initialize(environment, page = 1)
+    def initialize(environment)
       @environment = environment
-      @page        = page
     end
 
     def all
-      @users = JSON.parse(RestClient.get("#{host}/harvester/users.json", params: { api_key: api_key, page: page }))['users']
+      @users = JSON.parse(RestClient.get("#{host}/harvester/users.json", params: { api_key: api_key }))['users']
     end
 
     def find(id)
@@ -23,10 +22,6 @@ module Admin
 
     def update(id, max_requests)
       RestClient.patch("#{host}/harvester/users/#{id}.json?api_key=#{api_key}", { user: { max_requests: max_requests }})
-    end
-
-    def total
-      RestClient.get("#{host}/harvester/users.json", params: { api_key: api_key, page: page }).headers[:x_total].to_i
     end
 
     private

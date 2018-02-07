@@ -1,8 +1,8 @@
-<h2 class='float-left'>API Users</h2>
+<h2>API Users</h2>
 
 <%= link_to('Download CSV', environment_admin_users_path(format: :csv), class: 'button primary new-right') %>
 
-<table>
+<table id='users'>
   <thead>
     <tr>
       <th>Username</th>
@@ -33,26 +33,3 @@
     <% end %>
   </tbody>
 </table>
-
-<ul class="pagination" role="navigation" aria-label="Pagination">
-  <% if @page == 1 %>
-    <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
-  <% else %>
-    <li class='pagination-previous'><%= link_to 'Previous', environment_admin_users_path(page: (@page - 1)) %>
-  <% end %>
-
-  <% 1.upto(@total) do |i| %>
-    <% if i == @page %>
-      <li class="current"><span class="show-for-sr">You're on page</span> <%= i %></li>
-    <% else %>
-      <li><%= link_to i, environment_admin_users_path(page: i) %></li>
-    <% end %>
-  <% end %>
-
-
-  <% if @page == @total %>
-    <li class="pagination-next disabled">Next <span class="show-for-sr">page</span></li>
-  <% else %>
-    <li class='pagination-next'><%= link_to 'Next', environment_admin_users_path(page: (@page + 1)) %>
-  <% end %>
-</ul>

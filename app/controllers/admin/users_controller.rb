@@ -6,9 +6,7 @@ module Admin
     respond_to :csv, only: :index
 
     def index
-      @users = admin_users_request.all
-      @total = (admin_users_request.total / 10.00).ceil || 1
-      @page = params[:page].try(:to_i) || 1
+      @users = Admin::User.new(params[:environment]).all
     end
 
     def edit
@@ -24,10 +22,6 @@ module Admin
     end
 
     private
-
-    def admin_users_request
-      Admin::User.new(params[:environment], params[:page])
-    end
 
     def api_key
       APPLICATION_ENVIRONMENT_VARIABLES[

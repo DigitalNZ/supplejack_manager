@@ -46,5 +46,6 @@
 //= require sources
 //= require suppressed_collections
 //= require harvest_errors
+//= require admin/users
 
 $(function(){ $(document).foundation(); });
