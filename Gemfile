@@ -56,6 +56,7 @@ gem 'uglifier', '>= 1.0.3'
 gem 'compass-rails', '>= 1.0.3'
 gem 'foundation-rails'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
+gem 'activeresource-response'
 
 group :development do
   gem 'binding_of_caller', '>= 0.6.8'

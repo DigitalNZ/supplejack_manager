@@ -6,18 +6,18 @@ module Admin
     respond_to :csv, only: :index
 
     def index
-      @admin_users = Admin::User.all
+      @users = admin_users_request.all
+      @total = (admin_users_request.total / 10.00).ceil || 1
+      @page = params[:page].try(:to_i) || 1
     end
 
     def edit
-      @admin_user = Admin::User.find(params[:id])
+      @user = Admin::User.new(params[:environment]).find(params[:id])
     end
 
     def update
-      @admin_user = Admin::User.find(params[:id])
-
-      if @admin_user.update_attributes(user_params)
-        redirect_to admin_users_path
+      if Admin::User.new(params[:environment]).update(params[:id], params[:max_requests])
+        redirect_to environment_admin_users_path
       else
         render :edit
       end
@@ -25,8 +25,18 @@ module Admin
 
     private
 
-    def user_params
-      params.require(:admin_user).permit(:max_requests)
+    def admin_users_request
+      Admin::User.new(params[:environment], params[:page])
+    end
+
+    def api_key
+      APPLICATION_ENVIRONMENT_VARIABLES[
+        params[:environment]
+      ]['HARVESTER_API_KEY']
+    end
+
+    def page
+      params[:page] || 1
     end
   end
 end

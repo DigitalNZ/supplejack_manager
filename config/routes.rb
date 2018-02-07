@@ -20,8 +20,10 @@ HarvesterManager::Application.routes.draw do
     end
   end
 
-  namespace :admin do
-    resources :users
+  scope ':environment', as: 'environment' do
+    namespace :admin do
+      resources :users
+    end
   end
 
   resources :snippets do

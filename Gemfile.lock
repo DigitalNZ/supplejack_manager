@@ -110,6 +110,8 @@ GEM
       airbrake-ruby (~> 2.5)
     airbrake-ruby (2.7.1)
     arel (8.0.0)
+    arusarka-dynamic-active-resource (0.2.6)
+      activeresource
     ast (2.3.0)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
@@ -484,6 +486,7 @@ DEPENDENCIES
   activeresource
   activeresource-response
   airbrake
+  arusarka-dynamic-active-resource (~> 0.2.6)
   binding_of_caller (>= 0.6.8)
   bson
   cancancan

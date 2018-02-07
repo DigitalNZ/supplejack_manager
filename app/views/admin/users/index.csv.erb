@@ -8,16 +8,23 @@ the Department of Internal Affairs. http://digitalnz.org/supplejack
 %>
 
 <%-
-  require 'csv'
+require 'csv'
 
-  csv_output = CSV.generate(:col_sep => ",") do |csv|
-    columns = [:username, :name, :authentication_token, :email, :role, :daily_requests, :monthly_requests]
+csv_output = CSV.generate(:col_sep => ",") do |csv|
+  columns = ['username', 'name', 'authentication_token', 'email', 'role', 'daily_requests', 'monthly_requests']
 
-    csv << columns
-    Admin::User.all.each do |user|
-      csv << columns.map { |c| user.send(c) }
+  pages = (Admin::User.new(params[:environment]).total / 10.00).ceil
+
+  csv << columns
+
+  1.upto(pages).each do |page|
+    Admin::User.new(params[:environment], page).all.each do |user|
+      csv << columns.map do |c|
+        user[c]
+      end
     end
   end
+end
 %>
 
 <%= csv_output.html_safe %>

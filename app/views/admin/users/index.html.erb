@@ -1,6 +1,6 @@
 <h2 class='float-left'>API Users</h2>
 
-<%= link_to('Download CSV', admin_users_path(format: :csv), class: 'button primary new-right') %>
+<%= link_to('Download CSV', environment_admin_users_path(format: :csv), class: 'button primary new-right') %>
 
 <table>
   <thead>
@@ -17,19 +17,42 @@
   </thead>
 
   <tbody>
-    <% @admin_users.each do |user| %>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= user.username %></td>
-        <td><%= user.name %></td>
-        <td><%= user.authentication_token %></td>
-        <td><%= user.email %></td>
-        <td><%= user.role %></td>
-        <td><%= user.daily_requests %></td>
-        <td><%= user.monthly_requests %></td>
+        <td><%= user['username'] %></td>
+        <td><%= user['name'] %></td>
+        <td><%= user['authentication_token'] %></td>
+        <td><%= user['email'] %></td>
+        <td><%= user['role'] %></td>
+        <td><%= user['daily_requests'] %></td>
+        <td><%= user['monthly_requests'] %></td>
         <td>
-          <%= link_to user.max_requests, edit_admin_user_path(user.id) %>
+          <%= link_to user['max_requests'], edit_environment_admin_user_path(environment: 'development', id: user['id']) %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<ul class="pagination" role="navigation" aria-label="Pagination">
+  <% if @page == 1 %>
+    <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
+  <% else %>
+    <li class='pagination-previous'><%= link_to 'Previous', environment_admin_users_path(page: (@page - 1)) %>
+  <% end %>
+
+  <% 1.upto(@total) do |i| %>
+    <% if i == @page %>
+      <li class="current"><span class="show-for-sr">You're on page</span> <%= i %></li>
+    <% else %>
+      <li><%= link_to i, environment_admin_users_path(page: i) %></li>
+    <% end %>
+  <% end %>
+
+
+  <% if @page == @total %>
+    <li class="pagination-next disabled">Next <span class="show-for-sr">page</span></li>
+  <% else %>
+    <li class='pagination-next'><%= link_to 'Next', environment_admin_users_path(page: (@page + 1)) %>
+  <% end %>
+</ul>

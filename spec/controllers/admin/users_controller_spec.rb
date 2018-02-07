@@ -12,7 +12,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   describe '#index' do
     before do
-      allow(Admin::User).to receive(:all) { admin_users }
+      allow(Admin::User).to receive(:find) { admin_users }
     end
 
     context 'html' do
