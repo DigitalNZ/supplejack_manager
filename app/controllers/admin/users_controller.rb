@@ -3,6 +3,8 @@
 module Admin
   # app/controllers/admin/users_controller.rb
   class UsersController < ApplicationController
+    before_action :authenticate_admin!
+
     respond_to :csv, only: :index
 
     def index
@@ -19,6 +21,10 @@ module Admin
       else
         render :edit
       end
+    end
+
+    def authenticate_admin!
+      redirect_to root_path unless current_user.admin?
     end
 
     private
