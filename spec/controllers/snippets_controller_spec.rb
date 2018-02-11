@@ -27,7 +27,7 @@ describe SnippetsController do
     end
   end
 
-  describe "GET 'new'" do
+  describe 'GET new' do
     it 'initializes a new snippet' do
       Snippet.should_receive(:new) { snippet }
       get :new
@@ -35,68 +35,74 @@ describe SnippetsController do
     end
   end
 
-  describe "GET 'edit'" do
-    it "finds an existing snippet" do
-      Snippet.should_receive(:find).with("1234") { snippet }
-      get :edit, params: { id: "1234" }
+  describe 'GET edit' do
+    it 'finds an existing snippet' do
+      Snippet.should_receive(:find).with('1234') { snippet }
+      get :edit, params: { id: '1234' }
       assigns(:snippet).should eq snippet
     end
   end
 
-  describe "GET 'create'" do
+  describe 'GET create' do
     before do
       Snippet.stub(:new) { snippet }
       snippet.stub(:save) { true }
     end
 
-    it "initializes a new snippet" do
-      Snippet.should_receive(:new).with({"name" => "Copyright"}) { snippet }
-      post :create, params: { snippet: { name: "Copyright" } }
+    it 'initializes a new snippet' do
+      Snippet.should_receive(:new).with({'name' => 'Copyright'}) { snippet }
+      post :create, params: { snippet: { name: 'Copyright' } }
     end
 
-    it "saves the snippet" do
+    it 'saves the snippet' do
       snippet.should_receive(:save)
-      post :create, params: { snippet: {name: "Copyright"} }
+      post :create, params: { snippet: {name: 'Copyright'} }
     end
 
-    context "valid snippet" do
-      it "redirects to edit page" do
-        post :create, params: { snippet: { name: "Copyright" } }
+    context 'valid snippet' do
+      it 'redirects to edit page' do
+        post :create, params: { snippet: { name: 'Copyright' } }
         expect(response.status).to eq 302
       end
     end
 
-    context "invalid snippet" do
+    context 'invalid snippet' do
       before { snippet.stub(:save) { false }}
 
-      it "renders the edit action" do
-        post :create, params: { snippet: { name: "Copyright" } }
+      it 'renders the edit action' do
+        post :create, params: { snippet: { name: 'Copyright' } }
         response.should render_template(:new)
       end
     end
   end
 
-  describe "GET 'update'" do
+  describe 'GET update' do
     before do
       Snippet.stub(:find) { snippet }
       snippet.stub(:update_attributes) { true }
     end
 
-    it "updates the snippet attributes" do
-      snippet.should_receive(:update_attributes).with({"name" => "Copyright"})
-      put :update, params: { id: "1234", snippet: { name: "Copyright" } }
+    it 'updates the snippet attributes' do
+      snippet.should_receive(:update_attributes).with({ 'name' => 'Copyright',
+                                                        'message' => 'update cho self',
+                                                        'content': 'I am a snippet',
+                                                        'environment': 'test'})
+      put :update, params: { id: '1234', snippet: { name: 'Copyright',
+                                                    message: 'update cho self',
+                                                    content: 'I am a snippet',
+                                                    environment: 'test' }}
     end
 
-    context "valid snippet" do
-      it "redirects to edit page" do
+    context 'valid snippet' do
+      it 'redirects to edit page' do
         put :update, params: { id: '1234', snippet: { name: '' } }
         expect(response.status).to eq 302
       end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the snippet" do
+  describe 'DELETE destroy' do
+    it 'destroys the snippet' do
       Snippet.should_receive(:find).with(snippet.id) { snippet }
       snippet.should_receive(:destroy)
       delete :destroy, params: { id: snippet.id }
@@ -104,14 +110,14 @@ describe SnippetsController do
     end
   end
 
-  describe "GET current_version" do
+  describe 'GET current_version' do
     before do
       Snippet.stub(:find_by_name) { snippet }
     end
 
-    it "should find the current version of the snippet" do
-      Snippet.should_receive(:find_by_name).with("Copyright", 'staging') { snippet }
-      get :current_version, params: { name: "Copyright", environment: :staging, format: :json }
+    it 'should find the current version of the snippet' do
+      Snippet.should_receive(:find_by_name).with('Copyright', 'staging') { snippet }
+      get :current_version, params: { name: 'Copyright', environment: :staging, format: :json }
       assigns(:snippet).should eq snippet
     end
   end
