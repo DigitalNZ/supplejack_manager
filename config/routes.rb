@@ -1,9 +1,9 @@
 # The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-# and is licensed under the GNU General Public License, version 3. Some components are 
-# third party components that are licensed under the MIT license or otherwise publicly available. 
-# See https://github.com/DigitalNZ/supplejack_manager for details. 
-# 
-# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+# and is licensed under the GNU General Public License, version 3. Some components are
+# third party components that are licensed under the MIT license or otherwise publicly available.
+# See https://github.com/DigitalNZ/supplejack_manager for details.
+#
+# Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
 HarvesterManager::Application.routes.draw do
@@ -17,6 +17,12 @@ HarvesterManager::Application.routes.draw do
       get :current, on: :collection
       get :new_enrichment, on: :member
       get :new_harvest, on: :member
+    end
+  end
+
+  scope ':environment', as: 'environment' do
+    namespace :admin do
+      resources :users
     end
   end
 
@@ -40,7 +46,7 @@ HarvesterManager::Application.routes.draw do
     resources :abstract_jobs, only: [:index], path: 'jobs'
     resources :harvest_jobs, only: [:create, :update, :show, :index]
     resources :enrichment_jobs, only: [:create, :update, :show, :new]
-    
+
     resources :harvest_schedules, except: [:show] do
       put :update_all, on: :collection
     end

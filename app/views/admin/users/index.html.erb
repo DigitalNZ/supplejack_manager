@@ -1,0 +1,35 @@
+<h2>API Users</h2>
+
+<%= link_to('Download CSV', environment_admin_users_path(format: :csv), class: 'button primary new-right') %>
+
+<table id='users'>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Authentication Token</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Daily Requests</th>
+      <th>Monthly Requests</th>
+      <th>Max Requests</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user['username'] %></td>
+        <td><%= user['name'] %></td>
+        <td><%= user['authentication_token'] %></td>
+        <td><%= user['email'] %></td>
+        <td><%= user['role'] %></td>
+        <td><%= user['daily_requests'] %></td>
+        <td><%= user['monthly_requests'] %></td>
+        <td>
+          <%= link_to user['max_requests'], edit_environment_admin_user_path(environment: params[:environment], id: user['id']) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
