@@ -47,5 +47,6 @@
 //= require suppressed_collections
 //= require harvest_errors
 //= require admin/users
+//= require collection_statistics
 
 $(function(){ $(document).foundation(); });
