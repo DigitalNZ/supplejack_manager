@@ -95,7 +95,7 @@ describe LinkCheckRulesController do
       end
 
       it "updates all the attributes" do
-        expect(link_check_rule).to receive(:update_attributes).with({"collection_title" => "collection_title", "status_codes" => "203,205" })
+        expect(link_check_rule).to receive(:update_attributes).with({"collection_title" => "collection_title", "status_codes" => "203,205" }.with_indifferent_access)
         put :update, params: { id: 1, link_check_rule: { collection_title: "collection_title", status_codes: "203,205" }, environment: "development" }
       end
     end
