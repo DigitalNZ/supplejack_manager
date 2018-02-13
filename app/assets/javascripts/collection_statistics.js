@@ -1,0 +1,3 @@
+$(function() {
+  $('#stats').dataTable();
+})

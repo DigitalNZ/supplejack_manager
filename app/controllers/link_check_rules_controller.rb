@@ -48,7 +48,7 @@ class LinkCheckRulesController < ApplicationController
   end
 
   def update
-    if @link_check_rule.update_attributes(params[:link_check_rule])
+    if @link_check_rule.update_attributes(link_check_rule_params)
       redirect_to environment_link_check_rules_path(environment: params[:environment])
     else
       render :edit
@@ -62,6 +62,7 @@ class LinkCheckRulesController < ApplicationController
   private
 
   def link_check_rule_params
-    params.permit!
+    params.require(:link_check_rule).permit(:source_id, :xpath, :status_codes,
+                                            :active, :throttle, :collection_title)
   end
 end
