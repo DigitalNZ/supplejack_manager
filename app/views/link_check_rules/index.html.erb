@@ -37,7 +37,7 @@ http://digitalnz.org/supplejack
       </td>
       <td><%= link_check_rule.source.try(:source_id) %></td>
       <td><%= link_check_rule.active %></td>
-      <td><%= link_check_rule.updated_at %></td>
+      <td><%= DateTime.parse(link_check_rule.updated_at).to_formatted_s(:long) %></td>
       <td>
         <% if can? :update, link_check_rule %>
           <%= link_to "Edit", edit_environment_link_check_rule_path(id: link_check_rule.id, environment: params[:environment]) %>

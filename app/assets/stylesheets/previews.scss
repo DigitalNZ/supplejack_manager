@@ -13,3 +13,24 @@
 .records-preview-button {
   font-weight: bold;
 }
+
+.tabs {
+  .next-previous {
+    line-height: 4;
+    padding: 0 1rem;
+  }
+}
+
+.tabs-panel {
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.CodeRay {
+  font-size: .8rem;
+  .string {
+    .content {
+      white-space: normal;
+    }
+  }
+}
