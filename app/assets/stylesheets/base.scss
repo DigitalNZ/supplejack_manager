@@ -85,3 +85,11 @@ form {
 select {
   -webkit-appearance: none;
 }
+
+.page-content {
+  padding: 1rem 2rem;
+
+  .subheader {
+    padding-right: 2rem;
+  }
+}

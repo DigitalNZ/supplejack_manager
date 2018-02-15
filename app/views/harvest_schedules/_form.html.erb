@@ -15,10 +15,10 @@ http://digitalnz.org/supplejack
   <%= f.input :start_time, input_html: {class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
 
   <div class="grid-x">
-    <div class="medium-2 cell">
+    <div class="medium-3 cell">
       <%= f.label :recurrent %>
     </div>
-    <div class="medium-10 cell">
+    <div class="medium-9 cell">
       <%= f.input :recurrent, as: :boolean, label: false %>
     </div>
   </div>

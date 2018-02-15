@@ -188,7 +188,7 @@ en:
     parser_type: "Parser Type"
     duration: "Duration"
     records_per_second: "Records/sec"
-    validation_failure_errors: "Validation/Failure Errors"
+    validation_failure_errors: "Errors"
     scheduled: "Scheduled"
     already_active_html: "There is already an active Job running for the <strong>%{parser}</strong> in the <strong>%{environment}</strong> environment"
     incremental: "Incremental Harvest?"

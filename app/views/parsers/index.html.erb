@@ -8,7 +8,7 @@ Supplejack was created by DigitalNZ at the National Library of NZ and the Depart
 http://digitalnz.org/supplejack
 %>
 
-<h1 class="left"><%= t('parsers.label') %></h1>
+<h1><%= t('parsers.label') %></h1>
 <%= link_to t('parsers.create'), new_parser_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
 <table id="parsers" class="twelve">
@@ -32,7 +32,7 @@ http://digitalnz.org/supplejack
           <td><%= parser.strategy %></td>
           <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
           <td><%= link_to parser.source.name, edit_source_path(parser.source) %></td>
-          <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
+          <td><%= parser.versions.last.try(:created_at).try(:localtime).to_formatted_s(:long) %></td>
           <td><%= parser.last_edited_by %></td>
           <td><%= parser.data_type %></td>
         </tr>
@@ -42,7 +42,7 @@ http://digitalnz.org/supplejack
           <td><%= parser.strategy %></td>
           <td><%= parser.source.partner.name %></td>
           <td><%= parser.source.name %></td>
-          <td><%= parser.versions.last.try(:created_at).try(:localtime) %></td>
+          <td><%= parser.versions.last.try(:created_at).try(:localtime.to_formatted_s(:long)) %></td>
           <td><%= parser.last_edited_by %></td>
           <td><%= parser.data_type %></td>
         </tr>

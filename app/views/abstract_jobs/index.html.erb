@@ -24,11 +24,10 @@ http://digitalnz.org/supplejack
       <tr>
         <th><%= t("abstract_jons.type") %></th>
         <th><%= t("harvest_jobs.parser") %></th>
-        <th><%= t("harvest_jobs.parser_type") %></th>
+        <th><%= t("harvest_jobs.mode") %></th>
         <th><%= t("harvest_jobs.enrichment") %></th>
         <th><%= t("harvest_jobs.operator") %></th>
         <th><%= t("harvest_jobs.start_time") %></th>
-        <th><%= t("harvest_jobs.mode") %></th>
         <% if params[:status] == "finished" %>
           <th><%= t("harvest_jobs.duration") %></th>
         <% end %>
@@ -49,7 +48,7 @@ http://digitalnz.org/supplejack
         <% else %>
           <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) rescue '' %></td>
         <% end %>
-        <td><%= abstract_job.parser.try(:data_type) %></td>
+        <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
         <td><%= enrichments(abstract_job) %></td>
         <% if abstract_job.user %>
           <td><%= abstract_job.user.try(:name) %></td>
@@ -57,8 +56,6 @@ http://digitalnz.org/supplejack
           <td><%= t("harvest_jobs.scheduled") %></td>
         <% end %>
         <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
-
-        <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
 
         <% if params[:status] == "finished" %>
           <td><%= ChronicDuration.output(abstract_job.duration.to_i) if abstract_job.duration.present? %></td>

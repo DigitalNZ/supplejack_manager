@@ -30,7 +30,7 @@ http://digitalnz.org/supplejack
   <% end %>
 </div>
 
-<div id="versions">
+<div id="versions" class="versions">
   <% versionable.versions.desc(:created_at).each_with_index do |version, index| %>
     <div class="version <%= 'active' if @version.try(:id) == version.id %> <%= 'hidden' if index > 15 %>">
       <%= link_to version.message || "No message",  send(:"#{versionable_path}_path", versionable, version) %>

@@ -56,7 +56,7 @@ http://digitalnz.org/supplejack
         <li class='tabs-title'>
           <a data-tabs-target="api-record">API <%= @parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a>
         </li>
-        <div class="align-right">
+        <div class="align-right next-previous">
           <%= link_to_previous @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %> - Preview Record -
           <%= link_to_next @parser.id, params[:index], params[:environment], params[:review], class: "records-preview-button" %>
         </div>
