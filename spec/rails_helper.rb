@@ -12,7 +12,7 @@ require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'selenium/webdriver'
 
-# Capybara Screenshot
+# apybara Screenshot
 Capybara::Screenshot.webkit_options = { width: 1440, height: 900 }
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
   "screenshot_#{example.description.tr(' ', '-').gsub(%r{^.*\/spec\/}, '')}"

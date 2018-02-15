@@ -82,6 +82,7 @@ group :test do
   gem 'database_cleaner', '>= 1.3.0'
   gem 'launchy', '>= 2.1.2'
   gem 'simplecov', require: false
+  gem 'site_prism'
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
