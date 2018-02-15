@@ -183,6 +183,7 @@ example_id                                                         | status  | r
 ./spec/controllers/users_controller_spec.rb[1:5:4:3]               | passed  | 0.02547 seconds |
 ./spec/controllers/users_controller_spec.rb[1:5:4:4]               | passed  | 0.05733 seconds |
 ./spec/controllers/users_controller_spec.rb[1:5:5:1]               | passed  | 0.07489 seconds |
+./spec/features/test_spec.rb[1:1]                                  | failed  | 3.08 seconds    |
 ./spec/helpers/application_helper_spec.rb[1:1:1:1]                 | passed  | 0.0101 seconds  |
 ./spec/helpers/application_helper_spec.rb[1:1:1:2:1]               | passed  | 0.00686 seconds |
 ./spec/helpers/application_helper_spec.rb[1:1:1:2:2]               | passed  | 0.00771 seconds |

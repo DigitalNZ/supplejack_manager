@@ -75,11 +75,14 @@ group :development, :test do
 end
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'capybara', '>= 2.17.0'
+  gem 'capybara-screenshot'
+  gem 'capybara-selenium'
+  gem 'chromedriver-helper'
   gem 'database_cleaner', '>= 1.3.0'
   gem 'launchy', '>= 2.1.2'
-  gem 'capybara', '>= 2.17.0'
+  gem 'simplecov', require: false
   gem 'timecop'
-  gem 'webmock'
   gem 'vcr'
+  gem 'webmock'
 end

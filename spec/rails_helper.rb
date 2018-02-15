@@ -7,6 +7,31 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'database_cleaner'
 require 'devise'
+require 'capybara'
+require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
+require 'selenium/webdriver'
+
+# Capybara Screenshot
+Capybara::Screenshot.webkit_options = { width: 1440, height: 900 }
+Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
+  "screenshot_#{example.description.tr(' ', '-').gsub(%r{^.*\/spec\/}, '')}"
+end
+Capybara::Screenshot.prune_strategy = :keep_last_run
+Capybara::Screenshot.register_driver(:headless_chrome) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    args: %w[headless disable-gpu no-sandbox]
+  )
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :headless_chrome
+# User this to debug tests in a real browser
+# Capybara.javascript_driver = :selenium_chrome
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
