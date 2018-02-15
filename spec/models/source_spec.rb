@@ -57,7 +57,7 @@ describe Source do
 
   describe "after save" do
     it "calls update_apis" do
-      expect(source).to receive(:update_apis).and_call_original
+      expect(source).to receive(:update_apis)
       source.save
     end
   end
