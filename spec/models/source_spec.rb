@@ -6,7 +6,7 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Source do
   let(:source) {build(:source)}
@@ -48,13 +48,6 @@ describe Source do
     end
   end
 
-  describe "before validation" do
-    it "calls create_source_id" do
-      expect_any_instance_of(Source).to receive(:create_source_id)
-      Source.create(name: "Test", partner: create(:partner))
-    end
-  end
-
   describe "after create" do
     it "calls create_link_check_rule" do
       expect(source).to receive(:create_link_check_rule)
@@ -64,28 +57,8 @@ describe Source do
 
   describe "after save" do
     it "calls update_apis" do
-      expect(source).to receive(:update_apis)
+      expect(source).to receive(:update_apis).and_call_original
       source.save
-    end
-  end
-
-  describe "#update_apis" do
-    before do
-      allow_any_instance_of(Source).to receive(:update_apis).and_call_original
-      allow(RestClient).to receive(:post)
-    end
-
-    it "updates each backend_environment" do
-      APPLICATION_ENVS.each do |env|
-        env = APPLICATION_ENVIRONMENT_VARIABLES[env]
-        expect(RestClient).to receive(:post).with("#{env['API_HOST']}/harvester/partners/#{source.partner.id.to_s}/sources", anything)
-      end
-      source.send(:update_apis)
-    end
-
-    it "syncs the partner" do
-      expect(source.partner).to receive(:update_apis)
-      source.send(:update_apis)
     end
   end
 

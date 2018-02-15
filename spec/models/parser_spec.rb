@@ -6,7 +6,7 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Parser do
   let(:source) { create(:source) }
@@ -124,10 +124,6 @@ describe Parser do
     let(:version) { build(:version) }
     let(:parser_class) { double(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
-
-    before(:each) do
-      allow(parser).to receive(:loader) { loader }
-    end
 
     context 'when version is not passed' do
       it "content is the last content which is set in the Parser itself" do

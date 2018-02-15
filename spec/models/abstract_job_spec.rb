@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe AbstractJob do
   let(:abstract_job) { build(:abstract_job) }
