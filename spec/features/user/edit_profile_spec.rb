@@ -30,7 +30,7 @@ feature 'User change its profile', type: :feature, js: true do
 
       updated_user = User.find(user.id)
       expect(updated_user.email).to eq new_email
-      expect(updated_user.name).to eq new_password
+      expect(updated_user.name).to eq new_name
 
       logout(:user)
 
