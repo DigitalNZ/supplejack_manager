@@ -7,6 +7,8 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
+
+    allow(Preview).to receive(:find) { build(:preview, id: 1) }
   end
 
   let(:user)    { create(:user, :admin) }
@@ -14,7 +16,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   let!(:parser) { create(:parser, source_id: source) }
   let!(:version) { create(:version, versionable: parser, user_id: user) }
 
-  scenario 'A harvest operator can trigger a harvest' do
+  before do
     visit root_path
 
     fill_in 'Email', with: user.email
@@ -22,14 +24,64 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
 
     click_button 'Sign in'
 
-    expect(page).to have_text('Supplejack Dashboard')
-
     visit parsers_path
 
     expect(page).to have_text parser.name
-
     click_link parser.name
 
     expect(page).to have_content(parser.name)
   end
+
+  scenario 'A harvest operator can run a harvest' do
+    click_link version.message
+
+    click_link 'Tag as Staging'
+
+    find('.run-harvest').click
+
+    click_link 'Staging Harvest'
+
+    expect(page).to have_text 'Run Staging Harvest'
+    expect(page).to have_text 'Mode'
+    expect(page).to have_css  '#harvest_job_mode_normal'
+    expect(page).to have_css  '#harvest_job_mode_full_and_flush'
+
+    expect(page).to have_text 'How many records do you wish to harvest?'
+    expect(page).to have_css  '#harvest_job_limit'
+
+    expect(page).to have_button 'Start Harvest'
+  end
+
+  scenario 'A harvest operator can preview a harvest' do
+    click_link 'Preview'
+
+    expect(page).to have_text 'Previewing records'
+    expect(page).to have_text 'Previewing records Status: Initialising preview record...'
+    expect(page).to have_text 'x'
+
+    expect(page).to have_css '.tabs'
+
+    expect(page).to have_text 'Source Data'
+    expect(page).to have_text 'Harvested Attributes'
+    expect(page).to have_text 'API Record'
+
+    expect(page).to have_text '< previous'
+    expect(page).to have_text ' - Preview Record - '
+    expect(page).to have_text 'next'
+  end
+
+  scenario 'A harvest operator can Update a parser' do
+    fill_in 'parser_content', with: "class Hey; p 'hey' end"
+    fill_in 'Message', with: 'Updating Parser'
+    click_button 'Update Parser Script'
+    expect(page).to have_link 'Update Parser Script'
+  end
+
+  scenario 'A harvest operator can rename a parser'
+
+  scenario 'A harvest operator can change the data source of a parser'
+
+  scenario 'A harvest operator can disable Full & Flush harvest mode'
+
+  scenario 'A harvest operator can delete a parser script'
 end
