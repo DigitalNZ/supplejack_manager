@@ -9,7 +9,7 @@
 require 'rails_helper'
 
 describe Source do
-  let(:source) {build(:source)}
+  let(:source) { build(:source) }
 
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
