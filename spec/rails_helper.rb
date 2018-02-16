@@ -33,6 +33,10 @@ Capybara.javascript_driver = :headless_chrome
 # User this to debug tests in a real browser
 # Capybara.javascript_driver = :selenium_chrome
 
+# Require page objects
+require './spec/page_objects/application_page.rb'
+Dir[Rails.root.join('spec', 'page_objects', '**', '*.rb')].each { |f| require f }
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -52,7 +56,12 @@ Capybara.javascript_driver = :headless_chrome
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: [:controller, :feature]
+  config.include Warden::Test::Helpers
+
+  config.after :each do
+    Warden.test_reset!
+  end
 
   # Database cleaner
   config.before(:suite) do
