@@ -82,3 +82,5 @@ id_rsa
 /config/initializers/env_variables.rb
 
 spec/example.txt
+
+spec/examples.txt
