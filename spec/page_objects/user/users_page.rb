@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class AllUsersPage < ApplicationPage
+class UsersPage < ApplicationPage
   set_url 'users/'
 
   element :user_table, '#users'

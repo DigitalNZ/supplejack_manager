@@ -32,6 +32,8 @@ feature 'User change its profile', type: :feature, js: true do
       expect(updated_user.email).to eq new_email
       expect(updated_user.name).to eq new_name
 
+      expect(edit_user_page).to have_flash_success
+
       logout(:user)
 
       login_page = LoginPage.new
@@ -77,6 +79,8 @@ feature 'User change its profile', type: :feature, js: true do
 
       expect(admin_user.manage_partners).to eq [partner.id]
       expect(admin_user.run_harvest_partners).to eq [partner.id]
+
+      expect(login_page).to have_flash_success
     end
   end
 end
