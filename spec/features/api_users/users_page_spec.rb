@@ -27,11 +27,14 @@ feature 'API Users Page', type: :feature do
 
     before do
       allow_any_instance_of(Admin::User).to receive(:all).and_return([admins])
+      allow_any_instance_of(Admin::User).to receive(:find).and_return(admins)
+
       visit new_user_session_path
       within(:css, 'form.user-signin-form') do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
       end
+
       click_button 'Sign in'
     end
 
@@ -51,6 +54,12 @@ feature 'API Users Page', type: :feature do
       expect(page.has_content?(admins['role'])).to be true
       expect(page.has_content?(admins['daily_requests'])).to be true
       expect(page.has_content?(admins['monthly_requests'])).to be true
+    end
+
+    scenario 'can click to the edit page for the a user' do
+      visit environment_admin_users_path(environment: 'staging')
+      click_link("edit-user-#{admins['id']}")
+      expect(page.current_path).to eq edit_environment_admin_user_path(environment: 'staging', id: admins['id'])
     end
   end
 end
