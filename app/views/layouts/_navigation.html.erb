@@ -52,7 +52,7 @@ http://digitalnz.org/supplejack
               <%= link_to 'API Admin', '#' %>
               <ul class='dropdown menu' data-dropdown-menu>
                 <% APPLICATION_ENVS.reverse.each do |environment| %>
-                  <%= link_to environment.capitalize, environment_admin_users_path(environment, page: 1) %>
+                  <%= link_to environment.capitalize, environment_admin_users_path(environment, page: 1), id: "#{environment}-api-users" %>
                 <% end %>
               </ul>
             </li>
