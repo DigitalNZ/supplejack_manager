@@ -13,7 +13,7 @@ RSpec.feature 'Job Schedules', type: :feature do
   end
 
 
-  context 'one off schedules', js: true do
+  context 'one off schedules' do
     before do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
@@ -33,9 +33,17 @@ RSpec.feature 'Job Schedules', type: :feature do
     let(:parser) { create(:parser, source: source) }
     let(:one_off_schedule) { build(:harvest_schedule, recurrent: false, parser_id: parser.id) }
 
-    scenario 'does some things' do
+    scenario 'displayes one off schedule details' do
       one_off_schedule.id = 1
       visit environment_harvest_schedules_path(environment: 'staging')
+
+       expect(page.has_content?(one_off_schedule.parser.name)).to be true
+       expect(page.has_content?(I18n.l(one_off_schedule.start_time, format: :long))).to be true
+       expect(page.has_content?(one_off_schedule.environment)).to be true
+       expect(page.has_content?(one_off_schedule.mode)).to be true
+       # expect(page.has_content?(one_off_schedule)).to be true
+       # expect(page.has_content?(one_off_schedule)).to be true
+       # expect(page.has_content?(one_off_schedule)).to be true
     end
   end
 end
