@@ -29,7 +29,7 @@ feature 'Manage partners', type: :feature do
   end
 
   scenario 'Update a partner' do
-    click_link 'Partner 1'
+    click_link partners.first.name
 
     fill_in 'partner[name]', with: 'Updated name!!'
 
