@@ -29,9 +29,9 @@ Capybara.register_driver :headless_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
-# Capybara.javascript_driver = :headless_chrome
+Capybara.javascript_driver = :headless_chrome
 # User this to debug tests in a real browser
-Capybara.javascript_driver = :selenium_chrome
+# Capybara.javascript_driver = :selenium_chrome
 
 # Require page objects
 require './spec/page_objects/application_page.rb'
