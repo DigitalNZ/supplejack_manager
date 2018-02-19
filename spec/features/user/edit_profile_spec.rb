@@ -61,11 +61,11 @@ feature 'User change its profile', type: :feature, js: true do
       check 'user[manage_link_check_rules]'
 
       within edit_user_page.manage_permission_select do
-        select 'Partner 1'
+        select partner.name
       end
 
       within edit_user_page.run_permission_select do
-        select 'Partner 1'
+        select partner.name
       end
 
       click_button 'Update User'
