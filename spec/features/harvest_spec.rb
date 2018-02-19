@@ -53,6 +53,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can preview a harvest' do
+    allow_any_instance_of(Previewer).to receive(:create_preview_job) { true }
     click_link 'Preview'
 
     expect(page).to have_text 'Previewing records'
@@ -71,17 +72,46 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can Update a parser' do
-    fill_in 'parser_content', with: "class Hey; p 'hey' end"
-    fill_in 'Message', with: 'Updating Parser'
+    within '.CodeMirror' do
+      current_scope.click
+      field = current_scope.find('textarea', visible: false)
+      field.send_keys 'class Hey; end'
+    end
+
+    fill_in 'parser_message', with: 'Updating Parser'
     click_button 'Update Parser Script'
-    expect(page).to have_link 'Update Parser Script'
+    expect(page).to have_link 'Updating Parser'
   end
 
-  scenario 'A harvest operator can rename a parser'
+  scenario 'A harvest operator can rename a parser' do
+    click_button 'Rename Parser'
+    fill_in 'parser_name', with: 'Parser Name'
+    click_button 'Rename Parser', match: :first
+    expect(page).to have_link 'Parser Name'
+  end
 
-  scenario 'A harvest operator can change the data source of a parser'
+  scenario 'A harvest operator can change the data source of a parser' do
+    click_button('Change Data Source')
+    expect(page).to have_text 'Change source'
+    expect(page).to have_text 'Warning: changing the source of this parser does not affect records that have already been harvested.'
+    expect(page).to have_text 'Contributor'
+    expect(page).to have_text ' Data Source'
+    click_button 'Change source'
+  end
 
-  scenario 'A harvest operator can disable Full & Flush harvest mode'
+  scenario 'A harvest operator can disable Full & Flush harvest mode' do
+    allow(HarvestSchedule).to receive(:update_schedulers_from_environment) { true }
+    click_link 'Disable Full & Flush harvest mode'
+    page.driver.browser.switch_to.alert.accept
+    expect(page).to have_text 'Enable Full & Flush harvest mode'
+  end
 
-  scenario 'A harvest operator can delete a parser script'
+  scenario 'A harvest operator can delete a parser script' do
+    binding.pry
+    allow_any_instance_of(Parser).to receive(:running_jobs?) { false }
+
+    click_button 'Delete Parser Script'
+    expect(page).to have_text 'Delete Parser'
+    expect(page).to have_text 'Are you sure you want to delete this parser bro? You might need it in the future'
+  end
 end
