@@ -7,6 +7,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
+    allow(AbstractJob).to receive(:search).and_return([])
 
     allow(Preview).to receive(:find) { build(:preview, id: 1) }
   end
@@ -107,11 +108,10 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can delete a parser script' do
-    binding.pry
-    allow_any_instance_of(Parser).to receive(:running_jobs?) { false }
-
     click_button 'Delete Parser Script'
     expect(page).to have_text 'Delete Parser'
-    expect(page).to have_text 'Are you sure you want to delete this parser bro? You might need it in the future'
+    expect(page).to have_text "Are you sure that you want to delete the parser: #{parser.name} with version name: new test version? Warning: You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well."
+    expect(page).to have_text 'Delete'
+    expect(page).to have_text 'Cancel'
   end
 end
