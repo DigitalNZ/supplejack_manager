@@ -50,8 +50,11 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
       expect(page.has_content?(abstract_job.user.name))
       expect(page.has_content?(I18n.l(abstract_job.start_time, format: :long)))
       expect(page.has_content?(abstract_job.records_count))
-      expect(page.has_link?(abstract_job.parser.name, parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))).to be true
     end
 
+    scenario 'has links to the parser and the harvest job details' do
+      expect(page.has_link?(abstract_job.parser.name, parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))).to be true
+      expect(page.has_link?('View details', environment_harvest_job_path('staging', id: abstract_job.id))).to be true
+    end
   end
 end
