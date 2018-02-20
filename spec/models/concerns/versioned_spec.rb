@@ -88,7 +88,7 @@ describe Versioned do
 
     context 'invalid parser' do
       it 'doesnt generate a new version when saving fails' do
-        parser2 = build(:parser)
+        parser2 = build(:parser, source: nil)
         expect(parser2.save).to be false
         expect(parser2.versions).to be_empty
       end
