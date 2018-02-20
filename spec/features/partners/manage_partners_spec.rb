@@ -4,7 +4,10 @@ require 'rails_helper'
 feature 'Manage partners', type: :feature do
   let(:all_partners_page) { PartnersPage.new }
   let(:admin_user) { create(:user, :admin) }
-  let!(:partners) { create_list(:partner, 3) }
+  let!(:partners) do
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    create_list(:partner, 3)
+  end
 
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)

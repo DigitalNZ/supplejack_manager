@@ -5,6 +5,7 @@ feature 'Manage sources', type: :feature, js: true do
   let(:all_sources_page) { SourcesPage.new }
   let(:admin_user) { create(:user, :admin) }
   let!(:sources) do
+    allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
     create_list(:source, 3)

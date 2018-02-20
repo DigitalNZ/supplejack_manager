@@ -11,7 +11,7 @@ http://digitalnz.org/supplejack
 <h1 class="float-left"><%= t('snippets.label') %></h1>
 <%= link_to t('snippets.create'), new_snippet_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
-<table>
+<table id="snippets">
   <thead>
     <tr>
       <th><%= t('name') %></th>

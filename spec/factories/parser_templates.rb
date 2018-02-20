@@ -10,7 +10,7 @@
 
 FactoryBot.define do
   factory :parser_template do
-    name 'Copyright'
+    name      { Faker::Name.first_name }
     content 'hello'
     user_id '1'
   end

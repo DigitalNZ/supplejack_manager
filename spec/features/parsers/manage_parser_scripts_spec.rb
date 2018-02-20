@@ -6,6 +6,7 @@ feature 'Manage parser', type: :feature, js: true do
   let(:admin_user) { create(:user, :admin) }
   let!(:parsers) do
     allow_any_instance_of(Source).to receive(:update_apis)
+    allow_any_instance_of(Partner).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
     create_list(:parser, 3)
   end
@@ -33,7 +34,7 @@ feature 'Manage parser', type: :feature, js: true do
     expect(parser_form_page.parser_source_dropdown).not_to have_content(orphan_source.name)
   end
 
-  context 'Create a new source' do
+  context 'Create a new parser script' do
     let(:new_parser) { build(:parser) }
     let(:partner) { Partner.first }
 

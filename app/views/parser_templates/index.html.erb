@@ -11,7 +11,7 @@ http://digitalnz.org/supplejack
 <h1 class="left"><%= t('parser_templates.label') %></h1>
 <%= link_to t('parser_templates.create'), new_parser_template_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
-<table class="twelve">
+<table class="twelve" id="parser-templates">
   <thead>
     <tr>
       <th><%= t('name') %></th>
