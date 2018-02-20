@@ -12,7 +12,7 @@ describe ApplicationHelper do
   describe "#pretty_format" do
 
     let(:raw_data) { { bill: 'bob' }.to_json }
-    let(:parser) do
+    let!(:parser) do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
