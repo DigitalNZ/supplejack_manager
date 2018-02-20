@@ -1,25 +1,20 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'Manage parser', type: :feature, js: true do
-  let(:parser_template_page) { ParserTemplatesPage.new }
-  let(:admin_user) { create(:user, :admin) }
-  let(:new_parser_template) { build(:parser_template) }
+  let(:parser_templates_page) { ParserTemplatesPage.new }
+  let(:admin_user)            { create(:user, :admin)   }
+  let(:new_parser_template)   { build(:parser_template) }
+
   let!(:parser_templates) do
     create_list(:parser_template, 3)
   end
 
   before do
     login_as(admin_user, scope: :user)
-    parser_template_page.load
+    parser_templates_page.load
   end
-
-  scenario 'See all parser templatess' do
-    parser_templates.each do |parser_template|
-      expect(parser_template_page.parser_templates_table).to have_content(parser_template.name)
-    end
-  end
-
 
   scenario 'can create parser template with valid data' do
     click_link 'Create New Parser Template'
