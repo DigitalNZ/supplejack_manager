@@ -8,9 +8,23 @@
 
 FactoryBot.define do
   factory :parser do
-    name      Faker::Company.name
+    name      'NZMuseums'
     strategy  'xml'
     content   'class NZMuseums; end'
     data_type 'record'
+
+    trait :enrichment do
+      content 'class NZMuseums
+        enrichment :test_enrich, priority: -1, required_for_active_record: false do
+          requires :enrich_url do
+            primary[:landing_url].first
+          end
+
+          format :html
+          url "#{requirements[:enrich_url]}"
+          attribute :tag, default: "enrich test potato"
+        end
+      end'
+    end
   end
 end
