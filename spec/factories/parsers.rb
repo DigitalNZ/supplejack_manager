@@ -14,7 +14,7 @@ FactoryBot.define do
     data_type 'record'
 
     trait :enrichment do
-      content 'class NZMuseums
+      content 'class NZMuseums < SupplejackCommon::Xml::Base
         enrichment :test_enrich, priority: -1, required_for_active_record: false do
           requires :enrich_url do
             primary[:landing_url].first
