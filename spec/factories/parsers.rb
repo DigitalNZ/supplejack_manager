@@ -8,12 +8,14 @@
 
 FactoryBot.define do
   factory :parser do
-    name      'NZMuseums'
+    name      { Faker::Name.first_name }
     strategy  'xml'
     content   'class NZMuseums; end'
     data_type 'record'
+    source
 
     trait :enrichment do
+      name    'NZMuseums'
       content 'class NZMuseums < SupplejackCommon::Xml::Base
         enrichment :test_enrich, priority: -1, required_for_active_record: false do
           requires :enrich_url do

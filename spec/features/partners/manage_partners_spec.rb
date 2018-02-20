@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 feature 'Manage partners', type: :feature do
-  let(:all_partners_page) { AllPartnersPage.new }
+  let(:all_partners_page) { PartnersPage.new }
   let(:admin_user) { create(:user, :admin) }
   let!(:partners) { create_list(:partner, 3) }
 
@@ -13,7 +13,9 @@ feature 'Manage partners', type: :feature do
   end
 
   scenario 'See all partners' do
-    expect(all_partners_page.partner_table).to have_content('Partner', count: 3)
+    partners.each do |partner|
+      expect(all_partners_page.partner_table).to have_content(partner.name)
+    end
   end
 
   scenario 'Create a new partner' do
@@ -25,7 +27,10 @@ feature 'Manage partners', type: :feature do
 
     click_button 'Create a new Contributor'
 
-    expect(all_partners_page.partner_table).to have_content('Partner', count: 4)
+    partners.each do |partner|
+      expect(all_partners_page.partner_table).to have_content(partner.name)
+    end
+    expect(all_partners_page.partner_table).to have_content(new_partner.name)
   end
 
   scenario 'Update a partner' do

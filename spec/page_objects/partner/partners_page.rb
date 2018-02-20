@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class AllPartnersPage < ApplicationPage
+class PartnersPage < ApplicationPage
   set_url 'partners/'
 
   element :partner_table, '#partners'
