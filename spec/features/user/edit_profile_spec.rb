@@ -3,6 +3,7 @@ require 'rails_helper'
 
 feature 'User change its profile', type: :feature, js: true do
   let(:edit_user_page) { EditUserPage.new }
+  let(:users_page)     { UsersPage.new }
   let(:user) { create(:user) }
   let(:admin_user) { create(:user, :admin, email: 'admin@test.com') }
 
@@ -77,10 +78,10 @@ feature 'User change its profile', type: :feature, js: true do
       expect(admin_user.manage_link_check_rules).to be_truthy
       expect(admin_user.manage_parsers).to be_truthy
 
-      expect(admin_user.manage_partners).to eq [partner.id]
-      expect(admin_user.run_harvest_partners).to eq [partner.id]
+      expect(admin_user.manage_partners).to eq [partner.id.to_s]
+      expect(admin_user.run_harvest_partners).to eq [partner.id.to_s]
 
-      expect(login_page).to have_flash_success
+      expect(users_page).to have_flash_success
     end
   end
 end
