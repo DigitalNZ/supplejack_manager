@@ -5,6 +5,7 @@ feature 'Manage sources', type: :feature, js: true do
   let(:all_sources_page) { SourcesPage.new }
   let(:admin_user) { create(:user, :admin) }
   let!(:sources) do
+    allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
     create_list(:source, 3)
@@ -16,7 +17,9 @@ feature 'Manage sources', type: :feature, js: true do
   end
 
   scenario 'See all sources' do
-    expect(all_sources_page.source_table).to have_content('A Source')
+    sources.each do |source|
+      expect(all_sources_page.source_table).to have_content(source.name)
+    end
   end
 
   context 'Create a new source' do
@@ -30,7 +33,10 @@ feature 'Manage sources', type: :feature, js: true do
 
       click_button 'Create Data Source'
 
-      expect(all_sources_page.source_table).to have_content('A Source', count: 4)
+      sources.each do |source|
+        expect(all_sources_page.source_table).to have_content(source.name)
+      end
+      expect(all_sources_page.source_table).to have_content(new_source.name)
     end
   end
 

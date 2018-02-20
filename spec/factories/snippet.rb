@@ -8,7 +8,7 @@
 
 FactoryBot.define do
   factory :snippet do
-    name      'Copyright'
+    name      { Faker::Name.first_name }
     content   'module Copyright; end'
   end
 end
