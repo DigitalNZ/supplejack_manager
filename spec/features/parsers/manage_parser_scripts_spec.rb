@@ -37,6 +37,7 @@ feature 'Manage parser', type: :feature, js: true do
   context 'Create a new parser script' do
     let(:new_parser) { build(:parser) }
     let(:partner) { Partner.first }
+    let!(:parser_template) { create(:parser_template) }
 
     before do
       click_link 'New Parser Script'
@@ -76,6 +77,15 @@ feature 'Manage parser', type: :feature, js: true do
       click_button 'Create Parser Script'
 
       expect(page).to have_content("class #{new_parser.name} < SupplejackCommon::Oai::Base")
+    end
+
+    scenario 'create parser from a template' do
+      select 'JSON'
+      select parser_template.name
+
+      click_button 'Create Parser Script'
+
+      expect(page).to have_content(parser_template.content)
     end
   end
 end
