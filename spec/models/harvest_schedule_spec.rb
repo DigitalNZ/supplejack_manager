@@ -11,7 +11,12 @@ require 'rails_helper'
 describe HarvestSchedule do
 
   let(:schedule) { HarvestSchedule.new(recurrent: true) }
-  let(:parser) { build(:parser) }
+  let(:parser) do
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
+    build(:parser)
+  end
 
   context "class methods" do
     describe ".find_from_environment" do

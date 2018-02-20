@@ -9,7 +9,12 @@
 require 'rails_helper'
 
 describe ParsersHelper do
-  let(:parser) { build(:parser) }
+  let(:parser) do
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
+    build(:parser)
+  end
   let(:version) { build(:version, versionable: parser, tags: ['production'])}
 
   describe "#version_tags" do
