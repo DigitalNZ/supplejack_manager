@@ -13,7 +13,12 @@ describe HarvestJob do
   let(:job)  { HarvestJob.new(user_id: '1234567', parser_id: '7654321') }
 
   describe '.from_parser' do
-    let(:parser) { build(:parser, id: 1234) }
+    let(:parser) do
+      allow_any_instance_of(Partner).to receive(:update_apis)
+      allow_any_instance_of(Source).to receive(:update_apis)
+      allow(LinkCheckRule).to receive(:create)
+      build(:parser, id: 1234)
+    end
 
     it 'initializes a new HarvestJob' do
       job = HarvestJob.from_parser(parser)
