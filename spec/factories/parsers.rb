@@ -10,7 +10,7 @@ FactoryBot.define do
   factory :parser do
     name      'NZMuseums'
     strategy  'xml'
-    content   'class NZMuseums; end'
+    content   'class NZMuseums < SupplejackCommon::Xml::Base; end'
     data_type 'record'
 
     trait :enrichment do
