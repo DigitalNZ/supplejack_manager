@@ -41,8 +41,6 @@ RSpec.feature 'Enrichment Spec', js: true do
 
     expect(page).to have_text 'Record'
 
-    expect(page).to have_text 'Select the enrichment you would like to run'
-    expect(page).to have_text 'Test Enrich'
     expect(page).to have_button 'Start Enrichment'
   end
 end
