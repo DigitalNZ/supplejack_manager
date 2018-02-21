@@ -120,7 +120,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(page.has_content?(I18n.l(schedule1.start_time, format: :first_run_at))).to be true
       expect(page.has_content?(schedule1.environment)).to be true
       expect(page.has_content?(schedule1.mode)).to be true
-      expect(page.has_content?(I18n.l(schedule1.last_run_at, format: :first_run_at))).to be true
+      expect(page.has_content?(I18n.l(schedule1.start_time, format: :first_run_at))).to be true
       expect(page.has_content?(I18n.l(schedule1.next_run_at, format: :short))).to be true
     end
 
