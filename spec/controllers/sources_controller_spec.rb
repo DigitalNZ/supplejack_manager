@@ -101,6 +101,8 @@ describe SourcesController do
       it 'updates the requested source' do
         source = Source.create! valid_attributes
         put :update, params: { id: source.to_param, source: { name: 'updated' }}
+
+        expect(source.reload.name).to eq 'updated'
       end
 
       it "assigns the requested source as @source" do
