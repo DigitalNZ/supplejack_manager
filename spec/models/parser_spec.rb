@@ -6,11 +6,11 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Parser do
   let(:source) { create(:source) }
-  let(:parser) { build(:parser, source_id: source.id) }
+  let(:parser) { create(:parser, source_id: source.id, name: 'NZ Museums') }
 
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
@@ -20,7 +20,7 @@ describe Parser do
 
   context "validations" do
     it "is valid with valid attributes" do
-      expect(parser).to be_valid
+      expect(build(:parser)).to be_valid
     end
 
     it "should not be valid with a invalid strategy" do
@@ -39,7 +39,7 @@ describe Parser do
     end
 
     it "should not be valid with a duplicated name" do
-      parser2 = build(:parser, name: 'NZ Museums')
+      parser2 = build(:parser, name: parser.name)
       expect(parser2).not_to be_valid
     end
   end
@@ -125,14 +125,10 @@ describe Parser do
     let(:parser_class) { double(:parser_class, enrichment_definitions: {ndha_rights: "Hi"} )}
     let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
 
-    before(:each) do
-      allow(parser).to receive(:loader) { loader }
-    end
-
     context 'when version is not passed' do
       it "content is the last content which is set in the Parser itself" do
         parser.enrichment_definitions('staging')
-        expect(parser.content).to eq 'class NZMuseums; end'
+        expect(parser.content).to eq 'class NZMuseums < SupplejackCommon::Xml::Base; end'
       end
 
       it "returns the parser enrichment definitions" do
@@ -174,7 +170,7 @@ describe Parser do
 
       it "parser has right content from the version" do
         parser.enrichment_definitions("staging", version)
-        expect(parser.content).to eq "default: \\\"Research papers for 1\\\"\\r\\n\\t  attributes :display_collection, :primary_collection,   default: \\\"Massey Research Online"
+        expect(parser.content).to eq "class NZMuseums; end"
       end
 
       it "returns the parser enrichment definitions" do
@@ -233,10 +229,6 @@ describe Parser do
   describe "#valid_parser?" do
     it "should return nil" do
       expect(parser.error).to be nil
-    end
-
-    it "should return true" do
-      expect(parser.valid_parser?('staging')).to be true
     end
 
     it "returns false if not allowed" do

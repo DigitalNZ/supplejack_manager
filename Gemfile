@@ -70,17 +70,20 @@ end
 group :development, :test do
   gem 'pry-byebug'
   gem 'faker'
-  gem 'rspec-rails', '>= 2.12.2'
+  gem 'rspec-rails', '>= 3.7.2'
   gem 'factory_bot_rails'
 end
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'capybara', '>= 2.17.0'
+  gem 'capybara-screenshot'
+  gem 'capybara-selenium'
+  gem 'chromedriver-helper'
   gem 'database_cleaner', '>= 1.3.0'
-  gem 'cucumber-rails', '>= 1.4.0', require: false
   gem 'launchy', '>= 2.1.2'
-  gem 'capybara', '>= 2.0.1'
+  gem 'simplecov', require: false
+  gem 'site_prism'
   gem 'timecop'
-  gem 'webmock'
   gem 'vcr'
+  gem 'webmock'
 end

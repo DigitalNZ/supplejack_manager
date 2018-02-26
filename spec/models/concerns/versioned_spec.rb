@@ -6,7 +6,7 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Versioned do
   before do
@@ -88,7 +88,7 @@ describe Versioned do
 
     context 'invalid parser' do
       it 'doesnt generate a new version when saving fails' do
-        parser2 = build(:parser)
+        parser2 = build(:parser, source: nil)
         expect(parser2.save).to be false
         expect(parser2.versions).to be_empty
       end

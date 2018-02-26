@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe EnvironmentHelpers do
   let(:env_vars) { APPLICATION_ENVIRONMENT_VARIABLES }

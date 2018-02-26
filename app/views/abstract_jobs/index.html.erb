@@ -71,9 +71,9 @@ http://digitalnz.org/supplejack
 
         <td>
           <% if abstract_job._type == "HarvestJob" %>
-            <%= link_to t("harvest_jobs.view_details"), environment_harvest_job_path(abstract_job.environment, abstract_job) %>
+            <%= link_to t("harvest_jobs.view_details"), environment_harvest_job_path(abstract_job.environment, id: abstract_job.id) %>
           <% elsif abstract_job._type == "EnrichmentJob" %>
-            <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, abstract_job) %>
+            <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, id: abstract_job.id) %>
           <% end %>
         </td>
       </tr>

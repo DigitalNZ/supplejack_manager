@@ -60,6 +60,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :active, :role, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules, :manage_partners, :run_harvest_partners)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :active, :role, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules, manage_partners: [], run_harvest_partners: [])
   end
 end

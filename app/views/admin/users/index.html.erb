@@ -27,7 +27,7 @@
         <td><%= user['daily_requests'] %></td>
         <td><%= user['monthly_requests'] %></td>
         <td>
-          <%= link_to user['max_requests'], edit_environment_admin_user_path(environment: params[:environment], id: user['id']) %>
+          <%= link_to user['max_requests'], edit_environment_admin_user_path(environment: params[:environment], id: user['id']), id: "edit-user-#{user['id']}"  %>
         </td>
       </tr>
     <% end %>

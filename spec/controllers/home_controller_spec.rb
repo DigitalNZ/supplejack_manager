@@ -6,9 +6,16 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe HomeController do
+  let!(:parsers) do
+    allow_any_instance_of(Partner).to receive(:update_apis)
+    allow_any_instance_of(Source).to receive(:update_apis)
+    allow(LinkCheckRule).to receive(:create)
+    [build(:parser)]
+  end
+
   before(:each) do
     sign_in create(:user)
   end
@@ -95,8 +102,6 @@ describe HomeController do
     end
 
     context "recently edited parsers" do
-      let(:parsers) { [build(:parser)] }
-
       it 'sets the list of recently edited parsers' do
         allow(Parser).to receive_message_chain(:desc, :limit) { parsers }
         get :index

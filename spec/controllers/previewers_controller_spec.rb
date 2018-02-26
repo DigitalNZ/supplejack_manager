@@ -9,7 +9,7 @@
 # the Department of Internal Affairs.
 # http://digitalnz.org/supplejack
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe PreviewersController do
   before do
