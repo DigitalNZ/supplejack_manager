@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe PreviewsController do
   let(:preview) { build(:preview) }

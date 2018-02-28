@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Admin::User, type: :model do
   let(:admin_user) { Admin::User.new('development') }

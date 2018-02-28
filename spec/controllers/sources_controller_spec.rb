@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe SourcesController do
   let(:partner) { create(:partner) }
@@ -74,13 +74,11 @@ describe SourcesController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved source as @source" do
-        allow_any_instance_of(Source).to receive(:save).and_return(false)
         post :create, params: { source: { name: '' }}
         expect(assigns(:source)).to be_a_new(Source)
       end
 
       it "re-renders the 'new' template" do
-        allow_any_instance_of(Source).to receive(:save).and_return(false)
         post :create, params: { source: { name: '' } }
         expect(response).to render_template('new')
       end
@@ -95,8 +93,9 @@ describe SourcesController do
     describe 'with valid params' do
       it 'updates the requested source' do
         source = Source.create! valid_attributes
-        expect_any_instance_of(Source).to receive(:update_attributes)
         put :update, params: { id: source.to_param, source: { name: 'updated' }}
+
+        expect(source.reload.name).to eq 'updated'
       end
 
       it "assigns the requested source as @source" do
@@ -115,14 +114,12 @@ describe SourcesController do
     describe "with invalid params" do
       it "assigns the source as @source" do
         source = Source.create! valid_attributes
-        allow_any_instance_of(Source).to receive(:save).and_return(false)
         put :update, params: { id: source.to_param, source: { name: '' } }
         expect(assigns(:source)).to eq(source)
       end
 
       it "re-renders the 'edit' template" do
         source = Source.create! valid_attributes
-        allow_any_instance_of(Source).to receive(:save).and_return(false)
         put :update, params: { id: source.to_param, source: { name: '' }}
         expect(response).to render_template('edit')
       end

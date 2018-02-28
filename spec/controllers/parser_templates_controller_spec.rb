@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe ParserTemplatesController do
   let(:parser_template) { create(:parser_template) }

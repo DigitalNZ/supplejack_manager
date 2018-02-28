@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
   let(:user) { create(:user, :admin, email: 'info@boost.co.nz') }

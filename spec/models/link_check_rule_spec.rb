@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'rails_helper'
 
 describe LinkCheckRule do
 	let(:link_check_rule) { LinkCheckRule.new }

@@ -81,3 +81,4 @@ id_rsa
 /harvester-manager.sublime-workspace
 /config/initializers/env_variables.rb
 
+spec/examples.txt

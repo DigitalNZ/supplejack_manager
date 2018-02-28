@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe CollectionStatistics do
 	let!(:stats_obj_1) { build(:collection_statistics, day: Date.today, suppressed_count: 2, activated_count: 3, deleted_count: 3) }
@@ -21,14 +21,13 @@ describe CollectionStatistics do
 
 	describe "source" do
 
-		let(:collection_statistics) { CollectionStatistics.new }
+		let(:collection_statistics) { CollectionStatistics.new(source_id: 'source_id') }
 		let(:source) { create(:source) }
 
 		before do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
-      allow(collection_statistics).to receive(:source_id) { 'source_id' }
 		end
 
 		it "shound find the source with the collection statistics source id" do

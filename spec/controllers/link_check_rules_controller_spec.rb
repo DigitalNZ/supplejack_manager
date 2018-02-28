@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe LinkCheckRulesController do
   let(:link_check_rule) { build(:link_check_rule) }

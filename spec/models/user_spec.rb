@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
   let(:user) { build(:user, name: 'Federico Gonzalez') }

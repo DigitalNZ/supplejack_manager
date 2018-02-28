@@ -12,7 +12,7 @@ http://digitalnz.org/supplejack
 
 <%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button float-right #{ can_show_button(:create, HarvestSchedule) }" %>
 
-<%= form_tag update_all_environment_harvest_schedules_path, method: 'put' do %>
+<%= form_tag update_all_environment_harvest_schedules_path, method: 'put', id: 'update-all-jobs' do %>
   <%= hidden_field_tag 'harvest_schedule[status]', (@active_jobs ? 'stopped' : 'active') %>
   <%= submit_tag (@active_jobs ? 'Pause All' : 'Resume all'), class: 'button alert float-right' %>
 <% end %>
@@ -51,11 +51,11 @@ http://digitalnz.org/supplejack
             <td><%= schedule.mode.try(:titleize) %></td>
             <td>
               <% if can? :update, schedule %>
-                <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], schedule) %>
+                <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], id: schedule.id) %>
                 <br />
-                <%= link_to t("delete"), harvest_schedule_path(schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+                <%= link_to t("delete"), harvest_schedule_path(id: schedule.id), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
                 <br />
-                <%= form_tag harvest_schedule_path(schedule), method: 'put' do %>
+                <%= form_tag harvest_schedule_path(id: schedule.id), method: 'put' do %>
                   <%= hidden_field_tag 'harvest_schedule[status]', pause_resume_value_for(schedule) %>
                   <%= submit_tag pause_resume_class_for(schedule).titleize, class: pause_resume_class_for(schedule) %>
                 <% end %>
@@ -127,11 +127,11 @@ http://digitalnz.org/supplejack
           <% end %>
           <td>
             <% if can? :update, schedule %>
-              <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], schedule) %>
+              <%= link_to t("edit"), edit_environment_harvest_schedule_path(params[:environment], id: schedule.id) %>
               <br />
-              <%= link_to t("delete"), harvest_schedule_path(schedule), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
+              <%= link_to t("delete"), harvest_schedule_path(id: schedule.id), method: :delete, confirm: t("harvest_schedules.confirm_delete") %>
               <br />
-                <%= form_tag harvest_schedule_path(schedule), method: 'put' do %>
+                <%= form_tag harvest_schedule_path(id: schedule.id), method: 'put' do %>
                   <%= hidden_field_tag 'harvest_schedule[status]', pause_resume_value_for(schedule) %>
                   <%= submit_tag pause_resume_class_for(schedule).titleize, class: pause_resume_class_for(schedule) %>
                 <% end %>

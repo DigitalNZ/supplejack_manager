@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe UsersController do
   let(:user)       { create(:user, :admin, email: 'email@example.com') }

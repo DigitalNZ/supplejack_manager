@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'rails_helper'
 
 describe HarvestSchedulesHelper do
   let(:harvest_schedule) { build(:harvest_schedule,

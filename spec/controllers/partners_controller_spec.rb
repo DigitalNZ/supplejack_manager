@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe PartnersController do
   let(:partners) { create_list(:partner, 3) }

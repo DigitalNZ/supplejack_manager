@@ -1,10 +1,10 @@
-<%#  
+<%#
 The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
+and is licensed under the GNU General Public License, version 3. Some components are
+third party components that are licensed under the MIT license or otherwise publicly available.
+See https://github.com/DigitalNZ/supplejack_manager for details.
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
+Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs.
 http://digitalnz.org/supplejack
 %>
 
@@ -32,7 +32,7 @@ http://digitalnz.org/supplejack
           <td><%= parser.strategy %></td>
           <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
           <td><%= link_to parser.source.name, edit_source_path(parser.source) %></td>
-          <td><%= parser.versions.last.try(:created_at).try(:localtime).to_formatted_s(:long) %></td>
+          <td><%= parser.versions.last.try(:created_at).try(:localtime)&.to_formatted_s(:long) %></td>
           <td><%= parser.last_edited_by %></td>
           <td><%= parser.data_type %></td>
         </tr>
@@ -42,7 +42,7 @@ http://digitalnz.org/supplejack
           <td><%= parser.strategy %></td>
           <td><%= parser.source.partner.name %></td>
           <td><%= parser.source.name %></td>
-          <td><%= parser.versions.last.try(:created_at).try(:localtime.to_formatted_s(:long)) %></td>
+          <td><%= parser.versions.last.try(:created_at).try(:localtime)&.to_formatted_s(:long) %></td>
           <td><%= parser.last_edited_by %></td>
           <td><%= parser.data_type %></td>
         </tr>

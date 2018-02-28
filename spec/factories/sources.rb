@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :source do
-    sequence(:name) {|n| "source #{n}" }
+    sequence(:name) {|n| "A Source #{n}" }
     sequence(:source_id) {|n| "source_#{n}"}
     partner
   end

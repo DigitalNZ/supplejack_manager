@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe HarvestJobsController do
   let(:job) { build(:harvest_job) }

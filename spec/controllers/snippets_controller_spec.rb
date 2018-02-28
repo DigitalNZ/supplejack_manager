@@ -1,5 +1,5 @@
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe SnippetsController do
   let(:snippet) { create(:snippet) }
@@ -22,33 +22,33 @@ describe SnippetsController do
 
   describe 'GET new' do
     it 'initializes a new snippet' do
-      Snippet.should_receive(:new) { snippet }
+      expect(Snippet).to receive(:new) { snippet }
       get :new
-      assigns(:snippet).should eq snippet
+      expect(assigns(:snippet)).to eq snippet
     end
   end
 
   describe 'GET edit' do
     it 'finds an existing snippet' do
-      Snippet.should_receive(:find).with('1234') { snippet }
+      expect(Snippet).to receive(:find).with('1234') { snippet }
       get :edit, params: { id: '1234' }
-      assigns(:snippet).should eq snippet
+      expect(assigns(:snippet)).to eq snippet
     end
   end
 
   describe 'GET create' do
     before do
-      Snippet.stub(:new) { snippet }
-      snippet.stub(:save) { true }
+      allow(Snippet).to receive(:new) { snippet }
+      allow(snippet).to receive(:save) { true }
     end
 
     it 'initializes a new snippet' do
-      Snippet.should_receive(:new).with({'name' => 'Copyright'}) { snippet }
+      expect(Snippet).to receive(:new).with({'name' => 'Copyright'}) { snippet }
       post :create, params: { snippet: { name: 'Copyright' } }
     end
 
     it 'saves the snippet' do
-      snippet.should_receive(:save)
+      expect(snippet).to receive(:save)
       post :create, params: { snippet: {name: 'Copyright'} }
     end
 
@@ -60,26 +60,26 @@ describe SnippetsController do
     end
 
     context 'invalid snippet' do
-      before { snippet.stub(:save) { false }}
+      before { allow(snippet).to receive(:save) { false }}
 
       it 'renders the edit action' do
         post :create, params: { snippet: { name: 'Copyright' } }
-        response.should render_template(:new)
+        expect(response).to render_template(:new)
       end
     end
   end
 
   describe 'GET update' do
     before do
-      Snippet.stub(:find) { snippet }
-      snippet.stub(:update_attributes) { true }
+      allow(Snippet).to receive(:find) { snippet }
+      allow(snippet).to receive(:update_attributes) { true }
     end
 
     it 'updates the snippet attributes' do
-      snippet.should_receive(:update_attributes).with({ 'name' => 'Copyright',
-                                                        'message' => 'update cho self',
-                                                        'content': 'I am a snippet',
-                                                        'environment': 'test'})
+      expect(snippet).to receive(:update_attributes).with({ 'name' => 'Copyright',
+                                                            'message' => 'update cho self',
+                                                            'content': 'I am a snippet',
+                                                            'environment': 'test'})
       put :update, params: { id: '1234', snippet: { name: 'Copyright',
                                                     message: 'update cho self',
                                                     content: 'I am a snippet',
@@ -96,22 +96,22 @@ describe SnippetsController do
 
   describe 'DELETE destroy' do
     it 'destroys the snippet' do
-      Snippet.should_receive(:find).with(snippet.id) { snippet }
-      snippet.should_receive(:destroy)
+      expect(Snippet).to receive(:find).with(snippet.id) { snippet }
+      expect(snippet).to receive(:destroy)
       delete :destroy, params: { id: snippet.id }
-      response.should redirect_to snippets_path
+      expect(response).to redirect_to snippets_path
     end
   end
 
   describe 'GET current_version' do
     before do
-      Snippet.stub(:find_by_name) { snippet }
+      allow(Snippet).to receive(:find_by_name) { snippet }
     end
 
     it 'should find the current version of the snippet' do
-      Snippet.should_receive(:find_by_name).with('Copyright', 'staging') { snippet }
+      expect(Snippet).to receive(:find_by_name).with('Copyright', 'staging') { snippet }
       get :current_version, params: { name: 'Copyright', environment: :staging, format: :json }
-      assigns(:snippet).should eq snippet
+      expect(assigns(:snippet)).to eq snippet
     end
   end
 end

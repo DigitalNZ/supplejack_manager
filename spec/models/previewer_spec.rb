@@ -6,15 +6,13 @@
 # Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
 # http://digitalnz.org/supplejack
 
-require "spec_helper"
+require "rails_helper"
 
 describe Previewer do
 
   let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < SupplejackCommon::Json::Base; end") }
   let(:previewer) { Previewer.new(parser, "Data", "user123") }
   let(:preview) { mock_model(Preview) }
-
-  before { allow(previewer).to receive(:preview) { preview } }
 
   describe "#create_preview_job" do
 
