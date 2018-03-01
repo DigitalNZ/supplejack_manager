@@ -1,12 +1,4 @@
-<%#  
-The majority of The Supplejack Manager code is Crown copyright (C) 2014, New Zealand Government,
-and is licensed under the GNU General Public License, version 3. Some components are 
-third party components that are licensed under the MIT license or otherwise publicly available. 
-See https://github.com/DigitalNZ/supplejack_manager for details. 
 
-Supplejack was created by DigitalNZ at the National Library of NZ and the Department of Internal Affairs. 
-http://digitalnz.org/supplejack
-%>
 
 <h1 class="left">Link Check Rules - <%= params[:environment].capitalize%></h1>
 <%= link_to "New link check rule", new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right #{can_show_button(:create, LinkCheckRule)}" %>
