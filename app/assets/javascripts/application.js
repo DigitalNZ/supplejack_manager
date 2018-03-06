@@ -40,4 +40,6 @@
 //= require admin/users
 //= require collection_statistics
 
-$(function(){ $(document).foundation(); });
+$(function() {
+  $(document).foundation();
+});
