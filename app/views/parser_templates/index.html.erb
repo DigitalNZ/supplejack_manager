@@ -1,7 +1,7 @@
 <h1><%= t('parser_templates.label') %></h1>
 <%= link_to t('parser_templates.create'), new_parser_template_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
-<table class="twelve" id="parser-templates">
+<table id="parser-templates">
   <thead>
     <tr>
       <th><%= t('name') %></th>
