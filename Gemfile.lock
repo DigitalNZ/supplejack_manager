@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 8ca5ebf56e321a6f26eb288ead2c1e03ecfb70a0
+  revision: 9a10205fc9b126d1cb25ebd249fdfa95ddce58ee
+  branch: oliver/restful-enrichments
   specs:
     supplejack_common (0.0.2)
       actionpack
