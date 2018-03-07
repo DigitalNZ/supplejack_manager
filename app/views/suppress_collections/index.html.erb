@@ -35,7 +35,7 @@
     <tr>
       <td><%= source['name'] %></td>
       <td><%= source['status_updated_by'] %></td>
-      <td><%= l source['status_updated_at'].to_datetime, format: :long %></td>
+      <td><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%m/%d/%Y %I:%M%p') %></td>
       <% if can? :update, :suppress_collection %>
         <td>
           <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
@@ -64,7 +64,7 @@
     <tr>
       <td><%= source['name'] %></td>
       <td><%= source['status_updated_by'] %></td>
-      <td><%= l source['status_updated_at'].to_datetime, format: :long %></td>
+      <td><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%m/%d/%Y %I:%M%p') %></td>
       <td><%= source['status'] %></td>
     </tr>
     <% end %>
