@@ -46,6 +46,8 @@ en:
       last_edited: "Last Edited"
       last_editor: "Last Editor"
       data_type: "Parser Type"
+      last_updated_by: 'Last Updated By'
+      last_updated: 'Last Updated'
     scheduled_jobs:
       label: "Next Scheduled Jobs"
       view_environment_schedule: "%{environment} Job Schedule"

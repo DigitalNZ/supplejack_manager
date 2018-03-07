@@ -1,12 +1,14 @@
 
 
-<h1 class="float-left"><%= t('snippets.label') %></h1>
+<h1><%= t('snippets.label') %></h1>
 <%= link_to t('snippets.create'), new_snippet_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
 <table id="snippets">
   <thead>
     <tr>
       <th><%= t('name') %></th>
+      <th><%= t('last_updated_by') %></th>
+      <th><%= t('last_updated') %></th>
     </tr>
   </thead>
 
@@ -19,7 +21,14 @@
       <% else %>
         <td><%= link_to snippet.name, snippet_path(snippet) %></td>
       <% end %>
-
+      <td>
+        <%= snippet.last_edited_by %>
+      </td>
+      <td>
+        <%=
+          snippet.versions.last.try(:created_at).try(:localtime)&.to_formatted_s(:long)
+        %>
+      </td>
     </tr>
     <% end %>
   </tbody>

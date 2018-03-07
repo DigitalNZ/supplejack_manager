@@ -1,15 +1,14 @@
-
-
-<h1 class="left"><%= t('parser_templates.label') %></h1>
+<h1><%= t('parser_templates.label') %></h1>
 <%= link_to t('parser_templates.create'), new_parser_template_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
-<table class="twelve" id="parser-templates">
+<table id="parser-templates">
   <thead>
     <tr>
       <th><%= t('name') %></th>
+      <th><%= t('last_updated_by') %></th>
+      <th><%= t('last_updated') %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @parser_templates.each do |parser_template| %>
     <tr>
@@ -18,6 +17,14 @@
       <% else %>
         <td><%= link_to parser_template.name, parser_template_path(parser_template) %></td>
       <% end %>
+      <td>
+        <%= parser_template.try(:user)&.name %>
+      </td>
+      <td>
+        <%=
+          parser_template.try(:created_at).try(:localtime)&.to_formatted_s(:long)
+        %>
+      </td>
     </tr>
     <% end %>
   </tbody>
