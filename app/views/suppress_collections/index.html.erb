@@ -23,6 +23,8 @@
   <thead>
     <tr>
       <th><%= t('link_checker.suppress_collections.collection_title') %></th>
+      <th><%= t('link_checker.suppress_collections.status_updated_by') %></th>
+      <th><%= t('link_checker.suppress_collections.status_updated_at') %></th>
       <% if can? :update, :suppress_collection %>
         <th><%= t('link_checker.suppress_collections.activate_title') %></th>
       <% end %>
@@ -31,7 +33,9 @@
   <tbody>
     <% @blacklisted_sources.each do |source| %>
     <tr>
-      <td><%= source["name"] %></td>
+      <td><%= source['name'] %></td>
+      <td><%= source['status_updated_by'] %></td>
+      <td><%= l source['status_updated_at'].to_datetime, format: :long %></td>
       <% if can? :update, :suppress_collection %>
         <td>
           <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
@@ -40,6 +44,28 @@
           <% end %>
         </td>
       <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4><%= t('link_checker.suppress_collections.latest_activated_collections') %></h4>
+<table>
+  <thead>
+    <tr>
+      <th><%= t('link_checker.suppress_collections.collection_title') %></th>
+      <th><%= t('link_checker.suppress_collections.status_updated_by') %></th>
+      <th><%= t('link_checker.suppress_collections.status_updated_at') %></th>
+      <th><%= t('link_checker.suppress_collections.status') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @top_10_sources.each do |source| %>
+    <tr>
+      <td><%= source['name'] %></td>
+      <td><%= source['status_updated_by'] %></td>
+      <td><%= l source['status_updated_at'].to_datetime, format: :long %></td>
+      <td><%= source['status'] %></td>
     </tr>
     <% end %>
   </tbody>
