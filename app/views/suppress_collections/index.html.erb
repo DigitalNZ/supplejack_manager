@@ -49,23 +49,16 @@
   </tbody>
 </table>
 
+<br >
+<hr>
+<br >
 <h4><%= t('link_checker.suppress_collections.latest_activated_collections') %></h4>
 <table>
-  <thead>
-    <tr>
-      <th><%= t('link_checker.suppress_collections.collection_title') %></th>
-      <th><%= t('link_checker.suppress_collections.status_updated_by') %></th>
-      <th><%= t('link_checker.suppress_collections.status_updated_at') %></th>
-      <th><%= t('link_checker.suppress_collections.status') %></th>
-    </tr>
-  </thead>
   <tbody>
     <% @top_10_sources.each do |source| %>
     <tr>
-      <td><%= source['name'] %></td>
-      <td><%= source['status_updated_by'] %></td>
-      <td><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%m/%d/%Y %I:%M%p') %></td>
-      <td><%= source['status'] %></td>
+      <td>
+        <strong><%= source['name'] %></strong> was activated by <strong><%= source['status_updated_by'] %></strong> at <strong><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%m/%d/%Y %I:%M%p') %></strong></td>
     </tr>
     <% end %>
   </tbody>
