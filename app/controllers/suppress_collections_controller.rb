@@ -5,9 +5,24 @@ class SuppressCollectionsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @blacklisted_response = RestClient.get("#{fetch_env_vars['API_HOST']}/harvester/sources", { params: {:"source[status]" => "suppressed", api_key: fetch_env_vars['HARVESTER_API_KEY'] } })
+    sources_url = "#{fetch_env_vars['API_HOST']}/harvester/sources"
+    blacklisted_request_options = {
+      params: {
+        :'source[status]' => 'suppressed',
+        api_key: fetch_env_vars['HARVESTER_API_KEY']
+      }
+    }
+    @blacklisted_response = RestClient.get(sources_url, blacklisted_request_options)
     @blacklisted_sources = JSON.parse(@blacklisted_response)
-    @top_10_response = RestClient.get("#{fetch_env_vars['API_HOST']}/harvester/sources", { params: {:"source[status]" => "active", limit: 10, order_by: 'status_updated_at', api_key: fetch_env_vars['HARVESTER_API_KEY'] } })
+
+    top_10_request_options = {
+      params: {
+        :'source[status]' => 'active',
+        limit: 10, order_by: 'status_updated_at',
+        api_key: fetch_env_vars['HARVESTER_API_KEY']
+      }
+    }
+    @top_10_response = RestClient.get(sources_url, top_10_request_options)
     @top_10_sources = JSON.parse(@top_10_response)
   end
 
