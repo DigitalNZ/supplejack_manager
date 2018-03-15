@@ -19,5 +19,9 @@ FactoryBot.define do
     created_at Time.zone.now
     enrichment 'enrichment_code'
     record_id 1
+
+    trait :stopped do
+      status 'stopped'
+    end
   end
 end
