@@ -28,6 +28,7 @@ class EnrichmentJobsController < ApplicationController
   def enrichment_job_params
     params.require(:enrichment_job).permit(:parser_id, :version_id,
                                            :user_id, :environment,
-                                           :record_id, :enrichment)
+                                           :record_id, :enrichment,
+                                           :status)
   end
 end
