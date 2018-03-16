@@ -9,21 +9,17 @@ describe SuppressCollectionsController do
   end
 
   describe "GET 'index'" do
-    it "should be successful" do
+    it "should call the harvest sources end point to retrieve last 10 updated sources and suppressed" do
       expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
+      expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "active", limit: 10, order_by: 'status_updated_at', api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       get :index, params: { environment: "development" }
       expect(response).to be_success
-    end
-
-    it "should request the blacklist collection and assign it to response" do
-      expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
-      get :index, params: { environment: "development" }
     end
   end
 
   describe "PUT 'update'" do
-    it "should update the source in the API to active" do
-      expect(RestClient).to receive(:put).with("#{ENV['API_HOST']}/harvester/sources/abc123", source: {status: 'active'}, api_key: ENV['HARVESTER_API_KEY'])
+    it "should update the source in the API to active and set status_updated_by" do
+      expect(RestClient).to receive(:put).with("#{ENV['API_HOST']}/harvester/sources/abc123", source: {status: 'active', status_updated_by: 'John Doe'}, api_key: ENV['HARVESTER_API_KEY'])
       put :update, params: { id: 'abc123', environment: "development", status: 'active' }
     end
 
