@@ -5,7 +5,7 @@ class SnippetsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @snippets = Snippet.all
+    @snippets = Snippet.latest
   end
 
   def new; end

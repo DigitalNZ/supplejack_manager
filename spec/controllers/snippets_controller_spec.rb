@@ -14,7 +14,7 @@ describe SnippetsController do
 
   describe 'GET index' do
     it 'should assign all @snippets' do
-      expect(Snippet).to receive(:all) { [snippet] }
+      expect(Snippet).to receive(:latest) { [snippet] }
       get :index
       expect(assigns(:snippets)).to eq [snippet]
     end
