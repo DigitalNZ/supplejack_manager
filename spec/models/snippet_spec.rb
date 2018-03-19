@@ -1,6 +1,7 @@
 require "rails_helper"
 
 describe Snippet do
+  it_behaves_like 'an ordered collection'
 
   describe ".find_by_name" do
 
@@ -39,18 +40,5 @@ describe Snippet do
       end
     end
 
-  end
-
-  context 'scopes' do
-
-    describe '#latest' do
-      it 'orders all Snippets by #updated_at attribute' do
-        snippet_2 = create(:snippet, updated_at: 2.day.ago)
-        snippet_3 = create(:snippet, updated_at: 3.day.ago)
-        snippet_1 = create(:snippet, updated_at: 1.day.ago)
-
-        expect(Snippet.latest).to eq [snippet_1, snippet_2, snippet_3]
-      end
-    end
   end
 end
