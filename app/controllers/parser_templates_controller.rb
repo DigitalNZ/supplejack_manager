@@ -4,7 +4,7 @@ class ParserTemplatesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @parser_templates = ParserTemplate.all
+    @parser_templates = ParserTemplate.latest
   end
 
   def new; end
