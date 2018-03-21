@@ -7,7 +7,7 @@ class CollectionStatistics < ActiveResource::Base
 
   def self.index_statistics(statistics)
 		index_statistics = Hash.new
-		statistics = statistics.sort_by(&:day).reverse
+		statistics = statistics.sort_by(&:day)
 
 		statistics.each do |stats_item|
 			index_statistics[stats_item.day] ||= Hash.new(0)
@@ -16,7 +16,7 @@ class CollectionStatistics < ActiveResource::Base
 			index_statistics[stats_item.day][:deleted] += stats_item.deleted_count
 		end
 
-		index_statistics
+    index_statistics
   end
 
   def source

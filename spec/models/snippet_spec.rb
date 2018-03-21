@@ -40,5 +40,4 @@ describe Snippet do
     end
 
   end
-
 end

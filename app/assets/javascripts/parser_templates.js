@@ -8,5 +8,7 @@ $(function() {
     return $('#delete-parser-template-alert .close-reveal-modal').trigger('click');
   });
 
-  $('#parser-templates').dataTable();
+  $('#parser-templates').dataTable({
+    order: [[2, 'desc']]
+  });
 });
