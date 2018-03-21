@@ -82,3 +82,9 @@ module HarvesterManager
     config.i18n.enforce_available_locales = false
   end
 end
+
+# Setting config.time_zone = 'Wellington'
+# within the Application < Rails::Application block
+# seems to be overriden back to the default of UTC
+# ¯\_(ツ)_/¯
+Time.zone = 'Wellington'
