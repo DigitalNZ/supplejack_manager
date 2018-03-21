@@ -11,7 +11,7 @@ describe ParserTemplatesController do
 
 	describe "GET 'index'" do
 		it 'should get all of the parser templates chronologically ordered' do
-		  expect(ParserTemplate).to receive(:latest) { [parser_template] }
+		  expect(ParserTemplate).to receive(:all) { [parser_template] }
 		  get :index
 		  expect(assigns(:parser_templates)).to eq [parser_template]
 		end

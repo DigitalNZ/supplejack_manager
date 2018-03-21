@@ -9,6 +9,6 @@ $(function() {
   });
 
   $('#snippets').dataTable({
-    ordering: false
+    order: [[2, 'desc']]
   });
 });

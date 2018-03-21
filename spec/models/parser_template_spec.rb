@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe ParserTemplate do
-  it_behaves_like 'an ordered collection'
 
   let(:parser_template) { build(:parser_template) }
 

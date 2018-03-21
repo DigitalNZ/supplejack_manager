@@ -1,5 +1,5 @@
 $(function() {
   $('#stats').dataTable({
-    ordering: false
+    order: [[0, 'desc']]
   });
 })

@@ -9,6 +9,6 @@ $(function() {
   });
 
   $('#parser-templates').dataTable({
-    ordering: false
+    order: [[2, 'desc']]
   });
 });

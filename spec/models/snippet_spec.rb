@@ -1,7 +1,6 @@
 require "rails_helper"
 
 describe Snippet do
-  it_behaves_like 'an ordered collection'
 
   describe ".find_by_name" do
 

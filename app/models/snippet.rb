@@ -4,7 +4,6 @@ class Snippet
   include Mongoid::Timestamps
   include Mongoid::Paranoia
 
-  include Orderable
   include Versioned
 
   field :content,   type: String
