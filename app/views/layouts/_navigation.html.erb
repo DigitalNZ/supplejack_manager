@@ -45,7 +45,7 @@
               <ul class='dropdown menu' data-dropdown-menu>
                 <% APPLICATION_ENVS.reverse.each do |environment| %>
                   <%= link_to "#{environment.capitalize} Users", environment_admin_users_path(environment, page: 1), id: "#{environment}-api-users" %>
-                  <%= link_to "#{environment.capitalize} Activities", environment_admin_activities_path(environment), id: "#{environment}-api-activities" %>
+                  <%= link_to "#{environment.capitalize} API activities", environment_admin_activities_path(environment), id: "#{environment}-api-activities" %>
                 <% end %>
               </ul>
             </li>
