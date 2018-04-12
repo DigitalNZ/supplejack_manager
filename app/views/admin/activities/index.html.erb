@@ -1,0 +1,29 @@
+<h1>API Activities</h1>
+
+<%= link_to('Download CSV', environment_admin_activities_path(format: :csv), class: 'button primary new-right') %>
+
+<table id='activities'>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Search</th>
+      <th>User Sets</th>
+      <th>Records</th>
+      <th>Source Clickthroughs</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @activities.each do |activity| %>
+    <tr>
+      <td><%= activity['date'] %></td>
+      <td><%= number_with_delimiter activity['search'] %></td>
+      <td><%= number_with_delimiter activity['user_sets'] %></td>
+      <td><%= number_with_delimiter activity['records'] %></td>
+      <td><%= number_with_delimiter activity['source_clicks'] %></td>
+      <td><%= number_with_delimiter activity['total'] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

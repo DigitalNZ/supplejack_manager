@@ -1,0 +1,3 @@
+$(function() {
+  $('#activities').dataTable();
+});
