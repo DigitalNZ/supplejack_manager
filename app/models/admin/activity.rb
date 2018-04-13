@@ -14,6 +14,8 @@ module Admin
 
     def all
       JSON.parse(RestClient.get("#{host}/harvester/activities.json", params: { api_key: api_key }))['site_activities']
+    rescue Errno::ECONNREFUSED
+      []
     end
 
     private

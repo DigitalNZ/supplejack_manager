@@ -10,6 +10,10 @@ RSpec.describe Admin::ActivitiesController do
   end
 
   describe '#index' do
+    before do
+      allow_any_instance_of(Admin::Activity).to receive(:all) { true }
+    end
+
     context 'html' do
       before do
         get :index, params: { environment: 'development' }
@@ -21,6 +25,10 @@ RSpec.describe Admin::ActivitiesController do
 
       it 'renders the :index template' do
         expect(response).to render_template :index
+      end
+
+      it 'assigns an instance of @activities' do
+        expect(assigns(:activities)).to be_a(Admin::Activity)
       end
     end
 
@@ -35,6 +43,10 @@ RSpec.describe Admin::ActivitiesController do
 
       it 'renders the CSV file' do
         expect(response.header['Content-Type']).to include 'text/csv'
+      end
+
+      it 'assigns an array of @activity objects' do
+        expect(assigns(:activities).first).to be_a(Admin::Activity)
       end
     end
   end
