@@ -26,10 +26,6 @@ RSpec.describe Admin::ActivitiesController do
       it 'renders the :index template' do
         expect(response).to render_template :index
       end
-
-      it 'assigns an instance of @activities' do
-        expect(assigns(:activities)).to be_a(Admin::Activity)
-      end
     end
 
     context 'csv' do
@@ -43,10 +39,6 @@ RSpec.describe Admin::ActivitiesController do
 
       it 'renders the CSV file' do
         expect(response.header['Content-Type']).to include 'text/csv'
-      end
-
-      it 'assigns an array of @activity objects' do
-        expect(assigns(:activities).first).to be_a(Admin::Activity)
       end
     end
   end
