@@ -1,3 +1,5 @@
 $(function() {
-  $('#activities').dataTable();
+  $('#activities').dataTable({
+    'order': [[ 0, 'desc' ]]
+  });
 });
