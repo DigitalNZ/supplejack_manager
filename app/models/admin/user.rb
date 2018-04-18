@@ -14,6 +14,8 @@ module Admin
 
     def all
       @users = JSON.parse(RestClient.get("#{host}/harvester/users.json", params: { api_key: api_key }))['users']
+    rescue Errno::ECONNREFUSED
+      []
     end
 
     def find(id)

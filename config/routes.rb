@@ -16,6 +16,7 @@ HarvesterManager::Application.routes.draw do
   scope ':environment', as: 'environment' do
     namespace :admin do
       resources :users
+      resources :activities, only: [:index]
     end
   end
 

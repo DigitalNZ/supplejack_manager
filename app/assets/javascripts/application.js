@@ -39,6 +39,7 @@
 //= require harvest_errors
 //= require admin/users
 //= require collection_statistics
+//= require admin/activities
 
 $(function() {
   $(document).foundation();

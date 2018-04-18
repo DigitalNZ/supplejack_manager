@@ -1,0 +1,16 @@
+<%-
+  require 'csv'
+
+  csv_output = CSV.generate(:col_sep => ",") do |csv|
+    columns = ['date', 'search', 'user_sets', 'records', 'source_clicks', 'total']
+
+    csv << columns
+    
+    Admin::Activity.new(params[:environment]).all.each do |site_activity|
+      csv << columns.map do |c|
+        site_activity[c]
+      end
+    end
+  end
+%>
+<%= csv_output.html_safe %>
