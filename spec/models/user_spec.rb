@@ -69,4 +69,19 @@ describe User do
       expect(user.run_harvest_partners).to eq ['a', 'c']
     end
   end
+
+  describe '#ensure_authentication_token' do
+    it 'will generate an authentication token if it is currently empty' do
+      expect(user.authentication_token).to be_nil
+      user.save
+      expect(user.authentication_token).not_to be_nil
+    end
+
+    it 'will not overwrite an existing authentication token' do
+      user.save
+      token = user.authentication_token
+      user.save
+      expect(user.authentication_token).to eq token
+    end
+  end
 end
