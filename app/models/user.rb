@@ -1,22 +1,22 @@
+# frozen_string_literal: true
 
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  ROLES = %w[admin user]
+  ROLES = %w[admin user].freeze
 
   default_scope -> { order_by(name: 1) }
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
-  before_save :ensure_authentication_token
 
   field :name,                    type: String
 
   ## Database authenticatable
-  field :email,                   type: String,   default: ""
-  field :encrypted_password,      type: String,   default: ""
+  field :email,                   type: String,   default: ''
+  field :encrypted_password,      type: String,   default: ''
 
   ## Recoverable
   field :reset_password_token,    type: String
@@ -32,9 +32,6 @@ class User
   field :current_sign_in_ip,      type: String
   field :last_sign_in_ip,         type: String
 
-  ## Token authenticatable
-  field :authentication_token,    type: String
-
   field :role,                    type: String,   default: 'user'
   field :active,                  type: Boolean,  default: true
 
@@ -47,10 +44,6 @@ class User
 
   validates :name, :email, :role, presence: true
   validates :role, inclusion: ROLES
-
-  def ensure_authentication_token
-    self.authentication_token = SecureRandom.base64 if authentication_token.blank?
-  end
 
   def first_name
     name.split("\s").first if name.present?
