@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  ROLES = %w[admin user]
+  ROLES = %w[admin user].freeze
 
   default_scope -> { order_by(name: 1) }
   scope :active, -> { where(active: true) }
@@ -11,19 +12,11 @@ class User
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  # TODO check if needed. I have commented out because it seems very odd to override the mongo fields with attr_accessor
-  # attr_accessor :name, :email, :password, :password_confirmation, :remember_me,
-  #   :role, :active,
-  #   :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
-  #   :manage_partners, :run_harvest_partners
-
-  # before_save :ensure_authentication_token
-
   field :name,                    type: String
 
   ## Database authenticatable
-  field :email,                   type: String,   default: ""
-  field :encrypted_password,      type: String,   default: ""
+  field :email,                   type: String,   default: ''
+  field :encrypted_password,      type: String,   default: ''
 
   ## Recoverable
   field :reset_password_token,    type: String
@@ -38,9 +31,6 @@ class User
   field :last_sign_in_at,         type: Time
   field :current_sign_in_ip,      type: String
   field :last_sign_in_ip,         type: String
-
-  ## Token authenticatable
-  field :authentication_token,    type: String
 
   field :role,                    type: String,   default: 'user'
   field :active,                  type: Boolean,  default: true
