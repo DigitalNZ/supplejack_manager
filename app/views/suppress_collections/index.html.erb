@@ -22,7 +22,7 @@
 <table>
   <thead>
     <tr>
-      <th><%= t('link_checker.suppress_collections.collection_title') %></th>
+      <th><%= t('link_checker.suppress_collections.source_id') %></th>
       <th><%= t('link_checker.suppress_collections.status_updated_by') %></th>
       <th><%= t('link_checker.suppress_collections.status_updated_at') %></th>
       <% if can? :update, :suppress_collection %>
@@ -35,7 +35,7 @@
     <tr>
       <td><%= source['name'] %></td>
       <td><%= source['status_updated_by'] %></td>
-      <td><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%m/%d/%Y %I:%M%p') %></td>
+      <td><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%d/%m/%Y %I:%M%p') %></td>
       <% if can? :update, :suppress_collection %>
         <td>
           <%= form_tag(environment_suppress_collection_path(id: source["_id"], environment: params[:environment]), {method: :put, id: "suppress_collection"}) do |f| %>
@@ -58,7 +58,7 @@
     <% @top_10_sources.each do |source| %>
     <tr>
       <td>
-        <strong><%= source['name'] %></strong> was activated by <strong><%= source['status_updated_by'] %></strong> at <strong><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%m/%d/%Y %I:%M%p') %></strong></td>
+        <strong><%= source['name'] %></strong> was activated by <strong><%= source['status_updated_by'] %></strong> at <strong><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%d/%m/%Y %I:%M%p') %></strong></td>
     </tr>
     <% end %>
   </tbody>
