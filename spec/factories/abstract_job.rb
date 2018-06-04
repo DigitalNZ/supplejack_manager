@@ -22,5 +22,6 @@ FactoryBot.define do
     invalid_records_count 0
     incremental false
     enrichments 'enrichment code'
+    last_posted_record_id 'last posted record id'
   end
 end

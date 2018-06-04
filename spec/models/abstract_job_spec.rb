@@ -69,6 +69,10 @@ RSpec.describe AbstractJob do
     it 'has enrichments' do
       expect(abstract_job.enrichments).to eq 'enrichment code'
     end
+
+    it 'has last posted record id' do
+      expect(abstract_job.last_posted_record_id).to eq 'last posted record id'
+    end
   end
 
   describe '#user' do

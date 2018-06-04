@@ -107,6 +107,13 @@
       <td><strong><%= @harvest_job.status_message %></strong></td>
     </tr>
     <% end %>
+
+    <% if @harvest_job.last_posted_record_id.present? %>
+      <tr>
+        <td><%= t("harvest_jobs.last_posted_record_id") %></td>
+        <td><strong><%= @harvest_job.last_posted_record_id %></strong></td>
+      </tr>
+    <% end %>
   </table>
 
    <% if @harvest_job.harvest_failure.present? %>
