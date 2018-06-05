@@ -7,7 +7,7 @@ class LinkCheckRulesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @link_check_rules = params[:link_check_rule].present? ? LinkCheckRule.where(params[:link_check_rule]) : LinkCheckRule.all
+    @link_check_rules = params[:link_check_rule].present? ? LinkCheckRule.where(params[:link_check_rule]) : LinkCheckRule.all.select(&:source)
     respond_with @link_check_rules
   end
 

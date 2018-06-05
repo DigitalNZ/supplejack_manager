@@ -5,13 +5,16 @@ describe LinkCheckRulesController do
   let(:link_check_rule) { build(:link_check_rule) }
   let(:user)            { create(:user, :admin) }
   let(:partner)         { build(:partner) }
+  let(:source)          { build(:source) }
 
   before(:each) do
+    allow_any_instance_of(Source).to receive(:update_apis)
     sign_in user
   end
 
   describe "GET 'index'" do
-    it 'should get all of the collection rules' do
+    it 'should get all of the valid collection rules' do
+      allow(Source).to receive(:find) { source }
       expect(LinkCheckRule).to receive(:all) { [link_check_rule] }
       get :index, params: { environment: 'development' }
       expect(assigns(:link_check_rules)).to eq [link_check_rule]
