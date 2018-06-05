@@ -197,6 +197,7 @@ en:
     finished: "Finished"
     failed: "Failed"
     stopped: "Stopped"
+    last_posted_record_id: "Last posted record ID"
 
   enrichment_jobs:
     records_harvested: "Records enriched"
@@ -205,6 +206,7 @@ en:
     records_posted: "Records posted to API"
     records_processed: "Records processed"
     already_active_html: "There is already an active Enrichment Job running for the <strong>%{parser}</strong> in the <strong>%{environment}</strong> environment"
+    last_posted_record_id: "Last posted record ID"
 
   harvest_schedules:
     label: Schedules

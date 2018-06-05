@@ -73,5 +73,9 @@ RSpec.describe EnrichmentJob do
     it 'has a record_id' do
       expect(enrichment_job.record_id).to eq 1
     end
+
+    it 'has last posted record id' do
+      expect(enrichment_job.last_posted_record_id).to eq 'last posted record id'
+    end
   end
 end

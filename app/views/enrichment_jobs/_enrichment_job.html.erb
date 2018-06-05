@@ -97,6 +97,13 @@
         <strong><%= number_with_delimiter @enrichment_job.posted_records_count %></strong>
       </td>
     </tr>
+
+    <% if @enrichment_job.last_posted_record_id.present? %>
+      <tr>
+        <td><%= t("enrichment_jobs.last_posted_record_id") %></td>
+        <td><strong><%= @enrichment_job.last_posted_record_id %></strong></td>
+      </tr>
+    <% end %>
   </table>
 
 <% end %>
