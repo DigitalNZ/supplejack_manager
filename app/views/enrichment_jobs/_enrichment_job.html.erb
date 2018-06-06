@@ -104,6 +104,13 @@
         <td><strong><%= @enrichment_job.last_posted_record_id %></strong></td>
       </tr>
     <% end %>
+
+    <% if @enrichment_job.status_message.present? %>
+      <tr>
+        <td><%= t("enrichment_jobs.status_message") %></td>
+        <td><strong><%= @enrichment_job.status_message %></strong></td>
+      </tr>
+    <% end %>
   </table>
 
 <% end %>
