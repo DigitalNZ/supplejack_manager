@@ -133,7 +133,7 @@ describe ParsersController do
   describe "GET 'destroy'" do
     before do
       allow(Parser).to receive(:find) { parser }
-      allow(parser).to receive(:destroy) { true }
+      allow(parser).to receive(:delete) { true }
     end
 
     context "job not running for parser" do
@@ -146,15 +146,15 @@ describe ParsersController do
         expect(assigns(:parser)).to eq parser
       end
 
-      it "destroys the parser config" do
-        expect(parser).to receive(:destroy)
+      it "deletes the parser config" do
+        expect(parser).to receive(:delete)
         delete :destroy, params: { id: "1234" }
       end
     end
 
     it "does not destroy if there are currently running jobs" do
       allow(parser).to receive(:running_jobs?) { true }
-      expect(parser).not_to receive(:destroy)
+      expect(parser).not_to receive(:delete)
       delete :destroy, params: { id: "1234" }
     end
   end

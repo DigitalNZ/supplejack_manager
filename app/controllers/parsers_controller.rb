@@ -56,7 +56,7 @@ class ParsersController < ApplicationController
   end
 
   def destroy
-    @parser.destroy unless @parser.running_jobs?
+    @parser.delete unless @parser.running_jobs?
     redirect_to parsers_path
   end
 
