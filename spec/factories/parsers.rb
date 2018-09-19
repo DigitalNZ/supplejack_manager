@@ -20,5 +20,9 @@ FactoryBot.define do
         end
       end'
     end
+
+    trait :deleted do
+      deleted_at DateTime.now
+    end
   end
 end

@@ -1,9 +1,14 @@
+
 FactoryBot.define do
   factory :version do
     message   'new test version'
     tags      nil
-    user_id   '577d8c270403714b67000001'
+    user
     content   'class NZMuseums; end'
+
+    trait :deleted do
+      deleted_at DateTime.now
+    end
 
     trait :santos do
       tags ['santos clause']

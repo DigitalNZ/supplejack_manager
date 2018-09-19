@@ -2,8 +2,9 @@
 class Version
   include Mongoid::Document
   include Mongoid::Timestamps::Created
-  include Mongoid::Paranoia
   include Mongoid::Attributes::Dynamic
+
+  include SoftDeletable
 
   field :content,   type: String
   field :tags,      type: Array
@@ -14,6 +15,8 @@ class Version
 
   embedded_in :versionable, polymorphic: true
   delegate :name, :strategy, :file_name, to: :versionable
+
+  default_scope { where(deleted_at: nil) }
 
   def staging?
     self.tags ||= []

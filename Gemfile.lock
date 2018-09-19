@@ -298,8 +298,6 @@ GEM
     mongoid (6.3.0)
       activemodel (~> 5.1)
       mongo (>= 2.5.0, < 3.0.0)
-    mongoid_paranoia (0.3.0)
-      mongoid (>= 6.0.0)
     moped (1.5.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
@@ -522,7 +520,6 @@ DEPENDENCIES
   lograge
   modernizr-rails
   mongoid
-  mongoid_paranoia
   moped
   nokogiri
   oai!
@@ -548,4 +545,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.1
+   1.16.4

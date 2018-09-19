@@ -2,12 +2,12 @@
 class Parser
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Paranoia
   include Mongoid::Attributes::Dynamic
 
   include TemplateHelpers
 
   include Versioned
+  include SoftDeletable
 
   field :strategy,  type: String
   field :content,   type: String
@@ -34,7 +34,7 @@ class Parser
 
   before_create :apply_parser_template!
 
-  before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
+  default_scope { where(deleted_at: nil) }
 
   def self.find_by_partners(partner_ids=[])
     sources = Source.where(:partner.in => partner_ids).pluck(:id)
@@ -162,5 +162,13 @@ class Parser
 
   def full_and_flush_allowed?
     allow_full_and_flush
+  end
+
+  def delete(options = {})
+    self.deleted_at = DateTime.now
+
+    save(options)
+
+    HarvestSchedule.destroy_all_for_parser(self.id)
   end
 end

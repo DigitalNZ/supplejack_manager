@@ -2,6 +2,21 @@ require "rails_helper"
 
 describe Snippet do
 
+  context "scopes" do
+    context "#default_scope" do
+      it "returns snippets that are not soft deleted" do
+        create_list :snippet, 2
+        create :snippet, :deleted
+
+        Snippet.all.each do |snippet|
+          expect(snippet.deleted_at).to be nil
+        end
+
+        expect(Snippet.count).to be 2
+      end
+    end
+  end
+
   describe ".find_by_name" do
 
     let!(:snippet) { create(:snippet, name: "Copyright") }

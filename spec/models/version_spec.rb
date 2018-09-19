@@ -3,16 +3,29 @@ require 'rails_helper'
 
 class Program
   include Versioned
+
+  def content_changed?; end
 end
 
+
 describe Version do
-
+  let(:user)    { create(:user, email: 'test@test.co.nz') }
   let(:program) { Program.new }
-  let(:version) { Version.new }
+  let(:version) { create(:version, versionable: program, user: user) }
 
-  before do
-    version.versionable = program
-    version.user = build(:user, email: "test@test.co.nz")
+  context "scopes" do
+    context "#default_scope" do
+      it "returns versions that are not soft deleted" do
+        create_list(:version, 2, versionable: program, user: user)
+        create(:version, :deleted, versionable: program, user: user)
+
+        program.versions.each do |version|
+          expect(version.deleted_at).to be nil
+        end
+
+        expect(program.versions.length).to be 2
+      end
+    end
   end
 
   describe "#staging?" do
@@ -102,3 +115,5 @@ describe Version do
     end
   end
 end
+
+

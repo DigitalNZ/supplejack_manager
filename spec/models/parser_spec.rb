@@ -10,6 +10,21 @@ describe Parser do
     allow(LinkCheckRule).to receive(:create)
   end
 
+  context "scopes" do
+    context "#default_scope" do
+      it "returns parsers that are not soft deleted" do
+        create_list :parser, 2
+        create :parser, :deleted
+
+        Parser.all.each do |ps|
+          expect(ps.deleted_at).to be_nil
+        end
+
+        expect(Parser.count).to eql 2
+      end
+    end
+  end
+
   context "validations" do
     it "is valid with valid attributes" do
       expect(build(:parser)).to be_valid
@@ -36,10 +51,11 @@ describe Parser do
     end
   end
 
-  describe "before:destroy" do
+  describe "deleting associated HarvestSchedules" do
     it "should destroy all HarvestSchedules for the given parser." do
       expect(HarvestSchedule).to receive(:destroy_all_for_parser).with(parser.id)
-      parser.destroy
+
+      parser.delete
     end
   end
 

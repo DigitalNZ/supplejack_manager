@@ -2,9 +2,11 @@
 class Snippet
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Paranoia
 
   include Versioned
+  include SoftDeletable
+
+  default_scope { where(deleted_at: nil) }
 
   field :content,   type: String
 

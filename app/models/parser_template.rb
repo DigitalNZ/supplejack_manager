@@ -4,7 +4,8 @@
 class ParserTemplate
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Paranoia
+
+  include SoftDeletable
 
   field :name,		type: String
   field :content, type: String
@@ -14,6 +15,8 @@ class ParserTemplate
 
   validates :name, :content, presence: true
   validates :name, uniqueness: true
+
+  default_scope { where(deleted_at: nil) }
 
   def self.find_by_name(name)
     where(name: name).first
