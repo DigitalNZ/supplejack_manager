@@ -6,8 +6,6 @@ class Snippet
   include Versioned
   include SoftDeletable
 
-  default_scope { where(deleted_at: nil) }
-
   field :content,   type: String
 
   def self.find_by_name(name, environment)

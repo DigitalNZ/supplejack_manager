@@ -34,8 +34,6 @@ class Parser
 
   before_create :apply_parser_template!
 
-  default_scope { where(deleted_at: nil) }
-
   def self.find_by_partners(partner_ids=[])
     sources = Source.where(:partner.in => partner_ids).pluck(:id)
     @parsers = Parser.where(:source.in => sources)

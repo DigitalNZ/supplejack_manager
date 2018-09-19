@@ -16,8 +16,6 @@ class ParserTemplate
   validates :name, :content, presence: true
   validates :name, uniqueness: true
 
-  default_scope { where(deleted_at: nil) }
-
   def self.find_by_name(name)
     where(name: name).first
   end

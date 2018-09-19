@@ -3,6 +3,8 @@ module SoftDeletable
 
   included do
     field :deleted_at, type: DateTime
+
+    default_scope { where(deleted_at: nil) }
   end
 
   def delete(options = {})
