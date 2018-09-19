@@ -28,7 +28,7 @@ class Parser
 
   # ENVIRONMENTS = [:staging, :production]
   validates_presence_of   :name, :strategy, :data_type
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, scope: [:deleted_at]
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
   validates_inclusion_of  :data_type, in: VALID_DATA_TYPE
 

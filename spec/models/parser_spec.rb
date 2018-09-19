@@ -49,6 +49,19 @@ describe Parser do
       parser2 = build(:parser, name: parser.name)
       expect(parser2).not_to be_valid
     end
+
+    context "with duplicate soft-deleted data" do
+      before do
+        allow(HarvestSchedule).to receive(:destroy_all_for_parser)
+      end
+
+      it "should be valid with a duplicate name" do
+        deleted_parser = create(:parser, :deleted, name: "Parser Script")
+
+        new_parser = build(:parser, name: "Parser Script")
+        expect(new_parser).to be_valid
+      end
+    end
   end
 
   describe "deleting associated HarvestSchedules" do
