@@ -115,5 +115,3 @@ describe Version do
     end
   end
 end
-
-
