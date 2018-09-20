@@ -163,9 +163,7 @@ class Parser
   end
 
   def delete(options = {})
-    self.deleted_at = DateTime.now
-
-    save(options)
+    super
 
     HarvestSchedule.destroy_all_for_parser(self.id)
   end
