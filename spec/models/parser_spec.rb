@@ -10,21 +10,6 @@ describe Parser do
     allow(LinkCheckRule).to receive(:create)
   end
 
-  context "scopes" do
-    context "#default_scope" do
-      it "returns parsers that are not soft deleted" do
-        create_list :parser, 2
-        create :parser, :deleted
-
-        Parser.all.each do |ps|
-          expect(ps.deleted_at).to be_nil
-        end
-
-        expect(Parser.count).to eql 2
-      end
-    end
-  end
-
   context "validations" do
     it "is valid with valid attributes" do
       expect(build(:parser)).to be_valid

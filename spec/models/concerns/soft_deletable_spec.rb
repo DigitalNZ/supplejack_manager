@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-class Progress
+class Program
   include Mongoid::Document
   include SoftDeletable
 end
@@ -8,7 +8,7 @@ end
 describe SoftDeletable do
   let(:source)  { create(:source) }
   let(:user)    { create(:user) }
-  let(:program) { Progress.new }
+  let(:program) { Program.new }
 
   describe "attributes" do
     context "after being deleted" do
@@ -61,6 +61,24 @@ describe SoftDeletable do
 
       it "returns false" do 
         expect(program.deleted?).to be false
+      end
+    end
+  end
+
+  context "scopes" do
+    describe "#default_scope" do
+      it "returns programs that are not soft deleted" do
+        2.times { Program.new.save }
+
+        deleted_program = Program.new
+        deleted_program.save
+        deleted_program.delete
+
+        Program.all.each do |program|
+          expect(program.deleted_at).to be_nil
+        end
+
+        expect(Program.count).to eql 2
       end
     end
   end

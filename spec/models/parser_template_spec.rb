@@ -6,21 +6,6 @@ describe ParserTemplate do
 
   let(:parser_template) { create(:parser_template) }
 
-  context "scopes" do
-    context "#default_scope" do
-      it "returns parser templates that are not soft deleted" do
-        create_list :parser_template, 2
-        create :parser_template, :deleted
-
-        ParserTemplate.all.each do |ps|
-          expect(ps.deleted_at).to be_nil
-        end
-
-        expect(ParserTemplate.count).to eql 2
-      end
-    end
-  end
-
   describe 'validations' do
     %i[name content].each do |field|
       it "validates the presence of #{field}" do
