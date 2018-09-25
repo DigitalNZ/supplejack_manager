@@ -38,7 +38,7 @@ describe Parser do
     it 'must have a name that can be used as a class name' do
       parser3 = build(:parser, name: "Hey'bro!")
       parser3.valid?
-      expect(parser3.errors.messages[:name].first).to eq 'Your Parser Name includes invalid characters. Please only use Alphabetical or Numeric characters.'
+      expect(parser3.errors.messages[:name].first).to eq 'Parser name includes invalid characters. The name can only contain Alphabetical or Numeric characters, and can not start with a number.'
       expect(parser3).not_to be_valid
     end
 
