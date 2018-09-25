@@ -11,7 +11,7 @@
     <div class="grid-x">
       <div class="medium-12 cell">
         <%= f.input :name %>
-        <%= f.input :partner, collection: @partners, value_method: :name %>
+        <%= f.input :partner, collection: @partners, value_method: :name, selected: params.try(:[], 'parser').try(:[], 'partner') %>
         <%= f.association :source, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :name %>
         <%= f.input :strategy, collection: Hash[Parser::VALID_STRATEGIES.map { |u| [(u == 'xml' ? "#{u}/html".upcase : u.upcase), u]  }] %>
         <% if parser_type_enabled %>
