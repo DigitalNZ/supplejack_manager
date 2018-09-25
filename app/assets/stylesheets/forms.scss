@@ -1,6 +1,12 @@
 .error {
   small {
     color: $alert-color;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  input, select {
+    margin-bottom: .5rem;
   }
 }
 

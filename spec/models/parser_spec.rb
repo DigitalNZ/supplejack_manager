@@ -41,6 +41,13 @@ describe Parser do
       expect(parser3.errors.messages[:name].first).to eq 'Your Parser Name includes invalid characters. Please only use Alphabetical or Numeric characters.'
       expect(parser3).not_to be_valid
     end
+
+    it 'cannot have slashes in the class name' do
+      parser4 = build(:parser, name: 'Jeu/asd')
+      parser4.valid?
+      expect(parser4.errors.messages[:name].first).to eq 'Your Parser Name includes invalid characters. Please remove the /.'
+      expect(parser4).not_to be_valid
+    end
   end
 
   describe "before:destroy" do
@@ -50,7 +57,7 @@ describe Parser do
     end
   end
 
-  describe '.parser_class_name' do
+  describe '.class_name' do
     it 'returns the parser name as a class name' do
       parser = build(:parser, name: 'nZ Museums')
       expect(parser.class_name).to eq 'NZMuseums'

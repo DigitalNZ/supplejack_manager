@@ -39,6 +39,7 @@ class Parser
   before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
 
   def parser_name_is_a_valid_class_name
+    errors.add(:name, 'Your Parser Name includes invalid characters. Please remove the /.') if name.include? '/'
     class_name.constantize
   rescue NameError => e
     if e.message.include? 'wrong constant name'
