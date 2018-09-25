@@ -4,11 +4,10 @@ class Parser
 		extend ActiveSupport::Concern
 
 		def update_contents_parser_class!
-	    if self.changed.include?("name")
-	      class_name = self.name.gsub(/\s/, "_").camelize
-	      self.content = self.content.gsub(/^class .* </, "class #{class_name} <")
-	      self.message = "Renamed parser class"
-	    end
+      class_name = name.gsub(/\s/, '_').camelize
+      self.content = content.gsub(/^class .* </, "class #{class_name} <")
+      self.message = 'Renamed parser class'
+      self.save
 	  end
 
 	  def apply_parser_template!

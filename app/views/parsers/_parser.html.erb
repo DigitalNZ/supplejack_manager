@@ -3,11 +3,13 @@
 <div class="grid-x grid-margin-x">
   <div class="medium-9 cell">
     <% if can? :update, @parser %>
-      <h1 id="parser-title" class="float-left">
-        <%= link_to @parser.name, edit_parser_path(@parser) %>
-        <span class="parser-tag <%= "alert" if @parser.data_type == "concept" %> round label"><%= @parser.data_type %></span>
-      </h1>
-      <div id="hidden-parser-form">
+      <% if @parser.errors.blank? %>
+        <h1 id="parser-title" class="float-left">
+          <%= link_to @parser.name, edit_parser_path(@parser) %>
+          <span class="parser-tag <%= "alert" if @parser.data_type == "concept" %> round label"><%= @parser.data_type %></span>
+        </h1>
+      <% end %>
+      <div id="<%= 'hidden-parser-form' if @parser.errors.empty? %>">
         <%= simple_form_for @parser do |f| %>
           <div class='parser-form'>
             <%= f.input :name %>
@@ -19,9 +21,7 @@
       <h1 id="parser-title" class="float-left"><%= @parser.name %></h1>
     <% end %>
   </div>
-
   <div class="medium-3 cell">
-
   </div>
 </div>
 <div class="grid-x grid-margin-x">

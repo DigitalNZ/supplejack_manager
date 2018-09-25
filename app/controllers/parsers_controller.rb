@@ -54,11 +54,9 @@ class ParsersController < ApplicationController
   end
 
   def update
-    @parser.attributes = parser_params
-    @parser.user_id = current_user.id
-    @parser.update_contents_parser_class!
+    if @parser.update(parser_params.merge('user_id' => current_user.id))
+      @parser.update_contents_parser_class!
 
-    if @parser.save
       redirect_to edit_parser_path(@parser)
     else
       render :edit
