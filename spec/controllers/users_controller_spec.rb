@@ -115,7 +115,7 @@ describe UsersController do
       end
 
       it 'should sign in if the user is the current user' do
-        expect(controller).to receive(:sign_in)
+        expect(controller).to receive(:bypass_sign_in)
         put :update, params: { id: user.id, user: { name: 'User' } }
       end
 

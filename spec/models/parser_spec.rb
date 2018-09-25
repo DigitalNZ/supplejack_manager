@@ -34,12 +34,26 @@ describe Parser do
       parser2 = build(:parser, name: parser.name)
       expect(parser2).not_to be_valid
     end
+
+    it 'must have a name that can be used as a class name' do
+      parser3 = build(:parser, name: "Hey'bro!")
+      parser3.valid?
+      expect(parser3.errors.messages[:name].first).to eq 'Your Parser Name includes invalid characters. Please only use Alphabetical or Numberic characters.'
+      expect(parser3).not_to be_valid
+    end
   end
 
   describe "before:destroy" do
     it "should destroy all HarvestSchedules for the given parser." do
       expect(HarvestSchedule).to receive(:destroy_all_for_parser).with(parser.id)
       parser.destroy
+    end
+  end
+
+  describe '.parser_class_name' do
+    it 'returns the parser name as a class name' do
+      parser = build(:parser, name: 'nZ Museums')
+      expect(parser.class_name).to eq 'NZMuseums'
     end
   end
 

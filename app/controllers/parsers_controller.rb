@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ParsersController < ApplicationController
   load_and_authorize_resource
 
@@ -8,7 +10,9 @@ class ParsersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @parsers, serializer: ActiveModel::ArraySerializer }
+      format.json do
+        render json: @parsers, serializer: ActiveModel::ArraySerializer
+      end
     end
   end
 
@@ -20,11 +24,11 @@ class ParsersController < ApplicationController
     @source = @parser.source = Source.new
     @source.partner = Partner.new
 
-    if can? :manage, Partner
-      @partners = Partner.asc(:name)
-    else
-      @partners = Partner.where(:id.in => current_user.manage_partners).asc(:name)
-    end
+    @partners = if can? :manage, Partner
+                  Partner.asc(:name)
+                else
+                  Partner.where(:id.in => current_user.manage_partners).asc(:name)
+                end
   end
 
   def edit
@@ -35,6 +39,12 @@ class ParsersController < ApplicationController
   def create
     @parser.user_id = current_user.id
     @source = @parser.source
+
+    @partners = if can? :manage, Partner
+              Partner.asc(:name)
+            else
+              Partner.where(:id.in => current_user.manage_partners).asc(:name)
+            end
 
     if @parser.save
       redirect_to edit_parser_path(@parser)
@@ -65,8 +75,8 @@ class ParsersController < ApplicationController
 
     if @parser.save
       if params[:allow] == 'false'
-        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, "staging")
-        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, "production")
+        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, 'staging')
+        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, 'production')
       end
       respond_to do |format|
         format.html { redirect_to edit_parser_path(@parser) }

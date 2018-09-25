@@ -32,17 +32,31 @@ class Parser
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
   validates_inclusion_of  :data_type, in: VALID_DATA_TYPE
 
+  validate :parser_name_is_a_valid_class_name
+
   before_create :apply_parser_template!
 
   before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
+
+  def parser_name_is_a_valid_class_name
+    class_name.constantize
+  rescue NameError => e
+    if e.message.include? 'wrong constant name'
+      errors.add(:name, 'Your Parser Name includes invalid characters. Please only use Alphabetical or Numberic characters.')
+    end
+  end
 
   def self.find_by_partners(partner_ids=[])
     sources = Source.where(:partner.in => partner_ids).pluck(:id)
     @parsers = Parser.where(:source.in => sources)
   end
 
+  def class_name
+    name.gsub(/\s/, '').camelize
+  end
+
   def file_name
-    @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"
+    @file_name ||= name.downcase.gsub(/\s/, '_') + ".rb"
   end
 
   def path
@@ -52,7 +66,6 @@ class Parser
   def running_jobs?
     begin
       active_jobs = []
-
       APPLICATION_ENVS.each do |environment|
         active_jobs << AbstractJob.search({parser_id: self.id}, environment)
       end
