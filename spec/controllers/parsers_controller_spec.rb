@@ -102,8 +102,8 @@ describe ParsersController do
     end
 
     it "updates the parser attributes" do
-      expect(parser).to receive('attributes=').with({'name' => 'Tepapa'})
       put :update, params: { id: '1234', parser: { name: 'Tepapa' } }
+      expect(parser.name).to eq 'Tepapa'
     end
 
     it 'saves the parser' do

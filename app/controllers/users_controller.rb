@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
       if needs_password?(@user, params)
         if @user.update_attributes(user_params)
-          sign_in(@user, bypass: true) if @user == current_user
+          bypass_sign_in(@user) if @user == current_user
           redirect_to safe_users_path, notice: 'User was successfully updated.'
         else
           render :edit
