@@ -43,7 +43,7 @@ class Parser
     class_name.constantize
   rescue NameError => e
     if e.message.include? 'wrong constant name'
-      errors.add(:name, 'Your Parser Name includes invalid characters. Please only use Alphabetical or Numeric characters.')
+      errors.add(:name, 'Parser name includes invalid characters. The name can only contain Alphabetical or Numeric characters, and can not start with a number.')
     end
   end
 
