@@ -41,10 +41,10 @@ class ParsersController < ApplicationController
     @source = @parser.source
 
     @partners = if can? :manage, Partner
-              Partner.asc(:name)
-            else
-              Partner.where(:id.in => current_user.manage_partners).asc(:name)
-            end
+                  Partner.asc(:name)
+                else
+                  Partner.where(:id.in => current_user.manage_partners).asc(:name)
+                end
 
     if @parser.save
       redirect_to edit_parser_path(@parser)
