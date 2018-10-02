@@ -8,9 +8,9 @@ class HomeController < ApplicationController
 
     begin
       gather_job_stats
-      gather_collection_stats
+      # gather_collection_stats
       @parsers = Parser.desc(:updated_at).limit(5)
-      gather_harvest_schedules_stats
+      # gather_harvest_schedules_stats
     rescue StandardError => e
       Rails.logger.error "Exception caught while gathering stats. Exception is #{e.inspect}"
       Rails.logger.error e.backtrace.join("\n")
