@@ -80,8 +80,7 @@ staging:
   clients:
     default:
       database: harvester_staging
-      hosts:
-        - localhost:27017
+      hosts: <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
         consistency: :strong
 
