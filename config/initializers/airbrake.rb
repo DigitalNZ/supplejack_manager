@@ -7,6 +7,7 @@
 #
 # Configuration details:
 # https://github.com/airbrake/airbrake-ruby#configuration
+
 if Rails.env.staging? || Rails.env.production?
   Airbrake.configure do |c|
     # You must set both project_id & project_key. To find your project_id and
