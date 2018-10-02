@@ -12,19 +12,8 @@ require "sprockets/railtie"
 Bundler.require(*Rails.groups)
 
 APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development', 'test'] rescue []
-APPLICATION_ENVIRONMENT_VARIABLES = YAML.load_file('config/application.yml')
 
-# This is to support using the application.yml file for the Docker build.
-# The app needs the <%= %> to boot up
-# but needs the interpolated variables in the APPLICATION_ENVIRONMENT_VARIABLES hash to work correctly.
-
-APPLICATION_ENVIRONMENT_VARIABLES.keys.map do |config|
-  APPLICATION_ENVIRONMENT_VARIABLES[config].map do |name, value|
-    if value.include? '<%='
-      APPLICATION_ENVIRONMENT_VARIABLES[config][name] = eval(value.delete('<%=').delete('%>').delete(' '))
-    end
-  end
-end
+APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read("#{Rails.root}/config/application.yml")).result)
 
 module HarvesterManager
   class Application < Rails::Application
