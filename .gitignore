@@ -82,3 +82,6 @@ id_rsa
 /config/initializers/env_variables.rb
 
 spec/examples.txt
+
+.tags
+.tags_sorted_by_file
