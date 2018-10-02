@@ -7,23 +7,25 @@
 # GMAIL_USERNAME: Your_Gmail_Username
 # makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
 # Add application configuration variables here, as shown below.
-# 
+#
 # This setup assumes that you have an API that runs on localhost:3000
 # and a Worker running on localhost:3002.
 # Running the Manager allows you to harvest in production environment.
 
 development:
-  WORKER_HOST: http://worker:3000
-  WORKER_API_KEY: workerkey
-  API_HOST: http://api:3000
-  API_MONGOID_HOSTS: mongodb:27017
-  AIRBRAKE_PROJECT_ID: <project_id>
-  AIRBRAKE_PROJECT_API_KEY: <project_api_key>
+  WORKER_HOST: ENV['WORKER_HOST']
+  HARVESTER_API_KEY: ENV['HARVESTER_API_KEY']
+  API_HOST: ENV['API_HOST']
+  API_MONGOID_HOSTS: ENV['API_MONGOID_HOSTS']
+  WORKER_KEY: ENV['WORKER_KEY']
+  AIRBRAKE_PROJECT_ID: ENV['AIRBRAKE_PROJECT_ID']
+  AIRBRAKE_PROJECT_API_KEY: ENV['AIRBRAKE_PROJECT_API_KEY']
 
 staging:
-  WORKER_HOST: http://worker:3000
-  WORKER_API_KEY: workerkey
-  API_HOST: http://api:3000
-  API_MONGOID_HOSTS: mongodb:27017
-  AIRBRAKE_PROJECT_ID: <project_id>
-  AIRBRAKE_PROJECT_API_KEY: <project_api_key>
+  WORKER_HOST: ENV['WORKER_HOST']
+  HARVESTER_API_KEY: ENV['HARVESTER_API_KEY']
+  API_HOST: ENV['API_HOST']
+  API_MONGOID_HOSTS: ENV['API_MONGOID_HOSTS']
+  WORKER_KEY: ENV['WORKER_KEY']
+  AIRBRAKE_PROJECT_ID: ENV['AIRBRAKE_PROJECT_ID']
+  AIRBRAKE_PROJECT_API_KEY: ENV['AIRBRAKE_PROJECT_API_KEY']
