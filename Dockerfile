@@ -1,34 +1,25 @@
-FROM ruby:2.1.7
-RUN apt-get update -qq && apt-get install -y build-essential nodejs npm nodejs-legacy mysql-client vim openssh-client git
-RUN npm install -g phantomjs-prebuilt
+FROM ruby:2.3.1
 
-RUN apt-get install -y g++ cron
-
-# For nokogiri
+RUN apt-get update -qq && apt-get install -y build-essential openssh-client libpq-dev apt-transport-https
 RUN apt-get install -y libxml2-dev libxslt1-dev libxslt-dev liblzma-dev curl
 
-# capybara-webkit
-RUN apt-get install -y qt5-default libqt5webkit5-dev
+ARG RAILS_ENV
+ENV RAILS_ENV=$RAILS_ENV
 
-# Utilities
-RUN apt-get install -y nmap htop
+RUN mkdir -p /var/tmp
+WORKDIR /var/tmp
+COPY Gemfile .
+COPY Gemfile.lock .
+RUN gem install bundler
+RUN NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
 
-# Use libxml2, libxslt a packages from alpine for building nokogiri
-RUN bundle config build.nokogiri --use-system-libraries
+RUN mkdir -p /var/manager
+WORKDIR /var/manager
+COPY . .
 
-RUN mkdir /manager
+RUN mv config/application.yml.docker config/application.yml
+RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
 
-# CMD ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
+EXPOSE 3000
 
-# http://ilikestuffblog.com/2014/01/06/how-to-skip-bundle-install-when-deploying-a-rails-app-to-docker/
-WORKDIR /tmp
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-COPY config/mongoid.yml config/mongoid.yml
-
-# Cache bundle install
-ENV BUNDLE_PATH /bundle
-
-RUN bundle install
-WORKDIR /manager
-ADD . /manager
+CMD bundle exec rails s -b 0.0.0.0
