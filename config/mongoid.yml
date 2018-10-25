@@ -83,6 +83,9 @@ staging:
       hosts: <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
         consistency: :strong
+        user: <%= ENV['MONGOID_USER'] %>
+        password: <%= ENV['MONGOID_PASSWORD'] %>
+        auth_source: admin
 
 production:
   clients:
