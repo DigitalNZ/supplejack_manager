@@ -2,7 +2,7 @@
 
 <div class="grid-x">
   <div class="medium-8 cell">
-    <h2 id="link-check-rule-title" class="left"><%= @link_check_rule.source.name %></h2>
+    <h2 id="link-check-rule-title" class="left"><%= @link_check_rule.source.source_id %></h2>
     <%= render 'form', url: environment_link_check_rule_path(id: @link_check_rule.id, environment: params[:environment]) %>
   </div>
 </div>
