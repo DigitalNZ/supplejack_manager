@@ -1,4 +1,4 @@
 
 class SourceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :source_id
+  attributes :id, :source_id
 end
