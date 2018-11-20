@@ -18,7 +18,7 @@ feature 'Manage sources', type: :feature, js: true do
 
   scenario 'See all sources' do
     sources.each do |source|
-      expect(all_sources_page.source_table).to have_content(source.name)
+      expect(all_sources_page.source_table).to have_content(source.source_id)
     end
   end
 
@@ -28,26 +28,28 @@ feature 'Manage sources', type: :feature, js: true do
 
       click_link 'New Data Source'
 
-      fill_in 'source[name]', with: new_source.name
+      fill_in 'source[source_id]', with: new_source.source_id
       select sources.first.partner.name
 
       click_button 'Create Data Source'
 
       sources.each do |source|
-        expect(all_sources_page.source_table).to have_content(source.name)
+        expect(all_sources_page.source_table).to have_content(source.source_id)
       end
-      expect(all_sources_page.source_table).to have_content(new_source.name)
+      expect(all_sources_page.source_table).to have_content(new_source.source_id)
     end
   end
 
   scenario 'Update a source' do
-    click_link sources.first.name
+    new_partner = create(:partner)
 
-    fill_in 'source[name]', with: 'Updated name!!'
+    click_link sources.first.source_id
+
+    select new_partner.name
 
     click_button 'Update Data Source'
 
-    expect(all_sources_page.source_table).to have_content('Updated name!!')
+    expect(all_sources_page.source_table).to have_content(new_partner.name)
     expect(all_sources_page).to have_flash_success
   end
 end
