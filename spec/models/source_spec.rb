@@ -47,8 +47,8 @@ describe Source do
       source.save
     end
 
-    it 'calls slugfy_source_id' do
-      expect(source).to receive(:slugfy_source_id)
+    it 'calls slugify_source_id' do
+      expect(source).to receive(:slugify_source_id)
       source.save
     end
   end
@@ -68,7 +68,7 @@ describe Source do
     end
   end
 
-  describe '#slugfy_source_id' do
+  describe '#slugify_source_id' do
     it 'removes excess whitespace and replaces them with underscores in the source_id' do
       source.source_id = 'Source     4'
       source.save!
@@ -85,7 +85,7 @@ describe Source do
   describe 'creating a new source' do
     let(:new_source) { Source.new(source_id: 'New source', partner: create(:partner)) }
 
-    it 'creates a new source slugfying the source_id with #slugfy_source_id' do
+    it 'creates a new source slugifying the source_id with #slugfy_source_id' do
       new_source.save!
       expect(new_source.source_id).to eq 'new_source'
     end

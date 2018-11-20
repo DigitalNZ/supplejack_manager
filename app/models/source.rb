@@ -16,7 +16,7 @@ class Source
 
   after_save :update_apis
 
-  before_save :slugfy_source_id
+  before_save :slugify_source_id
 
   def partner_name
     partner.name
@@ -39,7 +39,7 @@ class Source
     end
   end
 
-  def slugfy_source_id
+  def slugify_source_id
     self.source_id = source_id.parameterize.underscore
   end
 end
