@@ -84,3 +84,11 @@
     }
   }
 }
+
+.success-box {
+  background-color: $successColor;
+  color: $white;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
