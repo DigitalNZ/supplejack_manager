@@ -9,8 +9,8 @@ ENV RAILS_ENV=$RAILS_ENV
 ARG TIMEZONE
 ENV TIMEZONE=$TIMEZONE
 
-RUN sudo echo $TIMEZONE > /etc/timezone
-RUN sudo dpkg-reconfigure -f noninteractive tzdata
+RUN echo $TIMEZONE > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN mkdir -p /var/tmp
 WORKDIR /var/tmp
@@ -28,4 +28,4 @@ RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
 
 EXPOSE 3000
 
-CMD bundle exec rails s -b 0.0.0.0
+CMD bundle exec puma -C config/puma.rb
