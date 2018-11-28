@@ -6,6 +6,12 @@ RUN apt-get install -y libxml2-dev libxslt1-dev libxslt-dev liblzma-dev curl
 ARG RAILS_ENV
 ENV RAILS_ENV=$RAILS_ENV
 
+ARG TIMEZONE
+ENV TIMEZONE=$TIMEZONE
+
+RUN sudo echo $TIMEZONE > /etc/timezone
+RUN sudo dpkg-reconfigure -f noninteractive tzdata
+
 RUN mkdir -p /var/tmp
 WORKDIR /var/tmp
 COPY Gemfile .
