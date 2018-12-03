@@ -33,7 +33,7 @@
   <tbody>
     <% @blacklisted_sources.each do |source| %>
     <tr>
-      <td><%= source['name'] %></td>
+      <td><%= source['source_id'] %></td>
       <td><%= source['status_updated_by'] %></td>
       <td><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%d/%m/%Y %I:%M%p') %></td>
       <% if can? :update, :suppress_collection %>
