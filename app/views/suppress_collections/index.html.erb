@@ -58,7 +58,7 @@
     <% @top_10_sources.each do |source| %>
     <tr>
       <td>
-        <strong><%= source['name'] %></strong> was activated by <strong><%= source['status_updated_by'] %></strong> at <strong><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%d/%m/%Y %I:%M%p') %></strong></td>
+        <strong><%= source['source_id'] %></strong> was activated by <strong><%= source['status_updated_by'] %></strong> at <strong><%= source['status_updated_at'].try(:to_datetime).try(:strftime, '%d/%m/%Y %I:%M%p') %></strong></td>
     </tr>
     <% end %>
   </tbody>
