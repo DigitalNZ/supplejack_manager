@@ -6,7 +6,6 @@
 <table id="sources" class="twelve">
   <thead>
     <tr>
-      <th>Source Name</th>
       <th>Source ID</th>
       <th>Partner</th>
     </tr>
@@ -15,8 +14,7 @@
     <% @sources.each do |source| %>
       <% if can? :update, source %>
         <tr>
-          <td><%= link_to source.name, edit_source_path(source) %></td>
-          <td><%= source.source_id %></td>
+          <td><%= link_to source.source_id, edit_source_path(source) %></td>
           <% if can? :update, source.partner %>
             <td><%= link_to source.partner.name, edit_partner_path(source.partner) %></td>
           <% else %>
@@ -25,7 +23,6 @@
         </tr>
       <% else %>
         <tr>
-          <td><%= source.name %></td>
           <td><%= source.source_id %></td>
           <td><%= source.partner.name %></td>
         </tr>

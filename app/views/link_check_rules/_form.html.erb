@@ -1,7 +1,7 @@
 
 
 <%= simple_form_for @link_check_rule, url: url do |f| %>
-  <%= f.input :source_id, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :name, group_label_method: :name %>
+  <%= f.input :source_id, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :source_id, group_label_method: :name %>
   <%= f.input :xpath %>
   <%= f.input :status_codes %>
   <%= f.input :throttle %>

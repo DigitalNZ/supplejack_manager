@@ -8,7 +8,6 @@
   <thead>
     <tr>
       <th>Partner</th>
-      <th>Source Name</th>
       <th>Source ID</th>
       <th>Active?</th>
       <th>Updated At</th>
@@ -22,12 +21,11 @@
       <td><%= link_check_rule.source.try(:partner_name) %></td>
       <td>
         <% if link_check_rule.source && can?(:update, link_check_rule.source) %>
-          <%= link_to link_check_rule.source.try(:name), edit_source_path(link_check_rule.source) %>
+          <%= link_to link_check_rule.source.try(:source_id), edit_source_path(link_check_rule.source) %>
         <% else %>
-          <%= link_check_rule.source.try(:name) %>
+          <%= link_check_rule.source.try(:source_id) %>
         <% end %>
       </td>
-      <td><%= link_check_rule.source.try(:source_id) %></td>
       <td><%= link_check_rule.active %></td>
       <td><%= DateTime.parse(link_check_rule.updated_at).to_formatted_s(:long) %></td>
       <td>

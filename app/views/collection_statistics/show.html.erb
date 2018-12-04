@@ -16,7 +16,7 @@
 <% @collection_statistics.each do |collection| %>
 	<div class="grid-x">
 		<div class="medium-12 cell">
-		<h4><%= collection.source.name %></h4>
+		<h4><%= collection.source.source_id %></h4>
   		<div class="status-section float-left medium-4 cell">
 		    <h5>Activations (<%= collection.activated_records.to_a.size %>)</h5>
 		    <ul class="no-list-style">
