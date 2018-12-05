@@ -17,10 +17,6 @@ RSpec.describe SourceSerializer do
       expect(serializer).to have_key(:id)
     end
 
-    it 'has a name' do
-      expect(serializer).to have_key(:name)
-    end
-
     it 'has a source_id' do
       expect(serializer).to have_key(:source_id)
     end

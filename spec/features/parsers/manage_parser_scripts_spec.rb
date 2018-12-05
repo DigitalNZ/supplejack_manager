@@ -23,15 +23,15 @@ feature 'Manage parser', type: :feature, js: true do
   end
 
   scenario 'Only list sources within the selected partner' do
-    partner = create(:source, name: 'Source to be listed').partner
-    orphan_source = create(:source, name: 'Source not to be listed')
+    partner = create(:source, source_id: 'Source to be listed').partner
+    orphan_source = create(:source, source_id: 'Source not to be listed')
     parser_form_page = ParserFormPage.new
 
     click_link 'New Parser Script'
     select partner.name
 
-    expect(parser_form_page.parser_source_dropdown).to have_content(partner.sources.first.name)
-    expect(parser_form_page.parser_source_dropdown).not_to have_content(orphan_source.name)
+    expect(parser_form_page.parser_source_dropdown).to have_content(partner.sources.first.source_id)
+    expect(parser_form_page.parser_source_dropdown).not_to have_content(orphan_source.source_id)
   end
 
   context 'Create a new parser script' do
@@ -44,7 +44,7 @@ feature 'Manage parser', type: :feature, js: true do
 
       fill_in 'parser[name]', with: new_parser.name
       select partner.name
-      select partner.sources.first.name
+      select partner.sources.first.source_id
     end
 
     scenario 'valid JSON parser' do

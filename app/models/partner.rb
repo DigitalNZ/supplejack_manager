@@ -15,7 +15,7 @@ class Partner
   def self.for_select
     return [] if Partner.all.empty?
     Partner.all.sort(name: 1).map do |partner|
-      [partner.name, partner.sources.map {|p| [p.name, p.id]}]
+      [partner.name, partner.sources.map {|p| [p.source_id, p.id]}]
     end
   end
 
