@@ -16,7 +16,7 @@ class Previewer
   end
 
   def create_preview_job
-    response = RestClient.post("#{ENV['WORKER_HOST']}/previews", {
+    response = RestClient.post("#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}/previews", {
       preview: {
         format: format.to_s,
         harvest_job: {
