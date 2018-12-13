@@ -2,8 +2,8 @@
 class Preview < ActiveResource::Base
   include EnvironmentHelpers
 
-  self.site = ENV['WORKER_HOST']
-  headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
+  self.site = ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']
+  headers['Authorization'] = "Token token=#{ENV['PREVIEW_WORKER_KEY'] || ENV['WORKER_KEY']}"
 
   schema do
     attribute :raw_data,               :string
