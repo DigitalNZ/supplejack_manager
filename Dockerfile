@@ -70,7 +70,7 @@ RUN mkdir -p /var/manager
 WORKDIR /var/manager
 COPY . .
 
-RUN chown -R app:app /var/manager
+# RUN chown -R app:app /var/manager
 
 RUN mv config/application.yml.docker config/application.yml
 RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
