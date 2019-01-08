@@ -6,7 +6,7 @@ class ParsersController < ApplicationController
   respond_to :json, :html
 
   def index
-    @parsers = Parser.limit(50)
+    @parsers = Parser.all
 
     respond_to do |format|
       format.html
