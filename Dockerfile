@@ -48,6 +48,7 @@ RUN rm /etc/nginx/sites-enabled/default
 EXPOSE 80
 
 ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
+ADD rails-env.conf /etc/nginx/main.d/rails-env.conf
 
 ARG RAILS_ENV
 ENV RAILS_ENV=$RAILS_ENV
