@@ -25,7 +25,7 @@
           <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
           <td><%= link_to parser.source.source_id, edit_source_path(parser.source) %></td>
           <td><%= parser.try(:updated_at).try(:localtime)&.to_formatted_s(:long) %></td>
-          <td><%= parser.last_edited_by %></td>
+          <td><%= parser.last_editor %></td>
           <td><%= parser.data_type %></td>
         </tr>
       <% else %>
@@ -34,8 +34,8 @@
           <td><%= parser.strategy %></td>
           <td><%= parser.source.partner.name %></td>
           <td><%= parser.source.source_id %></td>
-          <td><%= parser.versions.last.try(:created_at).try(:localtime)&.to_formatted_s(:long) %></td>
-          <td><%= parser.last_edited_by %></td>
+          <td><%= parser.try(:updated_at).try(:localtime)&.to_formatted_s(:long) %></td>
+          <td><%= parser.last_editor %></td>
           <td><%= parser.data_type %></td>
         </tr>
       <% end %>
