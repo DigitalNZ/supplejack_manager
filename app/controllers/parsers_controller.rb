@@ -6,7 +6,7 @@ class ParsersController < ApplicationController
   respond_to :json, :html
 
   def index
-    @parsers = Parser.all
+    @parsers = Parser.all.to_a
 
     respond_to do |format|
       format.html
