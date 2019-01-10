@@ -82,7 +82,8 @@
       <% end %>
     </ul>
 
-    <div class="callout secondary text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? && @parser.versions.length > 0 ?  @parser.versions.last.message : @version&.message.to_s)  %></div>
+
+    <div class="callout secondary text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
       <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button production medium-12 cell" %>
     <% end %>
@@ -119,7 +120,7 @@
 
 <div id="delete-parser-alert" class="reveal small" data-reveal>
   <h2>Delete Parser</h2>
-  <p> Are you sure that you want to delete the parser: <strong><%= @parser.name %></strong> with version name: <strong><%= @version ? @version&.message : @parser.versions.last&.message.to_s %></strong>?</p>
+  <p> Are you sure that you want to delete the parser: <strong><%= @parser.name %></strong> with version name: <strong><%= @version ? @version.message : @parser.versions.last.message %></strong>?</p>
   <% if @parser.scheduled? %>
     <p> <strong>Warning:</strong> You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well. </p>
   <% end %>
