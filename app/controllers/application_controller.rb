@@ -1,7 +1,10 @@
-
 # app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   include ActionController::HttpAuthentication::Token::ControllerMethods
+
+  before_action do
+    ServerTiming::Auth.ok!
+  end
 
   protect_from_forgery
 

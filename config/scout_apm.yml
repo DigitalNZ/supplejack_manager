@@ -1,0 +1,8 @@
+common: &defaults
+  monitor: true
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

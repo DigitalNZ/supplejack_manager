@@ -13,6 +13,7 @@ class Parser
   field :content,   type: String
   field :data_type, type: String, default: "record"
   field :allow_full_and_flush, type: Boolean, default: true
+  field :last_editor, type: String
 
   index(name: 1) # requires this index as parsers are sorted with name in controller
 
@@ -37,6 +38,8 @@ class Parser
   before_create :apply_parser_template!
 
   before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
+
+  before_save :update_last_editor
 
   def parser_name_is_a_valid_class_name
     errors.add(:name, 'Your Parser Name includes invalid characters. Please remove the /.') if name.include? '/'
@@ -176,5 +179,11 @@ class Parser
 
   def full_and_flush_allowed?
     allow_full_and_flush
+  end
+
+  # This is for performance reasons.
+  # Loading versions.last on the /parsers page is very slow
+  def update_last_editor
+    self.last_editor = last_edited_by
   end
 end
