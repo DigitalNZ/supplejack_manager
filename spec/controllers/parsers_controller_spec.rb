@@ -20,7 +20,6 @@ describe ParsersController do
 
   describe "GET 'index'" do
     it 'finds all the parser configurations' do
-      expect(Parser).to receive(:all) { [parser] }
       get :index
       expect(assigns(:parsers)).to eq [parser]
     end

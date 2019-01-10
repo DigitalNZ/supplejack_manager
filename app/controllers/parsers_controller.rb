@@ -6,7 +6,7 @@ class ParsersController < ApplicationController
   respond_to :json, :html
 
   def index
-    @parsers = Parser.all
+    @parsers = Parser.only(:name, :strategy, :source, :data_type, :created_at, :updated_at, :last_editor).all.to_a
 
     respond_to do |format|
       format.html

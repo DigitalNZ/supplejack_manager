@@ -251,4 +251,17 @@ describe Parser do
       expect(parser.error).to eq({type: NoMethodError, message: "undefined method `+' for nil:NilClass"})
     end
   end
+
+  describe '#updated_last_editor' do
+    let(:user)    { create(:user) }
+    let(:version) { build(:version, :staging, user: user) }
+    let(:parser)  { create(:parser) }
+
+    it 'sets the user as the last edited by before a parser is saved' do
+      parser.versions.destroy_all
+      parser.versions << version
+      parser.save
+      expect(parser.last_editor).to eq 'John Doe'
+    end
+  end
 end
