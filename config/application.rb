@@ -1,4 +1,3 @@
-
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
@@ -8,6 +7,7 @@ require "action_mailer/railtie"
 # require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+require 'action_cable/engine'
 
 Bundler.require(*Rails.groups)
 
@@ -26,6 +26,7 @@ module HarvesterManager
 
       g.view_specs false
       g.helper_specs false
+      g.javascript_engine :js
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -35,6 +36,7 @@ module HarvesterManager
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/app/models/concerns)
     config.autoload_paths += %W(#{config.root}/lib)
+
 
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -79,6 +81,8 @@ module HarvesterManager
     config.assets.version = '1.0'
 
     config.i18n.enforce_available_locales = false
+
+    config.action_cable.mount_path = '/websocket'
   end
 end
 

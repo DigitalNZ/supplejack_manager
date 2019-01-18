@@ -40,6 +40,7 @@
 //= require admin/users
 //= require collection_statistics
 //= require admin/activities
+//= require cable
 
 $(function() {
   $(document).foundation();

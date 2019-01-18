@@ -11,6 +11,8 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
 
+    <%= action_cable_meta_tag %>
+
     <%= favicon_link_tag asset_path('favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_path('favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>

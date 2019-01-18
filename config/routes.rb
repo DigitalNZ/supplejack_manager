@@ -1,5 +1,6 @@
-
 HarvesterManager::Application.routes.draw do
+
+  mount ActionCable.server => '/cable'
 
   root to: 'home#index'
 

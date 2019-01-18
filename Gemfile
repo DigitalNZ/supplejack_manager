@@ -48,6 +48,7 @@ gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-
 gem 'activeresource-response'
 gem 'puma'
 gem 'server_timing'
+gem 'redis', "~> 3.0"
 
 group :development do
   gem 'binding_of_caller', '>= 0.6.8'

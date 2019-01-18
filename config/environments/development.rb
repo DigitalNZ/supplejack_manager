@@ -41,4 +41,14 @@ HarvesterManager::Application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+
+  # Update in the future to allow connection from Kubernetes deployments
+  # config.action_cable.allowed_request_origins = [
+    # 'http://localhost:3001', 'http://localhost:3002'
+  # ]
+
+  # config.action_cable.url = "ws://localhost:3001/cable"
+
+
+  config.action_cable.disable_request_forgery_protection = true
 end
