@@ -3,8 +3,7 @@
 # app/channels/preview_channel.rb
 class PreviewChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "preview_#{params[:version_id]}"
-    stream_from 'preview_channel'
+    stream_from "preview_channel_#{params[:parser_id]}_#{params[:user_id]}"
   end
 
   def unsubscribed
