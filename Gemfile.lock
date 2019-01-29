@@ -1,9 +1,10 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 9ad9fae2fa56f16304fdb297378ffe48cac9b381
-  tag: v2.5
+  revision: 44ebfc19bf31c88b79e2996e124060351221362d
+  branch: rm/more-info-for-sj-previews-and-harvests
   specs:
     supplejack_common (0.0.2)
+      actioncable
       actionpack
       activesupport
       chronic (<= 0.10.2)
