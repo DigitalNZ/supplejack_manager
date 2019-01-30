@@ -8,8 +8,6 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
     allow(AbstractJob).to receive(:search).and_return([])
-
-    allow(Preview).to receive(:find) { build(:preview, id: 1) }
   end
 
   let(:user)    { create(:user, :admin) }
