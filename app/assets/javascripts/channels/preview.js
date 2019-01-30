@@ -12,9 +12,6 @@ $(function() {
     },
 
     received: function(data) {
-
-      console.log(data);
-
       $('#status').html(data.status);
 
       $('#record-raw-data').html(data.raw_data);
@@ -27,12 +24,12 @@ $(function() {
         $('#field-errors').show();
       }
 
-      if(data.deletable == true) {
+      if(data.deletable === true) {
         $('#record-to-delete').show();
       }
 
       if(data.validation_errors) {
-        $('#status').html("Validation Errors");
+        $('#status').html('Validation Errors');
 
         $.each(JSON.parse(data.validation_errors), function(key, value) {
           $.each(value, function(attribute, message) {
