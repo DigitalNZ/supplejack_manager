@@ -82,7 +82,7 @@ module HarvesterManager
 
     config.i18n.enforce_available_locales = false
 
-    config.action_cable.mount_path = '/websocket'
+    config.action_cable.allowed_request_origins ['http://localhost', ENV['PREVEW_WORKER_HOST']]
   end
 end
 

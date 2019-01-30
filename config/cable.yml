@@ -1,6 +1,6 @@
 redis: &redis
   adapter: redis
-  url: ENV['ACTION_CABLE_REDIS_HOST']
+  url: <%= ENV['ACTION_CABLE_REDIS_HOST'] %>
 
 production: *redis
 development: *redis
