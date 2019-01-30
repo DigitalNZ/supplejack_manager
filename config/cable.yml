@@ -4,4 +4,5 @@ redis: &redis
 
 production: *redis
 development: *redis
-test: *redis
+test:
+  url: redis://localhost:6379/1
