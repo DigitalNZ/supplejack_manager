@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 44ebfc19bf31c88b79e2996e124060351221362d
+  revision: 2826673e10c0146622683b3128a965fee556eb46
   branch: rm/more-info-for-sj-previews-and-harvests
   specs:
     supplejack_common (0.0.2)
@@ -8,6 +8,7 @@ GIT
       actionpack
       activesupport
       chronic (<= 0.10.2)
+      coderay
       dimensions
       htmlentities
       json (~> 1.8.3)
