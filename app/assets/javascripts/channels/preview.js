@@ -12,6 +12,7 @@ $(function() {
     },
 
     received: function(data) {
+      $('#preview-area-spinner').hide();
       $('#status').html(data.status);
 
       $('#record-raw-data').html(data.raw_data);
