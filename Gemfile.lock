@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 2826673e10c0146622683b3128a965fee556eb46
+  revision: f140c238922c5183c07ae4ad2d68ce0a5dac6a2e
   branch: rm/more-info-for-sj-previews-and-harvests
   specs:
     supplejack_common (0.0.2)
