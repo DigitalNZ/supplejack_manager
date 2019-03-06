@@ -78,7 +78,7 @@ module HarvesterManager
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.elastic_apm.service_name = 'Supplejack Manager'
+    config.elastic_apm.service_name = "Supplejack Manager - #{Rails.env}"
 
     config.i18n.enforce_available_locales = false
   end
