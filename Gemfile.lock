@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 9ad9fae2fa56f16304fdb297378ffe48cac9b381
-  tag: v2.5
+  revision: b598e75beadc97b3b12064cf4915b4fe1f63b5ea
+  tag: v2.6
   specs:
     supplejack_common (0.0.2)
       actionpack
       activesupport
+      aws-sdk-s3
       chronic (<= 0.10.2)
       dimensions
       htmlentities
