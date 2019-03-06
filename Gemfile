@@ -6,7 +6,7 @@ gem 'rails', '~> 5.1'
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.5'
+gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.6'
 
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
@@ -48,6 +48,7 @@ gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-
 gem 'activeresource-response'
 gem 'puma'
 gem 'server_timing'
+gem 'aws-sdk-s3'
 gem 'elastic-apm'
 
 group :development do
