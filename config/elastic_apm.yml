@@ -1,4 +1,4 @@
 server_url: <%= "http://#{ENV['HOST_IP']}:8200" %>
 service_name: <%= "Supplejack Manager - #{Rails.env}" %>
-pool_size: 3
+pool_size: 6
 api_request_size: '2048kb'
