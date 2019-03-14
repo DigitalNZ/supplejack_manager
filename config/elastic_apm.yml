@@ -1,3 +1,4 @@
 server_url: <%= "http://#{ENV['HOST_IP']}:8200" %>
 service_name: <%= "Supplejack Manager - #{Rails.env}" %>
-pool_size: <%= ENV['ELASTIC_APM_POOL_SIZE'] || 6 %>
+pool_size: <%= ENV['ELASTIC_APM_POOL_SIZE'] || 5 %>
+disable_send: <%= ENV['ELASTIC_APM_DISABLE_SEND'] || false %>
