@@ -49,7 +49,6 @@ gem 'activeresource-response'
 gem 'puma'
 gem 'server_timing'
 gem 'aws-sdk-s3'
-gem 'elastic-apm'
 
 group :development do
   gem 'binding_of_caller', '>= 0.6.8'
