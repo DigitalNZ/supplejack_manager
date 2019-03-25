@@ -82,15 +82,10 @@ staging:
       database: harvester_staging
       hosts: <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
+        auth_source: admin
         consistency: :strong
         user: <%= ENV['MONGOID_USER'] %>
         password: <%= ENV['MONGOID_PASSWORD'] %>
-        auth_source: admin
-        ssl: <%= ENV['MONGOID_SSL_ENABLED'] || false %>
-        ssl_cert: <%= ENV['MONGOID_SSL_CERT_PATH'] %>
-        ssl_key: <%= ENV['MONGOID_SSL_CERT_PATH'] %>
-        ssl_verify: <%= ENV['MONGOID_SSL_ENABLED'] || false %>
-        ssl_ca_cert: <%= ENV['MONGOID_SSL_CA_CERT_PATH'] %>
 
 production:
   clients:
@@ -98,12 +93,7 @@ production:
       database: manager_production
       hosts: <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
       options:
+        auth_source: admin
         consistency: :strong
         user: <%= ENV['MONGOID_USER'] %>
         password: <%= ENV['MONGOID_PASSWORD'] %>
-        auth_source: admin
-        ssl: <%= ENV['MONGOID_SSL_ENABLED'] || false %>
-        ssl_cert: <%= ENV['MONGOID_SSL_CERT_PATH'] %>
-        ssl_key: <%= ENV['MONGOID_SSL_CERT_PATH'] %>
-        ssl_verify: <%= ENV['MONGOID_SSL_ENABLED'] || false %>
-        ssl_ca_cert: <%= ENV['MONGOID_SSL_CA_CERT_PATH'] %>
