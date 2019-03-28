@@ -1,5 +1,5 @@
 user = User.where(email: 'sjdocker@email.com').empty? ? User.create(email: 'sjdocker@email.com', name: 'Supplejack Docker', password: 'password', password_confirmation: 'password', role: 'admin') : User.find_by(email: 'sjdocker@email.com')
-partner = Partner.find_or_create_by(name: "Supplejack Docker")
+partner = Partner.find_or_create_by(name: "Supplejack Docker")
 source = Source.find_or_create_by(partner_id: BSON::ObjectId(partner.id), source_id: "supplejack_docker")
 
 if Parser.where(name: "oaisample").empty?
