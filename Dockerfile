@@ -1,4 +1,4 @@
-FROM ruby:2.3.1
+FROM ruby:2.3.8
 
 RUN apt-get update -qq && apt-get install -y build-essential openssh-client libpq-dev apt-transport-https
 RUN apt-get install -y libxml2-dev libxslt1-dev libxslt-dev liblzma-dev curl
