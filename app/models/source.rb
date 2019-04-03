@@ -40,7 +40,7 @@ class Source
   end
 
   def slugify_source_id
-    # Convert any special characters to underscore except hiphens
+    # Convert any special characters to underscore except hyphens
     self.source_id = source_id.split('-').map(&:parameterize).map(&:underscore).join('-')
   end
 end

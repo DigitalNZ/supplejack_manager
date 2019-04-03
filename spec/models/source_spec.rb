@@ -81,7 +81,7 @@ describe Source do
       expect(source.source_id).to eq '84_ource'
     end
 
-    it 'retain - and _ from source_id' do
+    it 'retains - and _ from source_id' do
       source.source_id = 'bl!a-bla_b.la_-hello'
       source.save!
       expect(source.source_id).to eq 'bl_a-bla_b_la_-hello'
