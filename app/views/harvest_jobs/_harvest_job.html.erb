@@ -48,14 +48,16 @@
       </td>
     </tr>
 
-    <% if ['failed', 'finished'].include?(@harvest_job.status) %>
+    <% if @harvest_job.end_time.present? %>
     <tr id="harvest-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
-        <strong><%= l(@harvest_job.end_time, format: :long) if @harvest_job.end_time.present? %></strong>
+        <strong><%= l(@harvest_job.end_time, formfat: :long) %></strong>
       </td>
     </tr>
+    <% end %>
 
+    <% if ['failed', 'finished'].include?(@harvest_job.status) %>
     <tr>
       <td><%= t("harvest_jobs.duration") %></td>
       <td>
@@ -112,6 +114,13 @@
       <tr>
         <td><%= t("harvest_jobs.last_posted_record_id") %></td>
         <td><strong><%= @harvest_job.last_posted_record_id %></strong></td>
+      </tr>
+    <% end %>
+
+    <% if @harvest_job.updated_at.present? %>
+      <tr>
+        <td><%= t("harvest_jobs.updated_at") %></td>
+        <td><strong><%= l(@harvest_job.updated_at, formfat: :long) %></strong></td>
       </tr>
     <% end %>
   </table>

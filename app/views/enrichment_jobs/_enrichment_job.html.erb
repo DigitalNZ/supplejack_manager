@@ -1,7 +1,7 @@
 
 
 <%= content_tag :div, id: "enrichment-job", data: { url: environment_enrichment_job_path(params[:environment], @enrichment_job, format: "js"), active: !@enrichment_job.finished? } do %>
-  
+
   <h2 class="left">
     <%= t("enrichment_jobs.progress") %>
     <% if can? :update, @enrichment_job.parser %>
@@ -54,14 +54,16 @@
       </td>
     </tr>
 
-    <% if @enrichment_job.finished? %>
+    <% unless @enrichment_job.end_time.nil? %>
     <tr id="enrichment-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
         <strong><%= l @enrichment_job.end_time, format: :long rescue '' %></strong>
       </td>
     </tr>
+    <% end %>
 
+    <% if @enrichment_job.finished? %>
     <tr>
       <td><%= t("harvest_jobs.duration") %></td>
       <td>
@@ -102,6 +104,13 @@
       <tr>
         <td><%= t("enrichment_jobs.last_posted_record_id") %></td>
         <td><strong><%= @enrichment_job.last_posted_record_id %></strong></td>
+      </tr>
+    <% end %>
+
+    <% if @enrichment_job.updated_at.present? %>
+      <tr>
+        <td><%= t("enrichment_jobs.updated_at") %></td>
+        <td><strong><%= l(@enrichment_job.updated_at, formfat: :long) %></strong></td>
       </tr>
     <% end %>
 
