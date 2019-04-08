@@ -23,5 +23,6 @@ FactoryBot.define do
     incremental false
     enrichments 'enrichment code'
     last_posted_record_id 'last posted record id'
+    updated_at: Time.zone.now
   end
 end
