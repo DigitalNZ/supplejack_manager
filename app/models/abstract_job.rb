@@ -23,6 +23,7 @@ class AbstractJob < ActiveResource::Base
     attribute :failed_records_count,  :integer
     attribute :invalid_records_count, :integer
     attribute :created_at,            :datetime
+    attribute :updated_at,            :datetime
     attribute :incremental,           :boolean
     attribute :enrichments,           :string
     attribute :last_posted_record_id, :string
