@@ -54,7 +54,7 @@
       </td>
     </tr>
 
-    <% unless @enrichment_job.end_time.nil? %>
+    <% if @enrichment_job.end_time.present? %>
     <tr id="enrichment-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
@@ -110,7 +110,7 @@
     <% if @enrichment_job.updated_at.present? %>
       <tr>
         <td><%= t("enrichment_jobs.updated_at") %></td>
-        <td><strong><%= l(@enrichment_job.updated_at, formfat: :long) %></strong></td>
+        <td><strong><%= l(@enrichment_job.updated_at, format: :long) %></strong></td>
       </tr>
     <% end %>
 

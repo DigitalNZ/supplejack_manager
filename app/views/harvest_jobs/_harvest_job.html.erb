@@ -52,7 +52,7 @@
     <tr id="harvest-end-time">
       <td><%= t("harvest_jobs.end_time") %></td>
       <td>
-        <strong><%= l(@harvest_job.end_time, formfat: :long) %></strong>
+        <strong><%= l(@harvest_job.end_time, format: :long) %></strong>
       </td>
     </tr>
     <% end %>
@@ -120,7 +120,7 @@
     <% if @harvest_job.updated_at.present? %>
       <tr>
         <td><%= t("harvest_jobs.updated_at") %></td>
-        <td><strong><%= l(@harvest_job.updated_at, formfat: :long) %></strong></td>
+        <td><strong><%= l(@harvest_job.updated_at, format: :long) %></strong></td>
       </tr>
     <% end %>
   </table>

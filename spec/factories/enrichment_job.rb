@@ -17,10 +17,10 @@ FactoryBot.define do
     invalid_records_count 0
     posted_records_count 0
     created_at Time.zone.now
+    updated_at Time.zone.now
     enrichment 'enrichment_code'
     record_id 1
     last_posted_record_id 'last posted record id'
-    updated_at Time.zone.now
 
     trait :stopped do
       status 'stopped'
