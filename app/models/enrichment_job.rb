@@ -19,6 +19,7 @@ class EnrichmentJob < AbstractJob
     attribute :invalid_records_count, :integer
     attribute :posted_records_count,  :integer
     attribute :created_at,            :datetime
+    attribute :updated_at,            :datetime
     attribute :enrichment,            :string
     attribute :record_id,             :integer
   end

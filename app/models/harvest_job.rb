@@ -19,6 +19,7 @@ class HarvestJob < AbstractJob
     attribute :failed_records_count,  :integer
     attribute :invalid_records_count, :integer
     attribute :created_at,            :datetime
+    attribute :updated_at,            :datetime
     attribute :enrichments,           :string
     attribute :mode,                  :string
     attribute :posted_records_count,  :integer
