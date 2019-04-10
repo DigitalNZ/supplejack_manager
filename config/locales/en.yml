@@ -198,6 +198,7 @@ en:
     failed: "Failed"
     stopped: "Stopped"
     last_posted_record_id: "Last posted record ID"
+    updated_at: "Harvest last updated"
 
   enrichment_jobs:
     records_harvested: "Records enriched"
@@ -207,6 +208,7 @@ en:
     records_processed: "Records processed"
     already_active_html: "There is already an active Enrichment Job running for the <strong>%{parser}</strong> in the <strong>%{environment}</strong> environment"
     last_posted_record_id: "Last posted record ID"
+    updated_at: "Harvest last updated"
 
   harvest_schedules:
     label: Schedules
