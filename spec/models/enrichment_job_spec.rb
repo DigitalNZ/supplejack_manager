@@ -77,5 +77,9 @@ RSpec.describe EnrichmentJob do
     it 'has last posted record id' do
       expect(enrichment_job.last_posted_record_id).to eq 'last posted record id'
     end
+
+    it 'has a updated_at' do
+      expect(enrichment_job.updated_at).to be_a(ActiveSupport::TimeWithZone)
+    end
   end
 end
