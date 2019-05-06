@@ -6,7 +6,7 @@ gem 'rails', '~> 5.1'
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
 
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.6'
+gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.7.0'
 
 # Due to a bug in multibyte when using Ruby 2.x, we use the ref commit.
 # We cannot get the HEAD oai this app is using Rails version 4.x
@@ -70,7 +70,7 @@ group :test do
   gem 'capybara', '>= 2.17.0'
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
-  gem 'chromedriver-helper'
+  gem 'webdrivers', '= 3.7.2'
   gem 'database_cleaner', '>= 1.3.0'
   gem 'launchy', '>= 2.1.2'
   gem 'simplecov', require: false
