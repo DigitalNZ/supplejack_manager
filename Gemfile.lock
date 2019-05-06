@@ -315,6 +315,7 @@ GEM
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nenv (0.3.0)
+    net_http_ssl_fix (0.0.10)
     netrc (0.11.0)
     nio4r (2.2.0)
     nokogiri (1.8.2)
@@ -489,7 +490,8 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webdrivers (3.8.0)
+    webdrivers (3.7.2)
+      net_http_ssl_fix
       nokogiri (~> 1.6)
       rubyzip (~> 1.0)
       selenium-webdriver (~> 3.0)
@@ -566,7 +568,7 @@ DEPENDENCIES
   unicorn-rails
   vcr
   web-console
-  webdrivers (~> 3.0)
+  webdrivers (= 3.7.2)
   webmock
 
 BUNDLED WITH

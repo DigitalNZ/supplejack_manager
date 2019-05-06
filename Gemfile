@@ -70,7 +70,7 @@ group :test do
   gem 'capybara', '>= 2.17.0'
   gem 'capybara-screenshot'
   gem 'capybara-selenium'
-  gem 'webdrivers', '~> 3.0'
+  gem 'webdrivers', '= 3.7.2'
   gem 'database_cleaner', '>= 1.3.0'
   gem 'launchy', '>= 2.1.2'
   gem 'simplecov', require: false

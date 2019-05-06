@@ -18,6 +18,6 @@ addons:
     sources:
       - google-chrome
     packages:
-      - google-chrome-unstable
+      - google-chrome-stable
 cache: bundler
 bundler_args: --without production
