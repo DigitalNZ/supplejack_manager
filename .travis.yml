@@ -8,7 +8,6 @@ before_script:
   - cp config/application.yml.example config/application.yml
   - sh -e /etc/init.d/xvfb start
 script:
-  - sudo update-alternatives --set google-chrome /usr/bin/google-chrome-unstable
   - RAILS_ENV=test bundle exec rake db:create --trace
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
