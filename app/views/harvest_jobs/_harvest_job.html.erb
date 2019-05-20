@@ -158,7 +158,7 @@
             <% if Nokogiri::XML(record.raw_data).errors.empty? %>
               <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
             <% else %>
-              <%= text_area_tag "", record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+              <%= text_area_tag "", record.raw_data, class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
             <% end %>
           <% end %>
 
