@@ -36,9 +36,9 @@
       <tr>
         <td><%= t("abstract_jobs.#{abstract_job._type.downcase}") %></td>
         <% if abstract_job.version_id.present? %>
-          <td><%= link_to abstract_job.parser.try(:name), parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
+          <td><%= link_to abstract_job.parser_name, parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
         <% else %>
-          <td><%= link_to abstract_job.parser.try(:name), edit_parser_path(abstract_job.parser) rescue '' %></td>
+          <td><%= link_to abstract_job.parser_name, edit_parser_path(abstract_job.parser) rescue '' %></td>
         <% end %>
         <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
         <td><%= enrichments(abstract_job) %></td>
