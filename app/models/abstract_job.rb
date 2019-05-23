@@ -58,6 +58,14 @@ class AbstractJob < ActiveResource::Base
     end
   end
 
+  # Parser collection has too many embeded documents due to
+  # parser versions.
+  # This method returns only the name attribute to be displayed
+  # along with the AbstractJob details
+  def parser_name
+    Parser.only(:name).find(parser_id).name
+  end
+
   def user
     @user ||= begin
       User.find(self.user_id) if self.respond_to?(:user_id) && user_id.present?

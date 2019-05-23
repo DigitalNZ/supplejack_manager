@@ -102,6 +102,10 @@ RSpec.describe AbstractJob do
     it 'returns the parser' do
       expect(abstract_job.parser).to eq parser
     end
+
+    it 'returns only the parser name' do
+      expect(abstract_job.parser_name).to eq parser.name
+    end
   end
 
   describe '#harvest_schedule' do
