@@ -5,6 +5,7 @@ gem 'rails', '~> 5.1'
 # Need json and kgio to add after upgrade ruby 2.3.0
 gem 'json', '1.8.3'
 gem 'kgio', '~> 2.10.0'
+gem 'elastic-apm'
 
 gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.7.0'
 
