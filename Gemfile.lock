@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common.git
-  revision: 3000360a0f1dbcaa62d4af84eb6391b751efbbdd
-  tag: v2.7.0
+  revision: f19835994abcc440f7aad414597d5344fb4cf493
+  tag: v2.7.1
   specs:
     supplejack_common (0.0.2)
       actionpack
@@ -387,7 +387,7 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redis (4.1.1)
+    redis (4.1.2)
     ref (2.0.0)
     request_store (1.4.0)
       rack (>= 1.4)
