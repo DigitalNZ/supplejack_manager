@@ -96,8 +96,40 @@ $(function() {
     }
   });
 
+
+
   return $('#parsers').dataTable({
-    "aaSorting": [[4, 'desc']]
+    "processing": true,
+    "serverSide": true,
+    "ajax": "/parsers/datatable",
+    "aaSorting": [[4, 'desc']],
+    "columns": [
+      {
+        "data": "name",
+        "render": function(data, type, row, meta) {
+          return `<a href="/parsers/${row.id}/edit">${data}</a>`;
+        }
+      },
+      { "data": "strategy" },
+      {
+        "data": "partner_name",
+        "render": function(data, type, row, meta) {
+          debugger;
+          if (!row.can_update) return row.partner_name;
+          return `<a href="/partners/${row.partner.id}/edit">${row.partner.name}</a>`;
+        }
+      },
+      {
+        "data": "source_name",
+        "render": function(data, type, row, meta) {
+          if (!row.can_update) return row.source.name;
+          return `<a href="/sources/${row.source.id}/edit">${row.source.name}</a>`;
+        }
+      },
+      { "data": "updated_at" },
+      { "data": "last_editor" },
+      { "data": "data_type" },
+    ]
   });
 });
 

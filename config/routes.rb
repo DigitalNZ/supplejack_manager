@@ -5,6 +5,7 @@ HarvesterManager::Application.routes.draw do
 
   resources :parsers do
     get :allow_flush, on: :member
+    collection { get 'datatable', constraints: { format: :json } }
     resources :previewers, only: [:create]
     resources :parser_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection

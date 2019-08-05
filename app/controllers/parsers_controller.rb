@@ -6,14 +6,22 @@ class ParsersController < ApplicationController
   respond_to :json, :html
 
   def index
-    @parsers = Parser.only(:name, :strategy, :source, :data_type, :created_at, :updated_at, :last_editor).all.to_a
-
     respond_to do |format|
       format.html
       format.json do
+        @parsers = Parser.only(%i[name strategy source data_type created_at updated_at last_editor]).all.to_a
         render json: @parsers, serializer: ActiveModel::ArraySerializer
       end
     end
+  end
+
+  def datatable
+    parsers = Parser.datatable_query(datatable_params)
+    render json: {
+      data: Presenters::DatatableParsers.new(parsers, can?(:update, Parser)).call,
+      recordsTotal: Parser.count,
+      recordsFiltered: parsers.length
+    }
   end
 
   def show
@@ -85,9 +93,21 @@ class ParsersController < ApplicationController
     end
   end
 
+  private
+
   def parser_params
     params
       .require(:parser)
       .permit(:name, :partner, :source_id, :strategy, :parser_template_name, :message, :content)
+  end
+
+  def datatable_params
+    {
+      search:    params[:search][:value],
+      start:     params[:start].to_i,
+      per_page:  params[:length].to_i,
+      order_by:  params[:columns][params[:order]['0'][:column]][:data],
+      direction: params[:order]['0'][:dir],
+    }
   end
 end
