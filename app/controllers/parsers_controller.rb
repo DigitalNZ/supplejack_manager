@@ -102,11 +102,12 @@ class ParsersController < ApplicationController
   end
 
   def datatable_params
+    sorted_by_column = params[:order]['0'][:column]
     {
       search:    params[:search][:value],
       start:     params[:start].to_i,
       per_page:  params[:length].to_i,
-      order_by:  params[:columns][params[:order]['0'][:column]][:data],
+      order_by:  params[:columns][sorted_by_column][:data],
       direction: params[:order]['0'][:dir],
     }
   end

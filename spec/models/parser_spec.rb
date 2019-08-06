@@ -264,4 +264,44 @@ describe Parser do
       expect(parser.last_editor).to eq 'John Doe'
     end
   end
+
+  describe '#datatable_query' do
+    let(:user)    { create(:user) }
+    let(:version) { build(:version, :staging, user: user) }
+    let(:parser)  { create(:parser) }
+    let(:options) { {
+      search:    '',
+      start:     5,
+      per_page:  20,
+      order_by:  'updated_at',
+      direction: 'desc'
+    } }
+
+    it 'returns a MongoID::Criteria' do
+      expect(Parser.datatable_query(options)).to be_a(Mongoid::Criteria)
+    end
+
+    it 'returns a limited number of records' do
+      query = Parser.datatable_query(options)
+      expect(query.options[:limit]).to eq(20)
+    end
+
+    it 'returns parsers with the offset given' do
+      query = Parser.datatable_query(options)
+      expect(query.options[:skip]).to eq(5)
+    end
+
+    it 'returns only the needed fields' do
+      query = Parser.datatable_query(options)
+      expect(query.options[:fields]).to include(*%w[
+        _id name strategy source_id data_type
+        updated_at last_editor source_name partner_name
+      ])
+    end
+
+    it 'orders by the given field' do
+      query = Parser.datatable_query(options)
+      expect(query.options[:sort]).to eq({'updated_at' => -1})
+    end
+  end
 end

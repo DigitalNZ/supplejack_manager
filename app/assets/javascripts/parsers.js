@@ -114,7 +114,6 @@ $(function() {
       {
         "data": "partner_name",
         "render": function(data, type, row, meta) {
-          debugger;
           if (!row.can_update) return row.partner_name;
           return `<a href="/partners/${row.partner.id}/edit">${row.partner.name}</a>`;
         }

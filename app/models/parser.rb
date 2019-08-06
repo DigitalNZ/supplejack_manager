@@ -223,7 +223,6 @@ class Parser
     self.partner_name = source&.partner.name
   end
 
-
   def update_source_name
     self.source_name = source&.source_id
   end
