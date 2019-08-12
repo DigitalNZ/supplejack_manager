@@ -10,35 +10,9 @@
       <th>Data Format</th>
       <th>Partner</th>
       <th>Source ID</th>
-      <th>Last Updated</th>
+      <th>Last Update</th>
       <th>Last Edited By</th>
       <th>Parser Type</th>
     </tr>
   </thead>
-
-  <tbody>
-    <% @parsers.try(:each) do |parser| %>
-      <% if can? :update, parser %>
-        <tr>
-          <td><%= link_to parser.name, edit_parser_path(parser) %></td>
-          <td><%= parser.strategy %></td>
-          <td><%= link_to parser.source.partner.name, edit_partner_path(parser.source.partner) %></td>
-          <td><%= link_to parser.source.source_id, edit_source_path(parser.source) %></td>
-          <td><%= parser.try(:updated_at).try(:localtime)&.to_formatted_s(:long) %></td>
-          <td><%= parser.last_editor %></td>
-          <td><%= parser.data_type %></td>
-        </tr>
-      <% else %>
-        <tr>
-          <td><%= link_to parser.name, parser_path(parser) %></td>
-          <td><%= parser.strategy %></td>
-          <td><%= parser.source.partner.name %></td>
-          <td><%= parser.source.source_id %></td>
-          <td><%= parser.try(:updated_at).try(:localtime)&.to_formatted_s(:long) %></td>
-          <td><%= parser.last_editor %></td>
-          <td><%= parser.data_type %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
 </table>

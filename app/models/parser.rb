@@ -13,7 +13,12 @@ class Parser
   field :content,   type: String
   field :data_type, type: String, default: "record"
   field :allow_full_and_flush, type: Boolean, default: true
-  field :last_editor, type: String
+
+  # Used for the /parsers page which includes these 3 fields
+  # As MongoDB doesn't allow to sort and search accross collections
+  field :last_editor,  type: String
+  field :partner_name, type: String
+  field :source_name,  type: String
 
   index(name: 1) # requires this index as parsers are sorted with name in controller
 
@@ -40,6 +45,8 @@ class Parser
   before_destroy { |parser| HarvestSchedule.destroy_all_for_parser(parser.id) }
 
   before_save :update_last_editor
+  before_save :update_partner_name
+  before_save :update_source_name
 
   def parser_name_is_a_valid_class_name
     errors.add(:name, 'Your Parser Name includes invalid characters. Please remove the /.') if name.include? '/'
@@ -48,6 +55,33 @@ class Parser
     if e.message.include? 'wrong constant name'
       errors.add(:name, 'Parser name includes invalid characters. The name can only contain Alphabetical or Numeric characters, and can not start with a number.')
     end
+  end
+
+  def self.datatable_query(params)
+    Parser
+      .offset(params[:start])
+      .limit(params[:per_page])
+      .order_by(params[:order_by] => params[:direction])
+      .includes(:source)
+      .only(
+        :name,
+        :strategy,
+        :source,
+        :data_type,
+        :updated_at,
+        :last_editor,
+        :source_name,
+        :partner_name
+      ).where(
+        '$or' => [
+          { name:         /#{params[:search]}/i },
+          { stragegy:     /#{params[:search]}/i },
+          { data_type:    /#{params[:search]}/i },
+          { last_editor:  /#{params[:search]}/i },
+          { partner_name: /#{params[:search]}/i },
+          { source_name:  /#{params[:search]}/i },
+        ]
+      )
   end
 
   def self.find_by_partners(partner_ids=[])
@@ -181,9 +215,15 @@ class Parser
     allow_full_and_flush
   end
 
-  # This is for performance reasons.
-  # Loading versions.last on the /parsers page is very slow
   def update_last_editor
     self.last_editor = last_edited_by
+  end
+
+  def update_partner_name
+    self.partner_name = source&.partner.name
+  end
+
+  def update_source_name
+    self.source_name = source&.source_id
   end
 end

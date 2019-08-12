@@ -19,13 +19,48 @@ describe ParsersController do
   end
 
   describe "GET 'index'" do
-    it 'finds all the parser configurations' do
+    it 'returns a 200 status code' do
       get :index
-      expect(assigns(:parsers)).to eq [parser]
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe 'GET show' do
+  describe "GET 'datatable'" do
+    before do
+      # GET parameters from datatable are too complex
+      # so it is stubbed
+      allow_any_instance_of(ParsersController).to receive(:datatable_params).and_return({
+              search:    '',
+              start:     0,
+              per_page:  20,
+              order_by:  'updated_at',
+              direction: 'desc'
+            })
+    end
+
+    it 'returns a 200 status code' do
+      get :datatable
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns JSON' do
+      get :datatable
+      expect(response.header['Content-Type']).to include 'application/json'
+    end
+
+    it 'returns an array of parsers' do
+      get :datatable
+      JSON.parse(response.body)['data'].each do |parser|
+        expect(parser).to include(
+          * %w[id name strategy updated_at last_editor data_type source partner can_update]
+        )
+        expect(parser['source']).to include(* %w[id name])
+        expect(parser['partner']).to include(* %w[id name])
+      end
+    end
+  end
+
+  describe "GET 'show'" do
     it 'finds an existing parser' do
       expect(Parser).to receive(:find).with('1234') { parser }
       get :show, params: { id: '1234' }
