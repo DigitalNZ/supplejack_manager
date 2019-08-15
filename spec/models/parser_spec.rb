@@ -270,7 +270,7 @@ describe Parser do
     let(:version) { build(:version, :staging, user: user) }
     let(:parser)  { create(:parser) }
     let(:options) { {
-      search:    '',
+      search:    'term',
       start:     5,
       per_page:  20,
       order_by:  'updated_at',
@@ -302,6 +302,19 @@ describe Parser do
     it 'orders by the given field' do
       query = Parser.datatable_query(options)
       expect(query.options[:sort]).to eq({'updated_at' => -1})
+    end
+
+    it 'searches through the different fields' do
+      query = Parser.datatable_query(options)
+      expect(query.selector['$or']).to be_a(Array)
+      expect(query.selector['$or']).to eq([
+              {"name"=>/term/i},
+              {"strategy"=>/term/i},
+              {"data_type"=>/term/i},
+              {"last_editor"=>/term/i},
+              {"partner_name"=>/term/i},
+              {"source_name"=>/term/i}
+            ])
     end
   end
 end

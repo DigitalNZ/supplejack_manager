@@ -75,7 +75,7 @@ class Parser
       ).where(
         '$or' => [
           { name:         /#{params[:search]}/i },
-          { stragegy:     /#{params[:search]}/i },
+          { strategy:     /#{params[:search]}/i },
           { data_type:    /#{params[:search]}/i },
           { last_editor:  /#{params[:search]}/i },
           { partner_name: /#{params[:search]}/i },
