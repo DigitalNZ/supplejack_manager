@@ -64,6 +64,8 @@ class AbstractJob < ActiveResource::Base
   # along with the AbstractJob details
   def parser_name
     Parser.only(:name).find(parser_id).name
+  rescue Mongoid::Errors::DocumentNotFound
+    ''
   end
 
   def user
