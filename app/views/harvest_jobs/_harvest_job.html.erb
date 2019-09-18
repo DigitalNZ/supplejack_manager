@@ -1,13 +1,13 @@
-
-
 <%= content_tag :div, id: "harvest-job", data: { url: harvest_job_path(@harvest_job, format: "js"), active: !@harvest_job.finished? } do %>
 
   <h2 class="left">
     <%= t("harvest_jobs.progress") %>
-    <% if can? :update, @harvest_job.parser %>
-      <span class="parser-title">: <%= link_to @harvest_job.parser.try(:name), edit_parser_path(@harvest_job.parser) %></span>
-    <% else %>
-      <span class="parser-title">: <%= @harvest_job.parser.try(:name) %></span>
+    <% if @harvest_job.parser.present? %>
+      <% if can? :update, @harvest_job.parser %>
+        <span class="parser-title">: <%= link_to @harvest_job.parser.try(:name), edit_parser_path(@harvest_job.parser) %></span>
+      <% else %>
+        <span class="parser-title">: <%= @harvest_job.parser.try(:name) %></span>
+      <% end %>
     <% end %>
   </h2>
 
