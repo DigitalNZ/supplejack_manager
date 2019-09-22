@@ -20,7 +20,15 @@ class Parser
   field :partner_name, type: String
   field :source_name,  type: String
 
-  index(name: 1) # requires this index as parsers are sorted with name in controller
+  # Adding indexes across all fields so we can sort them in the datatable.
+  index(name: 1)
+  index(strategy: 1)
+  index(source: 1)
+  index(data_type: 1)
+  index(updated_at: 1)
+  index(last_editor: 1)
+  index(source_name: 1)
+  index(partner_name: 1)
 
   attr_accessor :parser_template_name, :error
 
