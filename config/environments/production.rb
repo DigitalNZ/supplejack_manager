@@ -34,12 +34,8 @@ HarvesterManager::Application.configure do
 
   # See everything in the log (default is :info)
   config.log_level = ENV['LOG_LEVEL'] || :info
-
-  # Prepend all log lines with the following tags
-  # config.log_tags = [ :subdomain, :uuid ]
-
-  # Use a different logger for distributed setups
-  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+  config.log_tags = [:request_id]
+  config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
