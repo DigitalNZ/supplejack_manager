@@ -1,6 +1,15 @@
 common: &defaults
   monitor: true
 
+test:
+  monitor: false
+
+development:
+  monitor: false
+
+uat:
+  monitor: false
+
 staging:
   <<: *defaults
 

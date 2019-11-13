@@ -30,6 +30,7 @@ HarvesterManager::Application.configure do
   # config.active_record.mass_assignment_sanitizer = :strict
 
   config.log_level = :debug
+  config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
