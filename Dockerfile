@@ -28,4 +28,4 @@ RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
 
 EXPOSE 3000
 
-CMD bundle exec puma -C config/puma.rb
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
