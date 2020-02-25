@@ -319,7 +319,6 @@ GEM
       mongo (>= 2.5.0, < 3.0.0)
     mongoid_paranoia (0.3.0)
       mongoid (>= 6.0.0)
-    moped (1.5.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
     nenv (0.3.0)
@@ -553,7 +552,6 @@ DEPENDENCIES
   modernizr-rails
   mongoid
   mongoid_paranoia
-  moped
   nokogiri
   oai!
   ougai
