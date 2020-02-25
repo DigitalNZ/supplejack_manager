@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}" }
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'activeresource', require: 'active_resource'
@@ -19,7 +20,7 @@ gem 'puma'
 gem 'rails', '~> 5.1'
 gem 'server_timing'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
-gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.git', tag: 'v2.7.1'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.7.1'
 
 # assets gems
 gem 'compass-rails', '>= 1.0.3'
