@@ -552,7 +552,6 @@ DEPENDENCIES
   modernizr-rails
   mongoid
   mongoid_paranoia
-  nokogiri
   oai!
   ougai
   pry-byebug
