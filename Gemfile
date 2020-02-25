@@ -6,7 +6,6 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'activeresource', require: 'active_resource'
 gem 'activeresource-response'
 gem 'airbrake'
-gem 'awesome_print', '~> 1.8'
 gem 'aws-sdk-s3' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'bson'
 gem 'cancancan'
@@ -25,14 +24,12 @@ gem 'json', '1.8.3'
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'kgio', '~> 2.10.0'
-gem 'lograge'
 gem 'modernizr-rails'
 gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'moped'
 gem 'nokogiri'
 gem 'oai', git: 'https://github.com/code4lib/ruby-oai.git', ref: 'ebe92'
-gem 'ougai', '~> 1.8'
 gem 'puma'
 gem 'rails', '~> 5.1'
 gem 'sass-rails'
@@ -73,4 +70,9 @@ group :test do
   gem 'vcr'
   gem 'webdrivers', '= 3.7.2'
   gem 'webmock'
+end
+
+group :uat, :staging, :production do
+  gem 'lograge'
+  gem 'ougai'
 end

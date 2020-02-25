@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-unless Rails.env.test?
+unless Rails.env.test? || Rails.env.development?
   module ActiveSupport
     module TaggedLogging
       module Formatter
@@ -13,23 +13,23 @@ unless Rails.env.test?
       end
     end
   end
-end
 
-module CustomLogger
-  class Logger < Ougai::Logger
-    include ActiveSupport::LoggerThreadSafeLevel
-    include LoggerSilence
+  module CustomLogger
+    class Logger < Ougai::Logger
+      include ActiveSupport::LoggerThreadSafeLevel
+      include LoggerSilence
 
-    def initialize(*args)
-      super
-      after_initialize if respond_to? :after_initialize
-    end
+      def initialize(*args)
+        super
+        after_initialize if respond_to? :after_initialize
+      end
 
-    def create_formatter
-      if Rails.env.development? || Rails.env.test?
-        Ougai::Formatters::Readable.new
-      else
-        Ougai::Formatters::Bunyan.new
+      def create_formatter
+        if Rails.env.development? || Rails.env.test?
+          Ougai::Formatters::Readable.new
+        else
+          Ougai::Formatters::Bunyan.new
+        end
       end
     end
   end
