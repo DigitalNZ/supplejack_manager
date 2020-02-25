@@ -1,5 +1,3 @@
-
-
 <h2>Job Schedules - <%= params[:environment].capitalize %></h2>
 
 <%= link_to "New Schedule", new_environment_harvest_schedule_path(params[:environment]), class: "button float-right #{ can_show_button(:create, HarvestSchedule) }" %>

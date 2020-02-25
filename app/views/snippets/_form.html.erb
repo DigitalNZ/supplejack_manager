@@ -1,5 +1,3 @@
-
-
 <%= simple_form_for @snippet do |f| %>
   <% if can? :update, @snippet %>
     <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
