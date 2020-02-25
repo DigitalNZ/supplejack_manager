@@ -573,7 +573,6 @@ DEPENDENCIES
   rails (~> 5.1)
   rails-controller-testing
   rb-fsevent
-  responders (~> 2.0)
   rspec-rails (>= 3.7.2)
   rubocop
   sass-rails
