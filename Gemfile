@@ -9,8 +9,6 @@ gem 'aws-sdk-s3'
 gem 'cancancan'
 gem 'coderay', '~> 1.0.8'
 gem 'devise', '~> 4.0'
-gem 'elastic-apm'
-gem 'figaro', '>= 0.7.0'
 gem 'json', '1.8.3'
 gem 'kaminari'
 gem 'kaminari-mongoid'
@@ -73,6 +71,7 @@ end
 
 group :uat, :staging, :production do
   gem 'airbrake'
+  gem 'elastic-apm'
   gem 'lograge'
   gem 'ougai'
 end
