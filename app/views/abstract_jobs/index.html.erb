@@ -50,7 +50,7 @@
         <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
 
         <% if params[:status] == "finished" %>
-          <td><%= ChronicDuration.output(abstract_job.duration.to_i) if abstract_job.duration.present? %></td>
+          <td><%= human_duration(abstract_job.duration) %></td>
         <% end %>
 
         <td><%= abstract_job.records_count %></td>
