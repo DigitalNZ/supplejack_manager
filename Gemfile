@@ -24,7 +24,7 @@ gem 'supplejack_common', git: 'https://github.com/DigitalNZ/supplejack_common.gi
 # assets gems
 gem 'compass-rails', '>= 1.0.3'
 gem 'foundation-rails'
-gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails'
 gem 'jquery-rails'
 gem 'jquery-timepicker-rails'
 gem 'jquery-ui-rails'
