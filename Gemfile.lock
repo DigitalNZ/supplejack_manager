@@ -530,7 +530,6 @@ DEPENDENCIES
   aws-sdk-s3
   better_errors
   binding_of_caller
-  bson
   cancancan
   capybara (>= 2.17.0)
   capybara-screenshot
