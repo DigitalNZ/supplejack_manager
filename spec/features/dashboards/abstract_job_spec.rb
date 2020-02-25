@@ -92,7 +92,7 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
     end
 
     scenario 'displays finished job duration' do
-      expect(page.has_content?(ChronicDuration.output(abstract_job.duration.to_i)))
+      expect(page.has_content?('18 minutes 31 seconds'))
     end
   end
 end

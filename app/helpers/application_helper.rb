@@ -1,7 +1,7 @@
 
 module ApplicationHelper
   include EnvironmentHelpers
-  
+
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
@@ -49,5 +49,20 @@ module ApplicationHelper
 
   def parser_type_enabled
     ENV["PARSER_TYPE_ENABLED"] == "true"
+  end
+
+  def human_duration(secs)
+    return '' unless secs.present?
+
+    secs = secs.to_i
+    [[60, :seconds],
+     [60, :minutes],
+     [24, :hours],
+     [Float::INFINITY, :days]].map do |count, name|
+      next unless secs.positive?
+
+      secs, n = secs.divmod(count)
+      "#{n.to_i} #{name}" unless n.to_i.zero?
+    end.compact.reverse.join(' ')
   end
 end
