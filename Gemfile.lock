@@ -23,16 +23,6 @@ GIT
       tzinfo
 
 GIT
-  remote: https://github.com/code4lib/ruby-oai.git
-  revision: ebe92638c483813cd401c9588334d64ff46aae70
-  ref: ebe92
-  specs:
-    oai (0.3.1)
-      builder (>= 2.0.0)
-      faraday
-      faraday_middleware
-
-GIT
   remote: https://github.com/plataformatec/simple_form.git
   revision: 67381fbe74950b37796f8f43a1ff4eca57f772f4
   specs:
@@ -213,9 +203,9 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
-    faraday (0.13.1)
+    faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.12.2)
+    faraday_middleware (0.14.0)
       faraday (>= 0.7.4, < 1.0)
     ffi (1.12.2)
     ffi-compiler (1.0.1)
@@ -320,7 +310,7 @@ GEM
     mongoid_paranoia (0.3.0)
       mongoid (>= 6.0.0)
     multi_json (1.13.1)
-    multipart-post (2.0.0)
+    multipart-post (2.1.1)
     nenv (0.3.0)
     net_http_ssl_fix (0.0.10)
     netrc (0.11.0)
@@ -332,6 +322,10 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oai (1.0.0)
+      builder (>= 3.1.0)
+      faraday
+      faraday_middleware
     oj (3.9.2)
     orm_adapter (0.5.0)
     ougai (1.8.2)
@@ -552,7 +546,7 @@ DEPENDENCIES
   modernizr-rails
   mongoid
   mongoid_paranoia
-  oai!
+  oai
   ougai
   pry-byebug
   puma
