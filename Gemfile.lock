@@ -535,7 +535,6 @@ DEPENDENCIES
   jquery-rails
   jquery-timepicker-rails
   jquery-ui-rails
-  json (= 1.8.3)
   kaminari
   kaminari-mongoid
   launchy (>= 2.1.2)
