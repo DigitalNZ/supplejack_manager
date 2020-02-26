@@ -1,11 +1,10 @@
 <h2><%= t('snippets.create_a') %></h2>
 
-<%= simple_form_for @snippet do |f| %>
+<%= form_with model: @snippet do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
 
-  <%= f.input :name %>
+  <%= f.text_area :content, class: 'code-editor' %>
 
-  <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
-
-  <%= f.button :submit, class: 'right' %>
-
+  <%= f.submit class: 'button' %>
 <% end %>
