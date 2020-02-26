@@ -1,16 +1,15 @@
-<%= simple_form_for @harvest_schedule, html: { class: "harvest_schedule" } do |f| %>
+<%= form_with model: @harvest_schedule, html: { class: "harvest_schedule" } do |f| %>
 
-  <%= f.input :parser_id, collection: @parsers %>
+  <%= f.label :parser_id, 'Parser Script' %>
+  <%= f.select :parser_id, @parsers.map { |parser| [parser.name, parser.id] }, include_blank: true %>
 
-  <%= f.input :start_time, input_html: {class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
+  <%= f.label :start_time %>
+  <%= f.datetime_field :start_time, input_html: { class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
 
   <div class="grid-x">
-    <div class="medium-3 cell">
-      <%= f.label :recurrent %>
-    </div>
-    <div class="medium-9 cell">
-      <%= f.input :recurrent, as: :boolean, label: false %>
-    </div>
+    <%= f.label :recurrent do %>
+      <%= f.check_box :recurrent %> Recurrent
+    <% end %>
   </div>
 
   <br/>
@@ -25,33 +24,33 @@
     <% end %>
   </ul>
 
-  <%= content_tag(:div, id: "recurrent-options", style: @harvest_schedule.recurrent ? "" : "display: none") do %>
+  <%= tag.div(id: "recurrent-options", style: @harvest_schedule.recurrent ? "" : "display: none") do %>
 
     <div class="tabs-content" data-tabs-content='example-tabs'>
 
       <%= content_tag :div, id: "simple-schedule-tab", class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
-        <%= f.input :frequency, collection: ["daily", "weekly", "fortnightly", "monthly"].map{|o| [o.capitalize, o] } %>
+        <%= f.collection_select :frequency, ["daily", "weekly", "fortnightly", "monthly"].map { |o| [o, o.capitalize] }, :first, :second %>
 
         <div class="input string optional harvest_schedule_at_hour">
           <%= f.label :at_hour %>
           <div class="grid-x">
-            <div class="medium-2 cell"><%= f.input_field :at_hour, collection: (0..23).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
-            <div class="medium-2 cell"><%= f.input_field :at_minutes, collection: (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, include_blank: false %></div>
+            <div class="medium-2 cell"><%= f.collection_select :at_hour, (0..23).map { |n| n.to_s.rjust(2, "0") }, :to_s, :to_s %></div>
+            <div class="medium-2 cell"><%= f.collection_select :at_minutes, (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, :to_s, :to_s %></div>
             <div class="medium-10 cell"></div>
           </div>
         </div>
 
-        <%= f.input :offset, hint: t("harvest_schedules.offset_hint") %>
+        <%= f.number_field :offset, hint: t("harvest_schedules.offset_hint") %>
       <% end %>
 
       <%= content_tag :div, id: "cron-syntax-tab", class: "tabs-panel #{!@harvest_schedule.simple? ? "is-active" : nil}" do %>
-        <%= f.input :cron %>
+        <%= f.text_field :cron %>
       <% end %>
 
     </div>
   <% end %>
 
-  <%= f.input :environment, as: :hidden %>
+  <%= f.hidden_field :environment %>
 
   <%= render "mode", { harvest_schedule: @harvest_schedule }  %>
 
@@ -59,5 +58,5 @@
 
   <br/>
 
-  <%= f.button :submit, t('harvest_schedules.save'), class: "button float-right" %>
+  <%= f.submit t('harvest_schedules.save'), class: "button float-right" %>
 <% end %>
