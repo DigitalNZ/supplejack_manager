@@ -1,9 +1,19 @@
-<%= simple_form_for @link_check_rule, url: url do |f| %>
-  <%= f.input :source_id, as: :grouped_select, collection: @partners, group_method: :sources, label_method: :source_id, group_label_method: :name %>
-  <%= f.input :xpath %>
-  <%= f.input :status_codes %>
-  <%= f.input :throttle %>
-  <%= f.input :active, :as => :boolean, value: true %>
+<%= form_with do |f| %>
+  <%= f.label :source_id %>
+  <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id) %>
 
-  <%= f.button :submit, class: 'right' %>
+  <%= f.label :xpath %>
+  <%= f.text_field :xpath %>
+
+  <%= f.label :status_codes %>
+  <%= f.text_field :status_codes %>
+
+  <%= f.label :throttle %>
+  <%= f.text_field :throttle %>
+
+  <%= f.label :active do %>
+    <%= f.check_box :active, value: true %> Active
+  <% end -%>
+
+  <%= f.submit 'Create Link check rule', class: 'button right' %>
 <% end %>

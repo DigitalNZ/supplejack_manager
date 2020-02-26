@@ -160,8 +160,7 @@
     <%= f.label :partner, 'Contributor' %>
     <%= f.select :partner, Partner.all.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
     <%= f.label :source, 'Data source' %>
-    <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id)
-    %>
+    <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id) %>
     <%= f.submit 'Change source', class: 'button right' %>
   <% end %>
   <button class="close-button" data-close aria-label="Close modal" type="button">
