@@ -211,19 +211,19 @@ describe Parser do
     it "returns normal if the parser is not oai" do
       allow(parser).to receive(:oai?) {false}
       allow(parser).to receive(:full_and_flush_allowed?) {false}
-      expect(parser.modes).to eq [['Normal','normal']]
+      expect(parser.modes).to eq [['normal', 'Normal']]
     end
 
     it "returns normal and incremental if the parser is oai" do
       allow(parser).to receive(:oai?) {true}
       allow(parser).to receive(:full_and_flush_allowed?) {false}
-      expect(parser.modes).to eq [['Normal','normal'], ['Incremental','incremental']]
+      expect(parser.modes).to eq [['normal','Normal'], ['incremental','Incremental']]
     end
 
     it "returns normal, full_and_flush and incremental if the parser is oai" do
       allow(parser).to receive(:oai?) {true}
       allow(parser).to receive(:full_and_flush_allowed?) {true}
-      expect(parser.modes).to eq [['Normal','normal'], ['Incremental','incremental'], ['Full And Flush','full_and_flush']]
+      expect(parser.modes).to eq [['normal','Normal'], ['incremental','Incremental'], ['full_and_flush','Full And Flush']]
     end
   end
 
