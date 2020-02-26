@@ -16,9 +16,8 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 5.2'
 gem 'server_timing'
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.7.1'
 
 # assets gems
