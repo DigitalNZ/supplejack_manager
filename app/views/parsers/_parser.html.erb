@@ -8,10 +8,10 @@
         </h1>
       <% end %>
       <div id="<%= 'hidden-parser-form' if @parser.errors.empty? %>">
-        <%= simple_form_for @parser do |f| %>
+        <%= form_with model: @parser do |f| %>
           <div class='parser-form'>
-            <%= f.input :name %>
-            <%= f.button :submit, "Rename Parser" %>
+            <%= f.text_field :name %>
+            <%= f.submit "Rename Parser" %>
           </div>
         <% end %>
       </div>
@@ -156,10 +156,13 @@
 <div id="change-source-alert" class="reveal medium" data-reveal>
   <h2>Change source</h2>
   <p> Warning: changing the source of this parser does not affect records that have already been harvested.</p>
-  <%= simple_form_for @parser do |f| %>
-    <%= f.input :partner, selected: @parser.partner.name, collection: Partner.all.sort(name: 1), label_method: :name, value_method: :name %>
-    <%= f.association :source, as: :grouped_select, collection: Partner.all, group_method: :sources, include_blank: false, label_method: :source_id, group_label_method: :name %>
-    <%= f.button :submit, "Change source", class: 'right' %>
+  <%= form_with model: @parser do |f| %>
+    <%= f.label :partner, 'Contributor' %>
+    <%= f.select :partner, Partner.all.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
+    <%= f.label :source, 'Data source' %>
+    <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id)
+    %>
+    <%= f.submit 'Change source', class: 'button right' %>
   <% end %>
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
