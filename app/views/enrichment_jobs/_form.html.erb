@@ -1,18 +1,33 @@
 <h3><%= "Run #{@enrichment_job.environment.capitalize} Enrichment" %></h3>
 
-<%= simple_form_for @enrichment_job, url: environment_enrichment_jobs_path(@enrichment_job.environment), remote: true do |f| %>
-  <%= f.input :parser_id, as: :hidden %>
-  <%= f.input :version_id, as: :hidden %>
-  <%= f.input :user_id, as: :hidden %>
-  <%= f.input :environment, as: :hidden %>
+<%= form_for @enrichment_job, url: environment_enrichment_jobs_path(@enrichment_job.environment), remote: true do |f| %>
+  <%= f.hidden_field :parser_id %>
+  <%= f.hidden_field :version_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :environment %>
 
-  <%= f.input :record_id, placeholder: "Enter a record_id, or leave blank to run full enrichment" %>
+  <%= f.label :record_id %>
+  <%= f.text_field :record_id, placeholder: 'Enter a record_id, or leave blank to run full enrichment' %>
 
   <% if @parser.enrichment_definitions(@enrichment_job.environment).any? %>
-    <%= f.input :enrichment, collection: @parser.enrichment_definitions(@enrichment_job.environment).keys.map {|k| [k.to_s.titleize, k]}, as: :radio_buttons, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
+    <label class="large"><%= t("parsers.enrichments_to_run") %></label>
+    <%=
+      f.collection_radio_buttons(
+        :enrichment,
+        @parser.enrichment_definitions(@enrichment_job.environment).keys.map do |k|
+          [k.to_s.titleize, k]
+        end,
+        :second,
+        :first
+      ) do |b|
+        b.label { b.radio_button + b.text}
+      end
+        # label: ,
+        # label_html: { class: 'large' }
+    %>
   <% end %>
 
   <br/>
 
-  <%= f.button :submit, "Start Enrichment", class: "button columns twelve" %>
+  <%= f.submit "Start Enrichment", class: "button columns twelve" %>
 <% end %>
