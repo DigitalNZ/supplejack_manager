@@ -13,7 +13,7 @@ $(function() {
     $(window).data("beforeunload", function() {
       return "You've modified your parser, reloading the page will reset all changes.";
     });
-    Harvester.myCodeMirror.on("change", function() {
+    Harvester.myCodeMirror.change(function() {
       $(window).data("codechange", true);
       return window.onbeforeunload = $(window).data("beforeunload");
     });

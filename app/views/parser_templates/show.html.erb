@@ -4,6 +4,6 @@
 	</div>
 </div>
 
-<%= simple_form_for @parser_template do |f| %>
-  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor read-only"} %>
+<%= form_with model: @parser_template do |f| %>
+  <%= f.text_field :content, class: "code-editor read-only" %>
 <% end %>
