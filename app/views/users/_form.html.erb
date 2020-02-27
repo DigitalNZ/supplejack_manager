@@ -1,31 +1,55 @@
-<%= simple_form_for @user do |f| %>
-  <%= f.input :name %>
-  <%= f.input :email %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+<%= form_with model: @user, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
 
   <% if can? :edit_users, @user %>
     <fieldset>
       <legend><%= t('users.administration') %></legend>
-      <%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :role, collection: User::ROLES, label_method: :humanize, value_method: :to_s, include_blank: false, input_html:{ class: 'two' } %>
+      <%= f.label :active do %>
+        <%= f.check_box :active %> Active
+      <% end %>
+      <%= f.select :role, User::ROLES.map { |role| [role.humanize, role] }, class: 'two' %>
     </fieldset>
 
     <fieldset id="management_permissions">
       <legend><%= t('users.management_permissions') %></legend>
       <p><%= t('users.name_can') %></p>
-      <%= f.input :manage_data_sources, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :manage_parsers, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :manage_harvest_schedules, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :manage_link_check_rules, as: :boolean, checked_value: true, unchecked_value: false %>
-      <%= f.input :manage_partners, collection: Partner.all.sort(name: 1), include_blank: false, input_html: {multiple: true, size: 1} %>
+
+      <%= f.label  :manage_data_sources do %>
+        <%= f.check_box :manage_data_sources %> Manage data sources
+      <% end %>
+
+      <%= f.label  :manage_parsers do %>
+        <%= f.check_box :manage_parsers %> Manage parsers
+      <% end %>
+
+      <%= f.label  :manage_harvest_schedules do %>
+        <%= f.check_box :manage_harvest_schedules %> Manage harvest_schedules
+      <% end %>
+
+      <%= f.label  :manage_link_check_rules do %>
+        <%= f.check_box :manage_link_check_rules %> Manage link check rules
+      <% end %>
+
+      <%= f.label :manage_partners, 'For the following contributors (select multiple by holding Ctrl/Apple key):' %>
+      <%= f.select :manage_partners, Partner.all.sort(name: 1).map { |partner| [partner.name, partner.name] }, {}, multiple: true %>
     </fieldset>
 
     <fieldset id="harvesting_permissions">
       <legend><%= t('users.harvesting_permissions') %></legend>
-      <%= f.input :run_harvest_partners, collection: Partner.all.sort(name: 1), include_blank: false, input_html: {multiple: true} %>
+      <%= f.label :run_harvest_partners, 'The user can run harvests for the following contributors (select multiple by holding Ctrl/Apple key):' %>
+      <%= f.select :run_harvest_partners, Partner.all.sort(name: 1).map { |partner| [partner.name, partner.name] }, {}, multiple: true %>
     </fieldset>
   <% end %>
 
-  <%= f.button :submit %> or <%= link_to t('cancel'), safe_users_path %>
+  <%= f.submit class: 'button' %> or <%= link_to t('cancel'), safe_users_path %>
 <% end %>
