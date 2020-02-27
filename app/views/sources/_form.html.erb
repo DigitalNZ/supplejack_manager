@@ -1,27 +1,28 @@
-<%= simple_form_for(@source) do |f| %>
+<%= form_with model: @source do |f| %>
 
   <% if @source.errors.any? %>
-    <%= f.error_notification %>
+    <%= t('forms.error_notification.default_message') %>
   <% end %>
 
-  <div class="grid-x form-inputs">
-    <div class="medium-12 cell">
-      <%= f.input :source_id, disabled: @source.persisted? %>
-      <% if can? :manage, Partner %>
-        <%= f.association :partner, collection: @partners, include_blank: '<create new>' %>
-        <%= f.simple_fields_for :partner do |partner_form| %>
-        <fieldset id="new-partner-fields">
-          <legend><%= t('partners.create') %></legend>
-          <%= partner_form.input :name %>
-        </fieldset>
-        <% end %>
-      <% else %>
-        <%= f.association :partner, collection: @partners %>
-      <% end %>
-    </div>
-  </div>
+  <%= f.label :source_id %>
+  <%= f.text_field :source_id, disabled: @source.persisted? %>
 
-  <div class="form-actions right">
-    <%= f.button :submit %>
-  </div>
+  <% if can? :manage, Partner %>
+    <%= f.label :partner, 'Contributor' %>
+    <%= f.select :partner, @partners.map { |p| [p.name, p.id] }, include_blank: '<create new>' %>
+
+    <fieldset id="new-partner-fields">
+      <legend><%= t('partners.create') %></legend>
+      <%= f.fields_for :partner do |partner_form| %>
+        <%= partner_form.label :name %>
+        <%= partner_form.text_field :name %>
+      <% end %>
+    </fieldset>
+
+  <% else %>
+    <%= f.label :partner, 'Contributor' %>
+    <%= f.select :partner, @partners.map { |p| [p.name, p.id] } %>
+  <% end %>
+
+  <%= f.submit class: 'button' %>
 <% end %>
