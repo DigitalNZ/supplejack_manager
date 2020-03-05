@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe CollectionStatisticsController do
+RSpec.describe CollectionStatisticsController do
   let(:collection_statistics) { build(:collection_statistics) }
 
   before(:each) do

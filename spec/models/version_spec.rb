@@ -5,7 +5,7 @@ class Program
   include Versioned
 end
 
-describe Version do
+RSpec.describe Version do
 
   let(:program) { Program.new }
   let(:version) { Version.new }

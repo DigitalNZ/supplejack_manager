@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Snippet do
+RSpec.describe Snippet do
 
   describe ".find_by_name" do
 

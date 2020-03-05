@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe HarvestSchedulesController do
+RSpec.describe HarvestSchedulesController do
   let(:schedule) { build(:harvest_schedule) }
   let(:paused_schedule) { build(:harvest_schedule) }
 

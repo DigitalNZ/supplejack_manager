@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Previewer do
+RSpec.describe Previewer do
 
   let(:parser) { Parser.new(name: "Europeana", strategy: "json", content: "class Europeana < SupplejackCommon::Json::Base; end") }
   let(:previewer) { Previewer.new(parser, "Data", "user123") }
@@ -15,7 +15,7 @@ describe Previewer do
         preview: {
           format: "json",
           harvest_job: {
-            parser_code: "Data", 
+            parser_code: "Data",
             parser_id: parser.id,
             environment: "preview",
             index: 0,

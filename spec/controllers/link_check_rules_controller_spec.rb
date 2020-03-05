@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe LinkCheckRulesController do
+RSpec.describe LinkCheckRulesController do
   let(:link_check_rule) { build(:link_check_rule) }
   let(:user)            { create(:user, :admin) }
   let(:partner)         { build(:partner) }

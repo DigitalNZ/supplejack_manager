@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HarvestJob do
+RSpec.describe HarvestJob do
   let(:user) { create(:user, id: 333) }
   let(:job)  { HarvestJob.new(user_id: '1234567', parser_id: '7654321') }
 

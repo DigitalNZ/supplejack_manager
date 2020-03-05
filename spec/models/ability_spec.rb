@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
-describe Ability do
+RSpec.describe Ability do
   let(:user)          { create(:user) }
   let(:user_ability)  { Ability.new(user) }
   let(:admin_ability) { Ability.new(create(:user, role: 'admin')) }

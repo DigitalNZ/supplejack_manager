@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'Manage partners', type: :feature do
+RSpec.feature 'Manage partners', type: :feature do
   let(:all_partners_page) { PartnersPage.new }
   let(:admin_user) { create(:user, :admin) }
   let!(:partners) do

@@ -41,13 +41,13 @@
       <% end %>
 
       <%= f.label :manage_partners, 'For the following contributors (select multiple by holding Ctrl/Apple key):' %>
-      <%= f.select :manage_partners, Partner.all.sort(name: 1).map { |partner| [partner.name, partner.name] }, {}, multiple: true %>
+      <%= f.select :manage_partners, Partner.all.sort(name: 1).map { |partner| [partner.name, partner.id] }, {}, multiple: true %>
     </fieldset>
 
     <fieldset id="harvesting_permissions">
       <legend><%= t('users.harvesting_permissions') %></legend>
       <%= f.label :run_harvest_partners, 'The user can run harvests for the following contributors (select multiple by holding Ctrl/Apple key):' %>
-      <%= f.select :run_harvest_partners, Partner.all.sort(name: 1).map { |partner| [partner.name, partner.name] }, {}, multiple: true %>
+      <%= f.select :run_harvest_partners, Partner.all.sort(name: 1).map { |partner| [partner.name, partner.id] }, {}, multiple: true %>
     </fieldset>
   <% end %>
 

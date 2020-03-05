@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HarvestSchedulesHelper do
+RSpec.describe HarvestSchedulesHelper do
   let(:harvest_schedule) { build(:harvest_schedule,
                                  frequency: 'monthly',
                                  at_hour: '13',

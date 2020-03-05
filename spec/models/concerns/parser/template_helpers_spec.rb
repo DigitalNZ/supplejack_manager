@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Parser::TemplateHelpers do
+RSpec.describe Parser::TemplateHelpers do
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)

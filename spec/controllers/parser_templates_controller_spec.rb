@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe ParserTemplatesController do
+RSpec.describe ParserTemplatesController do
   let(:parser_template) { create(:parser_template) }
   let(:user)            { create(:user, :admin) }
 

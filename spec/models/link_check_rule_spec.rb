@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LinkCheckRule do
+RSpec.describe LinkCheckRule do
 	let(:link_check_rule) { LinkCheckRule.new }
 	let(:source) { create(:source, source_id: "source_id") }
 

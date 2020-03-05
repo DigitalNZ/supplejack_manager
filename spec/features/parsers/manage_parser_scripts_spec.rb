@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'Manage parser', type: :feature, js: true do
+RSpec.feature 'Manage parser', type: :feature, js: true do
   let(:parser_page) { ParsersPage.new }
   let(:admin_user) { create(:user, :admin) }
   let!(:parsers) do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CollectionStatistics do
+RSpec.describe CollectionStatistics do
 	let!(:stats_obj_1) { build(:collection_statistics, day: Date.today, suppressed_count: 2, activated_count: 3, deleted_count: 3) }
 	let!(:stats_obj_2) { build(:collection_statistics, day: Date.today, suppressed_count: 1, activated_count: 1, deleted_count: 2) }
 	let!(:stats_obj_3) { build(:collection_statistics, day: Date.today, suppressed_count: 5, activated_count: 2, deleted_count: 4) }

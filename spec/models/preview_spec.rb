@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe Preview do
+RSpec.describe Preview do
   let(:preview) { Preview.new }
 
   @preview = { preview: { id: 1 } }.to_json

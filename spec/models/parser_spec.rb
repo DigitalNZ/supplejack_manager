@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Parser do
+RSpec.describe Parser do
   let(:source) { create(:source) }
   let(:parser) { create(:parser, source_id: source.id, name: 'NZ Museums') }
 

@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe PartnersController do
+RSpec.describe PartnersController do
   let(:partners) { create_list(:partner, 3) }
   let(:partner)  { build(:partner) }
   let(:user)     { create(:user, role: 'admin') }

@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe HomeController do
+RSpec.describe HomeController do
   let!(:parsers) do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)

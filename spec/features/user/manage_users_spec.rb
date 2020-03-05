@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'Admin user can manage other users', type: :feature do
+RSpec.feature 'Admin user can manage other users', type: :feature do
   let(:all_users_page) { UsersPage.new }
   let!(:active_users) { create_list(:user, 3) }
   let!(:deactived_users) { create_list(:user, 3, active: false) }

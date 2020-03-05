@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe SourcesController do
+RSpec.describe SourcesController do
   let(:partner) { create(:partner) }
   let(:user)    { create(:user, :admin) }
 

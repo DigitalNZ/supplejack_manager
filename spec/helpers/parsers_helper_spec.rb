@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ParsersHelper do
+RSpec.describe ParsersHelper do
   let(:parser) do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)

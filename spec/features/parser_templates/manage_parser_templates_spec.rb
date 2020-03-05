@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'Manage parser', type: :feature, js: true do
+RSpec.feature 'Manage parser', type: :feature, js: true do
   let(:parser_templates_page) { ParserTemplatesPage.new }
   let(:admin_user)            { create(:user, :admin)   }
   let(:new_parser_template)   { build(:parser_template) }

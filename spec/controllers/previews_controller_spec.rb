@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe PreviewsController do
+RSpec.describe PreviewsController do
   let(:preview) { build(:preview) }
   let(:user) { create(:user) }
 

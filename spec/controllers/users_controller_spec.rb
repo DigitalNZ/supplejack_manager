@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UsersController do
+RSpec.describe UsersController do
   let(:user)       { create(:user, :admin, email: 'email@example.com') }
   let(:other_user) { create(:user, :admin, email: 'other@example.com') }
 

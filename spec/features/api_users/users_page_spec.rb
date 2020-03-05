@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'API Users Page', type: :feature do
+RSpec.feature 'API Users Page', type: :feature do
   let(:admins) do
     { id: '123123123',
       name: 'John Doe',

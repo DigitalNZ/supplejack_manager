@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe AbstractJobsController do
+RSpec.describe AbstractJobsController do
   before(:each) do
     sign_in create(:user)
   end

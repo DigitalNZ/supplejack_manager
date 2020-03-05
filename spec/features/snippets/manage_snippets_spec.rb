@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-feature 'Manage snippets', type: :feature, js: true do
+RSpec.feature 'Manage snippets', type: :feature, js: true do
   let(:snippet_page) { SnippetsPage.new }
   let(:admin_user) { create(:user, :admin) }
   let(:new_snippet) { build(:snippet) }

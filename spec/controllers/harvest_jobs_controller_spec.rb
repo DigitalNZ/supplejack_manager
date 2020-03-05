@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe HarvestJobsController do
+RSpec.describe HarvestJobsController do
   let(:job) { build(:harvest_job) }
 
   before(:each) do

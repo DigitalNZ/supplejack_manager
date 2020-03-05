@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe SuppressCollectionsController do
+RSpec.describe SuppressCollectionsController do
   let(:user) { create(:user, :admin) }
 
   before(:each) do

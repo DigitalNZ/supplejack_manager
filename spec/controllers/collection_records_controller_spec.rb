@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe CollectionRecordsController do
+RSpec.describe CollectionRecordsController do
   before(:each) do
     sign_in create(:user, :admin)
   end

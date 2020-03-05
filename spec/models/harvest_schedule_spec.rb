@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HarvestSchedule do
+RSpec.describe HarvestSchedule do
 
   let(:schedule) { HarvestSchedule.new(recurrent: true) }
   let(:parser) do

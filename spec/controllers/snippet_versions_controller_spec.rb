@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-describe SnippetVersionsController do
+RSpec.describe SnippetVersionsController do
   let(:user)    { create(:user) }
   let(:snippet) { create(:snippet) }
   let(:version) { create(:version, versionable: snippet, user: user) }
