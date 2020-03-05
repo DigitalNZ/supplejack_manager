@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :parser_template do
     name    { Faker::Name.first_name }
-    content 'hello'
+    content { 'hello' }
   end
 end

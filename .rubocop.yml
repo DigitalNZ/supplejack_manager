@@ -19,3 +19,6 @@ AllCops:
     - 'features/**/*'
   DisplayStyleGuide: true
   DisplayCopNames: true
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
