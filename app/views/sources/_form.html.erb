@@ -1,4 +1,4 @@
-<%= form_with model: @source do |f| %>
+<%= form_with model: @source, local: true do |f| %>
 
   <% if @source.errors.any? %>
     <%= t('forms.error_notification.default_message') %>
@@ -8,8 +8,14 @@
   <%= f.text_field :source_id, disabled: @source.persisted? %>
 
   <% if can? :manage, Partner %>
-    <%= f.label :partner, 'Contributor' %>
-    <%= f.select :partner, @partners.map { |p| [p.name, p.id] }, include_blank: '<create new>' %>
+    <%= f.label :partner_id, 'Contributor' %>
+    <%=
+      f.select(
+        :partner_id,
+        @partners.map { |p| [p.name, p.id] },
+        include_blank: '<create new>'
+      )
+    %>
 
     <fieldset id="new-partner-fields">
       <legend><%= t('partners.create') %></legend>
@@ -20,8 +26,8 @@
     </fieldset>
 
   <% else %>
-    <%= f.label :partner, 'Contributor' %>
-    <%= f.select :partner, @partners.map { |p| [p.name, p.id] } %>
+    <%= f.label :partner_id, 'Contributor' %>
+    <%= f.select :partner_id, @partners.map { |p| [p.name, p.id] } %>
   <% end %>
 
   <%= f.submit class: 'button' %>

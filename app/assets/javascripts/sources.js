@@ -12,11 +12,14 @@ var fold_create_fields = function(select, fields) {
 
 $(function() {
   var update_link, update_time;
+
   $('#sources').dataTable();
+
   fold_create_fields('select[name="source[partner]"]', '#new-partner-fields');
   $('select[name="source[partner]"]').change(function() {
     return fold_create_fields('select[name="source[partner]"]', '#new-partner-fields');
   });
+
   update_link = function() {
     var env, link, new_date, now, time_ago, time_ago_ms;
     time_ago = $("#date-slider").slider("value");
@@ -31,6 +34,7 @@ $(function() {
       return $('#reindex-button').attr('href', link + "?env=" + env);
     }
   };
+
   update_time = function() {
     var new_date, now, time_ago, time_ago_ms;
     time_ago = $("#date-slider").slider("value");
@@ -44,6 +48,7 @@ $(function() {
     }
     return update_link();
   };
+
   $("#date-slider").slider({
     orientation: "horizontal",
     range: "min",
@@ -52,9 +57,11 @@ $(function() {
     slide: update_time,
     change: update_time
   });
+
   $('#environment').change(function() {
     return update_link();
   });
+
   if ($("#date-slider").length !== 0) {
     return update_link();
   }
