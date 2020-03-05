@@ -13,7 +13,7 @@ describe SuppressCollectionsController do
       expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "suppressed", api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/sources", params: { :"source[status]" => "active", limit: 10, order_by: 'status_updated_at', api_key: ENV['HARVESTER_API_KEY'] }) { '{}' }
       get :index, params: { environment: "development" }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

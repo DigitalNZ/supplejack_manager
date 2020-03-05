@@ -20,7 +20,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       allow(HarvestSchedule).to receive(:all).and_return([one_off_schedule])
 
       visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
+      within(:css, 'form[action="/users/sign_in"]') do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
       end
@@ -89,7 +89,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       allow(HarvestSchedule).to receive(:all).and_return([schedule1])
 
       visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
+      within(:css, 'form[action="/users/sign_in"]') do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
       end
@@ -169,7 +169,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       allow(HarvestSchedule).to receive(:all).and_return(schedules)
 
       visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
+      within(:css, 'form[action="/users/sign_in"]') do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
       end

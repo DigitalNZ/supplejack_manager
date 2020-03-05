@@ -30,7 +30,7 @@ feature 'API Users Page', type: :feature do
       allow_any_instance_of(Admin::User).to receive(:find).and_return(admins)
 
       visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
+      within(:css, 'form[action="/users/sign_in"]') do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
       end
