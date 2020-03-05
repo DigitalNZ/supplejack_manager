@@ -1,40 +1,32 @@
-
-
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
-*/
-
+// gems
 @import 'jquery-ui/core';
 @import 'jquery-ui/theme';
-@import "jquery-ui/datepicker";
-@import "jquery-ui/slider";
-@import "jquery.ui.timepicker";
-@import "foundation_and_overrides";
-@import "codemirror";
-@import "codemirror/themes/monokai";
-@import "coderay";
-@import "base";
-@import "forms";
-@import "top_nav";
-@import "parsers";
-@import "harvest_jobs";
-@import "versions";
-@import "snippets";
-@import "parser_templates";
-@import "link_check_rules";
-@import "collection_statistics";
-@import "collection_records";
-@import "previews";
-@import "home";
-@import "devise";
+@import 'jquery-ui/datepicker';
+@import 'jquery-ui/slider';
+@import 'jquery.ui.timepicker';
+@import 'codemirror';
+@import 'codemirror/themes/monokai';
+@import 'coderay';
+
+// foundation related
+@import 'foundation/settings';
+@import 'foundation/foundation_and_overrides';
+
+// custom forms
+@import 'blocks/base';
+@import 'blocks/forms';
+@import 'blocks/top_nav';
+@import 'blocks/parsers';
+@import 'blocks/harvest_jobs';
+@import 'blocks/versions';
+@import 'blocks/snippets';
+@import 'blocks/parser_templates';
+@import 'blocks/link_check_rules';
+@import 'blocks/collection_statistics';
+@import 'blocks/collection_records';
+@import 'blocks/previews';
+@import 'blocks/home';
+@import 'blocks/devise';
 
 .data-tables {
   .pagination-previous a::before, .pagination-previous.disabled::before,
