@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -103,7 +104,7 @@ RSpec.describe ParsersController do
     end
 
     it 'saves the parser' do
-      expect{ post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } }}.to change(Parser, :count).by(1)
+      expect { post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } } }.to change(Parser, :count).by(1)
     end
 
     context 'valid parser' do
@@ -129,13 +130,13 @@ RSpec.describe ParsersController do
       allow(parser).to receive(:update_attributes) { true }
     end
 
-    it "finds an existing parser " do
+    it 'finds an existing parser ' do
       expect(Parser).to receive(:find).with('1234') { parser }
       put :update, params: { id: '1234', parser: { name: '' } }
       expect(assigns(:parser)).to eq parser
     end
 
-    it "updates the parser attributes" do
+    it 'updates the parser attributes' do
       put :update, params: { id: '1234', parser: { name: 'Tepapa' } }
       expect(parser.name).to eq 'Tepapa'
     end
@@ -146,7 +147,7 @@ RSpec.describe ParsersController do
     end
 
     context 'valid parser' do
-      before { allow(parser).to receive(:save) { true }}
+      before { allow(parser).to receive(:save) { true } }
 
       it 'redirects to edit page' do
         put :update, params: { id: parser.id, parser: { name: '' } }
@@ -155,7 +156,7 @@ RSpec.describe ParsersController do
     end
 
     context 'invalid parser' do
-      before { allow(parser).to receive(:save) { false }}
+      before { allow(parser).to receive(:save) { false } }
 
       it 'renders the edit action' do
         put :update, params: { id: '1234', parser: { name: '' } }
@@ -170,26 +171,25 @@ RSpec.describe ParsersController do
       allow(parser).to receive(:destroy) { true }
     end
 
-    context "job not running for parser" do
-
+    context 'job not running for parser' do
       before { allow(parser).to receive(:running_jobs?) { false } }
 
-      it "finds an existing parser " do
-        expect(Parser).to receive(:find).with("1234") { parser }
-        delete :destroy, params: { id: "1234" }
+      it 'finds an existing parser ' do
+        expect(Parser).to receive(:find).with('1234') { parser }
+        delete :destroy, params: { id: '1234' }
         expect(assigns(:parser)).to eq parser
       end
 
-      it "destroys the parser config" do
+      it 'destroys the parser config' do
         expect(parser).to receive(:destroy)
-        delete :destroy, params: { id: "1234" }
+        delete :destroy, params: { id: '1234' }
       end
     end
 
-    it "does not destroy if there are currently running jobs" do
+    it 'does not destroy if there are currently running jobs' do
       allow(parser).to receive(:running_jobs?) { true }
       expect(parser).not_to receive(:destroy)
-      delete :destroy, params: { id: "1234" }
+      delete :destroy, params: { id: '1234' }
     end
   end
 

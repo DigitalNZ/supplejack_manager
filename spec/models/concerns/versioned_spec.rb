@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Versioned do
@@ -24,19 +26,19 @@ RSpec.describe Versioned do
 
   describe 'current_version' do
     context 'production environment' do
-      it "returns the most recent version tagged with production" do
+      it 'returns the most recent version tagged with production' do
         expect(parser.current_version(:production)).to eq parser.versions[1]
       end
     end
 
-    context "test environment" do
-      it "returns the most recent version regardless of tags" do
+    context 'test environment' do
+      it 'returns the most recent version regardless of tags' do
         expect(parser.current_version(:test)).to eq parser.versions.last
       end
     end
   end
 
-  describe "#save_with_version" do
+  describe '#save_with_version' do
     let(:source) { create(:source) }
     let(:user)   { create(:user, :admin) }
     let(:parser) { create(:parser, strategy: 'json', name: 'Natlib', source_id: source, user_id: user) }

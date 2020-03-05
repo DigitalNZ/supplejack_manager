@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :link_check_rule do
     source_id { 'source_id' }

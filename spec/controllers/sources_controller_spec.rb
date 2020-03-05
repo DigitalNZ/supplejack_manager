@@ -68,14 +68,14 @@ RSpec.describe SourcesController do
 
       it 'creates a source with a nested contributor' do
         expect do
-          post :create, params: { source: { source_id: 'Data Source', partner_id: partner.id, partner_attributes: { name: 'Contributor' }} }
+          post :create, params: { source: { source_id: 'Data Source', partner_id: partner.id, partner_attributes: { name: 'Contributor' } } }
         end.to change(Partner, :count).by(1)
       end
     end
 
     describe 'with invalid params' do
       it 'assigns a newly created but unsaved source as @source' do
-        post :create, params: { source: { source_id: '' }}
+        post :create, params: { source: { source_id: '' } }
         expect(assigns(:source)).to be_a_new(Source)
       end
 
@@ -94,7 +94,7 @@ RSpec.describe SourcesController do
     describe 'with valid params' do
       it 'updates the requested source' do
         source = Source.create! valid_attributes
-        put :update, params: { id: source.to_param, source: { source_id: 'updated' }}
+        put :update, params: { id: source.to_param, source: { source_id: 'updated' } }
 
         expect(source.reload.source_id).to eq 'updated'
       end

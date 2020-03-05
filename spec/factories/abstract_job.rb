@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # Status can be
 # finished, failed, stopped, ready

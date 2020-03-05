@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class UsersPage < ApplicationPage
   set_url 'users/'
 

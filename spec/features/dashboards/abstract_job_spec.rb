@@ -25,7 +25,7 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
 
       click_button 'Sign in'
 
-      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], {limit: 50, offset: 0, total_count: 1})
+      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end
 
     let(:source) { create(:source) }
@@ -71,7 +71,7 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
 
       click_button 'Sign in'
 
-      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], {limit: 50, offset: 0, total_count: 1})
+      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end
 
     let(:source) { create(:source) }

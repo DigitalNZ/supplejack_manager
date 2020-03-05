@@ -46,7 +46,7 @@ RSpec.feature 'API Users Page', type: :feature do
     end
 
     scenario 'can click to the edit page for the a user' do
-      expect_any_instance_of(Admin::User).to receive(:update).with('max_requests' => '10000', 'id' => admin['id'] ).and_return true
+      expect_any_instance_of(Admin::User).to receive(:update).with('max_requests' => '10000', 'id' => admin['id']).and_return true
 
       within(:css, "form#edit-user-form-#{admin['id']}") do
         fill_in 'max_requests', with: '10000'

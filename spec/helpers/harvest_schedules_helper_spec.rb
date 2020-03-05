@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe HarvestSchedulesHelper do
@@ -10,7 +12,7 @@ RSpec.describe HarvestSchedulesHelper do
 
 
   context '#harvest_schedule_frequency' do
-    it "should generate the text" do
+    it 'should generate the text' do
       expect(helper.harvest_schedule_frequency(harvest_schedule)).to eq 'monthly at 13:46 (46 13 1 * *)'
     end
   end
