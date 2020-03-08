@@ -17,13 +17,8 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
-      visit new_user_session_path
-      within(:css, 'form[action="/users/sign_in"]') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
 
-      click_button 'Sign in'
+      sign_in user
 
       allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end
@@ -63,13 +58,8 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
-      visit new_user_session_path
-      within(:css, 'form[action="/users/sign_in"]') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
 
-      click_button 'Sign in'
+      sign_in user
 
       allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end

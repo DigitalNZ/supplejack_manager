@@ -18,12 +18,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   let!(:version) { create(:version, versionable: parser, user_id: user) }
 
   before do
-    visit root_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Sign in'
+    sign_in user
 
     visit parsers_path
 
