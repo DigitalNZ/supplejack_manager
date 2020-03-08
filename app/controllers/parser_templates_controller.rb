@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/parser_templates_controller.rb
 class ParserTemplatesController < ApplicationController

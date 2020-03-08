@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Parser
   include Mongoid::Document
@@ -11,7 +12,7 @@ class Parser
 
   field :strategy,  type: String
   field :content,   type: String
-  field :data_type, type: String, default: "record"
+  field :data_type, type: String, default: 'record'
   field :allow_full_and_flush, type: Boolean, default: true
 
   # Used for the /parsers page which includes these 3 fields
@@ -92,7 +93,7 @@ class Parser
       )
   end
 
-  def self.find_by_partners(partner_ids=[])
+  def self.find_by_partners(partner_ids = [])
     sources = Source.where(:partner.in => partner_ids).pluck(:id)
     @parsers = Parser.where(:source.in => sources)
   end
@@ -102,7 +103,7 @@ class Parser
   end
 
   def file_name
-    @file_name ||= name.downcase.gsub(/\s/, '_') + ".rb"
+    @file_name ||= name.downcase.gsub(/\s/, '_') + '.rb'
   end
 
   def path
@@ -110,26 +111,24 @@ class Parser
   end
 
   def running_jobs?
-    begin
-      active_jobs = []
-      APPLICATION_ENVS.each do |environment|
-        active_jobs << AbstractJob.search({parser_id: self.id}, environment)
-      end
-
-      active_jobs.flatten.present?
-    rescue StandardError => e
-      Rails.logger.error "Exception caught while checking running jobs. Exception is #{e.inspect}"
-      Rails.logger.error e.backtrace.join("\n")
+    active_jobs = []
+    APPLICATION_ENVS.each do |environment|
+      active_jobs << AbstractJob.search({ parser_id: self.id }, environment)
     end
+
+    active_jobs.flatten.present?
+  rescue StandardError => e
+    Rails.logger.error "Exception caught while checking running jobs. Exception is #{e.inspect}"
+    Rails.logger.error e.backtrace.join("\n")
   end
 
   def scheduled?
     if Rails.env.development?
-      !HarvestSchedule.find_from_environment({parser_id: self.id}, 'development').empty?
+      !HarvestSchedule.find_from_environment({ parser_id: self.id }, 'development').empty?
     else
       begin
 
-        !HarvestSchedule.find_from_environment({parser_id: self.id}, 'staging').empty? or !HarvestSchedule.find_from_environment({parser_id: self.id}, 'production').empty?
+        !HarvestSchedule.find_from_environment({ parser_id: self.id }, 'staging').empty? || !HarvestSchedule.find_from_environment({ parser_id: self.id }, 'production').empty?
 
       rescue StandardError => e
 
@@ -142,15 +141,15 @@ class Parser
   end
 
   def xml?
-    ["xml", "oai", "rss"].include?(strategy)
+    ['xml', 'oai', 'rss'].include?(strategy)
   end
 
   def json?
-    strategy == "json"
+    strategy == 'json'
   end
 
   def oai?
-    strategy == "oai"
+    strategy == 'oai'
   end
 
   # Checks if the parser is valid or not.

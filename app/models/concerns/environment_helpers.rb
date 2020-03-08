@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/models/concerns/environment_helpers.rb
 module EnvironmentHelpers
@@ -16,7 +17,7 @@ module EnvironmentHelpers
   end
 
 
-  def set_worker_environment_for(klass, environment=nil)
+  def set_worker_environment_for(klass, environment = nil)
     if environment.present?
       env_vars = APPLICATION_ENVIRONMENT_VARIABLES[environment]
     else

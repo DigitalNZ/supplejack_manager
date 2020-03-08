@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 
 module ApplicationHelper
   include EnvironmentHelpers
 
-  def display_base_errors resource
-    return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
+  def display_base_errors(resource)
+    return '' if (resource.errors.empty?) || (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
     html = <<-HTML
     <div class="alert alert-error alert-block">
@@ -14,9 +15,9 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def link_to_tab(name, path, html_options={})
+  def link_to_tab(name, path, html_options = {})
     li_options = {}
-    li_options.reverse_merge!({class: "active"}) if request.path == path
+    li_options.reverse_merge!({ class: 'active' }) if request.path == path
     content_tag(:li, link_to(name, path, html_options), li_options)
   end
 
@@ -34,12 +35,12 @@ module ApplicationHelper
   def format_backtrace(backtrace)
     content_tag 'div' do
       backtrace.each_with_index do |span_content, index|
-        concat content_tag("small", span_content)
+        concat content_tag('small', span_content)
       end
     end
   end
 
-  def safe_users_path(params={})
+  def safe_users_path(params = {})
     current_user.admin? ? users_path(params) : root_path
   end
 
@@ -48,7 +49,7 @@ module ApplicationHelper
   end
 
   def parser_type_enabled
-    ENV["PARSER_TYPE_ENABLED"] == "true"
+    ENV['PARSER_TYPE_ENABLED'] == 'true'
   end
 
   def human_duration(secs)

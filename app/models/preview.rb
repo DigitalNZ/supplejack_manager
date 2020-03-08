@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Preview < ActiveResource::Base
   include EnvironmentHelpers
@@ -35,7 +36,7 @@ class Preview < ActiveResource::Base
   end
 
   def finished?
-    self.status == "finished"
+    self.status == 'finished'
   end
 
   def api_record_json
@@ -43,7 +44,7 @@ class Preview < ActiveResource::Base
   end
 
   def api_record_output
-    CodeRay.scan(api_record_json, :json).html(:line_numbers => :table).html_safe
+    CodeRay.scan(api_record_json, :json).html(line_numbers: :table).html_safe
   end
 
   def harvested_attributes_json
@@ -51,7 +52,7 @@ class Preview < ActiveResource::Base
   end
 
   def harvested_attributes_output
-    CodeRay.scan(harvested_attributes_json, :json).html(:line_numbers => :table).html_safe
+    CodeRay.scan(harvested_attributes_json, :json).html(line_numbers: :table).html_safe
   end
 
   def field_errors?
@@ -59,7 +60,7 @@ class Preview < ActiveResource::Base
   end
 
   def field_errors_output
-    CodeRay.scan(field_errors_json, :json).html(:line_numbers => :table).html_safe if field_errors?
+    CodeRay.scan(field_errors_json, :json).html(line_numbers: :table).html_safe if field_errors?
   end
 
   def validation_errors_output
@@ -99,7 +100,6 @@ class Preview < ActiveResource::Base
   end
 
   def errors?
-    harvest_failure? or validation_errors? or field_errors? or harvest_job_errors.present?
+    harvest_failure? || validation_errors? || field_errors? || harvest_job_errors.present?
   end
-
 end

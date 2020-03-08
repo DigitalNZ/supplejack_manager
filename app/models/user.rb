@@ -37,7 +37,7 @@ class User
 
   field :manage_data_sources,     type: Boolean,  default: false
   field :manage_parsers,          type: Boolean,  default: false
-  field :manage_harvest_schedules,type: Boolean,  default: false
+  field :manage_harvest_schedules, type: Boolean,  default: false
   field :manage_link_check_rules, type: Boolean,  default: false
   field :manage_partners,         type: Array, default: []
   field :run_harvest_partners,    type: Array, default: []

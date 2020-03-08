@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Snippet
   include Mongoid::Document
@@ -14,7 +15,7 @@ class Snippet
   end
 
   def file_name
-    @file_name ||= self.name.downcase.gsub(/\s/, "_") + ".rb"
+    @file_name ||= self.name.downcase.gsub(/\s/, '_') + '.rb'
   end
 
   def path

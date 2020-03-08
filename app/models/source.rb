@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Source
   include Mongoid::Document
@@ -23,24 +24,23 @@ class Source
   end
 
   private
-
-  def update_apis
-    partner.update_apis
-    APPLICATION_ENVS.each do |environment|
-      env = APPLICATION_ENVIRONMENT_VARIABLES[environment]
-      RestClient.post("#{env['API_HOST']}/harvester/partners/#{self.partner.id.to_s}/sources", { source: self.attributes, api_key: env['HARVESTER_API_KEY'] })
+    def update_apis
+      partner.update_apis
+      APPLICATION_ENVS.each do |environment|
+        env = APPLICATION_ENVIRONMENT_VARIABLES[environment]
+        RestClient.post("#{env['API_HOST']}/harvester/partners/#{self.partner.id}/sources", { source: self.attributes, api_key: env['HARVESTER_API_KEY'] })
+      end
     end
-  end
 
-  def create_link_check_rule
-    APPLICATION_ENVS.each do |environment|
-      set_worker_environment_for(LinkCheckRule, environment)
-      LinkCheckRule.create(source_id: self.id, active: false)
+    def create_link_check_rule
+      APPLICATION_ENVS.each do |environment|
+        set_worker_environment_for(LinkCheckRule, environment)
+        LinkCheckRule.create(source_id: self.id, active: false)
+      end
     end
-  end
 
-  def slugify_source_id
-    # Convert any special characters to underscore except hyphens
-    self.source_id = source_id.split('-').map(&:parameterize).map(&:underscore).join('-')
-  end
+    def slugify_source_id
+      # Convert any special characters to underscore except hyphens
+      self.source_id = source_id.split('-').map(&:parameterize).map(&:underscore).join('-')
+    end
 end

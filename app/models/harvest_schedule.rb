@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 
 class HarvestSchedule < ActiveResource::Base
   include EnvironmentHelpers
 
-  self.site = ENV["WORKER_HOST"]
+  self.site = ENV['WORKER_HOST']
   headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
 
   schema do
@@ -30,21 +31,21 @@ class HarvestSchedule < ActiveResource::Base
   class << self
     def find_from_environment(params, env)
       self.change_worker_env!(env)
-      self.find(:all, params: { harvest_schedule: params} )
+      self.find(:all, params: { harvest_schedule: params })
     end
 
     def destroy_all_for_parser(parser_id)
       environments = ['staging', 'production']
-      environments = [Rails.env] if ['development','test'].include? Rails.env
+      environments = [Rails.env] if ['development', 'test'].include? Rails.env
 
       environments.each do |env|
-        HarvestSchedule.find_from_environment({parser_id: parser_id}, env).each do |hs|
+        HarvestSchedule.find_from_environment({ parser_id: parser_id }, env).each do |hs|
           HarvestSchedule.delete(hs.id)
         end
       end
     end
 
-    def update_schedulers_from_environment(params, env, mode="normal")
+    def update_schedulers_from_environment(params, env, mode = 'normal')
       schedulers = self.find_from_environment(params, env)
       if schedulers.any?
         schedulers.each do |scheduler|
@@ -60,8 +61,8 @@ class HarvestSchedule < ActiveResource::Base
   end
 
   def recurrent
-    return true if @attributes["recurrent"].nil? || @attributes["recurrent"].to_s.match(/1|true/)
-    return false if @attributes["recurrent"].to_s.match(/0|false/)
+    return true if @attributes['recurrent'].nil? || @attributes['recurrent'].to_s.match(/1|true/)
+    return false if @attributes['recurrent'].to_s.match?(/0|false/)
   end
 
   def parser
@@ -76,5 +77,4 @@ class HarvestSchedule < ActiveResource::Base
     return false unless parser
     parser.oai?
   end
-
 end

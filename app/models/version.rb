@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Version
   include Mongoid::Document
@@ -17,15 +18,15 @@ class Version
 
   def staging?
     self.tags ||= []
-    self.tags.include?("staging")
+    self.tags.include?('staging')
   end
 
   def production?
     self.tags ||= []
-    self.tags.include?("production")
+    self.tags.include?('production')
   end
 
-  def update_attributes(attributes={})
+  def update_attributes(attributes = {})
     attributes ||= {}
     attributes[:tags] ||= []
     super(attributes)
@@ -37,9 +38,9 @@ class Version
 
       RestClient::Request.execute(
         method: :post,
-        url: ENV["CHANGESAPP_HOST"],
-        user: ENV["CHANGESAPP_USER"],
-        password: ENV["CHANGESAPP_PASSWORD"],
+        url: ENV['CHANGESAPP_HOST'],
+        user: ENV['CHANGESAPP_USER'],
+        password: ENV['CHANGESAPP_PASSWORD'],
         payload: payload
       )
     end

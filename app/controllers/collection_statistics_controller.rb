@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/collection_statistics_controller.rb
 class CollectionStatisticsController < ApplicationController

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 
 class EnrichmentJob < AbstractJob
-  self.site = ENV["WORKER_HOST"]
+  self.site = ENV['WORKER_HOST']
   headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
 
   schema do

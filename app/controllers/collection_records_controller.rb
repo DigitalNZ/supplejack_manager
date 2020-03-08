@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class CollectionRecordsController < ApplicationController
   authorize_resource class: false
@@ -11,7 +12,7 @@ class CollectionRecordsController < ApplicationController
   def update
     begin
       RestClient.put("#{fetch_env_vars['API_HOST']}/harvester/records/#{params[:id]}", { record: { status: params[:status] }, api_key: fetch_env_vars['HARVESTER_API_KEY'] })
-      flash[:notice] = "Record successfully updated"
+      flash[:notice] = 'Record successfully updated'
     rescue Exception => e
       Rails.logger.error "Exception #{e} when attempting to post to API"
     end

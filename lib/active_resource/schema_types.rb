@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module ActiveResource
   module SchemaTypes
@@ -31,14 +32,14 @@ module ActiveResource
       def self.cast_value(value)
         return true if value.to_s.match(/true|1/) || value == true
         return false if value.to_s.match(/false|0/) || value == false
-        return nil
+        nil
       end
     end
 
     TYPE_MAPPINGS = {
-                      "datetime" => ActiveResource::SchemaTypes::DateTime, 
-                      "date" =>     ActiveResource::SchemaTypes::Date,
-                      "boolean" =>  ActiveResource::SchemaTypes::Boolean
+                      'datetime' => ActiveResource::SchemaTypes::DateTime,
+                      'date' =>     ActiveResource::SchemaTypes::Date,
+                      'boolean' =>  ActiveResource::SchemaTypes::Boolean
                     }
 
     included do
@@ -51,7 +52,5 @@ module ActiveResource
         end
       end
     end
-
-    
   end
 end

@@ -6,7 +6,7 @@ class ParserTemplate
   include Mongoid::Timestamps
   include Mongoid::Paranoia
 
-  field :name,		type: String
+  field :name,    type: String
   field :content, type: String
   field :user_id, type: String
 

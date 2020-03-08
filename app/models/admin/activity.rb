@@ -19,13 +19,12 @@ module Admin
     end
 
     private
+      def host
+        APPLICATION_ENVIRONMENT_VARIABLES[environment]['API_HOST']
+      end
 
-    def host
-      APPLICATION_ENVIRONMENT_VARIABLES[environment]['API_HOST']
-    end
-
-    def api_key
-      APPLICATION_ENVIRONMENT_VARIABLES[environment]['HARVESTER_API_KEY']
-    end
+      def api_key
+        APPLICATION_ENVIRONMENT_VARIABLES[environment]['HARVESTER_API_KEY']
+      end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/partners_controller.rb
 class PartnersController < ApplicationController
@@ -28,8 +29,7 @@ class PartnersController < ApplicationController
   end
 
   private
-
-  def partner_params
-    params.require(:partner).permit(:name)
-  end
+    def partner_params
+      params.require(:partner).permit(:name)
+    end
 end

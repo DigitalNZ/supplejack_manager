@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ParserVersionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -38,16 +40,15 @@ class ParserVersionsController < ApplicationController
   end
 
   private
+    def find_parser
+      @parser = Parser.find(params[:parser_id])
+    end
 
-  def find_parser
-    @parser = Parser.find(params[:parser_id])
-  end
+    def find_version
+      @version = @parser.find_version(params[:id])
+    end
 
-  def find_version
-    @version = @parser.find_version(params[:id])
-  end
-
-  def parser_version_params
-    params.permit!
-  end
+    def parser_version_params
+      params.permit!
+    end
 end
