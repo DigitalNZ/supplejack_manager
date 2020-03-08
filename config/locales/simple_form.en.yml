@@ -1,6 +1,5 @@
-
 en:
-  simple_form:
+  forms:
     "yes": 'Yes'
     "no": 'No'
     required:
@@ -29,7 +28,7 @@ en:
         source_id: "Source ID"
         environment: "Environment:"
         partner: "Contributor"
-      partner: 
+      partner:
         name: "Contributor name"
       snippet:
         name: "Code Snippet Name"
@@ -37,6 +36,6 @@ en:
         parser_id: "Parser Script"
         start_time: "Begin"
         recurrent: "Recurring"
-    placeholders:      
+    placeholders:
       collection_record:
         id: "Enter a Record ID"
