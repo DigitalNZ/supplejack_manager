@@ -16,7 +16,7 @@ RSpec.feature 'Job Schedules', type: :feature do
   end
 
   context 'One off schedules' do
-    let(:one_off_schedule) { create(:harvest_schedule, recurrent: false, parser_id: parser.id) }
+    let(:one_off_schedule) { build(:harvest_schedule, recurrent: false, parser_id: parser.id, id: 1) }
 
     before do
       allow_any_instance_of(Partner).to receive(:update_apis)
