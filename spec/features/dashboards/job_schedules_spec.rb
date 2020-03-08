@@ -5,6 +5,9 @@ require 'rails_helper'
 RSpec.feature 'Job Schedules', type: :feature do
   let(:user) { create(:user, :admin) }
 
+  let(:source) { create(:source) }
+  let(:parser) { create(:parser, source: source) }
+
   context 'a user that is logged out' do
     scenario 'gets redirected to the sign in page' do
       visit environment_harvest_schedules_path(environment: 'staging')
@@ -13,27 +16,19 @@ RSpec.feature 'Job Schedules', type: :feature do
   end
 
   context 'One off schedules' do
+    let(:one_off_schedule) { create(:harvest_schedule, recurrent: false, parser_id: parser.id) }
+
     before do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
       allow(HarvestSchedule).to receive(:all).and_return([one_off_schedule])
 
-      visit new_user_session_path
-      within(:css, 'form[action="/users/sign_in"]') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
-
-      click_button 'Sign in'
+      sign_in user
     end
 
-    let(:source) { create(:source) }
-    let(:parser) { create(:parser, source: source) }
-    let(:one_off_schedule) { build(:harvest_schedule, recurrent: false, parser_id: parser.id) }
 
     before :each do
-      one_off_schedule.id = 1
       visit environment_harvest_schedules_path(environment: 'staging')
     end
 
@@ -48,7 +43,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(HarvestSchedule).to receive(:find).and_return(one_off_schedule)
       click_link('Edit')
 
-      expect(page.current_path).to eq edit_environment_harvest_schedule_path(environment: 'staging', id: 1)
+      expect(page.current_path).to eq edit_environment_harvest_schedule_path(environment: 'staging', id: one_off_schedule.id)
     end
 
     scenario 'can click Delete link to delete job', js: true do
@@ -88,17 +83,9 @@ RSpec.feature 'Job Schedules', type: :feature do
       allow(LinkCheckRule).to receive(:create)
       allow(HarvestSchedule).to receive(:all).and_return([schedule1])
 
-      visit new_user_session_path
-      within(:css, 'form[action="/users/sign_in"]') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
-
-      click_button 'Sign in'
+      sign_in user
     end
 
-    let(:source) { create(:source) }
-    let(:parser) { create(:parser, source: source) }
     let(:schedule1) do
       build(:harvest_schedule, { recurrent: true,
                                  parser_id: parser.id,
@@ -133,7 +120,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(HarvestSchedule).to receive(:find).and_return(schedule1)
       click_link('Edit')
 
-      expect(page.current_path).to eq edit_environment_harvest_schedule_path(environment: 'staging', id: 1)
+      expect(page.current_path).to eq edit_environment_harvest_schedule_path(environment: 'staging', id: schedule1.id)
     end
 
     scenario 'can click Delete link to delete job', js: true do
@@ -168,13 +155,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       allow(LinkCheckRule).to receive(:create)
       allow(HarvestSchedule).to receive(:all).and_return(schedules)
 
-      visit new_user_session_path
-      within(:css, 'form[action="/users/sign_in"]') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
-
-      click_button 'Sign in'
+      sign_in user
     end
 
     let(:source) { create(:source) }
