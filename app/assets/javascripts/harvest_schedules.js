@@ -12,7 +12,7 @@ $(function() {
     dateFormat: "dd/mm/yy",
     minDate: 0
   });
-  $("#harvest_schedule_recurrent").click(function() {
+  $('input[name="harvest_schedule[recurrent]"]').change(function() {
     var $checkBox, $recurrentOptions;
     $checkBox = $(this);
     $recurrentOptions = $("#recurrent-options");
@@ -22,7 +22,7 @@ $(function() {
       return $recurrentOptions.hide();
     }
   });
-  return $("#new_harvest_schedule").on("change", "#harvest_schedule_parser_id", function(event) {
+  return $("#new_harvest_schedule").change("#harvest_schedule_parser_id", function(event) {
     var $form, new_path;
     $form = $("form.harvest_schedule");
     new_path = $form.attr("action") + "/new.js";
