@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'Manage sources', type: :feature, js: true do
+RSpec.feature 'Manage sources', type: :feature, js: true do
   let(:all_sources_page) { SourcesPage.new }
   let(:admin_user) { create(:user, :admin) }
   let!(:sources) do

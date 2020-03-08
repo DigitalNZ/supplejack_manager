@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe PreviewersController do
+RSpec.describe PreviewersController do
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
@@ -37,8 +39,8 @@ describe PreviewersController do
       post :create, params: { parser_id: parser.id,
            parser: { content: 'variable += 1' },
            index: 10, format: :js }
-      expect(assigns(:parser_error)).to eq({ :type => NoMethodError,
-                                         :message => "undefined method `+' for nil:NilClass" })
+      expect(assigns(:parser_error)).to eq({ type: NoMethodError,
+                                         message: "undefined method `+' for nil:NilClass" })
     end
 
     it 'initializes a new previewer in test mode' do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'API Users Page', type: :feature do
+RSpec.feature 'API Users Page', type: :feature do
   let(:admin) do
     { id: '123123123',
       name: 'John Doe',
@@ -29,13 +29,7 @@ feature 'API Users Page', type: :feature do
       allow_any_instance_of(Admin::User).to receive(:all).and_return([admin])
       allow_any_instance_of(Admin::User).to receive(:find).and_return(admin)
 
-      visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
-
-      click_button 'Sign in'
+      sign_in user
       visit edit_environment_admin_user_path(environment: 'staging', id: admin['id'])
     end
 
@@ -46,7 +40,7 @@ feature 'API Users Page', type: :feature do
     end
 
     scenario 'can click to the edit page for the a user' do
-      expect_any_instance_of(Admin::User).to receive(:update).with('max_requests' => '10000', 'id' => admin['id'] ).and_return true
+      expect_any_instance_of(Admin::User).to receive(:update).with('max_requests' => '10000', 'id' => admin['id']).and_return true
 
       within(:css, "form#edit-user-form-#{admin['id']}") do
         fill_in 'max_requests', with: '10000'

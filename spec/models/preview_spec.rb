@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe Preview do
+RSpec.describe Preview do
   let(:preview) { Preview.new }
 
   @preview = { preview: { id: 1 } }.to_json
@@ -109,13 +110,13 @@ describe Preview do
 
     it 'should call pretty_xml_output when format is xml' do
       preview.format = 'xml'
-      expect(preview).to receive(:pretty_xml_output) {}
+      expect(preview).to receive(:pretty_xml_output) { }
       preview.raw_output
     end
 
     it 'should call pretty_json_output when format is not xml' do
       preview.format = 'json'
-      expect(preview).to receive(:pretty_json_output) {}
+      expect(preview).to receive(:pretty_json_output) { }
       preview.raw_output
     end
   end

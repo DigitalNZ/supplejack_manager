@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User has forgotten the password', type: :feature do
+RSpec.feature 'User has forgotten the password', type: :feature do
   let(:forgot_password_page) { ForgotPasswordPage.new }
   let!(:user) { create(:user) }
 

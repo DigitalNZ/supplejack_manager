@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User sign in', type: :feature do
+RSpec.feature 'User sign in', type: :feature do
   let(:login_page) { LoginPage.new }
   let(:user) { create(:user) }
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class LoginPage < ApplicationPage
   set_url 'users/sign_in'
 

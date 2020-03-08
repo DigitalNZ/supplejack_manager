@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe HarvestJobsController do
+RSpec.describe HarvestJobsController do
   let(:job) { build(:harvest_job) }
 
   before(:each) do
@@ -23,7 +24,7 @@ describe HarvestJobsController do
 
     it 'should update the attributes' do
       expect(job).to receive(:update_attributes)
-      put :update, params: { id: 1, harvest_job: {status: 'finished'}, format: 'js', environment: 'staging' }
+      put :update, params: { id: 1, harvest_job: { status: 'finished' }, format: 'js', environment: 'staging' }
     end
   end
 end

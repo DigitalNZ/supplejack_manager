@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe SnippetsController do
+RSpec.describe SnippetsController do
   let(:snippet) { create(:snippet) }
   let(:user)    { create(:user, :admin) }
   let(:version) { create(:version, versionable: snippet) }
@@ -43,13 +44,13 @@ describe SnippetsController do
     end
 
     it 'initializes a new snippet' do
-      expect(Snippet).to receive(:new).with({'name' => 'Copyright'}) { snippet }
+      expect(Snippet).to receive(:new).with({ 'name' => 'Copyright' }) { snippet }
       post :create, params: { snippet: { name: 'Copyright' } }
     end
 
     it 'saves the snippet' do
       expect(snippet).to receive(:save)
-      post :create, params: { snippet: {name: 'Copyright'} }
+      post :create, params: { snippet: { name: 'Copyright' } }
     end
 
     context 'valid snippet' do
@@ -60,7 +61,7 @@ describe SnippetsController do
     end
 
     context 'invalid snippet' do
-      before { allow(snippet).to receive(:save) { false }}
+      before { allow(snippet).to receive(:save) { false } }
 
       it 'renders the edit action' do
         post :create, params: { snippet: { name: 'Copyright' } }
@@ -79,11 +80,11 @@ describe SnippetsController do
       expect(snippet).to receive(:update_attributes).with({ 'name' => 'Copyright',
                                                             'message' => 'update cho self',
                                                             'content': 'I am a snippet',
-                                                            'environment': 'test'})
+                                                            'environment': 'test' })
       put :update, params: { id: '1234', snippet: { name: 'Copyright',
                                                     message: 'update cho self',
                                                     content: 'I am a snippet',
-                                                    environment: 'test' }}
+                                                    environment: 'test' } }
     end
 
     context 'valid snippet' do
