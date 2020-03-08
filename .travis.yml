@@ -1,8 +1,4 @@
-sudo: required
-
 language: ruby
-
-dist: bionic
 
 rvm:
   - 2.6.5
@@ -11,23 +7,16 @@ services:
   - mongodb
   - xvfb
 
-before_script:
-  - cp config/application.yml.example config/application.yml
-  - gem install bundler --version $(tail -n1 Gemfile.lock)
-  - bundle exec rake db:test:prepare
-  - RAILS_ENV=test bundle exec rake db:create --trace
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-
 addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
+  chrome: stable
 
 cache: bundler
 
-bundler_args: --without production
+before_script:
+  - cp config/application.yml.example config/application.yml
+  - gem install bundler --version $(tail -n1 Gemfile.lock)
+  - RAILS_ENV=test bin/rails db:create --trace
+  - RAILS_ENV=test bin/rails db:migrate --trace
 
 jobs:
   include:
