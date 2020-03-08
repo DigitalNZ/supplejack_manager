@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class AbstractJob < ActiveResource::Base
   include EnvironmentHelpers
@@ -34,23 +35,23 @@ class AbstractJob < ActiveResource::Base
   add_response_method :http
 
   class << self
-    def build(attributes={})
-      attributes.reverse_merge!({parser_id: nil, version_id: nil, user_id: nil, limit: nil, environment: nil})
+    def build(attributes = {})
+      attributes.reverse_merge!({ parser_id: nil, version_id: nil, user_id: nil, limit: nil, environment: nil })
       new(attributes)
     end
 
-    def from_parser(parser, user=nil)
-      self.new(parser_id: parser.id, version_id: nil, limit: nil, user_id: user.try(:id), environment: nil)
+    def from_parser(parser, user = nil)
+      self.new(parser_id: parser.id, version_id: nil, limit: nil, user_id: user&.id, environment: nil)
     end
 
-    def search(params={}, environment = nil)
+    def search(params = {}, environment = nil)
       self.change_worker_env!(environment) if environment.present?
-      params = params.try(:dup).try(:symbolize_keys) || {}
-      params.reverse_merge!(status: "active", page: 1, environment: ["staging","production"])
+      params = params&.dup&.symbolize_keys || {}
+      params.reverse_merge!(status: 'active', page: 1, environment: ['staging', 'production'])
       params[:parser_id] = params.delete(:parser) if params[:parser]
       jobs = self.find(:all, params: params)
       Kaminari::PaginatableArray.new(
-        jobs,{
+        jobs, {
           limit: jobs.http['X-limit'].to_i,
           offset: jobs.http['X-offset'].to_i,
           total_count: jobs.http['X-total'].to_i

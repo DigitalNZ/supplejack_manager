@@ -1,5 +1,3 @@
-
-
 <div class="medium-8 cell centered">
 
   <div class="grid-x">
@@ -9,10 +7,10 @@
   <div class="grid-x">
     <%= form_tag(environment_collection_records_path(environment: params[:environment]), {method: :get, id: "collection_records_form"}) do |f| %>
       <div class="medium-4 cell">
-          <%= text_field_tag 'id', @record_id, placeholder: t('simple_form.placeholders.collection_record.id')  %>
+          <%= text_field_tag 'id', @record_id, placeholder: t('forms.placeholders.collection_record.id')  %>
       </div>
       <div class="medium-4 cell">
-        <%= submit_tag t('records.search'), class: "button right" %>
+        <%= submit_tag t('records.search'), class: "button" %>
       </div>
     <% end %>
   </div>
