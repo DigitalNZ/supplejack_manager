@@ -13,11 +13,11 @@ $(function() {
     $(window).data("beforeunload", function() {
       return "You've modified your parser, reloading the page will reset all changes.";
     });
-    Harvester.myCodeMirror.change(function() {
+    Harvester.myCodeMirror.on('change', function() {
       $(window).data("codechange", true);
       return window.onbeforeunload = $(window).data("beforeunload");
     });
-    return $(".edit_parser input[value='Update Parser Script'], .edit_snippet input[value='Update Snippet'], .new_snippet input[value='Create Snippet'], .new_parser_template input[value='Create Parser template'], .edit_parser_template input[value='Update Parser template']").hover((function() {
+    return $("form[method='post'] input[value='Update Parser Script'], form[method='post'] input[value='Update Snippet'], form[method='post'] input[value='Create Snippet'], form[action='/parser_templates'] input[value='Create Parser template'], form[method='post'] input[value='Update Parser template']").hover((function() {
       return window.onbeforeunload = null;
     }), function() {
       if ($(window).data("codechange")) {
