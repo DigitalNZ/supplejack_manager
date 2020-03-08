@@ -1,19 +1,30 @@
-
-
 <div class="twelve columns centered">
   <div class="devise-block">
     <div class="four columns centered">
       <div class="four columns centered">
         <%= image_tag('Supplejack-icon-190.png') %>
       </div>
+
       <h3 class="text-center">Sign In</h3>
-      <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical user-signin-form' }) do |f| %>
-        <%= f.input :email, :autofocus => true %>
-        <%= f.input :password %>
-        <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-        <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <% if devise_mapping.rememberable? %>
+          <div>
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <%= f.submit 'Sign in', :class => 'button btn-primary' %>
       <% end %>
-      <%= render "devise/shared/links" %>
+
+      <%= render 'devise/shared/links' %>
     </div>
   </div>
 </div>

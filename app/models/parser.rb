@@ -212,7 +212,7 @@ class Parser
     modes = ['normal']
     modes << 'incremental' if oai?
     modes << 'full_and_flush' if full_and_flush_allowed?
-    modes.map {|m| [m.titleize, m]}
+    modes.map { |m| [m, m.titleize] }
   end
 
   def partner

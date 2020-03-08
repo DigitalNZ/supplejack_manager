@@ -1,12 +1,12 @@
-
-
-<%= simple_form_for @snippet do |f| %>
+<%= form_with model: @snippet, local: true do |f| %>
   <% if can? :update, @snippet %>
-    <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
+    <%= f.text_area :content, class: 'code-editor' %>
 
-    <%= f.input :message %>
-    <%= f.button :submit, class: 'right' %>
+    <%= f.label :message %>
+    <%= f.text_field :message %>
+
+    <%= f.submit class: 'button' %>
   <% else %>
-    <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor read-only"} %>
+    <%= f.text_area :content, class: 'code-editor read-only' %>
   <% end %>
 <% end %>

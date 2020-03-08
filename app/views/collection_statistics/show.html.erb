@@ -1,6 +1,3 @@
-
-
-
 <h2 class="collection-stats-heading">
 	<%= link_to_previous_day @day, params[:environment], class: "cycle-prev-day-button arrow arrow-left" %>
 	<span><%= params[:environment].try(:capitalize)%> Collection Statistics for: <%= @day.to_date.to_formatted_s(:long) %></span>
