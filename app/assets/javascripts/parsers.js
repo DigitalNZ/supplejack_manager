@@ -10,9 +10,9 @@ stored_sources = null;
 
 $(function() {
 
-  $(".edit_parser input[value='Update Parser Script']").click(function(e) {
+  $("form[action^='/parsers/'] input[name='parser[message]'").submit(function(e) {
     var parser_message;
-    parser_message = $('input#parser_message').val();
+    parser_message = $('input[name="parser[message]"').val();
     if (!parser_message) {
       alert('Message is required');
       return e.preventDefault();
