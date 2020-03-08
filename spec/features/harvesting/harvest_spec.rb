@@ -53,7 +53,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     click_link 'Preview'
 
     expect(page).to have_text 'Previewing records'
-    expect(page).to have_text 'Previewing records Status: Initialising preview record...'
+    expect(page).to have_text 'Status: Initialising preview record...'
     expect(page).to have_text 'x'
 
     expect(page).to have_css '.tabs'
@@ -101,7 +101,15 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   scenario 'A harvest operator can delete a parser script' do
     click_button 'Delete Parser Script'
     expect(page).to have_text 'Delete Parser'
-    expect(page).to have_text "Are you sure that you want to delete the parser: #{parser.name} with version name: new test version? Warning: You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well."
+
+    within '.delete-confirmation' do
+      expect(page).to have_text 'Are you sure that you want to delete the parser:'
+      expect(page).to have_text "#{parser.name}"
+      expect(page).to have_text 'with version name:'
+    end
+    expect(page).to have_text 'Warning:'
+    expect(page).to have_text 'You currently have scheduled jobs set for this parser.'
+    expect(page).to have_text 'By deleting this parser the scheduled jobs will be deleted as well.'
     expect(page).to have_text 'Delete'
     expect(page).to have_text 'Cancel'
   end
