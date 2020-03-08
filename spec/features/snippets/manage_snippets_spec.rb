@@ -15,6 +15,14 @@ RSpec.feature 'Manage snippets', type: :feature, js: true do
     snippet_page.load
   end
 
+  def fill_and_submit_snippet(code, message, button = 'Update Snippet')
+    fill_code_mirror code
+
+    fill_in 'snippet[message]', with: message unless message.empty?
+
+    click_button button
+  end
+
   scenario 'See all snippets' do
     snippets.each do |snippet|
       expect(snippet_page.snippets_table).to have_content(snippet.name)
@@ -25,54 +33,24 @@ RSpec.feature 'Manage snippets', type: :feature, js: true do
     click_link 'Create New Code Snippet'
 
     fill_in 'snippet[name]', with: new_snippet.name
-
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys new_snippet.content
-    end
-
-    click_button 'Create Snippet'
+    fill_and_submit_snippet(new_snippet.content, '', 'Create Snippet')
 
     expect(page).to have_content(new_snippet.name)
   end
 
   scenario 'can update snippet' do
     click_link snippets.first.name
+    fill_and_submit_snippet('my code', 'A message')
 
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys 'Hello'
-    end
-
-    fill_in 'snippet[message]', with: 'A message'
-
-    click_button 'Update Snippet'
-
-    expect(page).to have_content(snippets.first.content + 'Hello')
+    expect(page).to have_content(snippets.first.content + 'my code')
   end
 
-  scenario 'can see a old version of a snippet' do
+  scenario 'can see an old version of a snippet' do
     click_link snippets.first.name
 
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys 'abcdef'
-    end
+    fill_and_submit_snippet('abcdef', 'A message')
+    fill_and_submit_snippet('hide this message', 'New message')
 
-    fill_in 'snippet[message]', with: 'A message'
-
-    click_button 'Update Snippet'
-
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys 'hide this message'
-    end
-
-    click_button 'Update Snippet'
     click_link 'A message'
 
     expect(page).not_to have_content('hide this message')

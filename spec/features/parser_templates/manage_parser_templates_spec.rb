@@ -20,12 +20,7 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
     click_link 'Create New Parser Template'
 
     fill_in 'parser_template[name]', with: new_parser_template.name
-
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys new_parser_template.content
-    end
+    fill_code_mirror new_parser_template.content
 
     click_button 'Create Parser template'
 
@@ -35,11 +30,7 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
   scenario 'can update parser script' do
     click_link parser_templates.first.name
 
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys 'Hello'
-    end
+    fill_code_mirror 'Hello'
 
     click_button 'Update Parser template'
 

@@ -73,13 +73,9 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can Update a parser' do
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys 'class Hey; end'
-    end
-
+    fill_code_mirror 'class Hey; end'
     fill_in 'parser_message', with: 'Updating Parser'
+
     click_button 'Update Parser Script'
     expect(page).to have_link 'Updating Parser'
   end
