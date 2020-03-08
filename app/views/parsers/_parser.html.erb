@@ -8,10 +8,10 @@
         </h1>
       <% end %>
       <div id="<%= 'hidden-parser-form' if @parser.errors.empty? %>">
-        <%= form_with model: @parser do |f| %>
+        <%= form_with model: @parser, local: true do |f| %>
           <div class='parser-form'>
             <%= f.text_field :name %>
-            <%= f.submit "Rename Parser" %>
+            <%= f.submit "Rename Parser", class: 'button' %>
           </div>
         <% end %>
       </div>
@@ -118,7 +118,12 @@
 
 <div id="delete-parser-alert" class="reveal small" data-reveal>
   <h2>Delete Parser</h2>
-  <p> Are you sure that you want to delete the parser: <strong><%= @parser.name %></strong> with version name: <strong><%= @version ? @version.message : @parser.versions.last.message %></strong>?</p>
+  <p class='delete-confirmation'>
+    Are you sure that you want to delete the parser:
+    <strong><%= @parser.name %></strong>
+    with version name:
+    <strong><%= @version ? @version.message : @parser.versions.last.message %></strong>?
+  </p>
   <% if @parser.scheduled? %>
     <p> <strong>Warning:</strong> You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well. </p>
   <% end %>

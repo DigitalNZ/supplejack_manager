@@ -3,12 +3,12 @@
     <h1 id="snippet-title" class="float-left"><%= @snippet.name %></h1>
     <% if can? :update, @snippet %>
       <div id="hidden-snippet-form">
-        <%= form_with model: @snippet do |f| %>
+        <%= form_with model: @snippet, local: true do |f| %>
           <div class="snippet-form">
             <%= f.label :name %>
             <%= f.text_field :name %>
 
-            <%= f.submit "Rename Snippet" %>
+            <%= f.submit "Rename Snippet", class: 'button' %>
           </div>
         <% end %>
       </div>

@@ -1,10 +1,10 @@
-<%= form_with model: @parser do |f| %>
+<%= form_with model: @parser, local: true do |f| %>
   <% if can? :update, @parser %>
-    <%= f.text_field :content, label: false, input_html: {class: "code-editor read"} %>
+    <%= f.text_field :content, label: false, class: "code-editor read" %>
 
     <%= f.text_field :message %>
     <%= f.submit class: 'button' %>
   <% else %>
-    <%= f.text_field :content, label: false, input_html: {class: "code-editor read-only"} %>
+    <%= f.text_field :content, label: false, class: "code-editor read-only" %>
   <% end %>
 <% end %>
