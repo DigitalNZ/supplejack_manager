@@ -18,12 +18,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   let!(:version) { create(:version, versionable: parser, user_id: user) }
 
   before do
-    visit root_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Sign in'
+    sign_in user
 
     visit parsers_path
 
@@ -58,7 +53,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     click_link 'Preview'
 
     expect(page).to have_text 'Previewing records'
-    expect(page).to have_text 'Previewing records Status: Initialising preview record...'
+    expect(page).to have_text 'Status: Initialising preview record...'
     expect(page).to have_text 'x'
 
     expect(page).to have_css '.tabs'
@@ -73,13 +68,9 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can Update a parser' do
-    within '.CodeMirror' do
-      current_scope.click
-      field = current_scope.find('textarea', visible: false)
-      field.send_keys 'class Hey; end'
-    end
-
+    fill_code_mirror 'class Hey; end'
     fill_in 'parser_message', with: 'Updating Parser'
+
     click_button 'Update Parser Script'
     expect(page).to have_link 'Updating Parser'
   end
@@ -110,7 +101,15 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   scenario 'A harvest operator can delete a parser script' do
     click_button 'Delete Parser Script'
     expect(page).to have_text 'Delete Parser'
-    expect(page).to have_text "Are you sure that you want to delete the parser: #{parser.name} with version name: new test version? Warning: You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well."
+
+    within '.delete-confirmation' do
+      expect(page).to have_text 'Are you sure that you want to delete the parser:'
+      expect(page).to have_text "#{parser.name}"
+      expect(page).to have_text 'with version name:'
+    end
+    expect(page).to have_text 'Warning:'
+    expect(page).to have_text 'You currently have scheduled jobs set for this parser.'
+    expect(page).to have_text 'By deleting this parser the scheduled jobs will be deleted as well.'
     expect(page).to have_text 'Delete'
     expect(page).to have_text 'Cancel'
   end

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe CollectionRecordsController do
+RSpec.describe CollectionRecordsController do
   before(:each) do
     sign_in create(:user, :admin)
   end
@@ -10,7 +11,7 @@ describe CollectionRecordsController do
     it 'should be successful' do
       expect(RestClient).to receive(:get).with("#{ENV['API_HOST']}/harvester/records/.json", params: { api_key: ENV['HARVESTER_API_KEY'] })
       get :index, params: { environment: 'development' }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it 'should search for a record' do

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe PartnersController do
+RSpec.describe PartnersController do
   let(:partners) { create_list(:partner, 3) }
   let(:partner)  { build(:partner) }
   let(:user)     { create(:user, role: 'admin') }
@@ -71,13 +72,13 @@ describe PartnersController do
 
   describe "GET 'edit'" do
     it 'it should render the edit template' do
-      allow(Partner).to receive(:find).with("1") {partner}
+      allow(Partner).to receive(:find).with('1') { partner }
       get :edit, params: { id: 1 }
       expect(response).to render_template(:edit)
     end
 
     it 'should should assign the partner to @partner' do
-      expect(Partner).to receive(:find).with("1") {partner}
+      expect(Partner).to receive(:find).with('1') { partner }
       get :edit, params: { id: 1 }
       expect(assigns(:partner)).to eq partner
     end
@@ -112,7 +113,7 @@ describe PartnersController do
         expect(partner.name).to eq partner.name
       end
 
-      it "renders edit" do
+      it 'renders edit' do
         put :update, params: { id: partner.id, partner: { name: '' } }
         expect(response).to render_template(:edit)
       end

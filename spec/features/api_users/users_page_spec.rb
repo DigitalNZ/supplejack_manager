@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'API Users Page', type: :feature do
+RSpec.feature 'API Users Page', type: :feature do
   let(:admins) do
     { id: '123123123',
       name: 'John Doe',
@@ -29,13 +29,7 @@ feature 'API Users Page', type: :feature do
       allow_any_instance_of(Admin::User).to receive(:all).and_return([admins])
       allow_any_instance_of(Admin::User).to receive(:find).and_return(admins)
 
-      visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
-
-      click_button 'Sign in'
+      sign_in user
     end
 
     scenario 'can be access from the home page navigation' do

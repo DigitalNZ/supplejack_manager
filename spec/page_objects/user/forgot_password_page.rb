@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ForgotPasswordPage < ApplicationPage
   set_url 'users/password/new'
 

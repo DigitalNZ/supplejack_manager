@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class ParserTemplatesPage < ApplicationPage
   set_url '/parser_templates'
 

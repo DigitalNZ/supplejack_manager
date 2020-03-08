@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe User do
+RSpec.describe User do
   let(:user) { build(:user, name: 'Federico Gonzalez') }
 
   describe '.active' do

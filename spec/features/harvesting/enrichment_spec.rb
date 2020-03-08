@@ -16,12 +16,7 @@ RSpec.feature 'Enrichment Spec', js: true do
   let!(:version) { create(:version, :enrichment, versionable: enrichment, user_id: user, tags: ['staging']) }
 
   before do
-    visit root_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-
-    click_button 'Sign in'
+    sign_in user
 
     visit parsers_path
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Source do
+RSpec.describe Source do
   let(:source) { build(:source) }
 
   before do

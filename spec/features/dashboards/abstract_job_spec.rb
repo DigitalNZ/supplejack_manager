@@ -17,15 +17,10 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
-      visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
 
-      click_button 'Sign in'
+      sign_in user
 
-      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], {limit: 50, offset: 0, total_count: 1})
+      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end
 
     let(:source) { create(:source) }
@@ -53,8 +48,8 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
     end
 
     scenario 'has links to the parser and the harvest job details' do
-      expect(page.has_link?(abstract_job.parser.name, parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))).to be true
-      expect(page.has_link?('View details', environment_harvest_job_path('staging', id: abstract_job.id))).to be true
+      expect(page).to have_link(abstract_job.parser.name, href: parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))
+      expect(page).to have_link('View details', href: environment_harvest_job_path('staging', id: abstract_job.id))
     end
   end
 
@@ -63,15 +58,10 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
-      visit new_user_session_path
-      within(:css, 'form.user-signin-form') do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
 
-      click_button 'Sign in'
+      sign_in user
 
-      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], {limit: 50, offset: 0, total_count: 1})
+      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end
 
     let(:source) { create(:source) }
