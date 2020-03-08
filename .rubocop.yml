@@ -1,4 +1,13 @@
+inherit_gem:
+  rubocop-rails_config:
+    - config/rails.yml
+
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
 AllCops:
+  TargetRubyVersion: 2.6.5
   Exclude:
     - 'vendor/**/*'
     - 'db/**/*'
@@ -10,11 +19,6 @@ AllCops:
     - 'features/**/*'
   DisplayStyleGuide: true
   DisplayCopNames: true
-Rails:
-  Enabled: true
-# https://github.com/bbatsov/rubocop/issues/1633
-Style/MultilineOperationIndentation:
-  Enabled: false
-Rails/Output:
-  Exclude:
-    - 'lib/**/*'
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes

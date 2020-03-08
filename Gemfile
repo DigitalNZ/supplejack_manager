@@ -7,8 +7,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'activeresource', require: 'active_resource'
 gem 'activeresource-response'
 gem 'aws-sdk-s3'
+gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan'
-gem 'coderay', '~> 1.0.8'
+gem 'coderay', '~> 1.1.2'
 gem 'devise', '~> 4.0'
 gem 'kaminari'
 gem 'kaminari-mongoid'
@@ -16,9 +17,8 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 5.2'
 gem 'server_timing'
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.7.1'
 
 # assets gems
@@ -30,40 +30,45 @@ gem 'jquery-timepicker-rails'
 gem 'jquery-ui-rails'
 gem 'modernizr-rails'
 gem 'sass-rails'
-gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.0.3'
-
-group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'guard-rspec'
-  gem 'rb-fsevent'
-  gem 'unicorn-rails'
-  gem 'web-console'
-end
-
-group :development, :test do
-  gem 'pry-byebug'
-  gem 'rubocop', require: false
-end
 
 group :test do
   gem 'capybara', '>= 2.17.0'
   gem 'capybara-screenshot'
-  gem 'capybara-selenium'
-  gem 'database_cleaner', '>= 1.3.0'
-  gem 'factory_bot_rails'
+  gem 'database_cleaner-mongoid', '>= 1.3.0'
+  gem 'factory_bot_rails', '~> 5.0'
   gem 'faker'
-  gem 'launchy', '>= 2.1.2'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.7.2'
   gem 'simplecov', require: false
   gem 'site_prism'
-  gem 'test-unit'
   gem 'timecop'
-  gem 'vcr'
-  gem 'webdrivers', '= 3.7.2'
-  gem 'webmock'
+  gem 'webdrivers'
+end
+
+group :development do
+  gem 'unicorn-rails'
+
+  # better error
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # spring
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'spring', '~> 2.1'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :development, :test do
+  # debuggers
+  gem 'pry-byebug'
+  gem 'pry-rails'
+
+  # rubocop tests
+  gem 'rubocop', require: false
+  gem 'rubocop-rails_config', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'rubocop-performance', require: false
 end
 
 group :uat, :staging, :production do
