@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/abstract_jobs_controller.rb
 class AbstractJobsController < ApplicationController
@@ -12,18 +13,17 @@ class AbstractJobsController < ApplicationController
   end
 
   private
+    def search_params
+      {
+        status: nil,
+        environment: nil,
+        page: nil,
+        parser_id: nil
+      }.merge(abstract_job_params)
+        .compact
+    end
 
-  def search_params
-    {
-      status: nil,
-      environment: nil,
-      page: nil,
-      parser_id: nil
-    }.reverse_merge!(abstract_job_params)
-      .compact
-  end
-
-  def abstract_job_params
-    params.permit(:status, :environment, :page, :parser_id)
-  end
+    def abstract_job_params
+      params.permit(:status, :environment, :page, :parser_id)
+    end
 end

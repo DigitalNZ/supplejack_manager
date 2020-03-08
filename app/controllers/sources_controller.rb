@@ -36,6 +36,7 @@ class SourcesController < ApplicationController
     if @source.save
       redirect_to sources_path, notice: 'Source was successfully created.'
     else
+      @partners = Partner.asc(:name)
       render :new
     end
   end
