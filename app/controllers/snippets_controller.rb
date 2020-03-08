@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class SnippetsController < ApplicationController
   load_and_authorize_resource except: :current_version

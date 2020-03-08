@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # PreviewersController
 class PreviewersController < ApplicationController
   before_action :set_previewer, :validate_parser_content

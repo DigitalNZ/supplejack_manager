@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/enrichment_jobs_controller.rb
 class EnrichmentJobsController < ApplicationController
@@ -20,15 +21,14 @@ class EnrichmentJobsController < ApplicationController
   end
 
   private
+    def set_worker_environment
+      set_worker_environment_for(EnrichmentJob)
+    end
 
-  def set_worker_environment
-    set_worker_environment_for(EnrichmentJob)
-  end
-
-  def enrichment_job_params
-    params.require(:enrichment_job).permit(:parser_id, :version_id,
-                                           :user_id, :environment,
-                                           :record_id, :enrichment,
-                                           :status)
-  end
+    def enrichment_job_params
+      params.require(:enrichment_job).permit(:parser_id, :version_id,
+                                             :user_id, :environment,
+                                             :record_id, :enrichment,
+                                             :status)
+    end
 end

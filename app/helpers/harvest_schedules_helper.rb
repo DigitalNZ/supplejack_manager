@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module HarvestSchedulesHelper
   def harvest_schedule_frequency(harvest_schedule)

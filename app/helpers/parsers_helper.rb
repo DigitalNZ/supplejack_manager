@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helpers for Parsers
 module ParsersHelper
   # Returns the next link for preview view
@@ -72,10 +74,10 @@ module ParsersHelper
   end
 
   def enrichments(job)
-    if job._type.downcase.match(/enrichment/)
-      content_tag(:span, job.try(:enrichment))   
+    if job._type.downcase.match?(/enrichment/)
+      content_tag(:span, job.try(:enrichment))
     else
-      content_tag(:span, '')   
+      content_tag(:span, '')
     end
   end
 

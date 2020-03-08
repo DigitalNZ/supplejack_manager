@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/link_check_rules_controller.rb
 class LinkCheckRulesController < ApplicationController
@@ -53,9 +54,8 @@ class LinkCheckRulesController < ApplicationController
   end
 
   private
-
-  def link_check_rule_params
-    params.require(:link_check_rule).permit(:source_id, :xpath, :status_codes,
-                                            :active, :throttle, :collection_title)
-  end
+    def link_check_rule_params
+      params.require(:link_check_rule).permit(:source_id, :xpath, :status_codes,
+                                              :active, :throttle, :collection_title)
+    end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class SuppressCollectionsController < ApplicationController
   authorize_resource class: false
@@ -8,7 +9,7 @@ class SuppressCollectionsController < ApplicationController
     sources_url = "#{fetch_env_vars['API_HOST']}/harvester/sources"
     blacklisted_request_options = {
       params: {
-        :'source[status]' => 'suppressed',
+        'source[status]': 'suppressed',
         api_key: fetch_env_vars['HARVESTER_API_KEY']
       }
     }
@@ -17,7 +18,7 @@ class SuppressCollectionsController < ApplicationController
 
     top_10_request_options = {
       params: {
-        :'source[status]' => 'active',
+        'source[status]': 'active',
         limit: 10, order_by: 'status_updated_at',
         api_key: fetch_env_vars['HARVESTER_API_KEY']
       }
@@ -35,5 +36,4 @@ class SuppressCollectionsController < ApplicationController
 
     redirect_to environment_suppress_collections_path(environment: params[:environment])
   end
-
 end

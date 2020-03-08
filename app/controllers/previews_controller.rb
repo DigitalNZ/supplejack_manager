@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/controllers/previews_controller.rb
 class PreviewsController < ApplicationController
   respond_to :js

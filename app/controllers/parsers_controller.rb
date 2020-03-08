@@ -33,10 +33,10 @@ class ParsersController < ApplicationController
     @source.partner = Partner.new
 
     @partners = if can? :manage, Partner
-                  Partner.asc(:name)
-                else
-                  Partner.where(:id.in => current_user.manage_partners).asc(:name)
-                end
+      Partner.asc(:name)
+    else
+      Partner.where(:id.in => current_user.manage_partners).asc(:name)
+    end
   end
 
   def edit
@@ -49,10 +49,10 @@ class ParsersController < ApplicationController
     @source = @parser.source
 
     @partners = if can? :manage, Partner
-                  Partner.asc(:name)
-                else
-                  Partner.where(:id.in => current_user.manage_partners).asc(:name)
-                end
+      Partner.asc(:name)
+    else
+      Partner.where(:id.in => current_user.manage_partners).asc(:name)
+    end
 
     if @parser.save
       redirect_to edit_parser_path(@parser)
@@ -81,8 +81,8 @@ class ParsersController < ApplicationController
 
     if @parser.save
       if params[:allow] == 'false'
-        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, 'staging')
-        HarvestSchedule.update_schedulers_from_environment({parser_id: @parser.id}, 'production')
+        HarvestSchedule.update_schedulers_from_environment({ parser_id: @parser.id }, 'staging')
+        HarvestSchedule.update_schedulers_from_environment({ parser_id: @parser.id }, 'production')
       end
       respond_to do |format|
         format.html { redirect_to edit_parser_path(@parser) }
@@ -94,21 +94,20 @@ class ParsersController < ApplicationController
   end
 
   private
+    def parser_params
+      params
+        .require(:parser)
+        .permit(:name, :partner, :source_id, :strategy, :parser_template_name, :message, :content)
+    end
 
-  def parser_params
-    params
-      .require(:parser)
-      .permit(:name, :partner, :source_id, :strategy, :parser_template_name, :message, :content)
-  end
-
-  def datatable_params
-    sorted_by_column = params[:order]['0'][:column]
-    {
-      search:    params[:search][:value],
-      start:     params[:start].to_i,
-      per_page:  params[:length].to_i,
-      order_by:  params[:columns][sorted_by_column][:data],
-      direction: params[:order]['0'][:dir],
-    }
-  end
+    def datatable_params
+      sorted_by_column = params[:order]['0'][:column]
+      {
+        search:    params[:search][:value],
+        start:     params[:start].to_i,
+        per_page:  params[:length].to_i,
+        order_by:  params[:columns][sorted_by_column][:data],
+        direction: params[:order]['0'][:dir],
+      }
+    end
 end

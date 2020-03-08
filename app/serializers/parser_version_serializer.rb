@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class ParserVersionSerializer < ActiveModel::Serializer
   attributes :id, :parser_id, :name, :strategy, :content, :message,

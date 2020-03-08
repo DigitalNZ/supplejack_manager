@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/harvest_jobs_controller.rb
 class HarvestJobsController < ApplicationController
@@ -24,8 +25,7 @@ class HarvestJobsController < ApplicationController
   end
 
   private
-
-  def harvest_job_params
-    params.require(:harvest_job).permit(:parser_id, :version_id, :user_id, :environment, :mode, :limit, :status, enrichments: [])
-  end
+    def harvest_job_params
+      params.require(:harvest_job).permit(:parser_id, :version_id, :user_id, :environment, :mode, :limit, :status, enrichments: [])
+    end
 end

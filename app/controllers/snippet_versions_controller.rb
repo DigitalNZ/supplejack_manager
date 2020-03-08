@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # app/controllers/snippet_versions_controller.rb
 class SnippetVersionsController < ApplicationController
@@ -22,16 +23,15 @@ class SnippetVersionsController < ApplicationController
   end
 
   private
+    def find_snippet
+      @snippet = Snippet.find(params[:snippet_id])
+    end
 
-  def find_snippet
-    @snippet = Snippet.find(params[:snippet_id])
-  end
+    def find_version
+      @version = @snippet.find_version(params[:id])
+    end
 
-  def find_version
-    @version = @snippet.find_version(params[:id])
-  end
-
-  def snippet_version_params
-    params.permit!
-  end
+    def snippet_version_params
+      params.permit!
+    end
 end

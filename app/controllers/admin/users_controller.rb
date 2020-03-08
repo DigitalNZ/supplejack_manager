@@ -22,19 +22,18 @@ module Admin
     end
 
     private
+      def user_params
+        params.permit(:max_requests, :id)
+      end
 
-    def user_params
-      params.permit(:max_requests, :id)
-    end
+      def api_key
+        APPLICATION_ENVIRONMENT_VARIABLES[
+          params[:environment]
+        ]['HARVESTER_API_KEY']
+      end
 
-    def api_key
-      APPLICATION_ENVIRONMENT_VARIABLES[
-        params[:environment]
-      ]['HARVESTER_API_KEY']
-    end
-
-    def page
-      params[:page] || 1
-    end
+      def page
+        params[:page] || 1
+      end
   end
 end

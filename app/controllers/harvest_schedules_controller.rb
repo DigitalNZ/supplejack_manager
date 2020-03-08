@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class HarvestSchedulesController < ApplicationController
   authorize_resource
@@ -11,12 +12,12 @@ class HarvestSchedulesController < ApplicationController
     @harvest_schedules = HarvestSchedule.all
 
     @active_jobs = @harvest_schedules.map(&:status).include? 'active'
-    @recurrent_schedules = @harvest_schedules.find_all {|s| s.recurrent == true }.sort_by(&:next_run_at)
-    @one_off_schedules = @harvest_schedules.find_all {|s| s.recurrent == false }.sort_by(&:start_time)
+    @recurrent_schedules = @harvest_schedules.find_all { |s| s.recurrent == true }.sort_by(&:next_run_at)
+    @one_off_schedules = @harvest_schedules.find_all { |s| s.recurrent == false }.sort_by(&:start_time)
   end
 
   def new
-     # This is because this route is shared with the new.js template.
+    # This is because this route is shared with the new.js template.
     if params[:harvest_schedule].present?
       @harvest_schedule = HarvestSchedule.new(harvest_schedule_params)
     else
@@ -25,7 +26,7 @@ class HarvestSchedulesController < ApplicationController
 
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
-    @harvest_schedule.mode = "normal"
+    @harvest_schedule.mode = 'normal'
 
     if can? :manage, HarvestSchedule
       @parsers = Parser.asc(:name)
@@ -78,8 +79,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   private
-
-  def harvest_schedule_params
-    params.require(:harvest_schedule).permit!
-  end
+    def harvest_schedule_params
+      params.require(:harvest_schedule).permit!
+    end
 end

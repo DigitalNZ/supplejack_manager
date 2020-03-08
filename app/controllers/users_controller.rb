@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class UsersController < ApplicationController
   load_and_authorize_resource
@@ -46,13 +47,12 @@ class UsersController < ApplicationController
   end
 
   private
+    def needs_password?(user, params)
+      @user.email != params[:user][:email] ||
+        params[:user][:password].present?
+    end
 
-  def needs_password?(user, params)
-    @user.email != params[:user][:email] ||
-      params[:user][:password].present?
-  end
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :active, :role, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules, manage_partners: [], run_harvest_partners: [])
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :active, :role, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules, manage_partners: [], run_harvest_partners: [])
+    end
 end

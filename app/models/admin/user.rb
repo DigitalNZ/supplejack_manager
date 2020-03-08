@@ -23,17 +23,16 @@ module Admin
     end
 
     def update(params)
-      RestClient.patch("#{host}/harvester/users/#{params['id']}.json?api_key=#{api_key}", { user: { max_requests: params['max_requests'] }})
+      RestClient.patch("#{host}/harvester/users/#{params['id']}.json?api_key=#{api_key}", { user: { max_requests: params['max_requests'] } })
     end
 
     private
+      def host
+        APPLICATION_ENVIRONMENT_VARIABLES[environment]['API_HOST']
+      end
 
-    def host
-      APPLICATION_ENVIRONMENT_VARIABLES[environment]['API_HOST']
-    end
-
-    def api_key
-      APPLICATION_ENVIRONMENT_VARIABLES[environment]['HARVESTER_API_KEY']
-    end
+      def api_key
+        APPLICATION_ENVIRONMENT_VARIABLES[environment]['HARVESTER_API_KEY']
+      end
   end
 end
