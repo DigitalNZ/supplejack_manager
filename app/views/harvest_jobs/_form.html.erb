@@ -1,20 +1,21 @@
-
-
 <h3>
   <%= "Run #{@harvest_job.environment.capitalize} Harvest " %>
-  <span class='parser-tag  round label'><%= "#{@version.message}"%></span>
+  <span class='parser-tag  round label'><%= @version.message %></span>
 </h3>
 
 <% unless @parser.valid_parser?(@harvest_job.environment, @version) %>
-  <%= render "parsers/error", error: @parser.error %>
+  <%= render 'parsers/error', error: @parser.error %>
 <% end %>
-<%= simple_form_for @harvest_job, remote: true do |f| %>
-  <%= f.input :parser_id, as: :hidden %>
-  <%= f.input :version_id, as: :hidden %>
-  <%= f.input :user_id, as: :hidden %>
-  <%= f.input :environment, as: :hidden %>
+<%= form_with model: @harvest_job do |f| %>
+  <%= f.hidden_field :parser_id %>
+  <%= f.hidden_field :version_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :environment %>
 
-  <%= f.input :mode, collection: @parser.modes, as: :radio_buttons, checked: @parser.modes.first, label_html: {class: "large"} %>
+  <%= f.label :mode, class: 'large' %>
+  <%= f.collection_radio_buttons :mode, @parser.modes, :first, :second, checked: @parser.modes.first do |b| %>
+    <%= b.label { b.radio_button + b.text } %>
+  <% end %>
   <% unless @parser.modes.flatten.include?('full_and_flush') %>
     <input type="radio" disabled="true" title="Full And Flush is currently disabled." class="<%="#{'disabled-f-and-f' unless @parser.allow_full_and_flush }" %>">
   <% end %>
@@ -22,13 +23,17 @@
     <%= "Full and Flush (#{t("parsers.disable_full_and_flush")})" unless @parser.allow_full_and_flush %>
   </span>
   <br/></br>
-  <%= f.input :limit, label: t("parsers.records_to_harvest"), label_html: {class: "large"} %>
+  <%= f.label :limit, t('parsers.records_to_harvest'), class: 'large' %>
+  <%= f.number_field :limit  %>
 
   <% if @parser.enrichment_definitions(@harvest_job.environment, @version).any? %>
-    <%= f.input :enrichments, collection: @parser.enrichment_definitions(@harvest_job.environment, @version).keys.map {|k| [k.to_s.titleize, k]}, as: :check_boxes, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
+    <%= f.label :enrichments, t('parsers.enrichments_to_run'), class: 'large' %>
+    <%= f.collection_check_boxes :enrichments, @parser.enrichment_definitions(@harvest_job.environment, @version).keys.map { |k| [k, k.to_s.titleize] }, :first, :second do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
   <% end %>
 
   <br/>
 
-  <%= f.button :submit, "Start Harvest", class: "button columns twelve" %>
+  <%= f.submit 'Start Harvest', class: 'button columns twelve' %>
 <% end %>

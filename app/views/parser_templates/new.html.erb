@@ -1,15 +1,14 @@
-
-
 <h2><%= t('parser_templates.create_a') %></h2>
 
 <h5 class="subheader">
   <%= t('parser_templates.helptext') %>
 </h5>
 
-<%= simple_form_for @parser_template do |f| %>
-  <%= f.input :name, label: t('parser_templates.name')%>
+<%= form_with model: @parser_template, local: true do |f| %>
+  <%= f.label :name, 'Parser Template Name' %>
+  <%= f.text_field :name, label: t('parser_templates.name')%>
 
-  <%= f.input :content, as: :text, label: false, required: false, input_html: {class: "code-editor"} %>
+  <%= f.text_area :content, class: 'code-editor' %>
 
-  <%= f.button :submit, class: 'float-right' %>
+  <%= f.submit class: 'button float-right' %>
 <% end %>

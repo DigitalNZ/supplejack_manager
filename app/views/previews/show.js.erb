@@ -1,5 +1,3 @@
-
-
 $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.status) %>");
 
 <% if @preview.raw_data.present? and @preview.harvested_attributes.present? %>

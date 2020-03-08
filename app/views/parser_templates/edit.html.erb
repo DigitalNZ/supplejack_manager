@@ -1,39 +1,36 @@
-
-
 <div class="grid-x">
-	<div class="medium-9 cell">
-		<h1 id="parser-template-title" class="float-left"><%= @parser_template.name %></h1>
-		<div id="hidden-parser-template-form">
-			<%= simple_form_for @parser_template do |f| %>
-				<div class="parser-template-form">
-				  <%= f.input :name %>
-				  <%= f.button :submit, "Rename Parser template" %>
-			  </div>
-			<% end %>
-		</div>
-	</div>
+  <div class="medium-9 cell">
+    <h1 id="parser-template-title" class="float-left"><%= @parser_template.name %></h1>
+    <div id="hidden-parser-template-form">
+      <%= form_with model: @parser_template, local: true do |f| %>
+        <div class="parser-template-form">
+          <%= f.text_field :name %>
+          <%= f.submit "Rename Parser template", class: 'button' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-	<div class="medium-3 cell new-actions">
-		<a href="#" id="rename-parser-template-action" class="button float-right medium-12"><%= t('parser_templates.rename') %></a>
-		<a href="#" class="button float-right medium-12" data-open="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
+  <div class="medium-3 cell new-actions">
+    <a href="#" id="rename-parser-template-action" class="button float-right medium-12"><%= t('parser_templates.rename') %></a>
+    <a href="#" class="button float-right medium-12" data-open="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
   </div>
 </div>
 
 <div id="delete-parser-template-alert" class="reveal small" data-reveal>
-	<h2>Delete Parser Template</h2>
-	<p> Are you sure that you want to delete the parser template: <strong><%= @parser_template.name %></strong> </p>
-	<div>
-		<%= button_to "Delete", @parser_template, method: :delete, class: "button alert float-right" %>
-		<button id="cancel-parser-template-delete" data-close class="button secondary float-right">Cancel</button>
-	</div>
+  <h2>Delete Parser Template</h2>
+  <p> Are you sure that you want to delete the parser template: <strong><%= @parser_template.name %></strong> </p>
+  <div>
+    <%= button_to "Delete", @parser_template, method: :delete, class: "button alert float-right" %>
+    <button id="cancel-parser-template-delete" data-close class="button secondary float-right">Cancel</button>
+  </div>
 
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
-<%= simple_form_for @parser_template do |f| %>
-  <%= f.input :content, as: :text, label: false, input_html: {class: "code-editor"} %>
-
-  <%= f.button :submit %>
+<%= form_with model: @parser_template do |f| %>
+  <%= f.text_area :content, class: "code-editor" %>
+  <%= f.submit class: 'button' %>
 <% end %>
