@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class EditUserPage < ApplicationPage
   set_url 'users/{id}/edit'
 

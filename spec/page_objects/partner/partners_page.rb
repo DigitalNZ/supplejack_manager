@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PartnersPage < ApplicationPage
   set_url 'partners/'
 

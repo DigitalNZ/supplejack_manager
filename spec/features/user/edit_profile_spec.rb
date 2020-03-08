@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'User change its profile', type: :feature, js: true do
+RSpec.feature 'User change its profile', type: :feature, js: true do
   let(:edit_user_page) { EditUserPage.new }
   let(:users_page)     { UsersPage.new }
   let(:user) { create(:user) }

@@ -2,8 +2,7 @@
 
 require 'rails_helper'
 
-describe ParserTemplate do
-
+RSpec.describe ParserTemplate do
   let(:parser_template) { build(:parser_template) }
 
   describe 'validations' do

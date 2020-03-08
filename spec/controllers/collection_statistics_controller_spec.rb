@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
-describe CollectionStatisticsController do
+RSpec.describe CollectionStatisticsController do
   let(:collection_statistics) { build(:collection_statistics) }
 
   before(:each) do
@@ -12,13 +13,13 @@ describe CollectionStatisticsController do
     it 'should get all of the collection statistics' do
       expect(CollectionStatistics).to receive(:all) { [collection_statistics] }
       get :index, params: { environment: 'staging' }
-      expect(assigns(:collection_statistics)).to eq "#{Time.zone.today.to_s}" => {:suppressed=>1, :activated=>0, :deleted=>0}
+      expect(assigns(:collection_statistics)).to eq "#{Time.zone.today}" => { suppressed: 1, activated: 0, deleted: 0 }
     end
   end
 
   describe 'GET show' do
     it 'should do a find :all with the day' do
-      expect(CollectionStatistics).to receive(:find).with(:all, params: { collection_statistics: {day: Date.today.to_s} }) { collection_statistics }
+      expect(CollectionStatistics).to receive(:find).with(:all, params: { collection_statistics: { day: Date.today.to_s } }) { collection_statistics }
       get :show, params: { id: Date.today.to_s, environment: 'staging' }
       expect(assigns(:collection_statistics)).to eq collection_statistics
     end
