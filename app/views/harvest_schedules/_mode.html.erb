@@ -1,8 +1,11 @@
 <div id="mode">
   <% if harvest_schedule.parser.present? %>
-    <%= simple_fields_for harvest_schedule do |f| %>
+    <%= form_with model: harvest_schedule, local: true do |f| %>
+      <%= f.label :mode, class: :large %>
 
-      <%= f.input :mode, collection: harvest_schedule.parser.modes, as: :radio_buttons, checked: harvest_schedule.mode, label_html: {class: "large"} %>
+      <%= f.collection_radio_buttons :mode, harvest_schedule.parser.modes, :first, :second, checked: harvest_schedule.mode do |b| %>
+        <%= b.label { b.radio_button + b.text } %>
+      <% end %>
 
       <% unless harvest_schedule.parser.modes.flatten.include?('full_and_flush') %>
         <% checked = harvest_schedule.mode %>
