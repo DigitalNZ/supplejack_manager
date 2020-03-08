@@ -53,8 +53,8 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
     end
 
     scenario 'has links to the parser and the harvest job details' do
-      expect(page.has_link?(abstract_job.parser.name, parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))).to be true
-      expect(page.has_link?('View details', environment_harvest_job_path('staging', id: abstract_job.id))).to be true
+      expect(page).to have_link(abstract_job.parser.name, href: parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))
+      expect(page).to have_link('View details', href: environment_harvest_job_path('staging', id: abstract_job.id))
     end
   end
 
