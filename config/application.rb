@@ -29,9 +29,9 @@ module HarvesterManager
     # the framework and any gems in your application.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W[#{config.root}/app/models/concerns]
-    config.autoload_paths += %W[#{config.root}/lib]
+    config.autoload_paths << "#{config.root}/app/models/concerns"
+    config.autoload_paths << "#{config.root}/lib"
 
-    config.time_zone = 'Wellington'
+    config.time_zone = 'Pacific/Auckland'
   end
 end
