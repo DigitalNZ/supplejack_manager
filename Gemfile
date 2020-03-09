@@ -22,15 +22,13 @@ gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.7.1'
 
 # assets gems
-gem 'compass-rails', '>= 1.0.3'
 gem 'foundation-rails', '~> 6.4.1'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails'
 gem 'jquery-timepicker-rails'
 gem 'jquery-ui-rails'
-gem 'modernizr-rails'
 gem 'sass-rails'
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier', '>= 1.3.0'
 
 group :test do
   gem 'capybara', '>= 2.17.0'

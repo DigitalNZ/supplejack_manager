@@ -1,1 +1,34 @@
+# FOLDERS
+.bundle
+.git
+.gitlab
+node_modules
+spec
+tmp/*
+log/*
+!log/.keep
+public/assets
+public/packs
+public/packs-test
+public/system/*
+public/uploads/*
+coverage
+vendor/cache
+vendor/bundle
+storage/*
+
+# FILES
+.dockerignore
+.gitignore
+.gitlab-ci.yml
+.rspec
+.rubocop.yml
+.byebug_history
+.ruby-version
+.DS_Store
+Dockerfile
+README.md
+yarn.lock
+bin/docker-build
 config/application.yml
+config/application.yml.development

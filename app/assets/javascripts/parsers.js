@@ -107,7 +107,7 @@ $(function() {
       {
         "data": "name",
         "render": function(data, type, row, meta) {
-          return `<a href="/parsers/${row.id}/edit">${data}</a>`;
+          return '<a href="/parsers/' + row.id + '/edit">' + data + '</a>';
         }
       },
       { "data": "strategy" },
@@ -115,14 +115,14 @@ $(function() {
         "data": "partner_name",
         "render": function(data, type, row, meta) {
           if (!row.can_update) return row.partner_name;
-          return `<a href="/partners/${row.partner.id}/edit">${row.partner.name}</a>`;
+          return '<a href="/partners/' + row.partner.id + '/edit">' + row.partner.name + '</a>';
         }
       },
       {
         "data": "source_name",
         "render": function(data, type, row, meta) {
           if (!row.can_update) return row.source.name;
-          return `<a href="/sources/${row.source.id}/edit">${row.source.name}</a>`;
+          return '<a href="/sources/' + row.source.id + '/edit">' + row.source.name + '</a>';
         }
       },
       { "data": "updated_at" },
