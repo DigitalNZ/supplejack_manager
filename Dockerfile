@@ -1,30 +1,52 @@
-FROM ruby:2.6.5
+FROM ruby:2.6.5-alpine AS builder
 
-RUN apt-get update -qq && apt-get install -y build-essential openssh-client libpq-dev apt-transport-https
-RUN apt-get install -y libxml2-dev libxslt1-dev libxslt-dev liblzma-dev curl
+# install packages
+ARG RAILS_ENV='production'
+ARG BUILD_PACKAGES='build-base curl-dev git'
+ARG DEV_PACKAGES='yaml-dev zlib-dev nodejs yarn'
+ARG RUBY_PACKAGES='tzdata'
+RUN apk add --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 
-ARG RAILS_ENV
-ENV RAILS_ENV=$RAILS_ENV
+# install rubygem
+WORKDIR /app
+RUN bundle config set without 'development:test'
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler -v $(tail -n1 Gemfile.lock) \
+    && bundle config --global frozen 1 \
+    && bundle install --jobs=4 --retry=3 \
+    # Remove unneeded files (cached *.gem, *.o, *.c)
+    && rm -rf $GEM_HOME/cache/*.gem \
+    && find $GEM_HOME/gems/ -name '*.c' -delete \
+    && find $GEM_HOME/gems/ -name '*.o' -delete
 
-ARG TIMEZONE
-ENV TIMEZONE=$TIMEZONE
-
-RUN echo $TIMEZONE > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
-
-RUN mkdir -p /var/tmp
-WORKDIR /var/tmp
-COPY Gemfile .
-COPY Gemfile.lock .
-RUN gem install bundler
-RUN NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
-
-RUN mkdir -p /var/manager
-WORKDIR /var/manager
+# compile assets
 COPY . .
+RUN cp config/application.yml.docker config/application.yml
+ARG RAILS_ENV='production'
+ENV RAILS_ENV=$RAILS_ENV
+RUN bundle exec rails assets:precompile
 
-RUN mv config/application.yml.docker config/application.yml
-RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
+# Remove folders not needed in resulting image
+RUN rm -rf tmp/cache vendor/assets spec package.json yarn.lock
+
+############### Build step done ###############
+
+FROM ruby:2.6.5-alpine
+
+# install packages
+ARG PACKAGES='tzdata nodejs ncurses'
+RUN apk add --no-cache $PACKAGES
+
+# copy files from builder
+WORKDIR /app
+COPY --from=builder $GEM_HOME $GEM_HOME
+COPY --from=builder /app /app
+
+# set environment variables
+ARG RAILS_ENV='production'
+ENV RAILS_ENV=$RAILS_ENV
+ARG TZ='Pacific/Auckland'
+ENV TZ=$TZ
 
 EXPOSE 3000
 
