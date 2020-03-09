@@ -1,6 +1,5 @@
+# Load the Rails application.
+require_relative 'application'
 
-# Load the rails application
-require File.expand_path('../application', __FILE__)
-
-# Initialize the rails application
-HarvesterManager::Application.initialize!
+# Initialize the Rails application.
+Rails.application.initialize!
