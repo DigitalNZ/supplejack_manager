@@ -4,6 +4,6 @@
 	</div>
 </div>
 
-<%= form_with model: @parser_template do |f| %>
+<%= custom_form_with model: @parser_template do |f| %>
   <%= f.text_field :content, class: "code-editor read-only" %>
 <% end %>

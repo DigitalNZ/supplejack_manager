@@ -1,4 +1,4 @@
-<%= form_with model: @parser, local: true do |f| %>
+<%= custom_form_with model: @parser, local: true do |f| %>
   <% if can? :update, @parser %>
     <%= f.text_field :content, label: false, class: "code-editor read" %>
 

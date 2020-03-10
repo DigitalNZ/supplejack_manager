@@ -3,7 +3,7 @@
     <h1 id="snippet-title" class="float-left"><%= @snippet.name %></h1>
     <% if can? :update, @snippet %>
       <div id="hidden-snippet-form">
-        <%= form_with model: @snippet, local: true do |f| %>
+        <%= custom_form_with model: @snippet, local: true do |f| %>
           <div class="snippet-form">
             <%= f.label :name %>
             <%= f.text_field :name %>

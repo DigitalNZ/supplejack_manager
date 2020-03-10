@@ -1,6 +1,6 @@
 <h2><%= t('snippets.create_a') %></h2>
 
-<%= form_with model: @snippet, local: true do |f| %>
+<%= custom_form_with model: @snippet, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
