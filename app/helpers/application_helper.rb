@@ -3,6 +3,11 @@
 module ApplicationHelper
   include EnvironmentHelpers
 
+  def custom_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
+    options[:builder] = CustomFormBuilder
+    form_with model: model, scope: scope, url: url, format: format, **options, &block
+  end
+
   def display_base_errors(resource)
     return '' if (resource.errors.empty?) || (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
