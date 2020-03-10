@@ -85,14 +85,14 @@ $(function() {
     return $(this).hide();
   });
 
-  stored_sources = $('#parser_source_id optgroup');
-  $('#parser_partner').change(function() {
+  stored_sources = $('select[name="parser[source_id]"] optgroup');
+  $('select[name="parser[partner]"]').change(function() {
     var partner;
-    partner = $('#parser_partner').val();
-    $('#parser_source_id optgroup').remove();
-    $('#parser_source_id').append(stored_sources);
+    partner = $('select[name="parser[partner]"]').val();
+    $('select[name="parser[source_id]"] optgroup').remove();
+    $('select[name="parser[source_id]"]').append(stored_sources);
     if (partner !== "") {
-      return $("#parser_source_id optgroup[label!='" + partner + "']").remove();
+      return $("select[name=\"parser[source_id]\"] optgroup[label!='" + partner + "']").remove();
     }
   });
 

@@ -2,7 +2,7 @@
   <div class="medium-9 cell">
     <h1 id="parser-template-title" class="float-left"><%= @parser_template.name %></h1>
     <div id="hidden-parser-template-form">
-      <%= form_with model: @parser_template, local: true do |f| %>
+      <%= custom_form_with model: @parser_template, local: true do |f| %>
         <div class="parser-template-form">
           <%= f.text_field :name %>
           <%= f.submit "Rename Parser template", class: 'button' %>
@@ -30,7 +30,7 @@
   </button>
 </div>
 
-<%= form_with model: @parser_template do |f| %>
+<%= custom_form_with model: @parser_template do |f| %>
   <%= f.text_area :content, class: "code-editor" %>
   <%= f.submit class: 'button' %>
 <% end %>
