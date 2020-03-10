@@ -5,15 +5,15 @@
     <%= t('parsers.new.helptext') %>
   </h5>
 
-  <%= form_with model: @parser, local: true do |f| %>
+  <%= custom_form_with model: @parser, local: true do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
 
     <%= f.label :partner %>
     <%= f.select :partner, @partners.map(&:name) %>
 
-    <%= f.label :source_id %>
-    <%= f.grouped_collection_select :source_id, @partners, :sources, :name, :id, :source_id, include_blank: true %>
+    <%= f.label :source %>
+    <%= f.grouped_collection_select :source, @partners, :sources, :name, :id, :source_id, {include_blank: true}, {name: 'parser[source_id]'} %>
 
     <%= f.label :strategy %>
     <%= f.select :strategy, Hash[Parser::VALID_STRATEGIES.map { |u| [(u == 'xml' ? "#{u}/html".upcase : u.upcase), u] }] %>

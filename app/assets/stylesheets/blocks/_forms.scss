@@ -1,13 +1,37 @@
-.error {
-  small {
+.field_with_errors {
+  label {
     color: $alert-color;
-    display: block;
-    margin-bottom: 1rem;
+    font-weight: bold;
   }
 
-  input, select {
-    margin-bottom: .5rem;
+  [type="text"],
+  [type="password"],
+  [type="date"],
+  [type="datetime"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="email"],
+  [type="number"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="url"],
+  [type="color"],
+  textarea,
+  select {
+    border-color: $alert-color;
   }
+}
+
+small.error {
+  display: block;
+  margin-top: -.5rem;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: $alert-color;
 }
 
 select {

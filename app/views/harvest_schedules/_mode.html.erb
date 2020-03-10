@@ -1,6 +1,6 @@
 <div id="mode">
   <% if harvest_schedule.parser.present? %>
-    <%= form_with model: harvest_schedule, local: true do |f| %>
+    <%= custom_form_with model: harvest_schedule, local: true do |f| %>
       <%= f.label :mode, class: :large %>
 
       <%= f.collection_radio_buttons :mode, harvest_schedule.parser.modes, :first, :second, checked: harvest_schedule.mode do |b| %>

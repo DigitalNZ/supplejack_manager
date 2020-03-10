@@ -8,7 +8,7 @@
         </h1>
       <% end %>
       <div id="<%= 'hidden-parser-form' if @parser.errors.empty? %>">
-        <%= form_with model: @parser, local: true do |f| %>
+        <%= custom_form_with model: @parser, local: true do |f| %>
           <div class='parser-form'>
             <%= f.text_field :name %>
             <%= f.submit "Rename Parser", class: 'button' %>
@@ -161,7 +161,7 @@
 <div id="change-source-alert" class="reveal medium" data-reveal>
   <h2>Change source</h2>
   <p> Warning: changing the source of this parser does not affect records that have already been harvested.</p>
-  <%= form_with model: @parser do |f| %>
+  <%= custom_form_with model: @parser do |f| %>
     <%= f.label :partner, 'Contributor' %>
     <%= f.select :partner, Partner.all.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
     <%= f.label :source, 'Data source' %>
