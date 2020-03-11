@@ -15,9 +15,9 @@ $(function() {
 
   $('#sources').dataTable();
 
-  fold_create_fields('select[name="source[partner]"]', '#new-partner-fields');
-  $('select[name="source[partner]"]').change(function() {
-    return fold_create_fields('select[name="source[partner]"]', '#new-partner-fields');
+  fold_create_fields('select[name="source[partner_id]"]', '#new-partner-fields');
+  $('select[name="source[partner_id]"]').change(function() {
+    return fold_create_fields('select[name="source[partner_id]"]', '#new-partner-fields');
   });
 
   update_link = function() {
