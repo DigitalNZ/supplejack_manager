@@ -2,18 +2,19 @@
 .bundle
 .git
 .gitlab
+.github
 node_modules
 spec
 tmp/*
 log/*
 !log/.keep
+!tmp/pids/.keep
 public/assets
 public/packs
 public/packs-test
 public/system/*
 public/uploads/*
 coverage
-vendor/cache
 vendor/bundle
 storage/*
 
