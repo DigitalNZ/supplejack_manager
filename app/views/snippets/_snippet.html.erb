@@ -1,17 +1,17 @@
 <div class="grid-x grid-margin-x">
   <div class="medium-9 cell">
-    <h1 id="snippet-title" class="float-left"><%= @snippet.name %></h1>
+    <h1 id="resource-title" data-toggler='.hide' class="float-left"><%= @snippet.name %></h1>
     <% if can? :update, @snippet %>
-      <div id="hidden-snippet-form">
-        <%= custom_form_with model: @snippet, local: true do |f| %>
-          <div class="snippet-form">
-            <%= f.label :name %>
-            <%= f.text_field :name %>
 
-            <%= f.submit "Rename Snippet", class: 'button' %>
+      <%= custom_form_with model: @snippet, local: true, class: 'hide', data: {toggler: '.hide'}, id: 'rename-form' do |f| %>
+        <%= f.label :name, 'Code Snippet Name' %>
+        <div class="input-group">
+          <%= f.text_field :name, class: 'input-group-field' %>
+          <div class="input-group-button">
+            <%= f.submit "Rename", class: 'button' %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     <% end %>
 
     <% if @version %>
@@ -32,7 +32,7 @@
       <%= render partial: "versions/version_list", locals: { versionable: @snippet, versionable_path: "snippet_snippet_version" } %>
 
       <% if can? :update, @snippet %>
-        <a href="#" id="rename-snippet-action" class="button expand medium-12"><%= t('snippets.rename') %></a>
+        <a href="#" data-toggle='resource-title rename-form' class="button expand medium-12"><%= t('snippets.rename') %></a>
         <a href="#" class="button expand medium-12" data-open="delete-snippet-alert"><%= t('snippets.delete') %></a>
       <% end %>
     </div>

@@ -71,32 +71,10 @@ ul.parser-actions {
     width: 50%;
   }
 }
-div.hidden {
-  display: none;
-}
+
 ul.tagging {
   li {
     width: 50%;
-  }
-}
-
-#hidden-parser-form {
-  display: none;
-}
-
-.parser-form {
-  input[type="text"] {
-    font-size: 1.6em;
-    height: 100%;
-  }
-  input[type="submit"] {
-    float: left;
-    margin-top: 19px;
-    margin-left: 20px;
-  }
-  .parser_name {
-    width: 70%;
-    float: left;
   }
 }
 
