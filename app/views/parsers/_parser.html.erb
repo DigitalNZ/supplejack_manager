@@ -10,12 +10,7 @@
 
       <%= custom_form_with model: @parser, local: true, class: @parser.errors.empty? ? 'hide' : '', data: { toggler: '.hide' }, id: 'rename-form' do |f| %>
         <%= f.label :name, 'Parser Script Name' %>
-        <div class="input-group">
-          <%= f.text_field :name, class: 'input-group-field' %>
-          <div class="input-group-button">
-            <%= f.submit "Rename", class: 'button' %>
-          </div>
-        </div>
+        <%= f.text_field_submit :name, class: 'input-group-field', submit_text: 'Rename' %>
       <% end %>
 
     <% else %>

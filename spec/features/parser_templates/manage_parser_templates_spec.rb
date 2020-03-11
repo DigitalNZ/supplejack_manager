@@ -43,7 +43,7 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
 
     fill_in 'parser_template[name]', with: 'New name'
 
-    click_button 'Rename Parser template'
+    click_button 'Rename'
 
     expect(page).to have_content('New name')
   end

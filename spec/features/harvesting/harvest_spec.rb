@@ -78,7 +78,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   scenario 'A harvest operator can rename a parser' do
     click_button 'Rename Parser'
     fill_in 'parser_name', with: 'Parser Name'
-    click_button 'Rename Parser', match: :first
+    click_button 'Rename'
     expect(page).to have_link 'Parser Name'
   end
 
