@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     ServerTiming::Auth.ok!
   end
 
-  protect_from_forgery
+  protect_from_forgery with: :exception
 
   include EnvironmentHelpers
 
