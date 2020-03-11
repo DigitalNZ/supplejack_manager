@@ -3,6 +3,7 @@
 class HarvestSchedulesController < ApplicationController
   authorize_resource
 
+  before_action :find_parsers, only: %i[new create edit update]
   before_action :set_worker_environment
   skip_before_action :verify_authenticity_token
 
@@ -27,12 +28,6 @@ class HarvestSchedulesController < ApplicationController
     @harvest_schedule.start_time = Time.now
     @harvest_schedule.environment = params[:environment]
     @harvest_schedule.mode = 'normal'
-
-    if can? :manage, HarvestSchedule
-      @parsers = Parser.asc(:name)
-    else
-      @parsers = Parser.find_by_partners(current_user.manage_partners)
-    end
   end
 
   def create
@@ -43,12 +38,6 @@ class HarvestSchedulesController < ApplicationController
 
   def edit
     @harvest_schedule = HarvestSchedule.find(params[:id])
-
-    if can? :manage, HarvestSchedule
-      @parsers = Parser.asc(:name)
-    else
-      @parsers = Parser.find_by_partners(current_user.manage_partners)
-    end
   end
 
   def update
@@ -81,5 +70,13 @@ class HarvestSchedulesController < ApplicationController
   private
     def harvest_schedule_params
       params.require(:harvest_schedule).permit!
+    end
+
+    def find_parsers
+      if can? :manage, HarvestSchedule
+        @parsers = Parser.asc(:name)
+      else
+        @parsers = Parser.find_by_partners(current_user.manage_partners)
+      end
     end
 end
