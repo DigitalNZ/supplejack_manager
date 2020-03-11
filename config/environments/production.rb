@@ -97,4 +97,5 @@ Rails.application.configure do
   config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
 
   config.action_mailer.default_url_options = { host: ENV['HOST'] }
+  config.action_controller.forgery_protection_origin_check = false
 end
