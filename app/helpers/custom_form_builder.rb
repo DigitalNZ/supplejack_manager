@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 class CustomFormBuilder < ActionView::Helpers::FormBuilder
-  def error_wrapper(method, options, &block)
-    block.call + object.errors[method].uniq.map do |error_msg|
+  def errors(method, options)
+    object.errors[method].uniq.map do |error_msg|
       @template.content_tag(:small, error_msg, class: :error)
     end.join.html_safe
+  end
+
+  def error_wrapper(method, options, &block)
+    block.call + errors(method, options)
   end
 
   %w[
@@ -25,6 +29,10 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     range_field
   ].each do |field_type|
     define_method(field_type) do |method, options = {}|
+      disable_errors_display = options.delete(:disable_errors_display)
+
+      return super(method, options) if disable_errors_display
+
       error_wrapper(method, options) do
         super(method, options)
       end
@@ -41,5 +49,15 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     error_wrapper(method, options) do
       super(method, collection, group_method, group_label_method, option_key_method, option_value_method, options, html_options)
     end
+  end
+
+  def text_field_submit(method, options = {})
+    submit_text = options.delete(:submit_text) || 'Submit'
+    @template.content_tag(:div, class: 'input-group') do
+      text_field(method, options.merge(disable_errors_display: true)) +
+      @template.content_tag(:div, class: 'input-group-button') do
+        submit(submit_text, class: 'button')
+      end
+    end + errors(method, options)
   end
 end

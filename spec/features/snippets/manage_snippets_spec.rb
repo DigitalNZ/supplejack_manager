@@ -62,7 +62,7 @@ RSpec.feature 'Manage snippets', type: :feature, js: true do
 
     fill_in 'snippet[name]', with: 'New name'
 
-    click_button 'Rename Snippet'
+    click_button 'Rename'
 
     expect(page).to have_content('New name')
   end
