@@ -3,8 +3,8 @@
   <%= f.label :parser_id, 'Parser Script' %>
   <%= f.select :parser_id, @parsers.map { |parser| [parser.name, parser.id] }, include_blank: true %>
 
-  <%= f.label :start_time %>
-  <%= f.datetime_field :start_time, input_html: { class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil } %>
+  <%= f.label :start_time, 'Begin' %>
+  <%= f.datetime_field :start_time, class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil %>
 
   <div class="grid-x">
     <%= f.label :recurrent do %>
@@ -15,11 +15,11 @@
   <br/>
 
   <ul class="tabs" data-tabs id="example-tabs">
-    <%= content_tag :li, class: "tabs-title #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
+    <%= tag.li class: "tabs-title #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
       <a data-tabs-target="simple-schedule-tab" href="#simple-schedule-tab">Simple Schedule</a>
     <% end %>
 
-    <%= content_tag :li, class: "tabs-title #{!@harvest_schedule.simple? ? "is-active" : nil }" do %>
+    <%= tag.li class: "tabs-title #{!@harvest_schedule.simple? ? "is-active" : nil }" do %>
       <a data-tabs-target='cron-syntax-tab' href="#cron-syntax-tab" aria-selected="true">Cron Syntax</a>
     <% end %>
   </ul>
@@ -28,7 +28,8 @@
 
     <div class="tabs-content" data-tabs-content='example-tabs'>
 
-      <%= content_tag :div, id: "simple-schedule-tab", class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
+      <%= tag.div id: "simple-schedule-tab", class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
+        <%= f.label :frequency %>
         <%= f.collection_select :frequency, ["daily", "weekly", "fortnightly", "monthly"].map { |o| [o, o.capitalize] }, :first, :second %>
 
         <div class="input string optional harvest_schedule_at_hour">
@@ -40,10 +41,12 @@
           </div>
         </div>
 
+        <%= f.label :offset %>
         <%= f.number_field :offset, hint: t("harvest_schedules.offset_hint") %>
       <% end %>
 
-      <%= content_tag :div, id: "cron-syntax-tab", class: "tabs-panel #{!@harvest_schedule.simple? ? "is-active" : nil}" do %>
+      <%= tag.div id: "cron-syntax-tab", class: "tabs-panel #{!@harvest_schedule.simple? ? "is-active" : nil}" do %>
+        <%= f.label :cron %>
         <%= f.text_field :cron %>
       <% end %>
 
