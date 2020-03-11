@@ -71,11 +71,6 @@ $(function() {
     return false;
   });
 
-  $('#rename-parser-action').click(function() {
-    $('#parser-title').hide();
-    return $('#hidden-parser-form').show();
-  });
-
   $('#cancel-parser-delete').click(function() {
     return $('#delete-parser-alert .close-reveal-modal').trigger('click');
   });

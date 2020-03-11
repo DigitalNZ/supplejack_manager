@@ -1,18 +1,24 @@
 <div class="grid-x">
-  <div class="medium-9 cell">
-    <h1 id="parser-template-title" class="float-left"><%= @parser_template.name %></h1>
-    <div id="hidden-parser-template-form">
-      <%= custom_form_with model: @parser_template, local: true do |f| %>
-        <div class="parser-template-form">
-          <%= f.text_field :name %>
-          <%= f.submit "Rename Parser template", class: 'button' %>
+  <div class="medium-5 cell">
+
+    <h1 id="resource-title" data-toggler='.hide' class="float-left"><%= @parser_template.name %></h1>
+
+    <%= custom_form_with model: @parser_template, local: true, class: 'hide', id: 'rename-form', data: { toggler: '.hide' } do |f| %>
+      <%= f.label :name, 'Harvest Template Name' %>
+      <div class="input-group">
+        <%= f.text_field :name, class: 'input-group-field' %>
+        <div class="input-group-button">
+          <%= f.submit "Rename", class: 'button' %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+
   </div>
 
-  <div class="medium-3 cell new-actions">
-    <a href="#" id="rename-parser-template-action" class="button float-right medium-12"><%= t('parser_templates.rename') %></a>
+  <div class="medium-3 medium-offset-4 cell new-actions">
+    <a href="#" class="button float-right medium-12" data-toggle='rename-form resource-title'>
+      <%= t('parser_templates.rename') %>
+    </a>
     <a href="#" class="button float-right medium-12" data-open="delete-parser-template-alert"><%= t('parser_templates.delete') %></a>
   </div>
 </div>
