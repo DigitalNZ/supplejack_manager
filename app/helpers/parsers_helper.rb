@@ -82,7 +82,6 @@ module ParsersHelper
   end
 
   def localize_date_time(date_time)
-    local_date = ActiveSupport::TimeZone['Wellington'].parse(date_time.to_s)
-    local_date.strftime('%d %b %Y %H:%M')
+    date_time.localtime.strftime('%d %b %Y %H:%M')
   end
 end
