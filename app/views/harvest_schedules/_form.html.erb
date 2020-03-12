@@ -4,7 +4,7 @@
   <%= f.select :parser_id, @parsers.map { |parser| [parser.name, parser.id] }, include_blank: true %>
 
   <%= f.label :start_time, 'Begin' %>
-  <%= f.datetime_field :start_time, class: "datetimepicker", value: @harvest_schedule.start_time.present? ? l(@harvest_schedule.start_time) : nil %>
+  <%= f.text_field :start_time, class: "datetimepicker", value: @harvest_schedule.start_time.present? ? @harvest_schedule.start_time.localtime.strftime('%d/%m/%Y') : nil %>
 
   <div class="grid-x">
     <%= f.label :recurrent do %>
