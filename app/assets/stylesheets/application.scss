@@ -3,9 +3,9 @@
 @import 'jquery-ui/theme';
 @import 'jquery-ui/datepicker';
 @import 'jquery-ui/slider';
-@import 'jquery.ui.timepicker';
-@import 'codemirror';
-@import 'codemirror/themes/monokai';
+@import 'jquery-datetimepicker/jquery.datetimepicker';
+@import 'codemirror/lib/codemirror';
+@import 'codemirror/theme/monokai';
 @import 'coderay';
 
 // foundation related
@@ -26,6 +26,7 @@
 @import 'blocks/collection_records';
 @import 'blocks/previews';
 @import 'blocks/home';
+@import 'blocks/codemirror';
 @import 'blocks/devise';
 
 .data-tables {

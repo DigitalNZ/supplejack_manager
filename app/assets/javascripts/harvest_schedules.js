@@ -9,7 +9,9 @@ $(function() {
     ]
   });
 
-  $('.datetimepicker').datepicker();
+  $('.datetimepicker').datetimepicker({
+    format: 'd/m/Y H:i'
+  });
 
   $('input[name="harvest_schedule[recurrent]"]').change(function() {
     var $checkBox, $recurrentOptions;

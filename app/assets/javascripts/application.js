@@ -18,11 +18,11 @@
 //= require datatables.foundation
 //= require jquery-ui/widgets/datepicker
 //= require jquery-ui/widgets/slider
-//= require jquery.timepicker.js
+//= require jquery-datetimepicker
 //= require moment.min
 //= require codemirror
-//= require codemirror/modes/ruby
-//= require codemirror/modes/xml
+//= require codemirror/mode/ruby/ruby
+//= require codemirror/mode/xml/xml
 //= require link_check_rules
 //= require code_mirror_setup
 //= require harvester
