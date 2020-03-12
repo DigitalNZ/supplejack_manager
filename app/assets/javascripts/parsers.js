@@ -80,15 +80,20 @@ $(function() {
     return $(this).hide();
   });
 
-  stored_sources = $('select[name="parser[source_id]"] optgroup');
-  $('select[name="parser[partner]"]').change(function() {
-    var partner;
-    partner = $('select[name="parser[partner]"]').val();
+
+  var update_source_from_contributor_value = function($stored_sources) {
+    var partner = $('select[name="parser[partner]"]').val();
     $('select[name="parser[source_id]"] optgroup').remove();
-    $('select[name="parser[source_id]"]').append(stored_sources);
+    $('select[name="parser[source_id]"]').append($stored_sources);
     if (partner !== "") {
       return $("select[name=\"parser[source_id]\"] optgroup[label!='" + partner + "']").remove();
     }
+  }
+
+  var $stored_sources = $('select[name="parser[source_id]"] optgroup');
+  update_source_from_contributor_value($stored_sources)
+  $('select[name="parser[partner]"]').change(function() {
+    update_source_from_contributor_value($stored_sources)
   });
 
 
