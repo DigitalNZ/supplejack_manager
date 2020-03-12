@@ -1,4 +1,4 @@
-<%= custom_form_with model: @harvest_schedule, html: { class: "harvest_schedule" }, local: true do |f| %>
+<%= custom_form_with model: @harvest_schedule, local: true do |f| %>
 
   <%= f.label :parser_id, 'Parser Script' %>
   <%= f.select :parser_id, @parsers.map { |parser| [parser.name, parser.id] }, include_blank: true %>

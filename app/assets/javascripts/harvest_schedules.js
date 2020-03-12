@@ -8,10 +8,12 @@ $(function() {
       }
     ]
   });
+
   $('.datetimepicker').datepicker({
     dateFormat: "dd/mm/yy",
     minDate: 0
   });
+
   $('input[name="harvest_schedule[recurrent]"]').change(function() {
     var $checkBox, $recurrentOptions;
     $checkBox = $(this);
@@ -22,10 +24,9 @@ $(function() {
       return $recurrentOptions.hide();
     }
   });
-  return $("#new_harvest_schedule").change("#harvest_schedule_parser_id", function(event) {
-    var $form, new_path;
-    $form = $("form.harvest_schedule");
-    new_path = $form.attr("action") + "/new.js";
-    return $.get(new_path, $form.serialize());
+
+  var $form = $('form[action="/staging/harvest_schedules"]');
+  return $($form.find('select[name="harvest_schedule[parser_id]"]')).change(function(event) {
+    return $.get($form.attr('action') + '/new.js', $form.serialize());
   });
 });
