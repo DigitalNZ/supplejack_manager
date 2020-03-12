@@ -46,7 +46,8 @@ COPY --from=builder /app /app
 
 # Change TimeZone
 ARG TIMEZONE=Pacific/Auckland
-ENV TZ=$TZ
+ENV TIMEZONE=$TIMEZONE
+ENV TZ=$TIMEZONE
 ARG RAILS_ENV="production"
 ENV RAILS_ENV=$RAILS_ENV
 EXPOSE 3000
