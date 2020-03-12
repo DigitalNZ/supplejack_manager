@@ -2,7 +2,10 @@
 
 class CustomFormBuilder < ActionView::Helpers::FormBuilder
   def errors(method, options)
-    object.errors[method].uniq.map do |error_msg|
+    # errors from source or source_id are refering to the Source model
+    errors = object.errors[method] + object.errors[method.to_s.gsub(/_id$/, '')]
+
+    errors.uniq.map do |error_msg|
       @template.content_tag(:small, error_msg, class: :error)
     end.join.html_safe
   end

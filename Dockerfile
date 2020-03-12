@@ -11,14 +11,19 @@ RUN apk add --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 # install rubygem
 COPY Gemfile Gemfile.lock ./
 COPY vendor/cache ./vendor/cache
+COPY node_modules ./node_modules
+COPY public/assets ./public/assets
 RUN gem install bundler -v $(tail -n1 Gemfile.lock) \
-    && bundle config without development:test \
-    && bundle config --global frozen 1 \
+    && bundler config without 'development:test' \
+    && bundle config frozen 1 \
     && bundle install --path=vendor/cache --jobs=4 --retry=3 \
     # Remove unneeded files (cached *.gem, *.o, *.c)
     && rm -rf $GEM_HOME/cache/*.gem \
     && find $GEM_HOME/gems/ -name "*.c" -delete \
     && find $GEM_HOME/gems/ -name "*.o" -delete
+
+COPY package.json yarn.lock ./
+RUN yarn install --production
 
 COPY . .
 
@@ -28,7 +33,7 @@ ENV RAILS_ENV=$RAILS_ENV
 RUN cp config/application.yml.docker config/application.yml
 RUN bin/rails assets:precompile
 
-RUN rm -rf tmp/cache vendor/assets spec
+RUN rm -rf tmp/cache vendor/assets spec node_modules
 
 ############### Build step done ###############
 

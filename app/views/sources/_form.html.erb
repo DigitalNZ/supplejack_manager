@@ -9,14 +9,7 @@
 
   <% if can? :manage, Partner %>
     <%= f.label :partner_id, 'Contributor' %>
-    <%=
-      f.select(
-        :partner,
-        @partners.map { |p| [p.name, p.id] },
-        { include_blank: '<create new>' },
-        { name: 'source[partner_id]' }
-      )
-    %>
+    <%= f.select :partner_id, @partners.map { |p| [p.name, p.id] }, include_blank: '<create new>' %>
 
     <fieldset id="new-partner-fields">
       <legend><%= t('partners.create') %></legend>

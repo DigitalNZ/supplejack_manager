@@ -10,13 +10,18 @@ services:
 addons:
   chrome: stable
 
-cache: bundler
+cache:
+  bundler: true
+  yarn: true
+  directories:
+    - node_modules
 
 before_script:
   - cp config/application.yml.example config/application.yml
   - gem install bundler --version $(tail -n1 Gemfile.lock)
   - RAILS_ENV=test bin/rails db:create --trace
   - RAILS_ENV=test bin/rails db:migrate --trace
+  - nvm install $(cat .nvmrc)
 
 jobs:
   include:
@@ -24,6 +29,7 @@ jobs:
     - stage: test
       name: 'Rspec'
       script:
+        - yarn install
         - bundle exec rspec
 
     - stage: test

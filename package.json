@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "codemirror": "^3.23.0",
+    "jquery-datetimepicker": "^2.5.21"
+  }
+}
