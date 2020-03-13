@@ -27,7 +27,7 @@ storage/*
 .DS_Store
 Dockerfile
 README.md
-yarn.lock
+package-lock.lock
 bin/docker-build
 config/application.yml
 config/application.yml.development
