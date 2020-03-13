@@ -81,8 +81,9 @@ class ParsersController < ApplicationController
 
     if @parser.save
       if params[:allow] == 'false'
-        HarvestSchedule.update_schedulers_from_environment({ parser_id: @parser.id }, 'staging')
-        HarvestSchedule.update_schedulers_from_environment({ parser_id: @parser.id }, 'production')
+        APPLICATION_ENVS.each do |env|
+          HarvestSchedule.update_schedulers_from_environment({ parser_id: @parser.id }, env)
+        end
       end
       respond_to do |format|
         format.html { redirect_to edit_parser_path(@parser) }
