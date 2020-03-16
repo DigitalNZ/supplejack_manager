@@ -55,9 +55,9 @@
 
   <%= f.hidden_field :environment %>
 
-  <%= render "mode", { harvest_schedule: @harvest_schedule }  %>
+  <%= render "mode", { harvest_schedule: @harvest_schedule, f: f }  %>
 
-  <%= render "enrichments", { harvest_schedule: @harvest_schedule, environment: params[:environment]  }  %>
+  <%= render "enrichments", { harvest_schedule: @harvest_schedule, environment: params[:environment], f: f }  %>
 
   <br/>
 

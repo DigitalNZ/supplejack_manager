@@ -14,6 +14,9 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     block.call + errors(method, options)
   end
 
+  ############################################
+  # Overriding existing helpers              #
+  ############################################
   %w[
     text_field
     text_area
@@ -54,6 +57,9 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  ############################################
+  # Creating new helpers                     #
+  ############################################
   def text_field_submit(method, options = {})
     submit_text = options.delete(:submit_text) || 'Submit'
     @template.content_tag(:div, class: 'input-group') do
@@ -62,5 +68,11 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
         submit(submit_text, class: 'button')
       end
     end + errors(method, options)
+  end
+
+  def enrichment_check_boxes(method, enrichments)
+    collection_check_boxes method, enrichments.keys.map { |k| [k.to_s, k.to_s.titleize] }, :first, :second do |b|
+      b.label { b.check_box + b.text }
+    end
   end
 end
