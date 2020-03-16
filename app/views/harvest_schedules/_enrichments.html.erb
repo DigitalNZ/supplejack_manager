@@ -1,9 +1,9 @@
 <div id="all-enrichments">
   <% if harvest_schedule.parser %>
     <% if harvest_schedule.parser.enrichment_definitions(environment).any? %>
-      <%= simple_fields_for harvest_schedule do |f| %>
-        <%= f.input :enrichments, collection: harvest_schedule.parser.enrichment_definitions(environment).keys.map {|k| [k.to_s.titleize, k.to_s]}, as: :check_boxes, label: t("parsers.enrichments_to_run"), label_html: {class: "large"} %>
-      <% end %>
+
+      <%= f.label t('parsers.enrichments_to_run'), class: 'large' %>
+      <%= f.enrichment_check_boxes :enrichments, harvest_schedule.parser.enrichment_definitions(environment)%>
     <% end %>
   <% end %>
 </div>

@@ -28,9 +28,7 @@
 
   <% if @parser.enrichment_definitions(@harvest_job.environment, @version).any? %>
     <%= f.label :enrichments, t('parsers.enrichments_to_run'), class: 'large' %>
-    <%= f.collection_check_boxes :enrichments, @parser.enrichment_definitions(@harvest_job.environment, @version).keys.map { |k| [k, k.to_s.titleize] }, :first, :second do |b| %>
-      <%= b.label { b.check_box + b.text } %>
-    <% end %>
+    <%= f.enrichment_check_boxes :enrichments, @parser.enrichment_definitions(@harvest_job.environment, @version) %>
   <% end %>
 
   <br/>
