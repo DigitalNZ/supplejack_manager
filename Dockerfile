@@ -50,7 +50,7 @@ COPY --from=builder $GEM_HOME $GEM_HOME
 COPY --from=builder /app /app
 
 # Change TimeZone
-ARG TIMEZONE=Pacific/Auckland
+ARG TIMEZONE="Pacific/Auckland"
 ENV TIMEZONE=$TIMEZONE
 ENV TZ=$TIMEZONE
 ARG RAILS_ENV="production"
