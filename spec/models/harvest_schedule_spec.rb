@@ -29,11 +29,9 @@ RSpec.describe HarvestSchedule do
     context 'staging' do
       before { allow(Rails).to receive(:env) { 'staging' } }
       it 'should send a delete request for all of the schedules associated with the given parser' do
-        expect(HarvestSchedule).to receive(:find_from_environment).with({ parser_id: parser.id }, 'staging') { [mock_schedule_1, mock_schedule_2] }
+        expect(HarvestSchedule).to receive(:find_from_environment).with({ parser_id: parser.id }, Rails.env) { [mock_schedule_1, mock_schedule_2] }
         expect(HarvestSchedule).to receive(:delete).with(mock_schedule_1.id)
         expect(HarvestSchedule).to receive(:delete).with(mock_schedule_2.id)
-        expect(HarvestSchedule).to receive(:find_from_environment).with({ parser_id: parser.id }, 'production') { [mock_schedule_3] }
-        expect(HarvestSchedule).to receive(:delete).with(mock_schedule_3.id)
         HarvestSchedule.destroy_all_for_parser(parser.id)
       end
     end
