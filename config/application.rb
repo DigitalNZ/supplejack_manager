@@ -13,7 +13,7 @@ APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development
 APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result)
 
 begin
-  ENV.update YAML.load_file('config/application.yml')[Rails.env]
+  ENV.update YAML.load(ERB.new(File.read('config/application.yml')).result)[Rails.env]
 rescue StandardError
   {}
 end
