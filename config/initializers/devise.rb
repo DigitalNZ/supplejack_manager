@@ -5,7 +5,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = ENV['DEVISE_MAILER'] || "devise@test.com"
+  config.mailer_sender = "Supplejack Manager <no-reply@#{ENV.fetch('HOST', 'localhost')}>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
