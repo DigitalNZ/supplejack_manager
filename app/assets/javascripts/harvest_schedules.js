@@ -24,8 +24,8 @@ $(function() {
     }
   });
 
-  var $form = $('form[action="/staging/harvest_schedules"]');
-  return $($form.find('select[name="harvest_schedule[parser_id]"]')).change(function(event) {
+  var $form = $('#harvest-schedule-form form');
+  return $form.find('select[name="harvest_schedule[parser_id]"]').change(function(event) {
     return $.get($form.attr('action') + '/new.js', $form.serialize());
   });
 });
