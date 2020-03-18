@@ -97,5 +97,13 @@ Rails.application.configure do
   config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
 
   config.action_mailer.default_url_options = { host: ENV['HOST'] }
+  config.action_mailer.smtp_settings = {
+    domain: ENV['HOST'],
+    address: ENV['SMTP_ADDRESS'],
+    port: ENV['SMTP_PORT'],
+    user_name: ENV['SMTP_USER'],
+    password: ENV['SMTP_PASSWORD']
+  }
+
   config.action_controller.forgery_protection_origin_check = false
 end
