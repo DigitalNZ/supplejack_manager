@@ -1,7 +1,7 @@
 <div class="grid-x">
   <div class="medium-5 cell">
 
-    <h1 id="resource-title" data-toggler='.hide' class="float-left"><%= @parser_template.name %></h1>
+    <h1 id="resource-title" data-toggler=".hide"><%= @parser_template.name %></h1>
 
     <%= custom_form_with model: @parser_template, local: true, class: 'hide', id: 'rename-form', data: { toggler: '.hide' } do |f| %>
       <%= f.label :name, 'Harvest Template Name' %>
