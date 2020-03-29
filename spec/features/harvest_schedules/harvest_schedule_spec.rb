@@ -13,13 +13,15 @@ RSpec.feature 'Harvest Schedule Spec', js: true do
   let!(:parser) { create(:parser, :enrichment, source_id: source) }
   let!(:version) { create(:version, versionable: parser, user_id: user) }
 
-  scenario 'A harvest operator can create and edit a harvest schedule' do
+  before do
     sign_in user
 
     visit environment_harvest_schedules_path('test')
 
     click_link 'New Schedule'
+  end
 
+  scenario 'A harvest operator can create and edit a harvest schedule' do
     select(parser.name, from: 'Parser Script')
     choose('Full And Flush')
     check('Test Enrich')
@@ -29,6 +31,16 @@ RSpec.feature 'Harvest Schedule Spec', js: true do
     choose('Normal')
     uncheck('Test Enrich')
     click_button('Save Schedule')
-    expect(page).to have_link(parser.name);
+    expect(page).to have_link(parser.name)
+  end
+
+  scenario 'A harvest operator can create and delete a harvest schedule' do
+    select(parser.name, from: 'Parser Script')
+    choose('Full And Flush')
+    check('Test Enrich')
+    click_button('Save Schedule')
+    click_link('Delete')
+    expect(page).not_to have_text(parser.name)
+    expect(page).to have_text('No data available in table')
   end
 end
