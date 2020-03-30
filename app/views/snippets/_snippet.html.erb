@@ -1,6 +1,6 @@
 <div class="grid-x grid-margin-x">
   <div class="medium-9 cell">
-    <h1 id="resource-title" data-toggler='.hide' class="float-left"><%= @snippet.name %></h1>
+    <h1 id="resource-title" data-toggler='.hide'><%= @snippet.name %></h1>
     <% if can? :update, @snippet %>
 
       <%= custom_form_with model: @snippet, local: true, class: 'hide', data: {toggler: '.hide'}, id: 'rename-form' do |f| %>
