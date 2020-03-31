@@ -8,6 +8,11 @@ module ApplicationHelper
     form_with model: model, scope: scope, url: url, format: format, **options, &block
   end
 
+  def custom_fields_for(object, options = {}, &block)
+    options[:builder] = CustomFormBuilder
+    fields_for(object, nil, options, &block)
+  end
+
   def display_base_errors(resource)
     return '' if (resource.errors.empty?) || (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
