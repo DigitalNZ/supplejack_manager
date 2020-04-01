@@ -42,7 +42,7 @@ jobs:
       script:
         - gem install bundler-audit
         - bundle audit update
-        - bundle audit check
+        - bundle audit check --ignore CVE-2020-10663
 
     - stage: test
       name: 'brakeman check'
