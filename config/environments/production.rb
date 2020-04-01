@@ -96,7 +96,10 @@ Rails.application.configure do
   config.log_level = ENV['LOG_LEVEL'] || :info
   config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
 
-  config.action_mailer.default_url_options = { host: ENV['HOST'] }
+  config.action_mailer.default_url_options = {
+    host: ENV['HOST'],
+    protocol: 'https'
+  }
   config.action_mailer.smtp_settings = {
     domain: ENV['HOST'],
     address: ENV['SMTP_ADDRESS'],
