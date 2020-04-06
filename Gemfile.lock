@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: f19835994abcc440f7aad414597d5344fb4cf493
-  tag: v2.7.1
+  revision: a866415515ee9513caf8bdf67765a401e2458a1c
+  tag: v2.8.3
   specs:
     supplejack_common (0.0.2)
       actionpack
@@ -10,12 +10,13 @@ GIT
       chronic (<= 0.10.2)
       dimensions
       htmlentities
-      json (~> 1.8.3)
+      json (>= 2.3.0)
       jsonpath (~> 0.5.0)
       loofah
       mimemagic
       mongoid
       nokogiri
+      oai
       redis
       rest-client
       retriable
@@ -215,7 +216,7 @@ GEM
       railties (>= 3.1.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (1.8.6)
+    json (2.3.0)
     jsonapi-renderer (0.2.2)
     jsonpath (0.5.8)
       multi_json

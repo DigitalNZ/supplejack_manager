@@ -19,7 +19,7 @@ gem 'oai'
 gem 'puma'
 gem 'rails', '~> 5.2'
 gem 'server_timing'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.7.1'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.8.3'
 
 # assets gems
 gem 'foundation-rails', '~> 6.4.1'
