@@ -7,7 +7,7 @@ class SourcesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @sources = params[:source].present? ? Source.where(params[:source]) : Source.all
+    @sources = Source.all
     respond_with @sources
   end
 
