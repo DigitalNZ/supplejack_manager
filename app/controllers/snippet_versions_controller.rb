@@ -17,7 +17,7 @@ class SnippetVersionsController < ApplicationController
   end
 
   def update
-    @version.update_attributes(snippet_version_params[:version])
+    @version.update_attributes(snippet_version_params)
     @version.post_changes
     redirect_to snippet_snippet_version_path(@snippet, @version)
   end
@@ -32,6 +32,8 @@ class SnippetVersionsController < ApplicationController
     end
 
     def snippet_version_params
-      params.permit!
+      params
+        .require(:version)
+        .permit(:content, tags: [])
     end
 end
