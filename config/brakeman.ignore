@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "85be41e10b3e650de5a37a1857f09f9ed14e234c38729883403df53091f6d2e9",
+      "check_name": "Evaluation",
+      "message": "User input in eval",
+      "file": "app/controllers/previewers_controller.rb",
+      "line": 35,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(params[:parser][:content])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PreviewersController",
+        "method": "validate_parser_content"
+      },
+      "user_input": "params[:parser][:content]",
+      "confidence": "High",
+      "note": "Required for validating Ruby syntax"
+    }
+  ],
+  "updated": "2020-04-06 13:20:25 +1200",
+  "brakeman_version": "4.8.0"
+}
