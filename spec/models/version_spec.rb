@@ -8,11 +8,30 @@ end
 
 RSpec.describe Version do
   let(:program) { Program.new }
-  let(:version) { Version.new }
+  let(:version) { build(:version) }
 
   before do
     version.versionable = program
     version.user = build(:user, email: 'test@test.co.nz')
+  end
+
+  describe 'validations' do
+    context 'Invalid Version' do
+      let(:invalid_version) { build(:version, message: nil) }
+
+      it 'requires message to be valid' do
+        expect(invalid_version).to_not be_valid
+      end
+
+      it 'includes message in the errors array' do
+        invalid_version.valid?
+        expect(invalid_version.errors[:message]).to include "can't be blank"
+      end
+    end
+
+    it 'can be valid' do
+      expect(version).to be_valid
+    end
   end
 
   describe '#staging?' do
