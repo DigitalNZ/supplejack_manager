@@ -19,7 +19,7 @@ RSpec.describe Version do
     context 'Invalid Version' do
       let(:invalid_version) { build(:version, message: nil) }
 
-      it 'requires message to be valid' do
+      it 'requires a message to be present' do
         expect(invalid_version).to_not be_valid
       end
 
