@@ -8,8 +8,8 @@
       <% end %>
     <% end %>
 
-    <%= f.label :message, required: true %>
-    <%= f.text_field :message %>
+    <%= f.label :message %>
+    <%= f.text_field :message, required: true %>
     <%= f.submit class: 'button' %>
   <% else %>
     <%= f.text_area :content, class: "code-editor read-only" %>
