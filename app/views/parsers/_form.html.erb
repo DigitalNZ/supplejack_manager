@@ -3,11 +3,13 @@
     <%= f.text_area :content, class: "code-editor read" %>
 
     <% if @parser.errors.any? %>
-      <span class="error">The parser version message is required.</span>
+      <% if @parser.versions.last.errors.include? :message %>
+        <small class="error">The parser version message is required.</small>
+      <% end %>
     <% end %>
 
-    <%= f.label :message %>
-    <%= f.text_field :message, required: true %>
+    <%= f.label :message, required: true %>
+    <%= f.text_field :message %>
     <%= f.submit class: 'button' %>
   <% else %>
     <%= f.text_area :content, class: "code-editor read-only" %>
