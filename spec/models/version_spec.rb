@@ -15,25 +15,6 @@ RSpec.describe Version do
     version.user = build(:user, email: 'test@test.co.nz')
   end
 
-  describe 'validations' do
-    context 'Invalid Version' do
-      let(:invalid_version) { build(:version, message: nil) }
-
-      it 'requires a message to be present' do
-        expect(invalid_version).to_not be_valid
-      end
-
-      it 'includes message in the errors array' do
-        invalid_version.valid?
-        expect(invalid_version.errors[:message]).to include "can't be blank"
-      end
-    end
-
-    it 'can be valid' do
-      expect(version).to be_valid
-    end
-  end
-
   describe '#staging?' do
     context 'has staging tag' do
       before { version.tags = ['staging'] }

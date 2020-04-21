@@ -16,8 +16,6 @@ class Version
   embedded_in :versionable, polymorphic: true
   delegate :name, :strategy, :file_name, to: :versionable
 
-  validates :message, presence: true
-
   def staging?
     self.tags ||= []
     self.tags.include?('staging')

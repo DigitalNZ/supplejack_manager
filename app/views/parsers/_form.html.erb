@@ -2,12 +2,6 @@
   <% if can? :update, @parser %>
     <%= f.text_area :content, class: "code-editor read" %>
 
-    <% if @parser.errors.any? %>
-      <% if @parser.versions.last.errors.include? :message %>
-        <small class="error">The parser version message is required.</small>
-      <% end %>
-    <% end %>
-
     <%= f.label :message %>
     <%= f.text_field :message, required: true %>
     <%= f.submit class: 'button' %>

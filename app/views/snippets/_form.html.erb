@@ -1,13 +1,6 @@
 <%= custom_form_with model: @snippet, local: true do |f| %>
   <% if can? :update, @snippet %>
     <%= f.text_area :content, class: 'code-editor' %>
-
-    <% if @snippet.errors.any? %>
-      <% if @snippet.versions.last.errors.include? :message %>
-        <small class="error">The snippet version message is required.</small>
-      <% end %>
-    <% end %>
-
     <%= f.label :message %>
     <%= f.text_field :message, required: true %>
 
