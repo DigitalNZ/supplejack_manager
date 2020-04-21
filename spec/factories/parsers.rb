@@ -7,7 +7,6 @@ FactoryBot.define do
     content   { 'class NZMuseums < SupplejackCommon::Xml::Base; end' }
     data_type { 'record' }
     message { 'test message' }
-    
     source
 
     trait :enrichment do
