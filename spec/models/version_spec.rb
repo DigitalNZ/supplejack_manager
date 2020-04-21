@@ -8,7 +8,7 @@ end
 
 RSpec.describe Version do
   let(:program) { Program.new }
-  let(:version) { Version.new }
+  let(:version) { build(:version) }
 
   before do
     version.versionable = program

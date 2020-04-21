@@ -47,6 +47,7 @@ RSpec.describe Versioned do
       before(:each) do
         parser.save
         @version = parser.versions.first
+        @version.message = 'Version'
       end
 
       context 'content has not changed' do
@@ -63,7 +64,7 @@ RSpec.describe Versioned do
 
         it 'it should #save_with_version after save' do
           expect(parser).to receive(:save_with_version)
-          parser.save
+          parser.save!
         end
       end
 
