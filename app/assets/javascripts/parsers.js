@@ -85,6 +85,11 @@ $(function() {
     var partner = $('select[name="parser[partner]"]').val();
     $('select[name="parser[source_id]"] optgroup').remove();
     $('select[name="parser[source_id]"]').append($stored_sources);
+
+    // set the active item.
+    var currentSourceId = $("label[for='parser_source']").data('currentSourceId');
+    $('#parser_source_id').val(currentSourceId);
+
     if (partner !== "") {
       return $("select[name=\"parser[source_id]\"] optgroup[label!='" + partner + "']").remove();
     }
@@ -95,8 +100,6 @@ $(function() {
   $('select[name="parser[partner]"]').change(function() {
     update_source_from_contributor_value($stored_sources)
   });
-
-
 
   return $('#parsers').dataTable({
     "processing": true,
