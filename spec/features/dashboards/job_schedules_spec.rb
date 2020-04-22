@@ -189,5 +189,7 @@ RSpec.feature 'Job Schedules', type: :feature do
 
       find('input[value="Pause All"]').click
     end
+
+    scenario 'searching for a parser'
   end
 end
