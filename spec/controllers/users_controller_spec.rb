@@ -46,7 +46,7 @@ RSpec.describe UsersController do
   describe 'POST #create' do
     context 'valid input' do
       before(:each) do
-        @valid_user = { name: 'Sample User', email: 'sample@sample.com', password: '123456', password_confirmation: '123456' }
+        @valid_user = { name: 'Sample User', email: 'sample@sample.com', password: '123456', password_confirmation: '123456', role: 'user' }
       end
 
       it 'redirects to index template' do
@@ -89,17 +89,17 @@ RSpec.describe UsersController do
 
   describe 'PUT #update' do
     it 'should find the user' do
-      expect(User).to receive(:find)
-      put :update, params: { id: other_user.id }
+      expect(User).to receive(:find) { user }
+      put :update, params: { id: other_user.id, user: { name: 'User' } }
     end
 
     it 'redirects to index template' do
-      put :update, params: { id: other_user.id }
+      put :update, params: { id: other_user.id, user: { name: 'User' } }
       expect(response).to redirect_to(users_path)
     end
 
     it 'assigns user to instance variable' do
-      put :update, params: { id: other_user.id }
+      put :update, params: { id: other_user.id, user: { name: 'User' } }
       expect(assigns(:user)).to eq other_user
     end
 
