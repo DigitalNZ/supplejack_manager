@@ -10,9 +10,9 @@ RUN apk add --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 
 # install rubygem
 COPY Gemfile Gemfile.lock ./
-COPY vendor/cache ./vendor/cache
-COPY node_modules ./node_modules
-COPY public/assets ./public/assets
+# COPY vendor/cache ./vendor/cache
+# COPY node_modules ./node_modules
+# COPY public/assets ./public/assets
 RUN gem install bundler -v $(tail -n1 Gemfile.lock) \
     && bundler config without 'development:test' \
     && bundle config frozen 1 \
