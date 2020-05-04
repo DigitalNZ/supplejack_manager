@@ -41,6 +41,11 @@
 //= require collection_statistics
 //= require admin/activities
 
+// Workaround for CVE-2020-11022. Fixed in jQuery v3.5.0
+jQuery.htmlPrefilter = function(html) {
+	return html;
+};
+
 $(function() {
   $(document).foundation();
 });
