@@ -49,11 +49,3 @@ jobs:
       script:
         - gem install brakeman
         - brakeman --run-all-checks
-
-  allow_failures:
-
-    - stage: test
-      name: 'brakeman check'
-      script:
-        - gem install brakeman
-        - brakeman --run-all-checks
