@@ -49,3 +49,8 @@ jobs:
       script:
         - gem install brakeman
         - brakeman --run-all-checks
+
+    - stage: test
+      name: 'yarn audit'
+      script:
+        - yarn audit
