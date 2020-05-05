@@ -50,10 +50,7 @@ jobs:
         - gem install brakeman
         - brakeman --run-all-checks
 
-  allow_failures:
-
     - stage: test
-      name: 'brakeman check'
+      name: 'yarn audit'
       script:
-        - gem install brakeman
-        - brakeman --run-all-checks
+        - yarn audit

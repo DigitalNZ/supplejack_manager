@@ -34,6 +34,6 @@ class SnippetVersionsController < ApplicationController
     def snippet_version_params
       params
         .require(:version)
-        .moderate(controller_name, action_name, :content, tags: [])
+        .permit(:content, tags: [])
     end
 end
