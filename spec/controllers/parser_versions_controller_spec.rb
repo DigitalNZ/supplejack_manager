@@ -50,8 +50,11 @@ RSpec.describe ParserVersionsController do
 
   describe 'PUT update' do
     it 'updates the version' do
-      expect(version).to receive(:update_attributes).with('tags' => ['staging'])
       put :update, params: { id: 1, parser_id: 1, version: { tags: ['staging'] } }
+      expect(version.tags).to eq ['staging']
+
+      put :update, params: { id: 1, parser_id: 1, version: { tags: [] } }
+      expect(version.tags).to eq []
     end
 
     it 'redirects to the version path' do

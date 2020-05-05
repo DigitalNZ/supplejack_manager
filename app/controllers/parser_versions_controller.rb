@@ -49,6 +49,9 @@ class ParserVersionsController < ApplicationController
     end
 
     def parser_version_params
+      # Rails removes empty arrays from params so no top level key
+      return {} if params[:version].blank?
+
       params
         .require(:version)
         .moderate(controller_name, action_name, :content, tags: [])
