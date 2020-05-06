@@ -32,6 +32,9 @@ class SnippetVersionsController < ApplicationController
     end
 
     def snippet_version_params
+      # Rails removes empty arrays from params so no top level key
+      return {} if params[:version].blank?
+
       params
         .require(:version)
         .permit(:content, tags: [])

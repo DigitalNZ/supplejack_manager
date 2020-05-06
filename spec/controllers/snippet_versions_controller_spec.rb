@@ -37,8 +37,11 @@ RSpec.describe SnippetVersionsController do
 
   describe 'PUT update' do
     it 'updates the version' do
-      expect(version).to receive(:update_attributes).with({ 'tags'=>['staging'] })
       put :update, params: { id: 1, snippet_id: 1, version: { tags: ['staging'] } }
+      expect(version.tags).to eq ['staging']
+
+      put :update, params: { id: 1, snippet_id: 1, version: { tags: [] } }
+      expect(version.tags).to eq []
     end
 
     it 'posts a message to the changes app' do
