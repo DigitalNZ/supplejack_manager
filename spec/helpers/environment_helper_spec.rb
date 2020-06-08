@@ -49,7 +49,6 @@ RSpec.describe EnvironmentHelpers do
       expect(fetch_env_vars).to have_key('WORKER_HOST')
       expect(fetch_env_vars).to have_key('HARVESTER_API_KEY')
       expect(fetch_env_vars).to have_key('API_HOST')
-      expect(fetch_env_vars).to have_key('API_MONGOID_HOSTS')
       expect(fetch_env_vars).to have_key('WORKER_KEY')
     end
   end
