@@ -8,8 +8,7 @@ development:
       database: harvester_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
-      hosts:
-        <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
+      hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
@@ -67,8 +66,7 @@ test:
   clients:
     default:
       database: harvester_test
-      hosts:
-        <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
+      hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
       options:
         consistency: :strong
         # In the test environment we lower the retries and retry interval to
@@ -80,20 +78,20 @@ staging:
   clients:
     default:
       database: harvester_staging
-      hosts: <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
+      hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
       options:
         auth_source: admin
         consistency: :strong
-        user: <%= ENV['MONGOID_USER'] %>
-        password: <%= ENV['MONGOID_PASSWORD'] %>
+        user: <%= ENV['MONGO_USER'] %>
+        password: <%= ENV['MONGO_PASSWORD'] %>
 
 production:
   clients:
     default:
       database: manager_production
-      hosts: <%= ENV['API_MONGOID_HOSTS'].gsub(/\s+/, "").split(',') %>
+      hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
       options:
         auth_source: admin
         consistency: :strong
-        user: <%= ENV['MONGOID_USER'] %>
-        password: <%= ENV['MONGOID_PASSWORD'] %>
+        user: <%= ENV['MONGO_USER'] %>
+        password: <%= ENV['MONGO_PASSWORD'] %>
