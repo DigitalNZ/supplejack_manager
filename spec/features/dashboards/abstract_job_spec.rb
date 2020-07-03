@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
-  let(:user) { create(:user, :admin) }
-
   context 'a user that is logged out' do
     scenario 'gets redirected to the sign in page' do
       visit environment_abstract_jobs_path(environment: 'staging')
@@ -12,77 +10,71 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
     end
   end
 
-  context 'Active jobs', js: true do
+  context 'logged in' do
+    let(:user) { create(:user, :admin) }
+
     before do
       allow_any_instance_of(Partner).to receive(:update_apis)
       allow_any_instance_of(Source).to receive(:update_apis)
       allow(LinkCheckRule).to receive(:create)
 
       sign_in user
-
-      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
     end
 
-    let(:source) { create(:source) }
-    let(:parser) { create(:parser, source: source) }
-    let(:abstract_job) do
-      build(:abstract_job, status: 'active',
-                           mode: 'Normal',
-                           user_id: user.id,
-                           parser_id: parser.id,
-                           start_time: Time.zone.now - 1.hour,
-                           _type: 'HarvestJob',
-                           version_id: '999')
+    context 'Active jobs', js: true do
+      let(:source) { create(:source) }
+      let(:parser) { create(:parser, source: source) }
+      let(:abstract_job) do
+        build(:abstract_job, status: 'active',
+                             mode: 'Normal',
+                             user_id: user.id,
+                             parser_id: parser.id,
+                             start_time: Time.zone.now - 1.hour,
+                             _type: 'HarvestJob',
+                             version_id: '999')
+      end
+
+      before :each do
+        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
+        visit environment_abstract_jobs_path(status: 'active', environment: 'staging')
+      end
+
+      scenario 'displays active job details' do
+        expect(page.has_content?(abstract_job.parser.name))
+        expect(page.has_content?(abstract_job.mode))
+        expect(page.has_content?(abstract_job.user.name))
+        expect(page.has_content?(I18n.l(abstract_job.start_time, format: :long)))
+        expect(page.has_content?(abstract_job.records_count))
+      end
+
+      scenario 'has links to the parser and the harvest job details' do
+        expect(page).to have_link(abstract_job.parser.name, href: parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))
+        expect(page).to have_link('Details', href: environment_harvest_job_path('staging', id: abstract_job.id))
+      end
     end
 
-    before :each do
-      visit environment_abstract_jobs_path(status: 'active', environment: 'staging')
-    end
+    context 'Finished jobs', js: true do
+      let(:source) { create(:source) }
+      let(:parser) { create(:parser, source: source) }
+      let(:abstract_job) do
+        build(:abstract_job, status: 'finished',
+                             mode: 'Normal',
+                             user_id: user.id,
+                             parser_id: parser.id,
+                             start_time: Time.zone.now - 1.hour,
+                             _type: 'HarvestJob',
+                             version_id: '999',
+                             duration: 1111.11)
+      end
 
-    scenario 'displays active job details' do
-      expect(page.has_content?(abstract_job.parser.name))
-      expect(page.has_content?(abstract_job.mode))
-      expect(page.has_content?(abstract_job.user.name))
-      expect(page.has_content?(I18n.l(abstract_job.start_time, format: :long)))
-      expect(page.has_content?(abstract_job.records_count))
-    end
+      before :each do
+        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
+        visit environment_abstract_jobs_path(status: 'finished', environment: 'staging')
+      end
 
-    scenario 'has links to the parser and the harvest job details' do
-      expect(page).to have_link(abstract_job.parser.name, href: parser_parser_version_path(parser_id: parser.id, id: abstract_job.version_id))
-      expect(page).to have_link('View details', href: environment_harvest_job_path('staging', id: abstract_job.id))
-    end
-  end
-
-  context 'Finished jobs', js: true do
-    before do
-      allow_any_instance_of(Partner).to receive(:update_apis)
-      allow_any_instance_of(Source).to receive(:update_apis)
-      allow(LinkCheckRule).to receive(:create)
-
-      sign_in user
-
-      allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
-    end
-
-    let(:source) { create(:source) }
-    let(:parser) { create(:parser, source: source) }
-    let(:abstract_job) do
-      build(:abstract_job, status: 'finished',
-                           mode: 'Normal',
-                           user_id: user.id,
-                           parser_id: parser.id,
-                           start_time: Time.zone.now - 1.hour,
-                           _type: 'HarvestJob',
-                           version_id: '999',
-                           duration: 1111.11)
-    end
-
-    before :each do
-      visit environment_abstract_jobs_path(status: 'finished', environment: 'staging')
-    end
-
-    scenario 'displays finished job duration' do
-      expect(page.has_content?('18 minutes 31 seconds'))
+      scenario 'displays finished job duration' do
+        expect(page.has_content?('18 minutes 31 seconds'))
+      end
     end
   end
 end
