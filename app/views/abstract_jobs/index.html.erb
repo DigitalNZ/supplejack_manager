@@ -1,11 +1,8 @@
 <h1><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
 
-<% ['active', 'finished', 'failed', 'stopped'].each do |status| %>
-  <% if params[:status] == status %>
-    <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser]), class: 'button primary') %>
-  <% else %>
-    <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser: params[:parser]), class: 'button hollow') %>
-  <% end %>
+<% ['all', 'active', 'finished', 'failed', 'stopped'].each do |status| %>
+  <% button_class = params[:status] == status ? 'primary' : 'hollow' %>
+  <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser_id: params[:parser_id]), class: "button #{button_class}") %>
 <% end %>
 
 <div class='table-scroll'>
@@ -24,6 +21,10 @@
 
         <th><%= t("harvest_jobs.records_harvested") %></th>
         <th><%= t("harvest_jobs.validation_failure_errors") %></th>
+
+        <% if params[:status] == 'all' %>
+          <th><%= t("harvest_jobs.status") %></th>
+        <% end %>
 
         <th></th>
       </tr>
@@ -57,6 +58,10 @@
           <td><span class='errors-count'><strong><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></strong></span></td>
         <% else %>
           <td><%= abstract_job.invalid_records_count %>/<%= abstract_job.failed_records_count %></td>
+        <% end %>
+
+        <% if params[:status] == 'all' %>
+          <td><%= abstract_job.status.capitalize %></td>
         <% end %>
 
         <td>
