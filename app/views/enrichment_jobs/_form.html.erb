@@ -1,6 +1,6 @@
 <h3><%= "Run #{@enrichment_job.environment.capitalize} Enrichment" %></h3>
 
-<%= form_for @enrichment_job, url: environment_enrichment_jobs_path(@enrichment_job.environment), remote: true do |f| %>
+<%= form_for @enrichment_job, url: environment_enrichment_jobs_path(@enrichment_job.environment, format: :js), remote: true do |f| %>
   <%= f.hidden_field :parser_id %>
   <%= f.hidden_field :version_id %>
   <%= f.hidden_field :user_id %>
