@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options DEFAULT_URL_OPTIONS
+
   root to: 'home#index'
 
   resources :parsers do
