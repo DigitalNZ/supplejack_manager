@@ -96,10 +96,13 @@ Rails.application.configure do
   config.log_level = ENV['LOG_LEVEL'] || :info
   config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
 
-  config.action_mailer.default_url_options = {
+  DEFAULT_URL_OPTIONS = {
     host: ENV['HOST'],
     protocol: 'https'
-  }
+  }.freeze
+  config.action_controller.default_url_options = DEFAULT_URL_OPTIONS
+  config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
+
   config.action_mailer.smtp_settings = {
     domain: ENV['HOST'],
     address: ENV['SMTP_ADDRESS'],
