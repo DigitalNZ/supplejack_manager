@@ -60,5 +60,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # ALL custom configs comes  under this line
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  DEFAULT_URL_OPTIONS = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
 end

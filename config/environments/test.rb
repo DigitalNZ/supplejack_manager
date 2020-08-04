@@ -45,6 +45,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # ALL custom configs comes  under this line
-  config.action_mailer.default_url_options = { host: "localhost:3000"}
+  DEFAULT_URL_OPTIONS = { host: "localhost:3000"}
+  config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
 end
 
