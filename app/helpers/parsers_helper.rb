@@ -20,7 +20,8 @@ module ParsersHelper
     path = parser_previewers_path(parser_id,
                                   index: index.to_i + 1,
                                   environment: environment,
-                                  review: review)
+                                  review: review,
+                                  format: :js)
     link_to 'next >', path, html_options
   end
 
@@ -40,7 +41,8 @@ module ParsersHelper
     path = parser_previewers_path(parser_id,
                                   index: index,
                                   environment: environment,
-                                  review: review)
+                                  review: review,
+                                  format: :js)
 
     if index >= 0
       link_to '< previous', path, html_options
