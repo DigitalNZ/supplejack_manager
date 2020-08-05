@@ -36,5 +36,7 @@ class PreviewersController < ApplicationController
     @parser_error = false
   rescue => error
     @parser_error = { type: error.class, message: error.message }
+  rescue SyntaxError => error
+    @parser_error = { type: error.class, message: error.message }
   end
 end

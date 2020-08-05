@@ -168,6 +168,8 @@ class Parser
     rescue => error
       self.error = { type: error.class, message: error.message }
       false
+    rescue SyntaxError => error
+      self.error = { type: error.class, message: error.message }
     end
   end
 
