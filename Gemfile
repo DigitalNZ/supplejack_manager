@@ -71,7 +71,6 @@ end
 
 group :uat, :staging, :production do
   gem 'airbrake'
-  gem 'elastic-apm'
   gem 'lograge'
   gem 'ougai'
 end
