@@ -84,6 +84,6 @@ module ParsersHelper
   end
 
   def localize_date_time(date_time)
-    date_time.localtime.strftime('%d %b %Y %H:%M')
+    date_time.to_datetime.localtime.strftime('%d %b %Y %H:%M')
   end
 end
