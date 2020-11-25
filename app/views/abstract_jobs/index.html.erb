@@ -15,7 +15,7 @@
         <th><%= t("harvest_jobs.enrichment") %></th>
         <th><%= t("harvest_jobs.operator") %></th>
         <th><%= t("harvest_jobs.start_time") %></th>
-        <% if params[:status] == "finished" %>
+        <% if %w[finished all].include?(params[:status]) %>
           <th><%= t("harvest_jobs.duration") %></th>
         <% end %>
 
@@ -48,7 +48,7 @@
         <% end %>
         <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
 
-        <% if params[:status] == "finished" %>
+        <% if %w[finished all].include?(params[:status]) %>
           <td><%= human_duration(abstract_job.duration) %></td>
         <% end %>
 

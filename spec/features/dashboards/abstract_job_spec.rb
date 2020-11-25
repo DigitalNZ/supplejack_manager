@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
+RSpec.feature 'Abstract Job Dashboard', type: :feature do
   context 'a user that is logged out' do
     scenario 'gets redirected to the sign in page' do
       visit environment_abstract_jobs_path(environment: 'staging')
@@ -112,6 +112,7 @@ RSpec.feature 'Abscrtract Job Dashboard', type: :feature do
         expect(page).to have_content('Status')
         expect(page).to have_content('Finished')
         expect(page).to have_content('Active')
+        expect(page).to have_content('Duration')
       end
     end
   end
