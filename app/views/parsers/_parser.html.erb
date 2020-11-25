@@ -32,6 +32,31 @@
   <div class="medium-3 cell">
 
     <ul class="harvest-commands">
+      <li class="medium-12 cell">
+        <button class="button dropdown medium-12 expanded" data-toggle='harvests-jobs-dropdown'>
+          View all harvests jobs from this parser
+        </button>
+
+        <div class='dropdown-pane' id='harvests-jobs-dropdown' data-dropdown data-auto-focus='true'>
+          <ul class='no-bullet'>
+            <% APPLICATION_ENVS.each do |env| %>
+              <li>
+                <%=
+                  link_to(
+                    "#{env.capitalize} jobs",
+                    environment_abstract_jobs_path(
+                      env.downcase,
+                      status: 'all',
+                      parser_id: @parser.id,
+                    ),
+                    target: '_blank'
+                  )
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
       <% if can? :run_harvest, @parser %>
         <% if @version %>
           <li class="medium-12 cell">
