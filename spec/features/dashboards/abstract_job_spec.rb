@@ -113,6 +113,12 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
         expect(page).to have_content('Finished')
         expect(page).to have_content('Active')
         expect(page).to have_content('Duration')
+
+        expect(page.find('td:first-child a')[:href]).to include environment_abstract_jobs_path(
+          'staging',
+          status: 'all',
+          parser_id: abstract_job.parser.id
+        )
       end
     end
   end

@@ -9,7 +9,7 @@
   <table>
     <thead>
       <tr>
-        <th><%= t("abstract_jons.type") %></th>
+        <th></th>
         <th><%= t("harvest_jobs.parser") %></th>
         <th><%= t("harvest_jobs.mode") %></th>
         <th><%= t("harvest_jobs.enrichment") %></th>
@@ -33,7 +33,19 @@
     <tbody>
       <% @abstract_jobs.each do |abstract_job| %>
       <tr>
-        <td><%= t("abstract_jobs.#{abstract_job._type.downcase}") %></td>
+        <td>
+          <%=
+            link_to(
+              '&#128269;'.html_safe,
+              environment_abstract_jobs_path(
+                params[:environment],
+                status: params['status'],
+                parser_id: abstract_job.parser.id
+              ),
+              title: 'Filter to show only jobs from this parser'
+            )
+          %>
+        </td>
         <% if abstract_job.version_id.present? %>
           <td><%= link_to abstract_job.parser_name, parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
         <% else %>
