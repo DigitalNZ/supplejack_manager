@@ -87,3 +87,8 @@ select {
     padding-right: 2rem;
   }
 }
+
+.failed {
+  font-weight: $global-weight-bold;
+  color: get-color('warning');
+}
