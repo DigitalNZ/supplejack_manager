@@ -13,6 +13,7 @@ en:
   time:
     formats:
       first_run_at: "%d %b %Y"
+      start_time: "%b %d, %Y %H:%M"
 
   environments:
     production: "Production"

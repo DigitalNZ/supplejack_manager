@@ -58,7 +58,7 @@
         <% else %>
           <td><%= t("harvest_jobs.scheduled") %></td>
         <% end %>
-        <td><%= l abstract_job.try(:start_time), format: :long rescue nil %></td>
+        <td><%= l abstract_job&.start_time, format: :start_time rescue nil %></td>
 
         <% if %w[finished all].include?(params[:status]) %>
           <td><%= human_duration(abstract_job.duration) %></td>
