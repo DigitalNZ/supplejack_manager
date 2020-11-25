@@ -66,10 +66,10 @@ module ApplicationHelper
     return '' unless secs.present?
 
     secs = secs.to_i
-    [[60, :seconds],
-     [60, :minutes],
-     [24, :hours],
-     [Float::INFINITY, :days]].map do |count, name|
+    [[60, :sec],
+     [60, :min],
+     [24, :hr],
+     [Float::INFINITY, :day]].map do |count, name|
       next unless secs.positive?
 
       secs, n = secs.divmod(count)
