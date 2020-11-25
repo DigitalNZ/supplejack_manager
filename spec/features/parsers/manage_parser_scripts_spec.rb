@@ -80,6 +80,20 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
       expect(page).to have_content("class #{new_parser.name} < SupplejackCommon::Oai::Base")
     end
 
+    scenario 'displays a link to the jobs page' do
+      select 'OAI'
+      click_button 'Create Parser Script'
+
+      click_button 'View all harvests jobs from this parser'
+      link = page.find_link 'Staging jobs'
+      expect(link[:target]).to eq '_blank'
+      expect(link[:href]).to include environment_abstract_jobs_path(
+        'staging',
+        status: 'all',
+        parser_id: page.current_path.split('/')[2],
+      )
+    end
+
     scenario 'create parser from a template' do
       select 'JSON'
       select parser_template.name
