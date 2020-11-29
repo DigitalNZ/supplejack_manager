@@ -88,7 +88,7 @@ select {
   }
 }
 
-.failed {
+.warning {
   font-weight: $global-weight-bold;
   color: get-color('warning');
 }

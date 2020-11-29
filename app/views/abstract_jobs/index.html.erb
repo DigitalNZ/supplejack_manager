@@ -75,7 +75,7 @@
         <% if params[:status] == 'all' %>
           <td>
             <% status = abstract_job.status.capitalize %>
-            <span class="<%= status == 'Failed' ? 'failed' : '' %>">
+            <span class="<%= status == 'Failed' ? 'warning' : '' %>">
               <%= status %>
             </span>
           </td>

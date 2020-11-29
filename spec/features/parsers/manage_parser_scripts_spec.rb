@@ -84,7 +84,7 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
       select 'OAI'
       click_button 'Create Parser Script'
 
-      click_button 'View all harvests jobs from this parser'
+      click_button 'View all jobs from this parser'
       link = page.find_link 'Staging jobs'
       expect(link[:target]).to eq '_blank'
       expect(link[:href]).to include environment_abstract_jobs_path(
