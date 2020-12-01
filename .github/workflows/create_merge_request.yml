@@ -1,0 +1,31 @@
+name: Create MR on GitLab
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  create-merge-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create-merge-request
+        env:
+          GITLAB_API_ACCESS_TOKEN: ${{ secrets.GITLAB_API_ACCESS_TOKEN }}
+          GITLAB_API: ${{ secrets.GITLAB_API }}
+          GITLAB_PROJECT_ID: ${{ secrets.GITLAB_PROJECT_ID }}
+          PR_SOURCE_BRANCH: ${{ github.head_ref }}
+          PR_TARGET_BRANCH: ${{ github.base_ref }}
+        run: |
+          echo "PR_SOURCE_BRANCH: $PR_SOURCE_BRANCH"
+          echo "PR_TARGET_BRANCH: $PR_TARGET_BRANCH"
+          curl \
+            $GITLAB_API/projects/$GITLAB_PROJECT_ID/merge_requests \
+            --request POST \
+            --header "Content-Type: application/json" \
+            --header "PRIVATE-TOKEN: $GITLAB_API_ACCESS_TOKEN" \
+            --data '{
+              "source_branch": "'$PR_SOURCE_BRANCH'",
+              "target_branch": "'$PR_TARGET_BRANCH'",
+              "title": "'$PR_SOURCE_BRANCH' to '$PR_TARGET_BRANCH'",
+              "description": "See https://github.com/DigitalNZ/supplejack_manager/pulls"
+            }'
