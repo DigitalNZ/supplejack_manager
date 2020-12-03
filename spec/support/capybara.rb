@@ -8,6 +8,12 @@ require 'webdrivers'
 
 CAPYBARA_WINDOW_DEFAULTS = [1440, 900]
 
+if ENV['CI'].present?
+  net = Socket.ip_address_list.find(&:ipv4_private?)
+  Capybara.server_port = 8200
+  Capybara.server_host = net.nil? ? 'localhost' : net.ip_address
+end
+
 # Capybara Screenshot
 Capybara::Screenshot.webkit_options = { width: CAPYBARA_WINDOW_DEFAULTS[0], height: CAPYBARA_WINDOW_DEFAULTS[1] }
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
@@ -18,15 +24,31 @@ Capybara::Screenshot.register_driver(:headless_chrome) do |driver, path|
   driver.browser.save_screenshot(path)
 end
 
+
 Capybara.register_driver :headless_chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: [
+  args = [
     'headless',
     'disable-gpu',
     'no-sandbox',
     'disable-dev-shm-usage',
-    "window-size=#{CAPYBARA_WINDOW_DEFAULTS.join(',')}"
-  ])
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+    'window-size=1400,1400'
+  ]
+
+  if ENV['CI'].present?
+    uri = URI(ENV['SELENIUM_URI'])
+
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :remote,
+      url: "http://#{uri.host}:#{uri.port}/wd/hub/",
+      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+        chromeOptions: { args: args }
+      )
+    )
+  else
+    options = Selenium::WebDriver::Chrome::Options.new(args: args)
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
 end
 
 Capybara.javascript_driver = :headless_chrome
