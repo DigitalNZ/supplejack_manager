@@ -12,20 +12,8 @@
 # and a Worker running on localhost:3002.
 # Running the Manager allows you to harvest in production environment.
 
-development:
-  WORKER_HOST: http://127.0.0.1:3002
-  WORKER_KEY: WORKER_KEY
-  API_HOST: http://127.0.0.1:3000
-  HARVESTER_API_KEY: HARVESTER_KEY
-
-test:
-  WORKER_HOST: http://127.0.0.1:3002
-  WORKER_KEY: WORKER_KEY
-  API_HOST: http://127.0.0.1:3000
-  HARVESTER_API_KEY: HARVESTER_KEY
-
-staging:
-  WORKER_HOST: http://127.0.0.1:3002
-  WORKER_KEY: WORKER_KEY
-  API_HOST: http://127.0.0.1:3000
-  HARVESTER_API_KEY: HARVESTER_KEY
+uat:
+  WORKER_HOST:       <%= ENV['WORKER_HOST'] %>
+  WORKER_KEY:        <%= ENV['WORKER_KEY'] %>
+  HARVESTER_API_KEY: <%= ENV['HARVESTER_API_KEY' %>
+  API_HOST:          <%= ENV['API_HOST'] %>
