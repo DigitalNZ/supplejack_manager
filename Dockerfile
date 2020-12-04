@@ -30,7 +30,6 @@ COPY . .
 # compile the assets
 ARG RAILS_ENV="production"
 ENV RAILS_ENV=$RAILS_ENV
-RUN cp config/application.yml.docker config/application.yml
 RUN bin/rails assets:precompile
 
 RUN rm -rf tmp/cache vendor/assets spec node_modules

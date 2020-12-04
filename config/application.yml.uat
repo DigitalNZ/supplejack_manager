@@ -15,5 +15,5 @@
 uat:
   WORKER_HOST:       <%= ENV['WORKER_HOST'] %>
   WORKER_KEY:        <%= ENV['WORKER_KEY'] %>
-  HARVESTER_API_KEY: <%= ENV['HARVESTER_API_KEY' %>
+  HARVESTER_API_KEY: <%= ENV['HARVESTER_API_KEY'] %>
   API_HOST:          <%= ENV['API_HOST'] %>
