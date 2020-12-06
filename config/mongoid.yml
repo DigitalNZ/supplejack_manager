@@ -74,21 +74,10 @@ test:
         max_retries: 1
         retry_interval: 0
 
-uat:
-  clients:
-    default:
-      database: manager_uat
-      hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
-      options:
-        auth_source: admin
-        consistency: :strong
-        user: <%= ENV['MONGO_USER'] %>
-        password: <%= ENV['MONGO_PASSWORD'] %>
-
 staging:
   clients:
     default:
-      database: harvester_staging
+      database: <%= ENV['MONGO_DATABASE'] || 'harvester_staging' %>
       hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
       options:
         auth_source: admin
@@ -99,7 +88,7 @@ staging:
 production:
   clients:
     default:
-      database: manager_production
+      database: <%= ENV['MONGO_DATABASE'] || 'harvester_production' %>
       hosts: <%= ENV.fetch('MONGO_HOSTS', 'localhost:27017').gsub(/\s+/, '')&.split(',') %>
       options:
         auth_source: admin
