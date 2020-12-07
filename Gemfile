@@ -17,7 +17,7 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0'
 gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.8.3'
 
