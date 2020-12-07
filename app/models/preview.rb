@@ -84,7 +84,7 @@ class Preview < ActiveResource::Base
   end
 
   def raw_output
-    CodeRay.scan(self.send("pretty_#{self.format}_output"), self.format.to_sym).html(line_numbers: :table).html_safe
+    CodeRay.scan(self.send("pretty_#{attributes['format']}_output"), attributes['format'].to_sym).html(line_numbers: :table).html_safe
   end
 
   def pretty_xml_output
