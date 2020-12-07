@@ -8,7 +8,7 @@ require 'webdrivers'
 
 CAPYBARA_WINDOW_DEFAULTS = [1440, 900]
 
-if ENV['CI'].present?
+if ENV['SELENIUM_URI'].present?
   net = Socket.ip_address_list.find(&:ipv4_private?)
   Capybara.server_port = 8200
   Capybara.server_host = net.nil? ? 'localhost' : net.ip_address
@@ -34,7 +34,7 @@ Capybara.register_driver :headless_chrome do |app|
     'window-size=1400,1400'
   ]
 
-  if ENV['CI'].present?
+  if ENV['SELENIUM_URI'].present?
     uri = URI(ENV['SELENIUM_URI'])
 
     Capybara::Selenium::Driver.new(
