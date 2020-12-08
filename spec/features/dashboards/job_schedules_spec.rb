@@ -36,7 +36,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(page.has_content?(one_off_schedule.parser.name)).to be true
       expect(page.has_content?(I18n.l(one_off_schedule.start_time, format: :long))).to be true
       expect(page.has_content?(one_off_schedule.environment)).to be true
-      expect(page.has_content?(one_off_schedule.mode)).to be true
+      expect(page.has_content?(one_off_schedule.mode.capitalize)).to be true
     end
 
     scenario 'can click Edit link to go to update page', js: true do
@@ -106,7 +106,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(page.has_content?(schedule1.parser.name)).to be true
       expect(page.has_content?(I18n.l(schedule1.start_time, format: :first_run_at))).to be true
       expect(page.has_content?(schedule1.environment)).to be true
-      expect(page.has_content?(schedule1.mode)).to be true
+      expect(page.has_content?(schedule1.mode.capitalize)).to be true
       expect(page.has_content?(I18n.l(schedule1.start_time, format: :first_run_at))).to be true
       expect(page.has_content?(I18n.l(schedule1.next_run_at, format: :short))).to be true
     end

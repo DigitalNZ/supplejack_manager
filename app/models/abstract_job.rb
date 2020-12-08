@@ -52,11 +52,11 @@ class AbstractJob < ActiveResource::Base
       params[:parser_id] = params.delete(:parser) if params[:parser]
       jobs = self.find(:all, params: params)
       Kaminari::PaginatableArray.new(
-        jobs, {
-          limit: jobs.http['X-limit'].to_i,
-          offset: jobs.http['X-offset'].to_i,
-          total_count: jobs.http['X-total'].to_i
-      })
+        jobs,
+        limit: jobs.http['X-limit'].to_i,
+        offset: jobs.http['X-offset'].to_i,
+        total_count: jobs.http['X-total'].to_i
+      )
     end
   end
 

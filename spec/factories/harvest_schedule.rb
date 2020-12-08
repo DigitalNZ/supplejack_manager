@@ -10,5 +10,6 @@ FactoryBot.define do
     status { 'finished' }
     status_message { nil }
     environment { 'staging' }
+    mode { 'normal' }
   end
 end
