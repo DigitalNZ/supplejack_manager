@@ -35,7 +35,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
       end
 
       before :each do
-        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
+        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], limit: 50, offset: 0, total_count: 1)
         visit environment_abstract_jobs_path(status: 'active', environment: 'staging')
       end
 
@@ -69,7 +69,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
       end
 
       before :each do
-        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
+        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], limit: 50, offset: 0, total_count: 1)
         visit environment_abstract_jobs_path(status: 'finished', environment: 'staging')
       end
 
@@ -104,7 +104,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
       end
 
       before :each do
-        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], { limit: 50, offset: 0, total_count: 1 })
+        allow(AbstractJob).to receive(:search).and_return Kaminari::PaginatableArray.new([abstract_job], limit: 50, offset: 0, total_count: 1)
         visit environment_abstract_jobs_path(status: 'all', environment: 'staging')
       end
 
