@@ -9,6 +9,7 @@ require:
 AllCops:
   TargetRubyVersion: 2.7.1
   Exclude:
+    - 'node_modules/**/*'
     - 'vendor/**/*'
     - 'db/**/*'
     - 'config/**/*'
