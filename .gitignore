@@ -21,9 +21,6 @@
 /storage/*
 !/storage/.keep
 
-/node_modules
-/yarn-error.log
-
 /public/assets
 .byebug_history
 
@@ -97,3 +94,11 @@ spec/examples.txt
 .tags
 .tags_sorted_by_file
 !/tmp/pids/.keep
+
+# webpacker
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
