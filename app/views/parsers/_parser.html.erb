@@ -66,31 +66,42 @@
 
             <div class='dropdown-pane' id='enrichment-dropdown' data-dropdown data-auto-focus='true'>
               <ul class='no-bullet'>
-                <% if APPLICATION_ENVS.include?('staging') %>
-                  <li><%= link_to "Staging Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: { environment: "staging" } %></li>
-                <% end %>
-
-                <% if APPLICATION_ENVS.include?('production') %>
-                  <li><%= link_to 'Production Enrichment', new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "production"} %></li>
+                <% APPLICATION_ENVS.each do |env| %>
+                  <li>
+                    <%=
+                      link_to(
+                        "#{env.capitalize} Enrichment",
+                        new_enrichment_parser_parser_version_path(
+                          @harvest_job.parser_id, @harvest_job.version_id
+                        ),
+                        class: "records-enrichment-modal-button",
+                        data: { environment: env }
+                      ) %>
+                  </li>
                 <% end %>
               </ul>
             </div>
           </li>
           <li class="medium-12 cell">
-            <div class="button run-harvest dropdown medium-12 expanded" data-toggle='harvest-dropdown'>
+            <div class="button run-harvest dropdown medium-12 expanded" data-toggle='harvest-dropdown' <%= (@version&.tags || []).any? ? '' : 'disabled' %>>
               Run Harvest
             </div>
             <div class='dropdown-pane' id='harvest-dropdown' data-dropdown data-auto-focus='true'>
               <ul class='no-bullet'>
-                <% if APPLICATION_ENVS.include?('staging') && @version.try(:staging?) %>
-                  <li><%= link_to "Staging Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: { environment: 'staging' } %></li>
+                <% APPLICATION_ENVS.each do |env| %>
+                  <% if @version&.tags&.include?(env) %>
+                    <li>
+                      <%=
+                        link_to("#{env.capitalize} Harvest",
+                        new_harvest_parser_parser_version_path(
+                          @harvest_job.parser_id,
+                          @harvest_job.version_id
+                        ),
+                        class: "records-harvest-modal-button",
+                        data: { environment: env }) %>
+                    </li>
+                  <% end %>
                 <% end %>
-
-                <% if APPLICATION_ENVS.include?('production') && @version.try(:production?) %>
-                  <li><%= link_to 'Production Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: {environment: 'production' } %></li>
-                <% end %>
-
-                <li><%= link_to "Test Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "test"} %></li>
               </ul>
             </div>
           </li>
