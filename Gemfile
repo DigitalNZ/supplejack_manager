@@ -23,13 +23,6 @@ gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.8.3'
 
 # assets gems
 gem 'webpacker'
-gem 'foundation-rails', '~> 6.4.1'
-gem 'jquery-datatables-rails'
-gem 'jquery-rails'
-gem 'jquery-timepicker-rails'
-gem 'jquery-ui-rails'
-gem 'sass-rails'
-gem 'uglifier', '>= 1.3.0'
 
 group :test do
   gem 'capybara', '>= 2.17.0'

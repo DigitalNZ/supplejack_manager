@@ -1,15 +1,13 @@
-// gems
-@import 'jquery-ui/core';
-@import 'jquery-ui/theme';
-@import 'jquery-ui/datepicker';
-@import 'jquery-ui/slider';
+// node_modules
+// @import 'jquery-ui-dist/jquery-ui.theme'; // doesn't work well with webpacker
 @import 'jquery-datetimepicker/jquery.datetimepicker';
 @import 'codemirror/lib/codemirror';
 @import 'codemirror/theme/monokai';
-@import 'coderay';
+@import 'datatables.net-zf/css/dataTables.foundation.css';
+
+// @import 'coderay';
 
 // foundation related
-@import 'foundation/settings';
 @import 'foundation/foundation_and_overrides';
 
 // custom forms

@@ -4,16 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Harvester Manager" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Harvester Manager" %>">
-    <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_pack_tag "application", :media => "all" %>
+    <%= javascript_pack_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
 
-    <%= favicon_link_tag asset_path('favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
-    <%= favicon_link_tag asset_path('favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
-    <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
-    <%= favicon_link_tag asset_path('manifest.json'), rel: 'manifest' %>
-    <%= favicon_link_tag asset_path('safari-pinned-tab.svg'), rel: 'mask-icon', color: "#118a0f" %>
+    <%= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css' %>
+    <%= favicon_link_tag asset_pack_path('media/images/favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
+    <%= favicon_link_tag asset_pack_path('media/images/favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
+    <%= favicon_link_tag asset_pack_path('media/images/apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
+    <%= favicon_link_tag asset_pack_path('media/images/safari-pinned-tab.svg'), rel: 'mask-icon', color: "#118a0f" %>
 
     <meta name="theme-color" content="#118a0f">
   </head>
