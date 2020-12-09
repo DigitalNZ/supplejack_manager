@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Harvest Schedule Spec', js: true, pending: 'ActiveResource trying to access 127.0.0.1' do
+RSpec.feature 'Harvest Schedule Spec', js: true, skip: 'ActiveResource trying to access 127.0.0.1' do
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
