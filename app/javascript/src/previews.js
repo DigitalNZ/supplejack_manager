@@ -1,4 +1,4 @@
-this.PreviewJobsPoller = {
+window.PreviewJobsPoller = {
   poll: function() {
     if (this.lock === false || this.lock === void 0) {
       this.lock = true;
@@ -9,4 +9,4 @@ this.PreviewJobsPoller = {
     PreviewJobsPoller.lock = false;
     return $.get($("#preview-job").attr('url') + ".js");
   }
-};
+}

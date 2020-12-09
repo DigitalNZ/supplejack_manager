@@ -78,12 +78,12 @@ ul.tagging {
   }
 }
 
-.sorting { background: image-url('sort_both.png') no-repeat center right; }
-.sorting_asc { background: image-url('sort_asc.png') no-repeat center right; }
-.sorting_desc { background: image-url('sort_desc.png') no-repeat center right; }
+.sorting { background: image-url('/images/sort_both.png') no-repeat center right; }
+.sorting_asc { background: image-url('/images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: image-url('/images/sort_desc.png') no-repeat center right; }
 
-.sorting_asc_disabled { background: image-url('sort_asc_disabled.png') no-repeat center right; }
-.sorting_desc_disabled { background: image-url('sort_desc_disabled.png') no-repeat center right; }
+.sorting_asc_disabled { background: image-url('/images/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: image-url('/images/sort_desc_disabled.png') no-repeat center right; }
 
 $arrowSize: 18px;
 

@@ -1,8 +1,17 @@
 {
   "dependencies": {
+    "@rails/ujs": "^6.0.3-4",
     "@rails/webpacker": "5.2.1",
     "codemirror": "^3.23.0",
-    "jquery-datetimepicker": "^2.5.21"
+    "datatables.net": "^1.10.22",
+    "datatables.net-zf": "^1.10.22",
+    "foundation-sites": "6.4.3",
+    "jquery": "^3.5.1",
+    "jquery-datetimepicker": "^2.5.21",
+    "jquery-timepicker": "^1.3.3",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-dist": "^1.12.1",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"

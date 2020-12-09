@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 var fold_create_fields = function(select, fields) {
   if ($(select).val() === "") {
     $(fields).show();

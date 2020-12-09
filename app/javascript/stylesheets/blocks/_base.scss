@@ -8,8 +8,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .button.new-right {
   float: right;
-  margin-top: 20px;
   margin-left: 20px;
+  position: relative;
+  z-index: 100;
 }
 
 .reveal-modal.xxlarge {
@@ -49,7 +50,7 @@ form {
 }
 
 .small-spinner {
-  background: image-url('sj-spinner.gif') no-repeat 0 0;
+  background: image-url('/images/sj-spinner.gif') no-repeat 0 0;
   width: 20px;
   height: 20px;
   display: block;
