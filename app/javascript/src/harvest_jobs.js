@@ -16,7 +16,7 @@ $(function() {
   });
 });
 
-this.HarvestJobsPoller = {
+window.HarvestJobsPoller = {
   poll: function() {
     return setTimeout(this.request, 2000);
   },
