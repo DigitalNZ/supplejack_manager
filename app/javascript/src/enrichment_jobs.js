@@ -6,7 +6,7 @@ $(function() {
   }
 });
 
-this.EnrichmentJobsPoller = {
+window.EnrichmentJobsPoller = {
   poll: function() {
     return setTimeout(this.request, 2000);
   },
