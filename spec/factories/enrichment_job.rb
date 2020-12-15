@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :enrichment_job do
+    id { 1 }
     start_time { Time.zone.now - 1.day }
     end_time { Time.zone.now }
     records_count { 10 }
@@ -22,8 +23,16 @@ FactoryBot.define do
     record_id { 1 }
     last_posted_record_id { 'last posted record id' }
 
+    trait :finished do
+      status { 'finished' }
+    end
+
     trait :stopped do
       status { 'stopped' }
+    end
+
+    trait :failed do
+      status { 'failed' }
     end
   end
 end
