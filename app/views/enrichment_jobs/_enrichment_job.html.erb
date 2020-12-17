@@ -37,6 +37,15 @@
         class: "button new-right #{hide(@enrichment_job.finished?)}"
       )
     %>
+  <% elsif @enrichment_job.status.in?(%w[stopped failed]) %>
+    <button class="button new-right" data-open="resume-confirmation">
+      <%= t('enrichment_jobs.resume') %>
+    </button>
+
+    <%= render partial: 'shared/confirmation_modal', locals: {
+      information: t('enrichment_jobs.resume_modal_information'),
+      id: 'resume-confirmation'
+    } %>
   <% end %>
 
   <table class="twelve">

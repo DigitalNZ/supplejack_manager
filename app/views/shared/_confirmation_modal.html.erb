@@ -1,0 +1,12 @@
+<div class="reveal" id="<%= id %>" data-reveal>
+  <h1><%= t('confirmation_modal.confirmation') %></h1>
+  <p class="lead"><%= information %></p>
+  <p><%= t('confirmation_modal.question') %></p>
+
+  <%= yes %>
+  <button class="button hollow new-right" data-close><%= t('confirmation_modal.no') %></button>
+
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

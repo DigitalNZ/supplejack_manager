@@ -7,6 +7,6 @@ window.PreviewJobsPoller = {
   },
   request: function() {
     PreviewJobsPoller.lock = false;
-    return $.get($("#preview-job").attr('url') + ".js");
+    return $.get($("#preview-job").attr('url'));
   }
 }

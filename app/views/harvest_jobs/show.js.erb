@@ -1,5 +1,6 @@
 $("#harvest-result").html('<%= j render @harvest_job %>').show();
 $("#accordion-failed, #accordion-invalid, #accordion-backtrace").accordion({heightStyle: "content",collapsible: true, active: false})
+$('#resume-confirmation').foundation();
 
 var code_mirror_text_areas = document.getElementsByClassName('code-editor-multiple');
 
