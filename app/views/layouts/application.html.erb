@@ -4,12 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Harvester Manager" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Harvester Manager" %>">
-    <%= stylesheet_pack_tag "application", :media => "all" %>
+    <%= stylesheet_pack_tag "application", media: :all %>
     <%= javascript_pack_tag "application" %>
+    <%= csp_meta_tag %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
 
-    <%= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css' %>
+    <%= stylesheet_link_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css' %>
     <%= favicon_link_tag asset_pack_path('media/images/favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_pack_path('media/images/favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_pack_path('media/images/apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>
