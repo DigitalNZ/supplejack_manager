@@ -76,4 +76,12 @@ module ApplicationHelper
       "#{n.to_i} #{name}" unless n.to_i.zero?
     end.compact.reverse.join(' ')
   end
+
+  def hide(cond)
+    cond ? ' hide' : ''
+  end
+
+  def show(cond)
+    cond ? '' : ' hide'
+  end
 end

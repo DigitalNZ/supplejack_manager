@@ -11,7 +11,7 @@
     <% end %>
   </h2>
 
-  <%= link_to t("harvest_jobs.stop"), environment_harvest_job_path(@harvest_job, {environment: @harvest_job.environment, harvest_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-harvest-button", class: "button new-right #{can_show_button(:run_harvest, @harvest_job.parser)}", style: ("display: none" unless @harvest_job.status == "active") %>
+  <%= link_to t("harvest_jobs.stop"), environment_harvest_job_path(@harvest_job, {environment: @harvest_job.environment, harvest_job: {status: "stopped"}}), method: :put, remote: true, id: "stop-harvest-button", class: "button new-right #{can_show_button(:run_harvest, @harvest_job.parser)} #{show(@harvest_job.status == "active")}" %>
 
   <table class="twelve">
     <tr>

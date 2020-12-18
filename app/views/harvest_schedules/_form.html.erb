@@ -24,7 +24,7 @@
     <% end %>
   </ul>
 
-  <%= tag.div(id: "recurrent-options", style: @harvest_schedule.recurrent ? "" : "display: none") do %>
+  <div id="recurrent-options" class="<%= show(@harvest_schedule.recurrent) %>">
 
     <div class="tabs-content" data-tabs-content='example-tabs'>
 
@@ -51,7 +51,7 @@
       <% end %>
 
     </div>
-  <% end %>
+  </div>
 
   <%= f.hidden_field :environment %>
 
