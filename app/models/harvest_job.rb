@@ -28,4 +28,8 @@ class HarvestJob < AbstractJob
   end
 
   include ActiveResource::SchemaTypes
+
+  def resumable?
+    status.in?(%w[stopped failed]) && parser.strategy.in?(%w[xml json])
+  end
 end

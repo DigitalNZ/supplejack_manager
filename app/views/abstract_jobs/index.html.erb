@@ -40,7 +40,7 @@
               environment_abstract_jobs_path(
                 params[:environment],
                 status: params['status'],
-                parser_id: abstract_job.parser.id
+                parser_id: abstract_job.parser&.id
               ),
               title: 'Filter to show only jobs from this parser'
             )

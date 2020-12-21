@@ -38,7 +38,7 @@
           class: "button float-right"
         )
       %>
-    <% elsif @harvest_job.status.in?(%w[stopped failed]) %>
+    <% elsif @harvest_job.resumable? %>
       <button class="button float-right" data-open="resume-confirmation" >
         <%= t('harvest_jobs.resume') %>
       </button>

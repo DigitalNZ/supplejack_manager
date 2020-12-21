@@ -21,7 +21,7 @@
     <% end %>
   </h2>
 
-  <% if @enrichment_job.status == 'started' %>
+  <% if @enrichment_job.status == 'active' %>
     <%=
       link_to(
         t("enrichment_jobs.stop"),
@@ -44,7 +44,22 @@
 
     <%= render partial: 'shared/confirmation_modal', locals: {
       information: t('enrichment_jobs.resume_modal_information'),
-      id: 'resume-confirmation'
+      id: 'resume-confirmation',
+      yes:
+        link_to(
+          t('confirmation_modal.yes'),
+          environment_enrichment_job_path(
+            environment: @enrichment_job.environment,
+            id: @enrichment_job.id,
+            enrichment_job: {
+              status: "ready",
+              status_message: "Enrichment was resumed #{l(Time.now, format: :long)}"
+            }
+          ),
+          method: :put,
+          remote: true,
+          class: "button new-right"
+        )
     } %>
   <% end %>
 
