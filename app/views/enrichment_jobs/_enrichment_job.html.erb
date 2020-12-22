@@ -46,16 +46,19 @@
       information: t('enrichment_jobs.resume_modal_information'),
       id: 'resume-confirmation',
       yes:
-        link_to(
-          t('confirmation_modal.yes'),
+        button_to(
+          'Yes',
           environment_enrichment_job_path(
             environment: @enrichment_job.environment,
             id: @enrichment_job.id,
+          ),
+          params: {
             enrichment_job: {
               status: "ready",
               status_message: "Enrichment was resumed #{l(Time.now, format: :long)}"
             }
-          ),
+          },
+          'data-close': '',
           method: :put,
           remote: true,
           class: "button new-right"

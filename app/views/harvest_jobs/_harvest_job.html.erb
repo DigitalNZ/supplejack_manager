@@ -47,16 +47,19 @@
         information: t('harvest_jobs.resume_modal_information'),
         id: 'resume-confirmation',
         yes:
-          link_to(
-            t('confirmation_modal.yes'),
+          button_to(
+            'Yes',
             environment_harvest_job_path(
               environment: @harvest_job.environment,
-              id: @harvest_job.id,
+              id: @harvest_job.id
+            ),
+            params: {
               harvest_job: {
                 status: "ready",
                 status_message: "Harvest was resumed #{l(Time.now, format: :long)}"
               }
-            ),
+            },
+            'data-close': '',
             method: :put,
             remote: true,
             class: "button new-right"
