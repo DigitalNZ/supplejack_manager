@@ -28,8 +28,7 @@ module TemplateHelpers
   end
 
   protected
-
     def parser_classname
-      self.name.gsub(/\s/, "_").camelize
+      self.name.gsub(/\s/, '_').camelize
     end
 end
