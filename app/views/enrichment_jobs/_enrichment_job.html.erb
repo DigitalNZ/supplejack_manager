@@ -34,7 +34,7 @@
         method: :put,
         remote: true,
         id: "stop-enrichment-button",
-        class: "button new-right #{hide(@enrichment_job.finished?)}"
+        class: "button new-right"
       )
     %>
   <% elsif @enrichment_job.status.in?(%w[stopped failed]) %>
