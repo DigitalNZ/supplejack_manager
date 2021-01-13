@@ -8,7 +8,7 @@ FactoryBot.define do
     records_count { 10 }
     throughput { 1.0 }
     duration { 2.0 }
-    status { 'started' }
+    status { 'active' }
     user_id { 'user_id' }
     parser_id { 'parser_id' }
     version_id { 'version_id' }

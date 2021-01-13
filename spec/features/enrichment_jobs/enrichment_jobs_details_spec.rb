@@ -29,7 +29,6 @@ RSpec.feature 'Enrichment Jobs Spec', js: true do
       expect(EnrichmentJob).to receive(:find) { job }
 
       visit environment_enrichment_job_path(job.environment, id: job.id)
-      expect(page).to_not have_link('Stop Enrichment')
       expect(page).to_not have_button('Resume Enrichment')
     end
 
@@ -38,7 +37,6 @@ RSpec.feature 'Enrichment Jobs Spec', js: true do
       expect(EnrichmentJob).to receive(:find) { job }
 
       visit environment_enrichment_job_path(job.environment, id: job.id)
-      expect(page).to_not have_link('Stop Enrichment')
       expect(page).to have_button('Resume Enrichment')
     end
 
@@ -47,7 +45,6 @@ RSpec.feature 'Enrichment Jobs Spec', js: true do
       expect(EnrichmentJob).to receive(:find) { job }
 
       visit environment_enrichment_job_path(job.environment, id: job.id)
-      expect(page).to_not have_link('Stop Enrichment')
       expect(page).to have_button('Resume Enrichment')
     end
   end

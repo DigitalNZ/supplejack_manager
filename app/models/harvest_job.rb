@@ -27,9 +27,9 @@ class HarvestJob < AbstractJob
     attribute :retried_records_count, :integer
   end
 
-  include ActiveResource::SchemaTypes
-
   def resumable?
-    status.in?(%w[stopped failed]) && parser.strategy.in?(%w[xml json])
+    status.in?(%w[stopped failed]) && Parser.find(parser_id).strategy.in?(%w[xml json])
   end
+
+  include ActiveResource::SchemaTypes
 end

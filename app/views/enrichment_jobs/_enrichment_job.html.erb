@@ -26,8 +26,8 @@
       link_to(
         t("enrichment_jobs.stop"),
         environment_enrichment_job_path(
-          params[:environment],
-          @enrichment_job,
+          environment: params[:environment],
+          id: @enrichment_job.id,
           format: :js,
           enrichment_job: { status: "stopped" }
         ),
