@@ -10,7 +10,7 @@ class User
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  devise :recoverable, :rememberable, :trackable, :validatable, :two_factor_authenticatable, otp_secret_encryption_key: OTP_SECRET_KEY
 
   field :name,                    type: String
 
@@ -24,6 +24,13 @@ class User
 
   ## Rememberable
   field :remember_created_at,     type: Time
+
+  ## Two Factor Authenticatable
+  field :encrypted_otp_secret,      type: String
+  field :encrypted_otp_secret_iv,   type: String
+  field :encrypted_otp_secret_salt, type: String
+  field :consumed_timestep,         type: Integer
+  field :otp_required_for_login,    type: Boolean
 
   ## Trackable
   field :sign_in_count,           type: Integer,  default: 0
