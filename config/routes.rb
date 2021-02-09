@@ -54,4 +54,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: [:index, :edit, :update, :new, :create]
+
+  resources :two_factor_authentication_settings, only: [:create]
 end

@@ -10,7 +10,7 @@
 
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
-
+  
   <% if can? :edit_users, @user %>
     <fieldset>
       <legend><%= t('users.administration') %></legend>
@@ -53,3 +53,18 @@
 
   <%= f.submit class: 'button' %> or <%= link_to t('cancel'), safe_users_path %>
 <% end %>
+
+  <h2>Two Factor Authentication</h2>
+
+  <p>Please scan the below QR code into an OTP-compatible authentication application</p>
+
+  <%= qr_code_as_svg(current_user.two_factor_qr_code_uri) %>
+
+  <p>Please confirm that your authentication application is working by entering a generated code below.</p>
+
+  <%= form_for(:two_factor_authentication_settings, url: two_factor_authentication_settings_path) do |f| %>
+    <%= f.label :otp, 'One Time Password' %>
+    <%= f.text_field :otp, required: true %>
+    
+    <%= f.submit "Confirm & Enable", class: "button" %>
+  <% end %>

@@ -73,4 +73,11 @@ class User
   def active_for_authentication?
     super && active
   end
+
+  def two_factor_qr_code_uri
+    issuer = 'Supplejack Manager'
+    label = [issuer, email].join(':')
+
+    otp_provisioning_uri(label, issuer: issuer)
+  end
 end
