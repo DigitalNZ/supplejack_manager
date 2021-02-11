@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: c2085f9c21bcd1ed5d823ee850b0b6e5d88ee590
-  tag: v2.9.0
+  revision: 8eeaab04d9d5999703452e2e4495043d2ae520a4
+  branch: rm/store-harvest-job-state
   specs:
     supplejack_common (0.0.2)
       actionpack
@@ -14,7 +14,7 @@ GIT
       jsonpath (~> 0.5.0)
       loofah
       mimemagic
-      mongoid (~> 7.1.0)
+      mongoid
       nokogiri
       oai
       redis

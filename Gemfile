@@ -19,7 +19,8 @@ gem 'oai'
 gem 'puma'
 gem 'rails', '~> 6.0'
 gem 'server_timing'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.9.0'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'rm/store-harvest-job-state'
+# gem 'supplejack_common', path: '/webspace/supplejack_common'
 
 # assets gems
 gem 'webpacker'
