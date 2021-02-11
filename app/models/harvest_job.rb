@@ -28,7 +28,8 @@ class HarvestJob < AbstractJob
   end
 
   def resumable?
-    status.in?(%w[stopped failed]) && Parser.find(parser_id).strategy.in?(%w[xml json])
+    parser = Parser.find(parser_id) 
+    status.in?(%w[stopped failed]) && parser.strategy.in?(%w[xml json]) && parser.content.exclude?("type: 'token'")
   end
 
   include ActiveResource::SchemaTypes
