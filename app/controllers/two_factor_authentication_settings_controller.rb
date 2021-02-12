@@ -2,7 +2,7 @@
 
 class TwoFactorAuthenticationSettingsController < ApplicationController
   def create
-    unless current_user.validate_and_consume_otp!(params.dig(:two_factor_authentication_settings, :otp))
+    unless current_user.authenticate_totp(params.dig(:two_factor_authentication_settings, :otp))
       redirect_to(
         edit_user_path(current_user),
         alert: 'Incorrect two factor authentication code'

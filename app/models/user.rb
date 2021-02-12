@@ -10,7 +10,7 @@ class User
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
-  devise :recoverable, :rememberable, :trackable, :validatable, :two_factor_authenticatable, otp_secret_encryption_key: OTP_SECRET_KEY
+  devise :recoverable, :rememberable, :trackable, :validatable, :database_authenticatable, :two_factor_authenticatable
 
   field :name,                    type: String
 
@@ -26,11 +26,20 @@ class User
   field :remember_created_at,     type: Time
 
   ## Two Factor Authenticatable
-  field :encrypted_otp_secret,      type: String
-  field :encrypted_otp_secret_iv,   type: String
-  field :encrypted_otp_secret_salt, type: String
-  field :consumed_timestep,         type: Integer
-  field :otp_required_for_login,    type: Boolean
+  # field :encrypted_otp_secret,      type: String
+  # field :encrypted_otp_secret_iv,   type: String
+  # field :encrypted_otp_secret_salt, type: String
+  # field :consumed_timestep,         type: Integer
+  # field :otp_required_for_login,    type: Boolean
+
+  ## Houdini Two factor
+  field :second_factor_attempts_count,  type: Integer, default: 0
+  field :encrypted_otp_secret_key,      type: String
+  field :encrypted_otp_secret_key_iv,   type: String
+  field :encrypted_otp_secret_key_salt, type: String
+  field :direct_otp,                    type: String
+  field :direct_otp_sent_at,            type: DateTime
+  field :totp_timestamp,                type: Time
 
   ## Trackable
   field :sign_in_count,           type: Integer,  default: 0
@@ -51,6 +60,8 @@ class User
 
   validates :name, :email, :role, presence: true
   validates :role, inclusion: ROLES
+
+  has_one_time_password(encrypted: true)
 
   def first_name
     name.split("\s").first if name.present?
@@ -74,10 +85,14 @@ class User
     super && active
   end
 
-  def two_factor_qr_code_uri
-    issuer = 'Supplejack Manager'
-    label = [issuer, email].join(':')
-
-    otp_provisioning_uri(label, issuer: issuer)
+  def need_two_factor_authentication?(request)
+    !otp_secret_key.nil?
   end
+
+  def two_factor_qr_code_uri
+    provisioning_uri('Supplejack Manager')
+  end
+
+  # Intentionally left blank.
+  def send_two_factor_authentication_code(code); end
 end

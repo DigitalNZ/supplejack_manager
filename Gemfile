@@ -20,7 +20,8 @@ gem 'puma'
 gem 'rails', '~> 6.0'
 gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.8.3'
-gem 'devise-two-factor'
+# gem 'devise-two-factor'
+gem 'two_factor_authentication'
 gem 'rqrcode'
 
 # assets gems

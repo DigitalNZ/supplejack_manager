@@ -55,5 +55,6 @@ Rails.application.configure do
   DEFAULT_URL_OPTIONS = { :host => 'localhost:3000' }
   config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
 
-  OTP_SECRET_KEY               = ENV['OTP_SECRET_KEY']
+  Mongoid.logger = Logger.new($stdout)
+  Mongo::Logger.logger = Logger.new($stdout)
 end
