@@ -25,14 +25,6 @@ class User
   ## Rememberable
   field :remember_created_at,     type: Time
 
-  ## Two Factor Authenticatable
-  # field :encrypted_otp_secret,      type: String
-  # field :encrypted_otp_secret_iv,   type: String
-  # field :encrypted_otp_secret_salt, type: String
-  # field :consumed_timestep,         type: Integer
-  # field :otp_required_for_login,    type: Boolean
-
-  ## Houdini Two factor
   field :second_factor_attempts_count,  type: Integer, default: 0
   field :encrypted_otp_secret_key,      type: String
   field :encrypted_otp_secret_key_iv,   type: String
@@ -62,6 +54,7 @@ class User
   validates :role, inclusion: ROLES
 
   has_one_time_password(encrypted: true)
+  after_create :generate_totp
 
   def first_name
     name.split("\s").first if name.present?
@@ -86,11 +79,19 @@ class User
   end
 
   def need_two_factor_authentication?(request)
-    !otp_secret_key.nil?
+    MFA_ENABLED
   end
 
   def two_factor_qr_code_uri
     provisioning_uri('Supplejack Manager')
+  end
+  
+  # Generate the key required for MFA
+  def generate_totp
+    return unless MFA_ENABLED
+
+    self.otp_secret_key = generate_totp_secret
+    save!
   end
 
   # Intentionally left blank.

@@ -32,4 +32,31 @@ RSpec.feature 'User sign in', type: :feature do
   scenario 'Has reset password link' do
     expect(login_page).to have_reset_password_link
   end
+
+  context 'A user with 2fa enabled' do
+    let(:mfa_user) { create(:user, :otp) }
+
+    scenario 'Must enter their OTP' do
+      fill_in 'user[email]', with: mfa_user.email
+      fill_in 'user[password]', with: mfa_user.password
+      click_button 'Sign in'
+
+      expect(page).to have_text 'Please enter the code from your authenticator app:'
+
+      fill_in 'code', with: ROTP::TOTP.new(mfa_user.otp_secret_key).at(DateTime.now)
+
+      click_button 'Log in'
+
+
+      expect(page).to have_text 'Two factor authentication successful.'
+    end
+  end
+
+  context 'A user without MFA enabled' do
+    scenario 'Gets taken to their profile to set up their MFA device' do
+      fill_in 'user[email]', with: mfa_user.email
+      fill_in 'user[password]', with: mfa_user.password
+      click_button 'Sign in'
+    end
+  end
 end

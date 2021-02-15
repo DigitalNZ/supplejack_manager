@@ -9,8 +9,8 @@ require 'sprockets/railtie'
 Bundler.require(*Rails.groups)
 
 APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development', 'test'] rescue []
-
 APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result)
+MFA_ENABLED = ENV['MFA_ENABLED'] || true
 
 begin
   ENV.update YAML.load(ERB.new(File.read('config/application.yml')).result)[Rails.env]
@@ -33,5 +33,6 @@ module HarvesterManager
     config.autoload_paths << "#{config.root}/lib"
 
     config.time_zone = ENV['TIMEZONE']
+
   end
 end

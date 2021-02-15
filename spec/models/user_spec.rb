@@ -70,4 +70,13 @@ RSpec.describe User do
       expect(user.run_harvest_partners).to eq ['a', 'c']
     end
   end
+
+  describe 'generate_totp' do
+    it 'generate the totp after the user has been created' do
+      user = User.new(name: 'test', password: 'password', password_confirmation: 'password', email: 'test@test.co.nz')
+      expect(user.otp_secret_key).to eq nil
+      user.save!
+      expect(user.otp_secret_key).not_to eq nil
+    end
+  end
 end

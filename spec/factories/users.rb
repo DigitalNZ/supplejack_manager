@@ -12,5 +12,11 @@ FactoryBot.define do
     trait :admin do
       role { 'admin' }
     end
+
+    trait :otp do
+      before :create do |user|
+        user.otp_secret_key = user.generate_totp_secret
+      end
+    end
   end
 end
