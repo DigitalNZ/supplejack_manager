@@ -33,6 +33,5 @@ module HarvesterManager
     config.autoload_paths << "#{config.root}/lib"
 
     config.time_zone = ENV['TIMEZONE']
-
   end
 end
