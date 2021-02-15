@@ -85,7 +85,7 @@ class User
   def two_factor_qr_code_uri
     provisioning_uri('Supplejack Manager')
   end
-  
+
   # Generate the key required for MFA
   def generate_totp
     return unless MFA_ENABLED

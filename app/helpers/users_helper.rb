@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def qr_code_as_svg(uri)
     RQRCode::QRCode.new(uri).as_svg(
