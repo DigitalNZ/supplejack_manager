@@ -54,6 +54,7 @@
   <%= f.submit class: 'button' %> or <%= link_to t('cancel'), safe_users_path %>
 <% end %>
 
+<% if MFA_ENABLED %>
   <h2>Two Factor Authentication</h2>
 
   <p>Please scan the below QR code into an OTP-compatible authentication application</p>
@@ -68,3 +69,4 @@
     
     <%= f.submit "Confirm & Enable", class: "button" %>
   <% end %>
+<% end %>

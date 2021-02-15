@@ -2,6 +2,8 @@
 
 class TwoFactorAuthenticationSettingsController < ApplicationController
   def create
+    return unless MFA_ENABLED
+    
     unless current_user.authenticate_totp(params.dig(:two_factor_authentication_settings, :otp))
       redirect_to(
         edit_user_path(current_user),

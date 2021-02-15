@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 
 APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development', 'test'] rescue []
 APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result)
-MFA_ENABLED = ENV['MFA_ENABLED'] || true
+MFA_ENABLED = ENV['MFA_ENABLED'] || false
 
 begin
   ENV.update YAML.load(ERB.new(File.read('config/application.yml')).result)[Rails.env]
