@@ -51,12 +51,4 @@ RSpec.feature 'User sign in', type: :feature do
       expect(page).to have_text 'Two factor authentication successful.'
     end
   end
-
-  context 'A user without MFA enabled' do
-    scenario 'Gets taken to their profile to set up their MFA device' do
-      fill_in 'user[email]', with: mfa_user.email
-      fill_in 'user[password]', with: mfa_user.password
-      click_button 'Sign in'
-    end
-  end
 end

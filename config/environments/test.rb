@@ -47,4 +47,5 @@ Rails.application.configure do
   # ALL custom configs comes  under this line
   DEFAULT_URL_OPTIONS = { host: "localhost:3000"}
   config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
+  MFA_ENABLED = true
 end
