@@ -37,6 +37,7 @@ RSpec.feature 'User sign in', type: :feature do
     let(:mfa_user) { create(:user, :otp) }
 
     scenario 'Must enter their OTP' do
+      MFA_ENABLED = true
       fill_in 'user[email]', with: mfa_user.email
       fill_in 'user[password]', with: mfa_user.password
       click_button 'Sign in'
