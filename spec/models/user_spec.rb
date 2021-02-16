@@ -73,6 +73,7 @@ RSpec.describe User do
 
   describe 'generate_totp' do
     it 'generate the totp after the user has been created' do
+      MFA_ENABLED = true
       user = User.new(name: 'test', password: 'password', password_confirmation: 'password', email: 'test@test.co.nz')
       expect(user.otp_secret_key).to eq nil
       user.save!
