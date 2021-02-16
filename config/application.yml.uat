@@ -14,11 +14,11 @@
 
 
 uat:
-  MFA_ENABLED: 'false'
-  
+  OTP_SECRET_KEY:    <%= ENV['OTP_SECRET_KEY] %>
+  MFA_ENABLED:       <%= ENV['MFA_ENABLED] || 'false' %>
+
 staging:
   WORKER_HOST:       <%= ENV['WORKER_HOST'] %>
   WORKER_KEY:        <%= ENV['WORKER_KEY'] %>
   HARVESTER_API_KEY: <%= ENV['HARVESTER_API_KEY'] %>
   API_HOST:          <%= ENV['API_HOST'] %>
-  MFA_ENABLED:          'false'
