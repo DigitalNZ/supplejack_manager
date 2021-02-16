@@ -78,6 +78,7 @@ RSpec.describe User do
       expect(user.otp_secret_key).to eq nil
       user.save!
       expect(user.otp_secret_key).not_to be_empty
+      MFA_ENABLED = false
     end
   end
 end

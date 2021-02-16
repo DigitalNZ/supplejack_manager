@@ -50,6 +50,7 @@ RSpec.feature 'User sign in', type: :feature do
 
 
       expect(page).to have_text 'Two factor authentication successful.'
+      MFA_ENABLED = false
     end
   end
 end
