@@ -12,8 +12,13 @@
 # and a Worker running on localhost:3002.
 # Running the Manager allows you to harvest in production environment.
 
+
+uat:
+  MFA_ENABLED: 'false'
+  
 staging:
   WORKER_HOST:       <%= ENV['WORKER_HOST'] %>
   WORKER_KEY:        <%= ENV['WORKER_KEY'] %>
   HARVESTER_API_KEY: <%= ENV['HARVESTER_API_KEY'] %>
   API_HOST:          <%= ENV['API_HOST'] %>
+  MFA_ENABLED:          'false'
