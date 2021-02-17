@@ -22,3 +22,5 @@ staging:
   WORKER_KEY:        <%= ENV['WORKER_KEY'] %>
   HARVESTER_API_KEY: <%= ENV['HARVESTER_API_KEY'] %>
   API_HOST:          <%= ENV['API_HOST'] %>
+  MFA_ENABLED:       <%= ENV['MFA_ENABLED'] %>
+  OTP_SECRET_KEY:    <%= ENV['OTP_SECRET_KEY'] %>
