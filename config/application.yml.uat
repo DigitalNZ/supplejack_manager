@@ -15,7 +15,7 @@
 
 uat:
   OTP_SECRET_KEY:    <%= ENV['OTP_SECRET_KEY] %>
-  MFA_ENABLED:       <%= ENV['MFA_ENABLED] %>
+  MFA_ENABLED:       <%= ENV['MFA_ENABLED'] %>
 
 staging:
   WORKER_HOST:       <%= ENV['WORKER_HOST'] %>
