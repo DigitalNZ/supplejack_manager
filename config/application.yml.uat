@@ -14,7 +14,7 @@
 
 
 uat:
-  OTP_SECRET_KEY:    <%= ENV['OTP_SECRET_KEY] %>
+  OTP_SECRET_KEY:    <%= ENV['OTP_SECRET_KEY'] %>
   MFA_ENABLED:       <%= ENV['MFA_ENABLED'] %>
 
 staging:
