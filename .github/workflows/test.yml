@@ -18,28 +18,6 @@ jobs:
       run: |
         bundle exec rubocop
 
-  rspec:
-    runs-on: ubuntu-latest
-
-    services:
-      mongodb:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-
-    - name: Run RSpec unit tests
-      run: |
-        bundle exec rspec spec --fail-fast --format=progress
-
   brakeman:
     runs-on: ubuntu-latest
 
@@ -74,3 +52,33 @@ jobs:
         gem install bundler-audit
         bundle audit update
         bundle audit check --ignore
+
+  rspec:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Run RSpec unit tests
+      env:
+        MFA_ENABLED: false
+      run: |
+        cp config/application.yml.example config/application.yml
+        gem install bundler --version $(tail -n1 Gemfile.lock)
+        yarn install
+        RAILS_ENV=test bundle exec rails webpacker:compile
+        RAILS_ENV=test bin/rails db:create --trace
+        RAILS_ENV=test bin/rails db:migrate --trace
+        bundle exec rspec spec --fail-fast --format=progress
