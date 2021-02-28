@@ -17,8 +17,10 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.0.3.5'
 gem 'server_timing'
+gem 'two_factor_authentication'
+gem 'rqrcode'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.9.0'
 
 # assets gems

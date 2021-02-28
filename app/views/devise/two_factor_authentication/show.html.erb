@@ -1,0 +1,11 @@
+<div>
+
+  <h2>Please enter the code from your authenticator app:</h2>
+
+  <%= form_tag([resource_name, :two_factor_authentication], :method => :put) do %>
+    <%= text_field_tag :code %>
+    <%= submit_tag "Log in", class: 'button btn-primary' %>
+  <% end %>
+
+  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+</div>

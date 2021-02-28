@@ -4,6 +4,8 @@
 class ApplicationController < ActionController::Base
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   before_action do
     ServerTiming::Auth.ok!
   end
@@ -38,4 +40,11 @@ class ApplicationController < ActionController::Base
   def valid_token?
     request.headers['Authorization'].present? && request.headers['Authorization'].include?('Token token')
   end
+
+  protected
+    def configure_permitted_parameters
+      return unless MFA_ENABLED
+
+      devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
+    end
 end
