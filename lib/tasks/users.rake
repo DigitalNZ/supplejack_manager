@@ -10,12 +10,12 @@ namespace :users do
   task configure_mfa: :environment do
     p 'Generating TOTP secret for existing users...'
     User.all.each do |user|
-      next unless user.otp_secret_key.nil?
+      next if user.otp_secret_key.present?
 
       user.otp_secret_key = user.generate_totp_secret
       user.save!
       p "The secret key for user #{user&.name} with email #{user&.email} is #{user&.otp_secret_key}"
     end
-    p 'Complete'
+    p 'Complete!'
   end
 end
