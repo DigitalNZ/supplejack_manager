@@ -10,7 +10,7 @@ class User
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  devise :recoverable, :rememberable, :trackable, :validatable, :database_authenticatable, :two_factor_authenticatable
 
   field :name,                    type: String
 
@@ -24,6 +24,14 @@ class User
 
   ## Rememberable
   field :remember_created_at,     type: Time
+
+  field :second_factor_attempts_count,  type: Integer, default: 0
+  field :encrypted_otp_secret_key,      type: String
+  field :encrypted_otp_secret_key_iv,   type: String
+  field :encrypted_otp_secret_key_salt, type: String
+  field :direct_otp,                    type: String
+  field :direct_otp_sent_at,            type: DateTime
+  field :totp_timestamp,                type: Time
 
   ## Trackable
   field :sign_in_count,           type: Integer,  default: 0
@@ -44,6 +52,9 @@ class User
 
   validates :name, :email, :role, presence: true
   validates :role, inclusion: ROLES
+
+  has_one_time_password(encrypted: true)
+  after_create :generate_totp
 
   def first_name
     name.split("\s").first if name.present?
@@ -66,4 +77,23 @@ class User
   def active_for_authentication?
     super && active
   end
+
+  def need_two_factor_authentication?(request)
+    MFA_ENABLED
+  end
+
+  def two_factor_qr_code_uri
+    provisioning_uri('Supplejack Manager')
+  end
+
+  # Generate the key required for MFA
+  def generate_totp
+    return unless MFA_ENABLED
+
+    self.otp_secret_key = generate_totp_secret
+    save!
+  end
+
+  # Intentionally left blank.
+  def send_two_factor_authentication_code(code); end
 end
