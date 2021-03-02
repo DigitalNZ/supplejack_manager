@@ -30,11 +30,6 @@ FactoryBot.define do
       status { 'stopped' }
     end
 
-    trait :finished do
-      id { 1 }
-      status { 'finished' }
-    end
-
     trait :failed do
       id { 1 }
       status { 'failed' }

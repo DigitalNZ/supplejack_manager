@@ -28,7 +28,7 @@ class HarvestJob < AbstractJob
   end
 
   def resumable?
-    parser = Parser.find(parser_id) 
+    parser = Parser.find(parser_id)
     status.in?(%w[stopped failed]) && parser.strategy.in?(%w[xml json]) && parser.content.exclude?("type: 'token'")
   end
 
