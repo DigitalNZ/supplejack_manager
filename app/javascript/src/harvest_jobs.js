@@ -21,6 +21,6 @@ window.HarvestJobsPoller = {
     return setTimeout(this.request, 2000);
   },
   request: function() {
-    return $.get($("#harvest-job").data('url') + ".js");
+    return $.get($("#harvest-job").data('url'));
   }
 };

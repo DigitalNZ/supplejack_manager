@@ -9,6 +9,7 @@ Rails.application.config.content_security_policy do |policy|
   policy.font_src        :self
   policy.img_src         :self, :data, 'https://ajax.googleapis.com'
   policy.object_src      :none
+  policy.base_uri        :none
   policy.script_src      :self, :unsafe_inline
   policy.frame_ancestors :none
   policy.form_action     :self

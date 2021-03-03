@@ -1,4 +1,16 @@
-<%= content_tag :div, id: "enrichment-job", data: { url: environment_enrichment_job_path(params[:environment], @enrichment_job, format: "js"), active: !@enrichment_job.finished? } do %>
+<%=
+  tag.div(
+    id: "enrichment-job",
+    data: {
+      url: environment_enrichment_job_path(
+        environment: params[:environment],
+        id: @enrichment_job.id,
+        format: "js"
+      ),
+      active: !@enrichment_job.finished?
+    }
+  ) do
+%>
 
   <h2 class="left">
     <%= t("enrichment_jobs.progress") %>
@@ -9,21 +21,50 @@
     <% end %>
   </h2>
 
-  <%=
-    link_to(
-      t("enrichment_jobs.stop"),
-      environment_enrichment_job_path(
-        params[:environment],
-        @enrichment_job,
-        format: :js,
-        enrichment_job: { status: "stopped" }
-      ),
-      method: :put,
-      remote: true,
-      id: "stop-enrichment-button",
-      class: "button new-right #{hide(@enrichment_job.finished?)}"
-    )
-  %>
+  <% if @enrichment_job.status == 'active' %>
+    <%=
+      link_to(
+        t("enrichment_jobs.stop"),
+        environment_enrichment_job_path(
+          environment: params[:environment],
+          id: @enrichment_job.id,
+          format: :js,
+          enrichment_job: { status: "stopped" }
+        ),
+        method: :put,
+        remote: true,
+        id: "stop-enrichment-button",
+        class: "button new-right"
+      )
+    %>
+  <% elsif @enrichment_job.status.in?(%w[stopped failed]) %>
+    <button class="button new-right" data-open="resume-confirmation">
+      <%= t('enrichment_jobs.resume') %>
+    </button>
+
+    <%= render partial: 'shared/confirmation_modal', locals: {
+      information: t('enrichment_jobs.resume_modal_information'),
+      id: 'resume-confirmation',
+      yes:
+        button_to(
+          'Yes',
+          environment_enrichment_job_path(
+            environment: @enrichment_job.environment,
+            id: @enrichment_job.id,
+          ),
+          params: {
+            enrichment_job: {
+              status: "resume",
+              status_message: "Enrichment was resumed #{l(Time.now, format: :long)}"
+            }
+          },
+          'data-close': '',
+          method: :put,
+          remote: true,
+          class: "button new-right"
+        )
+    } %>
+  <% end %>
 
   <table class="twelve">
     <tr>

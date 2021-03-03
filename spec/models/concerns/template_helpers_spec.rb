@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Parser::TemplateHelpers do
+RSpec.describe TemplateHelpers do
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
@@ -16,7 +16,7 @@ RSpec.describe Parser::TemplateHelpers do
       parser.content = 'class KeteDnz < SupplejackCommon::Oai::Base'
       parser.name =  'Nz On Screen'
       parser.update_contents_parser_class!
-      expect(parser.content).to eq 'class NzOnScreen < SupplejackCommon::Oai::Base'
+      expect(parser.content).to include 'NzOnScreen'
     end
 
     it 'sets the commit message' do
@@ -30,7 +30,7 @@ RSpec.describe Parser::TemplateHelpers do
       parser.content = 'class KeteDnz < SupplejackCommon::Oai::Base'
       parser.name = 'Bfm rss'
       parser.update_contents_parser_class!
-      expect(parser.content).to eq 'class BfmRss < SupplejackCommon::Oai::Base'
+      expect(parser.content).to include 'BfmRss'
     end
   end
 

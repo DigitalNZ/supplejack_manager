@@ -27,7 +27,7 @@ RSpec.describe EnrichmentJob do
     end
 
     it 'has a status' do
-      expect(enrichment_job.status).to eq 'started'
+      expect(enrichment_job.status).to eq 'active'
     end
 
     it 'has a user_id' do

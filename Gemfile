@@ -19,9 +19,9 @@ gem 'oai'
 gem 'puma'
 gem 'rails', '~> 6.0.3.5'
 gem 'server_timing'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.0'
 gem 'two_factor_authentication'
 gem 'rqrcode'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.9.0'
 
 # assets gems
 gem 'webpacker'

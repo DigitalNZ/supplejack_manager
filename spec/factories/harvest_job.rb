@@ -9,5 +9,30 @@ FactoryBot.define do
     throughput { 0 }
     duration { 0 }
     status { 'ready' }
+    environment { 'staging' }
+
+    harvest_failure { OpenStruct.new(backtrace: '{}') }
+    invalid_records { [] }
+    failed_records { [] }
+
+    trait :active do
+      id { 1 }
+      status { 'active' }
+    end
+
+    trait :finished do
+      id { 1 }
+      status { 'finished' }
+    end
+
+    trait :stopped do
+      id { 1 }
+      status { 'stopped' }
+    end
+
+    trait :failed do
+      id { 1 }
+      status { 'failed' }
+    end
   end
 end

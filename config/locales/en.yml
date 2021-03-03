@@ -55,6 +55,12 @@ en:
     staging: "Staging Activity"
     production: "Production Activity"
 
+  confirmation_modal:
+    confirmation: Confirmation
+    question: Are you sure?
+    yes: Yes
+    no: No
+
   dashboard:
     title: "Supplejack Dashboard"
     intro: "Get started by identifying data sources to bring in to Supplejack. Then extract data from the sources by creating and running parser scripts. Complete the process by scheduling and monitoring regular harvest jobs."
@@ -208,6 +214,8 @@ en:
     failed_records: "Other errors"
     no_failure_errors: "There are no other errors."
     stop: "Stop Harvest"
+    resume: "Resume Harvest"
+    resume_modal_information: This will attempt to resume this job from its previous state.
     operator: "Operator"
     active: "Active"
     finished: "Finished"
@@ -235,6 +243,8 @@ en:
   enrichment_jobs:
     records_harvested: "Records enriched"
     stop: "Stop Enrichment"
+    resume: "Resume Enrichment"
+    resume_modal_information: This will attempt to resume this job from its previous state.
     progress: "Enrichment progress"
     records_posted: "Records posted to API"
     records_processed: "Records processed"
