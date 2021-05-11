@@ -77,7 +77,7 @@ class Preview < ActiveResource::Base
   end
 
   def raw_output
-    self.send("pretty_#{attributes['format']}_output") 
+    self.send("pretty_#{attributes['format']}_output")
   end
 
   def pretty_xml_output
