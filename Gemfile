@@ -9,7 +9,6 @@ gem 'activeresource-response'
 gem 'aws-sdk-s3'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan'
-gem 'coderay', '~> 1.1.2'
 gem 'devise', '~> 4.0'
 gem 'kaminari'
 gem 'kaminari-mongoid'

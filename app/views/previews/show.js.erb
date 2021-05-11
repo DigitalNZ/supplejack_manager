@@ -2,13 +2,69 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 
 <% if @preview.raw_data.present? and @preview.harvested_attributes.present? %>
 	$('#preview-<%= @preview.id %> #record-raw-data').html('<%= escape_javascript(@preview.raw_output) %>');
-	$('#preview-<%= @preview.id %> #harvest-attributes').html('<%= escape_javascript(@preview.harvested_attributes_output) %>');
+
+	$('#preview-<%= @preview.id %> a[href="#api-record"] .small-spinner').hide();
+
+	var recordRawData = document.getElementById('record-raw-data')
+
+	var recordRawDataCodeMirror = CodeMirror.fromTextArea(recordRawData, {
+		lineNumbers: true,
+		theme: 'monokai',
+		tabSize: 2,
+		readOnly: true,
+		mode: 'text/x-ruby',
+		lineSeperator: ','
+	}) 
+
+	$('#source-data-label').click(function() {
+		setTimeout(function() {
+			recordRawDataCodeMirror.refresh()
+		}, 1);
+	});
+
+	$('#preview-<%= @preview.id %> #harvest-attributes').html('<%= escape_javascript(@preview.harvested_attributes_json.html_safe) %>');
+
+	var harvestAttributes = document.getElementById('harvest-attributes')
+
+	var harvestAttributesCodeMirror = CodeMirror.fromTextArea(harvestAttributes, {
+		lineNumbers: true,
+		theme: 'monokai',
+		tabSize: 2,
+		readOnly: true,
+		mode: 'text/x-ruby',
+		lineSeperator: ','
+	});
+
+	$('#harvested-attributes-label').click(function() {
+		setTimeout(function() {
+			harvestAttributesCodeMirror.refresh()
+		}, 1);
+	});
+
 	$('#preview-<%= @preview.id %> a[href="#source-data"] .small-spinner, a[href="#harvestedAttributes"] .small-spinner').hide();
+
 <% end %>
 
 <% if @preview.api_record.present? %>
-	$('#preview-<%= @preview.id %> #api-record').html('<%= escape_javascript(@preview.api_record_output) %>');
+	$('#preview-<%= @preview.id %> #record-attributes').html('<%= escape_javascript(@preview.api_record_json.html_safe) %>');
+
 	$('#preview-<%= @preview.id %> a[href="#api-record"] .small-spinner').hide();
+
+	var recordAttributes = document.getElementById('record-attributes')
+	var recordAttributesCodeMirror = CodeMirror.fromTextArea(recordAttributes, {
+		lineNumbers: true,
+		theme: 'monokai',
+		tabSize: 2,
+		readOnly: true,
+		mode: 'text/x-ruby',
+		lineSeperator: ','
+	})
+
+	$('#api-record-label').click(function() {
+		setTimeout(function() {
+			recordAttributesCodeMirror.refresh()
+		}, 1);
+	});
 <% end %>
 
 <% if @preview.field_errors? %>
