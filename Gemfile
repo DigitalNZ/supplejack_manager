@@ -21,6 +21,7 @@ gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.0'
 gem 'two_factor_authentication'
 gem 'rqrcode'
+gem 'mimemagic', '= 0.3.10'
 
 # assets gems
 gem 'webpacker'
