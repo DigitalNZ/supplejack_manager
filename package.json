@@ -2,7 +2,7 @@
   "dependencies": {
     "@rails/ujs": "^6.0.3-4",
     "@rails/webpacker": "5.2.1",
-    "codemirror": "^3.23.0",
+    "codemirror": "^5.58.2",
     "datatables.net": "^1.10.22",
     "datatables.net-zf": "^1.10.22",
     "foundation-sites": "6.4.3",
