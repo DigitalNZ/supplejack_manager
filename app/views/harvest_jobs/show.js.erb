@@ -5,7 +5,7 @@ $('#resume-confirmation').foundation();
 var code_mirror_text_areas = document.getElementsByClassName('code-editor-multiple');
 
 $(code_mirror_text_areas).each(function(key, value) {
-  CodeMirror.fromTextArea(value, {
+  window.CodeMirror.fromTextArea(value, {
     lineNumbers: true,
     theme: 'monokai',
     tabSize: 2,

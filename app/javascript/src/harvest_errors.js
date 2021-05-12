@@ -1,5 +1,4 @@
-$(function() {
-
+$(function() {  
   var code_mirror_text_areas = document.getElementsByClassName('code-editor-multiple');
 
   $(code_mirror_text_areas).each(function(key, value) {

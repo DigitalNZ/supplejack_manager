@@ -1,5 +1,3 @@
-import CodeMirror from 'codemirror/lib/codemirror.js';
-
 $(function() {
   Harvester.textArea = document.getElementsByClassName("code-editor")[0];
   Harvester.readOnly = function() {

@@ -7,7 +7,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 
 	var recordRawData = document.getElementById('record-raw-data')
 
-	var recordRawDataCodeMirror = CodeMirror.fromTextArea(recordRawData, {
+	var recordRawDataCodeMirror = window.CodeMirror.fromTextArea(recordRawData, {
 		lineNumbers: true,
 		theme: 'monokai',
 		tabSize: 2,
@@ -26,7 +26,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 
 	var harvestAttributes = document.getElementById('harvest-attributes')
 
-	var harvestAttributesCodeMirror = CodeMirror.fromTextArea(harvestAttributes, {
+	var harvestAttributesCodeMirror = window.CodeMirror.fromTextArea(harvestAttributes, {
 		lineNumbers: true,
 		theme: 'monokai',
 		tabSize: 2,
@@ -51,7 +51,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 	$('#preview-<%= @preview.id %> a[href="#api-record"] .small-spinner').hide();
 
 	var recordAttributes = document.getElementById('record-attributes')
-	var recordAttributesCodeMirror = CodeMirror.fromTextArea(recordAttributes, {
+	var recordAttributesCodeMirror = window.CodeMirror.fromTextArea(recordAttributes, {
 		lineNumbers: true,
 		theme: 'monokai',
 		tabSize: 2,
