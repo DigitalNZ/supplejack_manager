@@ -43,17 +43,10 @@ class Preview < ActiveResource::Base
     JSON.pretty_generate(JSON.parse(self.api_record)) unless self.api_record.nil?
   end
 
-  def api_record_output
-    CodeRay.scan(api_record_json, :json).html(line_numbers: :table).html_safe
-  end
-
   def harvested_attributes_json
     JSON.pretty_generate(JSON.parse(self.harvested_attributes))
   end
 
-  def harvested_attributes_output
-    CodeRay.scan(harvested_attributes_json, :json).html(line_numbers: :table).html_safe
-  end
 
   def field_errors?
     JSON.parse(self.field_errors).any? unless self.field_errors.nil?
@@ -84,7 +77,7 @@ class Preview < ActiveResource::Base
   end
 
   def raw_output
-    CodeRay.scan(self.send("pretty_#{attributes['format']}_output"), attributes['format'].to_sym).html(line_numbers: :table).html_safe
+    self.send("pretty_#{attributes['format']}_output")
   end
 
   def pretty_xml_output

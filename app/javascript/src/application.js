@@ -4,7 +4,6 @@ require('jquery-ui')
 require('jquery-datetimepicker')
 require('foundation-sites')
 require('moment')
-require('codemirror')
 require('codemirror/mode/ruby/ruby')
 require('codemirror/mode/xml/xml')
 // those 2 are not working with require
@@ -31,6 +30,8 @@ require('./snippets')
 require('./sources')
 require('./suppressed_collections')
 
+
 $(function() {
+  window.CodeMirror = CodeMirror;
   $(document).foundation();
 });

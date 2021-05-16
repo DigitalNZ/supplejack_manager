@@ -35,8 +35,7 @@ module ApplicationHelper
     parser = Parser.find(parser_id) rescue nil
     if parser.present?
       format = parser.xml? ? :xml : :json
-      raw_data = JSON.pretty_generate(JSON.parse(raw_data)) if format == :json
-      CodeRay.scan(raw_data, format).html(line_numbers: :table).html_safe
+      JSON.pretty_generate(JSON.parse(raw_data)) if format == :json
     else
       raw_data
     end

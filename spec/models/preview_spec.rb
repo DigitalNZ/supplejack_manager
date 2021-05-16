@@ -14,19 +14,6 @@ RSpec.describe Preview do
     end
   end
 
-  describe '#api_record_output' do
-    let(:attributes_json) { JSON.pretty_generate('title': 'Json!') }
-
-    before do
-      allow(preview).to receive(:api_record_json) { attributes_json }
-    end
-
-    it 'returns highlighted json' do
-      output = %q{{\n  <span class=\"key\"><span class=\"delimiter\">&quot;</span><span class=\"content\">title</span><span class=\"delimiter\">&quot;</span></span>: <span class=\"string\"><span class=\"delimiter\">&quot;</span><span class=\"content\">Json!</span><span class=\"delimiter\">&quot;</span></span>\n}}
-      expect(preview.api_record_output).to match(output)
-    end
-  end
-
   describe 'harvested_attributes_json' do
     before { allow(preview).to receive(:harvested_attributes) { '{"title": "Json!"}' } }
 
@@ -34,19 +21,6 @@ RSpec.describe Preview do
       expect(preview.send(:harvested_attributes_json)).to eq JSON.pretty_generate(
         'title': 'Json!'
       )
-    end
-  end
-
-  describe '#harvested_attributes_output' do
-    let(:attributes_json) { JSON.pretty_generate('title': 'Json!') }
-
-    before do
-      allow(preview).to receive(:harvested_attributes_json) { attributes_json }
-    end
-
-    it 'returns highlighted json' do
-      output = %q{{\n  <span class=\"key\"><span class=\"delimiter\">&quot;</span><span class=\"content\">title</span><span class=\"delimiter\">&quot;</span></span>: <span class=\"string\"><span class=\"delimiter\">&quot;</span><span class=\"content\">Json!</span><span class=\"delimiter\">&quot;</span></span>\n}}
-      expect(preview.harvested_attributes_output).to match(output)
     end
   end
 

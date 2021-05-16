@@ -5,7 +5,7 @@ WORKDIR /app
 # install packages
 ARG BUILD_PACKAGES="build-base curl-dev git"
 ARG DEV_PACKAGES="yaml-dev zlib-dev libxml2-dev libxslt-dev nodejs yarn"
-ARG RUBY_PACKAGES="tzdata"
+ARG RUBY_PACKAGES="tzdata shared-mime-info"
 RUN apk add --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 
 # install rubygem
@@ -43,6 +43,8 @@ WORKDIR /app
 # install packages
 ARG PACKAGES="build-base tzdata libxslt libxml2-dev libxslt-dev nodejs"
 RUN apk add --no-cache $PACKAGES
+
+COPY --from=ruby:3.0.0-buster /usr/share/mime/packages/freedesktop.org.xml /usr/share/mime/packages/
 
 # get the application code
 COPY --from=builder $GEM_HOME $GEM_HOME

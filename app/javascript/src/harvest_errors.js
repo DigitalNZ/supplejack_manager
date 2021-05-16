@@ -1,5 +1,4 @@
-$(function() {
-
+$(function() {  
   var code_mirror_text_areas = document.getElementsByClassName('code-editor-multiple');
 
   $(code_mirror_text_areas).each(function(key, value) {
@@ -9,9 +8,11 @@ $(function() {
       tabSize: 2,
       readOnly: true,
       mode: $(value).data('mode'),
-      lineSeperator: ',',
+      lineSeperator: ','
     })
   });
 
   $("#accordion-failed, #accordion-invalid, #accordion-backtrace").accordion({heightStyle: "content",collapsible: true, active: false});
 });
+
+

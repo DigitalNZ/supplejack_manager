@@ -25,12 +25,6 @@ RSpec.describe ApplicationHelper do
 
       context 'json' do
         before { allow(parser).to receive(:xml?) { false } }
-
-        it 'should use coderay to format the raw_data' do
-          expect(CodeRay).to receive(:scan).with("{\n  \"bill\": \"bob\"\n}", :json) { double(:output).as_null_object }
-          helper.pretty_format('abc123', raw_data)
-        end
-
         it 'should pretty generate the JSON if it is json' do
           expect(JSON).to receive(:pretty_generate).with({ 'bill'=>'bob' })
           helper.pretty_format('abc123', raw_data)
