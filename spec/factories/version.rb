@@ -7,6 +7,8 @@ FactoryBot.define do
     user_id   { '577d8c270403714b67000001' }
     content   { 'class NZMuseums; end' }
 
+    user
+
     trait :santos do
       tags { ['santos clause'] }
     end
