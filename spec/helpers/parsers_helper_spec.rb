@@ -7,9 +7,24 @@ RSpec.describe ParsersHelper do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
-    build(:parser)
+    
+    create(:parser)
   end
-  let(:version) { build(:version, versionable: parser, tags: ['production']) }
+  let(:version) { build(:version, versionable: parser, tags: ['production'], message: Faker::Lorem.word, version: 'v2') }
+
+  describe '#version_message' do
+    context 'when version is nil' do
+      it 'returns message from last version of the parser' do
+        expect(helper.version_message(parser, nil)).to eq parser.versions.last.message
+      end
+    end
+
+    context 'when version is not nil' do
+      it 'returns message from last version of the parser' do
+        expect(helper.version_message(parser, version)).to eq version.message
+      end
+    end
+  end
 
   describe '#version_tags' do
     context 'current production tag' do
