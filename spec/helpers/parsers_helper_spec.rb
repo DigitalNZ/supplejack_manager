@@ -7,7 +7,6 @@ RSpec.describe ParsersHelper do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
-    
     create(:parser)
   end
   let(:version) { build(:version, versionable: parser, tags: ['production'], message: Faker::Lorem.word, version: 'v2') }
