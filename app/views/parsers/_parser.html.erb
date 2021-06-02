@@ -116,8 +116,10 @@
       <% end %>
     </ul>
 
+    <div class="callout secondary text-center" data-alert="">
+      <%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last&.message || 'No versions created yet' : @version.message)  %>
+    </div>
 
-    <div class="callout secondary text-center" data-alert=""><%= 'Current  version: ' + (@version.nil? ?  @parser.versions.last.message : @version.message)  %></div>
     <% if can? :run_harvest, @parser %>
       <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button production medium-12 cell" %>
     <% end %>
