@@ -15,7 +15,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   let(:user)    { create(:user, :admin) }
   let(:source)  { create(:source) }
   let!(:parser) { create(:parser, source_id: source) }
-  let!(:version) { create(:version, versionable: parser, user_id: user) }
+  let!(:version) { create(:version, versionable: parser, user_id: user, version: 'v5') }
 
   before do
     sign_in user
@@ -70,8 +70,8 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   scenario 'A harvest operator can Update a parser' do
     fill_code_mirror 'class Hey; end'
     fill_in 'parser_message', with: 'Updating Parser'
-
     click_button 'Update Parser Script'
+
     expect(page).to have_link 'Updating Parser'
   end
 
@@ -79,15 +79,18 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     click_button 'Rename Parser'
     fill_in 'parser_name', with: 'Parser Name'
     click_button 'Rename'
+
     expect(page).to have_link 'Parser Name'
   end
 
   scenario 'A harvest operator can change the data source of a parser' do
     click_button('Change Data Source')
+
     expect(page).to have_text 'Change source'
     expect(page).to have_text 'Warning: changing the source of this parser does not affect records that have already been harvested.'
     expect(page).to have_text 'Contributor'
     expect(page).to have_text ' Data Source'
+
     click_button 'Change source'
   end
 
@@ -95,6 +98,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     allow(HarvestSchedule).to receive(:update_schedulers_from_environment) { true }
     click_link 'Disable Full & Flush harvest mode'
     page.driver.browser.switch_to.alert.accept
+
     expect(page).to have_text 'Enable Full & Flush harvest mode'
   end
 
@@ -107,6 +111,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
       expect(page).to have_text "#{parser.name}"
       expect(page).to have_text 'with version name:'
     end
+
     expect(page).to have_text 'Warning:'
     expect(page).to have_text 'You currently have scheduled jobs set for this parser.'
     expect(page).to have_text 'By deleting this parser the scheduled jobs will be deleted as well.'

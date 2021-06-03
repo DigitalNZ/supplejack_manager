@@ -16,6 +16,8 @@ class Version
   embedded_in :versionable, polymorphic: true
   delegate :name, :strategy, :file_name, to: :versionable
 
+  default_scope -> { not_in(version: nil) }
+
   def staging?
     self.tags ||= []
     self.tags.include?('staging')

@@ -167,9 +167,7 @@ RSpec.describe Parser do
     end
 
     context 'when version is not passed but the parser has a tagged version' do
-      before(:each) do
-        parser.versions << build(:version, :staging)
-      end
+      before { parser.versions << build(:version, :staging, version: 'v1') }
 
       it 'parser is set as the content of the last tagged version' do
         parser.enrichment_definitions('staging')
@@ -256,7 +254,7 @@ RSpec.describe Parser do
 
   describe '#updated_last_editor' do
     let(:user)    { create(:user) }
-    let(:version) { build(:version, :staging, user: user) }
+    let(:version) { build(:version, :staging, user: user, version: 'v1') }
     let(:parser)  { create(:parser) }
 
     it 'sets the user as the last edited by before a parser is saved' do

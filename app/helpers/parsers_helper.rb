@@ -2,6 +2,10 @@
 
 # Helpers for Parsers
 module ParsersHelper
+  def version_message(parser, version = nil)
+    version.nil? ? parser.versions.last.message : version.message
+  end
+
   # Returns the next link for preview view
   #
   # @author Federico Gonzalez
