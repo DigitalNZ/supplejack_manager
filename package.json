@@ -12,7 +12,8 @@
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
     "moment": "^2.29.1",
-    "rails-erb-loader": "^5.5.2"
+    "rails-erb-loader": "^5.5.2",
+    "ws": "^6.2.2"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
