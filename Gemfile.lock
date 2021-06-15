@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: 570099ff3b2fb94ba1436eac41cfe1a83880b6f0
-  tag: v2.10.0
+  revision: 6ae9fef0dc61199fb2bb8682cbe519dd0301da9a
+  branch: ed/dependabot-fixes
   specs:
     supplejack_common (0.0.2)
-      actionpack (~> 6.0.3.5)
+      actionpack (>= 6.0.3.5, < 6.1.4.0)
       activesupport
       aws-sdk-s3
       chronic (<= 0.10.2)
@@ -189,7 +189,7 @@ GEM
       activesupport (>= 4.2.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
-    http-cookie (1.0.3)
+    http-cookie (1.0.4)
       domain_name (~> 0.5)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
@@ -258,7 +258,7 @@ GEM
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    nokogumbo (2.0.4)
+    nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
     oai (1.0.1)
       builder (>= 3.1.0)
@@ -326,7 +326,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbtree3 (0.6.0)
-    redis (4.2.5)
+    redis (4.3.1)
     regexp_parser (1.8.2)
     request_store (1.5.0)
       rack (>= 1.4)
