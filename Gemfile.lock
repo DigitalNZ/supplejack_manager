@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: 6ae9fef0dc61199fb2bb8682cbe519dd0301da9a
-  branch: ed/dependabot-fixes
+  revision: 92f3eb7ec3f0dd3db7f5e4e883b64118b58b4404
+  tag: v2.10.2
   specs:
     supplejack_common (0.0.2)
       actionpack (>= 6.0.3.5, < 6.1.4.0)
