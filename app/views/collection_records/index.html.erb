@@ -40,6 +40,7 @@
             </tr>
           </tbody>
         </table>
+        <%= text_area_tag "", JSON.pretty_generate(@record), class: 'code-editor-multiple readonly' %>
       <% elsif @record.nil? && @record_id %>
         <h3><%= t('records.not_found') %></h3>
       <% end %>
