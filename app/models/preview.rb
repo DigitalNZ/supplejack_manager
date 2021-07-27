@@ -52,10 +52,6 @@ class Preview < ActiveResource::Base
     JSON.parse(self.field_errors).any? unless self.field_errors.nil?
   end
 
-  def field_errors_output
-    CodeRay.scan(field_errors_json, :json).html(line_numbers: :table).html_safe if field_errors?
-  end
-
   def validation_errors_output
     JSON.parse(self.validation_errors) unless self.validation_errors.nil?
   end

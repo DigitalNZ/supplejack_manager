@@ -36,25 +36,6 @@ RSpec.describe Preview do
     end
   end
 
-  describe '#field_errors_output' do
-    let(:field_errors_json) { JSON.pretty_generate('title': 'Invalid!') }
-
-    before do
-      allow(preview).to receive(:field_errors?) { true }
-      allow(preview).to receive(:field_errors_json) { field_errors_json }
-    end
-
-    it 'returns highlighted json' do
-      output = %q{{\n  <span class=\"key\"><span class=\"delimiter\">&quot;</span><span class=\"content\">title</span><span class=\"delimiter\">&quot;</span></span>: <span class=\"string\"><span class=\"delimiter\">&quot;</span><span class=\"content\">Invalid!</span><span class=\"delimiter\">&quot;</span></span>\n}}
-      expect(preview.field_errors_output).to match(output)
-    end
-
-    it 'returns nil when there are no field_errors' do
-      allow(preview).to receive(:field_errors?) { false }
-      expect(preview.field_errors_output).to be nil
-    end
-  end
-
   describe '#validation_errors?' do
     it 'returns false when there are no validation_errors' do
       allow(preview).to receive(:validation_errors)
