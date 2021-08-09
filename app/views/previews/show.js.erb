@@ -14,7 +14,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 		readOnly: true,
 		mode: 'text/x-ruby',
 		lineSeperator: ','
-	}) 
+	})
 
 	$('#source-data-label').click(function() {
 		setTimeout(function() {
@@ -69,8 +69,15 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 
 <% if @preview.field_errors? %>
 	$('#preview-<%= @preview.id %> #status').html("Field Errors");
-	$('#preview-<%= @preview.id %> #field-errors p').html("<%= escape_javascript(@preview.field_errors_output) %>");
+	$('#preview-<%= @preview.id %> #field-errors .code-editor-multiple').html("<%= escape_javascript(@preview.field_errors) %>");
 	$('#preview-<%= @preview.id %> #field-errors').show();
+	window.CodeMirror.fromTextArea($('#preview-<%= @preview.id %> #field-errors .code-editor-multiple')[0], {
+    lineNumbers: true,
+    theme: 'monokai',
+    tabSize: 2,
+    readOnly: true,
+    lineSeperator: ',',
+  })
 <% end %>
 
 <% if @preview.deletable? %>
