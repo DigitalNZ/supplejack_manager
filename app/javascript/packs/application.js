@@ -11,6 +11,7 @@ require("@rails/ujs").start()
 
 import 'stylesheets/application'
 import 'src/application'
+import { init as initApm } from '@elastic/apm-rum'
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -18,3 +19,18 @@ import 'src/application'
 //
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
+
+if(process.env.RAILS_ENV == 'production') {
+  const apm = initApm({
+    // Set required service name (allowed characters: a-z, A-Z, 0-9, -, _, and space)
+    serviceName: 'Lending Services',
+
+    // Set custom APM Server URL (default: http://localhost:8200)
+    serverUrl: 'https://apm-server.digitalnz.org',
+
+    // Set service version (required for sourcemap feature)
+    serviceVersion: '',
+
+    environment: process.env.RAILS_ENV
+  })
+}

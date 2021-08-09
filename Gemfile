@@ -65,8 +65,11 @@ group :development, :test do
   gem 'rubocop-performance', require: false
 end
 
+group :production do
+  gem 'elastic-apm'
+end
+
 group :uat, :staging, :production do
-  gem 'airbrake'
   gem 'lograge'
   gem 'ougai'
 end

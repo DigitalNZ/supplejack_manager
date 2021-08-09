@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@elastic/apm-rum": "^5.9.1",
     "@rails/ujs": "^6.0.3-4",
     "@rails/webpacker": "5.2.1",
     "browserslist": "^4.16.6",
