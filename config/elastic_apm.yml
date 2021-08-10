@@ -1,5 +1,5 @@
 server_url: <%= ENV.fetch('ELASTIC_APM_SERVER_URL', 'localhost:8200') %>
-service_name: "Lending Services"
+service_name: "Supplejack Manager"
 pool_size: <%= ENV.fetch('ELASTIC_APM_POOL_SIZE', 5).to_i %>
 disable_send: <%= ENV.fetch('ELASTIC_APM_DISABLE_SEND', 'true') == 'true' %>
 verify_server_cert: "false"

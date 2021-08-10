@@ -3,8 +3,10 @@
 
 ENV['RAILS_ENV'] ||= ENV['RACK_ENV'] || 'development'
 ENV['NODE_ENV']  ||= 'development'
+ENV['ELASTIC_APM_SERVER_URL'] = ENV.fetch('ELASTIC_APM_SERVER_URL', 'localhost:8200')
 
 require 'pathname'
+
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile',
   Pathname.new(__FILE__).realpath)
 

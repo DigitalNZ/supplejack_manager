@@ -26,7 +26,7 @@ if(process.env.RAILS_ENV == 'production') {
     serviceName: 'Lending Services',
 
     // Set custom APM Server URL (default: http://localhost:8200)
-    serverUrl: 'https://apm-server.digitalnz.org',
+    serverUrl: process.env.ELASTIC_APM_SERVER_URL,
 
     // Set service version (required for sourcemap feature)
     serviceVersion: '',
