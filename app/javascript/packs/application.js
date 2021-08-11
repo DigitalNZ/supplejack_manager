@@ -23,7 +23,7 @@ const imagePath = (name) => images(name, true)
 if(process.env.RAILS_ENV == 'production') {
   const apm = initApm({
     // Set required service name (allowed characters: a-z, A-Z, 0-9, -, _, and space)
-    serviceName: 'Lending Services',
+    serviceName: 'Supplejack Manager',
 
     // Set custom APM Server URL (default: http://localhost:8200)
     serverUrl: process.env.ELASTIC_APM_SERVER_URL,
