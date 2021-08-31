@@ -4,3 +4,4 @@ pool_size: <%= ENV.fetch('ELASTIC_APM_POOL_SIZE', 5).to_i %>
 disable_send: <%= ENV.fetch('ELASTIC_APM_DISABLE_SEND', 'true') == 'true' %>
 verify_server_cert: "false"
 secret_token: <%= ENV["ELASTIC_APM_SECRET_TOKEN"] %>
+transaction_sample_rate: <%= ENV.fetch('ELASTIC_APM_SAMPLE_RATE', 0.1) %>
