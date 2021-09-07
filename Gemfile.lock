@@ -116,7 +116,7 @@ GEM
     aws-sigv4 (1.1.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
     bcrypt (3.1.16)
-    better_errors (2.6.0)
+    better_errors (2.8.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
