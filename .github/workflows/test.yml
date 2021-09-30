@@ -51,7 +51,7 @@ jobs:
       run: |
         gem install bundler-audit
         bundle audit update
-        bundle audit check --ignore
+        bundle audit check
 
   rspec:
     runs-on: ubuntu-latest
