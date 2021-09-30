@@ -117,7 +117,7 @@
     <tr>
       <td><%= t("harvest_jobs.duration") %></td>
       <td>
-        <strong><%= distance_of_time_in_words(@harvest_job.duration.to_i) %></strong>
+        <strong><%= human_readable_duration(@harvest_job.duration) %></strong>
       </td>
     </tr>
 
