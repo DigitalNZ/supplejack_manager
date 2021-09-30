@@ -69,7 +69,7 @@ module ApplicationHelper
         secs, n = secs.divmod(count)
         pluralize(n.floor, name.to_s) unless n.to_i.zero?
       end
-    end.compact.reverse.join(' ')
+    end.reverse.join(' ')
   end
 
   def hide(cond)
