@@ -74,7 +74,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
       end
 
       scenario 'displays finished job duration' do
-        expect(page.has_content?('18 minutes 31 seconds'))
+        expect(page).to have_content('19 minutes')
         expect(page).to_not have_content('Status')
       end
     end
