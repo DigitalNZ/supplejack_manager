@@ -61,7 +61,7 @@
         <td><%= l abstract_job&.start_time, format: :start_time rescue nil %></td>
 
         <% if %w[finished all].include?(params[:status]) %>
-          <td><%= distance_of_time_in_words(abstract_job.duration || 0) %></td>
+          <td><%= distance_of_time_in_words(abstract_job.duration.to_i) %></td>
         <% end %>
 
         <td><%= abstract_job.records_count %></td>
