@@ -61,21 +61,6 @@ module ApplicationHelper
     ENV['PARSER_TYPE_ENABLED'] == 'true'
   end
 
-  def human_duration(secs)
-    return '' unless secs.present?
-
-    secs = secs.to_i
-    [[60, :sec],
-     [60, :min],
-     [24, :hr],
-     [Float::INFINITY, :day]].map do |count, name|
-      next unless secs.positive?
-
-      secs, n = secs.divmod(count)
-      "#{n.to_i} #{name}" unless n.to_i.zero?
-    end.compact.reverse.join(' ')
-  end
-
   def hide(cond)
     cond ? ' hide' : ''
   end

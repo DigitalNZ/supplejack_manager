@@ -55,7 +55,7 @@ RSpec.feature 'Job Schedules', type: :feature do
 
     scenario 'can click Resume link to pause job', js: true do
       expect(HarvestSchedule).to receive(:find).and_return(one_off_schedule)
-      expect(one_off_schedule).to receive(:update_attributes).with('status'=>'active')
+      expect(one_off_schedule).to receive(:update_attributes).with('status' => 'active')
 
       find('input[value="Resume"]').click
     end
@@ -65,7 +65,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       visit environment_harvest_schedules_path(environment: 'staging')
 
       expect(HarvestSchedule).to receive(:find).and_return(one_off_schedule)
-      expect(one_off_schedule).to receive(:update_attributes).with('status'=>'paused')
+      expect(one_off_schedule).to receive(:update_attributes).with('status' => 'paused')
 
       find('input[value="Pause"]').click
     end
@@ -132,7 +132,7 @@ RSpec.feature 'Job Schedules', type: :feature do
 
     scenario 'can click Resume link to pause job', js: true do
       expect(HarvestSchedule).to receive(:find).and_return(schedule1)
-      expect(schedule1).to receive(:update_attributes).with('status'=>'active')
+      expect(schedule1).to receive(:update_attributes).with('status' => 'active')
 
       find('input[value="Resume"]').click
     end
@@ -142,7 +142,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       visit environment_harvest_schedules_path(environment: 'staging')
 
       expect(HarvestSchedule).to receive(:find).and_return(schedule1)
-      expect(schedule1).to receive(:update_attributes).with('status'=>'paused')
+      expect(schedule1).to receive(:update_attributes).with('status' => 'paused')
 
       find('input[value="Pause"]').click
     end
@@ -184,7 +184,7 @@ RSpec.feature 'Job Schedules', type: :feature do
 
     scenario 'clicking on Pause All' do
       schedules.each do |schedule|
-        expect(schedule).to receive(:update_attributes).with('status'=>'stopped')
+        expect(schedule).to receive(:update_attributes).with('status' => 'stopped')
       end
 
       find('input[value="Pause All"]').click
