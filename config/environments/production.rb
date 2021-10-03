@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require "#{Rails.root}/lib/custom_logger"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -104,7 +108,6 @@ Rails.application.configure do
 
   # ALL custom configs comes  under this line
   config.log_level = ENV['LOG_LEVEL'] || :info
-  require "#{config.root}/lib/custom_logger.rb"
   config.logger = ActiveSupport::TaggedLogging.new(CustomLogger.new(STDOUT))
 
   DEFAULT_URL_OPTIONS = {

@@ -69,7 +69,7 @@ group :production do
   gem 'elastic-apm'
 end
 
-group :uat, :staging, :production do
+group :uat, :staging, :production, :development do
   gem 'lograge'
   gem 'ougai'
 end
