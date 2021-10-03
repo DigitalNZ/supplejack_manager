@@ -32,7 +32,7 @@ module HarvesterManager
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths << "#{config.root}/app/models/concerns"
-    config.autoload_paths << "#{config.root}/lib"
+    config.autoload_paths << Rails.root.join('lib')
 
     config.time_zone = ENV['TIMEZONE']
   end
