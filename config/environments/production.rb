@@ -104,8 +104,8 @@ Rails.application.configure do
 
   # ALL custom configs comes  under this line
   config.log_level = ENV['LOG_LEVEL'] || :info
-  # require "#{config.root}/lib/custom_logger/logger.rb"
-  # config.logger = ActiveSupport::TaggedLogging.new(CustomLogger::Logger.new(STDOUT))
+  require "#{config.root}/lib/custom_logger.rb"
+  config.logger = ActiveSupport::TaggedLogging.new(CustomLogger.new(STDOUT))
 
   DEFAULT_URL_OPTIONS = {
     host: ENV['HOST'],
