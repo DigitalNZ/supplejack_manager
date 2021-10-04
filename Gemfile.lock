@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: 8c2a2dbd979d319fce0d2d076259cee63fbe3431
+  revision: ad109d00bc26bde51a06dd465bc8d89daea85f89
   branch: ed/parent-fix
   specs:
     supplejack_common (0.0.2)
@@ -110,7 +110,7 @@ GEM
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.48.0)
+    aws-sdk-kms (1.49.0)
       aws-sdk-core (~> 3, >= 3.120.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.103.0)
