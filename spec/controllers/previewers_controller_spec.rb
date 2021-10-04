@@ -29,12 +29,6 @@ RSpec.describe PreviewersController do
       post :create, params: { parser_id: parser.id, parser: { content: 'content' }, format: :js }
     end
 
-    it 'sets parser_error as false' do
-      post :create, params: { parser_id: parser.id,
-           parser: { content: 'variable = 1' }, index: 10, format: :js }
-      expect(assigns(:parser_error)).to eq false
-    end
-
     context 'when parser code is valid' do
       it 'sets parser_error as false' do
         code = 'class Repository1 < SupplejackCommon::Xml::Base
@@ -45,7 +39,7 @@ RSpec.describe PreviewersController do
 
         post :create, params: { parser_id: parser.id,
              parser: { content: code }, index: 10, format: :js }
-        expect(assigns(:parser_error)).to eq false
+        expect(assigns(:parser_error)).to be nil
       end
     end
 
