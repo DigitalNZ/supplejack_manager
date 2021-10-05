@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: ad109d00bc26bde51a06dd465bc8d89daea85f89
-  branch: ed/parent-fix
+  revision: f4fffa127df6a53e8196fa2328ddaef961a635bc
+  tag: v2.10.5
   specs:
     supplejack_common (0.0.2)
       actionpack (>= 6.0.3.5, < 6.1.5.0)
