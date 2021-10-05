@@ -1,26 +1,24 @@
-<% action = parser.allow_full_and_flush ? 'Disable' : 'Enable' %>
-
 <%
-  if @parser.allow_full_and_flush
-    confirm = t('parsers.disable_full_and_flush_confirmation', action: action.downcase)
+  action = parser.allow_full_and_flush ? 'Disable' : 'Enable'
+
+  confirm = if @parser.allow_full_and_flush
+    t('parsers.disable_full_and_flush_confirmation', action: action.downcase)
   else
-    confirm = t('parsers.enable_full_and_flush_confirmation', action: action.downcase)
+    t('parsers.enable_full_and_flush_confirmation', action: action.downcase)
   end
 %>
 
-<%=
-  link_to(
-    t('parsers.enable_disable_full_and_flush', action: action),
-    allow_flush_parser_path(
-      id: parser,
-      allow: !parser.allow_full_and_flush
-    ),
-    method: :get,
-    class: 'button expanded',
-    remote: true,
-    data: {
-      disable_with: 'Please wait...',
-      confirm: confirm
-    }
-  )
-%>
+<%= link_to(
+      t('parsers.enable_disable_full_and_flush', action: action),
+      allow_flush_parser_path(
+        id: parser,
+        allow: !parser.allow_full_and_flush
+      ),
+      method: :get,
+      class: 'button expanded',
+      remote: true,
+      data: {
+        disable_with: 'Please wait...',
+        confirm: confirm
+      }
+    ) %>

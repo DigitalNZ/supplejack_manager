@@ -12,11 +12,11 @@
               Run Enrichment
               <ul>
                 <% if APPLICATION_ENVS.include?(:staging) %>
-                  <li><%= link_to "Staging Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "staging"} %></li>
+                  <li><%= link_to 'Staging Enrichment', new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-enrichment-modal-button', data: { environment: 'staging' } %></li>
                 <% end %>
 
                 <% if APPLICATION_ENVS.include?(:production) %>
-                  <li><%= link_to "Production Enrichment", new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-enrichment-modal-button", data: {environment: "production"} %></li>
+                  <li><%= link_to 'Production Enrichment', new_enrichment_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-enrichment-modal-button', data: { environment: 'production' } %></li>
                 <% end %>
               </ul>
             </div>
@@ -26,19 +26,19 @@
               Run Harvest
               <ul>
                 <% if APPLICATION_ENVS.include?(:staging) && @version.try(:staging?) %>
-                  <li><%= link_to "Staging Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "staging"} %></li>
+                  <li><%= link_to 'Staging Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: { environment: 'staging' } %></li>
                 <% end %>
 
                 <% if APPLICATION_ENVS.include?(:production) && @version.try(:production?) %>
-                  <li><%= link_to "Production Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "production"} %></li>
+                  <li><%= link_to 'Production Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: { environment: 'production' } %></li>
                 <% end %>
 
-                <li><%= link_to "Test Harvest", new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: "records-harvest-modal-button", data: {environment: "test"} %></li>
+                <li><%= link_to 'Test Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: { environment: 'test' } %></li>
               </ul>
             </div>
           </li>
         <% end %>
-        <li><%= link_to "Preview", preview_path(@parser.id), class: "button records-preview-button" %></li>
+        <li><%= link_to 'Preview', preview_path(@parser.id), class: 'button records-preview-button' %></li>
       <% else %>
         <div href="#" class="button run-harvest dropdown disabled">Run Harvest</div>
       <% end %>
@@ -49,14 +49,14 @@
 <div class="grid-x">
   <div class="medium-9 cell">
     <% if @version %>
-      <%= render "parser_versions/form" %>
+      <%= render 'parser_versions/form' %>
     <% else %>
-      <%= render "form" %>
+      <%= render 'form' %>
     <% end %>
   </div>
 
   <div class="medium-3 cell">
-    <h3 class="no-margin-top left"><%= t("history") %></h3>
-    <%= render partial: "versions/version_list", locals: { versionable: @parser, versionable_path: "parser_parser_version" } %>
+    <h3 class="no-margin-top left"><%= t('history') %></h3>
+    <%= render partial: 'versions/version_list', locals: { versionable: @parser, versionable_path: 'parser_parser_version' } %>
   </div>
 </div>

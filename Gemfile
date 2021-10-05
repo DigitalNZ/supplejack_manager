@@ -10,6 +10,7 @@ gem 'aws-sdk-s3'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan'
 gem 'devise', '~> 4.0'
+gem 'erb_lint', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mongoid'

@@ -1,11 +1,11 @@
 <%= custom_form_with model: @parser, local: true do |f| %>
   <% if can? :update, @parser %>
-    <%= f.text_area :content, class: "code-editor read" %>
+    <%= f.text_area :content, class: 'code-editor read' %>
 
     <%= f.label :message %>
     <%= f.text_field :message, required: true %>
     <%= f.submit class: 'button' %>
   <% else %>
-    <%= f.text_area :content, class: "code-editor read-only" %>
+    <%= f.text_area :content, class: 'code-editor read-only' %>
   <% end %>
 <% end %>
