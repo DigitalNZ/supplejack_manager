@@ -1,10 +1,10 @@
-<div class="grid-x grid-margin-x">
-  <div class="medium-9 cell">
+<div class='grid-x grid-margin-x'>
+  <div class='medium-9 cell'>
     <% if can? :update, @parser %>
       <% if @parser.errors.blank? %>
-        <h1 id="resource-title" data-toggler='.hide' class="float-left">
+        <h1 id='resource-title' data-toggler='.hide' class='float-left'>
           <%= link_to @parser.name, edit_parser_path(@parser) %>
-          <span class="parser-tag <%= "alert" if @parser.data_type == "concept" %> round label"><%= @parser.data_type %></span>
+          <span class="parser-tag <%= 'alert' if @parser.data_type == 'concept' %> round label"><%= @parser.data_type %></span>
         </h1>
       <% end %>
 
@@ -23,9 +23,9 @@
 <div class="grid-x grid-margin-x">
   <div class="medium-9 cell">
     <% if @version %>
-      <%= render "parser_versions/form" %>
+      <%= render 'parser_versions/form' %>
     <% else %>
-      <%= render "form" %>
+      <%= render 'form' %>
     <% end %>
   </div>
 
@@ -41,17 +41,15 @@
           <ul class='no-bullet'>
             <% APPLICATION_ENVS.each do |env| %>
               <li>
-                <%=
-                  link_to(
-                    "#{env.capitalize} jobs",
-                    environment_abstract_jobs_path(
-                      env.downcase,
-                      status: 'all',
-                      parser_id: @parser.id,
-                    ),
-                    target: '_blank'
-                  )
-                %>
+                <%= link_to(
+                      "#{env.capitalize} jobs",
+                      environment_abstract_jobs_path(
+                        env.downcase,
+                        status: 'all',
+                        parser_id: @parser.id,
+                      ),
+                      target: '_blank'
+                    ) %>
               </li>
             <% end %>
           </ul>
@@ -68,15 +66,14 @@
               <ul class='no-bullet'>
                 <% APPLICATION_ENVS.each do |env| %>
                   <li>
-                    <%=
-                      link_to(
-                        "#{env.capitalize} Enrichment",
-                        new_enrichment_parser_parser_version_path(
-                          @harvest_job.parser_id, @harvest_job.version_id
-                        ),
-                        class: "records-enrichment-modal-button",
-                        data: { environment: env }
-                      ) %>
+                    <%= link_to(
+                          "#{env.capitalize} Enrichment",
+                          new_enrichment_parser_parser_version_path(
+                            @harvest_job.parser_id, @harvest_job.version_id
+                          ),
+                          class: 'records-enrichment-modal-button',
+                          data: { environment: env }
+                        ) %>
                   </li>
                 <% end %>
               </ul>
@@ -91,14 +88,12 @@
                 <% APPLICATION_ENVS.each do |env| %>
                   <% if @version&.tags&.include?(env) %>
                     <li>
-                      <%=
-                        link_to("#{env.capitalize} Harvest",
-                        new_harvest_parser_parser_version_path(
-                          @harvest_job.parser_id,
-                          @harvest_job.version_id
-                        ),
-                        class: "records-harvest-modal-button",
-                        data: { environment: env }) %>
+                      <%= link_to("#{env.capitalize} Harvest",
+                            new_harvest_parser_parser_version_path(
+                            @harvest_job.parser_id,
+                            @harvest_job.version_id),
+                            class: 'records-harvest-modal-button',
+                            data: { environment: env }) %>
                     </li>
                   <% end %>
                 <% end %>
@@ -111,28 +106,28 @@
       <% end %>
       <% if can? :preview, @parser %>
         <li class="medium-12 cell">
-          <%= link_to "Preview", parser_previewers_path(@parser, format: :js), class: "button records-preview-button expanded", data: { open: 'preview-modal' } %>
+          <%= link_to 'Preview', parser_previewers_path(@parser, format: :js), class: 'button records-preview-button expanded', data: { open: 'preview-modal' } %>
         </li>
       <% end %>
     </ul>
 
     <div class="callout secondary text-center" data-alert="">
-      <%= 'Current  version: ' + version_message(@parser, @version)  %>
+      <%= 'Current  version: ' + version_message(@parser, @version) %>
     </div>
 
     <% if can? :run_harvest, @parser %>
-      <%= link_to t("parsers.edit_current"), edit_parser_path(@parser), class: "button production medium-12 cell" %>
+      <%= link_to t('parsers.edit_current'), edit_parser_path(@parser), class: 'button production medium-12 cell' %>
     <% end %>
 
-    <%= render partial: "versions/version_list", locals: { versionable: @parser, versionable_path: "parser_parser_version" } %>
+    <%= render partial: 'versions/version_list', locals: { versionable: @parser, versionable_path: 'parser_parser_version' } %>
 
     <% if can? :run_harvest, @parser %>
       <button class="button expanded" data-toggle='rename-form resource-title'>Rename Parser</button>
-      <button class="button expanded" id="change-source-action" data-open="change-source-alert"><%= t("parsers.change_source") %></button>
+      <button class="button expanded" id="change-source-action" data-open="change-source-alert"><%= t('parsers.change_source') %></button>
       <% if @parser.running_jobs? %>
-        <button class="button expanded tip-top has-tip" disabled data-tooltip title="You currently have a job running for this parser. You will need to stop it before being able to delete it."><%= t("parsers.delete") %></button>
+        <button class="button expanded tip-top has-tip" disabled data-tooltip title="You currently have a job running for this parser. You will need to stop it before being able to delete it."><%= t('parsers.delete') %></button>
       <% else %>
-        <button class="button alert expanded" data-open="delete-parser-alert" ><%= t("parsers.delete") %></button>
+        <button class="button alert expanded" data-open="delete-parser-alert"><%= t('parsers.delete') %></button>
       <% end %>
       <div class="allow-flush-button">
         <%= render 'parsers/allow_flush_button', parser: @parser %>
@@ -146,7 +141,7 @@
   </div>
 
   <div id="preview-area-spinner" class="spinner">
-    <%= image_pack_tag("sj-spinner.gif") %>
+    <%= image_pack_tag('sj-spinner.gif') %>
   </div>
 
   <button class="close-button" data-close aria-label="Close modal" type="button">
@@ -166,7 +161,7 @@
     <p> <strong>Warning:</strong> You currently have scheduled jobs set for this parser. By deleting this parser the scheduled jobs will be deleted as well. </p>
   <% end %>
   <div>
-    <%= button_to "Delete", @parser, method: :delete, class: "button alert right" %>
+    <%= button_to 'Delete', @parser, method: :delete, class: 'button alert right' %>
     <button data-close class="button secondary right">Cancel</button>
   </div>
   <button class="close-button" data-close aria-label="Close modal" type="button">

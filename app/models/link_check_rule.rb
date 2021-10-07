@@ -8,19 +8,17 @@ class LinkCheckRule < ActiveResource::Base
   headers['Authorization'] = "Token token=#{ENV['WORKER_KEY']}"
 
   schema do
-    attribute :source_id,        :string
-    attribute :xpath,            :string
-    attribute :status_codes,     :string
-    attribute :active,           :boolean
-    attribute :throttle,         :integer
-    attribute :_id,              :string
+    attribute :source_id,    :string
+    attribute :xpath,        :string
+    attribute :status_codes, :string
+    attribute :active,       :boolean
+    attribute :throttle,     :integer
+    attribute :_id,          :string
   end
+
+  alias_attribute :id, :_id
 
   include ActiveResource::SchemaTypes
-
-  def id
-    _id
-  end
 
   def source
     Source.find(self.source_id) rescue nil

@@ -308,12 +308,12 @@ RSpec.describe Parser do
       query = Parser.datatable_query(options)
       expect(query.selector['$or']).to be_a(Array)
       expect(query.selector['$or']).to eq([
-              { 'name'=>/term/i },
-              { 'strategy'=>/term/i },
-              { 'data_type'=>/term/i },
-              { 'last_editor'=>/term/i },
-              { 'partner_name'=>/term/i },
-              { 'source_name'=>/term/i }
+              { 'name' => /term/i },
+              { 'strategy' => /term/i },
+              { 'data_type' => /term/i },
+              { 'last_editor' => /term/i },
+              { 'partner_name' => /term/i },
+              { 'source_name' => /term/i }
             ])
     end
   end

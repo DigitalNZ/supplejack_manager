@@ -33,7 +33,7 @@ class PreviewersController < ApplicationController
   # @last_modified Eddie
   def validate_parser_content
     eval params[:parser][:content]
-    @parser_error = false
+    @parser_error = nil
   rescue => error
     @parser_error = { type: error.class, message: error.message }
   rescue SyntaxError => error

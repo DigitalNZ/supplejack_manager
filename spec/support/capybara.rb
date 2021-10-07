@@ -17,7 +17,7 @@ end
 # Capybara Screenshot
 Capybara::Screenshot.webkit_options = { width: CAPYBARA_WINDOW_DEFAULTS[0], height: CAPYBARA_WINDOW_DEFAULTS[1] }
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  "screenshot_#{example.description.tr(' ', '-').gsub(%r{^.*\/spec\/}, '')}"
+  "screenshot_#{example.description.tr(' ', '-').gsub(%r{^.*/spec/}, '')}"
 end
 Capybara::Screenshot.prune_strategy = :keep_last_run
 Capybara::Screenshot.register_driver(:headless_chrome) do |driver, path|

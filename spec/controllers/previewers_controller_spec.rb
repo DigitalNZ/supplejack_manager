@@ -29,18 +29,51 @@ RSpec.describe PreviewersController do
       post :create, params: { parser_id: parser.id, parser: { content: 'content' }, format: :js }
     end
 
-    it 'sets parser_error as false' do
-      post :create, params: { parser_id: parser.id,
-           parser: { content: 'variable = 1' }, index: 10, format: :js }
-      expect(assigns(:parser_error)).to eq false
+    context 'when parser code is valid' do
+      it 'sets parser_error as false' do
+        code = 'class Repository1 < SupplejackCommon::Xml::Base
+          base_url "http://repository.digitalnz.org/public_records.xml"
+          record_selector "//records/record"
+          include_snippet "Global validations"
+        end'
+
+        post :create, params: { parser_id: parser.id,
+             parser: { content: code }, index: 10, format: :js }
+        expect(assigns(:parser_error)).to be nil
+      end
     end
 
-    it 'sets parser_error with error details' do
-      post :create, params: { parser_id: parser.id,
-           parser: { content: 'variable += 1' },
-           index: 10, format: :js }
-      expect(assigns(:parser_error)).to eq({ type: NoMethodError,
-                                         message: "undefined method `+' for nil:NilClass" })
+    context 'when parser code has an error' do
+      it 'sets parser_error with error details' do
+        code = 'class Repository1 < SupplejackCommon::Xml::Base
+          base_url "http://repository.digitalnz.org/public_records.xml"
+          record_selector "//records/record"
+          include_snippet "Global validations"
+          variable += 1
+        end'
+
+        post :create, params: { parser_id: parser.id,
+             parser: { content: code },
+             index: 10, format: :js }
+        expect(assigns(:parser_error))
+          .to eq({ type: NoMethodError, message: "undefined method `+' for nil:NilClass" })
+      end
+    end
+
+
+    context 'when parser code has a syntax error' do
+      it 'sets parser_error with error details' do
+        code = 'class Repository1 < SupplejackCommon::Xml::Base
+          base_url "http://repository.digitalnz.org/public_records.xml"
+          record_selector "//records/record"
+          include_snippet "Global validations"'
+
+        post :create, params: { parser_id: parser.id,
+             parser: { content: code },
+             index: 10, format: :js }
+        expect(assigns(:parser_error))
+          .to eq({ message: "(eval):4: syntax error, unexpected end-of-input, expecting `end'", type: SyntaxError })
+      end
     end
 
     it 'initializes a new previewer in test mode' do
