@@ -63,12 +63,9 @@
 
   <p>Please confirm that your authentication application is working by entering a generated code below.</p>
 
-  <% # binding.pry %>
-  <%= form_for(:two_factor_authentication_settings, url: two_factor_authentication_settings_path) do |f| %>
+  <%= form_for(:user, url: mfa_user_path) do |f| %>
     <%= f.label :otp, 'One Time Password' %>
-    <%= f.text_field :otp, required: true %>
-
-    <%= f.hidden_field :user_id, value: @user.id, required: true %>
+    <%= f.text_field :otp, value: '', required: true %>
 
     <%= f.submit "Confirm & Enable", class: "button" %>
   <% end %>

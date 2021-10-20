@@ -53,7 +53,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  resources :users, only: [:index, :edit, :update, :new, :create]
 
-  resources :two_factor_authentication_settings, only: [:create]
+  resources :users, only: [:index, :edit, :update, :new, :create] do
+    post 'mfa', on: :member
+  end
 end
