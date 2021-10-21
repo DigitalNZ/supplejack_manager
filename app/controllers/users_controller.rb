@@ -30,6 +30,22 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def mfa
+    return unless MFA_ENABLED
+
+    unless @user.authenticate_totp(user_params[:otp])
+      redirect_to(
+        edit_user_path(@user),
+        alert: 'Incorrect two factor authentication code'
+      ) && return
+    end
+
+    redirect_to(
+      edit_user_path(@user),
+      notice: 'Successfully enabled two factor authentication'
+    )
+  end
+
   def update
     if params.dig(:user, :role)
       authorize! :edit_users, @user
@@ -60,7 +76,9 @@ class UsersController < ApplicationController
       params
         .require(:user)
         .permit(
-          :name, :email, :password, :password_confirmation, :active, :manage_data_sources, :manage_parsers, :manage_harvest_schedules, :manage_link_check_rules,
+          :name, :email, :password, :password_confirmation,
+          :active, :manage_data_sources, :manage_parsers,
+          :manage_harvest_schedules, :manage_link_check_rules, :otp,
           manage_partners: [], run_harvest_partners: [])
     end
 end

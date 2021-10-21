@@ -30,7 +30,7 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: Run RSpec unit tests
+    - name: Run the brakeman test
       run: |
         gem install brakeman
         brakeman --run-all-checks
@@ -47,11 +47,10 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: Run RSpec unit tests
+    - name: Run the bundle audit test
       run: |
         gem install bundler-audit
-        bundle audit update
-        bundle audit check
+        bundle audit check --update
 
   rspec:
     runs-on: ubuntu-latest
