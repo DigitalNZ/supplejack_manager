@@ -46,10 +46,10 @@ RSpec.describe EnvironmentHelpers do
 
   describe '#fetch_env_vars' do
     it 'returns a hash of the available environment variables' do
-      expect(fetch_env_vars).to have_key('WORKER_HOST')
-      expect(fetch_env_vars).to have_key('HARVESTER_API_KEY')
-      expect(fetch_env_vars).to have_key('API_HOST')
-      expect(fetch_env_vars).to have_key('WORKER_KEY')
+      expect(fetch_env_vars('staging')).to have_key('WORKER_HOST')
+      expect(fetch_env_vars('staging')).to have_key('HARVESTER_API_KEY')
+      expect(fetch_env_vars('staging')).to have_key('API_HOST')
+      expect(fetch_env_vars('staging')).to have_key('WORKER_KEY')
     end
   end
 

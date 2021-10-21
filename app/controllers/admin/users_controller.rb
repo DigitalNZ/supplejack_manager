@@ -26,12 +26,6 @@ module Admin
         params.permit(:max_requests, :id)
       end
 
-      def api_key
-        APPLICATION_ENVIRONMENT_VARIABLES[
-          params[:environment]
-        ]['HARVESTER_API_KEY']
-      end
-
       def page
         params[:page] || 1
       end

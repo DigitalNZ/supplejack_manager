@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Partner do
   before do
-    allow(RestClient).to receive(:post)
+    allow(Api::Partner).to receive(:post)
   end
 
   describe 'validations' do
@@ -32,11 +32,10 @@ RSpec.describe Partner do
 
     it 'updates each environments' do
       APPLICATION_ENVS.each do |env|
-        env = APPLICATION_ENVIRONMENT_VARIABLES[env]
-        expect(RestClient).to receive(:post).with("#{env['API_HOST']}/harvester/partners", anything)
-
-        partner.update_apis
+        expect(Api::Partner).to receive(:post).with(env, anything)
       end
+
+      partner.update_apis
     end
   end
 end

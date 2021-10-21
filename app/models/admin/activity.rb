@@ -13,18 +13,10 @@ module Admin
     end
 
     def all
-      JSON.parse(RestClient.get("#{host}/harvester/activities.json", params: { api_key: api_key }))['site_activities']
+      response = Api::Activity.index(environment)
+      JSON.parse(response)['site_activities']
     rescue Errno::ECONNREFUSED
       []
     end
-
-    private
-      def host
-        APPLICATION_ENVIRONMENT_VARIABLES[environment]['API_HOST']
-      end
-
-      def api_key
-        APPLICATION_ENVIRONMENT_VARIABLES[environment]['HARVESTER_API_KEY']
-      end
   end
 end

@@ -13,26 +13,19 @@ module Admin
     end
 
     def all
-      @users = JSON.parse(RestClient.get("#{host}/harvester/users.json", params: { api_key: api_key }))['users']
+      response = Api::ApiUser.index(environment)
+      @users = JSON.parse(response)['users']
     rescue Errno::ECONNREFUSED
       []
     end
 
     def find(id)
-      @user = JSON.parse(RestClient.get("#{host}/harvester/users/#{id}.json", params: { api_key: api_key, page: page }))
+      response = Api::ApiUser.get(environment, id, { page: page })
+      @user = JSON.parse(response)
     end
 
     def update(params)
-      RestClient.patch("#{host}/harvester/users/#{params['id']}.json?api_key=#{api_key}", { user: { max_requests: params['max_requests'] } })
+      Api::ApiUser.patch(environment, params['id'], { user: { max_requests: params['max_requests'] } })
     end
-
-    private
-      def host
-        APPLICATION_ENVIRONMENT_VARIABLES[environment]['API_HOST']
-      end
-
-      def api_key
-        APPLICATION_ENVIRONMENT_VARIABLES[environment]['HARVESTER_API_KEY']
-      end
   end
 end

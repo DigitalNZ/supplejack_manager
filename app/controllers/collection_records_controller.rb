@@ -5,13 +5,18 @@ class CollectionRecordsController < ApplicationController
 
   def index
     @record_id = params[:id]
-    @response = RestClient.get("#{fetch_env_vars['API_HOST']}/harvester/records/#{@record_id}.json", { params: { api_key: fetch_env_vars['HARVESTER_API_KEY'] } }) rescue nil
-    @record = JSON.parse(@response) rescue nil
+    if @record_id
+      @response = Api::Record.get(env, @record_id) rescue nil
+      @record = JSON.parse(@response) rescue nil
+    else
+      @response = nil
+      @record = nil
+    end
   end
 
   def update
     begin
-      RestClient.put("#{fetch_env_vars['API_HOST']}/harvester/records/#{params[:id]}", { record: { status: params[:status] }, api_key: fetch_env_vars['HARVESTER_API_KEY'] })
+      Api::Record.put(env, params[:id], { record: { status: params[:status] } })
       flash[:notice] = 'Record successfully updated'
     rescue Exception => e
       Rails.logger.error "Exception #{e} when attempting to post to API"

@@ -21,10 +21,8 @@ class Partner
   end
 
   def update_apis
-    APPLICATION_ENVS.each do |environment|
-      env = APPLICATION_ENVIRONMENT_VARIABLES[environment]
-
-      RestClient.post("#{env['API_HOST']}/harvester/partners", { partner: self.attributes, api_key: env['HARVESTER_API_KEY'] })
+    APPLICATION_ENVS.each do |env|
+      Api::Partner.post(env, { partner: self.attributes })
     end
   end
 end

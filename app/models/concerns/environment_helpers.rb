@@ -16,39 +16,27 @@ module EnvironmentHelpers
     end
   end
 
+  def env
+    params[:environment]
+  end
 
   def set_worker_environment_for(klass, environment = nil)
-    if environment.present?
-      env_vars = APPLICATION_ENVIRONMENT_VARIABLES[environment]
-    else
-      env_vars = fetch_env_vars
-    end
+    env = environment || params[:environment]
+    env_vars = fetch_env_vars(env)
 
     klass.site = env_vars['WORKER_HOST']
     klass.user = env_vars['WORKER_KEY']
   end
 
-
-  def fetch_env_vars(environment = nil)
-    if Rails.env.development? && params[:environment]
-      environment = params[:environment]
-    elsif Rails.env.development?
-      environment = 'development'
-    elsif params[:environment] == 'test'
-      environment = 'staging'
-    else
-      environment = params[:environment] || params[:env]
-    end
-
+  def fetch_env_vars(environment)
     APPLICATION_ENVIRONMENT_VARIABLES[environment]
   end
 
   # :nodoc:
   module ClassMethods
     def change_worker_env!(env)
-      env_hash = APPLICATION_ENVIRONMENT_VARIABLES[env]
-      self.site = env_hash['WORKER_HOST']
-      self.user = env_hash['WORKER_KEY']
+      self.site = APPLICATION_ENVIRONMENT_VARIABLES[env]['WORKER_HOST']
+      self.user = APPLICATION_ENVIRONMENT_VARIABLES[env]['WORKER_KEY']
     end
   end
 end
