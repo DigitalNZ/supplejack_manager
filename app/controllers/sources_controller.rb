@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SourcesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: :show
   skip_before_action :verify_authenticity_token
 
   respond_to :html, :json
@@ -12,7 +12,10 @@ class SourcesController < ApplicationController
   end
 
   def show
-    respond_with @source
+    @source = Source.custom_find(params[:id])
+    status = @source.nil? ? :not_found : :ok
+
+    respond_with @source, status: status
   end
 
   def new

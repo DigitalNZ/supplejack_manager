@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Source do
-  let(:source) { build(:source) }
+  let(:source) { create(:source) }
 
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
@@ -35,9 +35,12 @@ RSpec.describe Source do
   end
 
   describe 'after create' do
+    let(:new_source) { build(:source) }
+
     it 'calls create_link_check_rule' do
-      expect(source).to receive(:create_link_check_rule)
-      source.save
+      expect(new_source).to receive(:create_link_check_rule)
+
+      new_source.save
     end
   end
 
@@ -94,6 +97,26 @@ RSpec.describe Source do
     it 'creates a new source slugifying the source_id with #slugfy_source_id' do
       new_source.save!
       expect(new_source.source_id).to eq 'new_source'
+    end
+  end
+
+  describe '#custom_find' do
+    context 'when querying with id' do
+      it 'returns source' do
+        expect(described_class.custom_find(source.id)).to eq(source)
+      end
+    end
+
+    context 'when querying with source_id' do
+      it 'returns source' do
+        expect(described_class.custom_find(source.source_id)).to eq(source)
+      end
+    end
+
+    context 'when source dosent exist' do
+      it 'returns nil' do
+        expect(described_class.custom_find('fakesourceid')).to be nil
+      end
     end
   end
 end
