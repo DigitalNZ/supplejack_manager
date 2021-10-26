@@ -13,6 +13,8 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.custom_find(params[:id])
+    authorize! :read, @source
+
     status = @source.nil? ? :not_found : :ok
 
     respond_with @source, status: status
