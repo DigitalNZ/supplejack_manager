@@ -19,6 +19,9 @@ class Source
 
   before_save :slugify_source_id
 
+  # Returns a source. Queries Source with either source_id or id.
+  #
+  # @param [String] id (can be id or source_id)
   def self.custom_find(id)
     any_of({ id: id }, { source_id: id }).first
   end
