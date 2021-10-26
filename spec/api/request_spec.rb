@@ -25,9 +25,9 @@ RSpec.describe Api::Request do
       expect(request.token).to include(APPLICATION_ENVIRONMENT_VARIABLES['test']['HARVESTER_API_KEY'])
     end
 
-    it 'stores the params ready to be used by RestClient if present' do
+    it 'stores the params' do
       request = described_class.new('/test', 'staging', { param: :value })
-      expect(request.params).to eq(params: { param: :value })
+      expect(request.params).to eq(param: :value)
     end
 
     it 'stores the params as empty hash if not present' do
@@ -66,9 +66,41 @@ RSpec.describe Api::Request do
     it 'sends the Authentication-Token header' do
       request = described_class.new('/test', 'staging')
       expect(RestClient::Request).to receive(:execute).with(hash_including(
-        headers: { 'Authentication-Token': request.token }
+        headers: { 'Authentication-Token': APPLICATION_ENVIRONMENT_VARIABLES['staging']['HARVESTER_API_KEY'] }
       ))
       request.get
+    end
+
+    it 'sends params in the URL if GET or DELETE' do
+      expected_hash = {
+        payload: nil,
+        headers: {
+          'Authentication-Token': APPLICATION_ENVIRONMENT_VARIABLES['staging']['HARVESTER_API_KEY'],
+          params: { param: :value }
+        }
+      }
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_hash))
+      described_class.new('/test', 'staging', { param: :value }).get
+
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_hash))
+      described_class.new('/test', 'staging', { param: :value }).delete
+    end
+
+    it 'sends params in the payload if PUT or PATCH or POST' do
+      expected_hash = {
+        payload: { param: :value },
+        headers: {
+          'Authentication-Token': APPLICATION_ENVIRONMENT_VARIABLES['staging']['HARVESTER_API_KEY'],
+        }
+      }
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_hash))
+      described_class.new('/test', 'staging', { param: :value }).put
+
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_hash))
+      described_class.new('/test', 'staging', { param: :value }).patch
+
+      expect(RestClient::Request).to receive(:execute).with(hash_including(expected_hash))
+      described_class.new('/test', 'staging', { param: :value }).post
     end
   end
 end
