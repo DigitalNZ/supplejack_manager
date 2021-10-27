@@ -4,7 +4,7 @@ module Api
   class PartnerSources < Request
     def self.post(env, partner_id, params)
       Api::Request.new(
-        "/harvester/partners/#{partner_id}/source",
+        "/harvester/partners/#{partner_id}/sources",
         env,
         params
       ).post
