@@ -21,7 +21,7 @@ module EnvironmentHelpers
   end
 
   def set_worker_environment_for(klass, environment = nil)
-    env = environment || params[:environment]
+    env = environment || params[:environment] || APPLICATION_ENVS.first
     env_vars = fetch_env_vars(env)
 
     klass.site = env_vars['WORKER_HOST']
