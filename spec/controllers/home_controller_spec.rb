@@ -26,14 +26,12 @@ RSpec.describe HomeController do
     context '#set environment' do
       it 'sets the environment to first available environment' do
         get :index
-        expect(controller.params[:environment]).to eq APPLICATION_ENVS.first.to_s
+        expect(assigns(:environment)).to eq APPLICATION_ENVS.first.to_s
       end
 
-      it 'sets the environment to production and cache the environment' do
+      it 'sets the environment to parameter' do
         get :index, params: { environment: 'production' }
-        expect(controller.params[:environment]).to eq 'production'
-        get :index
-        expect(controller.params[:environment]).to eq 'production'
+        expect(assigns(:environment)).to eq 'production'
       end
     end
 
