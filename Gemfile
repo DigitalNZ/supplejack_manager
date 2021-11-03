@@ -6,7 +6,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}" }
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'activeresource', require: 'active_resource'
 gem 'activeresource-response'
-gem 'aws-sdk-s3'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan'
 gem 'devise', '~> 4.0'
@@ -26,6 +25,10 @@ gem 'mimemagic', '= 0.3.10'
 
 # assets gems
 gem 'webpacker'
+
+# AWS gems required by parsers
+gem 'aws-sdk-s3'
+gem 'aws-sdk-rekognition', '~> 1.59'
 
 group :test do
   gem 'capybara', '>= 2.17.0'
