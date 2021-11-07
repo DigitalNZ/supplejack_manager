@@ -152,7 +152,7 @@ RSpec.describe SourcesController do
       it 'calls reindex on api' do
         source = Source.create! valid_attributes
         expect(Api::Source).to receive(:reindex).with('test', source.id, { date: '2013-09-12T01:49:51.067Z' })
-        get :reindex, params: { id: source.to_param, environment: 'test', date: '2013-09-12T01:49:51.067Z', format: :js }
+        get :reindex, params: { id: source.to_param, env: 'test', date: '2013-09-12T01:49:51.067Z', format: :js }
       end
     end
   end
