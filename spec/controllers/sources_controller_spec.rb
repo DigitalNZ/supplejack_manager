@@ -28,10 +28,32 @@ RSpec.describe SourcesController do
   end
 
   describe 'GET show' do
-    it 'assigns all sources as @sources' do
-      get :show, params: { id: source.id, format: :json }
+    context 'when querying with id' do
+      it 'assigns source as @source' do
+        get :show, params: { id: source.id, format: :json }
 
-      expect(assigns(:source)).to eq(source)
+        expect(assigns(:source)).to eq(source)
+      end
+    end
+
+    context 'when querying with source_id' do
+      it 'assigns source as @source' do
+        get :show, params: { id: source.source_id, format: :json }
+
+        expect(assigns(:source)).to eq(source)
+      end
+    end
+
+    context 'when source dosent exist' do
+      before { get :show, params: { id: 'fakesourceid', format: :json } }
+
+      it 'assigns nil as @source' do
+        expect(assigns(:source)).to be nil
+      end
+
+      it 'returns 404' do
+        expect(response).to have_http_status(404)
+      end
     end
   end
 
