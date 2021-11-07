@@ -31,7 +31,7 @@
   </button>
 </div>
 
-<%= custom_form_with model: @parser_template do |f| %>
+<%= custom_form_with model: @parser_template, local: false do |f| %>
   <%= f.text_area :content, class: "code-editor" %>
   <%= f.submit class: 'button' %>
 <% end %>
