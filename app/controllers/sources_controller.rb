@@ -51,7 +51,7 @@ class SourcesController < ApplicationController
   end
 
   def reindex
-    Api::Source.reindex(env, @source.id, { date: params[:date] })
+    Api::Source.reindex(params[:env], @source.id, { date: params[:date] })
   end
 
   def source_params
