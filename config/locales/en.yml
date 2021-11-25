@@ -141,14 +141,15 @@ en:
       helptext: "A contributor is the name of an organisation or entity that is providing a data source. A contributor can be attached to many data sources."
 
   jobs:
+    scheduled: "Schedules"
     active: "Active Jobs"
+    all: "All Jobs"
     finished: "Finished Jobs"
     failed: "Failed Jobs"
     stopped: "Stopped Jobs"
-    scheduled: "Job Schedules"
 
   records:
-    label: "Update Record Status"
+    label: "Record Status"
     search: "Search Record"
     not_found: "Record Not Found"
     record_id: "Record ID"
@@ -233,8 +234,6 @@ en:
     records_posted: "Records posted to API"
     mode: "Mode"
     enrichment: "Enrichment"
-    active: "Active"
-    finished: "Finished"
     failed: "Failed"
     stopped: "Stopped"
     last_posted_record_id: "Last posted record ID"
