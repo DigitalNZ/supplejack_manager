@@ -141,7 +141,9 @@
       <% end %>
     </div>
 
-   <%= render_async versions_parser_path(@parser.id) %>
+   <%= render_async versions_parser_path(@parser.id) do %>
+    <h3>Loading parsers...</h3>
+   <% end %>
 
    <% if can? :run_harvest, @parser %>
       <button class="button expanded" data-toggle='rename-form resource-title'>Rename Parser</button>
