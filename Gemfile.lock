@@ -374,6 +374,7 @@ GEM
       ffi (~> 1.0)
     redis (4.5.1)
     regexp_parser (2.1.1)
+    render_async (2.1.11)
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.1)
@@ -552,6 +553,7 @@ DEPENDENCIES
   puma (~> 4.3.9)
   rails (~> 6.1.4.1)
   rails-controller-testing
+  render_async (~> 2.1, >= 2.1.11)
   rqrcode
   rspec-rails (>= 3.7.2)
   rubocop

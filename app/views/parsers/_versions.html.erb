@@ -1,0 +1,9 @@
+<div id="versions" class="versions">
+  <% @versions.desc(:created_at).each_with_index do |version, index| %>
+    <div class="version <%= 'active' if @version.try(:id) == version.id %> <%= 'hidden' if index > 15 %>">
+      <%= link_to version.message || "No message",  send(:"#{'parser_parser_version'}_path", @parser, version) %>
+      <p><%= localize_date_time(version.created_at) %> by <%= version.user.try(:first_name) %></p>
+      <%= environment_tags(version, @parser) %>
+    </div>
+  <% end %>
+</div>

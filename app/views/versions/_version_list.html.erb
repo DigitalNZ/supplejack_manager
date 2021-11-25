@@ -1,4 +1,6 @@
-<div class="button-group expanded">
+<%
+=begin%>
+ <div class="button-group expanded">
   <% if can? :run_harvest, @parser %>
     <% if @version %>
       <% if APPLICATION_ENVS.include?('production') %>
@@ -18,7 +20,9 @@
       <% end %>
     <% end %>
   <% end %>
-</div>
+</div> 
+<%
+=end%>
 
 <div id="versions" class="versions">
   <% versionable.versions.desc(:created_at).each_with_index do |version, index| %>
