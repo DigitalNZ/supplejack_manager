@@ -39,7 +39,7 @@
               '&#128269;'.html_safe,
               environment_abstract_jobs_path(
                 params[:environment],
-                status: params['status'],
+                status: 'all',
                 parser_id: abstract_job.parser&.id
               ),
               title: 'Filter to show only jobs from this parser'
