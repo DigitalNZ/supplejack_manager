@@ -1,6 +1,6 @@
 <h1><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
 
-<% ['all', 'active', 'finished', 'failed', 'stopped'].each do |status| %>
+<% %w[all active finished failed stopped].each do |status| %>
   <% button_class = params[:status] == status ? 'primary' : 'hollow' %>
   <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser_id: params[:parser_id]), class: "button #{button_class}") %>
 <% end %>
@@ -10,20 +10,20 @@
     <thead>
       <tr>
         <th></th>
-        <th><%= t("harvest_jobs.parser") %></th>
-        <th><%= t("harvest_jobs.mode") %></th>
-        <th><%= t("harvest_jobs.enrichment") %></th>
-        <th><%= t("harvest_jobs.operator") %></th>
-        <th><%= t("harvest_jobs.start_time") %></th>
+        <th><%= t('harvest_jobs.parser') %></th>
+        <th><%= t('harvest_jobs.mode') %></th>
+        <th><%= t('harvest_jobs.enrichment') %></th>
+        <th><%= t('harvest_jobs.operator') %></th>
+        <th><%= t('harvest_jobs.start_time') %></th>
         <% if %w[finished all].include?(params[:status]) %>
-          <th><%= t("harvest_jobs.duration") %></th>
+          <th><%= t('harvest_jobs.duration') %></th>
         <% end %>
 
-        <th><%= t("harvest_jobs.records_harvested") %></th>
-        <th><%= t("harvest_jobs.validation_failure_errors") %></th>
+        <th><%= t('harvest_jobs.records_harvested') %></th>
+        <th><%= t('harvest_jobs.validation_failure_errors') %></th>
 
         <% if params[:status] == 'all' %>
-          <th><%= t("harvest_jobs.status") %></th>
+          <th><%= t('harvest_jobs.status') %></th>
         <% end %>
 
         <th></th>
@@ -39,7 +39,7 @@
               '&#128269;'.html_safe,
               environment_abstract_jobs_path(
                 params[:environment],
-                status: params['status'],
+                status: 'all',
                 parser_id: abstract_job.parser&.id
               ),
               title: 'Filter to show only jobs from this parser'
@@ -51,12 +51,12 @@
         <% else %>
           <td><%= link_to abstract_job.parser_name, edit_parser_path(abstract_job.parser) rescue '' %></td>
         <% end %>
-        <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == "HarvestJob" %></td>
+        <td><%= abstract_job.mode.try(:titleize) if abstract_job._type == 'HarvestJob' %></td>
         <td><%= enrichments(abstract_job) %></td>
         <% if abstract_job.user %>
           <td><%= abstract_job.user.try(:name) %></td>
         <% else %>
-          <td><%= t("harvest_jobs.scheduled") %></td>
+          <td><%= t('harvest_jobs.scheduled') %></td>
         <% end %>
         <td><%= l abstract_job&.start_time, format: :start_time rescue nil %></td>
 
@@ -82,10 +82,10 @@
         <% end %>
 
         <td>
-          <% if abstract_job._type == "HarvestJob" %>
-            <%= link_to t("harvest_jobs.view_details"), environment_harvest_job_path(abstract_job.environment, id: abstract_job.id) %>
-          <% elsif abstract_job._type == "EnrichmentJob" %>
-            <%= link_to t("harvest_jobs.view_details"), environment_enrichment_job_path(abstract_job.environment, id: abstract_job.id) %>
+          <% if abstract_job._type == 'HarvestJob' %>
+            <%= link_to t('harvest_jobs.view_details'), environment_harvest_job_path(abstract_job.environment, id: abstract_job.id) %>
+          <% elsif abstract_job._type == 'EnrichmentJob' %>
+            <%= link_to t('harvest_jobs.view_details'), environment_enrichment_job_path(abstract_job.environment, id: abstract_job.id) %>
           <% end %>
         </td>
       </tr>
