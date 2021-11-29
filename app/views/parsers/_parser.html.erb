@@ -119,7 +119,7 @@
       <%= link_to t('parsers.edit_current'), edit_parser_path(@parser), class: 'button production medium-12 cell' %>
     <% end %>
 
-    <%= render partial: 'versions/version_list', locals: { versionable: @parser, versionable_path: 'parser_parser_version', async_load_path: versions_parser_path(@parser.id) } %>
+    <%= render partial: 'versions/list', locals: { versionable: @parser, versionable_path: 'parser_parser_version', async_load_path: versions_parser_path(@parser.id) } %>
 
     <% if can? :run_harvest, @parser %>
       <button class="button expanded" data-toggle='rename-form resource-title'>Rename Parser</button>

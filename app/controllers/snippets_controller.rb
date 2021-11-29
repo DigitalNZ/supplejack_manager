@@ -44,9 +44,10 @@ class SnippetsController < ApplicationController
   end
 
   def versions
+    @versionable = @snippet
     @versions = @snippet.versions
 
-    render partial: 'versions'
+    render partial: 'versions/async_list'
   end
 
   def snippet_params

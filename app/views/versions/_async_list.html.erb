@@ -1,9 +1,9 @@
 <div id='versions' class='versions'>
   <% @versions.offset(10).desc(:created_at).each_with_index do |version, index| %>
     <div class="version hidden <%= 'active' if @version.try(:id) == version.id %>">
-      <%= link_to version.message || 'No message',  send(:"#{'parser_parser_version'}_path", @snippet, version) %>
+      <%= link_to version.message || 'No message',  send(:"#{'parser_parser_version'}_path", @versionable, version) %>
       <p><%= localize_date_time(version.created_at) %> by <%= version.user.try(:first_name) %></p>
-      <%= environment_tags(version, @snippet) %>
+      <%= environment_tags(version, @versionable) %>
     </div>
   <% end %>
 </div>
