@@ -1,6 +1,4 @@
-<%
-=begin%>
- <div class="button-group expanded">
+<div class="button-group expanded">
   <% if can? :run_harvest, @parser %>
     <% if @version %>
       <% if APPLICATION_ENVS.include?('production') %>
@@ -20,19 +18,22 @@
       <% end %>
     <% end %>
   <% end %>
-</div> 
-<%
-=end%>
+</div>
 
 <div id="versions" class="versions">
-  <% versionable.versions.desc(:created_at).each_with_index do |version, index| %>
-    <div class="version <%= 'active' if @version.try(:id) == version.id %> <%= 'hidden' if index > 15 %>">
+  <% versionable.versions.limit(10).desc(:created_at).each_with_index do |version, index| %>
+    <div class="version <%= 'active' if @version.try(:id) == version.id %>">
       <%= link_to version.message || "No message",  send(:"#{versionable_path}_path", versionable, version) %>
       <p><%= localize_date_time(version.created_at) %> by <%= version.user.try(:first_name) %></p>
       <%= environment_tags(version, versionable) %>
     </div>
   <% end %>
-  <% if versionable.versions.count > 15 %>
-    <button class="button show_more secondary expanded"> Click to show all versions...</button>
+
+ <%= render_async versions_parser_path(@parser.id) do %>
+  <strong>Loading more versions..</strong>
+ <% end %>
+
+  <% if versionable.versions.count > 10 %>
+    <button class="button show_more secondary expanded">Click to show all versions</button>
   <% end %>
 </div>

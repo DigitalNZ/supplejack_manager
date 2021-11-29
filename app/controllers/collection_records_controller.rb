@@ -25,3 +25,8 @@ class CollectionRecordsController < ApplicationController
     redirect_to environment_collection_records_path(environment: params[:environment], id: params[:id])
   end
 end
+
+
+# https://kibana.digitalnz.org/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-3d,to:now))&_a=(columns:!(),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'logs-*',key:kubernetes.container.name,negate:!f,params:(query:worker-sidekiq),type:phrase),query:(match_phrase:(kubernetes.container.name:worker-sidekiq)))),index:'logs-*',interval:auto,query:(language:kuery,query:'61a3524e3447d500018853b4'),sort:!(!('@timestamp',desc)))
+
+# fix 31827793
