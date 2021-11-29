@@ -1,8 +1,8 @@
-<div class="grid-x grid-margin-x">
-  <div class="medium-9 cell">
-    <h1 id="resource-title" data-toggler='.hide'><%= @snippet.name %></h1>
-    <% if can? :update, @snippet %>
+<div class='grid-x grid-margin-x'>
+  <div class='medium-9 cell'>
+    <h1 id='resource-title' data-toggler='.hide'><%= @snippet.name %></h1>
 
+    <% if can? :update, @snippet %>
       <%= custom_form_with model: @snippet, local: true, class: 'hide', data: {toggler: '.hide'}, id: 'rename-form' do |f| %>
         <%= f.label :name, 'Code Snippet Name' %>
         <%= f.text_field_submit :name, class: 'input-group-field', submit_text: 'Rename' %>
@@ -10,38 +10,38 @@
     <% end %>
 
     <% if @version %>
-      <%= render "snippet_versions/form" %>
+      <%= render 'snippet_versions/form' %>
     <% else %>
-      <%= render "form" %>
+      <%= render 'form' %>
     <% end %>
   </div>
 
-  <div class="medium-3 cell">
-    <div class="grid-x">
-      <h3 class="float-left"><%= t("history") %></h3>
+  <div class='medium-3 cell'>
+    <div class='grid-x'>
+      <h3 class='float-left'><%= t('history') %></h3>
 
       <% if can? :update, @snippet %>
-        <%= link_to t("snippets.edit_current"), edit_snippet_path(@snippet), class: "edit-snippet float-left" %>
+        <%= link_to t('snippets.edit_current'), edit_snippet_path(@snippet), class: 'edit-snippet float-left' %>
       <% end %>
 
-      <%= render partial: "versions/version_list", locals: { versionable: @snippet, versionable_path: "snippet_snippet_version" } %>
+      <%= render partial: 'versions/version_list', locals: { versionable: @snippet, versionable_path: 'snippet_snippet_version' } %>
 
       <% if can? :update, @snippet %>
-        <a href="#" data-toggle='resource-title rename-form' class="button expand medium-12"><%= t('snippets.rename') %></a>
-        <a href="#" class="button expand medium-12" data-open="delete-snippet-alert"><%= t('snippets.delete') %></a>
+        <a href="#" data-toggle='resource-title rename-form' class='button expand medium-12'><%= t('snippets.rename') %></a>
+        <a href="#" class='button expand medium-12" data-open="delete-snippet-alert'><%= t('snippets.delete') %></a>
       <% end %>
     </div>
   </div>
 
-<div id="delete-snippet-alert" class="reveal small" data-reveal>
+<div id="delete-snippet-alert" class='reveal small" data-reveal>
   <h2>Delete Snippet</h2>
   <p> Are you sure that you want to delete the snippet: <strong><%= @snippet.name %></strong> </p>
   <div>
     <%= button_to "Delete", @snippet, method: :delete, class: "button alert float-right" %>
-    <button id="cancel-snippet-delete" data-close class="button secondary float-right">Cancel</button>
+    <button id="cancel-snippet-delete" data-close class='button secondary float-right'>Cancel</button>
   </div>
 
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
+  <button class='close-button' data-close aria-label='Close modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
   </button>
 </div>
