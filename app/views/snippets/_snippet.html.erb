@@ -27,21 +27,22 @@
       <%= render partial: 'versions/version_list', locals: { versionable: @snippet, versionable_path: 'snippet_snippet_version', async_load_path: versions_snippet_path(@snippet.id) } %>
 
       <% if can? :update, @snippet %>
-        <a href="#" data-toggle='resource-title rename-form' class='button expand medium-12'><%= t('snippets.rename') %></a>
-        <a href="#" class='button expand medium-12" data-open="delete-snippet-alert'><%= t('snippets.delete') %></a>
+        <a href='#' data-toggle='resource-title rename-form' class='button expand medium-12'><%= t('snippets.rename') %></a>
+        <a href='#' class='button expand medium-12' data-open='delete-snippet-alert'><%= t('snippets.delete') %></a>
       <% end %>
     </div>
   </div>
 
-<div id="delete-snippet-alert" class='reveal small" data-reveal>
-  <h2>Delete Snippet</h2>
-  <p> Are you sure that you want to delete the snippet: <strong><%= @snippet.name %></strong> </p>
-  <div>
-    <%= button_to "Delete", @snippet, method: :delete, class: "button alert float-right" %>
-    <button id="cancel-snippet-delete" data-close class='button secondary float-right'>Cancel</button>
-  </div>
+  <div id='delete-snippet-alert' class='reveal small' data-reveal>
+    <h2>Delete Snippet</h2>
+    <p> Are you sure that you want to delete the snippet: <strong><%= @snippet.name %></strong> </p>
+    <div>
+      <%= button_to 'Delete', @snippet, method: :delete, class: 'button alert float-right' %>
+      <button id='cancel-snippet-delete' data-close class='button secondary float-right'>Cancel</button>
+    </div>
 
-  <button class='close-button' data-close aria-label='Close modal' type='button'>
-    <span aria-hidden='true'>&times;</span>
-  </button>
+    <button class='close-button' data-close aria-label='Close modal' type='button'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>
 </div>
