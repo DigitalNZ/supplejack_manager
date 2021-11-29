@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :snippet_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
     end
+    get :versions, on: :member
   end
 
   resources :parser_templates

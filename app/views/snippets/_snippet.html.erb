@@ -24,7 +24,7 @@
         <%= link_to t('snippets.edit_current'), edit_snippet_path(@snippet), class: 'edit-snippet float-left' %>
       <% end %>
 
-      <%= render partial: 'versions/version_list', locals: { versionable: @snippet, versionable_path: 'snippet_snippet_version' } %>
+      <%= render partial: 'versions/version_list', locals: { versionable: @snippet, versionable_path: 'snippet_snippet_version', async_load_path: versions_snippet_path(@snippet.id) } %>
 
       <% if can? :update, @snippet %>
         <a href="#" data-toggle='resource-title rename-form' class='button expand medium-12'><%= t('snippets.rename') %></a>
