@@ -29,9 +29,9 @@
     </div>
   <% end %>
 
- <%= render_async async_load_path do %>
-  <strong>Loading more versions..</strong>
- <% end %>
+  <%= render_async async_load_path do %>
+    <strong>Loading more versions..</strong>
+  <% end %>
 
   <% if versionable.versions.count > 10 %>
     <button class='button show_more secondary expanded'>Click to show all versions</button>
