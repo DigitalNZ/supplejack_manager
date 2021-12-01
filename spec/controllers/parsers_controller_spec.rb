@@ -14,19 +14,21 @@ RSpec.describe ParsersController do
   let(:user)    { create(:user, :admin) }
   let(:version) { create(:version, versionable: parser, user: user) }
 
-  before(:each) do
+  before do
     sign_in user
-    allow(parser).to receive(:find_version) { version }
+
+    allow(parser).to receive(:find_version).and_return(version)
   end
 
-  describe "GET 'index'" do
+  describe 'GET index' do
     it 'returns a 200 status code' do
       get :index
-      expect(response).to have_http_status(200)
+
+      expect(response).to be_successful
     end
   end
 
-  describe "GET 'datatable'" do
+  describe 'GET datatable' do
     before do
       # GET parameters from datatable are too complex
       # so it is stubbed
@@ -41,16 +43,19 @@ RSpec.describe ParsersController do
 
     it 'returns a 200 status code' do
       get :datatable
-      expect(response).to have_http_status(200)
+
+      expect(response).to be_successful
     end
 
     it 'returns JSON' do
       get :datatable
+
       expect(response.header['Content-Type']).to include 'application/json'
     end
 
     it 'returns an array of parsers' do
       get :datatable
+
       JSON.parse(response.body)['data'].each do |parser|
         expect(parser).to include(
           * %w[id name strategy updated_at last_editor data_type source partner can_update]
@@ -61,45 +66,60 @@ RSpec.describe ParsersController do
     end
   end
 
-  describe "GET 'show'" do
+  describe 'GET show' do
     it 'finds an existing parser' do
-      expect(Parser).to receive(:find).with('1234') { parser }
-      get :show, params: { id: '1234' }
+      get :show, params: { id: parser.id }
+
       expect(assigns(:parser)).to eq parser
     end
   end
 
-  describe "GET 'new'" do
+  describe 'GET new' do
     it 'initializes a new parser' do
       get :new
+
       expect(assigns(:parser)).to be_a_new(Parser)
     end
   end
 
-  describe "GET 'edit'" do
+  describe 'GET edit' do
     let(:job) { build(:harvest_job) }
 
-    before(:each) do
-      allow(Parser).to receive(:find) { parser }
-      allow(HarvestJob).to receive(:find) { job }
-    end
-
     it 'finds an existing parser' do
-      expect(Parser).to receive(:find).with('1234') { parser }
-      get :edit, params: { id: '1234' }
+      get :edit, params: { id: parser.id }
+
       expect(assigns(:parser)).to eq parser
     end
 
     it 'initializes a harvest_job' do
-      expect(HarvestJob).to receive(:from_parser).with(parser, user) { job }
-      get :edit, params: { id: '1234' }
+      expect(HarvestJob).to receive(:from_parser).with(parser, user).and_return(job)
+
+      get :edit, params: { id: parser.id }
+
       expect(assigns(:harvest_job)).to eq job
     end
   end
 
-  describe "GET 'create'" do
+  describe 'GET versions' do
+    before { get :versions, params: { id: parser.id } }
+
+    it 'assigns parser' do
+      expect(assigns(:parser)).to eq parser
+    end
+
+    it 'assigns versions' do
+      expect(assigns(:versions)).to eq parser.versions.select(&:valid?)
+    end
+
+    it 'assigns parser to versionable' do
+      expect(assigns(:versionable)).to eq parser
+    end
+  end
+
+  describe 'GET create' do
     it 'initializes a new parser' do
-      expect(Parser).to receive(:new).with('name' => 'Tepapa') { parser }
+      expect(Parser).to receive(:new).with('name' => 'Tepapa').and_return(parser)
+
       post :create, params: { parser: { name: 'Tepapa' } }
     end
 
@@ -107,101 +127,84 @@ RSpec.describe ParsersController do
       expect { post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } } }.to change(Parser, :count).by(1)
     end
 
-    context 'valid parser' do
+    context 'when parser is valid' do
       it 'redirects to the edit page' do
         post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } }
         expect(response.status).to eq 302
       end
     end
 
-    context 'invalid parser' do
-      before { allow(parser).to receive(:save) { false } }
-
+    context 'when parser is invalid' do
       it 'renders the edit action' do
         post :create, params: { parser: { name: 'Tepapa' } }
+
         expect(response).to render_template(:new)
       end
     end
   end
 
-  describe "GET 'update'" do
-    before do
-      allow(Parser).to receive(:find) { parser }
-      allow(parser).to receive(:update_attributes) { true }
-    end
-
+  describe 'GET update' do
     it 'finds an existing parser ' do
-      expect(Parser).to receive(:find).with('1234') { parser }
-      put :update, params: { id: '1234', parser: { name: '' } }
+      put :update, params: { id: parser.id, parser: { name: '' } }
+
       expect(assigns(:parser)).to eq parser
     end
 
     it 'updates the parser attributes' do
-      put :update, params: { id: '1234', parser: { name: 'Tepapa' } }
+      put :update, params: { id: parser.id, parser: { name: 'Tepapa' } }
+
+      parser.reload
+
       expect(parser.name).to eq 'Tepapa'
     end
 
-    it 'saves the parser' do
-      expect(parser).to receive(:save)
-      put :update, params: { id: '1234', parser: { name: 'Tepapa' } }
-    end
-
-    context 'valid parser' do
-      before { allow(parser).to receive(:save) { true } }
-
+    context 'when parser is valid' do
       it 'redirects to edit page' do
-        put :update, params: { id: parser.id, parser: { name: '' } }
+        put :update, params: { id: parser.id, parser: { name: 'Tepapa' } }
+
         expect(response).to redirect_to edit_parser_path(parser.id)
       end
     end
 
-    context 'invalid parser' do
-      before { allow(parser).to receive(:save) { false } }
-
+    context 'when parser is invalid' do
       it 'renders the edit action' do
-        put :update, params: { id: '1234', parser: { name: '' } }
+        put :update, params: { id: parser.id, parser: { name: '' } }
+
         expect(response).to render_template(:edit)
       end
     end
   end
 
-  describe "GET 'destroy'" do
-    before do
-      allow(Parser).to receive(:find) { parser }
-      allow(parser).to receive(:destroy) { true }
-    end
+  describe 'GET destroy' do
+    before { allow(Parser).to receive(:find) { parser } }
 
-    context 'job not running for parser' do
-      before { allow(parser).to receive(:running_jobs?) { false } }
+    context 'when job not running for parser' do
+      before { allow(parser).to receive(:running_jobs?).and_return(false) }
 
-      it 'finds an existing parser ' do
-        expect(Parser).to receive(:find).with('1234') { parser }
-        delete :destroy, params: { id: '1234' }
-        expect(assigns(:parser)).to eq parser
-      end
-
-      it 'destroys the parser config' do
+      it 'destroys the parser' do
         expect(parser).to receive(:destroy)
-        delete :destroy, params: { id: '1234' }
+
+        delete :destroy, params: { id: parser.id }
       end
     end
 
-    it 'does not destroy if there are currently running jobs' do
-      allow(parser).to receive(:running_jobs?) { true }
-      expect(parser).not_to receive(:destroy)
-      delete :destroy, params: { id: '1234' }
+    context 'when job not running for parser' do
+      before { allow(parser).to receive(:running_jobs?).and_return(true) }
+
+      it 'does not destroy if there are currently running jobs' do
+        expect(parser).not_to receive(:destroy)
+
+        delete :destroy, params: { id: parser.id }
+      end
     end
   end
 
-  describe "GET 'allow_flush'" do
-    before do
-      allow(Parser).to receive(:find) { parser }
-      allow(parser).to receive(:allow_full_and_flush) { true }
-      allow(parser).to receive(:save) { true }
-    end
+  describe 'GET allow_flush' do
+    before { allow(parser).to receive(:allow_full_and_flush) { true } }
 
     it 'sets the allow_full_and_flush to true' do
       get :allow_flush, params: { id: parser.id, allow: true }
+
       expect(assigns(:parser).allow_full_and_flush).to be true
     end
   end

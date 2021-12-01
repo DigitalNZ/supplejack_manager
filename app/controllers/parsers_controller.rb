@@ -94,6 +94,13 @@ class ParsersController < ApplicationController
     end
   end
 
+  def versions
+    @versionable = @parser
+    @versions = @parser.versions
+
+    render partial: 'versions/async_list'
+  end
+
   private
     def parser_params
       params

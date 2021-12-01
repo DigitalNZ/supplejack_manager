@@ -43,6 +43,13 @@ class SnippetsController < ApplicationController
     respond_with @snippet
   end
 
+  def versions
+    @versionable = @snippet
+    @versions = @snippet.versions
+
+    render partial: 'versions/async_list'
+  end
+
   def snippet_params
     params.require(:snippet).permit(:name, :content, :environment, :message).to_h
   end
