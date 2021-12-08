@@ -67,8 +67,7 @@ class Parser
   end
 
   def self.datatable_query(params)
-    Parser
-      .offset(params[:start])
+    query = offset(params[:start])
       .limit(params[:per_page])
       .order_by(params[:order_by] => params[:direction])
       .includes(:source)
@@ -81,16 +80,25 @@ class Parser
         :last_editor,
         :source_name,
         :partner_name
-      ).where(
-        '$or' => [
-          { name:         /#{params[:search]}/i },
-          { strategy:     /#{params[:search]}/i },
-          { data_type:    /#{params[:search]}/i },
-          { last_editor:  /#{params[:search]}/i },
-          { partner_name: /#{params[:search]}/i },
-          { source_name:  /#{params[:search]}/i },
-        ]
       )
+
+    return query.attribute_search(params[:search]) if params[:search_type] == 'quick_search'
+    return query if params[:search].empty?
+
+    query.where('versions.content' => %r{#{params[:search]}})
+  end
+
+  def self.attribute_search(words)
+    where(
+      '$or' => [
+        { name:         /#{words}/i },
+        { strategy:     /#{words}/i },
+        { data_type:    /#{words}/i },
+        { last_editor:  /#{words}/i },
+        { partner_name: /#{words}/i },
+        { source_name:  /#{words}/i },
+      ]
+    )
   end
 
   def self.find_by_partners(partner_ids = [])
