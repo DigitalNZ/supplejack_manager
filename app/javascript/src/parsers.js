@@ -101,10 +101,15 @@ $(function() {
     update_source_from_contributor_value($stored_sources)
   });
 
-  return $('#parsers').dataTable({
+  var table = $('#parsers').dataTable({
     "processing": true,
     "serverSide": true,
-    "ajax": "/parsers/datatable",
+    "ajax": {
+      "url": "/parsers/datatable",
+      "data": function(data) {
+        data.search.type = $('input[name="type"]:checked').val();
+      }
+    },
     "aaSorting": [[4, 'desc']],
     "columns": [
       {
@@ -132,6 +137,14 @@ $(function() {
       { "data": "last_editor" },
       { "data": "data_type" },
     ]
+  });
+
+  $('input[value="quick_search"]').on('click', function() {
+    table.fnDraw();
+  });
+
+  $('input[value="content_search"]').on('click', function() {
+    table.fnDraw();
   });
 });
 

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :parsers do
     get :allow_flush, on: :member
-    get 'datatable', on: :collection, constraints: { format: :json }
+    get :datatable, on: :collection, constraints: { format: :json }
     resources :previewers, only: [:create]
     resources :parser_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
