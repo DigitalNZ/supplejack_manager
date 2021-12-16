@@ -2,14 +2,11 @@
 require 'csv'
 
 csv_output = CSV.generate(:col_sep => ",") do |csv|
-  columns = ['username', 'name', 'authentication_token', 'email', 'role', 'daily_requests', 'monthly_requests']
-
+  columns = %w[username name authentication_token email role daily_requests monthly_requests]
   csv << columns
 
-  Admin::User.new(params[:environment]).all.each do |user|
-    csv << columns.map do |c|
-      user[c]
-    end
+  @users.each do |user|
+    csv << columns.map { |column| user[column] }
   end
 end
 %>
