@@ -2,7 +2,7 @@
 require 'csv'
 
 csv_output = CSV.generate(:col_sep => ",") do |csv|
-  columns = %w[username name authentication_token email role daily_requests monthly_requests]
+  columns = %w[username name email role daily_requests monthly_requests]
   csv << columns
 
   @users.each do |user|
