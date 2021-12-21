@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :parser do
     name      { Faker::Name.first_name }
     strategy  { 'xml' }
-    content   { 'class NZMuseums < SupplejackCommon::Xml::Base; end' }
+    content   { "class NZMuseums < SupplejackCommon::Xml::Base; %r{#{Faker::Name.last_name}}'; end" }
     data_type { 'record' }
     message { 'test message' }
     source

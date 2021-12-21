@@ -85,7 +85,17 @@ class Parser
     return query.attribute_search(params[:search]) if params[:search_type] == 'quick_search'
     return query if params[:search].empty?
 
-    query.where('versions.content' => %r{#{::Regexp.escape(params[:search])}})
+    query.content_search(params[:search])
+  end
+
+  def self.content_search(text)
+    regex = %r{#{::Regexp.escape(text)}}
+    where(
+      '$or' => [
+        { 'content' =>          regex },
+        { 'versions.content' => regex }
+      ]
+    )
   end
 
   def self.attribute_search(words)
