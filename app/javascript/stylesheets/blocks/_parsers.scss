@@ -4,6 +4,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// parsers/index.html.erb
+label.new-right {
+  float: right;
+  margin-left: 20px;
+  position: relative;
+  z-index: 100;
+}
+
+// others
+
 #preview-modal {
   padding-top: 16px;
   height: 98vh;
