@@ -101,6 +101,12 @@ class ParsersController < ApplicationController
     render partial: 'versions/async_list'
   end
 
+  def change_source
+    @partners = Partner.all
+
+    render partial: 'parsers/change_source'
+  end
+
   private
     def parser_params
       params

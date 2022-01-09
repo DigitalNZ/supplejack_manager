@@ -191,17 +191,19 @@
   </button>
 </div>
 
-<div id="change-source-alert" class="reveal medium" data-reveal>
-  <h2>Change source</h2>
-  <p> Warning: changing the source of this parser does not affect records that have already been harvested.</p>
-  <%= custom_form_with model: @parser, local: true do |f| %>
-    <%= f.label :partner, 'Contributor' %>
-    <%= f.select :partner, Partner.all.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
-    <%= f.label :source, 'Data source', data: { 'current_source_id': @parser.source_id } %>
-    <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id) %>
-    <%= f.submit 'Change source', class: 'button' %>
-  <% end %>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+<%= render_async change_source_parser_path(@parser.id) %>
+
+<%# <div id="change-source-alert" class="reveal medium" data-reveal> %>
+  <%# <h2>Change source</h2> %>
+  <%# <p> Warning: changing the source of this parser does not affect records that have already been harvested.</p> %>
+  <%# <%= custom_form_with model: @parser, local: true do |f| %> %>
+    <%# <%= f.label :partner, 'Contributor' %> %>
+    <%# <%= f.select :partner, Partner.all.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %> %>
+    <%# <%= f.label :source, 'Data source', data: { 'current_source_id': @parser.source_id } %> %>
+    <%# <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id) %> %>
+    <%# <%= f.submit 'Change source', class: 'button' %> %>
+  <%# <% end %> %>
+  <%# <button class="close-button" data-close aria-label="Close modal" type="button"> %>
+    <%# <span aria-hidden="true">&times;</span> %>
+  <%# </button> %>
+<%# </div> %>
