@@ -12,7 +12,9 @@ Rails.application.routes.draw do
       get :new_enrichment, on: :member
       get :new_harvest, on: :member
     end
+
     get :versions, on: :member
+    get :edit_meta, on: :member
   end
 
   scope ':environment', as: 'environment' do
