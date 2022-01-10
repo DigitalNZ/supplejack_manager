@@ -114,7 +114,7 @@
     <%= render partial: 'versions/list', locals: { versionable: @parser, versionable_path: 'parser_parser_version', async_load_path: versions_parser_path(@parser.id) } %>
 
     <% if can? :run_harvest, @parser %>
-      <%= link_to 'Edit name/data source', edit_meta_parser_path(@parser), class: 'button expanded' %>
+      <%= link_to 'Change name or data source', edit_meta_parser_path(@parser), class: 'button expanded' %>
 
       <div class="allow-flush-button">
         <%= render 'parsers/allow_flush_button', parser: @parser %>

@@ -75,12 +75,10 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     expect(page).to have_link 'Updating Parser'
   end
 
-  scenario 'A harvest operator can rename a parser' do
-    click_button 'Rename Parser'
-    fill_in 'parser_name', with: 'Parser Name'
-    click_button 'Rename'
+  scenario 'A harvest operator can update parser name and source' do
+    click_link 'Change name or data source'
 
-    expect(page).to have_link 'Parser Name'
+    expect(page).to have_current_path(edit_meta_parser_path(parser))
   end
 
   scenario 'A harvest operator can change the data source of a parser' do
