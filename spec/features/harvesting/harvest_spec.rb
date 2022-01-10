@@ -81,17 +81,6 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     expect(page).to have_current_path(edit_meta_parser_path(parser))
   end
 
-  scenario 'A harvest operator can change the data source of a parser' do
-    click_button('Change Data Source')
-
-    expect(page).to have_text 'Change source'
-    expect(page).to have_text 'Warning: changing the source of this parser does not affect records that have already been harvested.'
-    expect(page).to have_text 'Contributor'
-    expect(page).to have_text ' Data Source'
-
-    click_button 'Change source'
-  end
-
   scenario 'A harvest operator can disable Full & Flush harvest mode' do
     allow(HarvestSchedule).to receive(:update_schedulers_from_environment) { true }
     click_link 'Disable Full & Flush harvest mode'
