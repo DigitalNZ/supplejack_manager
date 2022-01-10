@@ -208,4 +208,20 @@ RSpec.describe ParsersController do
       expect(assigns(:parser).allow_full_and_flush).to be true
     end
   end
+
+  describe 'GET edit_meta' do
+    before { get :edit_meta, params: { id: parser.id } }
+
+    it 'returns a 200 status code' do
+      expect(response).to be_successful
+    end
+
+    it 'returns assigns parser' do
+      expect(assigns(:parser)).to eq parser
+    end
+
+    it 'returns assigns partners' do
+      expect(assigns(:partners)).to eq Partner.all
+    end
+  end
 end
