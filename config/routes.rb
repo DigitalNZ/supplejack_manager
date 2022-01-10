@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
+  resources :lint_parser, only: :show
+
   resources :parsers do
     get :allow_flush, on: :member
     get 'datatable', on: :collection, constraints: { format: :json }
