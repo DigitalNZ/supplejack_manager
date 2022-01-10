@@ -41,7 +41,6 @@ class Parser
 
   VALID_DATA_TYPE = ['record', 'concept']
 
-  # ENVIRONMENTS = [:staging, :production]
   validates_presence_of   :name, :strategy, :data_type
   validates_uniqueness_of :name
   validates_inclusion_of  :strategy, in: VALID_STRATEGIES
