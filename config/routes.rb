@@ -16,12 +16,6 @@ Rails.application.routes.draw do
 
     get :versions, on: :member
     get :edit_meta, on: :member
-
-    # member do
-    #   get :versions
-    #   get :meta, controller: :parser_meta, action: :edit
-    #   patch :meta, controller: :parset_meta, action: :update
-    # end
   end
 
   scope ':environment', as: 'environment' do
