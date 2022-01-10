@@ -1,0 +1,12 @@
+<div class='grid-x grid-margin-x'>
+  <div class='medium-9 cell'>
+    <h1><%= "Lint result for #{@parser.name}" %></h1>
+
+      <%- @warnings.split("\n").each do |warning| %>
+        <% unless warning.blank? %>
+          <code><%= warning %></code>
+          <hr>
+        <% end %>
+      <% end %>
+  </div>
+</div>

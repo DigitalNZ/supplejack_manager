@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     get :edit_meta, on: :member
   end
 
+  resources :lint_parser, only: :show
+
   scope ':environment', as: 'environment' do
     namespace :admin do
       resources :users
