@@ -104,7 +104,7 @@
     </ul>
 
     <div class="callout secondary text-center" data-alert="">
-      <%= 'Current  version: ' + version_message(@parser, @version) %>
+      <%= "Current version: #{version_message(@parser, @version)}" %>
     </div>
 
     <% if can? :run_harvest, @parser %>
