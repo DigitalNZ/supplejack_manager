@@ -179,7 +179,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    elastic-apm (4.4.0)
+    elastic-apm (4.5.0)
       concurrent-ruby (~> 1.0)
       http (>= 3.0)
     encryptor (3.0.0)
@@ -220,7 +220,7 @@ GEM
     faraday-rack (1.0.0)
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
-    ffi (1.15.4)
+    ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
