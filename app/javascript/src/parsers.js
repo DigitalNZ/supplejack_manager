@@ -139,6 +139,27 @@ $(function() {
     ]
   });
 
+  // remove the empty div.cell.small-6
+  table.parents('.dataTables_wrapper').find('.small-6:first').remove();
+  // make the other column wider
+  var div = table.parents('.dataTables_wrapper').find('.small-6:first')
+  div.removeClass('small-6');
+  div.addClass('small-12');
+
+  // Add the radios
+  var searchInput = table.parents('.dataTables_wrapper').find('input[type=search]').parent('label');
+  var radios = $(`
+    <label>
+      <input type="radio" name="type" value="quick_search" checked>
+      Quick search
+    </label>
+    <label>
+      <input type="radio" name="type" value="content_search">
+      Search within parser content
+    </label>
+    `);
+  searchInput.after(radios);
+
   $('input[value="quick_search"]').on('click', function() {
     table.fnDraw();
   });
