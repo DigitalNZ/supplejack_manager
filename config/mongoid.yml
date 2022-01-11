@@ -95,3 +95,4 @@ production:
         consistency: :strong
         user: <%= ENV['MONGO_USER'] %>
         password: <%= ENV['MONGO_PASSWORD'] %>
+        connect: <%= ENV['MONGO_CONNECT_MODE'] %>
