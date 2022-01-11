@@ -33,7 +33,7 @@ jobs:
     - name: Run the brakeman test
       run: |
         gem install brakeman
-        brakeman --run-all-checks
+        brakeman --run-all-checks --skip-files app/services/parser_linter.rb
 
   bundle-audit:
     runs-on: ubuntu-latest
