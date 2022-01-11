@@ -79,6 +79,11 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     click_link 'Change name or data source'
 
     expect(page).to have_current_path(edit_meta_parser_path(parser))
+
+    fill_in 'parser_name', with: 'New Parser name'
+    click_button 'Update Parser'
+
+    expect(page).to have_current_path(edit_parser_path(parser))
   end
 
   scenario 'A harvest operator can disable Full & Flush harvest mode' do
