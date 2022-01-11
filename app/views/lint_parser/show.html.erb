@@ -2,9 +2,13 @@
   <div class='medium-9 cell'>
     <h1><%= "Lint result for #{@parser.name}" %></h1>
 
-      <%- @warnings.split("\n").each do |warning| %>
+      <div class='callout warning text-center' data-alert=''>
+        <%= @linter.warnings_count %>
+      </div>
+
+      <% @linter.warnings.each do |warning| %>
         <% unless warning.blank? %>
-          <code><%= warning %></code>
+          <%= warning %>
           <hr>
         <% end %>
       <% end %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ParserLinter
-  attr_reader :parser, :tempfile, :warnings
+  attr_reader :parser, :tempfile, :warnings, :warnings_count
 
   def initialize(parser)
     @parser = parser
@@ -10,10 +10,10 @@ class ParserLinter
 
   def lint
     create_tmp_file
-    run_lingter
+    run_rubocop
     delete_tmp_file
 
-    @warnings
+    self
   end
 
   private
@@ -23,9 +23,12 @@ class ParserLinter
       file.close
     end
 
-    def run_lingter
-      @warnings = `bundle exec rubocop #{@tempfile} --format simple`
-      @warnings.slice!("== #{@tempfile} ==")
+    def run_rubocop
+      result = `bundle exec rubocop #{@tempfile} --format simple`
+      results = result.split("\n")
+      @warnings_count = results.last.scan(/\d* offenses detected/).last
+      results.pop
+      @warnings = results.drop(1)
     end
 
     def delete_tmp_file

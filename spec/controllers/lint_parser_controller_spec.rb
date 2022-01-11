@@ -22,8 +22,12 @@ RSpec.describe LintParserController do
       expect(assigns(:parser)).to eq parser
     end
 
-    it 'assigns rubocop warnings for the parser script' do
-      expect(assigns(:warnings)).to include 'Style/FrozenStringLiteralComment: Missing frozen string literal comment'
+    it 'assigns rubocop linter with warnings' do
+      expect(assigns(:linter).warnings.first).to include 'Style/FrozenStringLiteralComment: Missing frozen string literal comment'
+    end
+
+    it 'assigns rubocop linter with warnings count' do
+      expect(assigns(:linter).warnings_count).to include 'offenses detected'
     end
   end
 end

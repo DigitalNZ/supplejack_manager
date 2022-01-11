@@ -12,13 +12,16 @@ RSpec.describe ParserLinter do
   let(:source)   { create(:source) }
   let(:parser)   { create(:parser, source_id: source) }
 
-  describe 'linting parser' do
-    let(:warnings) { ParserLinter.new(parser).lint }
+  describe 'linting result' do
+    let(:linter) { ParserLinter.new(parser).lint }
 
-    it 'returns warnings' do
-      expect(warnings).to include '[Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment'
-      expect(warnings).to include '[Correctable] Layout/TrailingEmptyLines: Final newline missing'
-      expect(warnings).to include '2 offenses detected, 2 offenses auto-correctable'
+    it 'has warnings' do
+      expect(linter.warnings[0]).to include '[Correctable] Style/FrozenStringLiteralComment: Missing frozen string literal comment'
+      expect(linter.warnings[1]).to include '[Correctable] Layout/TrailingEmptyLines: Final newline missing'
+    end
+
+    it 'has counts' do
+      expect(linter.warnings_count).to eq '2 offenses detected'
     end
   end
 end
