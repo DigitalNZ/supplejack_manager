@@ -31,8 +31,7 @@ class HarvestSchedule < ActiveResource::Base
   class << self
     def find_from_environment(params, env)
       self.change_worker_env!(env)
-      # self.find(:all, params: { harvest_schedule: params })
-      []
+      self.find(:all, params: { harvest_schedule: params })
     end
 
     def destroy_all_for_parser(parser_id)
