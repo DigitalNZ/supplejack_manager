@@ -1,26 +1,19 @@
-<h1><%= t('parsers.label') %></h1>
+<div id="parsers-index">
+  <h1><%= t('parsers.label') %></h1>
 
-<%= link_to t('parsers.create'), new_parser_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
+  <%= link_to t('parsers.create'), new_parser_path, class: "button new-right #{can_show_button(:create, Parser)}" %>
 
-<label class="middle new-right">
-  <input type="radio" name="type" value="content_search">
-  Search within parser content
-</label>
-<label class="middle new-right">
-  <input type="radio" name="type" value="quick_search" checked>
-  Quick search
-</label>
-
-<table id="parsers" class="twelve">
-  <thead>
-    <tr>
-      <th>Harvest Name</th>
-      <th>Data Format</th>
-      <th>Partner</th>
-      <th>Source ID</th>
-      <th>Last Update</th>
-      <th>Last Edited By</th>
-      <th>Parser Type</th>
-    </tr>
-  </thead>
-</table>
+  <table id="parsers" class="twelve">
+    <thead>
+      <tr>
+        <th>Harvest Name</th>
+        <th>Data Format</th>
+        <th>Partner</th>
+        <th>Source ID</th>
+        <th>Last Update</th>
+        <th>Last Edited By</th>
+        <th>Parser Type</th>
+      </tr>
+    </thead>
+  </table>
+</div>
