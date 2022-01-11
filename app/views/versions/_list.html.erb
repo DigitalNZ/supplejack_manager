@@ -21,6 +21,8 @@
 </div>
 
 <div id='versions' class='versions'>
+  <span class='parser-tag label secondary'><%= "#{versionable.versions.count} versions" %></span>
+
   <% versionable.versions.limit(10).desc(:created_at).each_with_index do |version, index| %>
     <div class="version <%= 'active' if @version.try(:id) == version.id %>">
       <%= link_to version.message || 'No message',  send(:"#{versionable_path}_path", versionable, version) %>
