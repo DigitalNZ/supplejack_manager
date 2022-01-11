@@ -143,7 +143,7 @@ RSpec.describe Parser do
     context 'when version is not passed' do
       it 'content is the last content which is set in the Parser itself' do
         parser.enrichment_definitions('staging')
-        expect(parser.content).to match %r{class NZMuseums < SupplejackCommon::Xml::Base; .*; end}
+        expect(parser.content).to match %r{class NZMuseums < SupplejackCommon::Xml::Base\n.*\n\s*end}
       end
 
       it 'returns the parser enrichment definitions' do
