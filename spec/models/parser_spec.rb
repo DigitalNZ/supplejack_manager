@@ -143,7 +143,7 @@ RSpec.describe Parser do
     context 'when version is not passed' do
       it 'content is the last content which is set in the Parser itself' do
         parser.enrichment_definitions('staging')
-        expect(parser.content).to eq 'class NZMuseums < SupplejackCommon::Xml::Base; end'
+        expect(parser.content).to match %r{class NZMuseums < SupplejackCommon::Xml::Base; .*; end}
       end
 
       it 'returns the parser enrichment definitions' do
@@ -270,11 +270,12 @@ RSpec.describe Parser do
     let(:version) { build(:version, :staging, user: user) }
     let(:parser)  { create(:parser) }
     let(:options) { {
-      search:    'term',
-      start:     5,
-      per_page:  20,
-      order_by:  'updated_at',
-      direction: 'desc'
+      search:      'term',
+      start:       5,
+      per_page:    20,
+      order_by:    'updated_at',
+      direction:   'desc',
+      search_type: 'quick_search'
     } }
 
     it 'returns a MongoID::Criteria' do
@@ -315,6 +316,17 @@ RSpec.describe Parser do
               { 'partner_name' => /term/i },
               { 'source_name' => /term/i }
             ])
+    end
+
+    it 'searches through the parser content if asked to' do
+      query = Parser.datatable_query(options.merge(search_type: 'content_search'))
+      expect(query.selector).to eq({
+        '$or' => [
+          { 'content' => /term/ },
+          { 'versions.content' => /term/ }
+        ],
+        'deleted_at' => nil
+      })
     end
   end
 end

@@ -1,8 +1,17 @@
-
-
 // Place all the styles related to the parsers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// parsers/index.html.erb
+#parsers-index {
+  label {
+    display: inline-block;
+    margin-left: 20px;
+    float: none;
+  }
+}
+
+// others
 
 #preview-modal {
   padding-top: 16px;
