@@ -40,7 +40,7 @@ RSpec.describe TemplateHelpers do
     it 'should initialize the parsers content parser class' do
       parser.content = nil
       parser.apply_parser_template!
-      expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\nend"
+      expect(parser.content).to eq "# frozen_string_literal: true\n\nclass NzOnScreen < SupplejackCommon::Xml::Base\n\nend"
     end
 
     it 'should not initialize if parsers content is not nil' do
@@ -58,7 +58,7 @@ RSpec.describe TemplateHelpers do
         parser.content = nil
         expect(ParserTemplate).to receive(:find_by_name).with('template') { parser_template }
         parser.apply_parser_template!
-        expect(parser.content).to eq "class NzOnScreen < SupplejackCommon::Xml::Base\n\n\t#{parser_template.content}\n\nend"
+        expect(parser.content).to eq "# frozen_string_literal: true\n\nclass NzOnScreen < SupplejackCommon::Xml::Base\n\n\t#{parser_template.content}\n\nend"
       end
     end
   end

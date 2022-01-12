@@ -1,27 +1,19 @@
 <div class='grid-x grid-margin-x'>
   <div class='medium-9 cell'>
     <% if can? :update, @parser %>
-      <% if @parser.errors.blank? %>
-        <h1 id='resource-title' data-toggler='.hide' class='float-left'>
-          <%= link_to @parser.name, edit_parser_path(@parser) %>
-          <span class="parser-tag <%= 'alert' if @parser.data_type == 'concept' %> round label"><%= @parser.data_type %></span>
-        </h1>
-      <% end %>
-
-      <%= custom_form_with model: @parser, local: true, class: @parser.errors.empty? ? 'hide' : '', data: { toggler: '.hide' }, id: 'rename-form' do |f| %>
-        <%= f.label :name, 'Parser Script Name' %>
-        <%= f.text_field_submit :name, class: 'input-group-field', submit_text: 'Rename' %>
-      <% end %>
-
+      <h1 id='resource-title' data-toggler='.hide' class='float-left'>
+        <%= @parser.name %>
+        <span class="parser-tag <%= 'alert' if @parser.data_type == 'concept' %> round label"><%= @parser.data_type %></span>
+      </h1>
     <% else %>
-      <h1 id="parser-title" class="float-left"><%= @parser.name %></h1>
+      <h1 id='parser-title' class='float-left'><%= @parser.name %></h1>
     <% end %>
   </div>
-  <div class="medium-3 cell">
+  <div class='medium-3 cell'>
   </div>
 </div>
-<div class="grid-x grid-margin-x">
-  <div class="medium-9 cell">
+<div class='grid-x grid-margin-x'>
+  <div class='medium-9 cell'>
     <% if @version %>
       <%= render 'parser_versions/form' %>
     <% else %>
@@ -29,11 +21,10 @@
     <% end %>
   </div>
 
-  <div class="medium-3 cell">
-
-    <ul class="harvest-commands">
-      <li class="medium-12 cell">
-        <button class="button dropdown medium-12 expanded" data-toggle='harvests-jobs-dropdown'>
+  <div class='medium-3 cell'>
+    <ul class='harvest-commands'>
+      <li class='medium-12 cell'>
+        <button class='button dropdown medium-12 expanded' data-toggle='harvests-jobs-dropdown'>
           View all jobs from this parser
         </button>
 
@@ -57,8 +48,8 @@
       </li>
       <% if can? :run_harvest, @parser %>
         <% if @version %>
-          <li class="medium-12 cell">
-            <div class="button run-enrichment dropdown medium-12 expanded" data-toggle='enrichment-dropdown'>
+          <li class='medium-12 cell'>
+            <div class='button run-enrichment dropdown medium-12 expanded' data-toggle='enrichment-dropdown'>
               Run Enrichment
             </div>
 
@@ -79,8 +70,8 @@
               </ul>
             </div>
           </li>
-          <li class="medium-12 cell">
-            <div class="button run-harvest dropdown medium-12 expanded" data-toggle='harvest-dropdown' <%= (@version&.tags || []).any? ? '' : 'disabled' %>>
+          <li class='medium-12 cell'>
+            <div class='button run-harvest dropdown medium-12 expanded' data-toggle='harvest-dropdown' <%= (@version&.tags || []).any? ? '' : 'disabled' %>>
               Run Harvest
             </div>
             <div class='dropdown-pane' id='harvest-dropdown' data-dropdown data-auto-focus='true'>
@@ -102,17 +93,17 @@
           </li>
         <% end %>
       <% else %>
-        <div href="#" class="button run-harvest dropdown medium-12 cell expanded disabled">Run Harvest</div>
+        <div href='#' class='button run-harvest dropdown medium-12 cell expanded disabled'>Run Harvest</div>
       <% end %>
       <% if can? :preview, @parser %>
-        <li class="medium-12 cell">
+        <li class='medium-12 cell'>
           <%= link_to 'Preview', parser_previewers_path(@parser, format: :js), class: 'button records-preview-button expanded', data: { open: 'preview-modal' } %>
         </li>
       <% end %>
     </ul>
 
-    <div class="callout secondary text-center" data-alert="">
-      <%= 'Current  version: ' + version_message(@parser, @version) %>
+    <div class='callout secondary text-center' data-alert=''>
+      <%= "Current version: #{version_message(@parser, @version)}" %>
     </div>
 
     <% if can? :run_harvest, @parser %>
@@ -122,34 +113,37 @@
     <%= render partial: 'versions/list', locals: { versionable: @parser, versionable_path: 'parser_parser_version', async_load_path: versions_parser_path(@parser.id) } %>
 
     <% if can? :run_harvest, @parser %>
-      <button class="button expanded" data-toggle='rename-form resource-title'>Rename Parser</button>
-      <button class="button expanded" id="change-source-action" data-open="change-source-alert"><%= t('parsers.change_source') %></button>
-      <% if @parser.running_jobs? %>
-        <button class="button expanded tip-top has-tip" disabled data-tooltip title="You currently have a job running for this parser. You will need to stop it before being able to delete it."><%= t('parsers.delete') %></button>
-      <% else %>
-        <button class="button alert expanded" data-open="delete-parser-alert"><%= t('parsers.delete') %></button>
-      <% end %>
-      <div class="allow-flush-button">
+      <%= link_to 'Change name or data source', edit_meta_parser_path(@parser), class: 'button expanded' %>
+
+      <div class='allow-flush-button'>
         <%= render 'parsers/allow_flush_button', parser: @parser %>
       </div>
+
+      <%= link_to 'Lint parser (Beta)', lint_parser_path(@parser), class: 'button expanded' %>
+
+      <% if @parser.running_jobs? %>
+        <button class='button expanded tip-top has-tip' disabled data-tooltip title='You currently have a job running for this parser. You will need to stop it before being able to delete it.'><%= t('parsers.delete') %></button>
+      <% else %>
+        <button class='button alert expanded' data-open='delete-parser-alert'><%= t('parsers.delete') %></button>
+      <% end %>
     <% end %>
   </div>
 </div>
 
-<div id="preview-modal" class="reveal large" data-reveal>
-  <div id="preview-area">
+<div id='preview-modal' class='reveal large' data-reveal>
+  <div id='preview-area'>
   </div>
 
-  <div id="preview-area-spinner" class="spinner">
+  <div id='preview-area-spinner' class='spinner'>
     <%= image_pack_tag('sj-spinner.gif') %>
   </div>
 
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
+  <button class='close-button' data-close aria-label='Close modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
   </button>
 </div>
 
-<div id="delete-parser-alert" class="reveal small" data-reveal>
+<div id='delete-parser-alert' class='reveal small' data-reveal>
   <h2>Delete Parser</h2>
   <p class='delete-confirmation'>
     Are you sure that you want to delete the parser:
@@ -162,46 +156,29 @@
   <% end %>
   <div>
     <%= button_to 'Delete', @parser, method: :delete, class: 'button alert right' %>
-    <button data-close class="button secondary right">Cancel</button>
+    <button data-close class='button secondary right'>Cancel</button>
   </div>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
+  <button class='close-button' data-close aria-label='Close modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
   </button>
 </div>
 
-<div id="harvest-modal" class="reveal large" data-reveal>
-  <div id="harvest-form">
-  </div>
+<div id='harvest-modal' class='reveal large' data-reveal>
+  <div id='harvest-form'></div>
 
-  <div id="harvest-result"></div>
+  <div id='harvest-result'></div>
 
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
+  <button class='close-button' data-close aria-label='Close modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
   </button>
 </div>
 
-<div id="enrichment-modal" class="reveal large" data-reveal>
-  <div id="enrichment-form">
-  </div>
+<div id='enrichment-modal' class='reveal large' data-reveal>
+  <div id='enrichment-form'></div>
 
-  <div id="enrichment-result"></div>
+  <div id='enrichment-result'></div>
 
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<div id="change-source-alert" class="reveal medium" data-reveal>
-  <h2>Change source</h2>
-  <p> Warning: changing the source of this parser does not affect records that have already been harvested.</p>
-  <%= custom_form_with model: @parser, local: true do |f| %>
-    <%= f.label :partner, 'Contributor' %>
-    <%= f.select :partner, Partner.all.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
-    <%= f.label :source, 'Data source', data: { 'current_source_id': @parser.source_id } %>
-    <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id) %>
-    <%= f.submit 'Change source', class: 'button' %>
-  <% end %>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
+  <button class='close-button' data-close aria-label='Close modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
   </button>
 </div>

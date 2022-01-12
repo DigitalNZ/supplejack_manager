@@ -1,0 +1,16 @@
+<div class='grid-x grid-margin-x'>
+  <div class='medium-9 cell'>
+    <h1><%= "Lint result for #{@parser.name}" %></h1>
+
+      <div class='callout warning text-center' data-alert=''>
+        <%= @linter.warnings_count %>
+      </div>
+
+      <% @linter.warnings.each do |warning| %>
+        <% unless warning.blank? %>
+          <%= warning %>
+          <hr>
+        <% end %>
+      <% end %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class='medium-12 cell'>
+  <%= custom_form_with model: @parser, local: true do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :partner, 'Contributor' %>
+    <%= f.select :partner, @partners.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
+
+    <%= f.label :source, 'Data source' %>
+    <%= f.grouped_collection_select(:source_id, @partners, :sources, :name, :id, :source_id) %>
+
+    <%= link_to 'Cancel', edit_parser_path(@parser), class: 'button secondary' %>
+
+    <%= f.submit 'Update Parser', class: 'button float-right' %>
+  <% end %>
+</div>

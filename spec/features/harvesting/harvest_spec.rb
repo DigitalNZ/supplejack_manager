@@ -75,23 +75,15 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     expect(page).to have_link 'Updating Parser'
   end
 
-  scenario 'A harvest operator can rename a parser' do
-    click_button 'Rename Parser'
-    fill_in 'parser_name', with: 'Parser Name'
-    click_button 'Rename'
+  scenario 'A harvest operator can update parser name and source' do
+    click_link 'Change name or data source'
 
-    expect(page).to have_link 'Parser Name'
-  end
+    expect(page).to have_current_path(edit_meta_parser_path(parser))
 
-  scenario 'A harvest operator can change the data source of a parser' do
-    click_button('Change Data Source')
+    fill_in 'parser_name', with: 'New Parser name'
+    click_button 'Update Parser'
 
-    expect(page).to have_text 'Change source'
-    expect(page).to have_text 'Warning: changing the source of this parser does not affect records that have already been harvested.'
-    expect(page).to have_text 'Contributor'
-    expect(page).to have_text ' Data Source'
-
-    click_button 'Change source'
+    expect(page).to have_current_path(edit_parser_path(parser))
   end
 
   scenario 'A harvest operator can disable Full & Flush harvest mode' do

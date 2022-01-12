@@ -12,7 +12,7 @@ module TemplateHelpers
 
   def apply_parser_template!
     return if self.content.present?
-    parser_template = []
+    parser_template = ['# frozen_string_literal: true']
     parser_template << "class #{parser_classname} < SupplejackCommon::#{self.strategy.capitalize}::Base"
 
     if parser_template_name.present?
