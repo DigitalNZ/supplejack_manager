@@ -6,7 +6,7 @@
     <%= f.label :partner, 'Contributor' %>
     <%= f.select :partner, @partners.sort(name: 1).map { |p| [p.name, p.name] }, selected: @parser.partner.name %>
 
-    <%= f.label :source, 'Data source' %>
+    <%= f.label :source, 'Data source', data: { 'current_source_id': @parser.source_id } %>
     <%= f.grouped_collection_select(:source_id, @partners, :sources, :name, :id, :source_id) %>
 
     <%= link_to 'Cancel', edit_parser_path(@parser), class: 'button secondary' %>
