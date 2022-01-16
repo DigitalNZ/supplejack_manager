@@ -1,4 +1,4 @@
-<span id="preview-job" url="/previews/<%=@previewer.preview_id%>"></span>
+<span id="preview-job" url="/previews/<%=@preview.id%>"></span>
 
 <div class="grid-x">
   <div class="medium-12 cell">
@@ -10,7 +10,7 @@
   <% end %>
 </div>
 
-<div class="grid-x" id="preview-<%=@previewer.preview_id%>">
+<div class="grid-x" id="preview-<%=@preview.id%>">
   <div class="medium-12 cell">
       <p><strong>Status: </strong><span id="status">Initialising preview record...</span></p>
 
@@ -71,4 +71,4 @@
   </div>
 </div>
 
-<h4 class="not-found hidden"><%= @previewer.parser.name %> <span>didn't return any records.</span></h4>
+<h4 class="not-found hidden"><%= '@preview.parser.name' %> <span>didn't return any records.</span></h4>

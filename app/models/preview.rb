@@ -1,26 +1,31 @@
 # frozen_string_literal: true
 
-class Preview < ActiveResource::Base
+class Preview
   include EnvironmentHelpers
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-  self.site = ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']
-  headers['Authorization'] = "Token token=#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}"
+  after_create :create_preview_job
 
-  schema do
-    attribute :raw_data,               :string
-    attribute :harvested_attributes,   :string
-    attribute :api_record,             :string
-    attribute :status,                 :string
-    attribute :deletable,              :boolean
-    attribute :field_errors,           :string
-    attribute :validation_errors,      :string
-    attribute :harvest_failure,        :string
-    attribute :harvest_job_errors,     :string
-    attribute :format,                 :string
-  end
+  field :parser_code,          type: String
+  field :parser_id,            type: String
+  field :index,                type: Integer
+  field :user_id,              type: String
+  field :raw_data,             type: String
+  field :harvested_attributes, type: String
+  field :api_record,           type: String
+  field :status,               type: String
+  field :deletable,            type: Boolean
+  field :field_errors,         type: String
+  field :validation_errors,    type: String
+  field :harvest_failure,      type: String
+  field :harvest_job_errors,   type: String
+  field :format,               type: String
 
-  def id
-    self._id
+  def create_preview_job
+    preview_url = "#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}/previews"
+
+    RestClient.post(preview_url, { preview: { id: id } })
   end
 
   def harvest_failure?
