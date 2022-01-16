@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :parsers do
     get :allow_flush, on: :member
     get :datatable, on: :collection, constraints: { format: :json }
-    resources :previewers, only: [:create]
+    resources :previewers, only: %i[create show]
     resources :parser_versions, path: 'versions', only: [:show, :update] do
       get :current, on: :collection
       get :new_enrichment, on: :member
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     get :reindex, on: :member
   end
 
-  resources :previews, only: [:show]
+  resources :previews, only: %i[show update]
 
   scope ':environment', as: 'environment' do
     resources :abstract_jobs, only: [:index], path: 'jobs'

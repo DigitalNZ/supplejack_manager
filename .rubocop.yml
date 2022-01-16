@@ -23,3 +23,6 @@ AllCops:
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
+
+Style/Documentation:
+  Enabled: false
