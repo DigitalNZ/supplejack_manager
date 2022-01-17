@@ -13,32 +13,28 @@ RSpec.describe PreviewersController do
   let(:parser) { create(:parser, source_id: source) }
   let(:user)   { create(:user, :admin) }
 
-  before do
-    sign_in user
-    allow_any_instance_of(Previewer).to receive(:create_preview_job) { true }
-  end
+  before { sign_in user }
 
   describe 'POST create' do
-    it 'should call before filters for find_parser_and_version' do
-      expect(controller).to receive(:validate_parser_content)
-      post :create, params: { parser_id: parser.id, parser: { content: 'content' }, format: :js }
-    end
-
-    it 'should call before filters for set_previewer' do
-      expect(controller).to receive(:set_previewer)
-      post :create, params: { parser_id: parser.id, parser: { content: 'content' }, format: :js }
-    end
-
     context 'when parser code is valid' do
-      it 'sets parser_error as false' do
-        code = 'class Repository1 < SupplejackCommon::Xml::Base
+      let(:code) do
+        'class Repository1 < SupplejackCommon::Xml::Base
           base_url "http://repository.digitalnz.org/public_records.xml"
           record_selector "//records/record"
           include_snippet "Global validations"
         end'
+      end
 
+      before do
         post :create, params: { parser_id: parser.id,
-             parser: { content: code }, index: 10, format: :js }
+          parser: { content: code }, index: 10, format: :js }
+      end
+
+      it 'should call before filters for set_previewer' do
+        expect(assigns(:parser)).to eq parser
+      end
+
+      it 'sets parser_error as false' do
         expect(assigns(:parser_error)).to be nil
       end
     end
@@ -80,13 +76,6 @@ RSpec.describe PreviewersController do
       post :create, params: { parser_id: parser.id,
            parser: { content: 'Data' },
            index: 10, environment: 'test', format: :js }
-    end
-
-    it 'should preview the records from a existing harvest' do
-      expect_any_instance_of(Previewer).to receive(:create_preview_job)
-      post :create, params: { parser_id: parser.id,
-           parser: { content: 'Data' },
-           index: 10, environment: 'test', review: true, format: :js }
     end
   end
 end
