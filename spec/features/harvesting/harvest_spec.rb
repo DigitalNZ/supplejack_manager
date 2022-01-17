@@ -49,7 +49,6 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can preview a harvest' do
-    allow_any_instance_of(Previewer).to receive(:create_preview_job) { true }
     click_link 'Preview'
 
     expect(page).to have_text 'Previewing records'
