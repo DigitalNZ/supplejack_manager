@@ -5,8 +5,6 @@ class Preview
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  after_create :create_preview_job
-
   field :parser_code,          type: String
   field :parser_id,            type: String
   field :index,                type: Integer
@@ -22,10 +20,10 @@ class Preview
   field :harvest_job_errors,   type: String
   field :format,               type: String
 
-  def create_preview_job
+  def start_preview_worker(job_id)
     preview_url = "#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}/previews"
 
-    RestClient.post(preview_url, { preview: { id: id } })
+    RestClient.post(preview_url, { preview_id: id, job_id: job_id })
   end
 
   def harvest_failure?

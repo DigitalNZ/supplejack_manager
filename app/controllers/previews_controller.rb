@@ -3,7 +3,7 @@
 # app/controllers/previews_controller.rb
 class PreviewsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :find_preview
+  before_action :find_preview, only: [:show, :update]
 
   def show
     respond_to do |format|
