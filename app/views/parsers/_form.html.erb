@@ -1,5 +1,6 @@
 <%= custom_form_with model: @parser, local: true do |f| %>
   <% if can? :update, @parser %>
+    <%= f.hidden_field :id %>
     <%= f.text_area :content, class: 'code-editor read' %>
 
     <%= f.label :message %>

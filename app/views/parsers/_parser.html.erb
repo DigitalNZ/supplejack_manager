@@ -97,7 +97,7 @@
       <% end %>
       <% if can? :preview, @parser %>
         <li class='medium-12 cell'>
-          <%= link_to 'Preview', parser_previewers_path(@parser, format: :js), class: 'button records-preview-button expanded', data: { open: 'preview-modal' } %>
+          <%= link_to 'Preview', previews_path(format: :js), class: 'button records-preview-button expanded', data: { open: 'preview-modal' } %>
         </li>
       <% end %>
     </ul>

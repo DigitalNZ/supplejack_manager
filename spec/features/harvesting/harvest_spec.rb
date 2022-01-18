@@ -16,7 +16,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   let(:source)      { create(:source) }
   let!(:parser)     { create(:parser, source_id: source) }
   let!(:version)    { create(:version, versionable: parser, user_id: user, version: 'v5') }
-  let(:harvest_job) { create(:harvest_job) }
+  let(:harvest_job) { build(:harvest_job) }
 
   before do
     sign_in user
