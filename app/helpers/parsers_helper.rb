@@ -21,11 +21,13 @@ module ParsersHelper
     # index params is nil for the first iteration. to_i will make it 0
     # Its incremented so that in the second iteration previous link can be made visible.
     # Previous link is disabled when index is 0
-    path = parser_previewers_path(parser_id,
-                                  index: index.to_i + 1,
-                                  environment: environment,
-                                  review: review,
-                                  format: :js)
+    path = previews_path(
+      parser_id: parser_id,
+      index: index.to_i + 1,
+      environment: environment,
+      review: review,
+      format: :js
+    )
     link_to 'next >', path, html_options
   end
 
@@ -42,11 +44,13 @@ module ParsersHelper
   # @return [A Tag] of the previous preview page
   def link_to_previous(parser_id, index, environment, review, html_options = {})
     index = index.to_i - 1
-    path = parser_previewers_path(parser_id,
-                                  index: index,
-                                  environment: environment,
-                                  review: review,
-                                  format: :js)
+    path = previews_path(
+      parser_id: :parser_id,
+      index: index,
+      environment: environment,
+      review: review,
+      format: :js
+    )
 
     if index >= 0
       link_to '< previous', path, html_options
