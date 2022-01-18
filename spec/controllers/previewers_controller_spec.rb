@@ -3,18 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe PreviewersController do
+  let(:source)      { create(:source) }
+  let(:parser)      { create(:parser, source_id: source) }
+  let(:user)        { create(:user, :admin) }
+  let(:harvest_job) { build(:harvest_job) }
+
   before do
     allow_any_instance_of(Partner).to receive(:update_apis)
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
+    allow(HarvestJob).to receive(:create).and_return(harvest_job)
     allow(RestClient).to receive(:post)
+    sign_in user
   end
-
-  let(:source) { create(:source) }
-  let(:parser) { create(:parser, source_id: source) }
-  let(:user)   { create(:user, :admin) }
-
-  before { sign_in user }
 
   describe 'POST create' do
     context 'when parser code is valid' do
@@ -27,8 +28,14 @@ RSpec.describe PreviewersController do
       end
 
       before do
-        post :create, params: { parser_id: parser.id,
-          parser: { content: code }, index: 10, format: :js }
+        post :create, params: {
+          index: 10,
+          format: :js,
+          parser_id: parser.id,
+          parser: {
+            content: code
+          }
+        }
       end
 
       it 'should call before filters for set_previewer' do
