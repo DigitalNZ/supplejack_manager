@@ -1,6 +1,26 @@
 {
   "ignored_warnings": [
     {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "67a18a5f890b8bb88deb6f3c86f38d2d6b663e874e816e1b1686a945199a9fe1",
+      "check_name": "Evaluation",
+      "message": "User input in eval",
+      "file": "app/controllers/previews_controller.rb",
+      "line": 67,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(params[:parser][:content])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PreviewsController",
+        "method": "validate_parser_content"
+      },
+      "user_input": "params[:parser][:content]",
+      "confidence": "High",
+      "note": ""
+    },
+    {
       "warning_type": "Missing Encryption",
       "warning_code": 109,
       "fingerprint": "6a26086cd2400fbbfb831b2f8d7291e320bcc2b36984d2abc359e41b3b63212b",
@@ -14,29 +34,29 @@
       "location": null,
       "user_input": null,
       "confidence": "High",
-      "note": "SSL handled by ELB/ALB"
+      "note": ""
     },
     {
-      "warning_type": "Dangerous Eval",
-      "warning_code": 13,
-      "fingerprint": "85be41e10b3e650de5a37a1857f09f9ed14e234c38729883403df53091f6d2e9",
-      "check_name": "Evaluation",
-      "message": "User input in eval",
-      "file": "app/controllers/previewers_controller.rb",
-      "line": 35,
-      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
-      "code": "eval(params[:parser][:content])",
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "90e8a9dfaed1821cd9de6399be5a254801f6b9b3dde97702ee4eb4f76c71c645",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/services/parser_linter.rb",
+      "line": 27,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "`bundle exec rubocop #{\"tmp/parser_script-#{parser.id}.rb\"} --format simple`",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "PreviewersController",
-        "method": "validate_parser_content"
+        "class": "ParserLinter",
+        "method": "run_rubocop"
       },
-      "user_input": "params[:parser][:content]",
-      "confidence": "High",
-      "note": "Required for validating Ruby syntax"
+      "user_input": "parser.id",
+      "confidence": "Medium",
+      "note": ""
     }
   ],
-  "updated": "2020-04-08 14:33:48 +1200",
-  "brakeman_version": "4.8.0"
+  "updated": "2022-01-18 22:05:43 +0100",
+  "brakeman_version": "5.1.1"
 }

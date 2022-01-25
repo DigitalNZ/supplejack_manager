@@ -22,17 +22,15 @@ $(function() {
   $('body').on('click', 'a.records-preview-button', function(e) {
     e.preventDefault();
 
-    var $form, $link;
-
     $("#preview-area-spinner").show();
     $("#preview-area").html("");
     $("#preview-modal").foundation('open');
     window.Harvester.myCodeMirror.save();
 
     $link = $(this);
-    $form = $("#parser_content");
+    $form = $("#parser_content").parent('form').serialize().replace('_method=patch', '_method=post');
 
-    $.post($link.attr("href"), $form.serialize(), function(data) {
+    $.post($link.attr("href"), $form, function(data) {
       return $("#preview-area-spinner").hide();
     });
 

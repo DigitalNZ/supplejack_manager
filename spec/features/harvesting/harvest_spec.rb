@@ -12,10 +12,11 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     allow(Preview).to receive(:find) { build(:preview, id: 1) }
   end
 
-  let(:user)    { create(:user, :admin) }
-  let(:source)  { create(:source) }
-  let!(:parser) { create(:parser, source_id: source) }
-  let!(:version) { create(:version, versionable: parser, user_id: user, version: 'v5') }
+  let(:user)        { create(:user, :admin) }
+  let(:source)      { create(:source) }
+  let!(:parser)     { create(:parser, source_id: source) }
+  let!(:version)    { create(:version, versionable: parser, user_id: user, version: 'v5') }
+  let(:harvest_job) { build(:harvest_job) }
 
   before do
     sign_in user
@@ -49,7 +50,8 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   end
 
   scenario 'A harvest operator can preview a harvest' do
-    allow_any_instance_of(Previewer).to receive(:create_preview_job) { true }
+    allow(HarvestJob).to receive(:create).and_return(harvest_job)
+    allow(RestClient).to receive(:post)
     click_link 'Preview'
 
     expect(page).to have_text 'Previewing records'
