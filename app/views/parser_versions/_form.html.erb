@@ -1,4 +1,5 @@
 <%= form_tag do %>
+  <%= hidden_field_tag "parser[id]", @parser.id %>
 
   <%= text_area_tag "parser[content]", @version.content, class: "code-editor read-only"  %>
 
