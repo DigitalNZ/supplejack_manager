@@ -1,43 +1,43 @@
 <h2 class="collection-stats-heading">
-	<%= link_to_previous_day @day, params[:environment], class: "cycle-prev-day-button arrow arrow-left" %>
-	<span><%= params[:environment].try(:capitalize)%> Collection Statistics for: <%= @day.to_date.to_formatted_s(:long) %></span>
-	<%= link_to_next_day @day, params[:environment], class: "cycle-next-day-button arrow arrow-right"  %>
+  <%= link_to_previous_day @day, params[:environment], class: "cycle-prev-day-button arrow arrow-left" %>
+  <span><%= params[:environment].try(:capitalize)%> Collection Statistics for: <%= @day.to_date.to_formatted_s(:long) %></span>
+  <%= link_to_next_day @day, params[:environment], class: "cycle-next-day-button arrow arrow-right"  %>
 </h2>
 
 <% unless @collection_statistics.any? %>
-	<div class="medium-12 cell">
-		<h4>No activations, suppressions or deletions</h4>
-	</div>
+  <div class="medium-12 cell">
+    <h4>No activations, suppressions or deletions</h4>
+  </div>
 <% end %>
 
 <% @collection_statistics.each do |collection| %>
-	<div class="grid-x">
-		<div class="medium-12 cell">
-		<h4><%= collection.source.source_id %></h4>
-  		<div class="status-section float-left medium-4 cell">
-		    <h5>Activations (<%= collection.activated_records.to_a.size %>)</h5>
-		    <ul class="no-list-style">
-			    <% collection.activated_records.to_a.each do |record| %>
-			     <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
-			    <% end %>
-		    </ul>
-		  </div>
-		  <div class="status-section float-left medium-4 cell">
-		    <h5>Suppressions (<%= collection.suppressed_records.to_a.size %>)</h5>
-		    <ul class="no-list-style">
-			    <% collection.suppressed_records.to_a.each do |record| %>
-			     <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
-			    <% end %>
-		    </ul>
-		  </div>
-		  <div class="status-section float-left medium-4 cell">
-		    <h5>Deletions (<%= collection.deleted_records.to_a.size %>)</h5>
-		    <ul class="no-list-style">
-			    <% collection.deleted_records.to_a.each do |record| %>
-			     <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
-			    <% end %>
-		    </ul>
-		  </div>
-		</div>
-	</div>
+  <div class="grid-x">
+    <div class="medium-12 cell">
+    <h4><%= collection.source.source_id %></h4>
+      <div class="status-section float-left medium-4 cell">
+        <h5>Activations (<%= collection.activated_records.to_a.size %>)</h5>
+        <ul class="no-list-style">
+          <% collection.activated_records.to_a.each do |record| %>
+           <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="status-section float-left medium-4 cell">
+        <h5>Suppressions (<%= collection.suppressed_records.to_a.size %>)</h5>
+        <ul class="no-list-style">
+          <% collection.suppressed_records.to_a.each do |record| %>
+           <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="status-section float-left medium-4 cell">
+        <h5>Deletions (<%= collection.deleted_records.to_a.size %>)</h5>
+        <ul class="no-list-style">
+          <% collection.deleted_records.to_a.each do |record| %>
+           <li><%= "#{record.record_id}: "%><%= link_to "#{truncate(record.landing_url, length: 50)}", record.landing_url %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 <% end %>
