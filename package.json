@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@rails/actioncable": "^6.0.0",
     "@elastic/apm-rum": "^5.9.1",
     "@rails/ujs": "^6.1.4-1",
     "@rails/webpacker": "5.2.2",
