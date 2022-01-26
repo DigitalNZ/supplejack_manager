@@ -18,6 +18,7 @@ gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma', '~> 4.3.9'
 gem 'rails', '~> 6.1.4.4'
+gem "redis", "~> 4.0" # for action_cable in production
 gem 'render_async', '~> 2.1', '>= 2.1.11'
 gem 'rqrcode'
 gem 'rubocop', require: false

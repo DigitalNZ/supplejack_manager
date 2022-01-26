@@ -9,6 +9,7 @@
 
 require("@rails/ujs").start()
 
+import 'channels'
 import 'stylesheets/application'
 import 'src/application'
 import { init as initApm } from '@elastic/apm-rum'

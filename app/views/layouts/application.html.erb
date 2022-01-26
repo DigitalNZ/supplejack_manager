@@ -10,6 +10,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
 
+    <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css' %>
     <%= favicon_link_tag asset_pack_path('media/images/favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_pack_path('media/images/favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
