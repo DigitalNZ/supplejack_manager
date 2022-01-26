@@ -3,63 +3,26 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :parsers do
-    get :allow_flush, on: :member
-    get :datatable, on: :collection, constraints: { format: :json }
-    resources :parser_versions, path: 'versions', only: [:show, :update] do
-      get :current, on: :collection
-      get :new_enrichment, on: :member
-      get :new_harvest, on: :member
-    end
-
-    get :versions, on: :member
-    get :edit_meta, on: :member
-  end
-
-  resources :lint_parser, only: :show
+  draw(:action_cable)
+  draw(:parsers)
+  draw(:partners)
+  draw(:lint_parser)
+  draw(:snippets)
+  draw(:parser_templates)
+  draw(:sources)
+  draw(:previews)
+  draw(:users)
 
   scope ':environment', as: 'environment' do
-    namespace :admin do
-      resources :users
-      resources :activities, only: [:index]
-    end
-  end
+    draw(:admin)
 
-  resources :snippets do
-    get 'current_version', on: :collection
-    resources :snippet_versions, path: 'versions', only: [:show, :update] do
-      get :current, on: :collection
-    end
-    get :versions, on: :member
-  end
-
-  resources :parser_templates
-
-  resources :partners, except: [:show, :destroy]
-  resources :sources, except: [:destroy] do
-    get :reindex, on: :member
-  end
-
-  resources :previews, only: %i[show create update]
-
-  scope ':environment', as: 'environment' do
-    resources :abstract_jobs, only: [:index], path: 'jobs'
-    resources :harvest_jobs, only: [:create, :update, :show, :index]
-    resources :enrichment_jobs, only: [:create, :update, :show, :new]
-
-    resources :harvest_schedules, except: [:show] do
-      put :update_all, on: :collection
-    end
-
-    resources :collection_statistics, only: [:index, :show]
-    resources :link_check_rules, except: [:show]
-    resources :suppress_collections
-    resources :collection_records, only: [:index, :update]
-  end
-
-  devise_for :users
-
-  resources :users, only: [:index, :edit, :update, :new, :create] do
-    post 'mfa', on: :member
+    draw(:abstract_jobs)
+    draw(:harvest_jobs)
+    draw(:enrichment_jobs)
+    draw(:harvest_schedules)
+    draw(:collection_statistics)
+    draw(:link_check_rules)
+    draw(:suppress_collections)
+    draw(:collection_records)
   end
 end
