@@ -1,5 +1,5 @@
 $(function() {
-  $('#cancel-snippet-delete').click(function() {
+  $('#cancel-snippet-delete').on('click', function() {
     return $('#delete-snippet-alert .close-reveal-modal').trigger('click');
   });
 

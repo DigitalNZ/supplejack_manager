@@ -16,7 +16,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 		lineSeperator: ','
 	})
 
-	$('#source-data-label').click(function() {
+	$('#source-data-label').on('click', function() {
 		setTimeout(function() {
 			recordRawDataCodeMirror.refresh()
 		}, 1);
@@ -35,7 +35,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 		lineSeperator: ','
 	});
 
-	$('#harvested-attributes-label').click(function() {
+	$('#harvested-attributes-label').on('click', function() {
 		setTimeout(function() {
 			harvestAttributesCodeMirror.refresh()
 		}, 1);
@@ -60,7 +60,7 @@ $('#preview-<%= @preview.id %> #status').html("<%= escape_javascript(@preview.st
 		lineSeperator: ','
 	})
 
-	$('#api-record-label').click(function() {
+	$('#api-record-label').on('click', function() {
 		setTimeout(function() {
 			recordAttributesCodeMirror.refresh()
 		}, 1);
