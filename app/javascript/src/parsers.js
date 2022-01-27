@@ -10,7 +10,7 @@ stored_sources = null;
 
 $(function() {
 
-  $("form[action^='/parsers/'] input[name='parser[message]'").submit(function(e) {
+  $("form[action^='/parsers/'] input[name='parser[message]'").on('submit', function(e) {
     var parser_message;
     parser_message = $('input[name="parser[message]"').val();
     if (!parser_message) {
@@ -37,7 +37,7 @@ $(function() {
     return false;
   });
 
-  $(".records-harvest-modal-button").click(function(e) {
+  $(".records-harvest-modal-button").on('click', function(e) {
     e.preventDefault();
 
     var $link, environment;
@@ -55,7 +55,7 @@ $(function() {
     return false;
   });
 
-  $(".records-enrichment-modal-button").click(function() {
+  $(".records-enrichment-modal-button").on('click', function() {
     var $link, environment;
     $link = $(this);
     environment = $link.data("environment");
@@ -69,11 +69,11 @@ $(function() {
     return false;
   });
 
-  $('#cancel-parser-delete').click(function() {
+  $('#cancel-parser-delete').on('click', function() {
     return $('#delete-parser-alert .close-reveal-modal').trigger('click');
   });
 
-  $('.show_more').click(function() {
+  $('.show_more').on('click', function() {
     $('.version.hidden').show();
     return $(this).hide();
   });
