@@ -4,6 +4,8 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+import PreviewChannel from 'channels/preview_channel';
+
 var stored_sources;
 
 stored_sources = null;
@@ -27,10 +29,12 @@ $(function() {
     $("#preview-modal").foundation('open');
     window.Harvester.myCodeMirror.save();
 
-    $link = $(this);
-    $form = $("#parser_content").parent('form').serialize().replace('_method=patch', '_method=post');
+    const $link = $(this);
+    const $form = $("#parser_content").parent('form').serialize().replace('_method=patch', '_method=post');
 
     $.post($link.attr("href"), $form, function(data) {
+      const preview_id = $('#preview-job').data('preview-id');
+      PreviewChannel(preview_id);
       return $("#preview-area-spinner").hide();
     });
 

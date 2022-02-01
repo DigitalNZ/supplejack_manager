@@ -14,7 +14,7 @@
 
   <br/>
 
-  <ul class="tabs" data-tabs id="example-tabs">
+  <ul class="tabs" data-tabs id="preview-tabs">
     <%= tag.li class: "tabs-title #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
       <a data-tabs-target="simple-schedule-tab" href="#simple-schedule-tab">Simple Schedule</a>
     <% end %>
@@ -26,7 +26,7 @@
 
   <div id="recurrent-options" class="<%= show(@harvest_schedule.recurrent) %>">
 
-    <div class="tabs-content" data-tabs-content='example-tabs'>
+    <div class="tabs-content" data-tabs-content='preview-tabs'>
 
       <%= tag.div id: "simple-schedule-tab", class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
         <%= f.label :frequency %>

@@ -25,7 +25,6 @@ require('./link_check_rules')
 require('./parser_templates')
 require('./parsers')
 require('./partners')
-require('./previews')
 require('./snippets')
 require('./sources')
 require('./suppressed_collections')
@@ -33,5 +32,14 @@ require('./suppressed_collections')
 
 $(function() {
   window.CodeMirror = CodeMirror;
+  window.initCodeMirror = function(textarea, readOnly = false) {
+    return window.CodeMirror.fromTextArea(textarea, {
+      lineNumbers: true,
+      theme: 'monokai',
+      tabSize: 2,
+      readOnly: readOnly,
+      lineSeperator: ',',
+    });
+  }
   $(document).foundation();
 });
