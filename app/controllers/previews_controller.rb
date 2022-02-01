@@ -2,15 +2,15 @@
 
 # app/controllers/previews_controller.rb
 class PreviewsController < ApplicationController
+  respond_to :js, only: [:create, :show]
+  respond_to :json, only: [:update]
+
   skip_before_action :verify_authenticity_token
   before_action :find_preview, only: [:show, :update]
   before_action :find_parser, :validate_parser_content, only: [:create]
 
   def show
-    respond_to do |format|
-      format.js   { @preview }
-      format.json { render json: @preview }
-    end
+    render json: @preview
   end
 
   def create
@@ -36,11 +36,12 @@ class PreviewsController < ApplicationController
     )
     @preview.start_preview_worker(job.id)
 
-    render layout: false
+    respond_with @preview
   end
 
   def update
     if @preview.update_attributes(preview_params)
+      ActionCable.server.broadcast("preview_#{@preview.id}", @preview)
       render json: @preview
     else
       render json: { preview: @preview }, status: :bad_request
@@ -57,10 +58,26 @@ class PreviewsController < ApplicationController
     end
 
     def preview_params
-      params.require(:preview).permit(:raw_data, :harvested_attributes, :api_record,
-                                      :status, :deletable, :field_errors, :validation_errors,
-                                      :harvest_failure, :harvest_job_errors,
-                                      :format, harvest_job: [:parser_code, :parser_id, :environment, :index, :limit, :user_id])
+      params.require(:preview).permit(
+        :raw_data,
+        :harvested_attributes,
+        :api_record,
+        :status,
+        :deletable,
+        :field_errors,
+        :validation_errors,
+        :harvest_failure,
+        :harvest_job_errors,
+        :format,
+        harvest_job: [
+          :parser_code,
+          :parser_id,
+          :environment,
+          :index,
+          :limit,
+          :user_id
+        ]
+      )
     end
 
     def validate_parser_content

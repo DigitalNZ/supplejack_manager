@@ -1,4 +1,4 @@
-<span id="preview-job" url="/previews/<%=@preview.id%>"></span>
+<span id="preview-job" data-preview-id="<%= @preview.id %>" url="/previews/<%=@preview.id%>"></span>
 
 <div class="grid-x">
   <div class="medium-12 cell">
@@ -33,7 +33,7 @@
         <ul class="indented"></ul>
       </div>
 
-      <ul class='tabs' data-tabs id='example-tabs'>
+      <ul class='tabs' data-tabs id='preview-tabs'>
         <li class='tabs-title'>
           <a data-tabs-target='source-data'>Source Data<span class="small-spinner"></span></a>
         </li>
@@ -49,7 +49,7 @@
         </div>
       </ul>
 
-      <div class="tabs-content" data-tabs-content='example-tabs'>
+      <div class="tabs-content" data-tabs-content='preview-tabs'>
         <div class='tabs-panel' id="source-data">
           <textarea id="record-raw-data" class='code-editor-multiple'></textarea>
         </div>
