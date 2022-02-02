@@ -3,7 +3,9 @@
 class PreviewChannel < ApplicationCable::Channel
   def subscribed
     preview = Preview.find(params[:id])
-    stream_from "preview_#{preview.id}"
+    if current_user.id.to_s == preview.user_id
+      stream_from "preview_#{preview.id}"
+    end
   end
 
   def unsubscribed
