@@ -3,4 +3,13 @@
 # Be sure to restart your server when you modify this file.
 
 # Configure sensitive parameters which will be filtered from the log file.
-Rails.application.config.filter_parameters += %i[password password_confirmation otp_attempt]
+Rails.application.config.filter_parameters += %i[
+  password
+  password_confirmation
+  otp_attempt
+  parser_code
+  raw_data
+  harvested_attributes
+  api_record
+  content
+]
