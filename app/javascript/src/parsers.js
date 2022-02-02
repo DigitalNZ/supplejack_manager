@@ -34,7 +34,10 @@ $(function() {
 
     $.post($link.attr("href"), $form, function(data) {
       const preview_id = $('#preview-job').data('preview-id');
-      PreviewChannel(preview_id);
+      const preview = PreviewChannel(preview_id);
+      $('.records-preview-button, #preview-modal .close-button').on('click', function() {
+        preview.unsubscribe();
+      });
       return $("#preview-area-spinner").hide();
     });
 
