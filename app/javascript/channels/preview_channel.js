@@ -1,32 +1,37 @@
 import consumer from './consumer'
 
-const updateResult = (tabSelector, value) => {
-  $(`${tabSelector} .CodeMirror`).remove();
-  const textarea = document.querySelector(`${tabSelector} > textarea`);
-  textarea.value = value;
-  window.initCodeMirror(textarea, true);
-}
-
-let currentPreview = {};
-
 const PreviewChannel = (id) => {
-  consumer.subscriptions.create({ channel: 'PreviewChannel', id: id }, {
+  let currentPreview = {};
+
+  const updateResult = (tabSelector, value) => {
+    $(`${tabSelector} .CodeMirror`).remove();
+    const textarea = document.querySelector(`${tabSelector} > textarea`);
+    textarea.value = value;
+    window.initCodeMirror(textarea, true);
+  }
+
+  const initCodeMirrorOnTabsClick = (labelSelector, attribute) => {
+    $(labelSelector).on('click', function(event) {
+      // the timeout is required for CodeMirror to work on a tab change ¯\_(ツ)_/¯
+      setTimeout(function() {
+        let object = null;
+        try {
+          object = JSON.stringify(
+            JSON.parse(currentPreview[attribute]),
+            null, 2
+          );
+        } catch(_) {
+          object = currentPreview[attribute];
+        }
+        updateResult(`#${event.target.dataset.tabsTarget}`, object);
+      }, 1)
+    });
+  };
+
+  return consumer.subscriptions.create({ channel: 'PreviewChannel', id: id }, {
     connected() {
       // Called when the subscription is ready for use on the server
       console.log('PreviewChannel connected');
-
-      const initCodeMirrorOnTabsClick = (labelSelector, attribute) => {
-        $(labelSelector).on('click', function(event) {
-          // the timeout is required for CodeMirror to work on a tab change ¯\_(ツ)_/¯
-          setTimeout(function() {
-            const object = JSON.stringify(
-              JSON.parse(currentPreview[attribute]),
-              null, 2
-            );
-            updateResult(`#${event.target.dataset.tabsTarget}`, object);
-          }, 1)
-        });
-      };
 
       initCodeMirrorOnTabsClick('#source-data-label', 'raw_data')
       initCodeMirrorOnTabsClick('#harvested-attributes-label', 'harvested_attributes')
