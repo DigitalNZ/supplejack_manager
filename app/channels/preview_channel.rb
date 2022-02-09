@@ -9,6 +9,8 @@ class PreviewChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    Preview.find(params[:id]).destroy
+    preview = Preview.find(params[:id])
+    preview.stop_preview_worker!
+    preview.destroy
   end
 end

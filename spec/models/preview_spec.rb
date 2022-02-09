@@ -106,5 +106,12 @@ RSpec.describe Preview do
       expect(preview.field_errors_json).to be nil
     end
   end
+
+  describe '#stop_preview_worker!' do
+    it 'tells the worker to stop the preview worker' do
+      expect(RestClient).to receive(:delete).with("#{ENV['WORKER_HOST']}/previews/#{preview.id}")
+      preview.stop_preview_worker!
+    end
+  end
 end
 # Final newline missing.

@@ -26,6 +26,12 @@ class Preview
     RestClient.post(preview_url, { preview_id: id, job_id: job_id })
   end
 
+  def stop_preview_worker!
+    preview_url = "#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}/previews"
+
+    RestClient.delete("#{preview_url}/#{id}")
+  end
+
   def harvest_failure?
     !!harvest_failure
   end

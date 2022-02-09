@@ -32,7 +32,8 @@ class PreviewsController < ApplicationController
       environment: 'preview',
       index: params[:index].to_i,
       limit: params[:index].to_i + 1,
-      user_id: current_user.id
+      user_id: current_user.id,
+      preview_id: @preview.id
     )
     @preview.start_preview_worker(job.id)
 

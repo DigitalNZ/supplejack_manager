@@ -25,6 +25,7 @@ class HarvestJob < AbstractJob
     attribute :posted_records_count,  :integer
     attribute :limit,                 :integer
     attribute :retried_records_count, :integer
+    attribute :preview_id,            :string
   end
 
   def resumable?
