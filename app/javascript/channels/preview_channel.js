@@ -53,7 +53,8 @@ const PreviewChannel = (id) => {
         $('#preview-status .details__content').append(`${log} <br />`)
       })
 
-      updateResult('#harvested-attributes', JSON.stringify(JSON.parse(data.harvested_attributes), null, 2));
+      // fires the code mirror rendering
+      $('#preview-tabs li.is-active a')[0].click();
 
       if(data.field_errors != null && data.field_errors != '{}') {
         $('#status').html("Field Errors");
