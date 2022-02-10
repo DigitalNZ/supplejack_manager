@@ -8,8 +8,12 @@
 // foundation related
 @import 'foundation/foundation_and_overrides';
 
+// custom mixins
+@import 'mixins/bem';
+
 // custom forms
 @import 'blocks/base';
+@import 'blocks/details';
 @import 'blocks/forms';
 @import 'blocks/top_nav';
 @import 'blocks/parsers';
