@@ -23,6 +23,7 @@ const PreviewChannel = (id) => {
         } catch(_) {
           object = currentPreview[attribute];
         }
+        object = object == 'null' ? '' : object;
         updateResult(`#${event.target.dataset.tabsTarget}`, object);
       }, 1)
     });
