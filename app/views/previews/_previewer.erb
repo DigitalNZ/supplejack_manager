@@ -12,7 +12,12 @@
 
 <div class="grid-x" id="preview-<%=@preview.id%>">
   <div class="medium-12 cell">
-    <p><strong>Status: </strong><span id="status">Initialising preview record...</span></p>
+    <details class="details details--primary" id="preview-status">
+      <summary class="details__summary"><strong>Status: </strong><span id="status">Initialising preview record...</span></summary>
+      <div class="details__content">
+        <%= @preview.logs.join("<br />") %>
+      </div>
+    </details>
 
     <div id="record-to-delete" class="hidden">
       <p></strong>This record is marked for deletion.</em></p>

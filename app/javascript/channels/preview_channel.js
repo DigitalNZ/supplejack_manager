@@ -48,6 +48,10 @@ const PreviewChannel = (id) => {
       console.log('PreviewChannel received')
       $('#preview-area-spinner').hide();
       $('#status').html(data.status);
+      $('#preview-status .details__content').html('');
+      $.each(data.logs, function(_, log) {
+        $('#preview-status .details__content').append(`${log} <br />`)
+      })
 
       updateResult('#harvested-attributes', JSON.stringify(JSON.parse(data.harvested_attributes), null, 2));
 
@@ -96,16 +100,6 @@ const PreviewChannel = (id) => {
         $.each(failure.backtrace, function(key, value) {
           $('#harvest-failure .details__content').append(value + "<br />");
         });
-      }
-
-      // Status Log
-
-      if(data.status) {
-        $('#status-log').append("<p>" + data.status + "</p>");
-      }
-
-      if(data.status_log) {
-        $('#status-log').append("<p>" + data.status_log + "</p>");
       }
 
       if(data.status == 'finished' && data.raw_data == null) {
