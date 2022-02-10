@@ -10,6 +10,8 @@ Rails.application.config.filter_parameters += %i[
   parser_code
   raw_data
   harvested_attributes
+  harvest_failure
+  enrichment_failures
   api_record
   content
 ]

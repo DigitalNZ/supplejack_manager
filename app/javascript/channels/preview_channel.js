@@ -99,10 +99,24 @@ const PreviewChannel = (id) => {
         $('#harvest-failure').removeClass('hide');
         $('#harvest-failure h4').html(`Harvest failure: ${failure.exception_class} "${failure.message}"`);
 
-        $.each(failure.backtrace, function(key, value) {
-          $('#harvest-failure .details__content').append(value + "<br />");
+        $.each(failure.backtrace, function(_, line) {
+          $('#harvest-failure .details__content').append(line + "<br />");
         });
       }
+
+      if(data.enrichment_failures) {
+        $('#enrichment-failures').html('')
+        const failures = JSON.parse(data.enrichment_failures)
+        $.each(failures, function(_, failure) {
+          $('#enrichment-failures').append(`
+            <details class="details details--warning">
+              <summary class="details__summary"><h4>Enrichment "${failure.enrichment_name}" failed: ${failure.exception_class} "${failure.message}"</h4></summary>
+              <div class="details__content">${failure.backtrace.join('<br />')}</div>
+            </details>
+          `)
+        });
+      }
+
 
       if(data.status == 'finished' && data.raw_data == null) {
         $('h4.not-found').show();

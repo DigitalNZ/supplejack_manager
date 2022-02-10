@@ -68,6 +68,7 @@ class PreviewsController < ApplicationController
         :validation_errors,
         :harvest_failure,
         :harvest_job_errors,
+        :enrichment_failures,
         :format,
         harvest_job: [
           :parser_code,

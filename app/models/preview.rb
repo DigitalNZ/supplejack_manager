@@ -20,6 +20,7 @@ class Preview
   field :field_errors,         type: String
   field :validation_errors,    type: String
   field :harvest_failure,      type: String
+  field :enrichment_failures,  type: String
   field :harvest_job_errors,   type: String
   field :format,               type: String
 
