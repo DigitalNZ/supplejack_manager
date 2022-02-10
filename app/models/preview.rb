@@ -5,6 +5,8 @@ class Preview
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  before_save :append_logs
+
   field :parser_code,          type: String
   field :parser_id,            type: String
   field :index,                type: Integer
@@ -13,6 +15,7 @@ class Preview
   field :harvested_attributes, type: String
   field :api_record,           type: String
   field :status,               type: String
+  field :logs,                 type: Array, default: []
   field :deletable,            type: Boolean
   field :field_errors,         type: String
   field :validation_errors,    type: String
@@ -24,6 +27,10 @@ class Preview
     preview_url = "#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}/previews"
 
     RestClient.post(preview_url, { preview_id: id, job_id: job_id })
+  end
+
+  def append_logs
+    logs << status if status_changed? && status.present?
   end
 
   def harvest_failure?
