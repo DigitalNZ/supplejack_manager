@@ -1,0 +1,24 @@
+.details {
+  @include element('summary') {
+    // trick to avoid the text going under the arrow
+    & > * {
+      display: inline;
+    }
+
+    cursor: pointer;
+  }
+
+  @each $name, $color in $foundation-palette {
+    @include modifier(#{$name}) {
+      .details__summary {
+        background-color: scale-color($color, $lightness: $callout-background-fade);
+        padding: .5rem 1rem;
+      }
+
+      .details__content {
+        border: 2px solid scale-color($color, $lightness: $callout-background-fade);
+        padding: 1rem;
+      }
+    }
+  }
+}

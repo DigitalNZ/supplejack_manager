@@ -90,11 +90,11 @@ const PreviewChannel = (id) => {
         var failure = JSON.parse(data.harvest_failure);
 
         $('#status').html("Harvest Failed");
-        $('#harvest-failure h6').html(failure.exception_class);
-        $('#harvest-failure p').html(failure.message);
+        $('#harvest-failure').removeClass('hide');
+        $('#harvest-failure h4').html(`Harvest failure: ${failure.exception_class} "${failure.message}"`);
 
         $.each(failure.backtrace, function(key, value) {
-          $('#harvest-failure ul').append("<li>" + value + "</li>");
+          $('#harvest-failure .details__content').append(value + "<br />");
         });
       }
 
