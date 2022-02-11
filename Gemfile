@@ -16,7 +16,7 @@ gem 'mimemagic', '= 0.3.10'
 gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
-gem 'puma', '~> 4.3.9'
+gem 'puma', '~> 4.3.11'
 gem 'rails', '~> 6.1.4.4'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'render_async', '~> 2.1', '>= 2.1.11'
