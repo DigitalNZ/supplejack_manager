@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   protected
     def configure_permitted_parameters
-      return unless MFA_ENABLED
+      return unless User.new.need_two_factor_authentication?
 
       devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
     end
