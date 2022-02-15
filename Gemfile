@@ -21,7 +21,6 @@ gem 'rails', '~> 6.1.4.6'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'render_async', '~> 2.1', '>= 2.1.11'
 gem 'rqrcode'
-gem 'rubocop', require: false
 gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.6.1'
 gem 'two_factor_authentication'
@@ -48,16 +47,12 @@ group :test do
 end
 
 group :development do
-  gem 'unicorn-rails'
-
   # better error
   gem 'better_errors'
   gem 'binding_of_caller'
 
-  # spring
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring', '~> 2.1'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # listen is required for bootsnap
+  gem 'listen'
 end
 
 group :development, :test do
@@ -66,6 +61,7 @@ group :development, :test do
   gem 'pry-rails'
 
   # rubocop tests
+  gem 'rubocop', require: false
   gem 'rubocop-rails_config', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-performance', require: false
