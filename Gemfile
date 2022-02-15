@@ -23,7 +23,7 @@ gem 'render_async', '~> 2.1', '>= 2.1.11'
 gem 'rqrcode'
 gem 'rubocop', require: false
 gem 'server_timing'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.5'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.6.1'
 gem 'two_factor_authentication'
 
 # assets gems
