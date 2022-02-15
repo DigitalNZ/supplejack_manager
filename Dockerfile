@@ -1,4 +1,4 @@
-FROM ruby:2.7.2-alpine AS builder
+FROM ruby:3.0.3-alpine3.15 AS builder
 
 WORKDIR /app
 
@@ -36,7 +36,7 @@ RUN rm -rf tmp/cache vendor/assets spec node_modules
 
 ############### Build step done ###############
 
-FROM ruby:2.7.2-alpine
+FROM ruby:3.0.3-alpine3.15
 
 WORKDIR /app
 
