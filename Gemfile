@@ -12,7 +12,6 @@ gem 'devise', '~> 4.0'
 gem 'erb_lint', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mimemagic', '= 0.3.10'
 gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
