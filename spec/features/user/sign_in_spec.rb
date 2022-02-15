@@ -37,7 +37,7 @@ RSpec.feature 'User sign in', type: :feature do
     let(:mfa_user) { create(:user, :otp) }
 
     scenario 'Must enter their OTP' do
-      MFA_ENABLED = true
+      allow_any_instance_of(User).to receive(:need_two_factor_authentication?).and_return(true)
       fill_in 'user[email]', with: mfa_user.email
       fill_in 'user[password]', with: mfa_user.password
       click_button 'Sign in'
@@ -50,7 +50,6 @@ RSpec.feature 'User sign in', type: :feature do
 
 
       expect(page).to have_text 'Two factor authentication successful.'
-      MFA_ENABLED = false
     end
   end
 end

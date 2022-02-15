@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def mfa
-    return unless MFA_ENABLED
+    return unless @user.need_two_factor_authentication?
 
     unless @user.authenticate_totp(user_params[:otp])
       redirect_to(

@@ -6,8 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
     def confirm_two_factor_authenticated
-      return unless MFA_ENABLED
-
+      return unless User.new.need_two_factor_authentication?
       return if is_fully_authenticated?
 
       flash[:error] = t('devise.errors.messages.user_not_authenticated')

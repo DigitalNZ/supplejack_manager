@@ -78,8 +78,8 @@ class User
     super && active
   end
 
-  def need_two_factor_authentication?(request)
-    MFA_ENABLED
+  def need_two_factor_authentication?(request = nil)
+    ENV['MFA_ENABLED'] == 'true'
   end
 
   def two_factor_qr_code_uri
@@ -88,7 +88,7 @@ class User
 
   # Generate the key required for MFA
   def generate_totp
-    return unless MFA_ENABLED
+    return unless need_two_factor_authentication?
 
     self.otp_secret_key = generate_totp_secret
     save!
