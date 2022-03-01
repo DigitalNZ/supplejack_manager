@@ -49,9 +49,6 @@ group :development do
   # better error
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  # listen is required for bootsnap
-  gem 'listen'
 end
 
 group :development, :test do
