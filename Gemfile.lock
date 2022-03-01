@@ -273,9 +273,6 @@ GEM
       mongoid
     launchy (2.5.0)
       addressable (~> 2.7)
-    listen (3.7.1)
-      rb-fsevent (~> 0.10, >= 0.10.3)
-      rb-inotify (~> 0.9, >= 0.9.10)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -393,9 +390,6 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     randexp (0.1.7)
-    rb-fsevent (0.11.1)
-    rb-inotify (0.10.1)
-      ffi (~> 1.0)
     redis (4.6.0)
     regexp_parser (2.2.1)
     render_async (2.1.11)
@@ -549,7 +543,6 @@ DEPENDENCIES
   faker
   kaminari
   kaminari-mongoid
-  listen
   lograge
   mongoid
   mongoid_paranoia
