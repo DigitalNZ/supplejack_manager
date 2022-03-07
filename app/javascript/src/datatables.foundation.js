@@ -1,5 +1,5 @@
 /* Set the defaults for DataTables initialisation */
-$.extend( true, $.fn.dataTable.defaults, {
+$.extend(true, $.fn.dataTable.defaults, {
     "sDom": "<'medium-12 cell'<'grid-x'<'medium-3 cell no-left-padding'f>r>><'grid-x'<'medium-12 cell't>><'grid-x'<'medium-6 cell'i><'medium-6 cell'p>>",
     "sPaginationType": "foundation",
     "oLanguage": {
@@ -105,5 +105,4 @@ $.extend( $.fn.dataTableExt.oPagination, {
             }
         }
     }
-}
-);
+});
