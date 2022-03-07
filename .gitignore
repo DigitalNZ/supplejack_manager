@@ -95,10 +95,13 @@ spec/examples.txt
 .tags_sorted_by_file
 !/tmp/pids/.keep
 
-# webpacker
+# javascript
 /public/packs
 /public/packs-test
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

@@ -3,7 +3,7 @@
     <nav class='top-bar'>
       <ul class='dropdown menu' data-dropdown-menu>
         <li class='name'>
-          <%= link_to image_pack_tag('Supplejack360pxgreenwhite.png'), root_path, class: 'supplejack-logo', alt: 'Supplejack' %>
+          <%= link_to image_tag(image_path('Supplejack360pxgreenwhite.png')), root_path, class: 'supplejack-logo', alt: 'Supplejack' %>
         </li>
         <% if user_signed_in? %>
           <li class='has-submenu'>

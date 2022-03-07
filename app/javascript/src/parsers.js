@@ -4,7 +4,7 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-import PreviewChannel from 'channels/preview_channel';
+import PreviewChannel from '../channels/preview_channel';
 
 var stored_sources;
 

@@ -25,7 +25,9 @@ gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'pm/rail
 gem 'two_factor_authentication'
 
 # assets gems
-gem 'webpacker'
+gem 'sprockets-rails'
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
 
 # AWS gems required by parsers
 gem 'aws-sdk-s3'
