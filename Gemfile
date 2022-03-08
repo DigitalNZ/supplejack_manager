@@ -21,7 +21,7 @@ gem 'redis', '~> 4.0' # for action_cable in production
 gem 'render_async', '~> 2.1', '>= 2.1.11'
 gem 'rqrcode'
 gem 'server_timing'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'pm/rails-7'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.7'
 gem 'two_factor_authentication'
 
 # assets gems
