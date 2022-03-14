@@ -34,6 +34,7 @@ class ApplicationController < ActionController::Base
         ::Digest::SHA256.hexdigest(token),
         ::Digest::SHA256.hexdigest(ENV['WORKER_KEY'])
       )
+      # ::Digest::SHA256.hexdigest('YOUR_WORKER_KEY')
     end
   end
 

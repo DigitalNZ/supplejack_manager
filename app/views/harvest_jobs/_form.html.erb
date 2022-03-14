@@ -7,10 +7,11 @@
   <%= render 'parsers/error', error: @parser.error %>
 <% end %>
 <%= custom_form_with model: @harvest_job, local: false, format: :js do |f| %>
-  <%= f.hidden_field :parser_id %>
-  <%= f.hidden_field :version_id %>
-  <%= f.hidden_field :user_id %>
   <%= f.hidden_field :environment %>
+  <%= f.hidden_field :parser_id %>
+  <%= f.hidden_field :source_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :version_id %>
 
   <%= f.label :mode, class: 'large' %>
   <%= f.collection_radio_buttons :mode, @parser.modes, :first, :second, checked: @parser.modes.first do |b| %>

@@ -34,6 +34,7 @@ class ParserVersionsController < ApplicationController
 
   def new_harvest
     @harvest_job = HarvestJob.new(parser_id: @parser.id,
+                                  source_id: @parser.source.source_id,
                                   version_id: @version.id,
                                   user_id: current_user.id,
                                   environment: params[:environment])
