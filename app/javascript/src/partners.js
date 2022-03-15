@@ -3,6 +3,6 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$(function() {
+document.addEventListener('turbo:load', function() {
   return $('#partners').dataTable();
 });

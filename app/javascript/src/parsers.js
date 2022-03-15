@@ -10,7 +10,7 @@ var stored_sources;
 
 stored_sources = null;
 
-$(function() {
+document.addEventListener('turbo:load', function() {
 
   $("form[action^='/parsers/'] input[name='parser[message]'").on('submit', function(e) {
     var parser_message;

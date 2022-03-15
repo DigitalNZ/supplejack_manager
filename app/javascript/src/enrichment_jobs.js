@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('turbo:load', function() {
   var $enrichmentJob;
   $enrichmentJob = $("#enrichment-job");
   if ($enrichmentJob.length > 0 && $enrichmentJob.data("active")) {
