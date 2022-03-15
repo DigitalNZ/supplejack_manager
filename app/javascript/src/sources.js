@@ -12,7 +12,7 @@ var fold_create_fields = function(select, fields) {
   }
 };
 
-$(function() {
+document.addEventListener('turbo:load', function() {
   var update_link, update_time;
 
   $('#sources').dataTable();

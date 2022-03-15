@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('turbo:load', function() {
   var $harvestJob;
   $harvestJob = $("#harvest-job");
   if ($harvestJob.length > 0 && $harvestJob.data("active")) {

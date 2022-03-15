@@ -4,14 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Harvester Manager" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Harvester Manager" %>">
-    <%= stylesheet_link_tag "application", media: :all %>
-    <%= javascript_include_tag "application" %>
     <%= csp_meta_tag %>
     <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application", media: :all, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.1/themes/smoothness/jquery-ui.min.css', "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= action_cable_meta_tag %>
+
     <%= yield(:head) %>
 
-    <%= action_cable_meta_tag %>
-    <%= stylesheet_link_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.1/themes/smoothness/jquery-ui.min.css' %>
     <%= favicon_link_tag asset_path('favicon-32x32.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_path('favicon-16x16.png'), rel: 'icon', type: 'image/png' %>
     <%= favicon_link_tag asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png', sizes: '144x144' %>

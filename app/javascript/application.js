@@ -7,6 +7,8 @@ import 'foundation-sites'
 import 'moment'
 import './src/codemirror'
 import './src/datatable.js'
+import '@hotwired/turbo-rails'
+import './controllers'
 import RailsUJS from '@rails/ujs'
 RailsUJS.start()
 
@@ -31,7 +33,6 @@ import './src/snippets'
 import './src/sources'
 import './src/suppressed_collections'
 
-
-$(function() {
+document.addEventListener('turbo:load', function() {
   $(document).foundation();
 });
