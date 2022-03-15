@@ -24,6 +24,10 @@ gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.7'
 gem 'two_factor_authentication'
 
+# Hotwire and turbo
+gem 'turbo-rails'
+gem 'stimulus-rails'
+
 # assets gems
 gem 'sprockets-rails'
 gem 'jsbundling-rails'
