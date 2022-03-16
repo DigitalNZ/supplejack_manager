@@ -190,7 +190,7 @@ en:
 
   snippets:
     label: "Code Snippets"
-    edit_current: "(Edit current version)"
+    edit_current: "Edit current version"
     rename: "Rename Code Snippet"
     delete: "Delete Code Snippet"
     create: "Create New Code Snippet"

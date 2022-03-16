@@ -34,7 +34,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
 
     click_link 'Tag as Staging'
 
-    find('.run-harvest').click
+    click_button 'Run Harvest'
 
     click_link 'Staging Harvest'
 

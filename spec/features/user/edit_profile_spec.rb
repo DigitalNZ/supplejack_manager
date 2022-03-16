@@ -9,6 +9,7 @@ RSpec.feature 'User change its profile', type: :feature, js: true do
   let(:admin_user) { create(:user, :admin, email: 'admin@test.com') }
 
   before do
+    allow_any_instance_of(Source).to receive(:update_apis)
     allow_any_instance_of(Partner).to receive(:update_apis)
   end
 
@@ -19,6 +20,12 @@ RSpec.feature 'User change its profile', type: :feature, js: true do
     end
 
     scenario 'Updates profile information' do
+      allow(AbstractJob).to receive(:find) { {} }
+      allow(CollectionStatistics).to receive(:first) { build(:collection_statistics) }
+      allow(CollectionStatistics).to receive(:index_statistics) { { '2013-12-26' => { suppressed: 1, activated: 2, deleted: 3 } } }
+      allow(Parser).to receive_message_chain(:desc, :limit)
+      allow(HarvestSchedule).to receive(:find)
+
       new_email = 'update@test.com'
       new_name = 'Test John'
       new_password = 'terces'
@@ -29,6 +36,7 @@ RSpec.feature 'User change its profile', type: :feature, js: true do
       fill_in 'user[password_confirmation]', with: new_password
 
       click_button 'Update User'
+      expect(edit_user_page).to have_flash_success
 
       updated_user = User.find(user.id)
       expect(updated_user.email).to eq new_email
@@ -36,15 +44,14 @@ RSpec.feature 'User change its profile', type: :feature, js: true do
 
       expect(edit_user_page).to have_flash_success
 
-      logout(:user)
+      find_link("Hi, #{new_name}").hover
+      click_link 'Logout'
 
-      login_page = LoginPage.new
-      login_page.load
       fill_in 'user[email]', with: new_email
       fill_in 'user[password]', with: new_password
       click_button 'Sign in'
 
-      expect(login_page.flash_success).to have_content('Signed in successfully.')
+      expect(page).to have_content('Signed in successfully.')
     end
   end
 
