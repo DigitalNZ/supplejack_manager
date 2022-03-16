@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :collection_statistics do
     source_id { 'nz-history' }
-    day { Time.zone.today.to_s }
+    day { '2022-03-16' }
     suppressed_count { 1 }
     deleted_count { 0 }
     activated_count { 0 }

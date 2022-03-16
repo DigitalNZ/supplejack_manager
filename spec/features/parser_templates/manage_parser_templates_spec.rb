@@ -39,7 +39,7 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
 
   scenario 'can update parser script name' do
     click_link parser_templates.first.name
-    click_link 'Rename Parser Template'
+    click_button 'Rename Parser Template'
 
     fill_in 'parser_template[name]', with: 'New name'
 
@@ -50,7 +50,7 @@ RSpec.feature 'Manage parser', type: :feature, js: true do
 
   scenario 'can delete parser script' do
     click_link parser_templates.first.name
-    click_link 'Delete Parser Template'
+    click_button 'Delete Parser Template'
     click_button 'Delete'
 
     expect(page).not_to have_content(parser_templates.first.name)

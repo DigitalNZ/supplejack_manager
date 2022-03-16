@@ -35,4 +35,9 @@ import './src/suppressed_collections'
 
 document.addEventListener('turbo:load', function() {
   $(document).foundation();
+  $('#turbo-transition').hide();
+});
+
+document.addEventListener('turbo:click', function() {
+  $('#turbo-transition').show();
 });

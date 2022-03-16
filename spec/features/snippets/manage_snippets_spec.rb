@@ -58,7 +58,7 @@ RSpec.feature 'Manage snippets', type: :feature, js: true do
 
   scenario 'can update snippet name' do
     click_link snippets.first.name
-    click_link 'Rename Code Snippet'
+    click_button 'Rename Code Snippet'
 
     fill_in 'snippet[name]', with: 'New name'
 
@@ -69,7 +69,7 @@ RSpec.feature 'Manage snippets', type: :feature, js: true do
 
   scenario 'can delete snippet' do
     click_link snippets.first.name
-    click_link 'Delete Code Snippet'
+    click_button 'Delete Code Snippet'
     click_button 'Delete'
 
     expect(page).not_to have_content(snippets.first.name)
