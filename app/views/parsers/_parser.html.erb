@@ -82,9 +82,12 @@
                       <%= link_to("#{env.capitalize} Harvest",
                             new_harvest_parser_parser_version_path(
                             @harvest_job.parser_id,
-                            @harvest_job.version_id),
-                            class: 'records-harvest-modal-button',
-                            data: { environment: env }) %>
+                            @harvest_job.version_id,
+                            environment: env),
+                            data: {
+                              open: 'harvest-modal',
+                              turbo_frame: 'harvest_job_modal'
+                            }) %>
                     </li>
                   <% end %>
                 <% end %>
@@ -163,15 +166,17 @@
   </button>
 </div>
 
-<div id='harvest-modal' class='reveal large' data-reveal>
-  <div id='harvest-form'></div>
+  <div id='harvest-modal' class='reveal large' data-reveal>
+    <%= turbo_frame_tag 'harvest_job_modal' do %>
+      <div id='preview-area-spinner' class='spinner'>
+        <%= image_tag image_path('sj-spinner.gif') %>
+      </div>
+    <% end %>
 
-  <div id='harvest-result'></div>
-
-  <button class='close-button' data-close aria-label='Close modal' type='button'>
-    <span aria-hidden='true'>&times;</span>
-  </button>
-</div>
+    <button class='close-button' data-close aria-label='Close modal' type='button'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>
 
 <div id='enrichment-modal' class='reveal large' data-reveal>
   <div id='enrichment-form'></div>

@@ -45,7 +45,9 @@ RSpec.feature 'User change its profile', type: :feature, js: true do
       expect(edit_user_page).to have_flash_success
 
       find_link("Hi, #{new_name}").hover
+      expect(page).to have_link('Logout')
       click_link 'Logout'
+      expect(page).to have_text('You need to sign in or sign up before continuing.')
 
       fill_in 'user[email]', with: new_email
       fill_in 'user[password]', with: new_password
@@ -78,6 +80,7 @@ RSpec.feature 'User change its profile', type: :feature, js: true do
       end
 
       click_button 'Update User'
+      expect(page).to have_text('User was successfully updated.')
 
       admin_user.reload
 
