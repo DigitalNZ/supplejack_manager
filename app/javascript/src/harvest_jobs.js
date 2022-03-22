@@ -4,7 +4,7 @@ document.addEventListener('turbo:load', function() {
   if ($harvestJob.length > 0 && $harvestJob.data("active")) {
     HarvestJobsPoller.poll();
   }
-  return $('[name="harvest_job[mode]"]').change(function() {
+  return $('[name="harvest_job[mode]"]').on('change', function() {
     var box;
     box = $('#harvest_job_limit');
     if ($('#harvest_job_mode_full_and_flush')[0].checked) {

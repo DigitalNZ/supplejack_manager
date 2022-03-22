@@ -33,10 +33,13 @@ import './src/snippets'
 import './src/sources'
 import './src/suppressed_collections'
 
-document.addEventListener('turbo:load', function() {
+function initJS() {
   $(document).foundation();
   $('#turbo-transition').hide();
-});
+}
+
+document.addEventListener('turbo:load', initJS);
+document.addEventListener('turbo:frame-load', initJS);
 
 document.addEventListener('turbo:click', function() {
   $('#turbo-transition').show();

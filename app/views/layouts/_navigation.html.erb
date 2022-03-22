@@ -57,7 +57,9 @@
                 <%= link_to_tab t('users.all_users'), users_path %>
               <% end %>
               <%= link_to_tab t('users.edit_profile'), edit_user_path(current_user) %>
-            <li><%= link_to t('logout'), destroy_user_session_path, method: :delete %></li>
+              <li>
+                <%= link_to(t('logout'), destroy_user_session_path) %>
+              </li>
             </ul>
           </li>
         <% else %>

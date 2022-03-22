@@ -47,18 +47,15 @@ document.addEventListener('turbo:load', function() {
   $(".records-harvest-modal-button").on('click', function(e) {
     e.preventDefault();
 
-    var $link, environment;
-    $link = $(this);
-    environment = $link.data("environment");
+    var $link = $(this);
+    var environment = $link.data("environment");
     $("#harvest_job_environment").val(environment);
     $('#harvest_job_mode_normal').prop('checked', 'checked');
     $("#harvest-form").show();
     $("#harvest-result").hide();
     $("#harvest-modal").foundation('open');
     $("#harvest-form form").attr("action", "/" + environment + "/harvest_jobs");
-    $.get($(this).attr("href"), {
-      'environment': environment
-    });
+    $.get($link.attr("href"));
     return false;
   });
 
