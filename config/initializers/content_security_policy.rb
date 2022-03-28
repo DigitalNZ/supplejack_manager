@@ -6,26 +6,17 @@
 
 Rails.application.config.content_security_policy do |policy|
   policy.default_src     :none
-  policy.font_src        :self
-  policy.img_src         :self, :data, 'https://ajax.googleapis.com'
-  policy.object_src      :none
+
+  # alphabetically ordered
   policy.base_uri        :none
-  policy.script_src      :self, :unsafe_inline
-  policy.frame_ancestors :none
-  policy.form_action     :self
-
-  policy.style_src       :self, 'https://ajax.googleapis.com'
-  if Rails.env.in? %w[test development]
-    # we have to add unsafe_inline in development because the css loader
-    # injects inline styles
-    policy.style_src     :self, 'https://ajax.googleapis.com', :unsafe_inline
-  end
-
   policy.connect_src     :self
-  # If you are using webpack-dev-server then specify webpack-dev-server host
-  if Rails.env.in? %w[test development]
-    policy.connect_src :self, :https, "http://localhost:3036", "ws://localhost:3036"
-  end
+  policy.img_src         :self, :data, 'https://ajax.googleapis.com'
+  policy.font_src        :self
+  policy.form_action     :self
+  policy.frame_ancestors :none
+  policy.object_src      :none
+  policy.script_src      :self, :unsafe_inline
+  policy.style_src       :self, 'https://ajax.googleapis.com'
 
   # Specify URI for violation reports
   # policy.report_uri "/csp-violation-report-endpoint"

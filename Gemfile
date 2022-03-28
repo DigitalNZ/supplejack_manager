@@ -16,16 +16,18 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 6.1.4.6'
+gem 'rails', '~> 7.0.2'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'render_async', '~> 2.1', '>= 2.1.11'
 gem 'rqrcode'
 gem 'server_timing'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.6.1'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.7'
 gem 'two_factor_authentication'
 
 # assets gems
-gem 'webpacker'
+gem 'sprockets-rails'
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
 
 # AWS gems required by parsers
 gem 'aws-sdk-s3'
@@ -49,9 +51,6 @@ group :development do
   # better error
   gem 'better_errors'
   gem 'binding_of_caller'
-
-  # listen is required for bootsnap
-  gem 'listen'
 end
 
 group :development, :test do

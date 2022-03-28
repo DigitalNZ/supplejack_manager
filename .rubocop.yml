@@ -18,6 +18,7 @@ AllCops:
     - 'lib/liquid/**/*'
     - 'tmp/**/*'
     - 'features/**/*'
+    - 'bin/*'
   DisplayStyleGuide: true
   DisplayCopNames: true
 
@@ -26,3 +27,7 @@ Style/StringLiterals:
 
 Style/Documentation:
   Enabled: false
+
+Performance/OpenStruct:
+  Exclude:
+    - 'spec/**/*'
