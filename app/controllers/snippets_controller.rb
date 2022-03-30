@@ -35,7 +35,7 @@ class SnippetsController < ApplicationController
 
   def destroy
     @snippet.destroy
-    redirect_to snippets_path
+    redirect_to snippets_path, status: :see_other
   end
 
   def current_version
