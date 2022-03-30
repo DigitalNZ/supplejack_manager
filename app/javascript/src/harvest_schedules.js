@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('turbo:load', function() {
   $('#harvest_schedules').dataTable({
     'order': [[6, 'desc']],
     'aoColumnDefs': [
@@ -13,7 +13,7 @@ $(function() {
     format: 'd/m/Y H:i'
   });
 
-  $('input[name="harvest_schedule[recurrent]"]').change(function() {
+  $('input[name="harvest_schedule[recurrent]"]').on('change', function() {
     var $checkBox, $recurrentOptions;
     $checkBox = $(this);
     $recurrentOptions = $('#recurrent-options');
@@ -25,7 +25,7 @@ $(function() {
   });
 
   var $form = $('#harvest-schedule-form form');
-  return $form.find('select[name="harvest_schedule[parser_id]"]').change(function(event) {
+  return $form.find('select[name="harvest_schedule[parser_id]"]').on('change', function(event) {
     return $.get($form.attr('action') + '/new.js', $form.serialize());
   });
 });

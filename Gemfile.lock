@@ -494,10 +494,15 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stimulus-rails (1.0.4)
+      railties (>= 6.0.0)
     strscan (3.0.1)
     thor (1.2.1)
     timecop (0.9.4)
     timeout (0.2.0)
+    turbo-rails (1.0.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     two_factor_authentication (2.2.0)
       devise
       encryptor
@@ -570,8 +575,10 @@ DEPENDENCIES
   simplecov
   site_prism
   sprockets-rails
+  stimulus-rails
   supplejack_common!
   timecop
+  turbo-rails
   two_factor_authentication
   webdrivers
 

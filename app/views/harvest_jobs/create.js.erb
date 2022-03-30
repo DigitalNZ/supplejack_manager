@@ -1,8 +1,0 @@
-$("#harvest-form").hide();
-
-<% if @harvest_job.errors.any? %>
-  $("#harvest-result").html('<%= j render "errors" %>').show();
-<% else %>
-  $("#harvest-result").html('<%= j render @harvest_job %>').show();
-  HarvestJobsPoller.poll();
-<% end %>

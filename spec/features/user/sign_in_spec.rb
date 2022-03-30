@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'User sign in', type: :feature do
+RSpec.feature 'User sign in', type: :feature, js: true do
   let(:login_page) { LoginPage.new }
   let(:user) { create(:user) }
 
@@ -36,19 +36,21 @@ RSpec.feature 'User sign in', type: :feature do
   context 'A user with 2fa enabled' do
     let(:mfa_user) { create(:user, :otp) }
 
-    scenario 'Must enter their OTP' do
+    scenario 'Must enter a valid OTP' do
       allow_any_instance_of(User).to receive(:need_two_factor_authentication?).and_return(true)
+
       fill_in 'user[email]', with: mfa_user.email
       fill_in 'user[password]', with: mfa_user.password
       click_button 'Sign in'
 
       expect(page).to have_text 'Please enter the code from your authenticator app:'
 
-      fill_in 'code', with: ROTP::TOTP.new(mfa_user.otp_secret_key).at(DateTime.now)
-
+      fill_in 'code', with: '000000'
       click_button 'Log in'
+      expect(page).to have_text 'Attempt failed.'
 
-
+      fill_in 'code', with: ROTP::TOTP.new(mfa_user.otp_secret_key).at(DateTime.now)
+      click_button 'Log in'
       expect(page).to have_text 'Two factor authentication successful.'
     end
   end

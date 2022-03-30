@@ -1,14 +1,16 @@
 {
   "dependencies": {
     "@elastic/apm-rum": "^5.9.1",
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo-rails": "^7.1.1",
     "@rails/actioncable": "^6.0.0",
     "@rails/ujs": "^6.1.4-1",
     "codemirror": "^5.63.3",
     "datatables.net": "^1.11.3",
     "datatables.net-zf": "^1.11.3",
+    "esbuild": "^0.14.23",
     "foundation-sites": "6.4.3",
     "jquery": "^3.6.0",
-    "esbuild": "^0.14.23",
     "jquery-datetimepicker": "^2.5.21",
     "jquery-timepicker": "^1.3.3",
     "jquery-ui": "^1.13.0",

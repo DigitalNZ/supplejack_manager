@@ -13,7 +13,7 @@ RSpec.describe CollectionStatisticsController do
     it 'should get all of the collection statistics' do
       expect(CollectionStatistics).to receive(:all) { [collection_statistics] }
       get :index, params: { environment: 'staging' }
-      expect(assigns(:collection_statistics)).to eq "#{Time.zone.today}" => { suppressed: 1, activated: 0, deleted: 0 }
+      expect(assigns(:collection_statistics)).to eq '2022-03-16' => { suppressed: 1, activated: 0, deleted: 0 }
     end
   end
 

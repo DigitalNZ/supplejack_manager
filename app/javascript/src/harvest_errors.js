@@ -1,4 +1,4 @@
-$(function() {  
+document.addEventListener('turbo:load', function() {
   var code_mirror_text_areas = document.getElementsByClassName('code-editor-multiple');
 
   $(code_mirror_text_areas).each(function(key, value) {
@@ -14,5 +14,3 @@ $(function() {
 
   $("#accordion-failed, #accordion-invalid, #accordion-backtrace").accordion({heightStyle: "content",collapsible: true, active: false});
 });
-
-

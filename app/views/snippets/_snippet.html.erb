@@ -21,15 +21,12 @@
       <h3 class='float-left'><%= t('history') %></h3>
 
       <% if can? :update, @snippet %>
-        <%= link_to t('snippets.edit_current'), edit_snippet_path(@snippet), class: 'edit-snippet float-left' %>
+        <%= link_to(t('snippets.edit_current'), edit_snippet_path(@snippet), class: 'button expand medium-12') unless request.path == edit_snippet_path(@snippet) %>
+        <button data-toggle='resource-title rename-form' class='button expand medium-12'><%= t('snippets.rename') %></button>
+        <button class='button expand medium-12' data-open='delete-snippet-alert'><%= t('snippets.delete') %></button>
       <% end %>
 
       <%= render partial: 'versions/list', locals: { versionable: @snippet, versionable_path: 'snippet_snippet_version', async_load_path: versions_snippet_path(@snippet.id) } %>
-
-      <% if can? :update, @snippet %>
-        <a href='#' data-toggle='resource-title rename-form' class='button expand medium-12'><%= t('snippets.rename') %></a>
-        <a href='#' class='button expand medium-12' data-open='delete-snippet-alert'><%= t('snippets.delete') %></a>
-      <% end %>
     </div>
   </div>
 

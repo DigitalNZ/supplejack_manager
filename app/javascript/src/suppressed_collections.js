@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('turbo:load', function() {
   return $('#suppress_collection_form select').change(function() {
     var id;
     id = $('#suppress_collection_form select').find(":selected").attr("value");

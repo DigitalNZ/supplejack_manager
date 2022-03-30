@@ -71,9 +71,9 @@
             </div>
           </li>
           <li class='medium-12 cell'>
-            <div class='button run-harvest dropdown medium-12 expanded' data-toggle='harvest-dropdown' <%= (@version&.tags || []).any? ? '' : 'disabled' %>>
+            <button class='button run-harvest dropdown medium-12 expanded' data-toggle='harvest-dropdown' <%= (@version&.tags || []).any? ? '' : 'disabled' %>>
               Run Harvest
-            </div>
+            </button>
             <div class='dropdown-pane' id='harvest-dropdown' data-dropdown data-auto-focus='true'>
               <ul class='no-bullet'>
                 <% APPLICATION_ENVS.each do |env| %>
@@ -82,9 +82,12 @@
                       <%= link_to("#{env.capitalize} Harvest",
                             new_harvest_parser_parser_version_path(
                             @harvest_job.parser_id,
-                            @harvest_job.version_id),
-                            class: 'records-harvest-modal-button',
-                            data: { environment: env }) %>
+                            @harvest_job.version_id,
+                            environment: env),
+                            data: {
+                              open: 'harvest-modal',
+                              turbo_frame: 'harvest_job_modal'
+                            }) %>
                     </li>
                   <% end %>
                 <% end %>
@@ -93,7 +96,7 @@
           </li>
         <% end %>
       <% else %>
-        <div href='#' class='button run-harvest dropdown medium-12 cell expanded disabled'>Run Harvest</div>
+        <button class='button run-harvest dropdown medium-12 cell expanded disabled'>Run Harvest</button>
       <% end %>
       <% if can? :preview, @parser %>
         <li class='medium-12 cell'>
@@ -163,15 +166,17 @@
   </button>
 </div>
 
-<div id='harvest-modal' class='reveal large' data-reveal>
-  <div id='harvest-form'></div>
+  <div id='harvest-modal' class='reveal large' data-reveal>
+    <%= turbo_frame_tag 'harvest_job_modal' do %>
+      <div id='preview-area-spinner' class='spinner'>
+        <%= image_tag image_path('sj-spinner.gif') %>
+      </div>
+    <% end %>
 
-  <div id='harvest-result'></div>
-
-  <button class='close-button' data-close aria-label='Close modal' type='button'>
-    <span aria-hidden='true'>&times;</span>
-  </button>
-</div>
+    <button class='close-button' data-close aria-label='Close modal' type='button'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>
 
 <div id='enrichment-modal' class='reveal large' data-reveal>
   <div id='enrichment-form'></div>

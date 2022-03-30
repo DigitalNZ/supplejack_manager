@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('turbo:load', function() {
   Harvester.textArea = document.getElementsByClassName("code-editor")[0];
   Harvester.readOnly = function() {
     return $(Harvester.textArea).hasClass("read-only");

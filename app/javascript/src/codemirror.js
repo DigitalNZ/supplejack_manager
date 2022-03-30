@@ -2,7 +2,7 @@ import CodeMirror from 'codemirror/lib/codemirror'
 import 'codemirror/mode/ruby/ruby';
 import 'codemirror/mode/xml/xml';
 
-$(function() {
+document.addEventListener('turbo:load', function() {
   window.CodeMirror = CodeMirror;
   window.initCodeMirror = function(textarea, readOnly = false) {
     return window.CodeMirror.fromTextArea(textarea, {
