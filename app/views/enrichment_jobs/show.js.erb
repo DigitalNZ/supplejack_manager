@@ -1,6 +1,0 @@
-$("#enrichment-result").html('<%= j render @enrichment_job %>').show();
-$('#resume-confirmation').foundation();
-
-if ($("#enrichment-end-time").length == 0) {
-  EnrichmentJobsPoller.poll()
-}

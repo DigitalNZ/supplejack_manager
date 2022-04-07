@@ -26,14 +26,14 @@
               Run Harvest
               <ul>
                 <% if APPLICATION_ENVS.include?(:staging) && @version.try(:staging?) %>
-                  <li><%= link_to 'Staging Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: { environment: 'staging' } %></li>
+                  <li><%= link_to 'Staging Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), data: { environment: 'staging' } %></li>
                 <% end %>
 
                 <% if APPLICATION_ENVS.include?(:production) && @version.try(:production?) %>
-                  <li><%= link_to 'Production Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: { environment: 'production' } %></li>
+                  <li><%= link_to 'Production Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), data: { environment: 'production' } %></li>
                 <% end %>
 
-                <li><%= link_to 'Test Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), class: 'records-harvest-modal-button', data: { environment: 'test' } %></li>
+                <li><%= link_to 'Test Harvest', new_harvest_parser_parser_version_path(@harvest_job.parser_id, @harvest_job.version_id), data: { environment: 'test' } %></li>
               </ul>
             </div>
           </li>
@@ -57,6 +57,6 @@
 
   <div class="medium-3 cell">
     <h3 class="no-margin-top left"><%= t('history') %></h3>
-    <%= render partial: 'versions/version_list', locals: { versionable: @parser, versionable_path: 'parser_parser_version' } %>
+    <%= render partial: 'versions/list', locals: { versionable: @parser, versionable_path: 'parser_parser_version', async_load_path: versions_parser_path(@parser.id) } %>
   </div>
 </div>

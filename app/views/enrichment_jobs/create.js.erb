@@ -1,8 +1,0 @@
-$("#enrichment-form").hide();
-
-<% if @enrichment_job.errors.any? %>
-  $("#enrichment-result").html('<%= j render "errors" %>').show();
-<% else %>
-  $("#enrichment-result").html('<%= j render @enrichment_job %>').show();
-  EnrichmentJobsPoller.poll();
-<% end %>

@@ -44,35 +44,6 @@ document.addEventListener('turbo:load', function() {
     return false;
   });
 
-  $(".records-harvest-modal-button").on('click', function(e) {
-    e.preventDefault();
-
-    var $link = $(this);
-    var environment = $link.data("environment");
-    $("#harvest_job_environment").val(environment);
-    $('#harvest_job_mode_normal').prop('checked', 'checked');
-    $("#harvest-form").show();
-    $("#harvest-result").hide();
-    $("#harvest-modal").foundation('open');
-    $("#harvest-form form").attr("action", "/" + environment + "/harvest_jobs");
-    $.get($link.attr("href"));
-    return false;
-  });
-
-  $(".records-enrichment-modal-button").on('click', function() {
-    var $link, environment;
-    $link = $(this);
-    environment = $link.data("environment");
-    $("#enrichment-form").show();
-    $("#enrichment-result").hide();
-    $("#enrichment-modal").foundation('open');
-    $("#enrichment-form form").attr("action", "/" + environment + "/enrichment_jobs");
-    $.get($(this).attr("href"), {
-      'environment': environment
-    });
-    return false;
-  });
-
   $('#cancel-parser-delete').on('click', function() {
     return $('#delete-parser-alert .close-reveal-modal').trigger('click');
   });
