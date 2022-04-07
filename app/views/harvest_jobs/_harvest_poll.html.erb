@@ -1,0 +1,8 @@
+<%= tag.div(data: {
+      controller: 'poll',
+      'poll-url-value': "/#{@harvest_job.environment}/harvest_jobs/#{@harvest_job.id}",
+      'poll-refresh-interval-value': 2000,
+      'poll-turbo-frame-id-value': dom_id(@harvest_job)
+    }) do %>
+  <%= render partial: 'harvest_job' %>
+<% end %>

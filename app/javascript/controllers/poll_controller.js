@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static values = { url: String, refreshInterval: Number }
+  static values = { url: String, refreshInterval: Number, turboFrameId: String }
 
   connect() {
     this.load()
@@ -21,6 +21,9 @@ export default class extends Controller {
   startRefreshing() {
     this.refreshTimer = setInterval(() => {
       this.load()
+      if (this.element.querySelector('[data-active]').dataset['active'] == 'false') {
+        this.stopRefreshing()
+      }
     }, this.refreshIntervalValue)
   }
 
@@ -31,8 +34,7 @@ export default class extends Controller {
   }
 
   load() {
-    fetch(this.urlValue, { headers: { 'Turbo-Frame' : this.element.id } })
-      .then(response => response.text())
-      .then(html => this.element.innerHTML = html)
+    const frame = document.getElementById(this.turboFrameIdValue);
+    frame.src = this.urlValue;
   }
 }

@@ -1,15 +1,7 @@
-<%= turbo_frame_tag 'harvest_job_modal' do %>
+<%= turbo_frame_tag 'harvest_job_form' do %>
   <% if @harvest_job.errors.any? %>
     <%= render 'errors' %>
-  <% else %>
-    <%= turbo_frame_tag(@harvest_job, data: {
-      controller: 'poll',
-      'poll-url-value': "/#{@harvest_job.environment}/harvest_jobs/#{@harvest_job.id}",
-      'poll-refresh-interval-value': 2000
-    }) do %>
-      <div id='preview-area-spinner' class='spinner'>
-        <%= image_tag image_path('sj-spinner.gif') %>
-      </div>
-    <% end %>
   <% end %>
+
+  <%= render partial: 'form' %>
 <% end %>
