@@ -31,8 +31,8 @@
     </div>
   <% end %>
 
-  <%= render_async async_load_path do %>
-    <%= image_tag image_path('sj-spinner.gif', size: '40x40') %>
+  <%= turbo_frame_tag :more_versions, src: async_load_path do %>
+    <%= image_tag image_path('sj-spinner.gif', width: 40, height: 40) %>
     <strong>Loading more versions..</strong>
   <% end %>
 

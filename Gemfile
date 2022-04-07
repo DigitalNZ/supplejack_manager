@@ -18,7 +18,6 @@ gem 'oai'
 gem 'puma'
 gem 'rails', '~> 7.0.2'
 gem 'redis', '~> 4.0' # for action_cable in production
-gem 'render_async', '~> 2.1', '>= 2.1.11'
 gem 'rqrcode'
 gem 'server_timing'
 gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.7'
