@@ -8,16 +8,30 @@ class HarvestJobsController < ApplicationController
 
   def show
     @harvest_job = HarvestJob.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :show }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(@harvest_job, partial: 'harvest_jobs/harvest_job')
+      }
+    end
   end
 
   def create
     @harvest_job = HarvestJob.new(harvest_job_params)
-    @harvest_job.save
+
+    if @harvest_job.save
+      render turbo_stream: turbo_stream.replace('harvest_job_form', partial: 'harvest_jobs/harvest_poll')
+    else
+      render turbo_stream: turbo_stream.replace(@harvest_job, partial: 'harvest_jobs/form')
+    end
   end
 
   def update
     @harvest_job = HarvestJob.find(params[:id])
     @harvest_job.update_attributes(harvest_job_params)
+
+    redirect_to harvest_job_path(@harvest_job)
   end
 
   private
