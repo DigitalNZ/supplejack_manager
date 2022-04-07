@@ -49,9 +49,9 @@
       <% if can? :run_harvest, @parser %>
         <% if @version %>
           <li class='medium-12 cell'>
-            <div class='button run-enrichment dropdown medium-12 expanded' data-toggle='enrichment-dropdown'>
+            <button class='button run-enrichment dropdown medium-12 expanded' data-toggle='enrichment-dropdown' <%= @version&.tags.blank? ? 'disabled' : '' %>>
               Run Enrichment
-            </div>
+            </button>
 
             <div class='dropdown-pane' id='enrichment-dropdown' data-dropdown data-auto-focus='true'>
               <ul class='no-bullet'>
@@ -60,10 +60,13 @@
                     <%= link_to(
                           "#{env.capitalize} Enrichment",
                           new_enrichment_parser_parser_version_path(
-                            @harvest_job.parser_id, @harvest_job.version_id
+                            @harvest_job.parser_id, @harvest_job.version_id, environment: env
                           ),
                           class: 'records-enrichment-modal-button',
-                          data: { environment: env }
+                          data: {
+                            open: 'enrichment-modal',
+                            turbo_frame: 'enrichment_job_modal'
+                          }
                         ) %>
                   </li>
                 <% end %>
@@ -71,7 +74,7 @@
             </div>
           </li>
           <li class='medium-12 cell'>
-            <button class='button run-harvest dropdown medium-12 expanded' data-toggle='harvest-dropdown' <%= (@version&.tags || []).any? ? '' : 'disabled' %>>
+            <button class='button run-harvest dropdown medium-12 expanded' data-toggle='harvest-dropdown' <%= @version&.tags.blank? ? 'disabled' : '' %>>
               Run Harvest
             </button>
             <div class='dropdown-pane' id='harvest-dropdown' data-dropdown data-auto-focus='true'>
@@ -166,22 +169,24 @@
   </button>
 </div>
 
-  <div id='harvest-modal' class='reveal large' data-reveal>
-    <%= turbo_frame_tag 'harvest_job_modal' do %>
-      <div id='preview-area-spinner' class='spinner'>
-        <%= image_tag image_path('sj-spinner.gif') %>
-      </div>
-    <% end %>
+<div id='harvest-modal' class='reveal large' data-reveal>
+  <%= turbo_frame_tag 'harvest_job_modal' do %>
+    <div id='preview-area-spinner' class='spinner'>
+      <%= image_tag image_path('sj-spinner.gif') %>
+    </div>
+  <% end %>
 
-    <button class='close-button' data-close aria-label='Close modal' type='button'>
-      <span aria-hidden='true'>&times;</span>
-    </button>
-  </div>
+  <button class='close-button' data-close aria-label='Close modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
+  </button>
+</div>
 
 <div id='enrichment-modal' class='reveal large' data-reveal>
-  <div id='enrichment-form'></div>
-
-  <div id='enrichment-result'></div>
+  <%= turbo_frame_tag 'enrichment_job_modal' do %>
+    <div id='preview-area-spinner' class='spinner'>
+      <%= image_tag image_path('sj-spinner.gif') %>
+    </div>
+  <% end %>
 
   <button class='close-button' data-close aria-label='Close modal' type='button'>
     <span aria-hidden='true'>&times;</span>

@@ -2,7 +2,6 @@
 
 # app/controllers/enrichment_jobs_controller.rb
 class EnrichmentJobsController < ApplicationController
-  respond_to :js, :html
   before_action :set_worker_environment
   skip_before_action :verify_authenticity_token, only: [:show]
 

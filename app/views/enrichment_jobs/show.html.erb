@@ -1,3 +1,5 @@
-<div id="enrichment-result" class="enrichment-job-full">
-  <%= render @enrichment_job %>
-</div>
+<%= turbo_frame_tag dom_id(@enrichment_job) do %>
+  <div id="enrichment-result" class="enrichment-job-full">
+    <%= render @enrichment_job %>
+  </div>
+<% end %>
