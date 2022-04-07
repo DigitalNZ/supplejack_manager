@@ -394,7 +394,6 @@ GEM
     randexp (0.1.7)
     redis (4.6.0)
     regexp_parser (2.2.1)
-    render_async (2.1.11)
     request_store (1.5.1)
       rack (>= 1.4)
     responders (3.0.1)
@@ -564,7 +563,6 @@ DEPENDENCIES
   rails (~> 7.0.2)
   rails-controller-testing
   redis (~> 4.0)
-  render_async (~> 2.1, >= 2.1.11)
   rqrcode
   rspec-rails (>= 3.7.2)
   rubocop
