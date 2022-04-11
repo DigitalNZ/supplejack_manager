@@ -1,179 +1,181 @@
-<%=
-  tag.div(
-    id: "enrichment-job",
-    data: {
-      url: environment_enrichment_job_path(
-        environment: params[:environment],
-        id: @enrichment_job.id
-      ),
-      active: @enrichment_job.active?
-    }
-  ) do
-%>
-
-  <h2 class="left">
-    <%= t("enrichment_jobs.progress") %>
-    <% if can? :update, @enrichment_job.parser %>
-      <%# <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser)></span> %>
-      <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser), target: :_top %></span>
-    <% else %>
-      <span class="parser-title">: <%= @enrichment_job.parser.try(:name) %></span>
-    <% end %>
-  </h2>
-
-  <% if @enrichment_job.status == 'active' %>
-    <%=
-      link_to(
-        t("enrichment_jobs.stop"),
-        environment_enrichment_job_path(
+<%= turbo_frame_tag dom_id(@enrichment_job) do %>
+  <%=
+    tag.div(
+      id: "enrichment-job",
+      data: {
+        url: environment_enrichment_job_path(
           environment: params[:environment],
-          id: @enrichment_job.id,
-          format: :js,
-          enrichment_job: { status: "stopped" }
+          id: @enrichment_job.id
         ),
-        method: :put,
-        remote: true,
-        id: "stop-enrichment-button",
-        class: "button new-right"
-      )
-    %>
-  <% elsif @enrichment_job.status.in?(%w[stopped failed]) %>
-    <button class="button new-right" data-open="resume-confirmation">
-      <%= t('enrichment_jobs.resume') %>
-    </button>
+        active: @enrichment_job.ready? || @enrichment_job.active?
+      }
+    ) do
+  %>
 
-    <%= render partial: 'shared/confirmation_modal', locals: {
-      information: t('enrichment_jobs.resume_modal_information'),
-      id: 'resume-confirmation',
-      yes:
-        button_to(
-          'Yes',
+    <h2 class="left">
+      <%= t("enrichment_jobs.progress") %>
+      <% if can? :update, @enrichment_job.parser %>
+        <%# <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser)></span> %>
+        <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser), target: :_top %></span>
+      <% else %>
+        <span class="parser-title">: <%= @enrichment_job.parser.try(:name) %></span>
+      <% end %>
+    </h2>
+
+    <% if @enrichment_job.status == 'active' %>
+      <%=
+        link_to(
+          t("enrichment_jobs.stop"),
           environment_enrichment_job_path(
-            environment: @enrichment_job.environment,
+            environment: params[:environment],
             id: @enrichment_job.id,
+            format: :js,
+            enrichment_job: { status: "stopped" }
           ),
-          params: {
-            enrichment_job: {
-              status: "resume",
-              status_message: "Enrichment was resumed #{l(Time.now, format: :long)}"
-            }
-          },
-          'data-close': '',
           method: :put,
           remote: true,
+          id: "stop-enrichment-button",
           class: "button new-right"
         )
-    } %>
+      %>
+    <% elsif @enrichment_job.status.in?(%w[stopped failed]) %>
+      <button class="button new-right" data-open="resume-confirmation">
+        <%= t('enrichment_jobs.resume') %>
+      </button>
+
+      <%= render partial: 'shared/confirmation_modal', locals: {
+        information: t('enrichment_jobs.resume_modal_information'),
+        id: 'resume-confirmation',
+        yes:
+          button_to(
+            'Yes',
+            environment_enrichment_job_path(
+              environment: @enrichment_job.environment,
+              id: @enrichment_job.id,
+            ),
+            params: {
+              enrichment_job: {
+                status: "resume",
+                status_message: "Enrichment was resumed #{l(Time.now, format: :long)}"
+              }
+            },
+            'data-close': '',
+            method: :put,
+            remote: true,
+            class: "button new-right"
+          )
+      } %>
+    <% end %>
+
+    <table>
+      <tr>
+        <td><%= t("enrichment_jobs.enrichment") %></td>
+        <td>
+          <strong><%= @enrichment_job.enrichment %></strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("enrichment_jobs.record_id") %></td>
+        <td>
+          <strong><%= @enrichment_job.record_id %></strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("harvest_jobs.operator") %></td>
+        <td>
+          <% if @enrichment_job.user %>
+            <strong><%= @enrichment_job.user.try(:name) %></strong>
+          <% else %>
+            <strong><%= t("harvest_jobs.scheduled") %></strong>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("harvest_jobs.environment") %></td>
+        <td>
+          <strong><%= @enrichment_job.environment %></strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("harvest_jobs.start_time") %></td>
+        <td>
+          <% if @enrichment_job.start_time %>
+            <strong><%= l @enrichment_job.start_time, format: :long %></strong>
+          <% end %>
+        </td>
+      </tr>
+
+      <% if @enrichment_job.end_time.present? %>
+      <tr id="enrichment-end-time">
+        <td><%= t("harvest_jobs.end_time") %></td>
+        <td>
+          <strong><%= l @enrichment_job.end_time, format: :long rescue '' %></strong>
+        </td>
+      </tr>
+      <% end %>
+
+      <% if @enrichment_job.finished? %>
+      <tr>
+        <td><%= t("harvest_jobs.duration") %></td>
+        <td>
+          <strong><%= human_readable_duration(@enrichment_job.duration) %></strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("harvest_jobs.records_per_second") %></td>
+        <td>
+          <strong><%= number_with_precision @enrichment_job.throughput, precision: 2, delimiter: "," %></strong>
+        </td>
+      </tr>
+      <% end %>
+
+      <tr>
+        <td><%= t("enrichment_jobs.records_processed") %></td>
+        <td>
+          <strong><%= number_with_delimiter @enrichment_job.processed_count %></strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("enrichment_jobs.records_enriched") %></td>
+        <td>
+          <strong><%= number_with_delimiter @enrichment_job.records_count %></strong>
+        </td>
+      </tr>
+
+      <tr>
+        <td><%= t("enrichment_jobs.records_posted") %></td>
+        <td>
+          <strong><%= number_with_delimiter @enrichment_job.posted_records_count %></strong>
+        </td>
+      </tr>
+
+      <% if @enrichment_job.last_posted_record_id.present? %>
+        <tr>
+          <td><%= t("enrichment_jobs.last_posted_record_id") %></td>
+          <td><strong><%= @enrichment_job.last_posted_record_id %></strong></td>
+        </tr>
+      <% end %>
+
+      <% if @enrichment_job.updated_at.present? %>
+        <tr>
+          <td><%= t("enrichment_jobs.updated_at") %></td>
+          <td><strong><%= l(@enrichment_job.updated_at, format: :long) %></strong></td>
+        </tr>
+      <% end %>
+
+      <% if @enrichment_job.status_message.present? %>
+        <tr>
+          <td><%= t("enrichment_jobs.status_message") %></td>
+          <td><strong><%= @enrichment_job.status_message %></strong></td>
+        </tr>
+      <% end %>
+    </table>
+
   <% end %>
-
-  <table>
-    <tr>
-      <td><%= t("enrichment_jobs.enrichment") %></td>
-      <td>
-        <strong><%= @enrichment_job.enrichment %></strong>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("enrichment_jobs.record_id") %></td>
-      <td>
-        <strong><%= @enrichment_job.record_id %></strong>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("harvest_jobs.operator") %></td>
-      <td>
-        <% if @enrichment_job.user %>
-          <strong><%= @enrichment_job.user.try(:name) %></strong>
-        <% else %>
-          <strong><%= t("harvest_jobs.scheduled") %></strong>
-        <% end %>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("harvest_jobs.environment") %></td>
-      <td>
-        <strong><%= @enrichment_job.environment %></strong>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("harvest_jobs.start_time") %></td>
-      <td>
-        <% if @enrichment_job.start_time %>
-          <strong><%= l @enrichment_job.start_time, format: :long %></strong>
-        <% end %>
-      </td>
-    </tr>
-
-    <% if @enrichment_job.end_time.present? %>
-    <tr id="enrichment-end-time">
-      <td><%= t("harvest_jobs.end_time") %></td>
-      <td>
-        <strong><%= l @enrichment_job.end_time, format: :long rescue '' %></strong>
-      </td>
-    </tr>
-    <% end %>
-
-    <% if @enrichment_job.finished? %>
-    <tr>
-      <td><%= t("harvest_jobs.duration") %></td>
-      <td>
-        <strong><%= human_readable_duration(@enrichment_job.duration) %></strong>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("harvest_jobs.records_per_second") %></td>
-      <td>
-        <strong><%= number_with_precision @enrichment_job.throughput, precision: 2, delimiter: "," %></strong>
-      </td>
-    </tr>
-    <% end %>
-
-    <tr>
-      <td><%= t("enrichment_jobs.records_processed") %></td>
-      <td>
-        <strong><%= number_with_delimiter @enrichment_job.processed_count %></strong>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("enrichment_jobs.records_enriched") %></td>
-      <td>
-        <strong><%= number_with_delimiter @enrichment_job.records_count %></strong>
-      </td>
-    </tr>
-
-    <tr>
-      <td><%= t("enrichment_jobs.records_posted") %></td>
-      <td>
-        <strong><%= number_with_delimiter @enrichment_job.posted_records_count %></strong>
-      </td>
-    </tr>
-
-    <% if @enrichment_job.last_posted_record_id.present? %>
-      <tr>
-        <td><%= t("enrichment_jobs.last_posted_record_id") %></td>
-        <td><strong><%= @enrichment_job.last_posted_record_id %></strong></td>
-      </tr>
-    <% end %>
-
-    <% if @enrichment_job.updated_at.present? %>
-      <tr>
-        <td><%= t("enrichment_jobs.updated_at") %></td>
-        <td><strong><%= l(@enrichment_job.updated_at, format: :long) %></strong></td>
-      </tr>
-    <% end %>
-
-    <% if @enrichment_job.status_message.present? %>
-      <tr>
-        <td><%= t("enrichment_jobs.status_message") %></td>
-        <td><strong><%= @enrichment_job.status_message %></strong></td>
-      </tr>
-    <% end %>
-  </table>
-
 <% end %>

@@ -169,7 +169,7 @@
   </button>
 </div>
 
-<div id='harvest-modal' class='reveal large' data-reveal>
+<div id='harvest-modal' class='reveal large' data-reveal reset-modal-on-close>
   <%= turbo_frame_tag 'harvest_job_form' do %>
     <div id='preview-area-spinner' class='spinner'>
       <%= image_tag image_path('sj-spinner.gif') %>
@@ -181,7 +181,7 @@
   </button>
 </div>
 
-<div id='enrichment-modal' class='reveal large' data-reveal>
+<div id='enrichment-modal' class='reveal large' data-reveal reset-modal-on-close>
   <%= turbo_frame_tag 'enrichment_job_form' do %>
     <div id='preview-area-spinner' class='spinner'>
       <%= image_tag image_path('sj-spinner.gif') %>
