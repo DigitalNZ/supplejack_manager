@@ -31,7 +31,7 @@ class HarvestJobsController < ApplicationController
     @harvest_job = HarvestJob.find(params[:id])
     @harvest_job.update_attributes(harvest_job_params)
 
-    redirect_to harvest_job_path(@harvest_job)
+    redirect_to environment_harvest_job_path(params[:environment], id: @harvest_job.id)
   end
 
   private

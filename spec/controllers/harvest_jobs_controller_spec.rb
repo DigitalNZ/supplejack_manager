@@ -12,7 +12,7 @@ RSpec.describe HarvestJobsController do
   describe '#GET show' do
     it 'finds the harvest job' do
       expect(HarvestJob).to receive(:find) { job }
-      get :show, params: { id: 1, format: 'js', environment: 'staging' }
+      get :show, params: { id: 1, environment: 'staging' }
       expect(assigns(:harvest_job)).to eq job
     end
   end
@@ -24,7 +24,8 @@ RSpec.describe HarvestJobsController do
 
     it 'should update the attributes' do
       expect(job).to receive(:update_attributes)
-      put :update, params: { id: 1, harvest_job: { status: 'finished' }, format: 'js', environment: 'staging' }
+      expect(job).to receive(:id) { 'myid' }
+      put :update, params: { id: 1, harvest_job: { status: 'finished' }, environment: 'staging' }
     end
   end
 end

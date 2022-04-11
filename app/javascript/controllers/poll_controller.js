@@ -4,8 +4,6 @@ export default class extends Controller {
   static values = { url: String, refreshInterval: Number, turboFrameId: String }
 
   connect() {
-    this.load()
-
     if (this.hasRefreshIntervalValue) {
       this.startRefreshing()
     }
