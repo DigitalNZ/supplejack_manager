@@ -15,7 +15,7 @@ RSpec.feature 'Harvest Jobs Spec', js: true do
       expect(HarvestJob).to receive(:find) { job }
 
       visit environment_harvest_job_path(job.environment, id: job.id)
-      expect(page).to have_link('Stop Harvest')
+      expect(page).to have_button('Stop Harvest')
       expect(page).to_not have_button('Resume Harvest')
     end
 
@@ -30,11 +30,11 @@ RSpec.feature 'Harvest Jobs Spec', js: true do
     end
 
     def resumable_jobs_spec(job)
-      allow(HarvestJob).to receive(:find).and_return(job, job)
+      allow(HarvestJob).to receive(:find).and_return(job)
       allow(Parser).to receive(:find) { parser }
 
       visit environment_harvest_job_path(job.environment, id: job.id)
-      expect(page).to_not have_link('Stop Harvest')
+      expect(page).to_not have_button('Stop Harvest')
       click_button 'Resume Harvest'
 
       click_button 'No'
