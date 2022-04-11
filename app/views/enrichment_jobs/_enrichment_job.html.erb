@@ -4,10 +4,9 @@
     data: {
       url: environment_enrichment_job_path(
         environment: params[:environment],
-        id: @enrichment_job.id,
-        format: "js"
+        id: @enrichment_job.id
       ),
-      active: !@enrichment_job.finished?
+      active: @enrichment_job.active?
     }
   ) do
 %>

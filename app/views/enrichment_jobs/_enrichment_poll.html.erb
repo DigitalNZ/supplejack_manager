@@ -1,0 +1,8 @@
+<%= turbo_frame_tag(@enrichment_job, data: {
+  controller: 'poll',
+  'poll-url-value': "/#{@enrichment_job.environment}/enrichment_jobs/#{@enrichment_job.id}",
+  'poll-refresh-interval-value': 2000,
+  'poll-turbo-frame-id-value': dom_id(@enrichment_job)
+}) do %>
+  <%= render partial: 'enrichment_job' %>
+<% end %>

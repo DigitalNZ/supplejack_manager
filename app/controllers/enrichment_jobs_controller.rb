@@ -11,7 +11,12 @@ class EnrichmentJobsController < ApplicationController
 
   def create
     @enrichment_job = EnrichmentJob.new(enrichment_job_params)
-    @enrichment_job.save
+
+    if @enrichment_job.save
+      render turbo_stream: turbo_stream.replace('enrichment_job_form', partial: 'enrichment_jobs/enrichment_poll')
+    else
+      render turbo_stream: turbo_stream.replace(@enrichment_job, partial: 'enrichment_jobs/form')
+    end
   end
 
   def update
