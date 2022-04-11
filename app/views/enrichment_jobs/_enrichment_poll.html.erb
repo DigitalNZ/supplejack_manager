@@ -1,4 +1,4 @@
-<%= turbo_frame_tag(@enrichment_job, data: {
+<%= tag.div(data: {
   controller: 'poll',
   'poll-url-value': "/#{@enrichment_job.environment}/enrichment_jobs/#{@enrichment_job.id}",
   'poll-refresh-interval-value': 2000,

@@ -94,6 +94,14 @@ class AbstractJob < ActiveResource::Base
     end
   end
 
+  def ready?
+    status == 'ready'
+  end
+
+  def active?
+    status == 'active'
+  end
+
   def finished?
     status == 'finished'
   end
