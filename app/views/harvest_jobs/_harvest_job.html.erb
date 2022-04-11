@@ -3,9 +3,8 @@
     tag.div(id: "harvest-job", data: {
       url: environment_harvest_job_path(
         environment: @harvest_job.environment,
-        id: @harvest_job.id,
-        format: "js"
-      ), active: !@harvest_job.finished?
+        id: @harvest_job.id
+      ), active: @harvest_job.active?
     }) do
   %>
 
@@ -39,7 +38,7 @@
           )
         %>
       <% elsif @harvest_job.resumable? %>
-        <button class="button float-right" data-open="resume-confirmation" >
+        <button class="button float-right" data-open="resume-confirmation">
           <%= t('harvest_jobs.resume') %>
         </button>
 

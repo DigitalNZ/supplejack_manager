@@ -17,6 +17,8 @@ class EnrichmentJobsController < ApplicationController
   def update
     @enrichment_job = EnrichmentJob.find(params[:id])
     @enrichment_job.update_attributes(enrichment_job_params)
+
+    redirect_to enrichment_job_path(@enrichment_job)
   end
 
   private
