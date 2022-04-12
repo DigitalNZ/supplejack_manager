@@ -4,7 +4,7 @@
   <%= f.select :parser_id, @parsers.map { |parser| [parser.name, parser.id] }, include_blank: true %>
 
   <%= f.label :start_time, 'Begin' %>
-  <%= f.text_field :start_time, class: "datetimepicker", value: @harvest_schedule.start_time.present? ? @harvest_schedule.start_time.localtime.strftime('%d/%m/%Y %H:%m') : nil %>
+  <%= f.text_field :start_time, class: 'datetimepicker', value: @harvest_schedule.start_time.present? ? @harvest_schedule.start_time.localtime.strftime('%d/%m/%Y %H:%m') : nil %>
 
   <div class="grid-x">
     <%= f.label :recurrent do %>
@@ -12,7 +12,7 @@
     <% end %>
   </div>
 
-  <br/>
+  <br>
 
   <ul class="tabs" data-tabs id="preview-tabs">
     <%= tag.li class: "tabs-title #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
@@ -28,24 +28,24 @@
 
     <div class="tabs-content" data-tabs-content='preview-tabs'>
 
-      <%= tag.div id: "simple-schedule-tab", class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
+      <%= tag.div id: 'simple-schedule-tab', class: "tabs-panel #{@harvest_schedule.simple? ? "is-active" : nil }" do %>
         <%= f.label :frequency %>
-        <%= f.collection_select :frequency, ["daily", "weekly", "fortnightly", "monthly"].map { |o| [o, o.capitalize] }, :first, :second %>
+        <%= f.collection_select :frequency, ['daily', 'weekly', 'fortnightly', 'monthly'].map { |o| [o, o.capitalize] }, :first, :second %>
 
         <div class="input string optional harvest_schedule_at_hour">
           <%= f.label :at_hour %>
           <div class="grid-x">
-            <div class="medium-2 cell"><%= f.collection_select :at_hour, (0..23).map { |n| n.to_s.rjust(2, "0") }, :to_s, :to_s %></div>
-            <div class="medium-2 cell"><%= f.collection_select :at_minutes, (0..55).step(5).map { |n| n.to_s.rjust(2, "0") }, :to_s, :to_s %></div>
+            <div class="medium-2 cell"><%= f.collection_select :at_hour, (0..23).map { |n| n.to_s.rjust(2, '0') }, :to_s, :to_s %></div>
+            <div class="medium-2 cell"><%= f.collection_select :at_minutes, (0..55).step(5).map { |n| n.to_s.rjust(2, '0') }, :to_s, :to_s %></div>
             <div class="medium-10 cell"></div>
           </div>
         </div>
 
         <%= f.label :offset %>
-        <%= f.number_field :offset, hint: t("harvest_schedules.offset_hint") %>
+        <%= f.number_field :offset, hint: t('harvest_schedules.offset_hint') %>
       <% end %>
 
-      <%= tag.div id: "cron-syntax-tab", class: "tabs-panel #{!@harvest_schedule.simple? ? "is-active" : nil}" do %>
+      <%= tag.div id: 'cron-syntax-tab', class: "tabs-panel #{!@harvest_schedule.simple? ? "is-active" : nil}" do %>
         <%= f.label :cron %>
         <%= f.text_field :cron %>
       <% end %>
@@ -55,11 +55,11 @@
 
   <%= f.hidden_field :environment %>
 
-  <%= render "mode", { harvest_schedule: @harvest_schedule }  %>
+  <%= render 'mode', { harvest_schedule: @harvest_schedule } %>
 
-  <%= render "enrichments", { harvest_schedule: @harvest_schedule, environment: params[:environment] }  %>
+  <%= render 'enrichments', { harvest_schedule: @harvest_schedule, environment: params[:environment] } %>
 
-  <br/>
+  <br>
 
-  <%= f.submit t('harvest_schedules.save'), class: "button float-right" %>
+  <%= f.submit t('harvest_schedules.save'), class: 'button float-right' %>
 <% end %>

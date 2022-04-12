@@ -17,21 +17,21 @@
     <%= b.label { b.radio_button + b.text } %>
   <% end %>
   <% unless @parser.modes.flatten.include?('full_and_flush') %>
-    <input type="radio" disabled="true" title="Full And Flush is currently disabled." class="<%="#{'disabled-f-and-f' unless @parser.allow_full_and_flush }" %>">
+    <input type="radio" disabled="true" title="Full And Flush is currently disabled." class="<%= "#{'disabled-f-and-f' unless @parser.allow_full_and_flush }" %>">
   <% end %>
   <span class="<%= "parser-harvest-mode #{'disabled-f-and-f' unless @parser.allow_full_and_flush }" %>">
     <%= "Full and Flush (#{t("parsers.disable_full_and_flush")})" unless @parser.allow_full_and_flush %>
   </span>
-  <br/></br>
+  <br><br>
   <%= f.label :limit, t('parsers.records_to_harvest'), class: 'large' %>
-  <%= f.number_field :limit  %>
+  <%= f.number_field :limit %>
 
   <% if @parser.enrichment_definitions(@harvest_job.environment, @version).any? %>
     <%= f.label :enrichments, t('parsers.enrichments_to_run'), class: 'large' %>
     <%= f.enrichment_check_boxes :enrichments, @parser.enrichment_definitions(@harvest_job.environment, @version) %>
   <% end %>
 
-  <br/>
+  <br>
 
   <%= f.submit 'Start Harvest', class: 'button columns' %>
 <% end %>

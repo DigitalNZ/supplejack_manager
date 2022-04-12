@@ -23,9 +23,7 @@
         <%= snippet.last_edited_by %>
       </td>
       <td>
-        <%=
-          snippet.versions.last.try(:created_at).try(:localtime)&.to_formatted_s(:long)
-        %>
+        <%= snippet.versions.last.try(:created_at).try(:localtime)&.to_formatted_s(:long) %>
       </td>
     </tr>
     <% end %>

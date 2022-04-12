@@ -1,7 +1,7 @@
 <h1>Users</h1>
 
 <% if can? :create, User %>
-<%= link_to "New user", new_user_path, class: "button new-right" %>
+<%= link_to 'New user', new_user_path, class: 'button new-right' %>
 <% end %>
 
 <% if can? :edit_users, User %>

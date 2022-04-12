@@ -18,7 +18,7 @@
         <td><%= counts[:suppressed] %></td>
         <td><%= counts[:activated] %></td>
         <td><%= counts[:deleted] %></td>
-        <td><%= link_to "Show details", environment_collection_statistic_path(params[:environment], day.to_s) %></td>
+        <td><%= link_to 'Show details', environment_collection_statistic_path(params[:environment], day.to_s) %></td>
       </tr>
     <% end %>
   </tbody>

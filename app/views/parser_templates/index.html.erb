@@ -22,9 +22,7 @@
         <%= parser_template.try(:user)&.name %>
       </td>
       <td>
-        <%=
-          parser_template.try(:created_at).try(:localtime)&.to_formatted_s(:long)
-        %>
+        <%= parser_template.try(:created_at).try(:localtime)&.to_formatted_s(:long) %>
       </td>
     </tr>
     <% end %>

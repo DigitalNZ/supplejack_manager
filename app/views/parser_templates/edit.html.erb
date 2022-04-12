@@ -22,7 +22,7 @@
   <h2>Delete Parser Template</h2>
   <p> Are you sure that you want to delete the parser template: <strong><%= @parser_template.name %></strong> </p>
   <div>
-    <%= button_to "Delete", @parser_template, method: :delete, class: "button alert float-right" %>
+    <%= button_to 'Delete', @parser_template, method: :delete, class: 'button alert float-right' %>
     <button id="cancel-parser-template-delete" data-close class="button secondary float-right">Cancel</button>
   </div>
 
@@ -32,6 +32,6 @@
 </div>
 
 <%= custom_form_with model: @parser_template, local: false do |f| %>
-  <%= f.text_area :content, class: "code-editor" %>
+  <%= f.text_area :content, class: 'code-editor' %>
   <%= f.submit class: 'button' %>
 <% end %>

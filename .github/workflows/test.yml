@@ -2,6 +2,22 @@ name: Tests
 on: pull_request
 
 jobs:
+  erblint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Erblint
+      run: |
+        bundle exec erblint --lint-all
+
   rubocop:
     runs-on: ubuntu-latest
 

@@ -1,4 +1,7 @@
 ---
+exclude:
+- '**/vendor/**/*'
+- '**/node_modules/**/*'
 linters:
   Rubocop:
     enabled: true
@@ -8,4 +11,6 @@ linters:
       Layout/TrailingEmptyLines:
         Enabled: false
       Style/FrozenStringLiteralComment:
+        Enabled: false
+      Lint/UselessAssignment:
         Enabled: false

@@ -1,7 +1,7 @@
 <div class="grid-container">
   <% flash.each do |name, msg| %>
     <% if msg.is_a?(String) %>
-      <% name = :success if name.to_s == "notice" %>
+      <% name = :success if name.to_s == 'notice' %>
       <%= content_tag :div, msg, class: "callout #{name}" %>
     <% end %>
   <% end %>

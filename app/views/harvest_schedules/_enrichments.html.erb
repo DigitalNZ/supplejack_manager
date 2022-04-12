@@ -4,7 +4,7 @@
 
       <%= custom_fields_for :harvest_schedule, local: true do |f| %>
         <%= f.label t('parsers.enrichments_to_run'), class: 'large' %>
-        <%= f.enrichment_check_boxes :enrichments, harvest_schedule.parser.enrichment_definitions(environment)%>
+        <%= f.enrichment_check_boxes :enrichments, harvest_schedule.parser.enrichment_definitions(environment) %>
       <% end %>
 
     <% end %>

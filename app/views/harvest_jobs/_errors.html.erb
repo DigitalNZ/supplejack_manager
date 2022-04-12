@@ -3,7 +3,7 @@
 <ul class="indented">
   <% @harvest_job.errors.each do |attribute, errors| %>
     <% if attribute == :parser_id %>
-      <li><%= t("harvest_jobs.already_active_html", parser: @harvest_job.parser.name, environment: @harvest_job.environment) %></li>
+      <li><%= t('harvest_jobs.already_active_html', parser: @harvest_job.parser.name, environment: @harvest_job.environment) %></li>
     <% else %>
       <li><%= attribute %> <%= errors %></li>
     <% end %>

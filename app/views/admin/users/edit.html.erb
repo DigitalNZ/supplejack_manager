@@ -5,6 +5,6 @@
              id: @user['id']),
              method: :patch,
              html: { id: "edit-user-form-#{@user['id']}" } do |f| %>
-  <input type='text' name='max_requests' value="<%= @user['max_requests'] %>" />
+  <input type='text' name='max_requests' autocomplete="off" value="<%= @user['max_requests'] %>">
   <%= f.submit class: 'button' %>
 <% end %>
