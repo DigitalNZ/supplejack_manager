@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static values = { url: String, refreshInterval: Number, turboFrameId: String }
+  static targets = [ 'resume' ]
 
   connect() {
     if (this.hasRefreshIntervalValue) {
@@ -9,6 +10,12 @@ export default class extends Controller {
     }
     $(this.element).parents('.reveal').on('closed.zf.reveal', () => {
       this.stopRefreshing()
+    })
+  }
+
+  resumeTargetConnected(element) {
+    element.addEventListener('click', () => {
+      setTimeout(() => this.startRefreshing(), 2000)
     })
   }
 

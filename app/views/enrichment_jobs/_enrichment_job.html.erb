@@ -28,12 +28,9 @@
           environment_enrichment_job_path(
             environment: params[:environment],
             id: @enrichment_job.id,
-            format: :js,
             enrichment_job: { status: "stopped" }
           ),
           method: :put,
-          remote: true,
-          id: "stop-enrichment-button",
           class: "button new-right"
         )
       %>
@@ -58,9 +55,11 @@
                 status_message: "Enrichment was resumed #{l(Time.now, format: :long)}"
               }
             },
-            'data-close': '',
+            data: {
+              close: '',
+              'poll-target': 'resume'
+            },
             method: :put,
-            remote: true,
             class: "button new-right"
           )
       } %>
