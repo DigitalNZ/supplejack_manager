@@ -21,9 +21,19 @@
 }
 
 table.dataTable thead {
-  .sorting { background-image: url('sort_both.png'); }
-  .sorting_asc { background-image: url('sort_asc.png') !important; }
-  .sorting_desc { background-image: url('sort_desc.png') !important; }
-  .sorting_asc_disabled { background-image: url('sort_asc_disabled.png') !important; }
-  .sorting_desc_disabled { background-image: url('sort_desc_disabled.png') !important; }
+  .sorting {
+    background-image: url("sort_both.png");
+  }
+  .sorting_asc {
+    background-image: url("sort_asc.png") !important;
+  }
+  .sorting_desc {
+    background-image: url("sort_desc.png") !important;
+  }
+  .sorting_asc_disabled {
+    background-image: url("sort_asc_disabled.png") !important;
+  }
+  .sorting_desc_disabled {
+    background-image: url("sort_desc_disabled.png") !important;
+  }
 }

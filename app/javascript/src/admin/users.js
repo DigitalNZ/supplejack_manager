@@ -1,3 +1,3 @@
-document.addEventListener('turbo:load', function() {
-  $('#users').dataTable();
+document.addEventListener("turbo:load", function () {
+  $("#users").dataTable();
 });

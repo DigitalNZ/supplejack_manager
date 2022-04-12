@@ -1,4 +1,3 @@
-
 $productionColor: $success-color;
 $stagingColor: $primary-color;
 
@@ -6,7 +5,8 @@ $stagingColor: $primary-color;
   background-color: $productionColor;
   border: 1px solid darken($productionColor, 15%);
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: darken($productionColor, 7%);
   }
 }
@@ -98,7 +98,7 @@ $versionTagSize: 13px;
   &.production {
     background-color: $productionColor;
 
-    &>.arrow-left {
+    & > .arrow-left {
       border-right: 15px solid $productionColor;
     }
   }
@@ -106,7 +106,7 @@ $versionTagSize: 13px;
   &.staging {
     background-color: $stagingColor;
 
-    &>.arrow-left {
+    & > .arrow-left {
       border-right: 15px solid $stagingColor;
     }
   }

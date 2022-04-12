@@ -1,16 +1,16 @@
-import CodeMirror from 'codemirror/lib/codemirror'
-import 'codemirror/mode/ruby/ruby';
-import 'codemirror/mode/xml/xml';
+import CodeMirror from "codemirror/lib/codemirror";
+import "codemirror/mode/ruby/ruby";
+import "codemirror/mode/xml/xml";
 
-document.addEventListener('turbo:load', function() {
+document.addEventListener("turbo:load", function () {
   window.CodeMirror = CodeMirror;
-  window.initCodeMirror = function(textarea, readOnly = false) {
+  window.initCodeMirror = function (textarea, readOnly = false) {
     return window.CodeMirror.fromTextArea(textarea, {
       lineNumbers: true,
-      theme: 'monokai',
+      theme: "monokai",
       tabSize: 2,
       readOnly: readOnly,
-      lineSeperator: ',',
+      lineSeperator: ",",
     });
-  }
-})
+  };
+});

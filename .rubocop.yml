@@ -9,16 +9,16 @@ require:
 AllCops:
   TargetRubyVersion: 3.0.3
   Exclude:
-    - 'node_modules/**/*'
-    - 'vendor/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'script/**/*'
-    - 'lib/refinery/**/*'
-    - 'lib/liquid/**/*'
-    - 'tmp/**/*'
-    - 'features/**/*'
-    - 'bin/*'
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "script/**/*"
+    - "lib/refinery/**/*"
+    - "lib/liquid/**/*"
+    - "tmp/**/*"
+    - "features/**/*"
+    - "bin/*"
   DisplayStyleGuide: true
   DisplayCopNames: true
 
@@ -30,4 +30,4 @@ Style/Documentation:
 
 Performance/OpenStruct:
   Exclude:
-    - 'spec/**/*'
+    - "spec/**/*"

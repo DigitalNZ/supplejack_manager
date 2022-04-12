@@ -1,29 +1,29 @@
 // node_modules
-@import 'jquery-datetimepicker/jquery.datetimepicker';
-@import 'codemirror/lib/codemirror';
-@import 'codemirror/theme/monokai';
-@import 'datatables.net-zf/css/dataTables.foundation.min';
+@import "jquery-datetimepicker/jquery.datetimepicker";
+@import "codemirror/lib/codemirror";
+@import "codemirror/theme/monokai";
+@import "datatables.net-zf/css/dataTables.foundation.min";
 
 // foundation related
-@import 'foundation/foundation_and_overrides';
+@import "foundation/foundation_and_overrides";
 
 // custom mixins
-@import 'mixins/bem';
+@import "mixins/bem";
 
 // custom forms
-@import 'blocks/base';
-@import 'blocks/datatables';
-@import 'blocks/details';
-@import 'blocks/forms';
-@import 'blocks/top_nav';
-@import 'blocks/parsers';
-@import 'blocks/harvest_jobs';
-@import 'blocks/versions';
-@import 'blocks/parser_templates';
-@import 'blocks/link_check_rules';
-@import 'blocks/collection_statistics';
-@import 'blocks/collection_records';
-@import 'blocks/previews';
-@import 'blocks/home';
-@import 'blocks/codemirror';
-@import 'blocks/devise';
+@import "blocks/base";
+@import "blocks/datatables";
+@import "blocks/details";
+@import "blocks/forms";
+@import "blocks/top_nav";
+@import "blocks/parsers";
+@import "blocks/harvest_jobs";
+@import "blocks/versions";
+@import "blocks/parser_templates";
+@import "blocks/link_check_rules";
+@import "blocks/collection_statistics";
+@import "blocks/collection_records";
+@import "blocks/previews";
+@import "blocks/home";
+@import "blocks/codemirror";
+@import "blocks/devise";

@@ -2,71 +2,86 @@ name: Tests
 on: pull_request
 
 jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: yarn install
+      - name: prettier
+        run: yarn run prettier --check .
+
   erblint:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Erblint
-      run: |
-        bundle exec erblint --lint-all
+      - name: Erblint
+        run: |
+          bundle exec erblint --lint-all
 
   rubocop:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Rubocop
-      run: |
-        bundle exec rubocop
+      - name: Rubocop
+        run: |
+          bundle exec rubocop
 
   brakeman:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Run the brakeman test
-      run: |
-        gem install brakeman
-        brakeman --run-all-checks
+      - name: Run the brakeman test
+        run: |
+          gem install brakeman
+          brakeman --run-all-checks
 
   bundle-audit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Run the bundle audit test
-      run: |
-        gem install bundler-audit
-        bundle audit check --update
+      - name: Run the bundle audit test
+        run: |
+          gem install bundler-audit
+          bundle audit check --update
 
   rspec:
     runs-on: ubuntu-latest
@@ -78,20 +93,20 @@ jobs:
           - 27017:27017
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Run RSpec unit tests
-      env:
-        MFA_ENABLED: false
-      run: |
-        cp config/application.yml.example config/application.yml
-        gem install bundler --version $(tail -n1 Gemfile.lock)
-        yarn install
-        RAILS_ENV=test bin/rails assets:precompile
-        bundle exec rspec spec --fail-fast --format=progress
+      - name: Run RSpec unit tests
+        env:
+          MFA_ENABLED: false
+        run: |
+          cp config/application.yml.example config/application.yml
+          gem install bundler --version $(tail -n1 Gemfile.lock)
+          yarn install
+          RAILS_ENV=test bin/rails assets:precompile
+          bundle exec rspec spec --fail-fast --format=progress

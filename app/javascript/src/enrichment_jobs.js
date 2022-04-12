@@ -1,4 +1,4 @@
-document.addEventListener('turbo:load', function() {
+document.addEventListener("turbo:load", function () {
   var $enrichmentJob;
   $enrichmentJob = $("#enrichment-job");
   if ($enrichmentJob.length > 0 && $enrichmentJob.data("active")) {
@@ -7,10 +7,10 @@ document.addEventListener('turbo:load', function() {
 });
 
 window.EnrichmentJobsPoller = {
-  poll: function() {
+  poll: function () {
     return setTimeout(this.request, 2000);
   },
-  request: function() {
-    return $.get($("#enrichment-job").data('url'));
-  }
+  request: function () {
+    return $.get($("#enrichment-job").data("url"));
+  },
 };

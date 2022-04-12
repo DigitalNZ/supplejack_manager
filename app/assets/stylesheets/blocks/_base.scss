@@ -1,6 +1,9 @@
-
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   span {
     font-weight: normal;
   }
@@ -50,7 +53,7 @@ form {
 }
 
 .small-spinner {
-  background: image-url('/images/sj-spinner.gif') no-repeat 0 0;
+  background: image-url("/images/sj-spinner.gif") no-repeat 0 0;
   width: 20px;
   height: 20px;
   display: block;
@@ -65,7 +68,7 @@ form {
   margin-top: 20px;
 
   .button {
-    margin-bottom: 15px
+    margin-bottom: 15px;
   }
 }
 
@@ -91,5 +94,5 @@ select {
 
 .warning {
   font-weight: $global-weight-bold;
-  color: get-color('warning');
+  color: get-color("warning");
 }

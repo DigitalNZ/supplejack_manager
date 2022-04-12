@@ -2,6 +2,6 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-document.addEventListener('turbo:load', function() {
-  return $('#link_check_rules').dataTable();
+document.addEventListener("turbo:load", function () {
+  return $("#link_check_rules").dataTable();
 });

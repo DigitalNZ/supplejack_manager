@@ -26,7 +26,7 @@
 
 small.error {
   display: block;
-  margin-top: -.5rem;
+  margin-top: -0.5rem;
   margin-bottom: 1rem;
 }
 
@@ -43,7 +43,8 @@ select[multiple] {
 }
 
 form {
-  .checkbox, .radio {
+  .checkbox,
+  .radio {
     display: block;
 
     label {
@@ -58,7 +59,8 @@ label.large {
   margin-bottom: 9px;
 }
 
-fieldset#management_permissions , fieldset#harvesting_permissions {
+fieldset#management_permissions,
+fieldset#harvesting_permissions {
   padding: 3%;
 
   select[multiple] {
@@ -89,15 +91,16 @@ fieldset#management_permissions , fieldset#harvesting_permissions {
   padding-bottom: 10px;
 }
 
-.pause, .resume {
-  background:none!important;
+.pause,
+.resume {
+  background: none !important;
   color: $primary-color;
-  border:none;
-  padding:0!important;
+  border: none;
+  padding: 0 !important;
   font: inherit;
   cursor: pointer;
 }
 
 .resume {
-  color: #FA5858;
+  color: #fa5858;
 }
