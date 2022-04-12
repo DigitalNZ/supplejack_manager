@@ -1,5 +1,5 @@
 .details {
-  @include element('summary') {
+  @include element("summary") {
     // trick to avoid the text going under the arrow
     & > * {
       display: inline;
@@ -13,12 +13,16 @@
       margin: 1rem 0;
 
       .details__summary {
-        background-color: scale-color($color, $lightness: $callout-background-fade);
-        padding: .5rem 1rem;
+        background-color: scale-color(
+          $color,
+          $lightness: $callout-background-fade
+        );
+        padding: 0.5rem 1rem;
       }
 
       .details__content {
-        border: 2px solid scale-color($color, $lightness: $callout-background-fade);
+        border: 2px solid
+          scale-color($color, $lightness: $callout-background-fade);
         padding: 1rem;
       }
     }

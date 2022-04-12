@@ -83,6 +83,9 @@ id_rsa
 # vim artifacts
 **.swp
 
+# VSCode
+/.vscode
+
 # Ignore application configuration
 /config/application.yml
 /harvester-manager.sublime-project

@@ -1,22 +1,28 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static values = { url: String, refreshInterval: Number, turboFrameId: String }
-  static targets = [ 'resume' ]
+  static values = {
+    url: String,
+    refreshInterval: Number,
+    turboFrameId: String,
+  };
+  static targets = ["resume"];
 
   connect() {
     if (this.hasRefreshIntervalValue) {
-      this.startRefreshing()
+      this.startRefreshing();
     }
-    $(this.element).parents('.reveal').on('closed.zf.reveal', () => {
-      this.stopRefreshing()
-    })
+    $(this.element)
+      .parents(".reveal")
+      .on("closed.zf.reveal", () => {
+        this.stopRefreshing();
+      });
   }
 
   resumeTargetConnected(element) {
-    element.addEventListener('click', () => {
-      setTimeout(() => this.startRefreshing(), 2000)
-    })
+    element.addEventListener("click", () => {
+      setTimeout(() => this.startRefreshing(), 2000);
+    });
   }
 
   disconnect() {
@@ -25,16 +31,18 @@ export default class extends Controller {
 
   startRefreshing() {
     this.refreshTimer = setInterval(() => {
-      this.load()
-      if (this.element.querySelector('[data-active]').dataset['active'] == 'false') {
-        this.stopRefreshing()
+      this.load();
+      if (
+        this.element.querySelector("[data-active]").dataset["active"] == "false"
+      ) {
+        this.stopRefreshing();
       }
-    }, this.refreshIntervalValue)
+    }, this.refreshIntervalValue);
   }
 
   stopRefreshing() {
     if (this.refreshTimer) {
-      clearInterval(this.refreshTimer)
+      clearInterval(this.refreshTimer);
     }
   }
 

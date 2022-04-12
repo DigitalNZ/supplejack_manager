@@ -1,1 +1,1 @@
-window.Harvester = {}
+window.Harvester = {};

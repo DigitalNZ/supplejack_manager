@@ -1,58 +1,57 @@
-
 en:
   date:
     abbr_day_names:
-    - Sun
-    - Mon
-    - Tue
-    - Wed
-    - Thu
-    - Fri
-    - Sat
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
     abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Oct
-    - Nov
-    - Dec
+      -
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
     day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
     formats:
-      default: ! '%d/%m/%Y'
-      long: ! '%B %d, %Y'
-      short: ! '%b %d'
+      default: ! "%d/%m/%Y"
+      long: ! "%B %d, %Y"
+      short: ! "%b %d"
     month_names:
-    - 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
+      -
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
     order:
-    - :year
-    - :month
-    - :day
+      - :year
+      - :month
+      - :day
   datetime:
     distance_in_words:
       about_x_hours:
@@ -79,16 +78,16 @@ en:
         other: over %{count} years
       x_days:
         one: 1 day
-        other: ! '%{count} days'
+        other: ! "%{count} days"
       x_minutes:
         one: 1 minute
-        other: ! '%{count} minutes'
+        other: ! "%{count} minutes"
       x_months:
         one: 1 month
-        other: ! '%{count} months'
+        other: ! "%{count} months"
       x_seconds:
         one: 1 second
-        other: ! '%{count} seconds'
+        other: ! "%{count} seconds"
     prompts:
       day: Day
       hour: Hour
@@ -106,36 +105,36 @@ en:
   number:
     currency:
       format:
-        delimiter: ! ','
-        format: ! '%u%n'
+        delimiter: ! ","
+        format: ! "%u%n"
         precision: 2
         separator: .
         significant: false
         strip_insignificant_zeros: false
         unit: $
     format:
-      delimiter: ! ','
+      delimiter: ! ","
       precision: 3
       separator: .
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: ! '%n %u'
+        format: ! "%n %u"
         units:
           billion: Billion
           million: Million
           quadrillion: Quadrillion
           thousand: Thousand
           trillion: Trillion
-          unit: ''
+          unit: ""
       format:
-        delimiter: ''
+        delimiter: ""
         precision: 3
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: ! '%n %u'
+        format: ! "%n %u"
         units:
           byte:
             one: Byte
@@ -146,19 +145,19 @@ en:
           tb: TB
     percentage:
       format:
-        delimiter: ''
+        delimiter: ""
     precision:
       format:
-        delimiter: ''
+        delimiter: ""
   support:
     array:
-      last_word_connector: ! ', and '
-      two_words_connector: ! ' and '
-      words_connector: ! ', '
+      last_word_connector: ! ", and "
+      two_words_connector: ! " and "
+      words_connector: ! ", "
   time:
     am: am
     formats:
-      default: ! '%d/%m/%Y %H:%M %z'
-      long: ! '%B %d, %Y %H:%M:%S'
-      short: ! '%d %b %H:%M'
+      default: ! "%d/%m/%Y %H:%M %z"
+      long: ! "%B %d, %Y %H:%M:%S"
+      short: ! "%d %b %H:%M"
     pm: pm

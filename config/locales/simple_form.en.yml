@@ -1,19 +1,19 @@
 en:
   forms:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": "Yes"
+    "no": "No"
     required:
-      text: 'required'
-      mark: '*'
+      text: "required"
+      mark: "*"
     error_notification:
       default_message: "Please review the problems below:"
     labels:
       link_check_rules:
-        active: 'Link checking active?'
+        active: "Link checking active?"
       user:
-        active: 'Active (deactivated users cannot login)'
-        manage_partners: 'For the following contributors (select multiple by holding Ctrl/Apple key):'
-        run_harvest_partners: 'The user can run harvests for the following contributors (select multiple by holding Ctrl/Apple key):'
+        active: "Active (deactivated users cannot login)"
+        manage_partners: "For the following contributors (select multiple by holding Ctrl/Apple key):"
+        run_harvest_partners: "The user can run harvests for the following contributors (select multiple by holding Ctrl/Apple key):"
       parser:
         name: "Parser Script Name"
         strategy: "Data Format"
