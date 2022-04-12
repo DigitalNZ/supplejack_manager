@@ -37,7 +37,6 @@
               }
             ),
             method: :put,
-            id: "stop-harvest-button",
             class: "button float-right"
           )
         %>
@@ -62,9 +61,11 @@
                   status_message: "Harvest was resumed #{l(Time.now, format: :long)}"
                 }
               },
-              'data-close': '',
+              data: {
+                close: '',
+                'poll-target': 'resume'
+              },
               method: :put,
-              remote: true,
               class: "button new-right"
             )
           }
@@ -107,41 +108,31 @@
         </td>
       </tr>
 
-      <% if @harvest_job.end_time.present? %>
       <tr id="harvest-end-time">
         <td><%= t("harvest_jobs.end_time") %></td>
         <td>
-          <strong><%= l(@harvest_job.end_time, format: :long) %></strong>
-        </td>
-      </tr>
-      <% end %>
-
-      <% if ['failed', 'finished'].include?(@harvest_job.status) %>
-      <tr>
-        <td><%= t("harvest_jobs.duration") %></td>
-        <td>
-          <strong><%= human_readable_duration(@harvest_job.duration) %></strong>
+          <strong>
+            <% if @harvest_job.end_time.present? %>
+              <%= l(@harvest_job.end_time, format: :long) %>
+            <% end %>
+          </strong>
         </td>
       </tr>
 
-      <div id='harvest-modal' class='reveal large' data-reveal reset-modal-on-close>
-        <%= turbo_frame_tag 'harvest_job_form' do %>
-          <div id='preview-area-spinner' class='spinner'>
-            <%= image_tag image_path('sj-spinner.gif') %>
-          </div>
-        <% end %>
+      <% if @harvest_job.failed? || @harvest_job.finished? %>
+        <tr>
+          <td><%= t("harvest_jobs.duration") %></td>
+          <td>
+              <strong><%= human_readable_duration(@harvest_job.duration) %></strong>
+          </td>
+        </tr>
 
-        <button class='close-button' data-close aria-label='Close modal' type='button'>
-          <span aria-hidden='true'>&times;</span>
-        </button>
-      </div>
-
-      <tr>
-        <td><%= t("harvest_jobs.records_per_second") %></td>
-        <td>
-          <strong><%= number_with_precision @harvest_job.throughput, precision: 2, delimiter: "," %></strong>
-        </td>
-      </tr>
+        <tr>
+          <td><%= t("harvest_jobs.records_per_second") %></td>
+          <td>
+            <strong><%= number_with_precision @harvest_job.throughput, precision: 2, delimiter: "," %></strong>
+          </td>
+        </tr>
 
         <% if @harvest_job.mode === 'full_and_flush' && @harvest_job.records_count.zero? %>
           <tr>

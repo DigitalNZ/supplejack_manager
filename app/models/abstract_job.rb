@@ -106,6 +106,14 @@ class AbstractJob < ActiveResource::Base
     status == 'finished'
   end
 
+  def stopped?
+    status == 'stopped'
+  end
+
+  def failed?
+    status == 'failed'
+  end
+
   def total_errors_count
     failed_records_count.to_i + invalid_records_count.to_i
   end
