@@ -16,7 +16,7 @@
     <%= f.grouped_collection_select :source_id, @partners, :sources, :name, :id, :source_id, include_blank: true %>
 
     <%= f.label :strategy %>
-    <%= f.select :strategy, Hash[Parser::VALID_STRATEGIES.map { |u| [(u == 'xml' ? "#{u}/html".upcase : u.upcase), u] }] %>
+    <%= f.select :strategy, Parser::VALID_STRATEGIES.index_by { |u| (u == 'xml' ? "#{u}/html".upcase : u.upcase) } %>
 
     <% if parser_type_enabled %>
       <%= f.label :data_type %>

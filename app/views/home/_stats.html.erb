@@ -13,7 +13,7 @@
 
   <table id="server-stats">
     <tr>
-      <td class="header"><%= link_to t('harvest_jobs.label'), environment_abstract_jobs_path(environment, status: "active") %></td>
+      <td class="header"><%= link_to t('harvest_jobs.label'), environment_abstract_jobs_path(environment, status: 'active') %></td>
       <td class="stat">
         <%= link_to stats[:active_jobs], environment_abstract_jobs_path(environment, status: 'active') %>
       </td>

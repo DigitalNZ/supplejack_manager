@@ -12,11 +12,11 @@
     </div>
   </div>
 
-  <hr />
+  <hr>
 
   <%= render 'stats', { stats: @stats, environment: @environment } %>
 
-  <hr />
+  <hr>
 
   <% if @parsers.present? %>
     <div class="grid-x">
@@ -69,17 +69,17 @@
         <table>
           <thead>
             <tr>
-              <th><%= t("harvest_schedules.parser") %></th>
-              <th><%= t("harvest_schedules.next_run_at") %></th>
-              <th><%= t("harvest_schedules.frequency") %></th>
-              <th><%= t("harvest_schedules.mode") %></th>
+              <th><%= t('harvest_schedules.parser') %></th>
+              <th><%= t('harvest_schedules.next_run_at') %></th>
+              <th><%= t('harvest_schedules.frequency') %></th>
+              <th><%= t('harvest_schedules.mode') %></th>
             </tr>
           </thead>
           <tbody>
             <% @scheduled_jobs.each do |harvest_schedule| %>
               <tr>
                 <% if harvest_schedule.parser.present? %>
-                  <td><%=  link_to harvest_schedule.parser.name, edit_parser_path(harvest_schedule.parser) %></td>
+                  <td><%= link_to harvest_schedule.parser.name, edit_parser_path(harvest_schedule.parser) %></td>
                 <% else %>
                   <td></td>
                 <% end %>

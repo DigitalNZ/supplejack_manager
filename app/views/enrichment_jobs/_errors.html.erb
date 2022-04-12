@@ -3,7 +3,7 @@
 <ul class="indented">
   <% @enrichment_job.errors.each do |attribute, errors| %>
     <% if attribute == :enrichment %>
-      <li><%= t("enrichment_jobs.already_active_html", parser: @enrichment_job.parser.name, environment: @enrichment_job.environment) %></li>
+      <li><%= t('enrichment_jobs.already_active_html', parser: @enrichment_job.parser.name, environment: @enrichment_job.environment) %></li>
     <% else %>
       <li><%= attribute %> <%= errors %></li>
     <% end %>

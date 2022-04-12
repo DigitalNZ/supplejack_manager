@@ -1,6 +1,5 @@
-<h1 class="left">Link Check Rules - <%= params[:environment].capitalize%></h1>
-<%= link_to "New link check rule", new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right #{can_show_button(:create, LinkCheckRule)}" %>
-
+<h1 class="left">Link Check Rules - <%= params[:environment].capitalize %></h1>
+<%= link_to 'New link check rule', new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right #{can_show_button(:create, LinkCheckRule)}" %>
 
 <table id="link_check_rules">
   <thead>
@@ -28,7 +27,7 @@
       <td><%= DateTime.parse(link_check_rule.updated_at).to_formatted_s(:long) %></td>
       <td>
         <% if can? :update, link_check_rule %>
-          <%= link_to "Edit", edit_environment_link_check_rule_path(id: link_check_rule.id, environment: params[:environment]) %>
+          <%= link_to 'Edit', edit_environment_link_check_rule_path(id: link_check_rule.id, environment: params[:environment]) %>
         <% end %>
       </td>
     </tr>

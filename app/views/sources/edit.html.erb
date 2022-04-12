@@ -1,4 +1,4 @@
-<br/>
+<br>
 <div id="alert"></div>
 
 <div class="medium-7 cell">
@@ -17,7 +17,7 @@
   <div class="grid-x">
     <div class="medium-12 cell">
       <label class=""><%= t('forms.labels.sources.environment') %></label>
-      <%= select_tag "environment", options_for_select(APPLICATION_ENVS) %>
+      <%= select_tag 'environment', options_for_select(APPLICATION_ENVS) %>
     </div>
   </div>
   <div class="grid-x">
@@ -27,7 +27,7 @@
       <div id="time"><%= t('sources.all_records') %></div>
     </div>
   </div>
-  <%= link_to t('sources.reindex'), '#', remote: true, class: "float-right button", id: 'reindex-button', :'data-url' => reindex_source_path(@source) %>
+  <%= link_to t('sources.reindex'), '#', remote: true, class: 'float-right button', id: 'reindex-button', 'data-url': reindex_source_path(@source) %>
 
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>

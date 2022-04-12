@@ -8,9 +8,15 @@
       <% end %>
 
       <% unless harvest_schedule.parser.modes.flatten.include?('full_and_flush') %>
-        <% checked = harvest_schedule.mode %>
-        <% checked = false unless harvest_schedule.persisted? %>
-        <input class="optional" id="harvest_schedule_mode_full_and_flush" type="radio" disabled="true" <%= "checked" if harvest_schedule.mode == 'full_and_flush' %> data="<%= harvest_schedule.mode %>" name ="harvest_schedule[mode]" title="Full And Flush is currently disabled.">
+        <input
+          class="optional"
+          id="harvest_schedule_mode_full_and_flush"
+          type="radio"
+          disabled="true"
+          <%= 'checked' if harvest_schedule.mode == 'full_and_flush' %>
+          data="<%= harvest_schedule.mode %>"
+          name="harvest_schedule[mode]"
+          title="Full And Flush is currently disabled.">
           <span class="<%= "parser-harvest-mode #{'disabled-f-and-f' unless harvest_schedule.parser.allow_full_and_flush }" %>">
             Full And Flush  <%= "(#{t('parsers.disable_full_and_flush')})" unless harvest_schedule.parser.allow_full_and_flush %>
           </span>
@@ -18,7 +24,7 @@
 
       <% if harvest_schedule.oai? %>
         <div class="grid-x">
-          <div class="medium-12 cell"><span class="hint"><%= t("harvest_schedules.incremental_hint") %></span></div>
+          <div class="medium-12 cell"><span class="hint"><%= t('harvest_schedules.incremental_hint') %></span></div>
         </div>
       <% end %>
     <% end %>

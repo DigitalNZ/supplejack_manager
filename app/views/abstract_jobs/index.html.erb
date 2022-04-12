@@ -1,8 +1,15 @@
 <h1><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
 
 <% %w[all active finished failed stopped].each do |status| %>
-  <% button_class = params[:status] == status ? 'primary' : 'hollow' %>
-  <%= link_to(t("harvest_jobs.#{status}"), environment_abstract_jobs_path(params[:environment], status: status, parser_id: params[:parser_id]), class: "button #{button_class}") %>
+  <%= link_to(
+    t("harvest_jobs.#{status}"),
+    environment_abstract_jobs_path(
+      params[:environment],
+      status: status,
+      parser_id: params[:parser_id]
+    ),
+    class: "button #{params[:status] == status ? 'primary' : 'hollow'}"
+  ) %>
 <% end %>
 
 <div class='table-scroll'>
@@ -34,8 +41,7 @@
       <% @abstract_jobs.each do |abstract_job| %>
       <tr>
         <td>
-          <%=
-            link_to(
+          <%= link_to(
               '&#128269;'.html_safe,
               environment_abstract_jobs_path(
                 params[:environment],
@@ -43,8 +49,7 @@
                 parser_id: abstract_job.parser&.id
               ),
               title: 'Filter to show only jobs from this parser'
-            )
-          %>
+            ) %>
         </td>
         <% if abstract_job.version_id.present? %>
           <td><%= link_to abstract_job.parser_name, parser_parser_version_path(abstract_job.parser_id, abstract_job.version_id) %></td>
@@ -75,7 +80,7 @@
         <% if params[:status] == 'all' %>
           <td>
             <% status = abstract_job.status.capitalize %>
-            <span class="<%= status == 'Failed' ? 'warning' : '' %>">
+            <span class="<%= abstract_job.status.capitalize == 'Failed' ? 'warning' : '' %>">
               <%= status %>
             </span>
           </td>

@@ -1,46 +1,41 @@
 <%= turbo_frame_tag dom_id(@harvest_job) do %>
-  <%=
-    tag.div(
-      id: "harvest-job",
-      data: {
-        url: environment_harvest_job_path(
-          environment: @harvest_job.environment,
-          id: @harvest_job.id,
-        ),
-        active: @harvest_job.ready? || @harvest_job.active?
-      }
-    ) do
-  %>
+  <%= tag.div(
+    id: 'harvest-job',
+    data: {
+      url: environment_harvest_job_path(
+        environment: @harvest_job.environment,
+        id: @harvest_job.id,
+      ),
+      active: @harvest_job.ready? || @harvest_job.active?
+    }
+  ) do %>
 
     <h2 class="left">
-      <%= t("harvest_jobs.progress") %>
+      <%= t('harvest_jobs.progress') %>
       <% if @harvest_job.parser.present? %>
         <% if can? :update, @harvest_job.parser %>
-          <span class="parser-title">: <%= link_to @harvest_job.parser&.name, edit_parser_path(@harvest_job.parser), target: "_top" %></span>
+          <span class="parser-title">: <%= link_to @harvest_job.parser&.name, edit_parser_path(@harvest_job.parser), target: '_top' %></span>
         <% else %>
           <span class="parser-title">: <%= @harvest_job.parser.try(:name) %></span>
         <% end %>
       <% end %>
     </h2>
 
-
     <% if can?(:run_harvest, @harvest_job.parser) %>
       <% if @harvest_job.status == 'active' %>
-        <%=
-          button_to(
-            t("harvest_jobs.stop"),
-            environment_harvest_job_path(
-              environment: @harvest_job.environment,
-              id: @harvest_job.id,
-              harvest_job: {
-                status: "stopped"
-              }
-            ),
-            method: :put,
-            class: "button float-right"
-          )
-        %>
-      <% elsif @harvest_job.resumable? %>
+        <%= button_to(
+          t('harvest_jobs.stop'),
+          environment_harvest_job_path(
+            environment: @harvest_job.environment,
+            id: @harvest_job.id,
+            harvest_job: {
+              status: 'stopped'
+            }
+          ),
+          method: :put,
+          class: 'button float-right'
+        ) %>
+    <% elsif @harvest_job.resumable? %>
         <button class="button float-right" data-open="resume-confirmation">
           <%= t('harvest_jobs.resume') %>
         </button>
@@ -57,7 +52,7 @@
               ),
               params: {
                 harvest_job: {
-                  status: "resume",
+                  status: 'resume',
                   status_message: "Harvest was resumed #{l(Time.now, format: :long)}"
                 }
               },
@@ -66,41 +61,40 @@
                 'poll-target': 'resume'
               },
               method: :put,
-              class: "button new-right"
+              class: 'button new-right'
             )
-          }
-        %>
+          } %>
       <% end %>
     <% end %>
 
     <table>
       <tr>
-        <td><%= t("harvest_jobs.operator") %></td>
+        <td><%= t('harvest_jobs.operator') %></td>
         <td>
           <% if @harvest_job.user %>
             <strong><%= @harvest_job.user.try(:name) %></strong>
           <% else %>
-            <strong><%= t("harvest_jobs.scheduled") %></strong>
+            <strong><%= t('harvest_jobs.scheduled') %></strong>
           <% end %>
         </td>
       </tr>
 
       <tr>
-        <td><%= t("harvest_jobs.environment") %></td>
+        <td><%= t('harvest_jobs.environment') %></td>
         <td>
           <strong><%= @harvest_job.environment %></strong>
         </td>
       </tr>
 
       <tr>
-        <td><%= t("harvest_jobs.mode") %></td>
+        <td><%= t('harvest_jobs.mode') %></td>
         <td>
           <strong><%= @harvest_job.mode.try(:titleize) %></strong>
         </td>
       </tr>
 
       <tr>
-        <td><%= t("harvest_jobs.start_time") %></td>
+        <td><%= t('harvest_jobs.start_time') %></td>
         <td>
           <% if @harvest_job.start_time %>
             <strong><%= l @harvest_job.start_time, format: :long %></strong>
@@ -109,7 +103,7 @@
       </tr>
 
       <tr id="harvest-end-time">
-        <td><%= t("harvest_jobs.end_time") %></td>
+        <td><%= t('harvest_jobs.end_time') %></td>
         <td>
           <strong>
             <% if @harvest_job.end_time.present? %>
@@ -121,16 +115,16 @@
 
       <% if @harvest_job.failed? || @harvest_job.finished? %>
         <tr>
-          <td><%= t("harvest_jobs.duration") %></td>
+          <td><%= t('harvest_jobs.duration') %></td>
           <td>
               <strong><%= human_readable_duration(@harvest_job.duration) %></strong>
           </td>
         </tr>
 
         <tr>
-          <td><%= t("harvest_jobs.records_per_second") %></td>
+          <td><%= t('harvest_jobs.records_per_second') %></td>
           <td>
-            <strong><%= number_with_precision @harvest_job.throughput, precision: 2, delimiter: "," %></strong>
+            <strong><%= number_with_precision @harvest_job.throughput, precision: 2, delimiter: ',' %></strong>
           </td>
         </tr>
 
@@ -145,21 +139,21 @@
       <% end %>
 
       <tr>
-        <td><%= t("harvest_jobs.records_harvested") %></td>
+        <td><%= t('harvest_jobs.records_harvested') %></td>
         <td>
           <strong><%= number_with_delimiter @harvest_job.records_count %></strong>
         </td>
       </tr>
 
       <tr>
-        <td><%= t("harvest_jobs.records_posted") %></td>
+        <td><%= t('harvest_jobs.records_posted') %></td>
         <td>
           <strong><%= number_with_delimiter @harvest_job.posted_records_count %></strong>
         </td>
       </tr>
 
       <tr>
-        <td><%= t("harvest_jobs.records_retried") %></td>
+        <td><%= t('harvest_jobs.records_retried') %></td>
         <td>
           <strong><%= number_with_delimiter @harvest_job.retried_records_count %></strong>
         </td>
@@ -167,28 +161,28 @@
 
       <% if @harvest_job.status_message.present? %>
       <tr>
-        <td><%= t("harvest_jobs.status_message") %></td>
+        <td><%= t('harvest_jobs.status_message') %></td>
         <td><strong><%= @harvest_job.status_message %></strong></td>
       </tr>
       <% end %>
 
       <% if @harvest_job.last_posted_record_id.present? %>
         <tr>
-          <td><%= t("harvest_jobs.last_posted_record_id") %></td>
+          <td><%= t('harvest_jobs.last_posted_record_id') %></td>
           <td><strong><%= @harvest_job.last_posted_record_id %></strong></td>
         </tr>
       <% end %>
 
       <% if @harvest_job.updated_at.present? %>
         <tr>
-          <td><%= t("harvest_jobs.updated_at") %></td>
+          <td><%= t('harvest_jobs.updated_at') %></td>
           <td><strong><%= l(@harvest_job.updated_at, format: :long) %></strong></td>
         </tr>
       <% end %>
     </table>
 
     <% if @harvest_job.harvest_failure.present? %>
-      <h5><%= t('harvest_jobs.harvest_failure')%> </h5>
+      <h5><%= t('harvest_jobs.harvest_failure') %> </h5>
 
       <div id="harvest-job-errors-backtrace">
         <div id="accordion-backtrace" class="accordion">
@@ -197,30 +191,30 @@
           </h3>
           <div>
             <small>
-              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(@harvest_job.harvest_failure.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
+              <%= text_area_tag '', JSON.pretty_generate(JSON.parse(@harvest_job.harvest_failure.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
             </small>
           </div>
         </div>
       </div>
     <% end %>
 
-    <h5><%= t("harvest_jobs.invalid_records") %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
+    <h5><%= t('harvest_jobs.invalid_records') %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
 
     <% if @harvest_job.invalid_records.any? %>
     <div id="harvest-job-invalid-errors">
       <div id="accordion-invalid" class="accordion">
         <% @harvest_job.invalid_records.each do |record| %>
           <h3 class="error">
-            <span><%= record.error_messages.join(", ") %></span><span class="right"><%= localize_date_time(record.created_at) %></span>
+            <span><%= record.error_messages.join(', ') %></span><span class="right"><%= localize_date_time(record.created_at) %></span>
           </h3>
           <div>
             <h5>Raw Data</h5>
 
             <% unless record.raw_data.nil? %>
               <% if Nokogiri::XML(record.raw_data).errors.empty? %>
-                <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
+                <%= text_area_tag '', Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml' } %>
               <% else %>
-                <%= text_area_tag "", record.raw_data, class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+                <%= text_area_tag '', record.raw_data, class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
               <% end %>
             <% end %>
 
@@ -229,10 +223,10 @@
       </div>
     </div>
     <% else %>
-    <p><%= t("harvest_jobs.no_validation_errors") %></p>
+    <p><%= t('harvest_jobs.no_validation_errors') %></p>
     <% end %>
 
-    <h5><%= t("harvest_jobs.failed_records") %> <span class="errors-count">(<%= @harvest_job.failed_records_count.to_i %>)</span></h5>
+    <h5><%= t('harvest_jobs.failed_records') %> <span class="errors-count">(<%= @harvest_job.failed_records_count.to_i %>)</span></h5>
 
     <% if @harvest_job.failed_records.any? %>
     <div id="harvest-job-failed-errors">
@@ -246,16 +240,16 @@
 
             <% unless record.raw_data.nil? %>
               <% if Nokogiri::XML(record.raw_data).errors.empty? %>
-                <%= text_area_tag "", Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml'} %>
+                <%= text_area_tag '', Nokogiri::XML(record.raw_data), class: 'code-editor-multiple read-only', data: { mode: 'application/xml' } %>
               <% else %>
-                <%= text_area_tag "", record.raw_data, class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
+                <%= text_area_tag '', record.raw_data, class: 'code-editor-multiple read-only', data: { mode: 'text/x-ruby' } %>
               <% end %>
             <% end %>
 
             <h5>Backtrace</h5>
 
             <% unless record.backtrace.nil? %>
-              <%= text_area_tag "", JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly', data: { mode: 'text/x-ruby' } %>
+              <%= text_area_tag '', JSON.pretty_generate(JSON.parse(record.backtrace.to_s)), class: 'code-editor-multiple readonly', data: { mode: 'text/x-ruby' } %>
             <% end %>
 
           </div>
@@ -263,7 +257,7 @@
       </div>
     </div>
     <% else %>
-    <p><%= t("harvest_jobs.no_failure_errors") %></p>
+    <p><%= t('harvest_jobs.no_failure_errors') %></p>
     <% end %>
 
   <% end %>

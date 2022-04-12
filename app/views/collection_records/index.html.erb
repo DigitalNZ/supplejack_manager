@@ -5,12 +5,12 @@
   </div>
 
   <div class="grid-x">
-    <%= form_tag(environment_collection_records_path(environment: params[:environment]), {method: :get, id: "collection_records_form"}) do |f| %>
+    <%= form_tag(environment_collection_records_path(environment: params[:environment]), { method: :get, id: 'collection_records_form' }) do |f| %>
       <div class="medium-4 cell">
-          <%= text_field_tag 'id', @record_id, placeholder: t('forms.placeholders.collection_record.id')  %>
+          <%= text_field_tag 'id', @record_id, autocomplete: :off, placeholder: t('forms.placeholders.collection_record.id') %>
       </div>
       <div class="medium-4 cell">
-        <%= submit_tag t('records.search'), class: "button" %>
+        <%= submit_tag t('records.search'), class: 'button' %>
       </div>
     <% end %>
   </div>
@@ -33,8 +33,7 @@
               <td><%= @record['title'] %></td>
               <td>
                 <%= form_tag(environment_collection_record_path(id: @record['record_id'], environment: params[:environment]), method: :put, class: 'collection_records') do |f| %>
-                  <% statuses = ['active', 'deleted', 'suppressed'] %>
-                  <%= select_tag 'status', options_for_select(statuses, @record['status']), onchange: 'this.form.submit();' %>
+                  <%= select_tag 'status', options_for_select(['active', 'deleted', 'suppressed'], @record['status']), onchange: 'this.form.submit();' %>
                 <% end %>
               </td>
             </tr>
@@ -42,13 +41,11 @@
         </table>
 
         <h2>Database (fragments) view</h2>
-        <%=
-          text_area_tag(
-            "",
+          <%= text_area_tag(
+            '',
             JSON.pretty_generate(@record['fragments']),
             class: 'code-editor-multiple readonly'
-          )
-        %>
+          ) %>
       <% elsif @record.nil? && @record_id %>
         <h3><%= t('records.not_found') %></h3>
       <% end %>
