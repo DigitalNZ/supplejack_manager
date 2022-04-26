@@ -3,7 +3,7 @@
   <h2>Please enter the code from your authenticator app:</h2>
 
   <%= form_tag([resource_name, :two_factor_authentication], method: :put, data: { turbo: false }) do %>
-    <%= text_field_tag :code, autocomplete: :off %>
+    <%= text_field_tag :code, '', autocomplete: :off %>
     <%= submit_tag 'Log in', class: 'button btn-primary' %>
   <% end %>
 
