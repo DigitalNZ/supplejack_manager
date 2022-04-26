@@ -5,4 +5,6 @@
 import { application } from "./application";
 
 import PollController from "./poll_controller";
+import FormReloadingController from "./form_reloading_controller";
 application.register("poll", PollController);
+application.register("form_reloading", FormReloadingController);
