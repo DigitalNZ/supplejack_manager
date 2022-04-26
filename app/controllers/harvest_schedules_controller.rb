@@ -18,7 +18,7 @@ class HarvestSchedulesController < ApplicationController
   end
 
   def new
-    # This is because this route is shared with the new.js template.
+    # This is because this route is shared with the turbo frame request
     if params[:harvest_schedule].present?
       @harvest_schedule = HarvestSchedule.new(harvest_schedule_params)
     else
