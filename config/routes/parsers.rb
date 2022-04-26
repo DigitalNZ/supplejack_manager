@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 resources :parsers do
-  get :allow_flush, on: :member
+  put :allow_flush, on: :member
   get :datatable, on: :collection, constraints: { format: :json }
   resources :parser_versions, path: :versions, only: [:show, :update] do
     get :current, on: :collection

@@ -112,8 +112,8 @@ en:
       helptext: "Parser scripts are instructions that tell Supplejack how to extract data from a source and then map it to a common schema. Data sources can have multiple parser scripts to handle different extractions and enhancements, so you can create and name them separately. Your parser script must be associated with a contributor and data source. Selecting a data format tells Supplejack what kind of data to expect. You can optionally select a pre-existing template that will copy in standard instructions to help you get started."
       submit: "Create Parser Script"
     enable_disable_full_and_flush: "%{action} Full & Flush harvest mode"
-    enable_full_and_flush_confirmation: "You are about to enable full and flush harvest mode. Do you want to proceed?"
-    disable_full_and_flush_confirmation: "You are about to disable full and flush harvest mode. This will also update any existing harvest schedules for this parser from “Full & Flush” to “Normal” mode. Do you want to proceed?"
+    enable_full_and_flush_confirmation: "You are about to enable full and flush harvest mode."
+    disable_full_and_flush_confirmation: "You are about to disable full and flush harvest mode. This will also update any existing harvest schedules for this parser from “Full & Flush” to “Normal” mode."
     disable_full_and_flush: "Currently disabled from the parser edit page"
 
   sources:
