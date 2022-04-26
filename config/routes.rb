@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   draw(:sources)
   draw(:previews)
   draw(:users)
+  draw(:status)
 
   scope ':environment', as: 'environment' do
     draw(:admin)
