@@ -90,8 +90,8 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
 
   scenario 'A harvest operator can disable Full & Flush harvest mode' do
     allow(HarvestSchedule).to receive(:update_schedulers_from_environment) { true }
-    click_link 'Disable Full & Flush harvest mode'
-    page.driver.browser.switch_to.alert.accept
+    click_button 'Disable Full & Flush harvest mode'
+    click_button 'Yes'
 
     expect(page).to have_text 'Enable Full & Flush harvest mode'
   end
