@@ -3,8 +3,6 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-import PreviewChannel from "../channels/preview_channel";
-
 var stored_sources;
 
 stored_sources = null;
@@ -21,35 +19,6 @@ document.addEventListener("turbo:load", function () {
       }
     }
   );
-
-  $("body").on("click", "a.records-preview-button", function (e) {
-    e.preventDefault();
-
-    $("#preview-area-spinner").show();
-    $("#preview-area").html("");
-    $("#preview-modal").foundation("open");
-    window.Harvester.myCodeMirror.save();
-
-    const $link = $(this);
-    const $form = $("#parser_content")
-      .parent("form")
-      .serialize()
-      .replace("_method=patch", "_method=post");
-
-    $.post($link.attr("href"), $form, function (data) {
-      const preview_id = $("#preview-job").data("preview-id");
-      const preview = PreviewChannel(preview_id);
-      $(".records-preview-button, #preview-modal .close-button").on(
-        "click",
-        function () {
-          preview.unsubscribe();
-        }
-      );
-      return $("#preview-area-spinner").hide();
-    });
-
-    return false;
-  });
 
   $("#cancel-parser-delete").on("click", function () {
     return $("#delete-parser-alert .close-reveal-modal").trigger("click");

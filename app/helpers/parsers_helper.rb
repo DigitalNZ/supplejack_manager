@@ -25,8 +25,7 @@ module ParsersHelper
       parser_id: parser_id,
       index: index.to_i + 1,
       environment: environment,
-      review: review,
-      format: :js
+      review: review
     )
     link_to 'next >', path, html_options
   end
@@ -48,14 +47,14 @@ module ParsersHelper
       parser_id: :parser_id,
       index: index,
       environment: environment,
-      review: review,
-      format: :js
+      review: review
     )
 
     if index >= 0
       link_to '< previous', path, html_options
     else
       html_options[:class] << ' disabled'
+      html_options[:data].delete(:controller)
       content_tag(:span, '< previous', html_options)
     end
   end

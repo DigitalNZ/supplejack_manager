@@ -6,5 +6,11 @@ import { application } from "./application";
 
 import PollController from "./poll_controller";
 import FormReloadingController from "./form_reloading_controller";
+import CodeController from "./code_controller";
+import TabsController from "./tabs_controller";
+import PreviewButtonController from "./preview_button_controller";
 application.register("poll", PollController);
 application.register("form_reloading", FormReloadingController);
+application.register("code", CodeController);
+application.register("tabs", TabsController);
+application.register("preview_button", PreviewButtonController);
