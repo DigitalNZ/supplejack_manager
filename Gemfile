@@ -57,9 +57,7 @@ group :development do
 end
 
 group :development, :test do
-  # debuggers
-  gem 'pry-byebug'
-  gem 'pry-rails'
+  gem 'debug'
 
   # rubocop tests
   gem 'rubocop', require: false
