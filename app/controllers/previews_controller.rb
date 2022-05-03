@@ -2,7 +2,6 @@
 
 # app/controllers/previews_controller.rb
 class PreviewsController < ApplicationController
-  respond_to :js, only: [:create, :show]
   respond_to :json, only: [:update]
 
   skip_before_action :verify_authenticity_token
@@ -10,10 +9,21 @@ class PreviewsController < ApplicationController
   before_action :find_parser, :validate_parser_content, only: [:create]
 
   def show
-    render json: @preview
+    @parser = Parser.find(@preview.parser_id)
+    respond_to do |format|
+      format.json { render json: @preview }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          @preview,
+          partial: 'previews/preview',
+          locals: { preview: @preview, parser: @parser, parser_error: @parser_error, stream: true }
+        )
+      }
+    end
   end
 
   def create
+    Rails.logger.info(params[:index])
     @preview = Preview.create(
       parser_code: params[:parser][:content],
       parser_id: @parser.id,
@@ -36,12 +46,18 @@ class PreviewsController < ApplicationController
     )
     @preview.start_preview_worker(job.id)
 
-    respond_with @preview
+    render json: @preview
   end
 
   def update
+    @parser = Parser.find(@preview.parser_id)
     if @preview.update_attributes(preview_params)
-      ActionCable.server.broadcast("preview_#{@preview.id}", @preview)
+      Turbo::StreamsChannel.broadcast_replace_to(
+        "preview_#{@preview.id}",
+        target: "preview_#{@preview.id}",
+        partial: 'previews/preview',
+        locals: { preview: @preview, parser: @parser, parser_error: @parser_error, params: params, stream: false }
+      )
       render json: @preview
     else
       render json: { preview: @preview }, status: :bad_request

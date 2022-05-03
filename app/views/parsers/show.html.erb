@@ -38,7 +38,7 @@
             </div>
           </li>
         <% end %>
-        <li><%= link_to 'Preview', preview_path(@parser.id), class: 'button records-preview-button' %></li>
+        <li><%= link_to 'Preview', preview_path(@parser.id), class: 'button', data: { controller: 'preview_button' } %></li>
       <% else %>
         <div href="#" class="button run-harvest dropdown disabled">Run Harvest</div>
       <% end %>

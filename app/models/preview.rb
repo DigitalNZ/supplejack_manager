@@ -34,8 +34,20 @@ class Preview
     logs << status if status_changed? && status.present?
   end
 
+  def json_present?(data)
+    JSON.parse(data).any? unless data.nil?
+  end
+
   def harvest_failure?
-    !!harvest_failure
+    json_present?(harvest_failure)
+  end
+
+  def field_errors?
+    json_present?(field_errors)
+  end
+
+  def enrichment_failures?
+    json_present?(enrichment_failures)
   end
 
   def raw_data?
@@ -58,11 +70,6 @@ class Preview
     JSON.pretty_generate(JSON.parse(self.harvested_attributes))
   end
 
-
-  def field_errors?
-    JSON.parse(self.field_errors).any? unless self.field_errors.nil?
-  end
-
   def validation_errors_output
     JSON.parse(self.validation_errors) unless self.validation_errors.nil?
   end
@@ -81,22 +88,6 @@ class Preview
 
   def deletable?
     self.deletable
-  end
-
-  def raw_output
-    self.send("pretty_#{attributes['format']}_output")
-  end
-
-  def pretty_xml_output
-    self.raw_data
-  end
-
-  def pretty_json_output
-    JSON.pretty_generate(JSON.parse(self.raw_data))
-  end
-
-  def field_errors_json
-    JSON.pretty_generate(JSON.parse(self.field_errors)) if field_errors?
   end
 
   def errors?

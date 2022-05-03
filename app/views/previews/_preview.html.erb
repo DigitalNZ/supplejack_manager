@@ -1,0 +1,145 @@
+<% if stream %>
+  <%= turbo_stream_from dom_id(preview) %>
+<% end %>
+
+<%= turbo_frame_tag dom_id(preview) do %>
+  <div class="grid-x">
+    <div class="medium-12 cell">
+      <h2>Previewing <%= parser.data_type.pluralize rescue 'records' %></h2>
+    </div>
+
+    <% if parser_error %>
+      <%= render 'parsers/error', error: parser_error %>
+    <% end %>
+  </div>
+
+  <div class="grid-x" id="preview-<%= preview.id %>">
+    <div class="medium-12 cell">
+      <details class="details details--primary" id="preview-status">
+        <summary class="details__summary">
+          <strong>Status: </strong><%= preview.status %>
+        </summary>
+        <div class="details__content">
+          <% preview.logs.each do |log| %>
+            <%= log %>
+            <br>
+          <% end %>
+        </div>
+      </details>
+
+      <% if preview.enrichment_failures? %>
+        <% enrichment_failures = JSON.parse(preview.enrichment_failures) %>
+        <% enrichment_failures.each do |failure| %>
+          <details class="details details--warning">
+            <summary class="details__summary">
+              <h4>
+                Enrichment <%= "#{failure['enrichment_name']} failed: \"#{failure['exception_class']}\" #{failure['message']}" %>
+              </h4>
+            </summary>
+            <div class="details__content">
+              <% failure['backtrace'].each do |line| %>
+                <%= line %>
+                <br>
+              <% end %>
+            )
+            </div>
+          </details>
+        <% end %>
+      <% end %>
+
+      <% if preview.deletable %>
+        <div id="record-to-delete" class="hidden">
+          <p></strong>This record is marked for deletion.</em></p>
+        </div>
+      <% end %>
+
+      <% if preview.field_errors? %>
+        <details class="details details--warning">
+          <summary class="details__summary"><strong>Field errors</summary>
+          <div class="details__content">
+            <% field_errors = JSON.parse(preview.field_errors) %>
+            <% field_errors.each do |error| %>
+              <%= error.to_s %>
+              <br>
+            <% end %>
+          </div>
+        </details>
+      <% end %>
+
+      <% if preview.harvest_job_errors.present? %>
+        <details class="details details--warning">
+          <summary class="details__summary">Harvest Errors</summary>
+          <div class="details__content">
+            <p><strong><%= preview.harvest_job_errors %></strong></p>
+          </div>
+        </div>
+      <% end %>
+
+      <% if preview.validation_errors? %>
+        <div id="validation-errors">
+          <h4>Validation Errors</h4>
+          <ul class="indented">
+            <% validation_errors = JSON.parse(preview.validation_errors) %>
+            <% validation_errors.each do |attribute, message| %>
+              <li><strong><%= attribute %>: </strong> message</li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <ul class='tabs' data-tabs id='preview-tabs' data-controller='tabs'>
+        <li class='tabs-title'>
+          <a data-tabs-target='source-data'>Source Data<span class="small-spinner"></span></a>
+        </li>
+        <li class='tabs-title is-active' aria-selected='true'>
+          <a data-tabs-target='harvested-attributes'>Harvested Attributes<span class="small-spinner"></span></a>
+        </li>
+        <li class='tabs-title'>
+          <a data-tabs-target="api-record">API <%= parser.data_type.capitalize rescue 'Record' %><span class="small-spinner"></span></a>
+        </li>
+        <div class="align-right next-previous">
+          <%= link_to_previous parser.id, preview.index, params[:environment], params[:review], class: 'records-preview-button', data: { controller: 'preview_button' } %> - Preview Record -
+          <%= link_to_next parser.id, preview.index, params[:environment], params[:review], class: 'records-preview-button', data: { controller: 'preview_button' } %>
+        </div>
+      </ul>
+
+      <div class="tabs-content" data-tabs-content='preview-tabs'>
+        <div class='tabs-panel' id="source-data">
+          <textarea id="record-raw-data" class="code-editor-multiple" data-controller="code"><%= pretty_raw_data(preview) %>
+          </textarea>
+        </div>
+
+        <div class="tabs-panel is-active" id="harvested-attributes">
+          <textarea id="harvest-attributes" class="code-editor-multiple" data-controller="code"><%= pretty_json(preview.harvested_attributes) %>
+          </textarea>
+        </div>
+
+        <div class='tabs-panel' id="api-record">
+          <textarea id="record-attributes" class="code-editor-multiple" data-controller="code"><%= pretty_json(preview.api_record) %>
+          </textarea>
+        </div>
+      </div>
+
+      <% if preview.harvest_failure? %>
+        <% harvest_failure = JSON.parse(preview.harvest_failure) %>
+        <details class="details details--warning">
+          <summary class="details__summary">
+            <h4>
+              <%= "Harvest failure: \"#{harvest_failure['exception_class']}\" #{harvest_failure['message']}" %>
+            </h4>
+          </summary>
+          <div class="details__content">
+            <% harvest_failure['backtrace'].each do |line| %>
+              <%= line %>
+              <br>
+            <% end %>
+          </div>
+        </details>
+      <% end %>
+    </div>
+  </div>
+
+  <% if preview.finished? && data.raw_data.nil? %>
+    <h4 class="not-found"><%= 'preview.parser.name' %> <span>didn't return any records.</span></h4>
+  <% end %>
+<% end %>

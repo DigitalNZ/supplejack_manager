@@ -103,7 +103,7 @@
       <% end %>
       <% if can? :preview, @parser %>
         <li class='medium-12 cell'>
-          <%= link_to 'Preview', previews_path(format: :js), class: 'button records-preview-button expanded', data: { open: 'preview-modal' } %>
+          <%= link_to 'Preview', previews_path, class: 'button expanded', data: { open: 'preview-modal', controller: 'preview_button' } %>
         </li>
       <% end %>
     </ul>
@@ -137,8 +137,7 @@
 </div>
 
 <div id='preview-modal' class='reveal large' data-reveal>
-  <div id='preview-area'>
-  </div>
+  <%= turbo_frame_tag 'preview-area' %>
 
   <div id='preview-area-spinner' class='spinner'>
     <%= image_tag image_path('sj-spinner.gif') %>
