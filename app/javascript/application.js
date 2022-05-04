@@ -19,6 +19,7 @@ import "./src/apm";
 import "./channels";
 import "./src/collection_statistics";
 import "./src/datatables.foundation";
+import "./src/datetimepicker";
 import "./src/enrichment_jobs";
 import "./src/harvest_errors";
 import "./src/harvest_schedules";
