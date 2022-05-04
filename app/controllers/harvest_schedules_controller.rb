@@ -7,8 +7,6 @@ class HarvestSchedulesController < ApplicationController
   before_action :set_worker_environment
   skip_before_action :verify_authenticity_token
 
-  respond_to :html
-
   def index
     @harvest_schedules = HarvestSchedule.all
 
@@ -33,7 +31,8 @@ class HarvestSchedulesController < ApplicationController
   def create
     @harvest_schedule = HarvestSchedule.new(harvest_schedule_params)
     @harvest_schedule.save
-    respond_with @harvest_schedule, location: harvest_schedules_path
+
+    redirect_to harvest_schedules_path, status: :see_other
   end
 
   def edit
