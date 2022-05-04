@@ -60,53 +60,6 @@ RSpec.describe Preview do
     end
   end
 
-  describe '#raw_output' do
-    before { allow(preview).to receive(:raw_data) }
-
-    it 'should call pretty_xml_output when format is xml' do
-      preview.format = 'xml'
-      expect(preview).to receive(:pretty_xml_output) { }
-      preview.raw_output
-    end
-
-    it 'should call pretty_json_output when format is not xml' do
-      preview.format = 'json'
-      expect(preview).to receive(:pretty_json_output) { }
-      preview.raw_output
-    end
-  end
-
-  describe '#pretty_xml_output' do
-    it 'returns the raw data' do
-      allow(preview).to receive(:raw_data) { 'I am raw!' }
-      expect(preview.pretty_xml_output).to eq 'I am raw!'
-    end
-  end
-
-  describe 'pretty_json_output' do
-    before { allow(preview).to receive(:raw_data) { '{ "title": "Json!" }' } }
-
-    it 'returns the json in a pretty format' do
-      expect(preview.send(:pretty_json_output)).to eq JSON.pretty_generate(
-        'title': 'Json!'
-      )
-    end
-  end
-
-  describe '#field_errors_json' do
-    it 'returns the json in a pretty format' do
-      allow(preview).to receive(:field_errors) { '{"title":"WRONG!"}' }
-      expect(preview.field_errors_json).to eq JSON.pretty_generate(
-        'title': 'WRONG!'
-      )
-    end
-
-    it 'returns nil when there are no field_errors' do
-      allow(preview).to receive(:field_errors)
-      expect(preview.field_errors_json).to be nil
-    end
-  end
-
   describe '#append_logs' do
     it 'logs defaults to []' do
       expect(Preview.new.logs).to eq []

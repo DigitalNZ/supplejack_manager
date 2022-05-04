@@ -23,7 +23,6 @@ class PreviewsController < ApplicationController
   end
 
   def create
-    Rails.logger.info(params[:index])
     @preview = Preview.create(
       parser_code: params[:parser][:content],
       parser_id: @parser.id,

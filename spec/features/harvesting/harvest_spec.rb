@@ -8,8 +8,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     allow_any_instance_of(Source).to receive(:update_apis)
     allow(LinkCheckRule).to receive(:create)
     allow(AbstractJob).to receive(:search).and_return([])
-
-    allow(Preview).to receive(:find) { build(:preview, id: 1) }
+    allow(Preview).to receive(:find) { build(:preview, id: 1, parser_id: parser.id) }
   end
 
   let(:user)        { create(:user, :admin) }
@@ -47,26 +46,6 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     expect(page).to have_css  '#harvest_job_limit'
 
     expect(page).to have_button 'Start Harvest'
-  end
-
-  scenario 'A harvest operator can preview a harvest' do
-    allow(HarvestJob).to receive(:create).and_return(harvest_job)
-    allow(RestClient).to receive(:post)
-    click_link 'Preview'
-
-    expect(page).to have_text 'Previewing records'
-    expect(page).to have_text 'Status: Initialising preview record...'
-    expect(page).to have_text 'x'
-
-    expect(page).to have_css '.tabs'
-
-    expect(page).to have_text 'Source Data'
-    expect(page).to have_text 'Harvested Attributes'
-    expect(page).to have_text 'API Record'
-
-    expect(page).to have_text '< previous'
-    expect(page).to have_text ' - Preview Record - '
-    expect(page).to have_text 'next'
   end
 
   scenario 'A harvest operator can Update a parser' do
