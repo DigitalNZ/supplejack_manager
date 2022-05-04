@@ -8,8 +8,4 @@ document.addEventListener("turbo:load", function () {
       },
     ],
   });
-
-  $(".datetimepicker").datetimepicker({
-    format: "d/m/Y H:i",
-  });
 });
