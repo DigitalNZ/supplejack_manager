@@ -89,6 +89,23 @@
         </details>
       <% end %>
 
+      <% if preview.harvest_failure? %>
+        <% harvest_failure = JSON.parse(preview.harvest_failure) %>
+        <details class="details details--warning">
+          <summary class="details__summary">
+            <h4>
+              <%= "Harvest failure: \"#{harvest_failure['exception_class']}\" #{harvest_failure['message']}" %>
+            </h4>
+          </summary>
+          <div class="details__content">
+            <% harvest_failure['backtrace'].each do |line| %>
+              <%= line %>
+              <br>
+            <% end %>
+          </div>
+        </details>
+      <% end %>
+
       <ul class='tabs' data-tabs id='preview-tabs' data-controller='tabs'>
         <li class='tabs-title'>
           <a data-tabs-target='source-data'>Source Data<span class="small-spinner"></span></a>
@@ -121,23 +138,6 @@
           </textarea>
         </div>
       </div>
-
-      <% if preview.harvest_failure? %>
-        <% harvest_failure = JSON.parse(preview.harvest_failure) %>
-        <details class="details details--warning">
-          <summary class="details__summary">
-            <h4>
-              <%= "Harvest failure: \"#{harvest_failure['exception_class']}\" #{harvest_failure['message']}" %>
-            </h4>
-          </summary>
-          <div class="details__content">
-            <% harvest_failure['backtrace'].each do |line| %>
-              <%= line %>
-              <br>
-            <% end %>
-          </div>
-        </details>
-      <% end %>
     </div>
   </div>
 
