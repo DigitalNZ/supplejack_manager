@@ -42,6 +42,8 @@ function initJS() {
 document.addEventListener("turbo:load", initJS);
 document.addEventListener("turbo:frame-load", initJS);
 
-document.addEventListener("turbo:click", function () {
+document.addEventListener("turbo:click", function (event) {
+  if (event.target.attributes.href.value == "#") return false;
+
   $("#turbo-transition").show();
 });
