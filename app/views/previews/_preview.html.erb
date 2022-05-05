@@ -55,11 +55,11 @@
 
       <% if preview.field_errors? %>
         <details class="details details--warning">
-          <summary class="details__summary"><strong>Field errors</summary>
+          <summary class="details__summary"><strong>Field errors</strong></summary>
           <div class="details__content">
             <% field_errors = JSON.parse(preview.field_errors) %>
-            <% field_errors.each do |error| %>
-              <%= error.to_s %>
+            <% field_errors.each do |field, errors| %>
+              <strong><%= field %>:</strong> <%= errors.first %>
               <br>
             <% end %>
           </div>
