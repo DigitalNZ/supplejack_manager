@@ -68,23 +68,25 @@
 
       <% if preview.harvest_job_errors.present? %>
         <details class="details details--warning">
-          <summary class="details__summary">Harvest Errors</summary>
+          <summary class="details__summary"><h4>Harvest Errors</h4></summary>
           <div class="details__content">
             <p><strong><%= preview.harvest_job_errors %></strong></p>
           </div>
-        </div>
+        </details>
       <% end %>
 
       <% if preview.validation_errors? %>
-        <div id="validation-errors">
-          <h4>Validation Errors</h4>
-          <ul class="indented">
+        <details class="details details--warning">
+          <summary class="details__summary"><h4>Validation Errors</h4></summary>
+          <div class="details__content">
             <% validation_errors = JSON.parse(preview.validation_errors) %>
-            <% validation_errors.each do |attribute, message| %>
-              <li><strong><%= attribute %>: </strong> message</li>
+            <% validation_errors.each do |attribute, messages| %>
+              <% messages.each do |message| %>
+                <strong><%= attribute %>: </strong> <%= message %>
+                <br>
+              <% end %>
             <% end %>
-          </ul>
-        </div>
+        </details>
       <% end %>
 
       <ul class='tabs' data-tabs id='preview-tabs' data-controller='tabs'>
