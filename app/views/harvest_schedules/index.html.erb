@@ -43,7 +43,18 @@
               <% if can? :update, schedule %>
                 <%= link_to t('edit'), edit_environment_harvest_schedule_path(params[:environment], id: schedule.id) %>
                 <br>
-                <%= link_to t('delete'), harvest_schedule_path(id: schedule.id), method: :delete, confirm: t('harvest_schedules.confirm_delete') %>
+                <%= link_to t('delete'), '#', data: { open: "schedule_#{schedule.id}" } %>
+                <%= render partial: 'shared/confirmation_modal', locals: {
+                  information: t('harvest_schedules.confirm_delete'),
+                  id: "schedule_#{schedule.id}",
+                  yes: button_to(
+                      'Yes',
+                      harvest_schedule_path(schedule.id),
+                      data: { close: '' },
+                      method: :delete,
+                      class: 'button new-right'
+                    )
+                } %>
                 <br>
                 <%= form_tag harvest_schedule_path(id: schedule.id), method: 'put' do %>
                   <%= hidden_field_tag 'harvest_schedule[status]', pause_resume_value_for(schedule) %>
@@ -119,7 +130,18 @@
             <% if can? :update, schedule %>
               <%= link_to t('edit'), edit_environment_harvest_schedule_path(params[:environment], id: schedule.id) %>
               <br>
-              <%= link_to t('delete'), harvest_schedule_path(id: schedule.id), method: :delete, confirm: t('harvest_schedules.confirm_delete') %>
+              <%= link_to t('delete'), '#', data: { open: "schedule_#{schedule.id}" } %>
+              <%= render partial: 'shared/confirmation_modal', locals: {
+                  information: t('harvest_schedules.confirm_delete'),
+                  id: "schedule_#{schedule.id}",
+                  yes: button_to(
+                      'Yes',
+                      harvest_schedule_path(schedule.id),
+                      data: { close: '' },
+                      method: :delete,
+                      class: 'button new-right'
+                    )
+                } %>
               <br>
                 <%= form_tag harvest_schedule_path(id: schedule.id), method: 'put' do %>
                   <%= hidden_field_tag 'harvest_schedule[status]', pause_resume_value_for(schedule) %>

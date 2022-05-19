@@ -3,7 +3,7 @@
     <h1 id='resource-title' data-toggler='.hide'><%= @snippet.name %></h1>
 
     <% if can? :update, @snippet %>
-      <%= custom_form_with model: @snippet, local: true, class: 'hide', data: { toggler: '.hide' }, id: 'rename-form' do |f| %>
+      <%= custom_form_with model: @snippet, class: 'hide', data: { toggler: '.hide' }, id: 'rename-form' do |f| %>
         <%= f.label :name, 'Code Snippet Name' %>
         <%= f.text_field_submit :name, class: 'input-group-field', submit_text: 'Rename' %>
       <% end %>

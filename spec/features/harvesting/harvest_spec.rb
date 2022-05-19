@@ -31,7 +31,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
   scenario 'A harvest operator can run a harvest' do
     click_link version.message
 
-    click_link 'Tag as Staging'
+    click_button 'Tag as Staging'
 
     click_button 'Run Harvest'
 

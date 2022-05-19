@@ -3,7 +3,7 @@
 
     <h1 id="resource-title" data-toggler=".hide"><%= @parser_template.name %></h1>
 
-    <%= custom_form_with model: @parser_template, local: true, class: 'hide', id: 'rename-form', data: { toggler: '.hide' } do |f| %>
+    <%= custom_form_with model: @parser_template, class: 'hide', id: 'rename-form', data: { toggler: '.hide' } do |f| %>
       <%= f.label :name, 'Harvest Template Name' %>
       <%= f.text_field_submit :name, class: 'input-group-field', submit_text: 'Rename' %>
     <% end %>
@@ -31,7 +31,7 @@
   </button>
 </div>
 
-<%= custom_form_with model: @parser_template, local: false do |f| %>
+<%= custom_form_with model: @parser_template do |f| %>
   <%= f.text_area :content, class: 'code-editor' %>
   <%= f.submit class: 'button' %>
 <% end %>
