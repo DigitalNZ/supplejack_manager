@@ -4,7 +4,6 @@
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
     "@rails/actioncable": "^6.0.0",
-    "@rails/ujs": "^6.1.4-1",
     "codemirror": "^5.63.3",
     "datatables.net": "^1.11.3",
     "datatables.net-zf": "^1.11.3",

@@ -9,8 +9,6 @@ import "./src/codemirror";
 import "./src/datatable.js";
 import "@hotwired/turbo-rails";
 import "./controllers";
-import RailsUJS from "@rails/ujs";
-RailsUJS.start();
 
 // local files, please keep this alphabetically ordered
 import "./src/admin/users";

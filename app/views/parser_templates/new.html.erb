@@ -4,7 +4,7 @@
   <%= t('parser_templates.helptext') %>
 </h5>
 
-<%= custom_form_with model: @parser_template, local: true do |f| %>
+<%= custom_form_with model: @parser_template do |f| %>
   <%= f.label :name, t('parser_templates.name') %>
   <%= f.text_field :name %>
 

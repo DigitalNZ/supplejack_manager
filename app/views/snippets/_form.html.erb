@@ -1,4 +1,4 @@
-<%= custom_form_with model: @snippet, local: true do |f| %>
+<%= custom_form_with model: @snippet do |f| %>
   <% if can? :update, @snippet %>
     <%= f.text_area :content, class: 'code-editor' %>
     <%= f.label :message %>

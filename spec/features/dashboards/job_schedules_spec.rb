@@ -51,6 +51,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(one_off_schedule).to receive(:destroy)
 
       click_link('Delete')
+      click_button('Yes')
     end
 
     scenario 'can click Resume link to pause job', js: true do
@@ -128,6 +129,7 @@ RSpec.feature 'Job Schedules', type: :feature do
       expect(schedule1).to receive(:destroy)
 
       click_link('Delete')
+      click_button('Yes')
     end
 
     scenario 'can click Resume link to pause job', js: true do

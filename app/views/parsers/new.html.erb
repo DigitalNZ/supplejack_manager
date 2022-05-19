@@ -5,7 +5,7 @@
     <%= t('parsers.new.helptext') %>
   </h5>
 
-  <%= custom_form_with model: @parser, local: true do |f| %>
+  <%= custom_form_with model: @parser do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
 

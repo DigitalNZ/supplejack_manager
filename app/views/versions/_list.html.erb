@@ -1,24 +1,30 @@
-<div class='button-group expanded'>
-  <% if can? :run_harvest, @parser %>
-    <% if @version %>
-      <% if APPLICATION_ENVS.include?('production') %>
-        <% if @version.production? %>
-          <%= link_to 'Untag as Production', send(:"#{versionable_path}_path", versionable, @version, version: { tags: (Array(@version.tags) - ['production']).uniq }), method: :put, class: 'button production' %>
-        <% else %>
-          <%= link_to 'Tag as Production', send(:"#{versionable_path}_path", versionable, @version, version: { tags: (Array(@version.tags) + ['production']).uniq }), method: :put, class: 'button production' %>
-        <% end %>
-      <% end %>
-
-      <% if APPLICATION_ENVS.include?('staging') %>
-        <% if @version.staging? %>
-          <%= link_to 'Untag as Staging', send(:"#{versionable_path}_path", versionable, @version, version: { tags: (Array(@version.tags) - ['staging']).uniq }), method: :put, class: 'button expand medium-12 staging' %>
-        <% else %>
-          <%= link_to 'Tag as Staging', send(:"#{versionable_path}_path", versionable, @version, version: { tags: (Array(@version.tags) + ['staging']).uniq }), method: :put, class: 'button expand medium-12 staging' %>
-        <% end %>
+<% if can? :run_harvest, @parser %>
+  <% if @version %>
+    <% APPLICATION_ENVS.each do |environment| %>
+      <% if @version.tags&.include?(environment) %>
+        <%= button_to(
+          "Untag as #{environment.capitalize}",
+          send(:"#{versionable_path}_path",
+          versionable,
+          @version,
+          version: { tags: (Array(@version.tags) - [environment]).uniq }),
+          method: :put,
+          class: "button medium-12 cell #{environment}"
+        ) %>
+      <% else %>
+        <%= button_to(
+          "Tag as #{environment.capitalize}",
+          send(:"#{versionable_path}_path",
+          versionable,
+          @version,
+          version: { tags: (Array(@version.tags) + [environment]).uniq }),
+          method: :put,
+          class: "button medium-12 cell #{environment}"
+        ) %>
       <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>
 
 <div id='versions' class='versions'>
   <span class='parser-tag label secondary'><%= "#{versionable.versions.count} versions" %></span>
