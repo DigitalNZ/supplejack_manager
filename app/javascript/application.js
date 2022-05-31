@@ -15,6 +15,7 @@ import "./src/admin/users";
 import "./src/admin/activities";
 import "./src/apm";
 import "./channels";
+import "./src/collection_records";
 import "./src/collection_statistics";
 import "./src/datatables.foundation";
 import "./src/datetimepicker";
