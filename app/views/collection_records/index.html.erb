@@ -32,8 +32,17 @@
               <td><%= @record['record_id'] %></td>
               <td><%= @record['title'] %></td>
               <td>
-                <%= form_tag(environment_collection_record_path(id: @record['record_id'], environment: params[:environment]), method: :put, class: 'collection_records') do |f| %>
-                  <%= select_tag 'status', options_for_select(['active', 'deleted', 'suppressed'], @record['status']), onchange: 'this.form.submit();' %>
+                <%= form_tag(
+                  environment_collection_record_path(
+                    id: @record['record_id'],
+                    environment: params[:environment]
+                  ),
+                  method: :put,
+                  class: 'collection_records'
+                ) do |f| %>
+
+                  <%= select_tag 'status', options_for_select(['active', 'deleted', 'suppressed'], @record['status']) %>
+
                 <% end %>
               </td>
             </tr>
