@@ -20,7 +20,7 @@
     </h2>
 
     <% if @enrichment_job.status == 'active' %>
-        <%= link_to(
+        <%= button_to(
           t('enrichment_jobs.stop'),
           environment_enrichment_job_path(
             environment: params[:environment],
