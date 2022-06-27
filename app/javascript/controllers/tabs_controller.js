@@ -9,6 +9,9 @@ export default class extends Controller {
         .data("tabsTarget");
       const tabElement = $(`#${tabsTarget}`);
 
+      tabElement.find(".CodeMirror").each(function (_, codemirror) {
+        codemirror.parentNode.removeChild(codemirror);
+      });
       tabElement.find(".code-editor-multiple").each(function (_, textarea) {
         initCodeMirror(textarea);
       });
