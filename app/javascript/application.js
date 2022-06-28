@@ -23,7 +23,6 @@ import "./src/enrichment_jobs";
 import "./src/harvest_errors";
 import "./src/harvest_schedules";
 import "./src/harvester";
-import "./src/harvester_codemirror";
 import "./src/link_check_rules";
 import "./src/parser_templates";
 import "./src/parsers";
