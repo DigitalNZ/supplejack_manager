@@ -90,14 +90,6 @@ RSpec.describe ParsersController do
 
       expect(assigns(:parser)).to eq parser
     end
-
-    it 'initializes a harvest_job' do
-      expect(HarvestJob).to receive(:from_parser).with(parser, user).and_return(job)
-
-      get :edit, params: { id: parser.id }
-
-      expect(assigns(:harvest_job)).to eq job
-    end
   end
 
   describe 'GET versions' do
