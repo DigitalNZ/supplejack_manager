@@ -86,7 +86,7 @@ RSpec.feature 'Harvesting', type: :feature, js: true do
     end
 
     expect(page).to have_text 'Warning:'
-    expect(page).to have_text 'You currently have scheduled jobs set for this parser.'
+    expect(page).to have_text 'If you currently have scheduled jobs set for this parser.'
     expect(page).to have_text 'By deleting this parser the scheduled jobs will be deleted as well.'
     expect(page).to have_text 'Delete'
     expect(page).to have_text 'Cancel'
