@@ -53,6 +53,7 @@ $.extend($.fn.dataTableExt.oPagination, {
     },
 
     fnUpdate: function (oSettings, fnDraw) {
+      $(oSettings.nTBody).foundation();
       var iListLength = 5;
       var oPaging = oSettings.oInstance.fnPagingInfo();
       var an = oSettings.aanFeatures.p;
