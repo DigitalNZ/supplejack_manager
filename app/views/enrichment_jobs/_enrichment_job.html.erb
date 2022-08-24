@@ -171,5 +171,8 @@
       <% end %>
     </table>
 
+    <%= render partial: 'abstract_jobs/failure', locals: { failure: @enrichment_job.enrichment_failure } %>
+    <%= render partial: 'abstract_jobs/failure', locals: { failure: @enrichment_job.harvest_failure } %>
+
   <% end %>
 <% end %>

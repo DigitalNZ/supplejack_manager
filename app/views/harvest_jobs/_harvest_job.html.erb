@@ -181,22 +181,7 @@
       <% end %>
     </table>
 
-    <% if @harvest_job.harvest_failure.present? %>
-      <h5><%= t('harvest_jobs.harvest_failure') %> </h5>
-
-      <div id="harvest-job-errors-backtrace">
-        <div id="accordion-backtrace" class="accordion">
-          <h3 class="error">
-            <span><%= @harvest_job.harvest_failure.message %></span>
-          </h3>
-          <div>
-            <small>
-              <%= text_area_tag '', JSON.pretty_generate(JSON.parse(@harvest_job.harvest_failure.backtrace.to_s)), class: 'code-editor-multiple readonly' %>
-            </small>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: 'abstract_jobs/failure', locals: { failure: @harvest_job.harvest_failure } %>
 
     <h5><%= t('harvest_jobs.invalid_records') %> <span class="errors-count">(<%= @harvest_job.invalid_records_count.to_i %>)</span></h5>
 
