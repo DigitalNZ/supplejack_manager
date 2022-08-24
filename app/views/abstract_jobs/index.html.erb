@@ -22,9 +22,7 @@
         <th><%= t('harvest_jobs.enrichment') %></th>
         <th><%= t('harvest_jobs.operator') %></th>
         <th><%= t('harvest_jobs.start_time') %></th>
-        <% if %w[finished all].include?(params[:status]) %>
-          <th><%= t('harvest_jobs.duration') %></th>
-        <% end %>
+        <th><%= t('harvest_jobs.duration') %></th>
 
         <th><%= t('harvest_jobs.records_harvested') %></th>
         <th><%= t('harvest_jobs.validation_failure_errors') %></th>
@@ -65,10 +63,7 @@
         <% end %>
         <td><%= l abstract_job&.start_time, format: :start_time rescue nil %></td>
 
-        <% if %w[finished all].include?(params[:status]) %>
-          <td><%= human_readable_duration(abstract_job.duration) %></td>
-        <% end %>
-
+        <td><%= human_readable_duration(abstract_job.duration) %></td>
         <td><%= abstract_job.records_count %></td>
 
         <% if ((abstract_job.invalid_records_count.present? && abstract_job.invalid_records_count > 0) || (abstract_job.failed_records_count.present? && abstract_job.failed_records_count > 0)) %>

@@ -113,14 +113,16 @@
         </td>
       </tr>
 
-      <% if @harvest_job.failed? || @harvest_job.finished? %>
+      <% if @harvest_job.duration.present? %>
         <tr>
           <td><%= t('harvest_jobs.duration') %></td>
           <td>
-              <strong><%= human_readable_duration(@harvest_job.duration) %></strong>
+            <strong><%= human_readable_duration(@harvest_job.duration) %></strong>
           </td>
         </tr>
+      <% end %>
 
+      <% if @harvest_job.failed? || @harvest_job.finished? %>
         <tr>
           <td><%= t('harvest_jobs.records_per_second') %></td>
           <td>
