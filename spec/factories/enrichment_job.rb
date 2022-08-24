@@ -23,6 +23,9 @@ FactoryBot.define do
     record_id { 1 }
     last_posted_record_id { 'last posted record id' }
 
+    association :enrichment_failure, factory: :job_failure
+    association :harvest_failure, factory: :job_failure
+
     trait :finished do
       status { 'finished' }
     end

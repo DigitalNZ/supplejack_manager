@@ -11,7 +11,7 @@ FactoryBot.define do
     status { 'ready' }
     environment { 'staging' }
 
-    harvest_failure { OpenStruct.new(backtrace: '{}') }
+    association :harvest_failure, factory: :job_failure
     invalid_records { [] }
     failed_records { [] }
 

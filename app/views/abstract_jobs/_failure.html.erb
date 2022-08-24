@@ -1,0 +1,15 @@
+<% if failure.present? %>
+  <details class="details details--warning">
+    <summary class="details__summary">
+      <h4>
+        <%= "Exception: \"#{failure.exception_class}\" with message: \"#{failure.message}\"" %>
+      </h4>
+    </summary>
+    <div class="details__content">
+      <% failure.backtrace.each do |line| %>
+        <%= line %>
+        <br>
+      <% end %>
+    </div>
+  </details>
+<% end %>
