@@ -20,7 +20,7 @@ gem 'rails', '~> 7.0.3'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'rqrcode'
 gem 'server_timing'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'pm/security-upgrade'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v2.10.8'
 gem 'two_factor_authentication'
 
 # Hotwire and turbo
