@@ -36,6 +36,9 @@ gem 'cssbundling-rails'
 gem 'aws-sdk-s3'
 gem 'aws-sdk-rekognition', '~> 1.59'
 
+# error reporting
+gem 'elastic-apm'
+
 group :test do
   gem 'capybara', '>= 2.17.0'
   gem 'capybara-screenshot'
@@ -64,10 +67,6 @@ group :development, :test do
   gem 'rubocop-rails_config', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-performance', require: false
-end
-
-group :production do
-  gem 'elastic-apm'
 end
 
 group :uat, :staging, :production do
