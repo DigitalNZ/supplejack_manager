@@ -3,17 +3,13 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-var stored_sources;
-
-stored_sources = null;
+var stored_sources = null;
 
 document.addEventListener("turbo:load", function () {
   $("form[action^='/parsers/'] input[name='parser[message]'").on(
     "submit",
     function (e) {
-      var parser_message;
-      parser_message = $('input[name="parser[message]"').val();
-      if (!parser_message) {
+      if (!$('input[name="parser[message]"').val()) {
         alert("Message is required");
         return e.preventDefault();
       }
@@ -67,7 +63,7 @@ document.addEventListener("turbo:load", function () {
       {
         data: "name",
         render: function (data, type, row, meta) {
-          return '<a href="/parsers/' + row.id + '/edit">' + data + "</a>";
+          return `<a href="/parsers/${row.id}/edit">${data}</a>`;
         },
       },
       { data: "strategy" },
@@ -75,26 +71,14 @@ document.addEventListener("turbo:load", function () {
         data: "partner_name",
         render: function (data, type, row, meta) {
           if (!row.can_update) return row.partner_name;
-          return (
-            '<a href="/partners/' +
-            row.partner.id +
-            '/edit">' +
-            row.partner.name +
-            "</a>"
-          );
+          return `<a href="/partners/${row.partner.id}/edit">${row.partner.name}</a>`;
         },
       },
       {
         data: "source_name",
         render: function (data, type, row, meta) {
           if (!row.can_update) return row.source.name;
-          return (
-            '<a href="/sources/' +
-            row.source.id +
-            '/edit">' +
-            row.source.name +
-            "</a>"
-          );
+          return `<a href="/sources/${row.source.id}/edit">${row.source.name}</a>`;
         },
       },
       { data: "updated_at" },
