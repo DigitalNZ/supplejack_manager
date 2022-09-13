@@ -11,12 +11,12 @@
   ) do %>
 
     <h2 class="left">
-      <%= t('harvest_jobs.progress') %>
+      <%= t('harvest_jobs.progress') %>:
       <% if @harvest_job.parser.present? %>
         <% if can? :update, @harvest_job.parser %>
-          <span class="parser-title">: <%= link_to @harvest_job.parser&.name, edit_parser_path(@harvest_job.parser), target: '_top' %></span>
+          <%= link_to @harvest_job.parser&.name, edit_parser_path(@harvest_job.parser), target: '_top' %>
         <% else %>
-          <span class="parser-title">: <%= @harvest_job.parser.try(:name) %></span>
+          <%= @harvest_job.parser&.name %>
         <% end %>
       <% end %>
     </h2>
