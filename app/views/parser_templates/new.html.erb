@@ -1,4 +1,8 @@
-<h2><%= t('parser_templates.create_a') %></h2>
+<%= content_for :title do %>
+  <%= t('parser_templates.create_a') %>
+<% end %>
+
+<h1><%= t('parser_templates.create_a') %></h1>
 
 <h5 class="subheader">
   <%= t('parser_templates.helptext') %>

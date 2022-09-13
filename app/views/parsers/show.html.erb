@@ -1,6 +1,10 @@
+<%= content_for :title do %>
+  <%= @parser.name %>
+<% end %>
+
 <div class="grid-x">
   <div class="medium-9 cell">
-    <h1 id="parser-title" class="left"><%= @parser.name %></h1>
+    <h1><%= @parser.name %></h1>
   </div>
 
   <div class="medium-3 cell">

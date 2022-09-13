@@ -1,4 +1,13 @@
-<h1 class="left">Link Check Rules - <%= params[:environment].capitalize %></h1>
+<% title = "Link Check Rules - #{params[:environment].capitalize}" %>
+<%= content_for :title do %>
+  <%= title %>
+<% end %>
+
+<%= content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<h1><%= title %></h1>
 <%= link_to 'New link check rule', new_environment_link_check_rule_path(environment: params[:environment]), class: "button new-right #{can_show_button(:create, LinkCheckRule)}" %>
 
 <table id="link_check_rules">

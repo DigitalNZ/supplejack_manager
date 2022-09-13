@@ -1,8 +1,8 @@
-<div class="grid-x">
-  <div class="medium-9 cell">
-    <h1 id="parser-template-title" class="float-left"><%= @parser_template.name %></h1>
-  </div>
-</div>
+<%= content_for :title do %>
+  <%= @parser_template.name %>
+<% end %>
+
+<h1><%= @parser_template.name %></h1>
 
 <%= custom_form_with model: @parser_template do |f| %>
   <%= f.text_area :content, class: 'code-editor read-only' %>

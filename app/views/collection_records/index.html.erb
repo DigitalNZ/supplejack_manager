@@ -1,7 +1,12 @@
+<% title = "#{t('records.label')} - #{params[:environment].capitalize}" %>
+<%= content_for :title do %>
+  <%= title %>
+<% end %>
+
 <div class="medium-8 cell centered">
 
   <div class="grid-x">
-    <h1 class="float-left"><%= t('records.label') %> - <%= params[:environment].capitalize %></h1>
+    <h1 class="float-left"><%= title %></h1>
   </div>
 
   <div class="grid-x">

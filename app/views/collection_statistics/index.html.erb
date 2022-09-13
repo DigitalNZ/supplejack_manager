@@ -1,4 +1,13 @@
-<h1 class="left">Link Checking Report - <%= params[:environment].capitalize %></h1>
+<% title = "Link Checking Report - #{params[:environment].capitalize}" %>
+<%= content_for :title do %>
+  <%= title %>
+<% end %>
+
+<%= content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<h1><%= title %></h1>
 
 <table id="stats">
   <thead>

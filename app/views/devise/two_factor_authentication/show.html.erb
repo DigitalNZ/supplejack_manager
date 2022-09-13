@@ -1,11 +1,17 @@
-<div>
+<%= content_for :title do %>
+  MFA Login
+<% end %>
 
-  <h2>Please enter the code from your authenticator app:</h2>
+<h1>Multi-factor Authentication</h1>
 
-  <%= form_tag([resource_name, :two_factor_authentication], method: :put, data: { turbo: false }) do %>
+<p>Please enter the code from your authenticator app:</p>
+
+<%= form_tag([resource_name, :two_factor_authentication], method: :put, data: { turbo: false }) do %>
+  <label>
+    MFA Code
     <%= text_field_tag :code, '', autocomplete: :off, autofocus: true %>
-    <%= submit_tag 'Log in', class: 'button btn-primary' %>
-  <% end %>
+  </label>
+  <%= submit_tag 'Log in', class: 'button btn-primary' %>
+<% end %>
 
-  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-</div>
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

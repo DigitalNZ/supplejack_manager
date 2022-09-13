@@ -1,4 +1,12 @@
-<h2>API Users</h2>
+<%= content_for :title do %>
+  API Users
+<% end %>
+
+<%= content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<h1>API Users</h1>
 
 <%= link_to('Download CSV', environment_admin_users_path(format: :csv), class: 'button primary new-right') %>
 
