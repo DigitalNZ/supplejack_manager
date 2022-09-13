@@ -17,26 +17,6 @@
   }
 }
 
-.parser-title {
-  display: none;
-}
-
-.enrichment-job-full,
-.harvest-job-full {
-  .parser-title {
-    display: inline;
-  }
-  table {
-    clear: both;
-  }
-
-  #harvest-job {
-    .button {
-      margin-top: 14px;
-    }
-  }
-}
-
 #harvest-modal {
   .errors-count {
     display: none;

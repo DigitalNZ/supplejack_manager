@@ -11,11 +11,11 @@
   ) do %>
 
     <h2 class="left">
-      <%= t('enrichment_jobs.progress') %>
+      <%= t('enrichment_jobs.progress') %>:
       <% if can? :update, @enrichment_job.parser %>
-        <span class="parser-title">: <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser), target: :_top %></span>
+        <%= link_to @enrichment_job.parser.try(:name), edit_parser_path(@enrichment_job.parser), target: :_top %>
       <% else %>
-        <span class="parser-title">: <%= @enrichment_job.parser.try(:name) %></span>
+        <%= @enrichment_job.parser.try&.name %>
       <% end %>
     </h2>
 
