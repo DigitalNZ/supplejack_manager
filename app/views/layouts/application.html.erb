@@ -2,7 +2,10 @@
 <html class='no-js'>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : 'Harvester Manager' %></title>
+    <title>
+      <%= content_for?(:title) ? "#{yield(:title)} | " : '' %>
+      Harvester Manager
+    </title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'Harvester Manager' %>">
     <%= csp_meta_tag %>
     <%= csrf_meta_tags %>

@@ -1,4 +1,9 @@
-<h2><%= t('harvest_schedules.edit_env_schedule', env: params[:environment].capitalize) %></h2>
+<% title = t('harvest_schedules.edit_env_schedule', env: params[:environment].capitalize) %>
+<%= content_for :title do %>
+  <%= title %>
+<% end %>
+
+<h1><%= title %></h1>
 
 <div id="harvest-schedule-form">
   <%= render 'form' %>

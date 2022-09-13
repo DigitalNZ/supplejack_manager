@@ -1,19 +1,18 @@
-<br>
-<div id="alert"></div>
+<%= content_for :title do %>
+  <%= t('sources.edit') %>
+<% end %>
 
-<div class="medium-7 cell">
-  <h2><%= t('sources.edit') %></h2>
+<h1><%= t('sources.edit') %></h1>
 
-  <%= render 'form' %>
+<%= render 'form' %>
 
-  <% if can? :manage, @source %>
-    <h2><%= t('sources.manage') %></h2>
-    <a href="#" data-open="reindex-modal" class="button float-right"><%= t('sources.reindex') %></a>
-  <% end %>
-</div>
+<% if can? :manage, @source %>
+  <h2><%= t('sources.manage') %></h2>
+  <a href="#" data-open="reindex-modal" class="button float-right"><%= t('sources.reindex') %></a>
+<% end %>
 
 <div id="reindex-modal" class="reveal medium" data-reveal>
-  <h2><%= t('sources.reindex') %></h2>
+  <h1><%= t('sources.reindex') %></h1>
   <div class="grid-x">
     <div class="medium-12 cell">
       <label class=""><%= t('forms.labels.sources.environment') %></label>

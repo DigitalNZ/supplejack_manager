@@ -1,3 +1,9 @@
+<%= content_for :title do %>
+  Edit meta
+<% end %>
+
+<h1>Edit metadata of "<%= @parser.name %>"</h1>
+
 <div class='medium-12 cell'>
   <%= custom_form_with model: @parser do |f| %>
     <%= f.label :name %>

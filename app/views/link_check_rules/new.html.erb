@@ -1,6 +1,10 @@
+<%= content_for :title do %>
+  <%= t('link_checker.create_a') %>
+<% end %>
+
 <div class="grid-x">
   <div class="medium-8 cell">
-    <h2 id="link-check-rule-title" class="left"><%= t('link_checker.create_a') %></h2>
+    <h1 id="link-check-rule-title"><%= t('link_checker.create_a') %></h1>
     <%= render 'form', url: environment_link_check_rules_path(environment: params[:environment]) %>
   </div>
 </div>

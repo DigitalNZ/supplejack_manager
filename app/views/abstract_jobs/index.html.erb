@@ -1,4 +1,9 @@
-<h1><%= params[:status].capitalize %> Jobs - <%= params[:environment].capitalize %></h1>
+<% title = "#{params[:status].capitalize} Jobs - #{params[:environment].capitalize}" %>
+<%= content_for :title do %>
+  <%= title %>
+<% end %>
+
+<h1><%= title %></h1>
 
 <% %w[all active finished failed stopped].each do |status| %>
   <%= link_to(

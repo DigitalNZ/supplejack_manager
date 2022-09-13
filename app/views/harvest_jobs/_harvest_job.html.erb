@@ -10,7 +10,7 @@
     }
   ) do %>
 
-    <h2 class="left">
+    <h2>
       <%= t('harvest_jobs.progress') %>:
       <% if @harvest_job.parser.present? %>
         <% if can? :update, @harvest_job.parser %>
