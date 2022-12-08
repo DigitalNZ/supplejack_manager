@@ -100,4 +100,7 @@ Rails.application.configure do
   }
 
   config.action_controller.forgery_protection_origin_check = false
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{2.days.to_i}"
+  }
 end
