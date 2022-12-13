@@ -327,9 +327,13 @@ GEM
     parallel (1.21.0)
     parser (3.1.1.0)
       ast (~> 2.4.1)
+    prometheus-client (4.0.0)
     public_suffix (4.0.6)
     puma (5.6.4)
       nio4r (~> 2.0)
+    puma-metrics (1.2.5)
+      prometheus-client (>= 0.10)
+      puma (>= 5.0)
     racc (1.6.1)
     rack (2.2.4)
     rack-test (2.0.2)
@@ -536,6 +540,7 @@ DEPENDENCIES
   oai
   ougai
   puma
+  puma-metrics
   rails (~> 7.0.3)
   rails-controller-testing
   redis (~> 4.0)
