@@ -10,7 +10,7 @@ class User
   scope :active, -> { where(active: true) }
   scope :deactivated, -> { where(active: false) }
 
-  devise :recoverable, :rememberable, :trackable, :validatable, :database_authenticatable, :two_factor_authenticatable
+  devise :recoverable, :rememberable, :trackable, :validatable, :database_authenticatable, :two_factor_authenticatable, :lockable
 
   field :name,                    type: String
 
@@ -39,6 +39,12 @@ class User
   field :last_sign_in_at,         type: Time
   field :current_sign_in_ip,      type: String
   field :last_sign_in_ip,         type: String
+
+  ## lockable
+  field :failed_attempts,         type: Integer, default: 0
+  field :locked_at,               type: DateTime
+  field :unlock_token,            type: String
+
 
   field :role,                    type: String,   default: 'user'
   field :active,                  type: Boolean,  default: true
