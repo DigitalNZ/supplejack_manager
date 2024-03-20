@@ -7,7 +7,7 @@ require:
   - rubocop-performance
 
 AllCops:
-  TargetRubyVersion: 3.2.2
+  NewCops: enable
   Exclude:
     - "node_modules/**/*"
     - "vendor/**/*"
