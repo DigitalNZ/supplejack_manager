@@ -52,7 +52,7 @@ RSpec.describe HarvestSchedulesController do
       end
 
       it 'assigns the correct @harvest_schedule' do
-        get :new, params: { environment: 'staging', harvest_schedule: harvest_schedule }
+        get :new, params: { environment: 'staging', harvest_schedule: }
         expect(assigns(:harvest_schedule)).to eq harvest_schedule
       end
     end

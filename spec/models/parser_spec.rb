@@ -68,8 +68,8 @@ RSpec.describe Parser do
 
   describe '.find_by_partners' do
     let!(:partner) { create(:partner) }
-    let!(:source) { create(:source, partner: partner) }
-    let!(:parser) { create(:parser, source: source) }
+    let!(:source) { create(:source, partner:) }
+    let!(:parser) { create(:parser, source:) }
 
     it 'should find the Partner' do
       expect(Parser.find_by_partners([partner.id])).to eq [parser]
@@ -138,7 +138,7 @@ RSpec.describe Parser do
   describe '#enrichment_definitions' do
     let(:version) { build(:version) }
     let(:parser_class) { double(:parser_class, enrichment_definitions: { ndha_rights: 'Hi' }) }
-    let(:loader) { double(:loader, loaded?: true, parser_class: parser_class).as_null_object }
+    let(:loader) { double(:loader, loaded?: true, parser_class:).as_null_object }
 
     context 'when version is not passed' do
       it 'content is the last content which is set in the Parser itself' do
@@ -254,7 +254,7 @@ RSpec.describe Parser do
 
   describe '#updated_last_editor' do
     let(:user)    { create(:user) }
-    let(:version) { build(:version, :staging, user: user, version: 'v1') }
+    let(:version) { build(:version, :staging, user:, version: 'v1') }
     let(:parser)  { create(:parser) }
 
     it 'sets the user as the last edited by before a parser is saved' do
@@ -267,7 +267,7 @@ RSpec.describe Parser do
 
   describe '#datatable_query' do
     let(:user)    { create(:user) }
-    let(:version) { build(:version, :staging, user: user) }
+    let(:version) { build(:version, :staging, user:) }
     let(:parser)  { create(:parser) }
     let(:options) { {
       search:      'term',

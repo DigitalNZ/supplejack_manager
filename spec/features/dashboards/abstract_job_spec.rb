@@ -23,7 +23,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
 
     context 'Active jobs', js: true do
       let(:source) { create(:source) }
-      let(:parser) { create(:parser, source: source) }
+      let(:parser) { create(:parser, source:) }
       let(:abstract_job) do
         build(:abstract_job, status: 'active',
                              mode: 'Normal',
@@ -56,7 +56,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
 
     context 'Finished jobs', js: true do
       let(:source) { create(:source) }
-      let(:parser) { create(:parser, source: source) }
+      let(:parser) { create(:parser, source:) }
       let(:abstract_job) do
         build(:abstract_job, status: 'finished',
                              mode: 'Normal',
@@ -81,7 +81,7 @@ RSpec.feature 'Abstract Job Dashboard', type: :feature do
 
     context 'All jobs', js: true do
       let(:source) { create(:source) }
-      let(:parser) { create(:parser, source: source) }
+      let(:parser) { create(:parser, source:) }
       let(:abstract_job) do
         build(:abstract_job, status: 'finished',
                              mode: 'Normal',

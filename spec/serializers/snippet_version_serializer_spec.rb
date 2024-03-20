@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe SnippetVersionSerializer do
   let(:user)       { create(:user, :admin) }
   let(:snippet)    { create(:snippet) }
-  let(:version)    { create(:version, versionable: snippet, user: user) }
+  let(:version)    { create(:version, versionable: snippet, user:) }
   let(:serializer) { described_class.new(version).as_json }
 
   before(:each) do

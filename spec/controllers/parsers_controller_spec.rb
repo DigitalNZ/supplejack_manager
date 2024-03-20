@@ -12,7 +12,7 @@ RSpec.describe ParsersController do
   let(:source)  { create(:source) }
   let(:parser)  { create(:parser, source_id: source) }
   let(:user)    { create(:user, :admin) }
-  let(:version) { create(:version, versionable: parser, user: user) }
+  let(:version) { create(:version, versionable: parser, user:) }
 
   before do
     sign_in user

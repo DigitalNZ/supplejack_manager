@@ -50,7 +50,7 @@ class AbstractJob < ActiveResource::Base
       params.reverse_merge!(status: 'all', page: 1, environment: ['staging', 'production'])
       params.delete(:status) if params[:status] == 'all'
       params[:parser_id] = params.delete(:parser) if params[:parser]
-      jobs = self.find(:all, params: params)
+      jobs = self.find(:all, params:)
       Kaminari::PaginatableArray.new(
         jobs,
         limit: jobs.http['X-limit'].to_i,

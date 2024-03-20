@@ -27,7 +27,7 @@ class Preview
   def start_preview_worker(job_id)
     preview_url = "#{ENV['PREVIEW_WORKER_HOST'] || ENV['WORKER_HOST']}/previews"
 
-    RestClient.post(preview_url, { preview_id: id, job_id: job_id })
+    RestClient.post(preview_url, { preview_id: id, job_id: })
   end
 
   def append_logs

@@ -27,7 +27,7 @@ module Versioned
 
   def save_with_version
     version_number = versions.count + 1
-    versions.create(content: content, tags: tags, message: message, user_id: user_id, version: version_number)
+    versions.create(content:, tags:, message:, user_id:, version: version_number)
   end
 
   def find_version(version_id)

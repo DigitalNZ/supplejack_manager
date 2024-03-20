@@ -23,7 +23,7 @@ class Source
   #
   # @param [String] id (can be id or source_id)
   def self.custom_find(id)
-    any_of({ id: id }, { source_id: id }).first
+    any_of({ id: }, { source_id: id }).first
   end
 
   def partner_name

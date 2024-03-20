@@ -22,10 +22,10 @@ module ParsersHelper
     # Its incremented so that in the second iteration previous link can be made visible.
     # Previous link is disabled when index is 0
     path = previews_path(
-      parser_id: parser_id,
+      parser_id:,
       index: index.to_i + 1,
-      environment: environment,
-      review: review
+      environment:,
+      review:
     )
     link_to 'next >', path, html_options
   end
@@ -45,9 +45,9 @@ module ParsersHelper
     index = index.to_i - 1
     path = previews_path(
       parser_id: :parser_id,
-      index: index,
-      environment: environment,
-      review: review
+      index:,
+      environment:,
+      review:
     )
 
     if index >= 0

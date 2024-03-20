@@ -17,7 +17,7 @@ class SourcesController < ApplicationController
 
     status = @source.nil? ? :not_found : :ok
 
-    respond_with @source, status: status
+    respond_with @source, status:
   end
 
   def new

@@ -6,7 +6,7 @@ RSpec.feature 'Job Schedules', type: :feature do
   let(:user) { create(:user, :admin) }
 
   let(:source) { create(:source) }
-  let(:parser) { create(:parser, source: source) }
+  let(:parser) { create(:parser, source:) }
 
   context 'a user that is logged out' do
     scenario 'gets redirected to the sign in page' do
@@ -161,8 +161,8 @@ RSpec.feature 'Job Schedules', type: :feature do
     end
 
     let(:source) { create(:source) }
-    let(:parser1) { create(:parser, source: source) }
-    let(:parser2) { create(:parser, name: 'A 2nd name', source: source) }
+    let(:parser1) { create(:parser, source:) }
+    let(:parser2) { create(:parser, name: 'A 2nd name', source:) }
     let(:attributes) do
       { recurrent: true,
         status: 'active',

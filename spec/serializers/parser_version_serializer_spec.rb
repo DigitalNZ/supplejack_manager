@@ -12,7 +12,7 @@ RSpec.describe ParserVersionSerializer do
   let(:source)     { create(:source) }
   let(:parser)     { create(:parser, source_id: source) }
   let(:user)       { create(:user, :admin) }
-  let(:version)    { create(:version, versionable: parser, user: user) }
+  let(:version)    { create(:version, versionable: parser, user:) }
   let(:serializer) { described_class.new(version).as_json }
 
   describe '#attributes' do

@@ -42,12 +42,12 @@ Capybara.register_driver :headless_chrome do |app|
       browser: :remote,
       url: "http://#{uri.host}:#{uri.port}/wd/hub/",
       desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
-        chromeOptions: { args: args }
+        chromeOptions: { args: }
       )
     )
   else
-    options = Selenium::WebDriver::Chrome::Options.new(args: args)
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+    options = Selenium::WebDriver::Chrome::Options.new(args:)
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
   end
 end
 

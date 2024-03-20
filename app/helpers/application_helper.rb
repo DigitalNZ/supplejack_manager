@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def custom_form_with(model: nil, scope: nil, url: nil, format: nil, **options, &block)
     options[:builder] = CustomFormBuilder
-    form_with model: model, scope: scope, url: url, format: format, **options, &block
+    form_with model:, scope:, url:, format:, **options, &block
   end
 
   def custom_fields_for(object, options = {}, &block)

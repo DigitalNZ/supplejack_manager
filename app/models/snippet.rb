@@ -10,7 +10,7 @@ class Snippet
   field :content,   type: String
 
   def self.find_by_name(name, environment)
-    snippet = where(name: name).first
+    snippet = where(name:).first
     snippet.current_version(environment) if snippet.present?
   end
 

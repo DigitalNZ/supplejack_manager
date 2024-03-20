@@ -43,9 +43,9 @@ module Api
         end
 
         RestClient::Request.execute(
-          method: method,
+          method:,
           url: @url,
-          payload: payload,
+          payload:,
           headers: {
             'Authentication-Token': @token
           }.merge(url_params)

@@ -16,7 +16,7 @@ class ParserTemplate
   validates :name, uniqueness: true
 
   def self.find_by_name(name)
-    where(name: name).first
+    where(name:).first
   end
 
   # Where first instead of find_by so that Mongo doesn't error

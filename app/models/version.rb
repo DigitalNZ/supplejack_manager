@@ -43,7 +43,7 @@ class Version
         url: ENV['CHANGESAPP_HOST'],
         user: ENV['CHANGESAPP_USER'],
         password: ENV['CHANGESAPP_PASSWORD'],
-        payload: payload
+        payload:
       )
     end
   end

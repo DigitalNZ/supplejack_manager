@@ -20,7 +20,7 @@ module Admin
     end
 
     def find(id)
-      response = Api::ApiUser.get(environment, id, { page: page })
+      response = Api::ApiUser.get(environment, id, { page: })
       @user = JSON.parse(response)
     end
 

@@ -55,7 +55,7 @@ class PreviewsController < ApplicationController
         "preview_#{@preview.id}",
         target: "preview_#{@preview.id}",
         partial: 'previews/preview',
-        locals: { preview: @preview, parser: @parser, parser_error: @parser_error, params: params, stream: false }
+        locals: { preview: @preview, parser: @parser, parser_error: @parser_error, params:, stream: false }
       )
       render json: @preview
     else

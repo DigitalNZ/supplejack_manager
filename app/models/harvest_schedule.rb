@@ -39,7 +39,7 @@ class HarvestSchedule < ActiveResource::Base
       environments = [Rails.env] if ['development', 'test'].include? Rails.env
 
       environments.each do |env|
-        HarvestSchedule.find_from_environment({ parser_id: parser_id }, env).each do |hs|
+        HarvestSchedule.find_from_environment({ parser_id: }, env).each do |hs|
           HarvestSchedule.delete(hs.id)
         end
       end
@@ -62,7 +62,7 @@ class HarvestSchedule < ActiveResource::Base
 
   def recurrent
     return true if @attributes['recurrent'].nil? || @attributes['recurrent'].to_s.match(/1|true/)
-    return false if @attributes['recurrent'].to_s.match?(/0|false/)
+    false if @attributes['recurrent'].to_s.match?(/0|false/)
   end
 
   def parser

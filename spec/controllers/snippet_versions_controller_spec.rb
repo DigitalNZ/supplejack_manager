@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe SnippetVersionsController do
   let(:user)    { create(:user) }
   let(:snippet) { create(:snippet) }
-  let(:version) { create(:version, versionable: snippet, user: user) }
+  let(:version) { create(:version, versionable: snippet, user:) }
 
   before(:each) do
     sign_in user
