@@ -1,6 +1,6 @@
 <% action = parser.allow_full_and_flush ? 'Disable' : 'Enable' %>
 <button class="button expanded" data-open="full-and-flush-state-switch">
-  <%= t('parsers.enable_disable_full_and_flush', action: action) %>
+  <%= t('parsers.enable_disable_full_and_flush', action:) %>
 </button>
 
 <%= render partial: 'shared/confirmation_modal', locals: {

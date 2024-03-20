@@ -1,4 +1,4 @@
-<%= custom_form_with model: @link_check_rule, url: url do |f| %>
+<%= custom_form_with model: @link_check_rule, url: do |f| %>
   <%= f.label :source_id %>
   <%= f.grouped_collection_select(:source_id, Partner.all, :sources, :name, :id, :source_id) %>
 

@@ -10,7 +10,7 @@
     t("harvest_jobs.#{status}"),
     environment_abstract_jobs_path(
       params[:environment],
-      status: status,
+      status:,
       parser_id: params[:parser_id]
     ),
     class: "button #{params[:status] == status ? 'primary' : 'hollow'}"
