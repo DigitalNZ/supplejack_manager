@@ -12,6 +12,7 @@ gem 'devise', '~> 4.0'
 gem 'erb_lint', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
+gem 'mini_portile2'
 gem 'mongoid', '~> 7.5.1'
 gem 'mongoid_paranoia'
 gem 'oai'

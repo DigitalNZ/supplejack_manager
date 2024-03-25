@@ -534,6 +534,7 @@ DEPENDENCIES
   kaminari
   kaminari-mongoid
   lograge
+  mini_portile2
   mongoid (~> 7.5.1)
   mongoid_paranoia
   oai
