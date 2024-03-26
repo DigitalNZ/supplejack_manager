@@ -44,7 +44,8 @@ WORKDIR /app
 ARG PACKAGES="build-base tzdata libxslt libxml2-dev libxslt-dev nodejs"
 RUN apk add --no-cache $PACKAGES
 
-# Delete line below if it doesn't break anything being removed
+# This is needed for the pipeline build (it breaks without the freedesktop package). 
+# There is no newer version of buster, so we will keep using this version for now
 COPY --from=ruby:3.0.0-buster /usr/share/mime/packages/freedesktop.org.xml /usr/share/mime/packages/
 
 # get the application code
