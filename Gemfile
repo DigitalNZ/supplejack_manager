@@ -17,7 +17,6 @@ gem 'mongoid', '~> 7.5.1'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'puma-metrics'
 gem 'rails', '~> 7.0.5'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'rqrcode'
