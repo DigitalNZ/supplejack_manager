@@ -45,7 +45,7 @@ ARG PACKAGES="build-base tzdata libxslt libxml2-dev libxslt-dev nodejs"
 RUN apk add --no-cache $PACKAGES
 
 # Delete line below if it doesn't break anything being removed
-# COPY --from=ruby:3.0.0-buster /usr/share/mime/packages/freedesktop.org.xml /usr/share/mime/packages/
+COPY --from=ruby:3.0.0-buster /usr/share/mime/packages/freedesktop.org.xml /usr/share/mime/packages/
 
 # get the application code
 COPY --from=builder $GEM_HOME $GEM_HOME
