@@ -1,4 +1,4 @@
-FROM ruby:3.0.3-alpine3.15 AS builder
+FROM ruby:3.2.2-alpine3.18 AS builder
 
 WORKDIR /app
 
@@ -36,7 +36,7 @@ RUN rm -rf tmp/cache vendor/assets spec node_modules
 
 ############### Build step done ###############
 
-FROM ruby:3.0.3-alpine3.15
+FROM ruby:3.2.2-alpine3.18
 
 WORKDIR /app
 
@@ -44,6 +44,8 @@ WORKDIR /app
 ARG PACKAGES="build-base tzdata libxslt libxml2-dev libxslt-dev nodejs"
 RUN apk add --no-cache $PACKAGES
 
+# This is needed for the pipeline build (it breaks without the freedesktop package). 
+# There is no newer version of buster, so we will keep using this version for now
 COPY --from=ruby:3.0.0-buster /usr/share/mime/packages/freedesktop.org.xml /usr/share/mime/packages/
 
 # get the application code

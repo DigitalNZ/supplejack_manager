@@ -72,7 +72,7 @@ RSpec.describe PreviewsController do
              parser: { id: parser.id, content: code },
              index: 10, format: :js }
         expect(assigns(:parser_error))
-          .to eq({ message: "(eval):4: syntax error, unexpected end-of-input, expecting `end'", type: SyntaxError })
+          .to eq({ message: "(eval):4: syntax error, unexpected end-of-input, expecting `end' or dummy end\n...de_snippet \"Global validations\"\n...                               ^\n", type: SyntaxError })
       end
     end
 

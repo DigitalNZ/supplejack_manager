@@ -12,11 +12,11 @@ gem 'devise', '~> 4.0'
 gem 'erb_lint', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'mongoid'
+gem 'mini_portile2'
+gem 'mongoid', '~> 7.5.1'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'puma-metrics'
 gem 'rails', '~> 7.0.5'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'rqrcode'
