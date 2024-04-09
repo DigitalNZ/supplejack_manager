@@ -15,7 +15,6 @@
     "jquery-ui": "^1.13.2",
     "jquery-ui-dist": "^1.12.1",
     "moment": "^2.29.4",
-    "rails-erb-loader": "^5.5.2",
     "sass": "^1.49.9"
   },
   "scripts": {
