@@ -13,7 +13,7 @@ gem 'erb_lint', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mini_portile2'
-gem 'mongoid', '~> 8.0'
+gem 'mongoid', '~> 7.0' # version 8 is breaking tests
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
