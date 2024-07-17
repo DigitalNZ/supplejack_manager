@@ -83,7 +83,7 @@ module ParsersHelper
   end
 
   def enrichments(job)
-    if job._type.downcase.match?(/enrichment/)
+    if job._type.downcase.include?('enrichment')
       content_tag(:span, job.try(:enrichment))
     else
       content_tag(:span, '')

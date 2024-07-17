@@ -62,7 +62,7 @@ class HarvestSchedule < ActiveResource::Base
 
   def recurrent
     return true if @attributes['recurrent'].nil? || @attributes['recurrent'].to_s.match(/1|true/)
-    return false if @attributes['recurrent'].to_s.match?(/0|false/)
+    false if @attributes['recurrent'].to_s.match?(/0|false/)
   end
 
   def parser
