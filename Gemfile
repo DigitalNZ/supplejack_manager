@@ -45,7 +45,7 @@ group :test do
   gem 'capybara', '>= 2.17.0'
   gem 'capybara-screenshot'
   gem 'database_cleaner-mongoid', '>= 1.3.0'
-  gem 'factory_bot_rails', '~> 5.0'
+  gem 'factory_bot_rails', '~> 6.0'
   gem 'faker'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.7.2'
