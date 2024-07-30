@@ -62,7 +62,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'debug'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 
   # rubocop tests
   gem 'rubocop', require: false
