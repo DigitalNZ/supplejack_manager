@@ -109,19 +109,22 @@ RSpec.describe ParsersController do
   end
 
   describe 'GET create' do
-    it 'initializes a new parser' do
-      expect(Parser).to receive(:new).with('name' => 'Tepapa').and_return(parser)
+    let(:valid_attributes) { { name: 'Tepapa', source_id: source.id.to_s, strategy: 'json' }  }
+    let(:action_controller_params) { ActionController::Parameters.new(valid_attributes).permit! }
 
-      post :create, params: { parser: { name: 'Tepapa' } }
+    it 'initializes a new parser' do
+      expect(Parser).to receive(:new).with(action_controller_params).and_return(parser)
+
+      post :create, params: { parser: valid_attributes }
     end
 
     it 'saves the parser' do
-      expect { post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } } }.to change(Parser, :count).by(1)
+      expect { post :create, params: { parser: valid_attributes } }.to change(Parser, :count).by(1)
     end
 
     context 'when parser is valid' do
       it 'redirects to the edit page' do
-        post :create, params: { parser: { name: 'Tepapa', source_id: source, strategy: 'json' } }
+        post :create, params: { parser: valid_attributes }
         expect(response.status).to eq 302
       end
     end
