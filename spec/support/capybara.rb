@@ -3,8 +3,7 @@
 require 'capybara'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
-require 'selenium/webdriver'
-require 'webdrivers'
+# require 'selenium/webdriver'
 
 CAPYBARA_WINDOW_DEFAULTS = [1440, 900]
 
