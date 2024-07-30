@@ -13,7 +13,7 @@ module Versioned
 
     embeds_many :versions, as: :versionable
 
-    after_save :save_with_version, if: -> { content_changed? }
+    after_save :save_with_version, if: -> { content_previously_changed? }
   end
 
   def last_edited_by
