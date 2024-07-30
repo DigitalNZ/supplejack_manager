@@ -13,11 +13,11 @@ gem 'erb_lint', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'mini_portile2'
-gem 'mongoid', '~> 7.0' # version 8 is breaking tests
+gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 7.0.5'
+gem 'rails', '~> 7.1.3'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'rqrcode'
 gem 'server_timing'
