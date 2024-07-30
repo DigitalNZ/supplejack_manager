@@ -49,10 +49,10 @@ group :test do
   gem 'faker'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.7.2'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'site_prism'
   gem 'timecop'
-  gem 'webdrivers'
 end
 
 group :development do

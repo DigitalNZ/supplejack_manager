@@ -121,8 +121,8 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.956.0)
-    aws-sdk-core (3.201.1)
+    aws-partitions (1.960.0)
+    aws-sdk-core (3.201.3)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.8)
@@ -137,7 +137,7 @@ GEM
       aws-sdk-core (~> 3, >= 3.201.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
-    aws-sigv4 (1.8.0)
+    aws-sigv4 (1.9.1)
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
@@ -182,7 +182,7 @@ GEM
     concurrent-ruby (1.3.3)
     connection_pool (2.4.1)
     crass (1.0.6)
-    cssbundling-rails (1.4.0)
+    cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
     database_cleaner-core (2.0.1)
     database_cleaner-mongoid (2.0.1)
@@ -198,7 +198,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
     dimensions (1.3.0)
-    docile (1.4.0)
+    docile (1.4.1)
     domain_name (0.6.20240107)
     drb (2.2.1)
     elastic-apm (4.7.3)
@@ -226,7 +226,7 @@ GEM
       logger
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-net_http (3.1.0)
+    faraday-net_http (3.1.1)
       net-http
     faraday-retry (2.2.1)
       faraday (~> 2.0)
@@ -254,7 +254,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
-    jsbundling-rails (1.3.0)
+    jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (2.7.2)
     jsonapi-renderer (0.2.2)
@@ -357,7 +357,7 @@ GEM
       pry (>= 0.13.0)
     psych (5.1.2)
       stringio
-    public_suffix (6.0.0)
+    public_suffix (6.0.1)
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.8.1)
@@ -488,12 +488,13 @@ GEM
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sanitize (6.1.1)
+    sanitize (6.1.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     scout_apm (5.3.8)
       parser
-    selenium-webdriver (4.10.0)
+    selenium-webdriver (4.20.1)
+      base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -525,7 +526,7 @@ GEM
     thor (1.3.1)
     timecop (0.9.10)
     timeout (0.4.1)
-    turbo-rails (2.0.5)
+    turbo-rails (2.0.6)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -541,10 +542,6 @@ GEM
     uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webdrivers (5.3.1)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0, < 4.11)
     webrick (1.8.1)
     websocket (1.2.11)
     websocket-driver (0.7.6)
@@ -597,6 +594,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails_config
   rubocop-rspec
+  selenium-webdriver
   server_timing
   simplecov
   site_prism
@@ -606,7 +604,6 @@ DEPENDENCIES
   timecop
   turbo-rails
   two_factor_authentication
-  webdrivers
 
 BUNDLED WITH
    2.4.9
