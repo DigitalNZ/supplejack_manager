@@ -54,22 +54,25 @@ RSpec.describe ParserTemplatesController do
   end
 
   describe "PUT 'update'" do
+    let(:valid_attributes) { { name: 'title', content: 'new content' }  }
+    let(:action_controller_params) { ActionController::Parameters.new(valid_attributes).permit! }
+
     it 'should find the parser_template and update the user' do
        expect(ParserTemplate).to receive(:find) { parser_template }
-       put :update, params: { id: parser_template.id, parser_template: { name: 'title', content: 'new content' } }
+       put :update, params: { id: parser_template.id, parser_template: valid_attributes }
        assigns(:parser_template) { parser_template }
      end
 
     it 'should redirect_to the edit path' do
       allow(ParserTemplate).to receive(:find) { parser_template }
-      put :update, params: { id: parser_template.id, parser_template: { name: 'title', content: 'new content' } }
+      put :update, params: { id: parser_template.id, parser_template: valid_attributes }
       expect(response).to redirect_to edit_parser_template_path(parser_template.id)
     end
 
     it 'updates all the attributes' do
       allow(ParserTemplate).to receive(:find) { parser_template }
-      expect(parser_template).to receive(:update_attributes).with({ 'name' => 'title', 'content' => 'new content' })
-      put :update, params: { id: parser_template.id, parser_template: { name: 'title', content: 'new content' } }
+      expect(parser_template).to receive(:update_attributes).with(action_controller_params)
+      put :update, params: { id: parser_template.id, parser_template: valid_attributes }
     end
 
     context 'parser_template not valid' do

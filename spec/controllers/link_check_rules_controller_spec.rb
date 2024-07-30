@@ -77,24 +77,27 @@ RSpec.describe LinkCheckRulesController do
 
   describe "PUT 'update'" do
     context 'valid attributes' do
+      let(:valid_attributes) { { collection_title: 'collection_title', status_codes: '203,205' } }
+      let(:action_controller_params) { ActionController::Parameters.new(valid_attributes).permit! }
+
       before do
         expect(LinkCheckRule).to receive(:find) { link_check_rule }
         expect_any_instance_of(LinkCheckRule).to receive(:update_attributes) { true }
       end
 
       it 'should find the link_check_rule' do
-        put :update, params: { id: 1, link_check_rule: { collection_title: 'collection_title', status_codes: '203,205' }, environment: 'development' }
+        put :update, params: { id: 1, link_check_rule: valid_attributes, environment: 'development' }
         assigns(:link_check_rule) { link_check_rule }
       end
 
       it 'should redirect_to the index path' do
-        put :update, params: { id: 1, link_check_rule: { collection_title: 'collection_title', status_codes: '203,205' }, environment: 'development' }
+        put :update, params: { id: 1, link_check_rule: valid_attributes, environment: 'development' }
         expect(response).to redirect_to environment_link_check_rules_path(environment: 'development')
       end
 
       it 'updates all the attributes' do
-        expect(link_check_rule).to receive(:update_attributes).with({ 'collection_title' => 'collection_title', 'status_codes' => '203,205' }.with_indifferent_access)
-        put :update, params: { id: 1, link_check_rule: { collection_title: 'collection_title', status_codes: '203,205' }, environment: 'development' }
+        expect(link_check_rule).to receive(:update_attributes).with(action_controller_params)
+        put :update, params: { id: 1, link_check_rule: valid_attributes, environment: 'development' }
       end
     end
 
