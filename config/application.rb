@@ -47,6 +47,6 @@ module HarvesterManager
     # CUSTOM CONFIG GOES UNDER, this helps the migration process
     config.autoload_paths << Rails.root.join("/app/models/concerns")
 
-    config.time_zone = ENV['TIMEZONE']
+    config.time_zone = ENV.fetch('TIMEZONE', 'Wellington')
   end
 end
