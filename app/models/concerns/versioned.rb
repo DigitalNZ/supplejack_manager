@@ -17,7 +17,7 @@ module Versioned
   end
 
   def last_edited_by
-    versions.last.try(:user).try(:name)
+    versions.last&.user&.name
   end
 
   def current_version(environment)
