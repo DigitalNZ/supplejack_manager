@@ -13,7 +13,7 @@ RSpec.feature 'Enrichment Spec', js: true do
   let(:user)    { create(:user, :admin) }
   let(:source)  { create(:source) }
   let!(:enrichment) { create(:parser, :enrichment, source_id: source) }
-  let!(:version) { create(:version, :enrichment, versionable: enrichment, user_id: user, tags: ['staging'], version: 'v3') }
+  let!(:version) { create(:version, :enrichment, versionable: enrichment, user_id: user, tags: ['staging'], version: 3) }
 
   before do
     sign_in user
