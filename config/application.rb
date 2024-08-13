@@ -18,14 +18,10 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-APPLICATION_ENVS = YAML.load_file('config/application.yml').keys - ['development', 'test'] rescue []
-APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result)
+APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result, aliases: true) rescue {}
+APPLICATION_ENVS = APPLICATION_ENVIRONMENT_VARIABLES.keys - ['development', 'test', 'default']
 
-begin
-  ENV.update YAML.load(ERB.new(File.read('config/application.yml')).result)[Rails.env]
-rescue StandardError
-  {}
-end
+ENV.update APPLICATION_ENVIRONMENT_VARIABLES[Rails.env]
 
 module HarvesterManager
   class Application < Rails::Application
