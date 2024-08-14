@@ -25,6 +25,10 @@ gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'pm/upgr
 # gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v3.0.0'
 gem 'two_factor_authentication'
 
+# Logging
+gem 'lograge'
+gem 'ougai'
+
 # Hotwire and turbo
 gem 'turbo-rails'
 gem 'stimulus-rails'
@@ -73,9 +77,4 @@ group :development, :test do
   gem 'rubocop-rails_config', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-performance', require: false
-end
-
-group :uat, :staging, :production do
-  gem 'lograge'
-  gem 'ougai'
 end
