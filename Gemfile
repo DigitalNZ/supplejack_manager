@@ -65,6 +65,9 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
 
+  # provides bin/codeclimate_diff
+  gem 'codeclimate_diff', github: 'boost/codeclimate_diff'
+
   # rubocop tests
   gem 'rubocop', require: false
   gem 'rubocop-rails_config', require: false

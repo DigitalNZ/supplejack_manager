@@ -2,3 +2,4 @@
 /node_modules
 /vendor
 /tmp
+/codeclimate_diff_baseline.json
