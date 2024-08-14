@@ -21,7 +21,7 @@ module Versioned
   end
 
   def current_version(environment)
-    return versions.last if environment.to_sym == :test || environment.to_sym == :preview
+    return versions.last if environment.to_sym.in? [:test, :preview]
     versions.where(tags: environment.to_s).desc(:created_at).first
   end
 
