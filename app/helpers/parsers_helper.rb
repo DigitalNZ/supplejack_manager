@@ -44,7 +44,7 @@ module ParsersHelper
   def link_to_previous(parser_id, index, environment, review, html_options = {})
     index = index.to_i - 1
     path = previews_path(
-      parser_id: :parser_id,
+      parser_id: parser_id,
       index: index,
       environment: environment,
       review: review
@@ -62,8 +62,7 @@ module ParsersHelper
   def environment_tags(version, parser)
     content_tag(:div, class: 'version-tag-container') do
       bubbles = []
-      version.tags ||= []
-      version.tags.each do |environment|
+      (version.tags ||= []).each do |environment|
         label = environment.capitalize.first
         arrow = nil
         classes = ['version-tag', environment]

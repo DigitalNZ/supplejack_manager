@@ -36,7 +36,8 @@ class HarvestSchedule < ActiveResource::Base
 
     def destroy_all_for_parser(parser_id)
       environments = APPLICATION_ENVS
-      environments = [Rails.env] if ['development', 'test'].include? Rails.env
+      rails_env = Rails.env
+      environments = [rails_env] if ['development', 'test'].include? rails_env
 
       environments.each do |env|
         HarvestSchedule.find_from_environment({ parser_id: parser_id }, env).each do |hs|
