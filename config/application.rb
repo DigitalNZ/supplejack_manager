@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result, aliases: true) rescue {}
 APPLICATION_ENVS = APPLICATION_ENVIRONMENT_VARIABLES.keys - ['development', 'test', 'default']
 
-ENV.update APPLICATION_ENVIRONMENT_VARIABLES[Rails.env]
+ENV.update (APPLICATION_ENVIRONMENT_VARIABLES[Rails.env] || {})
 
 module HarvesterManager
   class Application < Rails::Application
