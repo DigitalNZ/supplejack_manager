@@ -101,6 +101,16 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          # File containing the version Spec of the version to use.  Examples: package.json, .nvmrc, .node-version, .tool-versions.
+          # If node-version and node-version-file are both provided the action will use version from node-version.
+          node-version-file: .nvmrc
+
+      - name: Install node packages
+        run: yarn install
+
       - name: Run RSpec unit tests
         env:
           MFA_ENABLED: false
