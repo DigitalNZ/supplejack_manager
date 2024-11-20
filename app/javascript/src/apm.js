@@ -11,7 +11,5 @@ initApm({
   serviceVersion: "",
 
   environment: process.env.NODE_ENV,
-  active: false,
-  // to enable the elastic apm again
-  // active: process.env.RAILS_ENV == "production",
+  active: false /* process.env.RAILS_ENV == "production" */,
 });
