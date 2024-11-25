@@ -2,22 +2,6 @@
 # yarn lockfile v1
 
 
-"@elastic/apm-rum-core@^5.14.1":
-  version "5.14.1"
-  resolved "https://registry.yarnpkg.com/@elastic/apm-rum-core/-/apm-rum-core-5.14.1.tgz#8f65060967c8d68498f2c520e4169ec07eb3b5bb"
-  integrity sha512-RFgTpXUIEIoy44TPnEN7cVcf2YIBOwaNdALrYVc4lOTMH3u0v4gaS0n9/Aee5nTGqWBLKWXXvMk/dAkjQW6qEg==
-  dependencies:
-    error-stack-parser "^1.3.5"
-    opentracing "^0.14.3"
-    promise-polyfill "^8.1.3"
-
-"@elastic/apm-rum@^5.9.1":
-  version "5.10.2"
-  resolved "https://registry.yarnpkg.com/@elastic/apm-rum/-/apm-rum-5.10.2.tgz#06d3e9f08adc19e1227073dda7e5c4ab34be48c7"
-  integrity sha512-NrBQcgautAGwJOrJ20WUUXV1Ynux4dEEU/fgeqfdG7G3JGqMbuIlF8s/nqLgQ9oXz72Z5MirOf68P7m5Zh/5HA==
-  dependencies:
-    "@elastic/apm-rum-core" "^5.14.1"
-
 "@hotwired/stimulus@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.0.1.tgz#141f15645acaa3b133b7c247cad58ae252ffae85"
@@ -167,13 +151,6 @@ detect-libc@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==
-
-error-stack-parser@^1.3.5:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/error-stack-parser/-/error-stack-parser-1.3.6.tgz#e0e73b93e417138d1cd7c0b746b1a4a14854c292"
-  integrity sha1-4Oc7k+QXE40c18C3RrGkoUhUwpI=
-  dependencies:
-    stackframe "^0.3.1"
 
 esbuild-android-arm64@0.14.23:
   version "0.14.23"
@@ -390,11 +367,6 @@ node-addon-api@^7.0.0:
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-7.1.1.tgz#1aba6693b0f255258a049d621329329322aad558"
   integrity sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==
 
-opentracing@^0.14.3:
-  version "0.14.7"
-  resolved "https://registry.yarnpkg.com/opentracing/-/opentracing-0.14.7.tgz#25d472bd0296dc0b64d7b94cbc995219031428f5"
-  integrity sha512-vz9iS7MJ5+Bp1URw8Khvdyw1H/hGvzHWlKQ7eRrQojSCDL1/SrWfrY9QebLw97n2deyRtzHRC3MkQfVNUCo91Q==
-
 php-date-formatter@^1.3.4:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/php-date-formatter/-/php-date-formatter-1.3.6.tgz#6d67359da890c742005fa89d20be3ded31cc1d2a"
@@ -409,11 +381,6 @@ prettier@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
   integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
-
-promise-polyfill@^8.1.3:
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.2.1.tgz#1fa955b325bee4f6b8a4311e18148d4e5b46d254"
-  integrity sha512-3p9zj0cEHbp7NVUxEYUWjQlffXqnXaZIMPkAO7HhFh8u5636xLRDHOUo2vpWSK0T2mqm6fKLXYn1KP6PAZ2gKg==
 
 readdirp@^4.0.1:
   version "4.0.2"
@@ -434,11 +401,6 @@ sass@^1.49.9:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
   integrity sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
-
-stackframe@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-0.3.1.tgz#33aa84f1177a5548c8935533cbfeb3420975f5a4"
-  integrity sha1-M6qE8Rd6VUjIk1Uzy/6zQgl19aQ=
 
 to-regex-range@^5.0.1:
   version "5.0.1"
