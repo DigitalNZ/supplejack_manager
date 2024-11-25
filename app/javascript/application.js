@@ -13,7 +13,6 @@ import "./controllers";
 // local files, please keep this alphabetically ordered
 import "./src/admin/users";
 import "./src/admin/activities";
-import "./src/apm";
 import "./channels";
 import "./src/collection_records";
 import "./src/collection_statistics";
