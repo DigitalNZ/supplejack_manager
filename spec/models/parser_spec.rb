@@ -248,7 +248,7 @@ RSpec.describe Parser do
       allow(parser).to receive(:content) { 'nil + 1' }
 
       expect(parser.valid_parser?('staging')).to be false
-      expect(parser.error).to eq({ type: NoMethodError, message: "undefined method `+' for nil:NilClass" })
+      expect(parser.error).to eq({ type: NoMethodError, message: "undefined method '+' for nil" })
     end
   end
 
