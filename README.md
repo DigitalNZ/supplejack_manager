@@ -39,3 +39,4 @@ The next/prev arrows come from DataTables, a plug-in for the jQuery Javascript l
 The CodeMirror JavaScript component by Marijn Haverbeke and others (see http://codemirror.net/index.html) is licensed under the MIT licence (see http://codemirror.net/LICENSE).
 
 The jQuery UI time picker extension by Trent Richardson (see http://trentrichardson.com/Impromptu/) is licensed under the MIT license (http://trentrichardson.com/Impromptu/MIT-LICENSE.txt).
+
