@@ -5,7 +5,7 @@
       "warning_code": 13,
       "fingerprint": "67a18a5f890b8bb88deb6f3c86f38d2d6b663e874e816e1b1686a945199a9fe1",
       "check_name": "Evaluation",
-      "message": "User input in eval",
+      "message": "Parameter value evaluated as code",
       "file": "app/controllers/previews_controller.rb",
       "line": 100,
       "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
@@ -41,25 +41,6 @@
       "note": ""
     },
     {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 123,
-      "fingerprint": "715ee6d743a8af33c7b930d728708ce19c765fb40e2ad9d2b974db04d92dc7d1",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 3.0.3 ends on 2024-03-31",
-      "file": ".ruby-version",
-      "line": 1,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Weak",
-      "cwe_id": [
-        1104
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Command Injection",
       "warning_code": 14,
       "fingerprint": "90e8a9dfaed1821cd9de6399be5a254801f6b9b3dde97702ee4eb4f76c71c645",
@@ -81,8 +62,31 @@
         77
       ],
       "note": ""
+    },
+    {
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "d3e148d3e2746562331c4415db913f6398a67ba11bd69a2f6e54067215680b32",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "app/models/parser.rb",
+      "line": 183,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "eval(version.content)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Parser",
+        "method": "valid_parser?"
+      },
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        913,
+        95
+      ],
+      "note": ""
     }
   ],
-  "updated": "2024-02-16 10:53:12 +1300",
-  "brakeman_version": "6.1.2"
+  "brakeman_version": "7.0.2"
 }
