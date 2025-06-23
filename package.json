@@ -6,7 +6,7 @@
     "codemirror": "^5.63.3",
     "datatables.net": "^1.11.3",
     "datatables.net-zf": "^1.11.3",
-    "esbuild": "^0.25.5",
+    "esbuild": "^0.14.23",
     "foundation-sites": "6.4.3",
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "^2.5.21",
