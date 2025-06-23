@@ -12,7 +12,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: 22
+          node-version: 16
       - run: yarn install
       - name: prettier
         run: yarn run prettier --check .
