@@ -56,7 +56,7 @@ RSpec.describe PreviewsController do
              parser: { id: parser.id, content: code },
              index: 10, format: :js }
         expect(assigns(:parser_error))
-          .to eq({ type: NoMethodError, message: "undefined method `+' for nil:NilClass" })
+          .to eq({ type: NoMethodError, message: "undefined method '+' for nil" })
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe PreviewsController do
              parser: { id: parser.id, content: code },
              index: 10, format: :js }
         expect(assigns(:parser_error))
-          .to eq({ message: "(eval):4: syntax error, unexpected end-of-input, expecting `end' or dummy end\n...de_snippet \"Global validations\"\n...                               ^\n", type: SyntaxError })
+          .to eq({ message: '(eval at /home/runner/work/supplejack_manager/supplejack_manager/app/controllers/previews_controller.rb:100):4: syntax errors found\\\\n  2 |           base_url \\\\\"http://repository.digitalnz.org/public_records.xml\\\\\"\\\\n  3 |           record_selector \\\\\"//records/record\\\\\"\\\\n> 4 | ... \\\\n    |     ^ expected an `end` to close the `class` statement\\\\n    |     ^ unexpected end-of-input, assuming it is closing the parent top level context\\\\n', type: SyntaxError })
       end
     end
 
