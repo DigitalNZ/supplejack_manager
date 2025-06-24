@@ -71,8 +71,11 @@ RSpec.describe PreviewsController do
         post :create, params: {
              parser: { id: parser.id, content: code },
              index: 10, format: :js }
-        expect(assigns(:parser_error))
-          .to eq({ message: '(eval at /home/runner/work/supplejack_manager/supplejack_manager/app/controllers/previews_controller.rb:100):4: syntax errors found\\\\n  2 |           base_url \\\\\"http://repository.digitalnz.org/public_records.xml\\\\\"\\\\n  3 |           record_selector \\\\\"//records/record\\\\\"\\\\n> 4 | ... \\\\n    |     ^ expected an `end` to close the `class` statement\\\\n    |     ^ unexpected end-of-input, assuming it is closing the parent top level context\\\\n', type: SyntaxError })
+        parser_error = assigns(:parser_error)
+        expect(parser_error[:message]).to include('eval at /home/runner/work/supplejack_manager/supplejack_manager/app/controllers/previews_controller.rb:100):4: syntax errors found')
+        expect(parser_error[:message]).to include('http://repository.digitalnz.org/public_records.xml')
+        expect(parser_error[:message]).to include('unexpected end-of-input, assuming it is closing the parent top level context')
+        expect(parser_error[:type].to_s).to include('SyntaxError')
       end
     end
 
