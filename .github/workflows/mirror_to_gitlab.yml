@@ -14,4 +14,5 @@ jobs:
           REMOTE: ${{ secrets.GITLAB_REPO_SSH }}
           GIT_SSH_PRIVATE_KEY: ${{ secrets.GIT_SSH_PRIVATE_KEY }}
           GIT_SSH_NO_VERIFY_HOST: ${{ secrets.GIT_SSH_NO_VERIFY_HOST }}
+          PUSH_ALL_REFS: "false"
           DEBUG: "true"
