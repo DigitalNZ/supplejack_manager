@@ -23,7 +23,7 @@ document.addEventListener("turbo:load", function () {
     });
 
     return $(
-      "form[method='post'] input[value='Update Parser Script'], form[method='post'] input[value='Update Snippet'], form[method='post'] input[value='Create Snippet'], form[action='/parser_templates'] input[value='Create Parser template'], form[method='post'] input[value='Update Parser template']",
+      "form[method='post'] input[value='Update Parser Script'], form[method='post'] input[value='Update Snippet'], form[method='post'] input[value='Create Snippet'], form[action='/parser_templates'] input[value='Create Parser template'], form[method='post'] input[value='Update Parser template']"
     ).on(
       "hover",
       function () {
@@ -33,7 +33,7 @@ document.addEventListener("turbo:load", function () {
         if ($(window).data("codechange")) {
           return (window.onbeforeunload = $(window).data("beforeunload"));
         }
-      },
+      }
     );
   }
 });

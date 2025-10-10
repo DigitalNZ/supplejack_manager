@@ -19,12 +19,12 @@ document.addEventListener("turbo:load", function () {
 
   fold_create_fields(
     'select[name="source[partner_id]"]',
-    "#new-partner-fields",
+    "#new-partner-fields"
   );
   $('select[name="source[partner_id]"]').change(function () {
     return fold_create_fields(
       'select[name="source[partner_id]"]',
-      "#new-partner-fields",
+      "#new-partner-fields"
     );
   });
 
@@ -39,7 +39,7 @@ document.addEventListener("turbo:load", function () {
       new_date = new Date(now - time_ago_ms);
       return $("#reindex-button").attr(
         "href",
-        link + "?env=" + env + "&date=" + new_date.toISOString(),
+        link + "?env=" + env + "&date=" + new_date.toISOString()
       );
     } else {
       return $("#reindex-button").attr("href", link + "?env=" + env);
@@ -59,7 +59,7 @@ document.addEventListener("turbo:load", function () {
         moment().diff(moment(new_date), "minutes") +
           " minutes ago (" +
           moment(new_date).format("hh:mm A") +
-          ")",
+          ")"
       );
     }
     return update_link();

@@ -20,7 +20,7 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
     iFilteredTotal: oSettings.fnRecordsDisplay(),
     iPage: Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
     iTotalPages: Math.ceil(
-      oSettings.fnRecordsDisplay() / oSettings._iDisplayLength,
+      oSettings.fnRecordsDisplay() / oSettings._iDisplayLength
     ),
   };
 };
@@ -45,7 +45,7 @@ $.extend($.fn.dataTableExt.oPagination, {
           '<li class="pagination-next"><a href="#">' +
           oLang.sNext +
           " &raquo; </a></li>" +
-          "</ul>",
+          "</ul>"
       );
       var els = $("a", nPaging);
       $(els[0]).bind("click.DT", { action: "previous" }, fnClickHandler);

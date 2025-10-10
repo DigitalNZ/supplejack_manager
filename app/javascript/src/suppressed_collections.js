@@ -8,8 +8,8 @@ document.addEventListener("turbo:load", function () {
         .attr("action")
         .replace(
           /^\/(.*)\/suppress_collections\/.*$/,
-          "/$1/suppress_collections/" + id,
-        ),
+          "/$1/suppress_collections/" + id
+        )
     );
   });
 });
