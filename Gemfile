@@ -17,12 +17,12 @@ gem 'mongoid'
 gem 'mongoid_paranoia'
 gem 'oai'
 gem 'puma'
-gem 'rails', '~> 7.1.3'
+gem 'rails', '~> 7.2.0'
 gem 'redis', '~> 4.0' # for action_cable in production
 gem 'rqrcode'
 gem 'server_timing'
 # gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'pm/upgrade'
-gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', tag: 'v3.0.2'
+gem 'supplejack_common', github: 'DigitalNZ/supplejack_common', branch: 'tw/rails-7-2'
 gem 'two_factor_authentication'
 
 # Logging

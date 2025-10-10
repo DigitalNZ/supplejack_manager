@@ -1,5 +1,4 @@
 require "active_support/core_ext/integer/time"
-require "custom_logger"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -49,6 +48,9 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
+  # Skip http-to-https redirect for the default health check endpoint.
+  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
     .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
@@ -69,6 +71,8 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "harvester_manager_production"
 
+  # Disable caching for Action Mailer templates even if Action Controller
+  # caching is enabled.
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -89,31 +93,4 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-
-  # ALL custom configs comes  under this line
-  config.force_ssl = false
-  config.assume_ssl = true
-
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
-  config.logger = ActiveSupport::TaggedLogging.new(CustomLogger.new(STDOUT))
-
-  DEFAULT_URL_OPTIONS = {
-    host: ENV['HOST'],
-    protocol: 'https'
-  }.freeze
-  config.action_controller.default_url_options = DEFAULT_URL_OPTIONS
-  config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS
-
-  config.action_mailer.smtp_settings = {
-    domain: ENV['HOST'],
-    address: ENV['SMTP_ADDRESS'],
-    port: ENV['SMTP_PORT'],
-    user_name: ENV['SMTP_USER'],
-    password: ENV['SMTP_PASSWORD']
-  }
-
-  config.action_controller.forgery_protection_origin_check = false
-  config.public_file_server.headers = {
-    'Cache-Control' => "public, max-age=#{2.days.to_i}"
-  }
 end
