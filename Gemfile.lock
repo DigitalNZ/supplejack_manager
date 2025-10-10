@@ -1,12 +1,11 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: 319f128cda352a074d49a68c6a67789333fbfff9
-  branch: tw/rails-7-2
+  revision: 94c9642853241d1eb714cec43be5d3992e29f9fa
   specs:
     supplejack_common (3.0.0)
-      actionpack (~> 7.2.0)
-      activemodel (~> 7.2.0)
-      activesupport (~> 7.2.0)
+      actionpack (~> 7.2.2.2)
+      activemodel (~> 7.2.2.2)
+      activesupport (~> 7.2.2.2)
       aws-sdk-s3
       chronic (<= 0.10.2)
       dimensions
