@@ -321,7 +321,9 @@ $button-palette: $foundation-palette;
 $button-opacity-disabled: 0.25;
 $button-background-hover-lightness: -20%;
 $button-hollow-hover-lightness: -50%;
-$button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+$button-transition:
+  background-color 0.25s ease-out,
+  color 0.25s ease-out;
 
 // 12. Button Group
 // ----------------
@@ -465,7 +467,9 @@ $input-padding: $form-spacing / 2;
 $input-shadow: inset 0 1px 2px rgba($black, 0.1);
 $input-shadow-focus: 0 0 5px $medium-gray;
 $input-cursor-disabled: not-allowed;
-$input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+$input-transition:
+  box-shadow 0.5s,
+  border-color 0.25s ease-in-out;
 $input-number-spinners: true;
 $input-radius: $global-radius;
 $form-button-radius: $global-radius;
@@ -660,7 +664,8 @@ $prototype-separator-margin-top: $global-margin;
 // --------------------
 
 $prototype-shadow-breakpoints: $global-prototype-breakpoints;
-$prototype-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+$prototype-box-shadow:
+  0 2px 5px 0 rgba(0, 0, 0, 0.16),
   0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
 // 41. Prototype Sizing
