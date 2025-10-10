@@ -18,6 +18,11 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+APPLICATION_ENVIRONMENT_VARIABLES = YAML.load(ERB.new(File.read('config/application.yml')).result, aliases: true) rescue {}
+APPLICATION_ENVS = APPLICATION_ENVIRONMENT_VARIABLES.keys - ['development', 'test', 'default']
+
+ENV.update((APPLICATION_ENVIRONMENT_VARIABLES[Rails.env] || {}).transform_values(&:to_s))
+
 module HarvesterManager
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -38,5 +43,10 @@ module HarvesterManager
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # CUSTOM CONFIG GOES UNDER, this helps the migration process
+    config.autoload_paths << Rails.root.join("/app/models/concerns")
+
+    config.time_zone = ENV.fetch('TIMEZONE', 'Wellington')    
   end
 end
