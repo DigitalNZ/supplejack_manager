@@ -13,7 +13,7 @@ document.addEventListener("turbo:load", function () {
         alert("Message is required");
         return e.preventDefault();
       }
-    }
+    },
   );
 
   $("#cancel-parser-delete").on("click", function () {
@@ -32,13 +32,13 @@ document.addEventListener("turbo:load", function () {
 
     // set the active item.
     var currentSourceId = $("label[for='parser_source']").data(
-      "currentSourceId"
+      "currentSourceId",
     );
     $("#parser_source_id").val(currentSourceId);
 
     if (partner !== "") {
       return $(
-        'select[name="parser[source_id]"] optgroup[label!=\'' + partner + "']"
+        'select[name="parser[source_id]"] optgroup[label!=\'' + partner + "']",
       ).remove();
     }
   };
