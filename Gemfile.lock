@@ -672,7 +672,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma
-  rails (~> 7.2.0)
+  rails (~> 7.2.2.2)
   rails-controller-testing
   redis (~> 4.0)
   rqrcode
