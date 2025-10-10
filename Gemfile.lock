@@ -1,10 +1,11 @@
 GIT
   remote: https://github.com/DigitalNZ/supplejack_common
-  revision: f1f484843b2a493fe1ad94acb061b3ab185875e6
+  revision: 319f128cda352a074d49a68c6a67789333fbfff9
   branch: tw/rails-7-2
   specs:
     supplejack_common (3.0.0)
       actionpack (~> 7.2.0)
+      activemodel (~> 7.2.0)
       activesupport (~> 7.2.0)
       aws-sdk-s3
       chronic (<= 0.10.2)
@@ -15,10 +16,11 @@ GIT
       json (>= 2.3.0)
       jsonpath
       loofah
-      mimemagic (~> 0.4.3)
+      mimemagic
       mongoid
       nokogiri
       oai
+      observer
       redis
       rest-client
       retriable
@@ -385,6 +387,7 @@ GEM
       faraday (< 3)
       faraday-follow_redirects (>= 0.3.0, < 2)
       rexml
+    observer (0.1.2)
     oj (3.16.11)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
@@ -416,7 +419,7 @@ GEM
     puma (7.0.4)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.17)
+    rack (3.1.18)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
