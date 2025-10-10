@@ -31,11 +31,6 @@ Rails.application.configure do
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 
-  DEFAULT_URL_OPTIONS = {
-    host: ENV['HOST'],
-    protocol: 'https'
-  }.freeze
-
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
@@ -62,4 +57,8 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # ALL custom configs comes  under this line
+  DEFAULT_URL_OPTIONS = { host: "localhost:3000"}
+  config.action_mailer.default_url_options = DEFAULT_URL_OPTIONS  
 end
