@@ -3,3 +3,16 @@
 /vendor
 /tmp
 /codeclimate_diff_baseline.json
+/app/assets/stylesheets/foundation/_settings.scss
+/app/javascript/src/datatables.foundation.js
+/app/javascript/src/harvest_errors.js
+/app/javascript/src/harvester.js
+/app/javascript/src/parser_templates.js
+/app/javascript/src/parsers.js
+/app/javascript/src/sources.js
+/app/javascript/src/suppressed_collections.js
+/babel.config.js
+/public/404.html
+/public/406-unsupported-browser.html
+/public/422.html
+/public/500.html
