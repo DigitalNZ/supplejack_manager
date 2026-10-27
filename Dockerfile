@@ -1,4 +1,4 @@
-FROM ruby:3.4.4-alpine3.22 AS builder
+FROM ruby:3.4.12-alpine3.24 AS builder
 
 WORKDIR /app
 
@@ -6,7 +6,8 @@ WORKDIR /app
 ARG BUILD_PACKAGES="build-base curl-dev git"
 ARG DEV_PACKAGES="yaml-dev zlib-dev libxml2-dev libxslt-dev nodejs yarn"
 ARG RUBY_PACKAGES="tzdata shared-mime-info"
-RUN apk add --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
+RUN apk upgrade --no-cache \
+    && apk add --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 
 # install rubygem
 COPY Gemfile Gemfile.lock ./
@@ -36,13 +37,14 @@ RUN rm -rf tmp/cache vendor/assets spec node_modules
 
 ############### Build step done ###############
 
-FROM ruby:3.4.4-alpine3.22
+FROM ruby:3.4.12-alpine3.24
 
 WORKDIR /app
 
 # install packages
 ARG PACKAGES="build-base tzdata libxslt libxml2-dev libxslt-dev nodejs"
-RUN apk add --no-cache $PACKAGES
+RUN apk upgrade --no-cache \
+    && apk add --no-cache $PACKAGES
 
 # This is needed for the pipeline build (it breaks without the freedesktop package). 
 # There is no newer version of buster, so we will keep using this version for now
